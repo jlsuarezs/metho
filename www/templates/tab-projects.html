@@ -1,0 +1,23 @@
+<ion-view view-title="Projets">
+    <ion-nav-buttons side="right">
+        <button class="button button-clear button-positive icon ion-ios-plus-empty" ng-click="newProject()"></button>
+    </ion-nav-buttons>
+    <ion-content ng-class="{ 'padding flex' : !projects.length }">
+        <!-- When there is not elements -->
+        <button class="button ion-ios-plus-empty icon button-positive button-outline" class="centered" ng-if="!projects.length" ng-click="newProject()">
+        </button><br ng-if="!projects.length">
+        <p class="center dimmed-50" ng-if="!projects.length">
+            Aucun projet? Ça viendra...
+        </p>
+
+        <!-- When there is -->
+        <ion-list ng-if="projects.length">
+            <ion-item ng-repeat="project in projects" class="item-icon-right item-remove-animate" type="item-text-wrap" href="#/projects">
+                <h2>{{project.name}}</h1>
+                <p>{{project.matter}}</p>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+                <ion-option-button class="button-assertive" ng-click="deleteProject('{{project.id}}')">Supprimer</ion-option-button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

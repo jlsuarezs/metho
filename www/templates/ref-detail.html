@@ -1,0 +1,21 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view view-title="{{article.name}}" id="html-bind-with-trust">
+    <ion-nav-buttons side="right">
+      <button class="button button-clear button-positive icon ion-ios-upload-outline" ng-click="share()" ng-if="!article.containsSub"></button>
+    </ion-nav-buttons>
+    <ion-content id="sub-content">
+        <div ng-if="article.text" ng-bind-html="article.text" class="padding justify">
+        </div>
+        <ion-list ng-if="article.containsSub">
+            <ion-item ng-repeat="subArticle in article.subPages" ng-attr-href="{{ subArticle.text ? '#/tab/ref/' + article.id + '/' + subArticle.id : '' }}" class="item-icon-right" type="item-text-wrap">
+                <h2>{{subArticle.name}}</h2>
+                <i class="icon ion-chevron-right icon-accessory" ng-if="subArticle.text != '' "></i>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

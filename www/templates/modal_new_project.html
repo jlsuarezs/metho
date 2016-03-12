@@ -1,0 +1,25 @@
+<ion-modal-view>
+    <ion-header-bar class="bar-stable">
+        <h1 class="title">Nouveau projet</h1>
+        <button class="button button-positive icon ion-ios-close-empty button-clear" ng-click="closeModal()">
+        </button>
+    </ion-header-bar>
+    <ion-content>
+        <form ng-submit="submitProject()">
+            <div class="list">
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Nom du projet</span>
+                <input type="text" placeholder="Essai sur les moyens de communication" ng-model="project.name" ng-readonly="false">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Matière</span>
+                <input type="text" placeholder="Géographie" ng-model="project.matter" ng-readonly="false">
+              </label>
+            </div>
+            <button type="submit" class="button button-full button-dark center">Créer le nouveau projet</button>
+        </form>
+        <p ng-bind="err">
+
+        </p>
+    </ion-content>
+</ion-modal-view>
