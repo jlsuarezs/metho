@@ -2,8 +2,9 @@ angular.module('starter.controllers', [])
 
 .controller('ProjectsCtrl', function($scope, $ionicModal, $ionicPlatform) {
     $scope.projects = [];
-    $scope.project = {};
+    $scope.project = { name:"" };
     $scope.err = "";
+    $scope.errorName = false;
     // Initialize the DB
     $scope.projectsRepo = new PouchDB("projects");
     // Load the projects
@@ -30,6 +31,7 @@ angular.module('starter.controllers', [])
 
     $scope.closeModal = function () {
         $scope.newProjectModal.hide();
+        $scope.errorName = false;
     }
 
     $scope.newProject = function () {
@@ -37,20 +39,25 @@ angular.module('starter.controllers', [])
     }
 
     $scope.submitProject = function () {
-        var creatingProj = {
-            name: $scope.project.name,
-            matter: $scope.project.matter
-        };
+        if ($scope.project.name == "") {
+            $scope.errorName = true;
+        }else {
+            $scope.errorName = false;
+            var creatingProj = {
+                name: $scope.project.name,
+                matter: $scope.project.matter
+            };
 
-        $scope.projectsRepo.post(creatingProj).then(function (response) {
-            creatingProj.id = response.id;
-            $scope.projects.push(creatingProj);
-            $scope.project = {};
-            $scope.newProjectModal.hide();
-            $scope.$apply();
-        }).catch(function (err) {
-            console.log(err);
-        });
+            $scope.projectsRepo.post(creatingProj).then(function (response) {
+                creatingProj.id = response.id;
+                $scope.projects.push(creatingProj);
+                $scope.project = {};
+                $scope.newProjectModal.hide();
+                $scope.$apply();
+            }).catch(function (err) {
+                console.log(err);
+            });
+        }
     }
 
     $scope.deleteProject = function (id) {

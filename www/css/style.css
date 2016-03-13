@@ -72,3 +72,8 @@ p.left-aligned {
 .scroll .button {
     max-width: 50%;
 }*/
+
+
+.red-border {
+    border-top-color: red !important;
+}

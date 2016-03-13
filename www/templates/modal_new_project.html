@@ -11,7 +11,7 @@
                 <span class="input-label">Nom du projet</span>
                 <input type="text" placeholder="Essai sur les moyens de communication" ng-model="project.name" ng-readonly="false">
               </label>
-              <label class="item item-input item-stacked-label">
+              <label class="item item-input item-stacked-label" ng-class="{ 'red-border':errorName }">
                 <span class="input-label">Matière</span>
                 <input type="text" placeholder="Géographie" ng-model="project.matter" ng-readonly="false">
               </label>
