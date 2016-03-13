@@ -69,15 +69,46 @@ angular.module('starter.controllers', [])
     }
 })
 
-.controller('RefCtrl', function($scope, Articles) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
+.controller('ProjectDetailCtrl', function($scope, $stateParams, $ionicModal) {
+    $scope.projectRepo = new PouchDB("projects");
+    $scope.sourceRepo = new PouchDB("sources");
+    $scope.project = {
+        name: "",
+        id: "",
+        matter: "",
+        sources: []
+    };
 
+    $scope.analyseProjectInfo = function (doc) {
+        $scope.project.name = doc.name;
+        $scope.project.id = doc.id;
+        $scope.project.matter = doc.matter;
+    }
+
+    $scope.analyseItemsInfo = function (result) {
+        for (var i = 0; i < result.rows.length; i++) {
+            if (result.rows[i].project_id == $stateParams.projectID) {
+                $scope.project.sources.push(result.rows[i]);
+            }
+        }
+    }
+
+    $scope.share = function () {
+        var textToShare = "";
+        for (var i = 0; i < $scope.project.sources.length; i++) {
+            textToShare += $scope.project.sources[i].parsed_source + "\n";
+        }
+        window.plugins.socialsharing.share(text, $scope.article.name);
+    }
+
+    // Initialize
+    $scope.projectRepo.get($stateParams.projectID).then($scope.analyseProjectInfo);
+
+    $scope.sourceRepo.allDocs({ include_docs: true }).then($scope.analyseItemsInfo);
+
+})
+
+.controller('RefCtrl', function($scope, Articles) {
   $scope.articles = Articles.all();
 })
 
@@ -91,12 +122,12 @@ angular.module('starter.controllers', [])
 })
 
 .controller('RefSubDetailCtrl', function($scope, $stateParams, Articles) {
-  $scope.article = Articles.get($stateParams.articleId).subPages[$stateParams.subId];
+    $scope.article = Articles.get($stateParams.articleId).subPages[$stateParams.subId];
 
-  $scope.shareSub = function () {
+    $scope.shareSub = function () {
       text = document.querySelectorAll("ion-content#sub-detail-content")[0].innerText;
       window.plugins.socialsharing.share(text, $scope.article.name);
-  }
+    }
 })
 
 .controller('SettingsCtrl', function($scope, localStorageService) {

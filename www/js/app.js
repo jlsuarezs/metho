@@ -53,6 +53,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
+  .state('tab.project-detail', {
+    url: '/projects/:projectID',
+    views: {
+      'tab-projects': {
+        templateUrl: 'templates/project-detail.html',
+        controller: 'ProjectDetailCtrl'
+      }
+    }
+  })
+
   .state('tab.ref', {
       url: '/ref',
       views: {
@@ -95,10 +105,4 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   $urlRouterProvider.otherwise('/tab/projects');
 
   $ionicConfigProvider.backButton.text("Retour");
-  // var projects = {
-  //   id:         'ID',
-  //   name:   'STRING',
-  //   matter: 'STRING'
-  // };
-  // ngdbProvider.setRepository('projects', projects);
 });
