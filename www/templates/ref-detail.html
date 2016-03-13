@@ -8,7 +8,7 @@
     <ion-nav-buttons side="right">
       <button class="button button-clear button-positive icon ion-ios-upload-outline" ng-click="share()" ng-if="!article.containsSub"></button>
     </ion-nav-buttons>
-    <ion-content id="sub-content">
+    <ion-content id="sub-content" scrollbar-y="true" has-bouncing="true">
         <div ng-if="article.text" ng-bind-html="article.text" class="padding justify">
         </div>
         <ion-list ng-if="article.containsSub">

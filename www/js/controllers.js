@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('ProjectsCtrl', function($scope, $ionicModal, $ionicPlatform) {
+.controller('ProjectsCtrl', function($scope, $ionicModal, $ionicPlatform, $ionicPopup, $ionicListDelegate) {
     $scope.projects = [];
     $scope.project = { name:"" };
     $scope.err = "";
@@ -41,11 +41,16 @@ angular.module('starter.controllers', [])
     $scope.submitProject = function () {
         if ($scope.project.name == "") {
             $scope.errorName = true;
+            var alertPopup = $ionicPopup.alert({
+             title: 'Erreur',
+             template: 'Entrez un nom de projet'
+            });
         }else {
             $scope.errorName = false;
+            var theMatter = $scope.project.matter != "" ? $scope.project.matter : "Matière inconnue";
             var creatingProj = {
                 name: $scope.project.name,
-                matter: $scope.project.matter
+                matter: theMatter
             };
 
             $scope.projectsRepo.post(creatingProj).then(function (response) {
@@ -61,22 +66,36 @@ angular.module('starter.controllers', [])
     }
 
     $scope.deleteProject = function (id) {
-        $scope.projectsRepo.get(id).then(function(doc) {
-          return $scope.projectsRepo.remove(doc);
-        }).then(function (result) {
-            for (var i = 0; i < $scope.projects.length; i++) {
-                if ($scope.projects[i].id == result.id) {
-                    $scope.projects.splice(i, 1);
-                    $scope.$apply();
-                }
-            }
-        }).catch(function (err) {
-          console.log(err);
+        var confirmPopup = $ionicPopup.confirm({
+          title: 'Supprimer',
+          template: 'Voulez-vous supprimer ce projet ?',
+          cancelText: 'Annuler',
+          okText: '<b>Confirmer</b>'
         });
+        confirmPopup.then(function(res) {
+            console.log(res);
+          if(res) {
+              $scope.projectsRepo.get(id).then(function(doc) {
+                return $scope.projectsRepo.remove(doc);
+              }).then(function (result) {
+                  for (var i = 0; i < $scope.projects.length; i++) {
+                      if ($scope.projects[i].id == result.id) {
+                          $scope.projects.splice(i, 1);
+                          $scope.$apply();
+                      }
+                  }
+              }).catch(function (err) {
+                console.log(err);
+              });
+          } else {
+            $ionicListDelegate.closeOptionButtons();
+          }
+        });
+
     }
 })
 
-.controller('ProjectDetailCtrl', function($scope, $stateParams, $ionicModal) {
+.controller('ProjectDetailCtrl', function($scope, $stateParams, $ionicModal, $ionicPopup) {
     $scope.projectRepo = new PouchDB("projects");
     $scope.sourceRepo = new PouchDB("sources");
     $scope.project = {
@@ -85,6 +104,13 @@ angular.module('starter.controllers', [])
         matter: "",
         sources: []
     };
+
+    $ionicModal.fromTemplateUrl('templates/modal_new_source.html', {
+        scope: $scope,
+        animation: 'slide-in-up',
+    }).then(function(modal) {
+        $scope.newSourceModal = modal;
+    });
 
     $scope.analyseProjectInfo = function (doc) {
         $scope.project.name = doc.name;
@@ -108,10 +134,33 @@ angular.module('starter.controllers', [])
         window.plugins.socialsharing.share(text, $scope.article.name);
     }
 
+    $scope.resetModalVars = function () {
+        // Reset vars
+        $scope.type = "";
+
+    }
+
+    $scope.addSource = function () {
+        // Open modal
+        $scope.newSourceModal.show();
+    }
+
+    $scope.closeModal = function () {
+        $scope.newSourceModal.hide();
+        $scope.resetModalVars();
+    }
+
+    $scope.submitSource = function () {
+
+
+        $scope.closeModal();
+    }
+
     // Initialize
     $scope.projectRepo.get($stateParams.projectID).then($scope.analyseProjectInfo);
 
     $scope.sourceRepo.allDocs({ include_docs: true }).then($scope.analyseItemsInfo);
+
 
 })
 

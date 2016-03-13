@@ -2,7 +2,7 @@
     <ion-nav-buttons side="right">
         <button class="button button-clear button-positive icon ion-ios-plus-empty" ng-click="newProject()"></button>
     </ion-nav-buttons>
-    <ion-content ng-class="{ 'padding flex' : !projects.length }">
+    <ion-content ng-class="{ 'padding flex' : !projects.length }" scrollbar-y="true" has-bouncing="true">
         <!-- When there is not elements -->
         <button class="button ion-ios-plus-empty icon button-positive button-outline" class="centered" ng-if="!projects.length" ng-click="newProject()">
         </button><br ng-if="!projects.length">
