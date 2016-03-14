@@ -109,7 +109,7 @@ angular.module('starter.controllers', [])
         matter: "",
         sources: []
     };
-    $scope.source = {};
+    $scope.newsource = {};
 
     $ionicModal.fromTemplateUrl('templates/modal_new_source.html', {
         scope: $scope,
