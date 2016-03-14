@@ -95,6 +95,11 @@ angular.module('starter.controllers', [])
     }
 })
 
+
+
+
+
+
 .controller('ProjectDetailCtrl', function($scope, $stateParams, $ionicModal, $ionicPopup) {
     $scope.projectRepo = new PouchDB("projects");
     $scope.sourceRepo = new PouchDB("sources");
@@ -104,6 +109,7 @@ angular.module('starter.controllers', [])
         matter: "",
         sources: []
     };
+    $scope.source = {};
 
     $ionicModal.fromTemplateUrl('templates/modal_new_source.html', {
         scope: $scope,
@@ -164,9 +170,15 @@ angular.module('starter.controllers', [])
 
 })
 
+
+
+
 .controller('RefCtrl', function($scope, Articles) {
   $scope.articles = Articles.all();
 })
+
+
+
 
 .controller('RefDetailCtrl', function($scope, $stateParams, Articles, $ionicNavBarDelegate) {
   $scope.article = Articles.get($stateParams.articleId);
@@ -177,6 +189,10 @@ angular.module('starter.controllers', [])
   }
 })
 
+
+
+
+
 .controller('RefSubDetailCtrl', function($scope, $stateParams, Articles) {
     $scope.article = Articles.get($stateParams.articleId).subPages[$stateParams.subId];
 
@@ -186,15 +202,29 @@ angular.module('starter.controllers', [])
     }
 })
 
+
+
+
 .controller('SettingsCtrl', function($scope, localStorageService) {
     if (localStorageService.get("setting-advanced") == null) {
         localStorageService.set("setting-advanced", false);
     }
+
+    if (localStorageService.get("setting-askForOrder") == null) {
+        localStorageService.set("setting-askForOrder", true);
+    }
+
+    if (localStorageService.get("setting-defaultOrder") == null) {
+        localStorageService.set("setting-defaultOrder", "alpha");
+    }
+
     $scope.settings = {
-        advanced: localStorageService.get("setting-advanced")
+        advanced: localStorageService.get("setting-advanced"),
+        askForOrder: localStorageService.get("setting-askForOrder"),
+        defaultOrder: localStorageService.get("setting-defaultOrder")
     };
 
     $scope.changeSettings = function (setting) {
-        localStorageService.set("setting-" + setting, $scope.settings.advanced);
+        localStorageService.set("setting-" + setting, $scope.settings[setting]);
     }
 });

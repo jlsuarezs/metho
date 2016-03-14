@@ -1,9 +1,19 @@
 <ion-view view-title="Paramètres">
   <ion-content scrollbar-y="true" has-bouncing="true">
     <ion-list>
-    <ion-toggle  ng-model="settings.advanced" ng-change="changeSettings('advanced')">
-        Mode avancé
-    </ion-toggle>
+        <label class="item item-stacked-label">
+            <span class="input-label"><b>Trier la bibliographie par</b></span>
+        </label>
+        <ion-list>
+          <ion-radio ng-model="settings.defaultOrder" ng-value="'alpha'" ng-change="changeSettings('defaultOrder')">Ordre alphabétique</ion-radio>
+          <ion-radio ng-model="settings.defaultOrder" ng-value="'type'" ng-change="changeSettings('defaultOrder')">Type d'ouvrage</ion-radio>
+        </ion-list>
+        <ion-toggle  ng-model="settings.askForOrder" ng-change="changeSettings('askForOrder')">
+            Demander l'ordre lors du partage
+        </ion-toggle>
+        <ion-toggle  ng-model="settings.advanced" ng-change="changeSettings('advanced')">
+            Mode avancé
+        </ion-toggle>
     </ion-list>
     <p class="padding center">
         Adapté à partir du <em>Guide de Méthodologie</em> de l'École d'éducation internationale de McMasterville écrit par Raymond Bédard.
