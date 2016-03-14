@@ -6,22 +6,49 @@
     </ion-header-bar>
     <ion-content>
         <form ng-submit="submitSource()">
-            <label class="item item-input item-select">
-                <div class="input-label">
-                    Type de source
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        Type de source
+                    </div>
+                    <select ng-model="newsource.type">
+                        <option selected value="book">Livre</option>
+                        <option value="article">Article de périodique</option>
+                        <option value="internet">Site Internet</option>
+                        <option value="cd">Cédérom (CD-ROM)</option>
+                        <option value="movie">Document audiovisuel</option>
+                        <option value="interview">Entrevue</option>
+                    </select>
+                </label>
+                <div ng-if="newsource.type == 'book'">
+                    <ion-list>
+                        <ion-radio ng-model="newsource.hasAuthors" ng-value="'13'">La source a de 1 à 3 auteurs</ion-radio>
+                        <ion-radio ng-model="newsource.hasAuthors" ng-value="'more3'">La source a plus de trois auteurs</ion-radio>
+                        <ion-radio ng-model="newsource.hasAuthors" ng-value="'collective'">La source est un collectif</ion-radio>
+                    </ion-list>
+                    <table>
+                        <thead>
+                            <th>
+                                Prénom
+                            </th>
+                            <th>
+                                Nom
+                            </th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="text">
+                                </td>
+                                <td>
+                                    <input type="text">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <select ng-model="newsource.type">
-                    <option selected value="book">Livre</option>
-                    <option value="article">Article de périodique</option>
-                    <option value="internet">Site Internet</option>
-                    <option value="cd">Cédérom (CD-ROM)</option>
-                    <option value="movie">Document audiovisuel</option>
-                    <option value="interview">Entrevue</option>
-                </select>
-            </label>
-            <button type="submit" class="button button-full button-dark center" ng-disabled="true">Créer la source</button>
+                <button type="submit" class="button button-full button-dark center" ng-disabled="true">Créer la source</button>
         </form>
-        <p ng-bind="err">
+        <p ng-bind="newsource.type">
 
         </p>
     </ion-content>
