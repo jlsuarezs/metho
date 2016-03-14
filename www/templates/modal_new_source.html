@@ -25,26 +25,37 @@
                         <ion-radio ng-model="newsource.hasAuthors" ng-value="'more3'">La source a plus de trois auteurs</ion-radio>
                         <ion-radio ng-model="newsource.hasAuthors" ng-value="'collective'">La source est un collectif</ion-radio>
                     </ion-list>
-                    <table>
-                        <thead>
-                            <th>
-                                Prénom
-                            </th>
-                            <th>
-                                Nom
-                            </th>
-                        </thead>
+                    <!-- La source a de 1 à 3 auteurs -->
+                    <table ng-if="newsource.hasAuthors == '13'" class="table100">
                         <tbody>
                             <tr>
                                 <td>
-                                    <input type="text">
+                                    <input type="text" ng-model="newsource.author1firstname" placeholder="Prénom">
                                 </td>
                                 <td>
-                                    <input type="text">
+                                    <input type="text" ng-model="newsource.author1lastname" placeholder="Nom">
+                                </td>
+                            </tr>
+                            <tr ng-if="(newsource.author1firstname != null && newsource.author1firstname != '') || (newsource.author1lastname != null && newsource.author1lastname != '')">
+                                <td>
+                                    <input type="text" placeholder="Prénom" ng-model="newsource.author2firstname">
+                                </td>
+                                <td>
+                                    <input type="text" placeholder="Nom" ng-model="newsource.author2lastname">
+                                </td>
+                            </tr>
+                            <tr ng-if="(newsource.author2firstname != null && newsource.author2firstname != '') || (newsource.author2lastname != null && newsource.author2lastname != '')">
+                                <td>
+                                    <input type="text" placeholder="Prénom" ng-model="newsource.author3firstname">
+                                </td>
+                                <td>
+                                    <input type="text" placeholder="Nom" ng-model="newsource.author3lastname">
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+                    <!-- La source a plus de 3 auteurs -->
+                    <!-- La source est un collectif -->
                 </div>
                 <button type="submit" class="button button-full button-dark center" ng-disabled="true">Créer la source</button>
         </form>
