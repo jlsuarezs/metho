@@ -11,12 +11,12 @@
                     Type de source
                 </div>
                 <select ng-model="newsource.type">
-                    <option selected value="">Livre</option>
-                    <option>Article de périodique</option>
-                    <option>Site Internet</option>
-                    <option>Cédérom (CD-ROM)</option>
-                    <option>Document audiovisuel</option>
-                    <option>Entrevue</option>
+                    <option selected value="book">Livre</option>
+                    <option value="article">Article de périodique</option>
+                    <option value="internet">Site Internet</option>
+                    <option value="cd">Cédérom (CD-ROM)</option>
+                    <option value="movie">Document audiovisuel</option>
+                    <option value="interview">Entrevue</option>
                 </select>
             </label>
             <button type="submit" class="button button-full button-dark center" ng-disabled="true">Créer la source</button>
