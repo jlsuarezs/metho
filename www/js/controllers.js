@@ -99,7 +99,7 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('ProjectDetailCtrl', function($scope, $stateParams, $ionicModal, $ionicPopup) {
+.controller('ProjectDetailCtrl', function($scope, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate) {
     $scope.projectRepo = new PouchDB("projects");
     $scope.sourceRepo = new PouchDB("sources");
     $scope.project = {
@@ -141,9 +141,26 @@ angular.module('starter.controllers', [])
 
     $scope.resetModalVars = function () {
         // Reset vars
-        $scope.type = "";
-
+        $scope.newsource = {};
     }
+
+    $scope.refreshModalScroll = function () {
+        $ionicScrollDelegate.resize();
+    }
+
+    // Refresh view on length change
+    $scope.$watch("newsource.hasBeenTranslated", $scope.refreshModalScroll);
+    $scope.$watch("newsource.type", $scope.refreshModalScroll);
+    $scope.$watch("newsource.hasAuthors", $scope.refreshModalScroll);
+    $scope.$watch("newsource.author1firstname", $scope.refreshModalScroll);
+    $scope.$watch("newsource.author1lastname", $scope.refreshModalScroll);
+    $scope.$watch("newsource.author2firstname", $scope.refreshModalScroll);
+    $scope.$watch("newsource.author2lastname", $scope.refreshModalScroll);
+    $scope.$watch("newsource.translator1firstname", $scope.refreshModalScroll);
+    $scope.$watch("newsource.translator1lastname", $scope.refreshModalScroll);
+    $scope.$watch("newsource.translator2firstname", $scope.refreshModalScroll);
+    $scope.$watch("newsource.translator2lastname", $scope.refreshModalScroll);
+
 
     $scope.addSource = function () {
         // Open modal

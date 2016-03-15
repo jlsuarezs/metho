@@ -4,7 +4,7 @@
         <button class="button button-positive icon ion-ios-close-empty button-clear" ng-click="closeModal()">
         </button>
     </ion-header-bar>
-    <ion-content>
+    <ion-content scrollbar-y="true">
         <form ng-submit="submitSource()">
                 <label class="item item-input item-select">
                     <div class="input-label smallest">
@@ -55,9 +55,50 @@
                         </tbody>
                     </table>
                     <!-- La source a plus de 3 auteurs -->
-
+                    <label class="item" ng-if="newsource.hasAuthors == 'more3'"><span class="input-label">Entrer le nom des deux premiers auteurs :</span></label>
+                    <table ng-if="newsource.hasAuthors == 'more3'" class="table100">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="text" ng-model="newsource.author1firstname" placeholder="Prénom">
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="newsource.author1lastname" placeholder="Nom">
+                                </td>
+                            </tr>
+                            <tr ng-if="(newsource.author1firstname != null && newsource.author1firstname != '') || (newsource.author1lastname != null && newsource.author1lastname != '')">
+                                <td>
+                                    <input type="text" placeholder="Prénom" ng-model="newsource.author2firstname">
+                                </td>
+                                <td>
+                                    <input type="text" placeholder="Nom" ng-model="newsource.author2lastname">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <!-- La source est un collectif -->
-
+                    <label class="item" ng-if="newsource.hasAuthors == 'collective'"><span class="input-label">Entrer le nom des directeurs (s'il y a lieu) :</span></label>
+                    <table ng-if="newsource.hasAuthors == 'collective'" class="table100">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="text" ng-model="newsource.author1firstname" placeholder="Prénom">
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="newsource.author1lastname" placeholder="Nom">
+                                </td>
+                            </tr>
+                            <tr ng-if="(newsource.author1firstname != null && newsource.author1firstname != '') || (newsource.author1lastname != null && newsource.author1lastname != '')">
+                                <td>
+                                    <input type="text" placeholder="Prénom" ng-model="newsource.author2firstname">
+                                </td>
+                                <td>
+                                    <input type="text" placeholder="Nom" ng-model="newsource.author2lastname">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- Autres champs -->
                     <div class="list black-top">
                         <label class="item item-input item-stacked-label">
                             <span class="input-label">Titre du livre</span>
@@ -80,6 +121,36 @@
                             <span class="input-label">Lieu de publication</span>
                             <input type="date" placeholder="Montréal">
                         </label>
+                        <ion-checkbox ng-model="newsource.hasBeenTranslated">Le livre a été traduit.</ion-checkbox>
+                        <label class="item" ng-if="newsource.hasBeenTranslated"><span class="input-label">Nom des traducteurs :</span></label>
+                        <table ng-if="newsource.hasBeenTranslated" class="table100">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <input type="text" ng-model="newsource.translator1firstname" placeholder="Prénom">
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="newsource.translator1lastname" placeholder="Nom">
+                                    </td>
+                                </tr>
+                                <tr ng-if="(newsource.translator1firstname != null && newsource.translator1firstname != '') || (newsource.translator1lastname != null && newsource.translator1lastname != '')">
+                                    <td>
+                                        <input type="text" placeholder="Prénom" ng-model="newsource.translator2firstname">
+                                    </td>
+                                    <td>
+                                        <input type="text" placeholder="Nom" ng-model="newsource.translator2lastname">
+                                    </td>
+                                </tr>
+                                <tr ng-if="(newsource.translator2firstname != null && newsource.translator2firstname != '') || (newsource.translator2lastname != null && newsource.translator2lastname != '')">
+                                    <td>
+                                        <input type="text" placeholder="Prénom" ng-model="newsource.translator3firstname">
+                                    </td>
+                                    <td>
+                                        <input type="text" placeholder="Nom" ng-model="newsource.translator3lastname">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <button type="submit" class="button button-full button-dark center" ng-disabled="true">Créer la source</button>
