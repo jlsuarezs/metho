@@ -73,7 +73,6 @@ angular.module('starter.controllers', [])
           okText: '<b>Confirmer</b>'
         });
         confirmPopup.then(function(res) {
-            console.log(res);
           if(res) {
               $scope.projectsRepo.get(id).then(function(doc) {
                 return $scope.projectsRepo.remove(doc);
