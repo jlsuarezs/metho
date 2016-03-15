@@ -7,7 +7,7 @@
     <ion-content>
         <form ng-submit="submitSource()">
                 <label class="item item-input item-select">
-                    <div class="input-label">
+                    <div class="input-label smallest">
                         Type de source
                     </div>
                     <select ng-model="newsource.type">
@@ -55,7 +55,23 @@
                         </tbody>
                     </table>
                     <!-- La source a plus de 3 auteurs -->
+
                     <!-- La source est un collectif -->
+
+                    <!-- <div class="list">
+                        <label class="item item-input item-floating-label">
+                            <span class="input-label">Titre du livre</span>
+                            <input type="text" placeholder="Titre du livre">
+                        </label>
+                        <label class="item item-input item-floating-label">
+                            <span class="input-label">Éditeur</span>
+                            <input type="text" placeholder="Éditeur">
+                        </label>
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">Nombre de pages</span>
+                            <input type="number" placeholder="341">
+                        </label>
+                    </div> -->
                 </div>
                 <button type="submit" class="button button-full button-dark center" ng-disabled="true">Créer la source</button>
         </form>

@@ -98,3 +98,15 @@ p.left-aligned {
 .table100 tr > td:first-child input {
     border-left: black 1px;
 }
+
+.condensed {
+    letter-spacing: -1.5px;
+}
+
+.smaller {
+    font-size: 0.95rem;
+}
+
+.smallest {
+    font-size: 0.843rem;
+}

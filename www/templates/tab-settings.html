@@ -8,7 +8,7 @@
           <ion-radio ng-model="settings.defaultOrder" ng-value="'alpha'" ng-change="changeSettings('defaultOrder')">Ordre alphabétique</ion-radio>
           <ion-radio ng-model="settings.defaultOrder" ng-value="'type'" ng-change="changeSettings('defaultOrder')">Type d'ouvrage</ion-radio>
         </ion-list>
-        <ion-toggle  ng-model="settings.askForOrder" ng-change="changeSettings('askForOrder')">
+        <ion-toggle  ng-model="settings.askForOrder" ng-change="changeSettings('askForOrder')" class="smaller">
             Demander l'ordre lors du partage
         </ion-toggle>
         <ion-toggle  ng-model="settings.advanced" ng-change="changeSettings('advanced')">
