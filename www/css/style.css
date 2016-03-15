@@ -85,8 +85,7 @@ p.left-aligned {
 }
 
 .table100 tr {
-    border-bottom: 1px solid #D0D0D0 !important;
-    /*border-top: 1px solid #D0D0D0 !important;*/
+    border-bottom: 1px solid #ddd !important;
 }
 
 .table100 input {
@@ -95,9 +94,9 @@ p.left-aligned {
     width: 100%;
 }
 
-.table100 tr > td:first-child input {
+/*.table100 tr > td:first-child input {
     border-left: black 1px;
-}
+}*/
 
 .condensed {
     letter-spacing: -1.5px;
@@ -122,10 +121,9 @@ p.left-aligned {
 }
 
 .item-radio:first-child{
-    border-top-color: black !important;
+    border-top-color: #404040 !important;
 }
 
-.item-radio:last-child{
-    border-bottom-color: black !important;
-    z-index: 10;
+.black-top > .item-stacked-label:first-child {
+    border-top-color: #404040 !important;
 }
