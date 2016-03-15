@@ -110,3 +110,22 @@ p.left-aligned {
 .smallest {
     font-size: 0.843rem;
 }
+
+.item-stacked-label:first-child{
+    margin-top: -2px !important;
+}
+
+.item-button-left .item-checkbox {
+    display: inline-block !important;
+    width: auto !important;
+    height: 100%;
+}
+
+.item-radio:first-child{
+    border-top-color: black !important;
+}
+
+.item-radio:last-child{
+    border-bottom-color: black !important;
+    z-index: 10;
+}

@@ -20,7 +20,7 @@
                     </select>
                 </label>
                 <div ng-if="newsource.type == 'book'">
-                    <ion-list>
+                    <ion-list class="isolated">
                         <ion-radio ng-model="newsource.hasAuthors" ng-value="'13'">La source a de 1 à 3 auteurs</ion-radio>
                         <ion-radio ng-model="newsource.hasAuthors" ng-value="'more3'">La source a plus de trois auteurs</ion-radio>
                         <ion-radio ng-model="newsource.hasAuthors" ng-value="'collective'">La source est un collectif</ion-radio>
@@ -58,20 +58,29 @@
 
                     <!-- La source est un collectif -->
 
-                    <!-- <div class="list">
-                        <label class="item item-input item-floating-label">
+                    <div class="list">
+                        <label class="item item-input item-stacked-label">
                             <span class="input-label">Titre du livre</span>
-                            <input type="text" placeholder="Titre du livre">
+                            <input type="text" placeholder="La revanche des chérubins">
                         </label>
-                        <label class="item item-input item-floating-label">
+                        <label class="item item-input item-stacked-label">
                             <span class="input-label">Éditeur</span>
-                            <input type="text" placeholder="Éditeur">
+                            <input type="text" placeholder="Québec Amérique">
                         </label>
                         <label class="item item-input item-stacked-label">
                             <span class="input-label">Nombre de pages</span>
                             <input type="number" placeholder="341">
                         </label>
-                    </div> -->
+                        <label class="item item-input item-stacked-label item-button-left">
+
+                            <span class="input-label">Date de publication</span>
+                            <input type="date" placeholder="2010">
+                        </label>
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">Lieu de publication</span>
+                            <input type="date" placeholder="Montréal">
+                        </label>
+                    </div>
                 </div>
                 <button type="submit" class="button button-full button-dark center" ng-disabled="true">Créer la source</button>
         </form>
