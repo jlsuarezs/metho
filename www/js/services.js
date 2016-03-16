@@ -19,6 +19,40 @@ angular.module('starter.services', [])
   };
 })
 
+.factory('Settings', function(localStorageService) {
+  // Default values
+  if (localStorageService.get("setting-advanced") == null) {
+      localStorageService.set("setting-advanced", false);
+  }
+
+  if (localStorageService.get("setting-askForOrder") == null) {
+      localStorageService.set("setting-askForOrder", true);
+  }
+
+  if (localStorageService.get("setting-defaultOrder") == null) {
+      localStorageService.set("setting-defaultOrder", "alpha");
+  }
+
+  var settings = {
+      advanced: localStorageService.get("setting-advanced"),
+      askForOrder: localStorageService.get("setting-askForOrder"),
+      defaultOrder: localStorageService.get("setting-defaultOrder")
+  };
+
+  return {
+    set: function(key, value) {
+        settings[key] = value;
+        localStorageService.set("setting-"+key, value);
+    },
+    get: function(key) {
+        return settings[key];
+    },
+    all: function() {
+        return settings;
+    }
+  };
+})
+
 .factory('Articles', function() {
   // Might use a resource here that returns a JSON array
   var articles = [{
