@@ -1,0 +1,5 @@
+{
+    "Social.framework": 2,
+    "MessageUI.framework": 2,
+    "libsqlite3.dylib": 1
+}

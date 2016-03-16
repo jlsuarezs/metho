@@ -1,0 +1,16 @@
+<ion-view view-title="{{project.name}}">
+    <ion-nav-buttons side="right">
+      <button class="button button-clear button-positive icon ion-ios-plus-empty" ng-click="addSource()"></button>
+      <button class="button button-clear button-positive icon ion-ios-upload-outline" ng-click="share()"></button>
+    </ion-nav-buttons>
+    <ion-content>
+        <ion-list>
+            <ion-item ng-repeat="source in project.sources" href="#/projects/{{project.id}}/{{source.id}}" class="item-icon-right" type="item-text-wrap">
+                <h2>{{source.text}}</h2>
+                <p>{{source.type}}</p>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+                <ion-option-button class="button-assertive" ng-click="deleteSource('{{source.id}}')">Supprimer</ion-option-button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
