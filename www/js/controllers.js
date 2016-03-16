@@ -3,6 +3,7 @@ angular.module('starter.controllers', [])
 .controller('ProjectsCtrl', function($scope, $ionicModal, $ionicPlatform, $ionicPopup, $ionicListDelegate) {
     $scope.projects = [];
     $scope.project = { name:"" };
+    $scope.editingProject = {};
     $scope.err = "";
     $scope.errorName = false;
     // Initialize the DB
@@ -29,8 +30,20 @@ angular.module('starter.controllers', [])
         $scope.newProjectModal = modal;
     });
 
+    $ionicModal.fromTemplateUrl('templates/modal_edit_project.html', {
+        scope: $scope,
+        animation: 'slide-in-up',
+    }).then(function(modal) {
+        $scope.editProjectModal = modal;
+    });
+
     $scope.closeModal = function () {
         $scope.newProjectModal.hide();
+        $scope.errorName = false;
+    }
+
+    $scope.closeEditModal = function () {
+        $scope.editProjectModal.hide();
         $scope.errorName = false;
     }
 
@@ -43,7 +56,7 @@ angular.module('starter.controllers', [])
             $scope.errorName = true;
             var alertPopup = $ionicPopup.alert({
              title: 'Erreur',
-             template: 'Entrez un nom de projet'
+             template: 'Entrez un nom de projet.'
             });
         }else {
             $scope.errorName = false;
@@ -91,6 +104,43 @@ angular.module('starter.controllers', [])
           }
         });
 
+    }
+
+    $scope.editProject = function (id) {
+        $scope.editingProject = {};
+        $scope.projectsRepo.get(id).then(function(doc) {
+            $scope.editingProject.name = doc.name;
+            $scope.editingProject.matter = doc.matter;
+            $scope.editingProject.id = doc._id;
+        });
+        $scope.editProjectModal.show();
+    }
+
+    $scope.submitEditProject = function () {
+        if ($scope.editingProject.name == "") {
+            $scope.errorName = true;
+            var alertPopup = $ionicPopup.alert({
+             title: 'Erreur',
+             template: 'Le projet doit avoir un nom.'
+            });
+        }else {
+            // make the change in the database
+            $scope.projectsRepo.get($scope.editingProject.id).then(function(doc) {
+                return $scope.projectsRepo.put($scope.editingProject, $scope.editingProject.id, doc._rev);
+            }).then(function(response) {
+                // edit the table's entry
+                for (var i = 0; i < $scope.projects.length; i++) {
+                    if ($scope.projects[i].id == response.id) {
+                        $scope.projects[i].name = $scope.editingProject.name;
+                        $scope.projects[i].matter = $scope.editingProject.matter;
+                    }
+                }
+            }).catch(function (err) {
+              console.log(err);
+            });
+            $scope.editProjectModal.hide();
+            $ionicListDelegate.closeOptionButtons();
+        }
     }
 })
 
