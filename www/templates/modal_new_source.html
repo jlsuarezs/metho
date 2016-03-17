@@ -19,7 +19,7 @@
                         <option value="interview">Entrevue</option>
                     </select>
                 </label>
-                <div ng-if="newsource.type == 'book'">
+                <div ng-slide-down="newsource.type == 'book'" lazy-render>
                     <ion-list class="isolated">
                         <ion-radio ng-model="newsource.hasAuthors" ng-value="'13'">La source a de 1 à 3 auteurs</ion-radio>
                         <ion-radio ng-model="newsource.hasAuthors" ng-value="'more3'">La source a plus de trois auteurs</ion-radio>
@@ -113,7 +113,6 @@
                             <input type="number" placeholder="341">
                         </label>
                         <label class="item item-input item-stacked-label item-button-left">
-
                             <span class="input-label">Date de publication</span>
                             <input type="date" placeholder="2010">
                         </label>
