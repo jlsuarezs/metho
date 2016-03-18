@@ -20,9 +20,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       StatusBar.styleDefault();
     }
 
-    // $rootScope.db = $cordovaSQLite.openDB("projects.db");
-    // $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS projects (id INTEGER PRIMARY KEY AUTOINCREMENT, project_name TEXT, project_matter TEXT)");
-    // $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS references (id INTEGER PRIMARY KEY AUTOINCREMENT, project_name TEXT, project_matter TEXT, project_id INTEGER, parsed_source TEXT, multiple_authors BOOLEAN, authors_lastname TEXT, authors_firstname TEXT, source_type TEXT, book_title TEXT, publication_location TEXT, editor_name TEXT, publication_date TEXT, page_number TEXT, article_title TEXT, periodic_title TEXT, edition_number TEXT, organism_name TEXT, support_type TEXT, homepage_name TEXT, url TEXT, consultation_date TEXT, document_title TEXT, productor TEXT, episode_title TEXT, production_location TEXT, broadcaster TEXT, duration TEXT, student_lastname TEXT, student_firstname TEXT, interviewed_person TEXT, interviewed_person_title TEXT, interview_location TEXT, interview_date DATE)");
   });
 })
 
