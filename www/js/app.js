@@ -60,6 +60,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
+  .state('tab.source-detail', {
+    url: '/projects/:projectID/:sourceID',
+    views: {
+      'tab-projects': {
+        templateUrl: 'templates/source-detail.html',
+        controller: 'SourceDetailCtrl'
+      }
+    }
+  })
+
   .state('tab.ref', {
       url: '/ref',
       views: {
