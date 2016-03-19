@@ -126,22 +126,26 @@
                         </label>
                         <label class="item item-input item-stacked-label">
                             <span class="input-label">Nombre de pages</span>
-                            <input type="number" placeholder="341" ng-model="newsource.pageNumber">
+                            <input type="number" placeholder="341" ng-model="newsource.pageNumber" min="1" max="15000">
                         </label>
                         <label class="item item-input item-stacked-label">
-                            <span class="input-label">Numéro de l'édition</span>
-                            <input type="number" placeholder="3" ng-model="newsource.editionNumber">
+                            <span class="input-label dimmed-75">Numéro de l'édition</span>
+                            <input type="number" placeholder="3" ng-model="newsource.editionNumber" min="1">
                         </label>
                         <label class="item item-input item-stacked-label">
-                            <span class="input-label">Numéro du volume</span>
-                            <input type="number" placeholder="2" ng-model="newsource.volumeNumber">
+                            <span class="input-label dimmed-75">Numéro du volume</span>
+                            <input type="number" placeholder="2" ng-model="newsource.volumeNumber" min="1">
                         </label>
                         <label class="item item-input item-stacked-label">
-                            <span class="input-label">Collection</span>
+                            <span class="input-label dimmed-75">Collection</span>
                             <input type="text" placeholder="Presses HEC" ng-model="newsource.collection">
                         </label>
                         <ion-checkbox ng-model="newsource.hasBeenTranslated">Le livre a été traduit.</ion-checkbox>
                         <div ng-slide-down="newsource.hasBeenTranslated" lazy-render>
+                            <label class="item item-input item-stacked-label">
+                                <span class="input-label">Langue d'origine</span>
+                                <input type="text" placeholder="Anglais" ng-model="newsource.translatedFrom">
+                            </label>
                             <label class="item" ng-if="newsource.hasBeenTranslated"><span class="input-label">Nom des traducteurs :</span></label>
                             <table ng-if="newsource.hasBeenTranslated" class="table100">
                                 <tbody>
