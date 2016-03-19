@@ -9,6 +9,11 @@
     color: rgba(0, 0, 0, 0.5);
 }
 
+.dimmed-75
+{
+    color: rgba(0, 0, 0, 0.6);
+}
+
 em {
     font-style: italic;
 }
