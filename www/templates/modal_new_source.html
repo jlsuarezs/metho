@@ -110,35 +110,35 @@
                     <div class="list black-top">
                         <label class="item item-input item-stacked-label">
                             <span class="input-label">Titre du livre</span>
-                            <input type="text" placeholder="La revanche des chérubins">
+                            <input type="text" placeholder="La revanche des chérubins" ng-model="newsource.title">
                         </label>
                         <label class="item item-input item-stacked-label">
                             <span class="input-label">Éditeur</span>
-                            <input type="text" placeholder="Québec Amérique">
+                            <input type="text" placeholder="Québec Amérique" ng-model="newsource.editor">
                         </label>
                         <label class="item item-input item-stacked-label item-button-left">
                             <span class="input-label">Date de publication</span>
-                            <input type="date" placeholder="2010">
+                            <input type="date" placeholder="2010" ng-model="newsource.publicationDate">
                         </label>
                         <label class="item item-input item-stacked-label">
                             <span class="input-label">Lieu de publication</span>
-                            <input type="date" placeholder="Montréal">
+                            <input type="date" placeholder="Montréal" ng-model="newsource.publicationLocation">
                         </label>
                         <label class="item item-input item-stacked-label">
                             <span class="input-label">Nombre de pages</span>
-                            <input type="number" placeholder="341">
+                            <input type="number" placeholder="341" ng-model="newsource.pageNumber">
                         </label>
                         <label class="item item-input item-stacked-label">
                             <span class="input-label">Numéro de l'édition</span>
-                            <input type="number" placeholder="3">
+                            <input type="number" placeholder="3" ng-model="newsource.editionNumber">
                         </label>
                         <label class="item item-input item-stacked-label">
                             <span class="input-label">Numéro du volume</span>
-                            <input type="number" placeholder="2">
+                            <input type="number" placeholder="2" ng-model="newsource.volumeNumber">
                         </label>
                         <label class="item item-input item-stacked-label">
                             <span class="input-label">Collection</span>
-                            <input type="text" placeholder="Presses HEC">
+                            <input type="text" placeholder="Presses HEC" ng-model="newsource.collection">
                         </label>
                         <ion-checkbox ng-model="newsource.hasBeenTranslated">Le livre a été traduit.</ion-checkbox>
                         <div ng-slide-down="newsource.hasBeenTranslated" lazy-render>
