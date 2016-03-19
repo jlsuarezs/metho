@@ -6,6 +6,7 @@
     </ion-header-bar>
     <ion-content scrollbar-y="true">
         <form ng-submit="submitSource()">
+                <!-- Choisir le type de la source -->
                 <label class="item item-input item-select">
                     <div class="input-label smallest">
                         Type de source
@@ -19,6 +20,7 @@
                         <option value="interview">Entrevue</option>
                     </select>
                 </label>
+                <!-- Livre -->
                 <div ng-slide-down="newsource.type == 'book'" lazy-render>
                     <ion-list class="isolated">
                         <ion-radio ng-model="newsource.hasAuthors" ng-value="'13'">La source a de 1 à 3 auteurs</ion-radio>
@@ -171,6 +173,26 @@
                             </table>
                         </div>
                     </div>
+                </div>
+                <!-- Article -->
+                <div ng-slide-down="newsource.type == 'article'" lazy-render>
+
+                </div>
+                <!-- Site web -->
+                <div ng-slide-down="newsource.type == 'internet'" lazy-render>
+
+                </div>
+                <!-- CD -->
+                <div ng-slide-down="newsource.type == 'cd'" lazy-render>
+
+                </div>
+                <!-- Vidéo -->
+                <div ng-slide-down="newsource.type == 'movie'" lazy-render>
+
+                </div>
+                <!-- Entrevue -->
+                <div ng-slide-down="newsource.type == 'interview'" lazy-render>
+
                 </div>
                 <button type="submit" class="button button-full button-dark center">Créer la source</button>
         </form>
