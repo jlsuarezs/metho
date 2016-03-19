@@ -1,14 +1,21 @@
-<ion-view view-title="{{project.name}}">
+<ion-view view-title="{{source.name}}">
     <ion-nav-buttons side="right">
       <button class="button button-clear button-positive icon ion-ios-upload-outline" ng-click="share()"></button>
     </ion-nav-buttons>
     <ion-content>
         <ion-list>
-            <ion-item ng-repeat="source in project.sources" href="#/projects/{{project.id}}/{{source.id}}" class="item-icon-right" type="item-text-wrap">
-                <h2>{{source.parsedSource}}</h2>
-                <p>{{source.parsedType}}</p>
-                <i class="icon ion-chevron-right icon-accessory"></i>
-                <ion-option-button class="button-assertive" ng-click="deleteSource('{{source.id}}')">Supprimer</ion-option-button>
+            <ion-item ng-repeat="error in source.errors" class="item-icon-left">
+                <i class="icon ion-android-alert icon-accessory"></i>
+                <h2>{{error.text}}</h2>
+            </ion-item>
+            <ion-item ng-repeat="warning in source.warnings" class="item-icon-left">
+                <i class="icon ion-alert-circled icon-accessory"></i>
+                <h2>{{warning.text}}</h2>
+            </ion-item>
+        </ion-list>
+        <ion-list>
+            <ion-item ng-repeat="input in inputs">
+
             </ion-item>
         </ion-list>
     </ion-content>
