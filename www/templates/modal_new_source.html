@@ -118,11 +118,11 @@
                         </label>
                         <label class="item item-input item-stacked-label item-button-left">
                             <span class="input-label">Date de publication</span>
-                            <input type="date" placeholder="2010" ng-model="newsource.publicationDate">
+                            <input type="text" placeholder="2010" ng-model="newsource.publicationDate">
                         </label>
                         <label class="item item-input item-stacked-label">
                             <span class="input-label">Lieu de publication</span>
-                            <input type="date" placeholder="Montréal" ng-model="newsource.publicationLocation">
+                            <input type="text" placeholder="Montréal" ng-model="newsource.publicationLocation">
                         </label>
                         <label class="item item-input item-stacked-label">
                             <span class="input-label">Nombre de pages</span>
@@ -180,7 +180,35 @@
                 </div>
                 <!-- Article -->
                 <div ng-slide-down="newsource.type == 'article'" lazy-render>
+                    <!-- Auteur -->
+                    <label class="item">
+                        <span class="input-label">Auteur</span>
+                    </label>
+                    <table class="table100">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="text" placeholder="Prénom">
+                                </td>
+                                <td>
+                                    <input type="text" placeholder="Nom">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- Nom de l'article -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Titre du l'article</span>
+                        <input type="text" placeholder="Haïti, la lente reconstruction" ng-model="newsource.title">
+                    </label>
 
+                    <!-- Nom du périodique -->
+                    
+                    <!-- Numéro de l'édition, du volume ou du périodique -->
+
+                    <!-- Date de publication -->
+
+                    <!-- Indication des pages de l'article -->
                 </div>
                 <!-- Site web -->
                 <div ng-slide-down="newsource.type == 'internet'" lazy-render>
@@ -200,8 +228,8 @@
                 </div>
                 <button type="submit" class="button button-full button-dark center">Créer la source</button>
         </form>
-        <!-- <p ng-bind="newsource.type">
+        <p ng-bind="newsource.publicationDate">
 
-        </p> -->
+        </p>
     </ion-content>
 </ion-modal-view>

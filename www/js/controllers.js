@@ -445,7 +445,7 @@ angular.module('starter.controllers', [])
                         sourceToParse.parsedSource += "trad. du " + sourceToParse.translatedFrom.toLowerCase() + " ";
                     }
                 }else {
-                    sourceToParse.errors.push("Aucune langue d'origine de la traduction spécifiée.");
+                    sourceToParse.errors.push("Aucune langue d'origine de la traduction spécifiée");
                     sourceToParse.parsedSource += "trad. de ? ";
                 }
 
@@ -496,7 +496,7 @@ angular.module('starter.controllers', [])
                 sourceToParse.parsedSource += sourceToParse.publicationLocation.capitalizeFirstLetter() + ", ";
             }else {
                 sourceToParse.parsedSource += "s.l., ";
-                sourceToParse.warnings.push("Lieu d'édition non spécifié.");
+                sourceToParse.warnings.push("Lieu d'édition non spécifié");
             }
 
             // Éditeur
