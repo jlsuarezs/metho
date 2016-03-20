@@ -188,10 +188,10 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <input type="text" placeholder="Prénom">
+                                    <input type="text" placeholder="Prénom" ng-model="newsource.author1firstname">
                                 </td>
                                 <td>
-                                    <input type="text" placeholder="Nom">
+                                    <input type="text" placeholder="Nom" ng-model="newsource.author1lastname">
                                 </td>
                             </tr>
                         </tbody>
@@ -203,12 +203,40 @@
                     </label>
 
                     <!-- Nom du périodique -->
-                    
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Nom du périodique</span>
+                        <input type="text" placeholder="Le Devoir" ng-model="newsource.editor">
+                    </label>
+
                     <!-- Numéro de l'édition, du volume ou du périodique -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Numéro de l'édition, du volume ou du périodique</span>
+                        <input type="text" placeholder="vol. 36, no 5" ng-model="newsource.editionNumber">
+                    </label>
 
                     <!-- Date de publication -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Date de publication</span>
+                        <input type="date" placeholder="21 mars 2009" ng-model="newsource.publicationDate">
+                    </label>
 
                     <!-- Indication des pages de l'article -->
+                    <label class="item">
+                        <span class="input-label">Indication des pages de l'article</span>
+                    </label>
+                    <table class="table100">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="number" placeholder="Début" ng-model="newsource.startPage">
+                                </td>
+                                <td>
+                                    <input type="number" placeholder="Fin" ng-model="newsource.endPage">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
                 </div>
                 <!-- Site web -->
                 <div ng-slide-down="newsource.type == 'internet'" lazy-render>
