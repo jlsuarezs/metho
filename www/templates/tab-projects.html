@@ -3,10 +3,10 @@
         <button class="button button-clear button-positive icon ion-ios-plus-empty" ng-click="newProject()"></button>
     </ion-nav-buttons>
     <ion-content ng-class="{ 'padding flex' : !projects.length }" scrollbar-y="true" has-bouncing="true">
-        <!-- When there is not elements -->
-        <button class="button ion-ios-plus-empty icon button-positive button-outline" class="centered" ng-if="!projects.length" ng-click="newProject()">
-        </button><br ng-if="!projects.length">
-        <p class="center dimmed-50" ng-if="!projects.length">
+        <!-- When there is no elements -->
+        <button class="button ion-ios-plus-empty icon button-positive button-outline" class="centered" ng-if="!projects.length && !loading" ng-click="newProject()">
+        </button><br ng-if="!projects.length && !loading">
+        <p class="center dimmed-50" ng-if="!projects.length && !loading">
             Aucun projet? Ça viendra...
         </p>
 
@@ -20,5 +20,10 @@
                 <ion-option-button class="button-assertive" ng-click="deleteProject('{{project.id}}')">Supprimer</ion-option-button>
             </ion-item>
         </ion-list>
+
+        <!-- Loading -->
+        <div class="spinner" ng-if="loading">
+            <ion-spinner icon="ios"></ion-spinner>
+        </div>
     </ion-content>
 </ion-view>

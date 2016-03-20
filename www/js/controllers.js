@@ -6,6 +6,7 @@ angular.module('starter.controllers', [])
     $scope.editingProject = {};
     $scope.err = "";
     $scope.errorName = false;
+    $scope.loading = true;
     // Initialize the DB
     $scope.projectsRepo = new PouchDB("projects");
     // Load the projects
@@ -18,6 +19,7 @@ angular.module('starter.controllers', [])
             }
             $scope.projects.push(obj);
         }
+        $scope.loading = false;
         $scope.$apply();
     }).catch(function (err) {
         console.log(err);
@@ -161,6 +163,7 @@ angular.module('starter.controllers', [])
         matter: "",
         sources: []
     };
+    $scope.loading = true;
     $scope.newsource = {};
 
     $ionicModal.fromTemplateUrl('templates/modal_new_source.html', {
@@ -590,6 +593,7 @@ angular.module('starter.controllers', [])
                 $scope.project.sources.push(result.rows[i]);
             }
         }
+        $scope.loading = false;
     }
 
 
