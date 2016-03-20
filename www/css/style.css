@@ -132,3 +132,7 @@ p.left-aligned {
 .black-top > .item-stacked-label:first-child {
     border-top-color: #404040 !important;
 }
+
+.deleteProject .popup {
+    width: 275px !important;
+}

@@ -80,10 +80,12 @@ angular.module('starter.controllers', [])
 
     $scope.deleteProject = function (id) {
         var confirmPopup = $ionicPopup.confirm({
-          title: 'Supprimer',
-          template: 'Voulez-vous supprimer ce projet ?',
+          title: 'Voulez-vous supprimer ce projet ?',
+          template: '<p class="center">La suppression de ce projet entrainera la perte de toutes les sources contenues dans celui-ci. Cette action est irréversible.</p>',
           cancelText: 'Annuler',
-          okText: '<b>Confirmer</b>'
+          okText: '<b>Supprimer</b>',
+          okType: 'button-assertive',
+          cssClass: 'deleteProject'
         });
         confirmPopup.then(function(res) {
           if(res) {
@@ -167,26 +169,12 @@ angular.module('starter.controllers', [])
         $scope.newSourceModal = modal;
     });
 
-    $scope.analyseProjectInfo = function (doc) {
-        $scope.project.name = doc.name;
-        $scope.project.id = doc.id;
-        $scope.project.matter = doc.matter;
-    }
-
-    $scope.analyseItemsInfo = function (result) {
-        for (var i = 0; i < result.rows.length; i++) {
-            if (result.rows[i].project_id == $stateParams.projectID) {
-                $scope.project.sources.push(result.rows[i]);
-            }
-        }
-    }
-
     $scope.share = function () {
         var textToShare = "";
         for (var i = 0; i < $scope.project.sources.length; i++) {
             textToShare += $scope.project.sources[i].parsedSource + "\n";
         }
-        window.plugins.socialsharing.share(text, $scope.article.name);
+        window.plugins.socialsharing.share(text, $scope.project.name);
     }
 
     $scope.resetModalVars = function () {
@@ -558,7 +546,25 @@ angular.module('starter.controllers', [])
         }
     }
 
+    $scope.deleteSource = function (id) {
+        // Delete the source
+    }
     // Initialize
+    $scope.analyseProjectInfo = function (doc) {
+        $scope.project.name = doc.name;
+        $scope.project.id = doc.id;
+        $scope.project.matter = doc.matter;
+    }
+
+    $scope.analyseItemsInfo = function (result) {
+        for (var i = 0; i < result.rows.length; i++) {
+            if (result.rows[i].project_id == $stateParams.projectID) {
+                $scope.project.sources.push(result.rows[i]);
+            }
+        }
+    }
+
+
     $scope.projectRepo.get($stateParams.projectID).then($scope.analyseProjectInfo);
 
     $scope.sourceRepo.allDocs({ include_docs: true }).then($scope.analyseItemsInfo);
