@@ -30,6 +30,11 @@
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
+    <script type="text/javascript">
+        String.prototype.capitalizeFirstLetter = function() {
+            return this.charAt(0).toUpperCase() + this.slice(1);
+        }
+    </script>
   </head>
   <body ng-app="starter">
     <!--
