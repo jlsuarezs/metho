@@ -96,6 +96,7 @@ angular.module('starter.controllers', [])
                       if ($scope.projects[i].id == result.id) {
                           $scope.projects.splice(i, 1);
                           $scope.$apply();
+                          return;
                       }
                   }
               }).catch(function (err) {
@@ -548,6 +549,33 @@ angular.module('starter.controllers', [])
 
     $scope.deleteSource = function (id) {
         // Delete the source
+        var confirmPopup = $ionicPopup.confirm({
+          title: 'Voulez-vous supprimer cet source ?',
+          template: '<p class="center">La suppression de cette source entrainera la perte de toutes les données ratachées à celle-ci. Cette action est irréversible.</p>',
+          cancelText: 'Annuler',
+          okText: '<b>Supprimer</b>',
+          okType: 'button-assertive',
+          cssClass: 'deleteProject'
+        });
+        confirmPopup.then(function(res) {
+          if(res) {
+              $scope.sourceRepo.get(id).then(function(doc) {
+                return $scope.sourceRepo.remove(doc);
+              }).then(function (result) {
+                  for (var i = 0; i < $scope.project.sources.length; i++) {
+                      if ($scope.project.sources[i].id == result.id) {
+                          $scope.projects.splice(i, 1);
+                          $scope.$apply();
+                          return;
+                      }
+                  }
+              }).catch(function (err) {
+                console.log(err);
+              });
+          } else {
+            $ionicListDelegate.closeOptionButtons();
+          }
+        });
     }
     // Initialize
     $scope.analyseProjectInfo = function (doc) {
