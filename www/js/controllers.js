@@ -204,8 +204,8 @@ angular.module('starter.controllers', [])
         }, 1000);
     }
 
-    // Refresh view on length change
-    $scope.$watch("newsource.hasBeenTranslated", $scope.refreshModalScroll);
+    // Refresh view on height change
+    // $scope.$watch("newsource.hasBeenTranslated", $scope.refreshModalScroll);
     $scope.$watch("newsource.type", $scope.refreshModalScroll);
     $scope.$watch("newsource.hasAuthors", $scope.refreshModalScroll);
     $scope.$watch("newsource.author1firstname", $scope.refreshModalScroll);
@@ -217,7 +217,9 @@ angular.module('starter.controllers', [])
     $scope.$watch("newsource.translator2firstname", $scope.refreshModalScroll);
     $scope.$watch("newsource.translator2lastname", $scope.refreshModalScroll);
     $scope.$watch("newsource.hasBeenTranslated", $scope.refreshModalScrollWithDelay);
-
+    // Keyboard events
+    window.addEventListener('keyboardDidHide', $scope.refreshModalScroll);
+    window.addEventListener('keyboardWillShow', $scope.refreshModalScroll);
 
     $scope.addSource = function () {
         // Open modal
@@ -305,13 +307,13 @@ angular.module('starter.controllers', [])
                     }
                     // Author 3 first name
                     if (sourceToParse.author3firstname != "" && sourceToParse.author3firstname != null) {
-                        sourceToParse.parsedSource += ", " + sourceToParse.author3firstname + ".";
+                        sourceToParse.parsedSource += ", " + sourceToParse.author3firstname + ". ";
                     }else {
                         sourceToParse.errors.push("Prénom du troisième auteur manquant");
                         sourceToParse.parsedSource += ", ?.";
                     }
                 }else {
-                    sourceToParse.parsedSource += ".";
+                    sourceToParse.parsedSource += ". ";
                 }
             }else if (sourceToParse.hasAuthors == "more3") {
                 if ((sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) || (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null)) {
@@ -350,9 +352,9 @@ angular.module('starter.controllers', [])
                         sourceToParse.parsedSource += "?";
                     }
 
-                    sourceToParse.parsedSource += " et al.";
+                    sourceToParse.parsedSource += " et al. ";
                 }else {
-                    sourceToParse.parsedSource += " et al.";
+                    sourceToParse.parsedSource += " et al. ";
                 }
             }else if (sourceToParse.hasAuthors == "collective") {
                 if ((sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) || (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null)) {
@@ -390,12 +392,140 @@ angular.module('starter.controllers', [])
                         sourceToParse.errors.push("Prénom du deuxième auteur manquant");
                         sourceToParse.parsedSource += "?";
                     }
-                    sourceToParse.parsedSource += " (dir).";
+                    sourceToParse.parsedSource += " (dir). ";
                 }else {
-                    sourceToParse.parsedSource += " (dir).";
+                    sourceToParse.parsedSource += " (dir). ";
                 }
             }else {
-                sourceToParse.parsedSource += "?."
+                sourceToParse.parsedSource += "?. "
+            }
+
+            // Titre
+            if (sourceToParse.title != null && sourceToParse.title != "") {
+                sourceToParse.parsedSource += "<em>" + sourceToParse.title + "</em>, ";
+            }else {
+                sourceToParse.errors.push("Aucun titre spécifié");
+                sourceToParse.parsedSource += "<em>?</em>, ";
+            }
+
+            // Édition
+            if (sourceToParse.editionNumber != null && sourceToParse.editionNumber != "") {
+                switch (sourceToParse.editionNumber) {
+                    case 1:
+                        sourceToParse.parsedSource += "1<sup>re</sup> ";
+                        break;
+                    default:
+                        sourceToParse.parsedSource += sourceToParse.editionNumber + "<sup>e</sup> ";
+                }
+                sourceToParse.parsedSource += "édition, ";
+            }
+
+            // Collection
+            if (sourceToParse.collection != null && sourceToParse.collection != "") {
+                sourceToParse.parsedSource += "coll. " + sourceToParse.collection + ", ";
+            }
+
+            // Traduction
+            if (sourceToParse.hasBeenTranslated) {
+                // Langue
+                if (sourceToParse.translatedFrom != null && sourceToParse.translatedFrom != "") {
+                    if ((/^[aeiou]$/i).test(sourceToParse.translatedFrom.substr(0, 1))) {
+                        sourceToParse.parsedSource += "trad. de l'" + sourceToParse.translatedFrom.toLowerCase() + " ";
+                    }else if (sourceToParse.translatedFrom.toLowerCase().substr(0, 1) == "h") {
+                        var arr_la = ["hawaïen", "hébreu", "hindi"];
+                        var arr_du = ["hongrois", "huron"];
+                        if (arr_la.indexOf(sourceToParse.translatedFrom.toLowerCase()) != -1) {
+                            sourceToParse.parsedSource += "trad. de l'" + sourceToParse.translatedFrom.toLowerCase() + " ";
+                        }else if (arr_du.indexOf(sourceToParse.translatedFrom.toLowerCase()) != -1) {
+                            sourceToParse.parsedSource += "trad. du " + sourceToParse.translatedFrom.toLowerCase() + " ";
+                        }else {
+                            sourceToParse.parsedSource += "trad. de l'" + sourceToParse.translatedFrom.toLowerCase() + " ";
+                        }
+                    }else {
+                        sourceToParse.parsedSource += "trad. du " + sourceToParse.translatedFrom.toLowerCase() + " ";
+                    }
+                }else {
+                    sourceToParse.errors.push("Aucune langue d'origine de la traduction spécifiée.");
+                    sourceToParse.parsedSource += "trad. de ? ";
+                }
+
+                // Traducteurs
+                if ((sourceToParse.translator1lastname != "" && sourceToParse.translator1lastname != null) || (sourceToParse.translator1firstname != "" && sourceToParse.translator1firstname != null)) {
+                    sourceToParse.parsedSource += "par ";
+                    // Translator's first name
+                    if (sourceToParse.translator1firstname != "" && sourceToParse.translator1firstname != null) {
+                        sourceToParse.parsedSource += sourceToParse.translator1firstname + " ";
+                    }else {
+                        sourceToParse.errors.push("Prénom du premier auteur manquant");
+                        sourceToParse.parsedSource += "? ";
+                    }
+                    // Translator's last name
+                    if (sourceToParse.translator1lastname != "" && sourceToParse.translator1lastname != null) {
+                        sourceToParse.parsedSource += sourceToParse.translator1lastname;
+                    }else {
+                        sourceToParse.errors.push("Nom du premier auteur manquant");
+                        sourceToParse.parsedSource += "? ";
+                    }
+                }else {
+                    sourceToParse.errors.push("Nom et prénom du premier traducteur manquants");
+                    sourceToParse.parsedSource += "?";
+                }
+
+                if ((sourceToParse.translator2lastname != "" && sourceToParse.translator2lastname != null) || (sourceToParse.translator2firstname != "" && sourceToParse.translator2firstname != null)) {
+                    // Translator 2 first name
+                    if (sourceToParse.translator2firstname != "" && sourceToParse.translator2firstname != null) {
+                        sourceToParse.parsedSource += ", " + sourceToParse.translator2firstname;
+                    }else {
+                        sourceToParse.errors.push("Prénom du deuxième auteur manquant");
+                        sourceToParse.parsedSource += "?";
+                    }
+                    // Translator 2 last name
+                    if (sourceToParse.translator2lastname != "" && sourceToParse.translator2lastname != null) {
+                        sourceToParse.parsedSource += " " + sourceToParse.translator2lastname + ", ";
+                    }else {
+                        sourceToParse.errors.push("Nom du deuxième auteur manquant");
+                        sourceToParse.parsedSource += "?, ";
+                    }
+                }else {
+                    sourceToParse.parsedSource += ", ";
+                }
+            }
+
+            // Lieu
+            if (sourceToParse.publicationLocation != null && sourceToParse.publicationLocation != "") {
+                sourceToParse.parsedSource += sourceToParse.publicationLocation.capitalizeFirstLetter() + ", ";
+            }else {
+                sourceToParse.parsedSource += "s.l., ";
+                sourceToParse.warnings.push("Lieu d'édition non spécifié.");
+            }
+
+            // Éditeur
+            if (sourceToParse.editor != null && sourceToParse.editor != "") {
+                sourceToParse.parsedSource += sourceToParse.editor + ", ";
+            }else {
+                sourceToParse.parsedSource += "?, ";
+                sourceToParse.errors.push("Éditeur non spécifié");
+            }
+
+            // Date
+            if (sourceToParse.publicationDate != null && sourceToParse.publicationDate != "") {
+                sourceToParse.parsedSource += sourceToParse.publicationDate + ", ";
+            }else {
+                sourceToParse.parsedSource += "s.d., ";
+                sourceToParse.warnings.push("Date d'édition non spécifiée");
+            }
+
+            // Volume
+            if (sourceToParse.volumeNumber != null && sourceToParse.volumeNumber != "") {
+                sourceToParse.parsedSource += "vol. " + sourceToParse.volumeNumber + ", ";
+            }
+
+            // Nombre de pages
+            if (sourceToParse.pageNumber != null && sourceToParse.pageNumber != "") {
+                sourceToParse.parsedSource += sourceToParse.pageNumber + " p.";
+            }else {
+                sourceToParse.parsedSource += "? p.";
+                sourceToParse.errors.push("Nombre de page non spécifié");
             }
 
             return sourceToParse;
