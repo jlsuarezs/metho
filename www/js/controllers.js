@@ -255,14 +255,14 @@ angular.module('starter.controllers', [])
                 if ((sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) || (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null)) {
                     // Author last name
                     if (sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) {
-                        sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase() + ", ";
+                        sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
                     }else {
                         sourceToParse.errors.push("Nom du premier auteur manquant");
                         sourceToParse.parsedSource += "?, ";
                     }
                     // Author first name
                     if (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null) {
-                        sourceToParse.parsedSource += sourceToParse.author1firstname;
+                        sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
                     }else {
                         sourceToParse.errors.push("Prénom du premier auteur manquant");
                         sourceToParse.parsedSource += "?";
@@ -275,14 +275,14 @@ angular.module('starter.controllers', [])
                 if ((sourceToParse.author2lastname != "" && sourceToParse.author2lastname != null) || (sourceToParse.author2firstname != "" && sourceToParse.author2firstname != null)) {
                     // Author 2 last name
                     if (sourceToParse.author2lastname != "" && sourceToParse.author2lastname != null) {
-                        sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase();
+                        sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
                     }else {
                         sourceToParse.errors.push("Nom du deuxième auteur manquant");
                         sourceToParse.parsedSource += "?, ";
                     }
                     // Author 2 first name
                     if (sourceToParse.author2firstname != "" && sourceToParse.author2firstname != null) {
-                        sourceToParse.parsedSource += ", " + sourceToParse.author2firstname;
+                        sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
                     }else {
                         sourceToParse.errors.push("Prénom du deuxième auteur manquant");
                         sourceToParse.parsedSource += "?";
@@ -292,14 +292,14 @@ angular.module('starter.controllers', [])
                 if ((sourceToParse.author3lastname != "" && sourceToParse.author3lastname != null) || (sourceToParse.author3firstname != "" && sourceToParse.author3firstname != null)) {
                     // Author 3 last name
                     if (sourceToParse.author3lastname != "" && sourceToParse.author3lastname != null) {
-                        sourceToParse.parsedSource += " et " + sourceToParse.author3lastname.toUpperCase();
+                        sourceToParse.parsedSource += " et " + sourceToParse.author3lastname.toUpperCase().trim();
                     }else {
                         sourceToParse.errors.push("Nom du troisième auteur manquant");
                         sourceToParse.parsedSource += ", ?";
                     }
                     // Author 3 first name
                     if (sourceToParse.author3firstname != "" && sourceToParse.author3firstname != null) {
-                        sourceToParse.parsedSource += ", " + sourceToParse.author3firstname + ". ";
+                        sourceToParse.parsedSource += ", " + sourceToParse.author3firstname.trim() + ". ";
                     }else {
                         sourceToParse.errors.push("Prénom du troisième auteur manquant");
                         sourceToParse.parsedSource += ", ?.";
@@ -311,14 +311,14 @@ angular.module('starter.controllers', [])
                 if ((sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) || (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null)) {
                     // Author last name
                     if (sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) {
-                        sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase() + ", ";
+                        sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
                     }else {
                         sourceToParse.errors.push("Nom du premier auteur manquant");
                         sourceToParse.parsedSource += "?, ";
                     }
                     // Author first name
                     if (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null) {
-                        sourceToParse.parsedSource += sourceToParse.author1firstname;
+                        sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
                     }else {
                         sourceToParse.errors.push("Prénom du premier auteur manquant");
                         sourceToParse.parsedSource += "?";
@@ -331,14 +331,14 @@ angular.module('starter.controllers', [])
                 if ((sourceToParse.author2lastname != "" && sourceToParse.author2lastname != null) || (sourceToParse.author2firstname != "" && sourceToParse.author2firstname != null)) {
                     // Author 2 last name
                     if (sourceToParse.author2lastname != "" && sourceToParse.author2lastname != null) {
-                        sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase();
+                        sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
                     }else {
                         sourceToParse.errors.push("Nom du deuxième auteur manquant");
                         sourceToParse.parsedSource += "?, ";
                     }
                     // Author 2 first name
                     if (sourceToParse.author2firstname != "" && sourceToParse.author2firstname != null) {
-                        sourceToParse.parsedSource += ", " + sourceToParse.author2firstname;
+                        sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
                     }else {
                         sourceToParse.errors.push("Prénom du deuxième auteur manquant");
                         sourceToParse.parsedSource += "?";
@@ -352,14 +352,14 @@ angular.module('starter.controllers', [])
                 if ((sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) || (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null)) {
                     // Author last name
                     if (sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) {
-                        sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase() + ", ";
+                        sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
                     }else {
                         sourceToParse.errors.push("Nom du premier auteur manquant");
                         sourceToParse.parsedSource += "?, ";
                     }
                     // Author first name
                     if (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null) {
-                        sourceToParse.parsedSource += sourceToParse.author1firstname;
+                        sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
                     }else {
                         sourceToParse.errors.push("Prénom du premier auteur manquant");
                         sourceToParse.parsedSource += "?";
@@ -372,14 +372,14 @@ angular.module('starter.controllers', [])
                 if ((sourceToParse.author2lastname != "" && sourceToParse.author2lastname != null) || (sourceToParse.author2firstname != "" && sourceToParse.author2firstname != null)) {
                     // Author 2 last name
                     if (sourceToParse.author2lastname != "" && sourceToParse.author2lastname != null) {
-                        sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase();
+                        sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
                     }else {
                         sourceToParse.errors.push("Nom du deuxième auteur manquant");
                         sourceToParse.parsedSource += "?, ";
                     }
                     // Author 2 first name
                     if (sourceToParse.author2firstname != "" && sourceToParse.author2firstname != null) {
-                        sourceToParse.parsedSource += ", " + sourceToParse.author2firstname;
+                        sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
                     }else {
                         sourceToParse.errors.push("Prénom du deuxième auteur manquant");
                         sourceToParse.parsedSource += "?";
@@ -393,8 +393,8 @@ angular.module('starter.controllers', [])
             }
 
             // Titre
-            if (sourceToParse.title != null && sourceToParse.title != "") {
-                sourceToParse.parsedSource += "<em>" + sourceToParse.title + "</em>, ";
+            if (sourceToParse.title != null && sourceToParse.title.trim() != "") {
+                sourceToParse.parsedSource += "<em>" + sourceToParse.title.trim() + "</em>, ";
             }else {
                 sourceToParse.errors.push("Aucun titre spécifié");
                 sourceToParse.parsedSource += "<em>?</em>, ";
@@ -414,7 +414,7 @@ angular.module('starter.controllers', [])
 
             // Collection
             if (sourceToParse.collection != null && sourceToParse.collection != "") {
-                sourceToParse.parsedSource += "coll. " + sourceToParse.collection + ", ";
+                sourceToParse.parsedSource += "coll. " + sourceToParse.collection.trim() + ", ";
             }
 
             // Traduction
@@ -422,19 +422,19 @@ angular.module('starter.controllers', [])
                 // Langue
                 if (sourceToParse.translatedFrom != null && sourceToParse.translatedFrom != "") {
                     if ((/^[aeiou]$/i).test(sourceToParse.translatedFrom.substr(0, 1))) {
-                        sourceToParse.parsedSource += "trad. de l'" + sourceToParse.translatedFrom.toLowerCase() + " ";
+                        sourceToParse.parsedSource += "trad. de l'" + sourceToParse.translatedFrom.toLowerCase().trim() + " ";
                     }else if (sourceToParse.translatedFrom.toLowerCase().substr(0, 1) == "h") {
                         var arr_la = ["hawaïen", "hébreu", "hindi"];
                         var arr_du = ["hongrois", "huron"];
-                        if (arr_la.indexOf(sourceToParse.translatedFrom.toLowerCase()) != -1) {
-                            sourceToParse.parsedSource += "trad. de l'" + sourceToParse.translatedFrom.toLowerCase() + " ";
-                        }else if (arr_du.indexOf(sourceToParse.translatedFrom.toLowerCase()) != -1) {
-                            sourceToParse.parsedSource += "trad. du " + sourceToParse.translatedFrom.toLowerCase() + " ";
+                        if (arr_la.indexOf(sourceToParse.translatedFrom.toLowerCase().trim()) != -1) {
+                            sourceToParse.parsedSource += "trad. de l'" + sourceToParse.translatedFrom.toLowerCase().trim() + " ";
+                        }else if (arr_du.indexOf(sourceToParse.translatedFrom.toLowerCase().trim()) != -1) {
+                            sourceToParse.parsedSource += "trad. du " + sourceToParse.translatedFrom.toLowerCase().trim() + " ";
                         }else {
-                            sourceToParse.parsedSource += "trad. de l'" + sourceToParse.translatedFrom.toLowerCase() + " ";
+                            sourceToParse.parsedSource += "trad. de l'" + sourceToParse.translatedFrom.toLowerCase().trim() + " ";
                         }
                     }else {
-                        sourceToParse.parsedSource += "trad. du " + sourceToParse.translatedFrom.toLowerCase() + " ";
+                        sourceToParse.parsedSource += "trad. du " + sourceToParse.translatedFrom.toLowerCase().trim() + " ";
                     }
                 }else {
                     sourceToParse.errors.push("Aucune langue d'origine de la traduction spécifiée");
@@ -445,15 +445,15 @@ angular.module('starter.controllers', [])
                 if ((sourceToParse.translator1lastname != "" && sourceToParse.translator1lastname != null) || (sourceToParse.translator1firstname != "" && sourceToParse.translator1firstname != null)) {
                     sourceToParse.parsedSource += "par ";
                     // Translator's first name
-                    if (sourceToParse.translator1firstname != "" && sourceToParse.translator1firstname != null) {
-                        sourceToParse.parsedSource += sourceToParse.translator1firstname + " ";
+                    if (sourceToParse.translator1firstname.trim() != "" && sourceToParse.translator1firstname != null) {
+                        sourceToParse.parsedSource += sourceToParse.translator1firstname.trim() + " ";
                     }else {
                         sourceToParse.errors.push("Prénom du premier auteur manquant");
                         sourceToParse.parsedSource += "? ";
                     }
                     // Translator's last name
-                    if (sourceToParse.translator1lastname != "" && sourceToParse.translator1lastname != null) {
-                        sourceToParse.parsedSource += sourceToParse.translator1lastname;
+                    if (sourceToParse.translator1lastname.trim() != "" && sourceToParse.translator1lastname != null) {
+                        sourceToParse.parsedSource += sourceToParse.translator1lastname.trim();
                     }else {
                         sourceToParse.errors.push("Nom du premier auteur manquant");
                         sourceToParse.parsedSource += "? ";
@@ -463,17 +463,17 @@ angular.module('starter.controllers', [])
                     sourceToParse.parsedSource += "?";
                 }
 
-                if ((sourceToParse.translator2lastname != "" && sourceToParse.translator2lastname != null) || (sourceToParse.translator2firstname != "" && sourceToParse.translator2firstname != null)) {
+                if ((sourceToParse.translator2lastname.trim() != "" && sourceToParse.translator2lastname != null) || (sourceToParse.translator2firstname.trim() != "" && sourceToParse.translator2firstname != null)) {
                     // Translator 2 first name
-                    if (sourceToParse.translator2firstname != "" && sourceToParse.translator2firstname != null) {
-                        sourceToParse.parsedSource += ", " + sourceToParse.translator2firstname;
+                    if (sourceToParse.translator2firstname.trim() != "" && sourceToParse.translator2firstname != null) {
+                        sourceToParse.parsedSource += ", " + sourceToParse.translator2firstname.trim();
                     }else {
                         sourceToParse.errors.push("Prénom du deuxième auteur manquant");
                         sourceToParse.parsedSource += "?";
                     }
                     // Translator 2 last name
-                    if (sourceToParse.translator2lastname != "" && sourceToParse.translator2lastname != null) {
-                        sourceToParse.parsedSource += " " + sourceToParse.translator2lastname + ", ";
+                    if (sourceToParse.translator2lastname.trim() != "" && sourceToParse.translator2lastname != null) {
+                        sourceToParse.parsedSource += " " + sourceToParse.translator2lastname.trim() + ", ";
                     }else {
                         sourceToParse.errors.push("Nom du deuxième auteur manquant");
                         sourceToParse.parsedSource += "?, ";
@@ -484,16 +484,16 @@ angular.module('starter.controllers', [])
             }
 
             // Lieu
-            if (sourceToParse.publicationLocation != null && sourceToParse.publicationLocation != "") {
-                sourceToParse.parsedSource += sourceToParse.publicationLocation.capitalizeFirstLetter() + ", ";
+            if (sourceToParse.publicationLocation != null && sourceToParse.publicationLocation.trim() != "") {
+                sourceToParse.parsedSource += sourceToParse.publicationLocation.capitalizeFirstLetter().trim() + ", ";
             }else {
                 sourceToParse.parsedSource += "s.l., ";
                 sourceToParse.warnings.push("Lieu d'édition non spécifié");
             }
 
             // Éditeur
-            if (sourceToParse.editor != null && sourceToParse.editor != "") {
-                sourceToParse.parsedSource += sourceToParse.editor + ", ";
+            if (sourceToParse.editor != null && sourceToParse.editor.trim() != "") {
+                sourceToParse.parsedSource += sourceToParse.editor.trim() + ", ";
             }else {
                 sourceToParse.parsedSource += "?, ";
                 sourceToParse.errors.push("Éditeur non spécifié");
