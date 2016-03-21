@@ -58,7 +58,7 @@ angular.module('starter.controllers', [])
             $scope.errorName = true;
             var alertPopup = $ionicPopup.alert({
              title: 'Erreur',
-             template: 'Entrez un nom de projet.'
+             template: '<p class="center">Entrez un nom de projet</p>'
             });
         }else {
             $scope.errorName = false;
@@ -538,13 +538,21 @@ angular.module('starter.controllers', [])
 
     $scope.submitSource = function () {
         if ($scope.newsource.type != "" && $scope.newsource.type != null) {
-            $scope.project.sources.push($scope.parseSource($scope.newsource));
+            var creatingProj = $scope.parseSource($scope.newsource);
+            creatingProj.project_id = $stateParams.projectID;
             // Save to db
-            $scope.closeModal();
+            $scope.sourceRepo.post(creatingProj).then(function (response) {
+                creatingProj.id = response.id;
+                $scope.project.sources.push(creatingProj);
+                $scope.closeModal();
+                $scope.$apply();
+            }).catch(function (err) {
+                console.log(err);
+            });
         }else {
             var alertPopup = $ionicPopup.alert({
              title: 'Erreur',
-             template: 'La source doit avoir un type'
+             template: '<p class="center">La source doit avoir un type</p>'
             });
             return;
         }
@@ -589,8 +597,8 @@ angular.module('starter.controllers', [])
 
     $scope.analyseItemsInfo = function (result) {
         for (var i = 0; i < result.rows.length; i++) {
-            if (result.rows[i].project_id == $stateParams.projectID) {
-                $scope.project.sources.push(result.rows[i]);
+            if (result.rows[i].doc.project_id == $stateParams.projectID) {
+                $scope.project.sources.push(result.rows[i].doc);
             }
         }
         $scope.loading = false;
@@ -600,7 +608,6 @@ angular.module('starter.controllers', [])
     $scope.projectRepo.get($stateParams.projectID).then($scope.analyseProjectInfo);
 
     $scope.sourceRepo.allDocs({ include_docs: true }).then($scope.analyseItemsInfo);
-
 
 })
 
