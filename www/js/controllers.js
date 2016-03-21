@@ -542,7 +542,7 @@ angular.module('starter.controllers', [])
             creatingProj.project_id = $stateParams.projectID;
             // Save to db
             $scope.sourceRepo.post(creatingProj).then(function (response) {
-                creatingProj.id = response.id;
+                creatingProj._id = response.id;
                 $scope.project.sources.push(creatingProj);
                 $scope.closeModal();
                 $scope.$apply();
@@ -574,8 +574,8 @@ angular.module('starter.controllers', [])
                 return $scope.sourceRepo.remove(doc);
               }).then(function (result) {
                   for (var i = 0; i < $scope.project.sources.length; i++) {
-                      if ($scope.project.sources[i].id == result.id) {
-                          $scope.projects.splice(i, 1);
+                      if ($scope.project.sources[i]._id == result.id) {
+                          $scope.project.sources.splice(i, 1);
                           $scope.$apply();
                           return;
                       }
