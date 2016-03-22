@@ -591,7 +591,7 @@ angular.module('starter.controllers', [])
     // Initialize
     $scope.analyseProjectInfo = function (doc) {
         $scope.project.name = doc.name;
-        $scope.project.id = doc.id;
+        $scope.project.id = doc._id;
         $scope.project.matter = doc.matter;
     }
 
@@ -611,8 +611,9 @@ angular.module('starter.controllers', [])
 
 })
 
+.controller('SourceDetailCtrl', function ($scope) {
 
-
+})
 
 .controller('RefCtrl', function($scope, Articles) {
   $scope.articles = Articles.all();
