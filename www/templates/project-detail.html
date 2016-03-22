@@ -6,15 +6,24 @@
     <ion-content ng-class="{ 'padding flex' : !project.sources.length }">
         <!-- List of sources -->
         <ion-list>
-            <ion-item ng-repeat="source in project.sources" href="#/projects/{{project.id}}/{{source.id}}" class="item-icon-right" type="item-text-wrap">
-                <h2 ng-bind-html="source.parsedSource"></h2>
+            <ion-item ng-repeat="source in project.sources" href="#/tab/projects/{{project.id}}/{{source._id}}" class="item item-icon-right" type="item-text-wrap">
+                <h2 ng-bind-html="source.parsedSource" ng-if="!source.title"></h2>
+                <h2 ng-if="source.title">{{source.title}}</h2>
                 <p>{{source.parsedType}}</p>
-                <i class="icon ion-chevron-right icon-accessory"></i>
+                <div class="icon">
+                    <span class="error-nb" ng-if="source.warnings.length">{{source.warnings.length}}</span>
+                    <span class=" ion-alert-circled icon-accessory yellow" ng-if="source.warnings.length"></span>
+                    &nbsp;
+                    <span class="error-nb" ng-if="source.errors.length">{{source.errors.length}}</span>
+                    <span class=" ion-android-alert icon-accessory red" ng-if="source.errors.length"></span>
+                    &nbsp;
+                    <span class=" ion-chevron-right icon-accessory"></span>
+                </div>
                 <ion-option-button class="button-assertive" ng-click="deleteSource('{{source._id}}')">Supprimer</ion-option-button>
             </ion-item>
         </ion-list>
 
-        <!-- When there are not sources -->
+        <!-- When there are no sources -->
         <button class="button ion-ios-plus-empty icon button-positive button-outline" class="centered" ng-if="!project.sources.length && !loading" ng-click="addSource()">
         </button><br ng-if="!project.sources.length && !loading">
         <p class="center dimmed-50" ng-if="!project.sources.length && !loading">

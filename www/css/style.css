@@ -136,3 +136,16 @@ p.left-aligned {
 .deleteProject .popup {
     width: 275px !important;
 }
+
+.error-nb {
+    font-size: 12px;
+    margin-right: 3px;
+}
+
+.yellow {
+    color: #e8ac18 !important;
+}
+
+.red {
+    color: #db183d !important;
+}
