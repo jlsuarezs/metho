@@ -149,3 +149,7 @@ p.left-aligned {
 .red {
     color: #db183d !important;
 }
+
+.limited-width {
+    width: calc(90vw - 95px) !important;
+}
