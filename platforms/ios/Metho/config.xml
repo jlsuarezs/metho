@@ -45,6 +45,9 @@
     <feature name="Keyboard">
         <param name="ios-package" onload="true" value="CDVKeyboard" />
     </feature>
+    <feature name="ActionSheet">
+        <param name="ios-package" value="ActionSheet" />
+    </feature>
     <name>Metho</name>
     <description>
         An Ionic Framework and Cordova project.
