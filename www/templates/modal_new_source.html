@@ -1,11 +1,12 @@
 <ion-modal-view>
     <ion-header-bar class="bar-stable">
-        <h1 class="title">Nouvelle source</h1>
         <button class="button button-positive icon ion-ios-close-empty button-clear" ng-click="closeModal()">
         </button>
+        <h1 class="title">Nouvelle source</h1>
+        <button class="button button-positive button-clear" ng-click="submitSource()">Créer</button>
     </ion-header-bar>
-    <ion-content scrollbar-y="true">
-        <form ng-submit="submitSource()">
+    <ion-content scrollbar-y="true" has-bouncing="true">
+        <form ng-submit="submitSource()" ng-keyup="$event.keyCode == 13 && submitSource()">
                 <!-- Choisir le type de la source -->
                 <label class="item item-input item-select">
                     <div class="input-label smallest">
@@ -254,7 +255,6 @@
                 <div ng-slide-down="newsource.type == 'interview'" lazy-render>
 
                 </div>
-                <button type="submit" class="button button-full button-dark center">Créer la source</button>
         </form>
         <!-- <p ng-bind="newsource.publicationDate">
 
