@@ -178,7 +178,20 @@ angular.module('starter.controllers', [])
         for (var i = 0; i < $scope.project.sources.length; i++) {
             textToShare += $scope.project.sources[i].parsedSource + "\n";
         }
-        window.plugins.socialsharing.share(text, $scope.project.name);
+        window.plugins.socialsharing.shareViaEmail(
+          textToShare,
+          project.name,
+          [], // TO: must be null or an array
+          [], // CC: must be null or an array
+          null, // BCC: must be null or an array
+          [], // FILES: can be null, a string, or an array
+          function () {
+
+          }, // called when sharing worked, but also when the user cancelled sharing via email (I've found no way to detect the difference)
+          function () {
+
+          } // called when sh*t hits the fan
+        );
     }
 
     $scope.resetModalVars = function () {
@@ -678,7 +691,6 @@ angular.module('starter.controllers', [])
     $scope.projectRepo = new PouchDB("projects");
 
     // Init
-
     $scope.analyseSourceInfo = function (result) {
         $scope.source = result;
     }
@@ -693,6 +705,9 @@ angular.module('starter.controllers', [])
 
     $scope.sourceRepo.get($stateParams.sourceID).then($scope.analyseSourceInfo);
 })
+
+
+
 
 .controller('RefCtrl', function($scope, Articles) {
   $scope.articles = Articles.all();
