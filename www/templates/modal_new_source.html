@@ -30,82 +30,42 @@
                     </ion-list>
                     <!-- La source a de 1 à 3 auteurs -->
                     <div ng-slide-down="newsource.hasAuthors == '13'" lazy-render duration="0.5">
-                        <table class="table100">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <input type="text" ng-model="newsource.author1firstname" placeholder="Prénom">
-                                    </td>
-                                    <td>
-                                        <input type="text" ng-model="newsource.author1lastname" placeholder="Nom">
-                                    </td>
-                                </tr>
-                                <tr ng-if="(newsource.author1firstname != null && newsource.author1firstname != '') || (newsource.author1lastname != null && newsource.author1lastname != '')">
-                                    <td>
-                                        <input type="text" placeholder="Prénom" ng-model="newsource.author2firstname">
-                                    </td>
-                                    <td>
-                                        <input type="text" placeholder="Nom" ng-model="newsource.author2lastname">
-                                    </td>
-                                </tr>
-                                <tr ng-if="(newsource.author2firstname != null && newsource.author2firstname != '') || (newsource.author2lastname != null && newsource.author2lastname != '')">
-                                    <td>
-                                        <input type="text" placeholder="Prénom" ng-model="newsource.author3firstname">
-                                    </td>
-                                    <td>
-                                        <input type="text" placeholder="Nom" ng-model="newsource.author3lastname">
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="flex-sub padding">
+                            <input type="text" ng-model="newsource.author1firstname" placeholder="Prénom">
+                            <input type="text" ng-model="newsource.author1lastname" placeholder="Nom">
+                        </div>
+                        <div class="flex-sub padding" ng-if="(newsource.author1firstname != null && newsource.author1firstname != '') || (newsource.author1lastname != null && newsource.author1lastname != '')">
+                            <input type="text" placeholder="Prénom" ng-model="newsource.author2firstname">
+                            <input type="text" placeholder="Nom" ng-model="newsource.author2lastname">
+                        </div>
+                        <div class="flex-sub padding" ng-if="(newsource.author2firstname != null && newsource.author2firstname != '') || (newsource.author2lastname != null && newsource.author2lastname != '')">
+                            <input type="text" placeholder="Prénom" ng-model="newsource.author3firstname">
+                            <input type="text" placeholder="Nom" ng-model="newsource.author3lastname">
+                        </div>
                     </div>
                     <!-- La source a plus de 3 auteurs -->
                     <div ng-slide-down="newsource.hasAuthors == 'more3'" lazy-render duration="0.5">
-                        <label class="item"><span class="input-label">Entrer le nom des deux premiers auteurs :</span></label>
-                        <table class="table100">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <input type="text" ng-model="newsource.author1firstname" placeholder="Prénom">
-                                    </td>
-                                    <td>
-                                        <input type="text" ng-model="newsource.author1lastname" placeholder="Nom">
-                                    </td>
-                                </tr>
-                                <tr ng-if="(newsource.author1firstname != null && newsource.author1firstname != '') || (newsource.author1lastname != null && newsource.author1lastname != '')">
-                                    <td>
-                                        <input type="text" placeholder="Prénom" ng-model="newsource.author2firstname">
-                                    </td>
-                                    <td>
-                                        <input type="text" placeholder="Nom" ng-model="newsource.author2lastname">
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <label class="item"><span class="input-label">Nom des deux premiers auteurs :</span></label>
+                        <div class="flex-sub padding">
+                            <input type="text" ng-model="newsource.author1firstname" placeholder="Prénom">
+                            <input type="text" ng-model="newsource.author1lastname" placeholder="Nom">
+                        </div>
+                        <div class="flex-sub padding" ng-if="(newsource.author1firstname != null && newsource.author1firstname != '') || (newsource.author1lastname != null && newsource.author1lastname != '')">
+                            <input type="text" placeholder="Prénom" ng-model="newsource.author2firstname">
+                            <input type="text" placeholder="Nom" ng-model="newsource.author2lastname">
+                        </div>
                     </div>
                     <!-- La source est un collectif -->
                     <div ng-slide-down="newsource.hasAuthors == 'collective'" lazy-render duration="0.5">
-                        <label class="item"><span class="input-label">Entrer le nom du ou des directeurs (s'il y a lieu) :</span></label>
-                        <table class="table100">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <input type="text" ng-model="newsource.author1firstname" placeholder="Prénom">
-                                    </td>
-                                    <td>
-                                        <input type="text" ng-model="newsource.author1lastname" placeholder="Nom">
-                                    </td>
-                                </tr>
-                                <tr ng-if="(newsource.author1firstname != null && newsource.author1firstname != '') || (newsource.author1lastname != null && newsource.author1lastname != '')">
-                                    <td>
-                                        <input type="text" placeholder="Prénom" ng-model="newsource.author2firstname">
-                                    </td>
-                                    <td>
-                                        <input type="text" placeholder="Nom" ng-model="newsource.author2lastname">
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <label class="item"><span class="input-label">Nom du ou des directeurs :</span></label>
+                        <div class="flex-sub padding">
+                            <input type="text" ng-model="newsource.author1firstname" placeholder="Prénom">
+                            <input type="text" ng-model="newsource.author1lastname" placeholder="Nom">
+                        </div>
+                        <div class="flex-sub padding" ng-if="(newsource.author1firstname != null && newsource.author1firstname != '') || (newsource.author1lastname != null && newsource.author1lastname != '')">
+                            <input type="text" placeholder="Prénom" ng-model="newsource.author2firstname">
+                            <input type="text" placeholder="Nom" ng-model="newsource.author2lastname">
+                        </div>
                     </div>
                     <!-- Autres champs -->
                     <div class="list black-top">
@@ -148,34 +108,18 @@
                                 <input type="text" placeholder="Anglais" ng-model="newsource.translatedFrom">
                             </label>
                             <label class="item" ng-if="newsource.hasBeenTranslated"><span class="input-label">Nom des traducteurs :</span></label>
-                            <table ng-if="newsource.hasBeenTranslated" class="table100">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <input type="text" ng-model="newsource.translator1firstname" placeholder="Prénom">
-                                        </td>
-                                        <td>
-                                            <input type="text" ng-model="newsource.translator1lastname" placeholder="Nom">
-                                        </td>
-                                    </tr>
-                                    <tr ng-if="(newsource.translator1firstname != null && newsource.translator1firstname != '') || (newsource.translator1lastname != null && newsource.translator1lastname != '')">
-                                        <td>
-                                            <input type="text" placeholder="Prénom" ng-model="newsource.translator2firstname">
-                                        </td>
-                                        <td>
-                                            <input type="text" placeholder="Nom" ng-model="newsource.translator2lastname">
-                                        </td>
-                                    </tr>
-                                    <tr ng-if="(newsource.translator2firstname != null && newsource.translator2firstname != '') || (newsource.translator2lastname != null && newsource.translator2lastname != '')">
-                                        <td>
-                                            <input type="text" placeholder="Prénom" ng-model="newsource.translator3firstname">
-                                        </td>
-                                        <td>
-                                            <input type="text" placeholder="Nom" ng-model="newsource.translator3lastname">
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="flex-sub padding">
+                                <input type="text" ng-model="newsource.translator1firstname" placeholder="Prénom">
+                                <input type="text" ng-model="newsource.translator1lastname" placeholder="Nom">
+                            </div>
+                            <div class="flex-sub padding" ng-if="(newsource.translator1firstname != null && newsource.translator1firstname != '') || (newsource.translator1lastname != null && newsource.translator1lastname != '')">
+                                <input type="text" placeholder="Prénom" ng-model="newsource.translator2firstname">
+                                <input type="text" placeholder="Nom" ng-model="newsource.translator2lastname">
+                            </div>
+                            <div class="flex-sub padding" ng-if="(newsource.translator2firstname != null && newsource.translator2firstname != '') || (newsource.translator2lastname != null && newsource.translator2lastname != '')">
+                                <input type="text" placeholder="Prénom" ng-model="newsource.translator3firstname">
+                                <input type="text" placeholder="Nom" ng-model="newsource.translator3lastname">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -185,18 +129,10 @@
                     <label class="item">
                         <span class="input-label">Auteur</span>
                     </label>
-                    <table class="table100">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <input type="text" placeholder="Prénom" ng-model="newsource.author1firstname">
-                                </td>
-                                <td>
-                                    <input type="text" placeholder="Nom" ng-model="newsource.author1lastname">
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="flex-sub padding">
+                        <input type="text" placeholder="Prénom" ng-model="newsource.author1firstname">
+                        <input type="text" placeholder="Nom" ng-model="newsource.author1lastname">
+                    </div>
                     <!-- Nom de l'article -->
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Titre du l'article</span>
@@ -225,19 +161,10 @@
                     <label class="item">
                         <span class="input-label">Indication des pages de l'article</span>
                     </label>
-                    <table class="table100">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <input type="number" placeholder="Début" ng-model="newsource.startPage">
-                                </td>
-                                <td>
-                                    <input type="number" placeholder="Fin" ng-model="newsource.endPage">
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
+                    <div class="flex-sub padding">
+                        <input type="number" placeholder="Début" ng-model="newsource.startPage" class="center">
+                        <input type="number" placeholder="Fin" ng-model="newsource.endPage" class="center">
+                    </div>
                 </div>
                 <!-- Site web -->
                 <div ng-slide-down="newsource.type == 'internet'" lazy-render>
