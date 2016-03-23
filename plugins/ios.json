@@ -22,10 +22,10 @@
         "cordova-plugin-x-socialsharing": {
             "PACKAGE_NAME": "com.ionicframework.metho"
         },
-        "cordova-plugin-keyboard": {
+        "cordova-plugin-actionsheet": {
             "PACKAGE_NAME": "com.ionicframework.metho"
         },
-        "cordova-plugin-actionsheet": {
+        "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.ionicframework.metho"
         }
     },

@@ -41,28 +41,29 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/cordova-plugin-keyboard/www/keyboard.js",
-        "id": "cordova-plugin-keyboard.keyboard",
-        "pluginId": "cordova-plugin-keyboard",
-        "clobbers": [
-            "window.Keyboard"
-        ]
-    },
-    {
         "file": "plugins/cordova-plugin-actionsheet/www/ActionSheet.js",
         "id": "cordova-plugin-actionsheet.ActionSheet",
         "pluginId": "cordova-plugin-actionsheet",
         "clobbers": [
             "window.plugins.actionsheet"
         ]
+    },
+    {
+        "file": "plugins/ionic-plugin-keyboard/www/ios/keyboard.js",
+        "id": "ionic-plugin-keyboard.keyboard",
+        "pluginId": "ionic-plugin-keyboard",
+        "clobbers": [
+            "cordova.plugins.Keyboard"
+        ],
+        "runs": true
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
     "cordova-plugin-x-socialsharing": "5.0.10",
-    "cordova-plugin-keyboard": "1.1.3",
-    "cordova-plugin-actionsheet": "2.2.2"
+    "cordova-plugin-actionsheet": "2.2.2",
+    "ionic-plugin-keyboard": "2.0.1"
 }
 // BOTTOM OF METADATA
 });

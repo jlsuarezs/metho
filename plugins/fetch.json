@@ -39,18 +39,19 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-keyboard": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-keyboard"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-actionsheet": {
         "source": {
             "type": "registry",
             "id": "cordova-plugin-actionsheet"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "ionic-plugin-keyboard": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/driftyco/ionic-plugins-keyboard.git",
+            "subdir": "."
         },
         "is_top_level": true,
         "variables": {}

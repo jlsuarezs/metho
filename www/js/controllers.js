@@ -199,7 +199,7 @@ angular.module('starter.controllers', [])
     // Refresh view on height change
     // $scope.$watch("newsource.hasBeenTranslated", $scope.refreshModalScroll);
     $scope.$watch("newsource.type", $scope.refreshModalScroll);
-    $scope.$watch("newsource.hasAuthors", $scope.refreshModalScroll);
+    $scope.$watch("newsource.hasAuthors", $scope.refreshModalScrollWithDelay);
     $scope.$watch("newsource.author1firstname", $scope.refreshModalScroll);
     $scope.$watch("newsource.author1lastname", $scope.refreshModalScroll);
     $scope.$watch("newsource.author2firstname", $scope.refreshModalScroll);
@@ -672,8 +672,26 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('SourceDetailCtrl', function ($scope) {
+.controller('SourceDetailCtrl', function ($scope, $stateParams) {
+    $scope.source = {};
+    $scope.sourceRepo = new PouchDB("sources");
+    $scope.projectRepo = new PouchDB("projects");
 
+    // Init
+
+    $scope.analyseSourceInfo = function (result) {
+        $scope.source = result;
+    }
+
+    $scope.analyseProjectInfo = function (doc) {
+        $scope.project.name = doc.name;
+        $scope.project.id = doc._id;
+        $scope.project.matter = doc.matter;
+    }
+
+    $scope.projectRepo.get($stateParams.projectID).then($scope.analyseProjectInfo);
+
+    $scope.sourceRepo.get($stateParams.sourceID).then($scope.analyseSourceInfo);
 })
 
 .controller('RefCtrl', function($scope, Articles) {

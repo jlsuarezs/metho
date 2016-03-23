@@ -1,16 +1,18 @@
-<ion-view view-title="{{source.name}}">
+<ion-view view-title="{{source.title}}" id="bind-html-with-trust">
     <ion-nav-buttons side="right">
       <button class="button button-clear button-positive icon ion-ios-upload-outline" ng-click="share()"></button>
     </ion-nav-buttons>
     <ion-content>
+        <p class="center padding" ng-bind-html="source.parsedSource"></p>
+        <p ng-bind="source.publicationDate"></p>
         <ion-list>
             <ion-item ng-repeat="error in source.errors" class="item-icon-left">
                 <i class="icon ion-android-alert icon-accessory"></i>
-                <h2>{{error.text}}</h2>
+                <h2>{{error}}</h2>
             </ion-item>
             <ion-item ng-repeat="warning in source.warnings" class="item-icon-left">
                 <i class="icon ion-alert-circled icon-accessory"></i>
-                <h2>{{warning.text}}</h2>
+                <h2>{{warning}}</h2>
             </ion-item>
         </ion-list>
         <ion-list>

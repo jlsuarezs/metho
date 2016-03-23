@@ -42,11 +42,11 @@
         <param name="ios-package" value="SocialSharing" />
         <param name="onload" value="true" />
     </feature>
-    <feature name="Keyboard">
-        <param name="ios-package" onload="true" value="CDVKeyboard" />
-    </feature>
     <feature name="ActionSheet">
         <param name="ios-package" value="ActionSheet" />
+    </feature>
+    <feature name="Keyboard">
+        <param name="ios-package" onload="true" value="IonicKeyboard" />
     </feature>
     <name>Metho</name>
     <description>
