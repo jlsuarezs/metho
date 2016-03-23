@@ -522,7 +522,68 @@ angular.module('starter.controllers', [])
 
             return sourceToParse;
         }else if (sourceToParse.type == "article") {
+            // Auteur
+            if ((sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null)|| (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null)) {
+                if (sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) {
+                    sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase() + ", ";
+                }else {
+                    sourceToParse.parsedSource += "?, ";
+                    sourceToParse.errors.push("Nom de l'auteur non spécifié");
+                }
 
+                if (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null) {
+                    sourceToParse.parsedSource += sourceToParse.author1firstname.toUpperCase() + ". ";
+                }else {
+                    sourceToParse.parseSource += "?. ";
+                    sourceToParse.errors.push("Prénom de l'auteur non spécifié");
+                }
+            }else {
+                sourceToParse.parsedSource += "?. ";
+                sourceToParse.errors.push("Nom et prénom de l'auteur non spécifiés");
+            }
+
+            // Titre de l'Article
+            if (sourceToParse.title != "" && sourceToParse.title != null) {
+                sourceToParse.parsedSource += "«" + sourceToParse.title + "», ";
+            }else {
+                sourceToParse.parsedSource += "«?», ";
+                sourceToParse.errors.push("Titre de l'article non spécifié");
+            }
+
+            // Nom du périodique
+            if (sourceToParse.editor != "" && sourceToParse.editor != null) {
+                sourceToParse.parsedSource += "<em>" + sourceToParse.editor + "</em>, ";
+            }else {
+                sourceToParse.parsedSource += "<em>?</em>, ";
+                sourceToParse.errors.push("Nom du périodique non spécifié");
+            }
+
+            // Numéro du périodique
+            if (sourceToParse.editionNumber != "" && sourceToParse.editionNumber != null) {
+                sourceToParse.parsedSource += sourceToParse.editionNumber + ", ";
+            }else {
+                sourceToParse.editionNumber += "?, ";
+                sourceToParse.errors.push("Numéro de volume ou de périodique non spécifié");
+            }
+
+            // Date de publication
+            if (sourceToParse.publicationDate != "" && sourceToParse.publicationDate != null) {
+                sourceToParse.parsedSource += sourceToParse.publicationDate + ", ";
+            }else {
+                sourceToParse.parsedSource += ", ";
+                sourceToParse.errors.push("Date de publication non spécifiée");
+            }
+
+            // Indication des pages
+            if (sourceToParse.endPage != "" || sourceToParse.startPage != "") {
+                sourceToParse.parsedSource += "p. " + sourceToParse.startPage + "-" + sourceToParse.endPage + ".";
+            }else {
+                sourceToParse.parsedSource += "?.";
+                sourceToParse.errors.push("Les pages de début et de fin ne sont pas spécifiés");
+            }
+
+
+            return sourceToParse;
         }else if (sourceToParse.type == "internet") {
 
         }else if (sourceToParse.type == "cd") {
