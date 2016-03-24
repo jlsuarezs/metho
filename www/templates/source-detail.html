@@ -4,20 +4,14 @@
     </ion-nav-buttons>
     <ion-content>
         <p class="center padding" ng-bind-html="source.parsedSource"></p>
-        <p ng-bind="source.publicationDate"></p>
         <ion-list>
             <ion-item ng-repeat="error in source.errors" class="item-icon-left">
-                <i class="icon ion-android-alert icon-accessory"></i>
+                <i class="icon ion-android-alert icon-accessory red"></i>
                 <h2>{{error}}</h2>
             </ion-item>
             <ion-item ng-repeat="warning in source.warnings" class="item-icon-left">
-                <i class="icon ion-alert-circled icon-accessory"></i>
+                <i class="icon ion-alert-circled icon-accessory yellow"></i>
                 <h2>{{warning}}</h2>
-            </ion-item>
-        </ion-list>
-        <ion-list>
-            <ion-item ng-repeat="input in inputs">
-
             </ion-item>
         </ion-list>
     </ion-content>
