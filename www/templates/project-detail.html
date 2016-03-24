@@ -6,7 +6,7 @@
     <ion-content ng-class="{ 'padding flex' : !project.sources.length }">
         <!-- List of sources -->
         <ion-list>
-            <ion-item ng-repeat="source in project.sources" href="#/tab/projects/{{project.id}}/{{source._id}}" class="item item-icon-right" type="item-text-wrap">
+            <ion-item ng-repeat="source in project.sources" href="#/tab/projects/{{project.id}}/{{source._id}}" class="item item-icon-right item-remove-animate" type="item-text-wrap">
                 <h2 ng-bind-html="source.parsedSource" ng-if="!source.title" class="limited-width"></h2>
                 <h2 ng-if="source.title" class="limited-width">{{source.title}}</h2>
                 <p>{{source.parsedType}}</p>
