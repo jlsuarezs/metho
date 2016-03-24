@@ -5,13 +5,13 @@
     <ion-content>
         <p class="center padding" ng-bind-html="source.parsedSource"></p>
         <ion-list>
-            <ion-item ng-repeat="error in source.errors" class="item-icon-left">
+            <ion-item ng-repeat="error in source.errors track by $index" class="item-icon-left item-remove-animate" ng-click="solveError($index)">
                 <i class="icon ion-android-alert icon-accessory red"></i>
-                <h2>{{error}}</h2>
+                <h2>{{error.errorTitle}}</h2>
             </ion-item>
-            <ion-item ng-repeat="warning in source.warnings" class="item-icon-left">
+            <ion-item ng-repeat="warning in source.warnings track by $index" class="item-icon-left item-remove-animate" ng-click="solveWarning($index)">
                 <i class="icon ion-alert-circled icon-accessory yellow"></i>
-                <h2>{{warning}}</h2>
+                <h2>{{warning.errorTitle}}</h2>
             </ion-item>
         </ion-list>
     </ion-content>

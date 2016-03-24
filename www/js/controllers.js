@@ -311,14 +311,55 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('SourceDetailCtrl', function ($scope, $stateParams) {
+.controller('SourceDetailCtrl', function ($scope, $stateParams, $ionicPopup, $parseSource) {
     $scope.source = {};
     $scope.sourceRepo = new PouchDB("sources");
     $scope.projectRepo = new PouchDB("projects");
 
+    $scope.solveError = function (id) {
+        $ionicPopup.prompt({
+            title: $scope.source.errors[id].promptTitle,
+            template: $scope.source.errors[id].promptText,
+            inputType: 'text',
+            cancelText: "Annuler",
+            okText: "<b>Confirmer</b>"
+        }).then(function(res) {
+            if (res != null) {
+                $scope.source[$scope.source.errors[id].var] = res;
+                console.log($scope.source);
+                $scope.source = $parseSource.parseSource($scope.source);
+                $scope.$apply();
+                $scope.sourceRepo.get($stateParams.sourceID).then(function (res) {
+                    return $scope.sourceRepo.put($scope.source, $scope.source._id, $scope.source._rev);
+                });
+            }
+        });
+    }
+
+    $scope.solveWarning = function (id) {
+        $ionicPopup.prompt({
+            title: $scope.source.warnings[id].promptTitle,
+            template: $scope.source.warnings[id].promptText,
+            inputType: 'text',
+            cancelText: "Annuler",
+            okText: "<b>Confirmer</b>"
+        }).then(function(res) {
+            if (res != null) {
+                $scope.source[$scope.source.warnings[id].var] = res;
+                console.log($scope.source);
+                $scope.source = $parseSource.parseSource($scope.source);
+                $scope.$apply();
+                $scope.sourceRepo.get($stateParams.sourceID).then(function (res) {
+                    return $scope.sourceRepo.put($scope.source, $scope.source._id, $scope.source._rev);
+                });
+            }
+        });
+    }
+
     // Init
     $scope.analyseSourceInfo = function (result) {
         $scope.source = result;
+        console.log($scope.source.errors);
     }
 
     $scope.analyseProjectInfo = function (doc) {
