@@ -360,7 +360,7 @@ angular.module('starter.services', [])
             if (sourceToParse.editionNumber != "" && sourceToParse.editionNumber != null) {
                 sourceToParse.parsedSource += sourceToParse.editionNumber + ", ";
             }else {
-                sourceToParse.editionNumber += "?, ";
+                sourceToParse.parsedSource += "?, ";
                 sourceToParse.errors.push("Numéro de volume ou de périodique non spécifié");
             }
 
@@ -368,18 +368,31 @@ angular.module('starter.services', [])
             if (sourceToParse.publicationDate != "" && sourceToParse.publicationDate != null) {
                 sourceToParse.parsedSource += sourceToParse.publicationDate + ", ";
             }else {
-                sourceToParse.parsedSource += ", ";
+                sourceToParse.parsedSource += "?, ";
                 sourceToParse.errors.push("Date de publication non spécifiée");
             }
 
             // Indication des pages
-            if (sourceToParse.endPage != "" || sourceToParse.startPage != "") {
-                sourceToParse.parsedSource += "p. " + sourceToParse.startPage + "-" + sourceToParse.endPage + ".";
-            }else {
-                sourceToParse.parsedSource += "?.";
-                sourceToParse.errors.push("Les pages de début et de fin ne sont pas spécifiés");
-            }
+            if ((sourceToParse.endPage != "" && sourceToParse.endPage != null) || (sourceToParse.startPage != "" && sourceToParse.startPage != null)) {
+                if (sourceToParse.startPage != "" && sourceToParse.startPage != null) {
+                    sourceToParse.parsedSource += "p. " + sourceToParse.startPage;
+                }else {
+                    sourceToParse.parsedSource += "p. ?";
+                    sourceToParse.errors.push("La page de début n'est pas spécifiée");
+                }
+                sourceToParse.parsedSource += "-";
 
+                if (sourceToParse.endPage != "" && sourceToParse.endPage != null) {
+                    sourceToParse.parsedSource += sourceToParse.endPage;
+                }else {
+                    sourceToParse.parsedSource += "?";
+                    sourceToParse.errors.push("La page de fin n'est pas spécifiée");
+                }
+                sourceToParse.parsedSource += ".";
+            }else {
+                sourceToParse.parsedSource += "p. ?-?.";
+                sourceToParse.errors.push("Les pages de début et de fin non spécifiés");
+            }
 
             return sourceToParse;
         }else if (sourceToParse.type == "internet") {
