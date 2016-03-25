@@ -317,40 +317,75 @@ angular.module('starter.controllers', [])
     $scope.projectRepo = new PouchDB("projects");
 
     $scope.solveError = function (id) {
-        $ionicPopup.prompt({
-            title: $scope.source.errors[id].promptTitle,
-            template: $scope.source.errors[id].promptText,
-            inputType: 'text',
-            cancelText: "Annuler",
-            okText: "<b>Confirmer</b>"
-        }).then(function(res) {
-            if (res != null) {
-                $scope.source[$scope.source.errors[id].var] = res;
-                console.log($scope.source);
-                $scope.source = $parseSource.parseSource($scope.source);
-                $scope.$apply();
-                $scope.sourceRepo.get($stateParams.sourceID).then(function (res) {
-                    return $scope.sourceRepo.put($scope.source, $scope.source._id, $scope.source._rev);
-                });
-            }
-        });
+        if ($scope.source.errors[id].complex) {
+            $ionicPopup.prompt({
+                title: $scope.source.errors[id].promptTitle,
+                subTitle: $scope.source.errors[id].promptText,
+                template: $scope.source.errors[id].template,
+                inputType: 'text',
+                cancelText: "Annuler",
+                okText: "<b>Confirmer</b>"
+            }).then(function(res) {
+                if (res != null) {
+                    var e = document.getElementById($scope.source.errors[id].id);
+                    $scope.source[$scope.source.errors[id].var] = e.options[e.selectedIndex].value;
+                    $scope.source = $parseSource.parseSource($scope.source);
+                    $scope.sourceRepo.put($scope.source, $scope.source._id, $scope.source._rev).then(function (response) {
+                        if (response.ok) {
+                            $scope.source._rev = response.rev;
+                        }else {
+                            console.log("not ok");
+                        }
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                }
+            });
+        }else {
+            $ionicPopup.prompt({
+                title: $scope.source.errors[id].promptTitle,
+                subTitle: $scope.source.errors[id].promptText,
+                inputType: 'text',
+                cancelText: "Annuler",
+                okText: "<b>Confirmer</b>"
+            }).then(function(res) {
+                if (res != null) {
+                    $scope.source[$scope.source.errors[id].var] = res;
+                    $scope.source = $parseSource.parseSource($scope.source);
+                    $scope.sourceRepo.put($scope.source, $scope.source._id, $scope.source._rev).then(function (response) {
+                        if (response.ok) {
+                            $scope.source._rev = response.rev;
+                        }else {
+                            console.log("not ok");
+                        }
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                }
+            });
+        }
+
     }
 
     $scope.solveWarning = function (id) {
         $ionicPopup.prompt({
             title: $scope.source.warnings[id].promptTitle,
-            template: $scope.source.warnings[id].promptText,
+            subTitle: $scope.source.warnings[id].promptText,
             inputType: 'text',
             cancelText: "Annuler",
             okText: "<b>Confirmer</b>"
         }).then(function(res) {
             if (res != null) {
                 $scope.source[$scope.source.warnings[id].var] = res;
-                console.log($scope.source);
                 $scope.source = $parseSource.parseSource($scope.source);
-                $scope.$apply();
-                $scope.sourceRepo.get($stateParams.sourceID).then(function (res) {
-                    return $scope.sourceRepo.put($scope.source, $scope.source._id, $scope.source._rev);
+                $scope.sourceRepo.put($scope.source, $scope.source._id, $scope.source._rev).then(function (response) {
+                    if (response.ok) {
+                        $scope.source._rev = response.rev;
+                    }else {
+                        console.log("not ok");
+                    }
+                }).catch(function (error) {
+                    console.log(error);
                 });
             }
         });
@@ -359,7 +394,6 @@ angular.module('starter.controllers', [])
     // Init
     $scope.analyseSourceInfo = function (result) {
         $scope.source = result;
-        console.log($scope.source.errors);
     }
 
     $scope.analyseProjectInfo = function (doc) {
