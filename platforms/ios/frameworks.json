@@ -1,5 +1,5 @@
 {
     "Social.framework": 2,
-    "MessageUI.framework": 2,
+    "MessageUI.framework": 1,
     "libsqlite3.dylib": 1
 }
