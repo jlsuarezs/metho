@@ -165,8 +165,7 @@ angular.module('starter.controllers', [])
     };
     $scope.loading = true;
     $scope.newsource = {};
-    $scope.todayDate = new Date();
-    $scope.newsource.consultationDate = $scope.todayDate;
+    $scope.newsource.consultationDate = new Date();
 
     $ionicModal.fromTemplateUrl('templates/modal_new_source.html', {
         scope: $scope,
