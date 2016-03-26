@@ -182,32 +182,35 @@ angular.module('starter.controllers', [])
             errNum += $scope.project.sources[i].errors.length;
         }
 
-        var confirmPopup = $ionicPopup.confirm({
-            title: 'Erreur',
-            template: '<p class="center">Les sources que vous essayez de partager contiennent <strong>' + errNum + '</strong> erreur(s). Voulez-vous les partager quand même?</p>',
-            cancelText: 'Annuler',
-            okText: '<b>Partager</b>'
-        });
-        confirmPopup.then(function(res) {
-            if(res) {
-                window.plugins.socialsharing.shareViaEmail(
-                  textToShare,
-                  $scope.project.name,
-                  [], // TO: must be null or an array
-                  [], // CC: must be null or an array
-                  null, // BCC: must be null or an array
-                  [], // FILES: can be null, a string, or an array
-                  function () { // Success
-                      console.log("success");
-                  },
-                  function () { // Error
-                      console.log("error");
-                  }
-                );
-            } else {
-                console.log("Cancelled by user");
-            }
-        });
+        if (errNum > 0) {
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Erreur',
+                template: '<p class="center">Les sources que vous essayez de partager contiennent <strong>' + errNum + '</strong> erreur(s). Voulez-vous les partager quand même?</p>',
+                cancelText: 'Annuler',
+                okText: '<b>Partager</b>'
+            });
+            confirmPopup.then(function(res) {
+                if(res) {
+                    window.plugins.socialsharing.shareViaEmail(
+                      textToShare,
+                      $scope.project.name,
+                      [], // TO: must be null or an array
+                      [], // CC: must be null or an array
+                      null, // BCC: must be null or an array
+                      [], // FILES: can be null, a string, or an array
+                      function () { // Success
+                          console.log("success");
+                      },
+                      function () { // Error
+                          console.log("error");
+                      }
+                    );
+                } else {
+                    console.log("Cancelled by user");
+                }
+            });
+        }
+
     }
 
     $scope.resetModalVars = function () {
