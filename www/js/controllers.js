@@ -165,6 +165,8 @@ angular.module('starter.controllers', [])
     };
     $scope.loading = true;
     $scope.newsource = {};
+    $scope.todayDate = new Date();
+    $scope.newsource.consultationDate = $scope.todayDate;
 
     $ionicModal.fromTemplateUrl('templates/modal_new_source.html', {
         scope: $scope,
@@ -197,6 +199,7 @@ angular.module('starter.controllers', [])
     $scope.resetModalVars = function () {
         // Reset vars
         $scope.newsource = {};
+        $scope.newsource.consultationDate = $scope.todayDate;
     }
 
     $scope.refreshModalScroll = function () {
@@ -207,6 +210,27 @@ angular.module('starter.controllers', [])
         setTimeout(function () {
             $ionicScrollDelegate.resize();
         }, 1000);
+    }
+
+    $scope.autoCompleteEditor = function () {
+        if ($scope.newsource.type == "internet") {
+            switch ($scope.newsource.editor.toLowerCase()) {
+                case "wikipédia, l'encyclopédie libre":
+                case "wikipédia l'encyclopédie libre":
+                case "wikipedia, l'encyclopédie libre":
+                case "wikipedia l'encyclopédie libre":
+                    $scope.newsource.url = "https://www.fr.wikipedia.org";
+                    $scope.newsource.editor = "Wikipédia, l'encyclopédie libre";
+                    break;
+                case "wikipedia the free encyclopedia":
+                case "wikipedia, the free encyclopedia":
+                    $scope.newsource.url = "https://www.en.wikipedia.org";
+                    $scope.newsource.editor = "Wikipedia, the free encyclopedia";
+                    break;
+                default:
+                    $scope.newsource.url = "";
+            }
+        }
     }
 
     // Refresh view on height change
@@ -222,6 +246,7 @@ angular.module('starter.controllers', [])
     $scope.$watch("newsource.translator2firstname", $scope.refreshModalScroll);
     $scope.$watch("newsource.translator2lastname", $scope.refreshModalScroll);
     $scope.$watch("newsource.hasBeenTranslated", $scope.refreshModalScrollWithDelay);
+    $scope.$watch("newsource.editor", $scope.autoCompleteEditor);
     // Keyboard events
     window.addEventListener('keyboardDidHide', $scope.refreshModalScroll);
     window.addEventListener('keyboardWillShow', $scope.refreshModalScroll);
@@ -305,10 +330,12 @@ angular.module('starter.controllers', [])
     }
 
 
+    $scope.$on("$ionicView.beforeEnter", function () {
+        $scope.project.sources = [];
+        $scope.sourceRepo.allDocs({ include_docs: true }).then($scope.analyseItemsInfo);
+    });
+
     $scope.projectRepo.get($stateParams.projectID).then($scope.analyseProjectInfo);
-
-    $scope.sourceRepo.allDocs({ include_docs: true }).then($scope.analyseItemsInfo);
-
 })
 
 .controller('SourceDetailCtrl', function ($scope, $stateParams, $ionicPopup, $parseSource) {

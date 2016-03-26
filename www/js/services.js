@@ -408,7 +408,110 @@ angular.module('starter.services', [])
 
             return sourceToParse;
         }else if (sourceToParse.type == "internet") {
+            if (sourceToParse.hasAuthors) {
+                if ((sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) || (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null)) {
+                    // Author last name
+                    if (sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) {
+                        sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
+                    }else {
+                        sourceToParse.errors.push({errorTitle:"Nom du premier auteur manquant", promptTitle:"Auteur", promptText:"Entrez le nom du premier auteur", var:"author1lastname"});
+                        sourceToParse.parsedSource += "?, ";
+                    }
+                    // Author first name
+                    if (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null) {
+                        sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
+                    }else {
+                        sourceToParse.errors.push({errorTitle:"Prénom du premier auteur manquant", promptTitle:"Auteur", promptText:"Entrez le prénom du premier auteur", var:"author1firstname"});
+                        sourceToParse.parsedSource += "?";
+                    }
+                }else {
+                    sourceToParse.errors.push({errorTitle:"Prénom du premier auteur manquant", promptTitle:"Auteur", promptText:"Entrez le prénom du premier auteur", var:"author1firstname"});
+                    sourceToParse.errors.push({errorTitle:"Nom du premier auteur manquant", promptTitle:"Auteur", promptText:"Entrez le nom du premier auteur", var:"author1lastname"});
+                    sourceToParse.parsedSource += "?";
+                }
 
+                if ((sourceToParse.author2lastname != "" && sourceToParse.author2lastname != null) || (sourceToParse.author2firstname != "" && sourceToParse.author2firstname != null)) {
+                    // Author 2 last name
+                    if (sourceToParse.author2lastname != "" && sourceToParse.author2lastname != null) {
+                        sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
+                    }else {
+                        sourceToParse.errors.push({errorTitle:"Nom du deuxième auteur manquant", promptTitle:"Auteur", promptText:"Entrez le nom du deuxième auteur", var:"author2lastname"});
+                        sourceToParse.parsedSource += "?, ";
+                    }
+                    // Author 2 first name
+                    if (sourceToParse.author2firstname != "" && sourceToParse.author2firstname != null) {
+                        sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
+                    }else {
+                        sourceToParse.errors.push({errorTitle:"Prénom du deuxième auteur manquant", promptTitle:"Auteur", promptText:"Entrez le prénom du deuxième auteur", var:"author2firstname"});
+                        sourceToParse.parsedSource += "?";
+                    }
+                }
+
+                if ((sourceToParse.author3lastname != "" && sourceToParse.author3lastname != null) || (sourceToParse.author3firstname != "" && sourceToParse.author3firstname != null)) {
+                    // Author 3 last name
+                    if (sourceToParse.author3lastname != "" && sourceToParse.author3lastname != null) {
+                        sourceToParse.parsedSource += " et " + sourceToParse.author3lastname.toUpperCase().trim();
+                    }else {
+                        sourceToParse.errors.push({errorTitle:"Nom du troisième auteur manquant", promptTitle:"Auteur", promptText:"Entrez le nom du troisième auteur", var:"author3lastname"});
+                        sourceToParse.parsedSource += ", ?";
+                    }
+                    // Author 3 first name
+                    if (sourceToParse.author3firstname != "" && sourceToParse.author3firstname != null) {
+                        sourceToParse.parsedSource += ", " + sourceToParse.author3firstname.trim() + ". ";
+                    }else {
+                        sourceToParse.errors.push({errorTitle:"Prénom du troisième auteur manquant", promptTitle:"Auteur", promptText:"Entrez le prénom du troisième auteur", var:"author3firstname"});
+                        sourceToParse.parsedSource += ", ?.";
+                    }
+                }else {
+                    sourceToParse.parsedSource += ". ";
+                }
+            }else {
+                if (sourceToParse.editor != null && sourceToParse.editor != "") {
+                    sourceToParse.parsedSource += sourceToParse.editor + ", ";
+                }else {
+                    sourceToParse.parsedSource += "?, ";
+                    sourceToParse.errors.push({errorTitle:"Titre de la page d'accueil non spécifié", promptTitle:"Titre de la page d'accueil", promptText:"Entrez le titre de la page d'accueil", var:"editor"});
+                }
+            }
+
+            // Titre de l'article
+            if (sourceToParse.title != null && sourceToParse.title != "") {
+                sourceToParse.parsedSource += "«" + sourceToParse.title + "», ";
+            }else {
+                sourceToParse.parsedSource += "«?», ";
+                sourceToParse.errors.push({errorTitle:"Titre de la page non spécifié", promptTitle:"Titre de la page", promptText:"Entrez le titre de la page", var:"title"})
+            }
+
+            // Titre de la page d'accueil (si il y a des auteurs)
+            if (sourceToParse.hasAuthors) {
+                if (sourceToParse.editor != null && sourceToParse.editor != "") {
+                    sourceToParse.parsedSource += "<em>" + sourceToParse.editor + "</em>, ";
+                }else {
+                    sourceToParse.parsedSource += "<em>?</em>, ";
+                    sourceToParse.errors.push({errorTitle:"Titre de la page d'accueil non spécifié", promptTitle:"Titre de la page d'accueil", promptText:"Entrez le titre de la page d'accueil", var:"editor"});
+                }
+            }
+
+            // Type de support
+            sourceToParse.parsedSource += "[en ligne]. ";
+
+            // URL
+            if (sourceToParse.url != null && sourceToParse.url != "") {
+                sourceToParse.parsedSource += "[" + sourceToParse.url + "] ";
+            }else {
+                sourceToParse.parsedSource += "[?] ";
+                sourceToParse.errors.push({errorTitle:"Adresse web non spécifiée", promptTitle:"Adresse web", promptText:"Entrez l'adresse web", var:"url"});
+            }
+
+            // Date de consultation
+            if (sourceToParse.consultationDate != null && sourceToParse.consultationDate != "") {
+                sourceToParse.parsedSource += "(" + new Date(sourceToParse.consultationDate).toLocaleDateString() + ").";
+            }else {
+                sourceToParse.parsedSource += "(?).";
+                sourceToParse.errors.push({errorTitle:"Date de consultation non spécifiée", promptTitle:"Date de consultation", promptText:"Entrez la date de consultation", var:"consultationDate"});
+            }
+
+            return sourceToParse;
         }else if (sourceToParse.type == "cd") {
 
         }else if (sourceToParse.type == "movie") {
