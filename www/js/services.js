@@ -112,18 +112,19 @@ angular.module('starter.services', [])
                     if (sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) {
                         sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
                     }else {
-                        sourceToParse.errors.push("Nom du premier auteur manquant");
+                        sourceToParse.errors.push({errorTitle:"Nom du premier auteur manquant", promptTitle:"Auteur", promptText:"Entrez le nom du premier auteur", var:"author1lastname"});
                         sourceToParse.parsedSource += "?, ";
                     }
                     // Author first name
                     if (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null) {
                         sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
                     }else {
-                        sourceToParse.errors.push("Prénom du premier auteur manquant");
+                        sourceToParse.errors.push({errorTitle:"Prénom du premier auteur manquant", promptTitle:"Auteur", promptText:"Entrez le prénom du premier auteur", var:"author1firstname"});
                         sourceToParse.parsedSource += "?";
                     }
                 }else {
-                    sourceToParse.errors.push("Nom et prénom du premier auteur manquants");
+                    sourceToParse.errors.push({errorTitle:"Prénom du premier auteur manquant", promptTitle:"Auteur", promptText:"Entrez le prénom du premier auteur", var:"author1firstname"});
+                    sourceToParse.errors.push({errorTitle:"Nom du premier auteur manquant", promptTitle:"Auteur", promptText:"Entrez le nom du premier auteur", var:"author1lastname"});
                     sourceToParse.parsedSource += "?";
                 }
 
@@ -132,14 +133,14 @@ angular.module('starter.services', [])
                     if (sourceToParse.author2lastname != "" && sourceToParse.author2lastname != null) {
                         sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
                     }else {
-                        sourceToParse.errors.push("Nom du deuxième auteur manquant");
+                        sourceToParse.errors.push({errorTitle:"Nom du deuxième auteur manquant", promptTitle:"Auteur", promptText:"Entrez le nom du deuxième auteur", var:"author2lastname"});
                         sourceToParse.parsedSource += "?, ";
                     }
                     // Author 2 first name
                     if (sourceToParse.author2firstname != "" && sourceToParse.author2firstname != null) {
                         sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
                     }else {
-                        sourceToParse.errors.push("Prénom du deuxième auteur manquant");
+                        sourceToParse.errors.push({errorTitle:"Prénom du deuxième auteur manquant", promptTitle:"Auteur", promptText:"Entrez le prénom du deuxième auteur", var:"author2firstname"});
                         sourceToParse.parsedSource += "?";
                     }
 
@@ -153,18 +154,19 @@ angular.module('starter.services', [])
                     if (sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) {
                         sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
                     }else {
-                        sourceToParse.errors.push("Nom du premier auteur manquant");
+                        sourceToParse.errors.push({errorTitle:"Nom du premier auteur manquant", promptTitle:"Auteur", promptText:"Entrez le nom du premier auteur", var:"author1lastname"});
                         sourceToParse.parsedSource += "?, ";
                     }
                     // Author first name
                     if (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null) {
                         sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
                     }else {
-                        sourceToParse.errors.push("Prénom du premier auteur manquant");
+                        sourceToParse.errors.push({errorTitle:"Prénom du premier auteur manquant", promptTitle:"Auteur", promptText:"Entrez le prénom du premier auteur", var:"author1firstname"});
                         sourceToParse.parsedSource += "?";
                     }
                 }else {
-                    sourceToParse.errors.push("Nom et prénom du premier auteur manquants");
+                    sourceToParse.errors.push({errorTitle:"Prénom du premier auteur manquant", promptTitle:"Auteur", promptText:"Entrez le prénom du premier auteur", var:"author1firstname"});
+                    sourceToParse.errors.push({errorTitle:"Nom du premier auteur manquant", promptTitle:"Auteur", promptText:"Entrez le nom du premier auteur", var:"author1lastname"});
                     sourceToParse.parsedSource += "?";
                 }
 
@@ -173,14 +175,14 @@ angular.module('starter.services', [])
                     if (sourceToParse.author2lastname != "" && sourceToParse.author2lastname != null) {
                         sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
                     }else {
-                        sourceToParse.errors.push("Nom du deuxième auteur manquant");
+                        sourceToParse.errors.push({errorTitle:"Nom du deuxième auteur manquant", promptTitle:"Auteur", promptText:"Entrez le nom du deuxième auteur", var:"author2lastname"});
                         sourceToParse.parsedSource += "?, ";
                     }
                     // Author 2 first name
                     if (sourceToParse.author2firstname != "" && sourceToParse.author2firstname != null) {
                         sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
                     }else {
-                        sourceToParse.errors.push("Prénom du deuxième auteur manquant");
+                        sourceToParse.errors.push({errorTitle:"Prénom du deuxième auteur manquant", promptTitle:"Auteur", promptText:"Entrez le prénom du deuxième auteur", var:"author2firstname"});
                         sourceToParse.parsedSource += "?";
                     }
                     sourceToParse.parsedSource += " (dir). ";
@@ -188,14 +190,15 @@ angular.module('starter.services', [])
                     sourceToParse.parsedSource += " (dir). ";
                 }
             }else {
-                sourceToParse.parsedSource += "?. "
+                sourceToParse.parsedSource += "?. ";
+                sourceToParse.errors.push({errorTitle:"Type de source non spécifié", promptTitle:"Type de source", promptText:"Sélectionnez le type de source", var:"hasAuthors", template:"<p class='center'><select id='authortype'><option value='13'>1 à 3 auteurs</option><option value='more3'>Plus de 3 auteurs</option><option value='collective'>Collectif</option></select></p>", complex:true, id:"authortype"})
             }
 
             // Titre
             if (sourceToParse.title != null && sourceToParse.title.trim() != "") {
                 sourceToParse.parsedSource += "<em>" + sourceToParse.title.trim() + "</em>, ";
             }else {
-                sourceToParse.errors.push("Aucun titre spécifié");
+                sourceToParse.errors.push({errorTitle:"Aucun titre spécifié", promptTitle:"Titre", promptText:"Entrez le titre", var:"title"});
                 sourceToParse.parsedSource += "<em>?</em>, ";
             }
 
@@ -236,7 +239,7 @@ angular.module('starter.services', [])
                         sourceToParse.parsedSource += "trad. du " + sourceToParse.translatedFrom.toLowerCase().trim() + " ";
                     }
                 }else {
-                    sourceToParse.errors.push("Aucune langue d'origine de la traduction spécifiée");
+                    sourceToParse.errors.push({errorTitle:"Aucune langue d'origine de la traduction spécifiée", promptTitle:"Langue de traduction", promptText:"Entrez la langue de traduction", var:"translatedFrom"});
                     sourceToParse.parsedSource += "trad. de ? ";
                 }
 
@@ -247,18 +250,19 @@ angular.module('starter.services', [])
                     if (sourceToParse.translator1firstname.trim() != "" && sourceToParse.translator1firstname != null) {
                         sourceToParse.parsedSource += sourceToParse.translator1firstname.trim() + " ";
                     }else {
-                        sourceToParse.errors.push("Prénom du premier auteur manquant");
+                        sourceToParse.errors.push({errorTitle:"Prénom du premier traducteur manquant", promptTitle:"Traducteur", promptText:"Entrez le prénom du premier traducteur", var:"translator1firstname"});
                         sourceToParse.parsedSource += "? ";
                     }
                     // Translator's last name
                     if (sourceToParse.translator1lastname.trim() != "" && sourceToParse.translator1lastname != null) {
                         sourceToParse.parsedSource += sourceToParse.translator1lastname.trim();
                     }else {
-                        sourceToParse.errors.push("Nom du premier auteur manquant");
+                        sourceToParse.errors.push({errorTitle:"Nom du premier traducteur manquant", promptTitle:"Traducteur", promptText:"Entrez le nom du premier traducteur", var:"translator1lastname"});
                         sourceToParse.parsedSource += "? ";
                     }
                 }else {
-                    sourceToParse.errors.push("Nom et prénom du premier traducteur manquants");
+                    sourceToParse.errors.push({errorTitle:"Prénom du premier traducteur manquant", promptTitle:"Traducteur", promptText:"Entrez le prénom du premier traducteur", var:"translator1firstname"});
+                    sourceToParse.errors.push({errorTitle:"Nom du premier traducteur manquant", promptTitle:"Traducteur", promptText:"Entrez le nom du premier traducteur", var:"translator1lastname"});
                     sourceToParse.parsedSource += "?";
                 }
 
@@ -267,14 +271,14 @@ angular.module('starter.services', [])
                     if (sourceToParse.translator2firstname.trim() != "" && sourceToParse.translator2firstname != null) {
                         sourceToParse.parsedSource += ", " + sourceToParse.translator2firstname.trim();
                     }else {
-                        sourceToParse.errors.push("Prénom du deuxième auteur manquant");
+                        sourceToParse.errors.push({errorTitle:"Prénom du deuxième traducteur manquant", promptTitle:"Traducteur", promptText:"Entrez le prénom du deuxième traducteur", var:"translator2firstname"});
                         sourceToParse.parsedSource += "?";
                     }
                     // Translator 2 last name
                     if (sourceToParse.translator2lastname.trim() != "" && sourceToParse.translator2lastname != null) {
                         sourceToParse.parsedSource += " " + sourceToParse.translator2lastname.trim() + ", ";
                     }else {
-                        sourceToParse.errors.push("Nom du deuxième auteur manquant");
+                        sourceToParse.errors.push({errorTitle:"Nom du deuxième traducteur manquant", promptTitle:"Traducteur", promptText:"Entrez le nom du deuxième traducteur", var:"translator2lastname"});
                         sourceToParse.parsedSource += "?, ";
                     }
                 }else {
@@ -287,7 +291,7 @@ angular.module('starter.services', [])
                 sourceToParse.parsedSource += sourceToParse.publicationLocation.capitalizeFirstLetter().trim() + ", ";
             }else {
                 sourceToParse.parsedSource += "s.l., ";
-                sourceToParse.warnings.push("Lieu d'édition non spécifié");
+                sourceToParse.warnings.push({errorTitle:"Lieu d'édition non spécifié", promptTitle:"Lieu d'édition", promptText:"Entrez le lieu d'édition", var:"publicationLocation"});
             }
 
             // Éditeur
@@ -295,7 +299,7 @@ angular.module('starter.services', [])
                 sourceToParse.parsedSource += sourceToParse.editor.trim() + ", ";
             }else {
                 sourceToParse.parsedSource += "?, ";
-                sourceToParse.errors.push("Éditeur non spécifié");
+                sourceToParse.errors.push({errorTitle:"Éditeur non spécifié", promptTitle:"Éditeur", promptText:"Entrez l'éditeur", var:"editor"});
             }
 
             // Date
@@ -303,7 +307,7 @@ angular.module('starter.services', [])
                 sourceToParse.parsedSource += sourceToParse.publicationDate + ", ";
             }else {
                 sourceToParse.parsedSource += "s.d., ";
-                sourceToParse.warnings.push("Date d'édition non spécifiée");
+                sourceToParse.warnings.push({errorTitle:"Date d'édition non spécifiée", promptTitle:"Date d'édition", promptText:"Entrez la date d'édition", var:"publicationDate"});
             }
 
             // Volume
@@ -314,9 +318,14 @@ angular.module('starter.services', [])
             // Nombre de pages
             if (sourceToParse.pageNumber != null && sourceToParse.pageNumber != "") {
                 sourceToParse.parsedSource += sourceToParse.pageNumber + " p.";
+                if (sourceToParse.pageNumber > 15000) {
+                    sourceToParse.warnings.push({errorTitle:"Nombre de pages trop élevé", promptTitle:"Nombre de pages", promptText:"Entrez le nombre de pages", var:"pageNumber"});
+                }else if (sourceToParse.pageNumber < 0) {
+                    sourceToParse.warnings.push({errorTitle:"Nombre de pages trop bas", promptTitle:"Nombre de pages", promptText:"Entrez le nombre de pages", var:"pageNumber"});
+                }
             }else {
                 sourceToParse.parsedSource += "? p.";
-                sourceToParse.errors.push("Nombre de page non spécifié");
+                sourceToParse.errors.push({errorTitle:"Nombre de page non spécifié", promptTitle:"Nombre de pages", promptText:"Entrez le nombre de pages", var:"pageNumber"});
             }
 
             return sourceToParse;
@@ -327,18 +336,19 @@ angular.module('starter.services', [])
                     sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase() + ", ";
                 }else {
                     sourceToParse.parsedSource += "?, ";
-                    sourceToParse.errors.push("Nom de l'auteur non spécifié");
+                    sourceToParse.errors.push({errorTitle:"Nom de l'auteur non spécifié", promptTitle:"Auteur", promptText:"Entrez le nom de l'auteur", var:"author1lastname"});
                 }
 
                 if (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null) {
                     sourceToParse.parsedSource += sourceToParse.author1firstname.toUpperCase() + ". ";
                 }else {
                     sourceToParse.parseSource += "?. ";
-                    sourceToParse.errors.push("Prénom de l'auteur non spécifié");
+                    sourceToParse.errors.push({errorTitle:"Prénom de l'auteur non spécifié", promptTitle:"Auteur", promptText:"Entrez le prénom de l'auteur", var:"author1firstname"});
                 }
             }else {
                 sourceToParse.parsedSource += "?. ";
-                sourceToParse.errors.push("Nom et prénom de l'auteur non spécifiés");
+                sourceToParse.errors.push({errorTitle:"Prénom de l'auteur non spécifié", promptTitle:"Auteur", promptText:"Entrez le prénom de l'auteur", var:"author1firstname"});
+                sourceToParse.errors.push({errorTitle:"Nom de l'auteur non spécifié", promptTitle:"Auteur", promptText:"Entrez le nom de l'auteur", var:"author1lastname"});
             }
 
             // Titre de l'Article
@@ -346,7 +356,7 @@ angular.module('starter.services', [])
                 sourceToParse.parsedSource += "«" + sourceToParse.title + "», ";
             }else {
                 sourceToParse.parsedSource += "«?», ";
-                sourceToParse.errors.push("Titre de l'article non spécifié");
+                sourceToParse.errors.push({errorTitle:"Titre de l'article non spécifié", promptTitle:"Titre de l'article", promptText:"Entrez le titre de l'article", var:"title"});
             }
 
             // Nom du périodique
@@ -354,7 +364,7 @@ angular.module('starter.services', [])
                 sourceToParse.parsedSource += "<em>" + sourceToParse.editor + "</em>, ";
             }else {
                 sourceToParse.parsedSource += "<em>?</em>, ";
-                sourceToParse.errors.push("Nom du périodique non spécifié");
+                sourceToParse.errors.push({errorTitle:"Nom du périodique non spécifié", promptTitle:"Nom du périodique", promptText:"Entrez le nom du périodique", var:"editor"});
             }
 
             // Numéro du périodique
@@ -362,7 +372,7 @@ angular.module('starter.services', [])
                 sourceToParse.parsedSource += sourceToParse.editionNumber + ", ";
             }else {
                 sourceToParse.parsedSource += "?, ";
-                sourceToParse.errors.push("Numéro de volume ou de périodique non spécifié");
+                sourceToParse.errors.push({errorTitle:"Numéro de volume ou de périodique non spécifié", promptTitle:"Numéro de volume", promptText:"Entrez le numéro de volume", var:"editionNumber"});
             }
 
             // Date de publication
@@ -370,7 +380,7 @@ angular.module('starter.services', [])
                 sourceToParse.parsedSource += sourceToParse.publicationDate + ", ";
             }else {
                 sourceToParse.parsedSource += "?, ";
-                sourceToParse.errors.push("Date de publication non spécifiée");
+                sourceToParse.errors.push({errorTitle:"Date de publication non spécifiée", promptTitle:"Date de publication", promptText:"Entrez la date de publication", var:"publicationDate"});
             }
 
             // Indication des pages
@@ -379,7 +389,7 @@ angular.module('starter.services', [])
                     sourceToParse.parsedSource += "p. " + sourceToParse.startPage;
                 }else {
                     sourceToParse.parsedSource += "p. ?";
-                    sourceToParse.errors.push("La page de début n'est pas spécifiée");
+                    sourceToParse.errors.push({errorTitle:"La page de début n'est pas spécifiée", promptTitle:"Page de début", promptText:"Entrez la page de début", var:"startPage"});
                 }
                 sourceToParse.parsedSource += "-";
 
@@ -387,12 +397,13 @@ angular.module('starter.services', [])
                     sourceToParse.parsedSource += sourceToParse.endPage;
                 }else {
                     sourceToParse.parsedSource += "?";
-                    sourceToParse.errors.push("La page de fin n'est pas spécifiée");
+                    sourceToParse.errors.push({errorTitle:"La page de fin n'est pas spécifiée", promptTitle:"Page de fin", promptText:"Entrez la page de fin", var:"endPage"});
                 }
                 sourceToParse.parsedSource += ".";
             }else {
                 sourceToParse.parsedSource += "p. ?-?.";
-                sourceToParse.errors.push("Les pages de début et de fin non spécifiés");
+                sourceToParse.errors.push({errorTitle:"La page de début n'est pas spécifiée", promptTitle:"Page de début", promptText:"Entrez la page de début", var:"startPage"});
+                sourceToParse.errors.push({errorTitle:"La page de fin n'est pas spécifiée", promptTitle:"Page de fin", promptText:"Entrez la page de fin", var:"endPage"});
             }
 
             return sourceToParse;
