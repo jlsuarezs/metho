@@ -186,19 +186,19 @@ angular.module('starter.controllers', [])
           [], // CC: must be null or an array
           null, // BCC: must be null or an array
           [], // FILES: can be null, a string, or an array
-          function () {
+          function () { // Success
 
-          }, // called when sharing worked, but also when the user cancelled sharing via email (I've found no way to detect the difference)
-          function () {
+          },
+          function () { // Error
 
-          } // called when sh*t hits the fan
+          }
         );
     }
 
     $scope.resetModalVars = function () {
         // Reset vars
         $scope.newsource = {};
-        $scope.newsource.consultationDate = $scope.todayDate;
+        $scope.newsource.consultationDate = new Date();
     }
 
     $scope.refreshModalScroll = function () {
