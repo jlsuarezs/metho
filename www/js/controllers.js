@@ -210,6 +210,21 @@ angular.module('starter.controllers', [])
                     console.log("Cancelled by user");
                 }
             });
+        }else {
+            window.plugins.socialsharing.shareViaEmail(
+              textToShare,
+              $scope.project.name,
+              [], // TO: must be null or an array
+              [], // CC: must be null or an array
+              null, // BCC: must be null or an array
+              [], // FILES: can be null, a string, or an array
+              function () { // Success
+                  console.log("success");
+              },
+              function () { // Error
+                  console.log("error");
+              }
+            );
         }
 
     }
