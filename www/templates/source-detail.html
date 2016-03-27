@@ -1,9 +1,16 @@
-<ion-view view-title="{{source.title}}" id="bind-html-with-trust">
+<ion-view id="bind-html-with-trust">
+    <ion-nav-title>
+        <div class="page-title">{{source.title}}</div>
+        <div class="page-sub-title">{{source.parsedType}}</div>
+    </ion-nav-title>
     <ion-nav-buttons side="right">
-      <button class="button button-clear button-positive icon ion-ios-upload-outline" ng-click="share()"></button>
+      <button class="button button-clear button-positive" ng-click="edit()">Modifier</button>
     </ion-nav-buttons>
     <ion-content ng-class="{ 'padding flex' : loading }">
+        <!-- Source -->
         <p class="center padding" ng-bind-html="source.parsedSource"></p>
+
+        <!-- Liste des erreurs -->
         <ion-list>
             <ion-item ng-repeat="error in source.errors track by $index" class="item-icon-left item-remove-animate" ng-click="solveError($index)">
                 <i class="icon ion-android-alert icon-accessory red"></i>
@@ -14,6 +21,10 @@
                 <h2>{{warning.errorTitle}}</h2>
             </ion-item>
         </ion-list>
+
+        <!-- Aucune erreur -->
+        <h2 ng-if="!source.errors.length && !loading" class="empty center">Aucune erreur</h2>
+
 
         <!-- Loading -->
         <div class="spinner" ng-if="loading">
