@@ -360,11 +360,18 @@ angular.module('starter.controllers', [])
     $scope.projectRepo.get($stateParams.projectID).then($scope.analyseProjectInfo);
 })
 
-.controller('SourceDetailCtrl', function ($scope, $stateParams, $ionicPopup, $parseSource) {
+.controller('SourceDetailCtrl', function ($scope, $stateParams, $ionicPopup, $parseSource, $ionicModal) {
     $scope.source = {};
     $scope.loading = true;
     $scope.sourceRepo = new PouchDB("sources");
     $scope.projectRepo = new PouchDB("projects");
+
+    $ionicModal.fromTemplateUrl('templates/modal_edit_source.html', {
+        scope: $scope,
+        animation: 'slide-in-up',
+    }).then(function(modal) {
+        $scope.editSourceModal = modal;
+    });
 
     $scope.solveError = function (id) {
         if ($scope.source.errors[id].complex) {
@@ -438,6 +445,31 @@ angular.module('starter.controllers', [])
                     console.log(error);
                 });
             }
+        });
+    }
+
+    $scope.edit = function () {
+        $scope.newsource = JSON.parse(JSON.stringify($scope.source));
+        $scope.editSourceModal.show();
+    }
+
+    $scope.cancelEdit = function () {
+        $scope.newsource = {};
+        $scope.editSourceModal.hide();
+    }
+
+    $scope.submitEdit = function () {
+        $scope.source = $parseSource.parseSource($scope.newsource);
+        $scope.editSourceModal.hide();
+        $scope.newsource = {};
+        $scope.sourceRepo.put($scope.source, $scope.source._id, $scope.source._rev).then(function (response) {
+            if (response.ok) {
+                $scope.source._rev = response.rev;
+            }else {
+                console.log("not ok");
+            }
+        }).catch(function (error) {
+            console.log(error);
         });
     }
 
