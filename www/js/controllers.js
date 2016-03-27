@@ -362,6 +362,7 @@ angular.module('starter.controllers', [])
 
 .controller('SourceDetailCtrl', function ($scope, $stateParams, $ionicPopup, $parseSource) {
     $scope.source = {};
+    $scope.loading = true;
     $scope.sourceRepo = new PouchDB("sources");
     $scope.projectRepo = new PouchDB("projects");
 
@@ -443,6 +444,7 @@ angular.module('starter.controllers', [])
     // Init
     $scope.analyseSourceInfo = function (result) {
         $scope.source = result;
+        $scope.loading = false;
     }
 
     $scope.analyseProjectInfo = function (doc) {

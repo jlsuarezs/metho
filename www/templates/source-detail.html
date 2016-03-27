@@ -2,7 +2,7 @@
     <ion-nav-buttons side="right">
       <button class="button button-clear button-positive icon ion-ios-upload-outline" ng-click="share()"></button>
     </ion-nav-buttons>
-    <ion-content>
+    <ion-content ng-class="{ 'padding flex' : loading }">
         <p class="center padding" ng-bind-html="source.parsedSource"></p>
         <ion-list>
             <ion-item ng-repeat="error in source.errors track by $index" class="item-icon-left item-remove-animate" ng-click="solveError($index)">
@@ -14,5 +14,10 @@
                 <h2>{{warning.errorTitle}}</h2>
             </ion-item>
         </ion-list>
+
+        <!-- Loading -->
+        <div class="spinner" ng-if="loading">
+            <ion-spinner></ion-spinner>
+        </div>
     </ion-content>
 </ion-view>
