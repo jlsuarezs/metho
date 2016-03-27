@@ -5,15 +5,15 @@
     </ion-nav-buttons>
     <ion-content ng-class="{ 'padding flex' : !project.sources.length }">
         <!-- List of sources -->
-        <ion-list>
-            <ion-item ng-repeat="source in project.sources" href="#/tab/projects/{{project.id}}/{{source._id}}" class="item item-icon-right item-remove-animate" type="item-text-wrap">
+        <ion-list ng-if="!loading">
+            <ion-item ng-repeat="source in project.sources" href="#/tab/projects/{{project.id}}/{{source._id}}" class="item item-icon-right" type="item-text-wrap">
                 <h2 ng-bind-html="source.parsedSource" ng-if="!source.title" ng-class="{'limited-width': source.errors.length || source.warnings.length}"></h2>
                 <h2 ng-if="source.title" ng-class="{'limited-width': source.errors.length || source.warnings.length}">{{source.title}}</h2>
                 <p>{{source.parsedType}}</p>
                 <div class="icon">
                     <span class="error-nb" ng-if="source.warnings.length">{{source.warnings.length}}</span>
                     <span class=" ion-alert-circled icon-accessory yellow" ng-if="source.warnings.length"></span>
-                    &nbsp;
+                    <span ng-if="source.warnings.length">&nbsp;</span>
                     <span class="error-nb" ng-if="source.errors.length">{{source.errors.length}}</span>
                     <span class=" ion-android-alert icon-accessory red" ng-if="source.errors.length"></span>
                     &nbsp;

@@ -164,6 +164,7 @@ angular.module('starter.controllers', [])
         sources: []
     };
     $scope.loading = true;
+    $scope.animateRemove = true;
     $scope.newsource = {};
     $scope.newsource.consultationDate = new Date();
 
@@ -348,8 +349,12 @@ angular.module('starter.controllers', [])
 
 
     $scope.$on("$ionicView.beforeEnter", function () {
-        $scope.project.sources = [];
         $scope.sourceRepo.allDocs({ include_docs: true }).then($scope.analyseItemsInfo);
+    });
+
+    $scope.$on("$ionicView.afterLeave", function () {
+        $scope.project.sources = [];
+        $scope.loading = true;
     });
 
     $scope.projectRepo.get($stateParams.projectID).then($scope.analyseProjectInfo);
