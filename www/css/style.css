@@ -163,3 +163,20 @@ p.left-aligned {
 .limited-width {
     width: calc(90vw - 95px) !important;
 }
+
+.empty {
+    padding-top: 50px;
+    color: #979797;
+    padding-bottom: 50px;
+}
+
+.page-title{
+         margin-top : -10px;
+         color: black;
+         font-size: 1em;
+}
+.page-sub-title{
+         margin-top: -25px;
+         color: rgba(0, 0, 0, 0.6);
+         font-size : .75em;
+}
