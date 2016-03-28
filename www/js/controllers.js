@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('metho.controllers', [])
 
 .controller('ProjectsCtrl', function($scope, $ionicModal, $ionicPlatform, $ionicPopup, $ionicListDelegate) {
     $scope.projects = [];
