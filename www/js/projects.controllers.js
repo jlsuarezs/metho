@@ -158,7 +158,7 @@ angular.module('metho.controllers.projects', [])
 
 
 // Project detail view
-.controller('ProjectDetailCtrl', function($scope, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $parseSource, ShareProject) {
+.controller('ProjectDetailCtrl', function($scope, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $parseSource, ShareProject, ShareSource, $state) {
     $scope.projectRepo = new PouchDB("projects");
     $scope.sourceRepo = new PouchDB("sources");
     $scope.project = {
@@ -171,6 +171,8 @@ angular.module('metho.controllers.projects', [])
     $scope.animateRemove = true;
     $scope.newsource = {};
     $scope.newsource.consultationDate = new Date();
+    $scope.refreshID = null;
+    $scope.refreshIndex = null;
 
     $ionicModal.fromTemplateUrl('templates/modal_new_source.html', {
         scope: $scope,
@@ -361,22 +363,29 @@ angular.module('metho.controllers.projects', [])
         $scope.loading = false;
     }
 
+    $scope.sourceRepo.allDocs({ include_docs: true }).then($scope.analyseItemsInfo);
 
     $scope.$on("$ionicView.beforeEnter", function () {
-        $scope.sourceRepo.allDocs({ include_docs: true }).then($scope.analyseItemsInfo);
+        if ($scope.refreshID != null) {
+            $scope.sourceRepo.get($scope.refreshID).then(function (result) {
+                $scope.project.sources[$scope.refreshIndex] = result;
+            });
+        }
     });
 
-    $scope.$on("$ionicView.afterLeave", function () {
-        $scope.project.sources = [];
-        $scope.loading = true;
-    });
+    $scope.openSourceDetail = function (id, index) {
+        ShareSource.setSource($scope.project.sources[index]);
+        $state.go('tab.source-detail', {projectID:$stateParams.projectID, sourceID:id});
+        $scope.refreshID = id;
+        $scope.refreshIndex = index;
+    }
 })
 
 
 // Source detail view
-.controller('SourceDetailCtrl', function ($scope, $stateParams, $ionicPopup, $parseSource, $ionicModal) {
-    $scope.source = {};
-    $scope.loading = true;
+.controller('SourceDetailCtrl', function ($scope, $stateParams, $ionicPopup, $parseSource, $ionicModal, ShareSource) {
+    $scope.source = ShareSource.getSource();
+    $scope.loading = false;
     $scope.sourceRepo = new PouchDB("sources");
     $scope.projectRepo = new PouchDB("projects");
 
@@ -487,19 +496,12 @@ angular.module('metho.controllers.projects', [])
         });
     }
 
-    // Init
-    $scope.analyseSourceInfo = function (result) {
-        $scope.source = result;
-        $scope.loading = false;
+    // Init if service is unavailable (debug when reloading the page)
+    if ($scope.source == null) {
+        $scope.loading = true;
+        $scope.sourceRepo.get($stateParams.sourceID).then(function (result) {
+            $scope.source = result;
+            $scope.loading = false;
+        });
     }
-
-    $scope.analyseProjectInfo = function (doc) {
-        $scope.project.name = doc.name;
-        $scope.project.id = doc._id;
-        $scope.project.matter = doc.matter;
-    }
-
-    $scope.projectRepo.get($stateParams.projectID).then($scope.analyseProjectInfo);
-
-    $scope.sourceRepo.get($stateParams.sourceID).then($scope.analyseSourceInfo);
 });
