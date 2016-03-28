@@ -1,7 +1,7 @@
 angular.module('metho.controllers.projects', [])
 
 // Project tab view
-.controller('ProjectsCtrl', function($scope, $ionicModal, $ionicPlatform, $ionicPopup, $ionicListDelegate) {
+.controller('ProjectsCtrl', function($scope, $ionicModal, $ionicPlatform, $ionicPopup, $ionicListDelegate, ShareProject, $state) {
     $scope.projects = [];
     $scope.project = { name:"" };
     $scope.editingProject = {};
@@ -148,17 +148,23 @@ angular.module('metho.controllers.projects', [])
             $ionicListDelegate.closeOptionButtons();
         }
     }
+
+    $scope.openProjectDetail = function (id, index) {
+        ShareProject.setName($scope.projects[index].name);
+        ShareProject.setMatter($scope.projects[index].matter);
+        $state.go("tab.project-detail",{projectID:id});
+    }
 })
 
 
 // Project detail view
-.controller('ProjectDetailCtrl', function($scope, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $parseSource) {
+.controller('ProjectDetailCtrl', function($scope, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $parseSource, ShareProject) {
     $scope.projectRepo = new PouchDB("projects");
     $scope.sourceRepo = new PouchDB("sources");
     $scope.project = {
-        name: "",
-        id: "",
-        matter: "",
+        name: ShareProject.getName(),
+        id: $stateParams.projectID,
+        matter: ShareProject.getMatter(),
         sources: []
     };
     $scope.loading = true;
@@ -345,11 +351,6 @@ angular.module('metho.controllers.projects', [])
         });
     }
     // Initialize
-    $scope.analyseProjectInfo = function (doc) {
-        $scope.project.name = doc.name;
-        $scope.project.id = doc._id;
-        $scope.project.matter = doc.matter;
-    }
 
     $scope.analyseItemsInfo = function (result) {
         for (var i = 0; i < result.rows.length; i++) {
@@ -369,8 +370,6 @@ angular.module('metho.controllers.projects', [])
         $scope.project.sources = [];
         $scope.loading = true;
     });
-
-    $scope.projectRepo.get($stateParams.projectID).then($scope.analyseProjectInfo);
 })
 
 

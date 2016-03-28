@@ -1,15 +1,22 @@
 angular.module('metho.services.projects', [])
 
-// Service to share titlebar name from project tab to project detail
-.factory('ShareTitlebar', function() {
-  var titleBar = "";
+// Service to share project info from project tab to project detail
+.factory('ShareProject', function() {
+  var name = "";
+  var matter = "";
 
   return {
-    set: function(settingVal) {
-      titleBar = settingVal;
+    setName: function(settingVal) {
+        name = settingVal;
     },
-    get: function() {
-      return titleBar;
+    getName: function() {
+        return name;
+    },
+    setMatter: function (settingVal) {
+        matter = settingVal;
+    },
+    getMatter: function () {
+        return matter;
     }
   };
 })
