@@ -29,7 +29,7 @@ angular.module('metho.services.projects', [])
     setSource: function(settingVal) {
         source = settingVal;
     },
-    getName: function() {
+    getSource: function() {
         return source;
     }
   };
@@ -344,6 +344,7 @@ angular.module('metho.services.projects', [])
                 sourceToParse.parsedSource += "? p.";
                 sourceToParse.errors.push({errorTitle:"Nombre de page non spécifié", promptTitle:"Nombre de pages", promptText:"Entrez le nombre de pages", var:"pageNumber"});
             }
+            sourceToParse.pageNumber = Number(sourceToParse.pageNumber);
 
             return sourceToParse;
         }else if (sourceToParse.type == "article") {
