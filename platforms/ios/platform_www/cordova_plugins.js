@@ -17,14 +17,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/cordova-plugin-device/www/device.js",
-        "id": "cordova-plugin-device.device",
-        "pluginId": "cordova-plugin-device",
-        "clobbers": [
-            "device"
-        ]
-    },
-    {
         "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
         "id": "cordova-plugin-splashscreen.SplashScreen",
         "pluginId": "cordova-plugin-splashscreen",
@@ -56,6 +48,14 @@ module.exports = [
             "cordova.plugins.Keyboard"
         ],
         "runs": true
+    },
+    {
+        "file": "plugins/cordova-plugin-device/www/device.js",
+        "id": "cordova-plugin-device.device",
+        "pluginId": "cordova-plugin-device",
+        "clobbers": [
+            "device"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -63,7 +63,8 @@ module.exports.metadata =
 {
     "cordova-plugin-x-socialsharing": "5.0.10",
     "cordova-plugin-actionsheet": "2.2.2",
-    "ionic-plugin-keyboard": "2.0.1"
+    "ionic-plugin-keyboard": "2.0.1",
+    "cordova-plugin-device": "1.1.1"
 }
 // BOTTOM OF METADATA
 });

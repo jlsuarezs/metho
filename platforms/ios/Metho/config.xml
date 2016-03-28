@@ -31,9 +31,6 @@
     <feature name="Console">
         <param name="ios-package" value="CDVLogger" />
     </feature>
-    <feature name="Device">
-        <param name="ios-package" value="CDVDevice" />
-    </feature>
     <feature name="SplashScreen">
         <param name="ios-package" value="CDVSplashScreen" />
         <param name="onload" value="true" />
@@ -47,6 +44,9 @@
     </feature>
     <feature name="Keyboard">
         <param name="ios-package" onload="true" value="IonicKeyboard" />
+    </feature>
+    <feature name="Device">
+        <param name="ios-package" value="CDVDevice" />
     </feature>
     <name>Metho</name>
     <description>
