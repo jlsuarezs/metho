@@ -23,7 +23,7 @@ angular.module('metho.services.projects', [])
 
 // Service to share source info from project detail to source detail
 .factory('ShareSource', function() {
-  var source = {};
+  var source = null;
 
   return {
     setSource: function(settingVal) {
