@@ -196,7 +196,45 @@
             </div>
             <!-- CD -->
             <div ng-slide-down="newsource.type == 'cd'" lazy-render>
+                <ion-checkbox ng-model="newsource.hasAuthors">La source a un auteur</ion-checkbox>
+                <div ng-slide-down="newsource.hasAuthors" lazy-render>
+                    <div class="flex-sub padding">
+                        <input type="text" ng-model="newsource.author1firstname" placeholder="Prénom">
+                        <input type="text" ng-model="newsource.author1lastname" placeholder="Nom">
+                    </div>
+                    <div class="flex-sub padding" ng-if="(newsource.author1firstname != null && newsource.author1firstname != '') || (newsource.author1lastname != null && newsource.author1lastname != '')">
+                        <input type="text" placeholder="Prénom" ng-model="newsource.author2firstname">
+                        <input type="text" placeholder="Nom" ng-model="newsource.author2lastname">
+                    </div>
+                    <div class="flex-sub padding" ng-if="(newsource.author2firstname != null && newsource.author2firstname != '') || (newsource.author2lastname != null && newsource.author2lastname != '')">
+                        <input type="text" placeholder="Prénom" ng-model="newsource.author3firstname">
+                        <input type="text" placeholder="Nom" ng-model="newsource.author3lastname">
+                    </div>
+                </div>
 
+                <!-- Titre -->
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Titre du document</span>
+                    <input type="text" placeholder="Multidictionnaire de la langue française" ng-model="newsource.title">
+                </label>
+
+                <!-- Éditeur -->
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Éditeur</span>
+                    <input type="text" placeholder="Québec Amérique" ng-model="newsource.editor">
+                </label>
+
+                <!-- Lieu de publication -->
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Lieu de publication</span>
+                    <input type="text" placeholder="Montréal" ng-model="newsource.publicationLocation">
+                </label>
+
+                <!-- Date de publication -->
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Date de publication</span>
+                    <input type="text" placeholder="2002" ng-model="newsource.publicationDate">
+                </label>
             </div>
             <!-- Vidéo -->
             <div ng-slide-down="newsource.type == 'movie'" lazy-render>
