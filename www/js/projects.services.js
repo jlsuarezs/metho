@@ -21,6 +21,20 @@ angular.module('metho.services.projects', [])
   };
 })
 
+// Service to share source info from project detail to source detail
+.factory('ShareSource', function() {
+  var source = {};
+
+  return {
+    setSource: function(settingVal) {
+        source = settingVal;
+    },
+    getName: function() {
+        return source;
+    }
+  };
+})
+
 // Service to parse the source in multiple views of Projects
 .factory('$parseSource', function() {
   return {
