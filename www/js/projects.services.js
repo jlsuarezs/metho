@@ -609,7 +609,7 @@ angular.module('metho.services.projects', [])
             if (sourceToParse.publicationLocation != null && sourceToParse.publicationLocation != "") {
                 sourceToParse.parsedSource += sourceToParse.publicationLocation + ", ";
             }else {
-                sourceToParse.parsedSource += "s.l.";
+                sourceToParse.parsedSource += "s.l., ";
                 sourceToParse.warnings.push({errorTitle:"Lieu de publication non spécifiée", promptTitle:"Lieu de publication", promptText:"Entrez la lieu de publication", var:"publicationLocation"});
             }
 
