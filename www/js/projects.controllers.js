@@ -3,7 +3,7 @@ angular.module('metho.controllers.projects', [])
 // Project tab view
 .controller('ProjectsCtrl', function($scope, $ionicModal, $ionicPlatform, $ionicPopup, $ionicListDelegate, ShareProject, $state) {
     $scope.projects = [];
-    $scope.project = { name:"" };
+    $scope.project = { name:"", matter:"" };
     $scope.editingProject = {};
     $scope.err = "";
     $scope.errorName = false;
@@ -55,7 +55,7 @@ angular.module('metho.controllers.projects', [])
     }
 
     $scope.submitProject = function () {
-        if ($scope.project.name == "") {
+        if ($scope.project.name == "" || $scope.project.name == null) {
             $scope.errorName = true;
             var alertPopup = $ionicPopup.alert({
              title: 'Erreur',
@@ -63,7 +63,11 @@ angular.module('metho.controllers.projects', [])
             });
         }else {
             $scope.errorName = false;
-            var theMatter = $scope.project.matter != "" ? $scope.project.matter : "Matière inconnue";
+            if ($scope.project.matter == "" || $scope.project.matter == null) {
+                var theMatter = "Matière inconnue";
+            }else {
+                var theMatter = $scope.project.matter;
+            }
             var creatingProj = {
                 name: $scope.project.name,
                 matter: theMatter
@@ -72,7 +76,7 @@ angular.module('metho.controllers.projects', [])
             $scope.projectsRepo.post(creatingProj).then(function (response) {
                 creatingProj.id = response.id;
                 $scope.projects.push(creatingProj);
-                $scope.project = {};
+                $scope.project = {name:"", matter:""};
                 $scope.newProjectModal.hide();
                 $scope.$apply();
             }).catch(function (err) {
@@ -116,7 +120,11 @@ angular.module('metho.controllers.projects', [])
         $scope.editingProject = {};
         $scope.projectsRepo.get(id).then(function(doc) {
             $scope.editingProject.name = doc.name;
-            $scope.editingProject.matter = doc.matter;
+            if (doc.matter == "Matière inconnue") {
+                $scope.editingProject.matter = "";
+            }else {
+                $scope.editingProject.matter = doc.matter;
+            }
             $scope.editingProject.id = doc._id;
         });
         $scope.editProjectModal.show();
@@ -138,7 +146,11 @@ angular.module('metho.controllers.projects', [])
                 for (var i = 0; i < $scope.projects.length; i++) {
                     if ($scope.projects[i].id == response.id) {
                         $scope.projects[i].name = $scope.editingProject.name;
-                        $scope.projects[i].matter = $scope.editingProject.matter;
+                        if ($scope.editingProject.matter == "") {
+                            $scope.projects[i].matter = "Matière inconnue";
+                        }else {
+                            $scope.projects[i].matter = $scope.editingProject.matter;
+                        }
                     }
                 }
             }).catch(function (err) {
