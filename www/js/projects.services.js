@@ -208,7 +208,7 @@ angular.module('metho.services.projects', [])
                 }
             }else {
                 sourceToParse.parsedSource += "?. ";
-                sourceToParse.errors.push({errorTitle:"Type de source non spécifié", promptTitle:"Type de source", promptText:"Sélectionnez le type de source", var:"hasAuthors", template:"<p class='center'><select id='authortype'><option value='13'>1 à 3 auteurs</option><option value='more3'>Plus de 3 auteurs</option><option value='collective'>Collectif</option></select></p>", complex:true, id:"authortype"})
+                sourceToParse.errors.push({errorTitle:"Nombre d'auteurs non spécifié", promptTitle:"Nombre d'auteurs", promptText:"Sélectionnez le nombre d'auteurs", var:"hasAuthors", template:"<p class='center'><select id='authortype'><option value='13'>1 à 3 auteurs</option><option value='more3'>Plus de 3 auteurs</option><option value='collective'>Collectif</option></select></p>", complex:true, id:"authortype"})
             }
 
             // Titre
