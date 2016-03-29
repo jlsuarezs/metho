@@ -322,6 +322,10 @@ angular.module('metho.services.projects', [])
             // Date
             if (sourceToParse.publicationDate != null && sourceToParse.publicationDate != "") {
                 sourceToParse.parsedSource += sourceToParse.publicationDate + ", ";
+                var today = new Date();
+                if (today.getFullYear() < Number(sourceToParse.publicationDate)) {
+                    sourceToParse.warnings.push({errorTitle:"Date de publication supérieure à la date courante", promptTitle:"Date d'édition", promptText:"Entrez la date d'édition", var:"publicationDate"});
+                }
             }else {
                 sourceToParse.parsedSource += "s.d., ";
                 sourceToParse.warnings.push({errorTitle:"Date d'édition non spécifiée", promptTitle:"Date d'édition", promptText:"Entrez la date d'édition", var:"publicationDate"});
