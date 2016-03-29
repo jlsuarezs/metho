@@ -149,7 +149,13 @@ angular.module('metho.controllers.projects', [])
         }
     }
 
-    $scope.openProjectDetail = function (id, index) {
+    $scope.openProjectDetail = function (id) {
+        for (var i = 0; i < $scope.projects.length; i++) {
+            if ($scope.projects[i].id == id) {
+                var index = i;
+                break;
+            }
+        }
         ShareProject.setName($scope.projects[index].name);
         ShareProject.setMatter($scope.projects[index].matter);
         $state.go("tab.project-detail",{projectID:id});
@@ -158,7 +164,7 @@ angular.module('metho.controllers.projects', [])
 
 
 // Project detail view
-.controller('ProjectDetailCtrl', function($scope, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $parseSource, ShareProject, ShareSource, $state) {
+.controller('ProjectDetailCtrl', function($scope, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $parseSource, ShareProject, ShareSource, $state, $ionicListDelegate) {
     $scope.projectRepo = new PouchDB("projects");
     $scope.sourceRepo = new PouchDB("sources");
     $scope.project = {
@@ -373,7 +379,14 @@ angular.module('metho.controllers.projects', [])
         }
     });
 
-    $scope.openSourceDetail = function (id, index) {
+    $scope.openSourceDetail = function (id) {
+        for (var i = 0; i < $scope.project.sources.length; i++) {
+            if ($scope.project.sources[i]._id == id) {
+                var index = i;
+                break;
+            }
+        }
+        console.log(index);
         ShareSource.setSource($scope.project.sources[index]);
         $state.go('tab.source-detail', {projectID:$stateParams.projectID, sourceID:id});
         $scope.refreshID = id;

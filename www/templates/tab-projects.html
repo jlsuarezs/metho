@@ -12,7 +12,7 @@
 
         <!-- When there is -->
         <ion-list ng-if="projects.length">
-            <ion-item ng-repeat="project in projects track by $index" class="item-icon-right item-remove-animate" type="item-text-wrap" ng-click="openProjectDetail('{{project.id}}', {{$index}})">
+            <ion-item ng-repeat="project in projects" class="item-icon-right item-remove-animate" type="item-text-wrap" ng-click="openProjectDetail('{{project.id}}')">
                 <h2>{{project.name}}</h1>
                 <p>{{project.matter}}</p>
                 <i class="icon ion-chevron-right icon-accessory"></i>
