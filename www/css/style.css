@@ -180,3 +180,9 @@ p.left-aligned {
          color: rgba(0, 0, 0, 0.6);
          font-size : .75em;
 }
+
+.preload1 { background: url('../img/biblio.png') no-repeat -9999px -9999px; }
+.preload2 { background: url('../img/layout.png') no-repeat -9999px -9999px; }
+.preload3 { background: url('../img/tableOfContents.png') no-repeat -9999px -9999px; }
+.preload4 { background: url('../img/page-icon.png') no-repeat -9999px -9999px; }
+.preload5 { background: url('../img/fiche.png') no-repeat -9999px -9999px; }
