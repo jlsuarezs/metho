@@ -318,6 +318,10 @@ angular.module('metho.controllers.projects', [])
         $scope.resetModalVars();
     }
 
+    $scope.$on('modal.hidden', function() {
+        $scope.resetModalVars();
+    });
+
     $scope.submitSource = function () {
         if ($scope.newsource.type != "" && $scope.newsource.type != null) {
             var creatingProj = $parseSource.parseSource($scope.newsource);
