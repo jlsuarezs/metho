@@ -329,6 +329,7 @@ angular.module('metho.controllers.projects', [])
             // Save to db
             $scope.sourceRepo.post(creatingProj).then(function (response) {
                 creatingProj._id = response.id;
+                creatingProj._rev = response.rev;
                 $scope.project.sources.push(creatingProj);
                 $scope.closeModal();
                 $scope.$apply();
