@@ -631,7 +631,112 @@ angular.module('metho.services.projects', [])
 
             return sourceToParse;
         }else if (sourceToParse.type == "movie") {
+            if ((sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) || (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null)) {
+                // Author last name
+                if (sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) {
+                    sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
+                }else {
+                    sourceToParse.errors.push({errorTitle:"Nom de l'auteur/réalisateur manquant", promptTitle:"Auteur/Réalisateur", promptText:"Entrez le nom de l'auteur/réalisateur", var:"author1lastname"});
+                    sourceToParse.parsedSource += "?, ";
+                }
+                // Author first name
+                if (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null) {
+                    sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
+                }else {
+                    sourceToParse.errors.push({errorTitle:"Prénom de l'auteur/réalisateur manquant", promptTitle:"Auteur/Réalisateur", promptText:"Entrez le prénom du premier auteur", var:"author1firstname"});
+                    sourceToParse.parsedSource += "?";
+                }
+            }else {
+                sourceToParse.errors.push({errorTitle:"Prénom de l'auteur/réalisateur manquant", promptTitle:"Auteur/Réalisateur", promptText:"Entrez le prénom du premier auteur", var:"author1firstname"});
+                sourceToParse.errors.push({errorTitle:"Nom de l'auteur/réalisateur manquant", promptTitle:"Auteur/Réalisateur", promptText:"Entrez le nom de l'auteur/réalisateur", var:"author1lastname"});
+                sourceToParse.parsedSource += "?";
+            }
 
+            if (sourceToParse.hasAuthors == true) { // Use longer syntax because it might have string value
+                sourceToParse.parsedSource += "et al., ";
+            }else {
+                sourceToParse.parsedSource += ". ";
+            }
+
+            // Titre de l'épisode
+            if (sourceToParse.episodeTitle != null && sourceToParse.episodeTitle != "") {
+                sourceToParse.parsedSource += "«" + sourceToParse.episodeTitle + "», ";
+            }
+
+            // Nom de l'émission ou du document
+            if (sourceToParse.title != null && sourceToParse.title != "") {
+                sourceToParse.parsedSource += "<em>" + sourceToParse.title + "</em>, ";
+            }else {
+                sourceToParse.parsedSource += "<em>?</em>";
+                sourceToParse.errors.push({errorTitle:"Nom de l'émission manquant", promptTitle:"Nom de l'émission", promptText:"Entrez le nom de l'émission", var:"title"})
+            }
+
+            // Lieu de production
+            if (sourceToParse.productionLocation != null && sourceToParse.productionLocation != "") {
+                sourceToParse.parsedSource += sourceToParse.productionLocation + ", ";
+            }else {
+                sourceToParse.parsedSource += "s.l., ";
+                sourceToParse.warnings.push({errorTitle:"Lieu de production non spécifié", promptTitle:"Lieu de production", promptText:"Entrez le lieu de production", var:"productionLocation"});
+            }
+
+            // Producteur
+            if (sourceToParse.productor != null && sourceToParse.productor != "") {
+                sourceToParse.parsedSource += sourceToParse.productor + ", ";
+            }else {
+                sourceToParse.parsedSource += "?, ";
+                sourceToParse.errors.push({errorTitle:"Producteur non spécifié", promptTitle:"Producteur", promptText:"Entrez le producteur", var:"productor"});
+            }
+
+            // Diffuseur
+            if (sourceToParse.broadcaster != null && sourceToParse.broadcaster != "") {
+                sourceToParse.parsedSource += sourceToParse.broadcaster + ", ";
+            }else {
+                sourceToParse.warnings.push({errorTitle:"Diffuseur non spécifié", promptTitle:"Diffuseur", promptText:"Entrez le diffuseur", var:"broadcaster"});
+            }
+
+            // Durée
+            if (sourceToParse.duration != null && sourceToParse.duration != "") {
+                sourceToParse.parsedSource += sourceToParse.duration + " min., ";
+            }else {
+                sourceToParse.parsedSource += "?, ";
+                sourceToParse.errors.push({errorTitle:"Durée non spécifié", promptTitle:"Durée", promptText:"Entrez la durée", var:"duration"});
+            }
+
+            // Date de publication
+            if (sourceToParse.publicationDate != null && sourceToParse.publicationDate != "") {
+                sourceToParse.parsedSource += sourceToParse.publicationDate + ", ";
+            }else {
+                sourceToParse.warnings.push({errorTitle:"Date de publication non spécifié", promptTitle:"Date de publication", promptText:"Entrez la date de publication", var:"publicationDate"});
+                sourceToParse.parsedSource += "s.d., ";
+            }
+
+            // Support
+            if (sourceToParse.support) {
+                switch (sourceToParse.support) {
+                    case "dvd":
+                        sourceToParse.parsedSource += "[DVD], ";
+                        break;
+                    case "cd":
+                        sourceToParse.parsedSource += "[cédérom], ";
+                        break;
+                    case "internet":
+                        sourceToParse.parsedSource += "[en ligne], ";
+                        break;
+                    default:
+                        sourceToParse.parsedSource += "[?], ";
+                        sourceToParse.errors.push({errorTitle:"Type de support non spécifié", promptTitle:"Type de support", promptText:"Entrez le type de support", var:"support"});
+                }
+            }
+
+            // Date de visionnement
+            if (sourceToParse.consultationDate != null && sourceToParse.consultationDate != "") {
+                sourceToParse.parsedSource += "(" + new Date(sourceToParse.consultationDate).toLocaleDateString() + ").";
+            }else {
+                sourceToParse.errors.push({errorTitle:"Date de consultation non spécifié", promptTitle:"Date de consultation", promptText:"Entrez le date de consultation", var:"consultationDate"});
+                sourceToParse.parsedSource += "(?).";
+            }
+
+            return sourceToParse;
         }else if (sourceToParse.type == "interview") {
 
         }else {

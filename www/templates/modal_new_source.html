@@ -252,7 +252,76 @@
                 </div>
                 <!-- Vidéo -->
                 <div ng-slide-down="newsource.type == 'movie'" lazy-render>
+                    <ion-checkbox ng-model="newsource.hasAuthors">La source a plus d'un auteur/réalisateur</ion-checkbox>
+                    <p class="center no-margin" ng-slide-down="newsource.hasAuthors" lazy-render>
+                        Vous devez entrer l'auteur/réalisateur principal, la mention «et al.» sera ajoutée afin de signifier qu'il y a plus d'un auteur/réalisateur.
+                    </p>
+                    <div>
+                        <label class="item">
+                            <span class="input-label">Auteur/réalisateur principal</span>
+                        </label>
+                        <div class="flex-sub padding">
+                            <input type="text" ng-model="newsource.author1firstname" placeholder="Prénom">
+                            <input type="text" ng-model="newsource.author1lastname" placeholder="Nom">
+                        </div>
+                    </div>
 
+                    <!-- Nom de l'émission ou du document -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Nom de l'émission ou du document</span>
+                        <input type="text" placeholder="Vengeance" ng-model="newsource.title">
+                    </label>
+
+                    <!-- Titre de l'épisode -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label dimmed-75">Titre de l'épisode</span>
+                        <input type="text" placeholder="La revanche" ng-model="newsource.episodeTitle">
+                    </label>
+
+                    <!-- Lieu de production -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Lieu de production</span>
+                        <input type="text" placeholder="Montréal" ng-model="newsource.productionLocation">
+                    </label>
+
+                    <!-- Producteur -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Producteur</span>
+                        <input type="text" placeholder="CC&C Clark Costelle et Cie" ng-model="newsource.productor">
+                    </label>
+
+                    <!-- Diffuseur -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Diffuseur</span>
+                        <input type="text" placeholder="ICI Radio-Canada" ng-model="newsource.broadcaster">
+                    </label>
+
+                    <!-- Durée -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Durée (minutes)</span>
+                        <input type="text" placeholder="55" ng-model="newsource.duration">
+                    </label>
+
+                    <!-- Date de publication -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Date de publication</span>
+                        <input type="text" placeholder="2002" ng-model="newsource.publicationDate">
+                    </label>
+
+                    <!-- Support -->
+                    <label class="item item-select item-stacked-label">
+                        <span class="input-label">Support</span>
+                        <select ng-model="newsource.support">
+                            <option value="cd">Cédérom</option>
+                            <option value="dvd" selected>DVD</option>
+                            <option value="internet">Vidéo Internet</option>
+                        </select>
+                    </label>
+                    <!-- Date de visionnement -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Date de visionnement</span>
+                        <input type="date" placeholder="29 mars 2015" ng-model="newsource.consultationDate">
+                    </label>
                 </div>
                 <!-- Entrevue -->
                 <div ng-slide-down="newsource.type == 'interview'" lazy-render>

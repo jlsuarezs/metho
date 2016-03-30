@@ -498,6 +498,9 @@ angular.module('metho.controllers.projects', [])
 
     $scope.edit = function () {
         $scope.newsource = JSON.parse(JSON.stringify($scope.source));
+        if ($scope.newsource.consultationDate != null && $scope.newsource.consultationDate != "") {
+            $scope.newsource.consultationDate = new Date($scope.newsource.consultationDate);
+        }
         $scope.editSourceModal.show();
     }
 
