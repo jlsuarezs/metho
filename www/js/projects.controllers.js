@@ -437,7 +437,16 @@ angular.module('metho.controllers.projects', [])
             }).then(function(res) {
                 if (res != null) {
                     var e = document.getElementById($scope.source.errors[id].id);
-                    $scope.source[$scope.source.errors[id].var] = e.options[e.selectedIndex].value;
+                    switch ($scope.source.errors[id].type) {
+                        case "select":
+                            $scope.source[$scope.source.errors[id].var] = e.options[e.selectedIndex].value;
+                            break;
+                        case "consultationDate":
+                            $scope.source[$scope.source.errors[id].var] = e.value;
+                            break;
+                        default:
+
+                    }
                     $scope.source = $parseSource.parseSource($scope.source);
                     $scope.sourceRepo.put($scope.source, $scope.source._id, $scope.source._rev).then(function (response) {
                         if (response.ok) {

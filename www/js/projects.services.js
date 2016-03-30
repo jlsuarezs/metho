@@ -208,7 +208,7 @@ angular.module('metho.services.projects', [])
                 }
             }else {
                 sourceToParse.parsedSource += "?. ";
-                sourceToParse.errors.push({errorTitle:"Nombre d'auteurs non spécifié", promptTitle:"Nombre d'auteurs", promptText:"Sélectionnez le nombre d'auteurs", var:"hasAuthors", template:"<p class='center'><select id='authortype'><option value='13'>1 à 3 auteurs</option><option value='more3'>Plus de 3 auteurs</option><option value='collective'>Collectif</option></select></p>", complex:true, id:"authortype"})
+                sourceToParse.errors.push({errorTitle:"Nombre d'auteurs non spécifié", promptTitle:"Nombre d'auteurs", promptText:"Sélectionnez le nombre d'auteurs", var:"hasAuthors", template:"<p class='center'><select id='authortype'><option value='13'>1 à 3 auteurs</option><option value='more3'>Plus de 3 auteurs</option><option value='collective'>Collectif</option></select></p>", complex:true, id:"authortype", type:"select"});
             }
 
             // Titre
@@ -667,7 +667,7 @@ angular.module('metho.services.projects', [])
             if (sourceToParse.title != null && sourceToParse.title != "") {
                 sourceToParse.parsedSource += "<em>" + sourceToParse.title + "</em>, ";
             }else {
-                sourceToParse.parsedSource += "<em>?</em>";
+                sourceToParse.parsedSource += "<em>?</em>, ";
                 sourceToParse.errors.push({errorTitle:"Nom de l'émission manquant", promptTitle:"Nom de l'émission", promptText:"Entrez le nom de l'émission", var:"title"})
             }
 
@@ -732,7 +732,7 @@ angular.module('metho.services.projects', [])
             if (sourceToParse.consultationDate != null && sourceToParse.consultationDate != "") {
                 sourceToParse.parsedSource += "(" + new Date(sourceToParse.consultationDate).toLocaleDateString() + ").";
             }else {
-                sourceToParse.errors.push({errorTitle:"Date de consultation non spécifié", promptTitle:"Date de consultation", promptText:"Entrez le date de consultation", var:"consultationDate"});
+                sourceToParse.errors.push({errorTitle:"Date de consultation non spécifié", promptTitle:"Date de consultation", promptText:"Entrez le date de consultation", var:"consultationDate", type:"consultationDate", template:"<p class='center'><input type='date' id='consultationDate'></p>", complex:true, id:"consultationDate"});
                 sourceToParse.parsedSource += "(?).";
             }
 
