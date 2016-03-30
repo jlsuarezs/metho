@@ -10,7 +10,7 @@
     <ion-content ng-class="{ 'padding flex' : !project.sources.length }">
         <!-- List of sources -->
         <ion-list ng-if="!loading">
-            <ion-item ng-repeat="source in project.sources" class="item item-icon-right item-remove-animate" type="item-text-wrap" ng-click="openSourceDetail('{{source._id}}')">
+            <ion-item ng-repeat="source in project.sources" class="item item-icon-right" ng-class="{'item-remove-animate': removeAnimate}" type="item-text-wrap" ng-click="openSourceDetail('{{source._id}}')">
                 <h2 ng-bind-html="source.parsedSource" ng-if="!source.title" ng-class="{'limited-width': source.errors.length || source.warnings.length}"></h2>
                 <h2 ng-if="source.title" ng-class="{'limited-width': source.errors.length || source.warnings.length}">{{source.title}}</h2>
                 <p>{{source.parsedType}}</p>

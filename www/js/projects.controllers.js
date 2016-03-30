@@ -186,11 +186,11 @@ angular.module('metho.controllers.projects', [])
         sources: []
     };
     $scope.loading = true;
-    $scope.animateRemove = true;
     $scope.newsource = {};
     $scope.newsource.consultationDate = new Date();
     $scope.refreshID = null;
     $scope.refreshIndex = null;
+    $scope.removeAnimate = false;
 
     $ionicModal.fromTemplateUrl('templates/modal_new_source.html', {
         scope: $scope,
@@ -359,13 +359,18 @@ angular.module('metho.controllers.projects', [])
               $scope.sourceRepo.get(id).then(function(doc) {
                 return $scope.sourceRepo.remove(doc);
               }).then(function (result) {
+                  $scope.removeAnimate = true;
+                  $scope.$apply();
                   for (var i = 0; i < $scope.project.sources.length; i++) {
                       if ($scope.project.sources[i]._id == result.id) {
                           $scope.project.sources.splice(i, 1);
                           $scope.$apply();
+                          $scope.removeAnimate = false;
+                          $scope.$apply();
                           return;
                       }
                   }
+
               }).catch(function (err) {
                 console.log(err);
               });
@@ -402,7 +407,6 @@ angular.module('metho.controllers.projects', [])
                 break;
             }
         }
-        console.log(index);
         ShareSource.setSource($scope.project.sources[index]);
         $state.go('tab.source-detail', {projectID:$stateParams.projectID, sourceID:id});
         $scope.refreshID = id;
