@@ -311,6 +311,7 @@ angular.module('metho.controllers.projects', [])
     $scope.addSource = function () {
         // Open modal
         $scope.newSourceModal.show();
+        cordova.plugins.Keyboard.disableScroll(true);
     }
 
     $scope.closeModal = function () {
@@ -431,6 +432,7 @@ angular.module('metho.controllers.projects', [])
     });
 
     $scope.solveError = function (id) {
+        cordova.plugins.Keyboard.disableScroll(false);
         if ($scope.source.errors[id].complex) {
             $ionicPopup.prompt({
                 title: $scope.source.errors[id].promptTitle,
@@ -491,6 +493,7 @@ angular.module('metho.controllers.projects', [])
     }
 
     $scope.solveWarning = function (id) {
+        cordova.plugins.Keyboard.disableScroll(false);
         $ionicPopup.prompt({
             title: $scope.source.warnings[id].promptTitle,
             subTitle: $scope.source.warnings[id].promptText,
@@ -515,6 +518,7 @@ angular.module('metho.controllers.projects', [])
     }
 
     $scope.edit = function () {
+        cordova.plugins.Keyboard.disableScroll(true);
         $scope.newsource = JSON.parse(JSON.stringify($scope.source));
         if ($scope.newsource.consultationDate != null && $scope.newsource.consultationDate != "") {
             $scope.newsource.consultationDate = new Date($scope.newsource.consultationDate);
