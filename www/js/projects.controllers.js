@@ -448,7 +448,7 @@ angular.module('metho.controllers.projects', [])
                         case "select":
                             $scope.source[$scope.source.errors[id].var] = e.options[e.selectedIndex].value;
                             break;
-                        case "consultationDate":
+                        case "input":
                             $scope.source[$scope.source.errors[id].var] = e.value;
                             break;
                         default:

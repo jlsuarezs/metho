@@ -325,7 +325,50 @@
                 </div>
                 <!-- Entrevue -->
                 <div ng-slide-down="newsource.type == 'interview'" lazy-render>
-
+                    <!-- Nom de l'intervieweur -->
+                    <div>
+                        <label class="item">
+                            <span class="input-label">Nom de l'intervieweur</span>
+                        </label>
+                        <div class="flex-sub padding">
+                            <input type="text" ng-model="newsource.author1firstname" placeholder="Prénom">
+                            <input type="text" ng-model="newsource.author1lastname" placeholder="Nom">
+                        </div>
+                    </div>
+                    <!-- Nom de la personne rencontrée -->
+                    <div class="isolated">
+                        <label class="item">
+                            <span class="input-label">Nom de la personne rencontrée</span>
+                        </label>
+                        <div class="flex-sub padding">
+                            <input type="text" ng-model="newsource.interviewed1firstname" placeholder="Prénom">
+                            <input type="text" ng-model="newsource.interviewed1lastname" placeholder="Nom">
+                        </div>
+                    </div>
+                    <!-- Civilité de la personne -->
+                    <label class="item item-select item-stacked-label">
+                        <span class="input-label">Civilitée de la personne</span>
+                        <select ng-model="newsource.civility">
+                            <option value="mister">M.</option>
+                            <option value="miss" selected>M<sup>me</sup></option>
+                            <option value="miss_young">M<sup>lle</sup></option>
+                        </select>
+                    </label>
+                    <!-- Titre de la personne -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Titre de la personne rencontrée</span>
+                        <input type="text" placeholder="retraité et ancien combattant de la Deuxième Guerre mondiale" ng-model="newsource.interviewedTitle">
+                    </label>
+                    <!-- Lieu de l'entrevue -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Lieu de l'entrevue</span>
+                        <input type="text" placeholder="Carignan" ng-model="newsource.publicationLocation">
+                    </label>
+                    <!-- Date de l'entrevue -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Date de l'entrevue</span>
+                        <input type="date" placeholder="2016-03-02" ng-model="newsource.consultationDate">
+                    </label>
                 </div>
         </form>
         <!-- <p ng-bind="newsource.publicationDate">
