@@ -7,22 +7,8 @@
     </ion-header-bar>
     <ion-content scrollbar-y="true" has-bouncing="true">
         <form ng-submit="submitSource()" ng-keyup="$event.keyCode == 13 && submitSource()">
-                <!-- Choisir le type de la source -->
-                <label class="item item-input item-select">
-                    <div class="input-label smallest">
-                        Type de source
-                    </div>
-                    <select ng-model="newsource.type">
-                        <option selected value="book">Livre</option>
-                        <option value="article">Article de périodique</option>
-                        <option value="internet">Site Internet</option>
-                        <option value="cd">Cédérom (CD-ROM)</option>
-                        <option value="movie">Document audiovisuel</option>
-                        <option value="interview">Entrevue</option>
-                    </select>
-                </label>
                 <!-- Livre -->
-                <div ng-slide-down="newsource.type == 'book'" lazy-render>
+                <div ng-if="newsource.type == 'book'">
                     <ion-list class="isolated">
                         <ion-radio ng-model="newsource.hasAuthors" ng-value="'13'">La source a de 1 à 3 auteurs</ion-radio>
                         <ion-radio ng-model="newsource.hasAuthors" ng-value="'more3'">La source a plus de trois auteurs</ion-radio>
@@ -124,7 +110,7 @@
                     </div>
                 </div>
                 <!-- Article -->
-                <div ng-slide-down="newsource.type == 'article'" lazy-render>
+                <div ng-if="newsource.type == 'article'">
                     <!-- Auteur -->
                     <label class="item">
                         <span class="input-label">Auteur</span>
@@ -167,7 +153,7 @@
                     </div>
                 </div>
                 <!-- Site web -->
-                <div ng-slide-down="newsource.type == 'internet'" lazy-render>
+                <div ng-if="newsource.type == 'internet'">
                     <ion-checkbox ng-model="newsource.hasAuthors">La source a un auteur</ion-checkbox>
                     <div ng-slide-down="newsource.hasAuthors" lazy-render>
                         <div class="flex-sub padding">
@@ -209,7 +195,7 @@
                     </label>
                 </div>
                 <!-- CD -->
-                <div ng-slide-down="newsource.type == 'cd'" lazy-render>
+                <div ng-if="newsource.type == 'cd'">
                     <ion-checkbox ng-model="newsource.hasAuthors">La source a un auteur</ion-checkbox>
                     <div ng-slide-down="newsource.hasAuthors" lazy-render>
                         <div class="flex-sub padding">
@@ -251,7 +237,7 @@
                     </label>
                 </div>
                 <!-- Vidéo -->
-                <div ng-slide-down="newsource.type == 'movie'" lazy-render>
+                <div ng-if="newsource.type == 'movie'">
                     <ion-checkbox ng-model="newsource.hasAuthors">La source a plus d'un auteur/réalisateur</ion-checkbox>
                     <p class="center no-margin" ng-slide-down="newsource.hasAuthors" lazy-render>
                         Vous devez entrer l'auteur/réalisateur principal, la mention «et al.» sera ajoutée afin de signifier qu'il y a plus d'un auteur/réalisateur.
@@ -324,7 +310,7 @@
                     </label>
                 </div>
                 <!-- Entrevue -->
-                <div ng-slide-down="newsource.type == 'interview'" lazy-render>
+                <div ng-if="newsource.type == 'interview'">
                     <!-- Nom de l'intervieweur -->
                     <div>
                         <label class="item">
@@ -341,6 +327,11 @@
                             <span class="input-label">Nom de la personne rencontrée</span>
                         </label>
                         <div class="flex-sub padding">
+                            <select ng-model="newsource.civility">
+                                <option value="mister">M.</option>
+                                <option value="miss" selected>M<sup>me</sup></option>
+                                <option value="miss_young">M<sup>lle</sup></option>
+                            </select>
                             <input type="text" ng-model="newsource.interviewed1firstname" placeholder="Prénom">
                             <input type="text" ng-model="newsource.interviewed1lastname" placeholder="Nom">
                         </div>
@@ -348,11 +339,7 @@
                     <!-- Civilité de la personne -->
                     <label class="item item-select item-stacked-label">
                         <span class="input-label">Civilitée de la personne</span>
-                        <select ng-model="newsource.civility">
-                            <option value="mister">M.</option>
-                            <option value="miss" selected>M<sup>me</sup></option>
-                            <option value="miss_young">M<sup>lle</sup></option>
-                        </select>
+
                     </label>
                     <!-- Titre de la personne -->
                     <label class="item item-input item-stacked-label">

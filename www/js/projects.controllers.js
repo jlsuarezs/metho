@@ -176,7 +176,7 @@ angular.module('metho.controllers.projects', [])
 
 
 // Project detail view
-.controller('ProjectDetailCtrl', function($scope, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $parseSource, ShareProject, ShareSource, $state, $ionicListDelegate) {
+.controller('ProjectDetailCtrl', function($scope, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $parseSource, ShareProject, ShareSource, $state, $ionicListDelegate, $ionicActionSheet) {
     $scope.projectRepo = new PouchDB("projects");
     $scope.sourceRepo = new PouchDB("sources");
     $scope.project = {
@@ -310,8 +310,47 @@ angular.module('metho.controllers.projects', [])
 
     $scope.addSource = function () {
         // Open modal
-        $scope.newSourceModal.show();
-        cordova.plugins.Keyboard.disableScroll(true);
+        var hideSheet = $ionicActionSheet.show({
+          buttons: [
+            { text: 'Livre' },
+            { text: 'Article de périodique' },
+            { text: 'Site Internet' },
+            { text: 'Cédérom (CD)' },
+            { text: 'Document audiovisuel' },
+            { text: 'Entrevue' }
+          ],
+          titleText: 'Choisir le type de source',
+          cancelText: 'Annuler',
+          buttonClicked: function(index) {
+            switch (index) {
+                case 0:
+                    $scope.newsource.type = "book";
+                    break;
+                case 1:
+                    $scope.newsource.type = "article";
+                    break;
+                case 2:
+                    $scope.newsource.type = "internet";
+                    break;
+                case 3:
+                    $scope.newsource.type = "cd";
+                    break;
+                case 4:
+                    $scope.newsource.type = "movie";
+                    break;
+                case 5:
+                    $scope.newsource.type = "interview";
+                    break;
+                default:
+
+            }
+            if (!!window.cordova) {
+                cordova.plugins.Keyboard.disableScroll(true);
+            }
+            $scope.newSourceModal.show();
+            return true;
+          }
+        });
     }
 
     $scope.closeModal = function () {
