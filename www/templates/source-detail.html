@@ -1,6 +1,7 @@
 <ion-view id="bind-html-with-trust">
     <ion-nav-title>
-        <div class="page-title">{{source.title}}</div>
+        <div class="page-title" ng-bind-html="source.parsedSource" ng-if="!source.title"></div>
+        <div class="page-title" ng-if="source.title">{{source.title}}</div>
         <div class="page-sub-title">{{source.parsedType}}</div>
     </ion-nav-title>
     <ion-nav-buttons side="right">
