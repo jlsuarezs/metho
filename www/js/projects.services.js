@@ -64,6 +64,9 @@ angular.module('metho.services.projects', [])
         }
         sourceToParse.errors = [];
         sourceToParse.warnings = [];
+
+        // Solve error with timezones
+        var _userOffset = new Date().getTimezoneOffset()*60000;
         if (sourceToParse.type == "book") {
             if (sourceToParse.hasAuthors == "13") {
 
@@ -527,7 +530,7 @@ angular.module('metho.services.projects', [])
 
             // Date de consultation
             if (sourceToParse.consultationDate != null && sourceToParse.consultationDate != "") {
-                sourceToParse.parsedSource += "(" + new Date(sourceToParse.consultationDate).toLocaleDateString() + ").";
+                sourceToParse.parsedSource += "(" + new Date(new Date(sourceToParse.consultationDate).getTime() - _userOffset).toLocaleDateString() + ").";
             }else {
                 sourceToParse.parsedSource += "(?).";
                 sourceToParse.errors.push({errorTitle:"Date de consultation non spécifié", promptTitle:"Date de consultation", promptText:"Entrez le date de consultation", var:"consultationDate", type:"input", template:"<p class='center'><input type='date' id='consultationDate'></p>", complex:true, id:"consultationDate"});
@@ -730,7 +733,7 @@ angular.module('metho.services.projects', [])
 
             // Date de visionnement
             if (sourceToParse.consultationDate != null && sourceToParse.consultationDate != "") {
-                sourceToParse.parsedSource += "(" + new Date(sourceToParse.consultationDate).toLocaleDateString() + ").";
+                sourceToParse.parsedSource += "(" + new Date(new Date(sourceToParse.consultationDate).getTime() - _userOffset) + ").";
             }else {
                 sourceToParse.errors.push({errorTitle:"Date de consultation non spécifié", promptTitle:"Date de consultation", promptText:"Entrez le date de consultation", var:"consultationDate", type:"input", template:"<p class='center'><input type='date' id='consultationDate'></p>", complex:true, id:"consultationDate"});
                 sourceToParse.parsedSource += "(?).";
@@ -820,7 +823,7 @@ angular.module('metho.services.projects', [])
 
             // Date de l'entrevue
             if (sourceToParse.consultationDate != null && sourceToParse.consultationDate != "") {
-                sourceToParse.parsedSource += "le " + new Date(sourceToParse.consultationDate).toLocaleDateString() + ".";
+                sourceToParse.parsedSource += "le " + new Date(new Date(sourceToParse.consultationDate).getTime() - _userOffset) + ".";
             }else {
                 sourceToParse.errors.push({errorTitle:"Date de consultation non spécifié", promptTitle:"Date de consultation", promptText:"Entrez le date de consultation", var:"consultationDate", type:"input", template:"<p class='center'><input type='date' id='consultationDate'></p>", complex:true, id:"consultationDate"});
                 sourceToParse.parsedSource += "le ?.";
