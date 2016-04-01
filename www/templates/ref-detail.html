@@ -6,7 +6,7 @@
 -->
 <ion-view view-title="{{article.name}}" id="html-bind-with-trust">
     <ion-nav-buttons side="right">
-      <button class="button button-clear button-positive icon ion-ios-upload-outline" ng-click="share()" ng-if="!article.containsSub"></button>
+      <button class="button button-clear button-positive icon ion-ios-upload-outline" on-tap="share()" ng-if="!article.containsSub"></button>
     </ion-nav-buttons>
     <ion-content id="sub-content" scrollbar-y="true" has-bouncing="true">
         <div ng-if="article.text" ng-bind-html="article.text" class="padding justify">
