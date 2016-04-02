@@ -69,6 +69,16 @@ angular.module('metho', ['ionic', 'metho.controllers.projects', 'metho.controlle
     }
   })
 
+  .state('tab.pending', {
+    url: '/pending/:projectID',
+    views: {
+      'tab-projects': {
+        templateUrl: 'templates/pending.html',
+        controller: 'PendingCtrl'
+      }
+    }
+  })
+
   .state('tab.ref', {
       url: '/ref',
       views: {

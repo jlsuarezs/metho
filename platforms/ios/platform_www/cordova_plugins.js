@@ -73,7 +73,7 @@ module.exports.metadata =
     "cordova-plugin-actionsheet": "2.2.2",
     "ionic-plugin-keyboard": "2.0.1",
     "cordova-plugin-device": "1.1.1",
-    "phonegap-plugin-barcodescanner": "3.1.2"
+    "phonegap-plugin-barcodescanner": "4.1.0"
 }
 // BOTTOM OF METADATA
 });

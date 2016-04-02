@@ -204,3 +204,8 @@ p.left-aligned {
 .no-padding {
     padding: 0 !important;
 }
+
+.padding-top {
+    top: auto !important;
+    bottom: auto !important;
+}

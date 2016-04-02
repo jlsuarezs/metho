@@ -4,10 +4,9 @@
         <div class="page-sub-title">{{project.matter}}</div>
     </ion-nav-title>
     <ion-nav-buttons side="right">
-      <button class="button button-clear button-positive icon ion-ios-plus-empty" ng-click="addSource()"></button>
       <button class="button button-clear button-positive icon ion-ios-upload-outline" ng-click="share()"></button>
     </ion-nav-buttons>
-    <ion-content ng-class="{ 'padding flex' : !project.sources.length }">
+    <ion-content ng-class="{ 'padding flex' : !project.sources.length }" class="has-footer">
         <!-- List of sources -->
         <ion-list ng-if="!loading">
             <ion-item ng-repeat="source in project.sources" class="item item-icon-right" ng-class="{'item-remove-animate': removeAnimate}" type="item-text-wrap" ng-click="openSourceDetail('{{source._id}}')">
@@ -39,4 +38,10 @@
             <ion-spinner></ion-spinner>
         </div>
     </ion-content>
+    <ion-footer-bar align-title="center" class="bar-stable">
+        <div class="buttons">
+            <button class="button button-clear button-positive icon ion-ios-plus-empty" ng-click="addSource()"></button>
+        </div>
+        <a class="title padding-top button button-clear" ng-click="openPendings()">Éléments en attente({{project.pendings.length}})</a>
+    </ion-footer-bar>
 </ion-view>

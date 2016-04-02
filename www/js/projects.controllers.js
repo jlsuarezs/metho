@@ -176,14 +176,16 @@ angular.module('metho.controllers.projects', [])
 
 
 // Project detail view
-.controller('ProjectDetailCtrl', function($scope, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $parseSource, ShareProject, ShareSource, $state, $ionicListDelegate, $ionicActionSheet, $http, $ionicLoading) {
+.controller('ProjectDetailCtrl', function($scope, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $parseSource, ShareProject, ShareSource, $state, $ionicListDelegate, $ionicActionSheet, $http, $ionicLoading, SharePendings) {
     $scope.projectRepo = new PouchDB("projects");
     $scope.sourceRepo = new PouchDB("sources");
+    $scope.pendingRepo = new PouchDB("pendings");
     $scope.project = {
         name: ShareProject.getName(),
         id: $stateParams.projectID,
         matter: ShareProject.getMatter(),
-        sources: []
+        sources: [],
+        pendings: []
     };
     $scope.loading = true;
     $scope.newsource = {};
@@ -191,6 +193,7 @@ angular.module('metho.controllers.projects', [])
     $scope.refreshID = null;
     $scope.refreshIndex = null;
     $scope.removeAnimate = false;
+    $scope.refreshPending = false;
 
     $ionicModal.fromTemplateUrl('templates/modal_new_source.html', {
         scope: $scope,
@@ -505,6 +508,18 @@ angular.module('metho.controllers.projects', [])
                                         cancelText: "Réessayer",
                                         cancelType: "button-energized button-outline"
                                     });
+                                    alertPopup.then(function (res) {
+                                        if (res) {
+                                            var creating = { isbn:result.text, date:new Date().toLocaleDateString()};
+                                            $scope.pendingRepo.post(creating).then(function (responseRepo) {
+                                                creating._id = responseRepo.id;
+                                                creating._rev = responseRepo.rev;
+                                                $scope.project.pendings.push(creating);
+                                            });
+                                        }else {
+                                            // Dans le service
+                                        }
+                                    });
                                 }
                             });
                         }else {
@@ -515,6 +530,18 @@ angular.module('metho.controllers.projects', [])
                                 okType: "button-positive",
                                 cancelText: "Supprimer",
                                 cancelType: "button-outline button-assertive"
+                            });
+                            alertPopup.then(function (res) {
+                                if (res) {
+                                    var creating = { isbn:result.text, date:new Date().toLocaleDateString(), project_id:$stateParams.projectID};
+                                    $scope.pendingRepo.post(creating).then(function (responseRepo) {
+                                        creating._id = responseRepo.id;
+                                        creating._rev = responseRepo.rev;
+                                        $scope.project.pendings.push(creating);
+                                    });
+                                }else {
+                                    return;
+                                }
                             });
                         }
 
@@ -542,13 +569,26 @@ angular.module('metho.controllers.projects', [])
         $scope.loading = false;
     }
 
+    $scope.analysePendings = function (result) {
+        for (var i = 0; i < result.rows.length; i++) {
+            if (result.rows[i].doc.project_id == $stateParams.projectID) {
+                $scope.project.pendings.push(result.rows[i].doc);
+            }
+        }
+    }
+
     $scope.sourceRepo.allDocs({ include_docs: true }).then($scope.analyseItemsInfo);
+    $scope.pendingRepo.allDocs({ include_docs: true }).then($scope.analysePendings);
 
     $scope.$on("$ionicView.beforeEnter", function () {
         if ($scope.refreshID != null) {
             $scope.sourceRepo.get($scope.refreshID).then(function (result) {
                 $scope.project.sources[$scope.refreshIndex] = result;
             });
+        }
+
+        if ($scope.refreshPending) {
+            $scope.project.pendings = SharePendings.getPendings();
         }
     });
 
@@ -563,6 +603,12 @@ angular.module('metho.controllers.projects', [])
         $state.go('tab.source-detail', {projectID:$stateParams.projectID, sourceID:id});
         $scope.refreshID = id;
         $scope.refreshIndex = index;
+    }
+
+    $scope.openPendings = function () {
+        SharePendings.setPendings($scope.project.pendings);
+        $state.go('tab.pending', $scope.project.id);
+        $scope.refreshPending = true;
     }
 })
 
@@ -703,5 +749,16 @@ angular.module('metho.controllers.projects', [])
             $scope.source = result;
             $scope.loading = false;
         });
+    }
+})
+
+.controller("PendingCtrl", function ($scope, $stateParams, SharePendings) {
+    $scope.project = {
+        id: $stateParams.projectID,
+        pendings: SharePendings.getPendings()
+    };
+
+    $scope.downloadDetails = function (index, id) {
+        // When in service
     }
 });

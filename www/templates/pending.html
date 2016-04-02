@@ -1,0 +1,17 @@
+<ion-view view-title="Éléments en attente">
+    <ion-content ng-class="{ 'padding flex' : !project.pendings.length }">
+        <!-- List of sources -->
+        <ion-list>
+            <ion-item ng-repeat="pending in project.pendings track by $index" class="item item-icon-right" type="item-text-wrap" ng-click="downloadDetails('$index', '{{pending._id}}')">
+                <h2>{{pending.isbn}}</h2>
+                <p>{{pending.date}}</p>
+                <i class="icon ion-ios-cloud-download-outline"></i>
+            </ion-item>
+        </ion-list>
+
+        <!-- When there are no sources -->
+        <p class="center dimmed-50" ng-if="!project.pendings.length && !loading">
+            Aucune source en attente !
+        </p>
+    </ion-content>
+</ion-view>
