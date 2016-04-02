@@ -4,7 +4,7 @@
         <h1 class="title">Nouvelle source</h1>
         <button class="button button-positive button-clear" ng-click="submitSource()">Créer</button>
     </ion-header-bar>
-    <ion-content scrollbar-y="true" has-bouncing="true">
+    <ion-content scrollbar-y="true" has-bouncing="true" ng-class="{ 'has-footer' : newsource.type == 'book' }">
         <form ng-submit="submitSource()" ng-keyup="$event.keyCode == 13 && submitSource()">
                 <!-- Livre -->
                 <div ng-if="newsource.type == 'book'">
@@ -72,7 +72,7 @@
                         </label>
                         <label class="item item-input item-stacked-label">
                             <span class="input-label">Nombre de pages</span>
-                            <input type="number" placeholder="341" ng-model="newsource.pageNumber">
+                            <input type="text" placeholder="341" ng-model="newsource.pageNumber">
                         </label>
                         <label class="item item-input item-stacked-label">
                             <span class="input-label dimmed-75">Numéro de l'édition</span>
@@ -361,4 +361,7 @@
 
         </p> -->
     </ion-content>
+    <ion-footer-bar align-title="center" class="bar-positive no-padding" ng-if="newsource.type == 'book'">
+      <button class="button button-full footer-button-custom icon-left ion-qr-scanner" ng-click="scanBook()">Balayer le code</button>
+    </ion-footer-bar>
 </ion-modal-view>

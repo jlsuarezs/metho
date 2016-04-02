@@ -27,6 +27,9 @@
         },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "com.ionicframework.metho"
+        },
+        "phonegap-plugin-barcodescanner": {
+            "PACKAGE_NAME": "com.ionicframework.metho"
         }
     },
     "dependent_plugins": {}

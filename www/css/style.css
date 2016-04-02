@@ -195,3 +195,12 @@ p.left-aligned {
 .no-margin {
     margin: 0 !important;
 }
+
+.footer-button-custom {
+    margin-top: 0 !important;
+    height: 100%;
+}
+
+.no-padding {
+    padding: 0 !important;
+}

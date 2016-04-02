@@ -176,7 +176,7 @@ angular.module('metho.controllers.projects', [])
 
 
 // Project detail view
-.controller('ProjectDetailCtrl', function($scope, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $parseSource, ShareProject, ShareSource, $state, $ionicListDelegate, $ionicActionSheet) {
+.controller('ProjectDetailCtrl', function($scope, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $parseSource, ShareProject, ShareSource, $state, $ionicListDelegate, $ionicActionSheet, $http, $ionicLoading) {
     $scope.projectRepo = new PouchDB("projects");
     $scope.sourceRepo = new PouchDB("sources");
     $scope.project = {
@@ -419,6 +419,117 @@ angular.module('metho.controllers.projects', [])
             $ionicListDelegate.closeOptionButtons();
           }
         });
+    }
+
+    $scope.scanBook = function () {
+        cordova.plugins.barcodeScanner.scan(
+            function (result) {
+                if (!result.cancelled) {
+                    if (result.format == "EAN_13") {
+                        if (navigator.onLine) {
+                            var loading = $ionicLoading.show({
+                              template: '<ion-spinner></ion-spinner>'
+                            });
+                            $http({ method:"GET", url:"http://isbndb.com/api/v2/json/YVFT6RLV/book/"+result.text})
+                            .then(function (response) { // Success
+                                // alert(JSON.stringify(response));
+                                if (!!response.data.error) {
+                                    loading.hide();
+                                    var alertPopup = $ionicPopup.alert({
+                                        title: 'Livre introuvable',
+                                        template: '<p class="center">Le code barre a bien été balayé, mais ce livre ne semble pas faire partie de notre base de données. </p>'
+                                    });
+                                }else {
+                                    // Titre
+                                    $scope.newsource.title = response.data.data[0].title;
+                                    // Publisher/Editor
+                                    $scope.newsource.editor = response.data.data[0].publisher_name;
+                                    // Date de publication
+                                    if (!!response.data.data[0].edition_info && response.data.data[0].edition_info.match(/[0-9]{4}/)) {
+                                        var working_on_date = response.data.data[0].edition_info.match(/[0-9]{4}/);
+                                        $scope.newsource.publicationDate = response.data.data[0].edition_info.match(/[0-9]{4}/);
+                                    }else if (!!response.data.data[0].publisher_text && response.data.data[0].publisher_text.match(/[0-9]{4}/)) {
+                                        var working_on_date = response.data.data[0].publisher_text.match(/[0-9]{4}/);
+                                        $scope.newsource.publicationDate = response.data.data[0].publisher_text.match(/[0-9]{4}/);
+                                    }else {
+                                        var working_on_date = "";
+                                    }
+
+                                    // Lieu de publication
+                                    if (response.data.data[0].publisher_text != "") {
+                                        var working_on_location = response.data.data[0].publisher_text;
+                                        working_on_location = working_on_location.replace(response.data.data[0].publisher_name, "");
+                                        working_on_location = working_on_location.replace(working_on_date, "");
+                                        working_on_location = working_on_location.replace(/[^a-zA-z\s]/g, "");
+                                        working_on_location = working_on_location.trim();
+                                        if (working_on_location != "") {
+                                            $scope.newsource.publicationLocation = working_on_location;
+                                        }
+                                    }
+                                    // Nombre de pages
+                                    if (response.data.data[0].physical_description_text != "") {
+                                        var arr_pages = response.data.data[0].physical_description_text.split(" ");
+                                        if (arr_pages.indexOf("p.") != -1) {
+                                            var indexOfPages = arr_pages.indexOf("p.") - 1;
+                                            $scope.newsource.pageNumber = arr_pages[indexOfPages];
+                                        }else if (arr_pages.indexOf("pages") != -1) {
+                                            var indexOfPages = arr_pages.indexOf("pages") - 1;
+                                            $scope.newsource.pageNumber = arr_pages[indexOfPages];
+                                        }
+                                    }
+
+                                    // Auteur
+                                    if (response.data.data[0].author_data.length) {
+                                        for (var i = 0; i < response.data.data[0].author_data.length; i++) {
+                                            $scope.newsource["author" + String(i+1) + "lastname"] = response.data.data[0].author_data[i].name.split(",")[0];
+                                            $scope.newsource["author" + String(i+1) + "firstname"] = response.data.data[0].author_data[i].name.split(",")[1];
+                                        }
+                                        var authorNum = response.data.data[0].author_data.length;
+                                        if (authorNum >= 1 && authorNum <= 3) {
+                                            $scope.newsource.hasAuthors = "13";
+                                        }else if (authorNum > 3) {
+                                            $scope.newsource.hasAuthors = "more3";
+                                        }
+                                    }
+
+                                    loading.hide();
+                                }
+                            }, function (response) { // Failure
+                                if (response.status == 408) {
+                                    loading.hide();
+                                    var alertPopup = $ionicPopup.confirm({
+                                        title: 'Erreur',
+                                        template: "<p class='center'>Le temps d'attente est écoulé. Vous vous trouvez probablement sur un réseau lent. Voulez-vous ajouter ce code-barre dans la liste d'attente ou réessayer ?</p>",
+                                        okText: "Ajouter",
+                                        okType: "button-positive",
+                                        cancelText: "Réessayer",
+                                        cancelType: "button-energized button-outline"
+                                    });
+                                }
+                            });
+                        }else {
+                            var alertPopup = $ionicPopup.confirm({
+                                title: 'Aucune connexion',
+                                template: '<p class="center">Voulez-vous ajouter ce code barre à la liste d\'attente ?</p>',
+                                okText: "Ajouter",
+                                okType: "button-positive",
+                                cancelText: "Supprimer",
+                                cancelType: "button-outline button-assertive"
+                            });
+                        }
+
+                    }else {
+                        var alertPopup = $ionicPopup.alert({
+                            title: 'Livre introuvable',
+                            template: '<p class="center">Le code barre a été balayé, mais ce type de code barre n\'est pas un code barre de livre. Le bon code barre possède habituellement une inscription ISBN par dessus celui-ci. Si deux code barre sont côte à côte, le mauvais a peut-être été balayé. Vous pouvez réessayer.</p>'
+                        });
+                    }
+                }
+            },
+            function (error) {
+                console.log("Scanning failed: " + error);
+            }
+        );
     }
     // Initialize
 

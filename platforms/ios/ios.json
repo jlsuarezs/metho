@@ -31,6 +31,10 @@
                         {
                             "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"BarcodeScanner\"><param name=\"ios-package\" value=\"CDVBarcodeScanner\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -62,6 +66,9 @@
             "PACKAGE_NAME": "com.ionicframework.metho"
         },
         "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.ionicframework.metho"
+        },
+        "phonegap-plugin-barcodescanner": {
             "PACKAGE_NAME": "com.ionicframework.metho"
         }
     },
@@ -123,12 +130,21 @@
             "clobbers": [
                 "device"
             ]
+        },
+        {
+            "file": "plugins/phonegap-plugin-barcodescanner/www/barcodescanner.js",
+            "id": "phonegap-plugin-barcodescanner.BarcodeScanner",
+            "pluginId": "phonegap-plugin-barcodescanner",
+            "clobbers": [
+                "cordova.plugins.barcodeScanner"
+            ]
         }
     ],
     "plugin_metadata": {
         "cordova-plugin-x-socialsharing": "5.0.10",
         "cordova-plugin-actionsheet": "2.2.2",
         "ionic-plugin-keyboard": "2.0.1",
-        "cordova-plugin-device": "1.1.1"
+        "cordova-plugin-device": "1.1.1",
+        "phonegap-plugin-barcodescanner": "3.1.2"
     }
 }
