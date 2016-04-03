@@ -756,7 +756,7 @@ angular.module('metho.controllers.projects', [])
     }
 })
 
-.controller("PendingCtrl", function ($scope, $stateParams, SharePendings, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicLoading, $http, $parseSource) {
+.controller("PendingCtrl", function ($scope, $stateParams, SharePendings, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicLoading, $http, $parseSource, $state) {
     $scope.project = {
         id: $stateParams.projectID,
         pendings: SharePendings.getPendings(),
@@ -811,6 +811,9 @@ angular.module('metho.controllers.projects', [])
                 $scope.editingISBN = null;
                 $scope.editingIndex = null;
                 $scope.editingId = null;
+                if ($scope.project.pendings.length == 0) {
+                    $state.go("tab.project-detail", {projectID:$stateParams.projectID});
+                }
                 $scope.closeModal();
                 $scope.$apply();
             }).catch(function (err) {
@@ -877,12 +880,17 @@ angular.module('metho.controllers.projects', [])
                         title: 'Livre introuvable',
                         template: '<p class="center">Le code barre a bien été balayé, mais ce livre ne semble pas faire partie de notre base de données.</p>'
                     });
-                    $scope.newSourceModal.hide();
-                    $scope.newsource = {};
-                    $scope.editingId = null;
-                    $scope.editingISBN = null;
-                    $scope.project.pending.splice($scope.editingIndex, 1);
-                    $scope.editingIndex = null;
+                    alertPopup.then(function (res) {
+                        $scope.newSourceModal.hide();
+                        $scope.newsource = {};
+                        $scope.editingId = null;
+                        $scope.editingISBN = null;
+                        $scope.project.pending.splice($scope.editingIndex, 1);
+                        $scope.editingIndex = null;
+                        if ($scope.project.pendings.length == 0) {
+                            $state.go("tab.project-detail", {projectID:$stateParams.projectID});
+                        }
+                    });
                 }else {
                     // Titre
                     $scope.newsource.title = response.data.data[0].title;
