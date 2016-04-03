@@ -1,0 +1,367 @@
+<ion-modal-view>
+    <ion-header-bar class="bar-stable">
+        <button class="button button-positive button-clear" ng-click="closeModal()">Annuler</button>
+        <h1 class="title">Nouvelle source</h1>
+        <button class="button button-positive button-clear" ng-click="submitSource()">Créer</button>
+    </ion-header-bar>
+    <ion-content scrollbar-y="true" has-bouncing="true" ng-class="{ 'has-footer' : newsource.type == 'book' }">
+        <form ng-submit="submitSource()" ng-keyup="$event.keyCode == 13 && submitSource()">
+                <!-- Livre -->
+                <div ng-if="newsource.type == 'book'">
+                    <ion-list class="isolated">
+                        <ion-radio ng-model="newsource.hasAuthors" ng-value="'13'">La source a de 1 à 3 auteurs</ion-radio>
+                        <ion-radio ng-model="newsource.hasAuthors" ng-value="'more3'">La source a plus de trois auteurs</ion-radio>
+                        <ion-radio ng-model="newsource.hasAuthors" ng-value="'collective'">La source est un collectif</ion-radio>
+                    </ion-list>
+                    <!-- La source a de 1 à 3 auteurs -->
+                    <div ng-slide-down="newsource.hasAuthors == '13'" lazy-render duration="0.5">
+                        <div class="flex-sub padding">
+                            <input type="text" ng-model="newsource.author1firstname" placeholder="Prénom">
+                            <input type="text" ng-model="newsource.author1lastname" placeholder="Nom">
+                        </div>
+                        <div class="flex-sub padding" ng-if="(newsource.author1firstname != null && newsource.author1firstname != '') || (newsource.author1lastname != null && newsource.author1lastname != '')">
+                            <input type="text" placeholder="Prénom" ng-model="newsource.author2firstname">
+                            <input type="text" placeholder="Nom" ng-model="newsource.author2lastname">
+                        </div>
+                        <div class="flex-sub padding" ng-if="(newsource.author2firstname != null && newsource.author2firstname != '') || (newsource.author2lastname != null && newsource.author2lastname != '')">
+                            <input type="text" placeholder="Prénom" ng-model="newsource.author3firstname">
+                            <input type="text" placeholder="Nom" ng-model="newsource.author3lastname">
+                        </div>
+                    </div>
+                    <!-- La source a plus de 3 auteurs -->
+                    <div ng-slide-down="newsource.hasAuthors == 'more3'" lazy-render duration="0.5">
+                        <label class="item"><span class="input-label">Nom des deux premiers auteurs :</span></label>
+                        <div class="flex-sub padding">
+                            <input type="text" ng-model="newsource.author1firstname" placeholder="Prénom">
+                            <input type="text" ng-model="newsource.author1lastname" placeholder="Nom">
+                        </div>
+                        <div class="flex-sub padding" ng-if="(newsource.author1firstname != null && newsource.author1firstname != '') || (newsource.author1lastname != null && newsource.author1lastname != '')">
+                            <input type="text" placeholder="Prénom" ng-model="newsource.author2firstname">
+                            <input type="text" placeholder="Nom" ng-model="newsource.author2lastname">
+                        </div>
+                    </div>
+                    <!-- La source est un collectif -->
+                    <div ng-slide-down="newsource.hasAuthors == 'collective'" lazy-render duration="0.5">
+                        <label class="item"><span class="input-label">Nom du ou des directeurs :</span></label>
+                        <div class="flex-sub padding">
+                            <input type="text" ng-model="newsource.author1firstname" placeholder="Prénom">
+                            <input type="text" ng-model="newsource.author1lastname" placeholder="Nom">
+                        </div>
+                        <div class="flex-sub padding" ng-if="(newsource.author1firstname != null && newsource.author1firstname != '') || (newsource.author1lastname != null && newsource.author1lastname != '')">
+                            <input type="text" placeholder="Prénom" ng-model="newsource.author2firstname">
+                            <input type="text" placeholder="Nom" ng-model="newsource.author2lastname">
+                        </div>
+                    </div>
+                    <!-- Autres champs -->
+                    <div class="list black-top">
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">Titre du livre</span>
+                            <input type="text" placeholder="La revanche des chérubins" ng-model="newsource.title">
+                        </label>
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">Éditeur</span>
+                            <input type="text" placeholder="Québec Amérique" ng-model="newsource.editor">
+                        </label>
+                        <label class="item item-input item-stacked-label item-button-left">
+                            <span class="input-label">Date de publication</span>
+                            <input type="text" placeholder="2010" ng-model="newsource.publicationDate">
+                        </label>
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">Lieu de publication</span>
+                            <input type="text" placeholder="Montréal" ng-model="newsource.publicationLocation">
+                        </label>
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">Nombre de pages</span>
+                            <input type="text" placeholder="341" ng-model="newsource.pageNumber">
+                        </label>
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label dimmed-75">Numéro de l'édition</span>
+                            <input type="number" placeholder="3" ng-model="newsource.editionNumber">
+                        </label>
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label dimmed-75">Numéro du volume</span>
+                            <input type="number" placeholder="2" ng-model="newsource.volumeNumber" min="1">
+                        </label>
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label dimmed-75">Collection</span>
+                            <input type="text" placeholder="Presses HEC" ng-model="newsource.collection">
+                        </label>
+                        <ion-checkbox ng-model="newsource.hasBeenTranslated">Le livre a été traduit.</ion-checkbox>
+                        <div ng-slide-down="newsource.hasBeenTranslated" lazy-render>
+                            <label class="item item-input item-stacked-label">
+                                <span class="input-label">Langue d'origine</span>
+                                <input type="text" placeholder="Anglais" ng-model="newsource.translatedFrom">
+                            </label>
+                            <label class="item" ng-if="newsource.hasBeenTranslated"><span class="input-label">Nom des traducteurs :</span></label>
+                            <div class="flex-sub padding">
+                                <input type="text" ng-model="newsource.translator1firstname" placeholder="Prénom">
+                                <input type="text" ng-model="newsource.translator1lastname" placeholder="Nom">
+                            </div>
+                            <div class="flex-sub padding" ng-if="(newsource.translator1firstname != null && newsource.translator1firstname != '') || (newsource.translator1lastname != null && newsource.translator1lastname != '')">
+                                <input type="text" placeholder="Prénom" ng-model="newsource.translator2firstname">
+                                <input type="text" placeholder="Nom" ng-model="newsource.translator2lastname">
+                            </div>
+                            <div class="flex-sub padding" ng-if="(newsource.translator2firstname != null && newsource.translator2firstname != '') || (newsource.translator2lastname != null && newsource.translator2lastname != '')">
+                                <input type="text" placeholder="Prénom" ng-model="newsource.translator3firstname">
+                                <input type="text" placeholder="Nom" ng-model="newsource.translator3lastname">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Article -->
+                <div ng-if="newsource.type == 'article'">
+                    <!-- Auteur -->
+                    <label class="item">
+                        <span class="input-label">Auteur</span>
+                    </label>
+                    <div class="flex-sub padding">
+                        <input type="text" placeholder="Prénom" ng-model="newsource.author1firstname">
+                        <input type="text" placeholder="Nom" ng-model="newsource.author1lastname">
+                    </div>
+                    <!-- Nom de l'article -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Titre du l'article</span>
+                        <input type="text" placeholder="Haïti, la lente reconstruction" ng-model="newsource.title">
+                    </label>
+
+                    <!-- Nom du périodique -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Nom du périodique</span>
+                        <input type="text" placeholder="Le Devoir" ng-model="newsource.editor">
+                    </label>
+
+                    <!-- Numéro de l'édition, du volume ou du périodique -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Numéro de l'édition, du volume ou du périodique</span>
+                        <input type="text" placeholder="vol. 36, no 5" ng-model="newsource.editionNumber">
+                    </label>
+
+                    <!-- Date de publication -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Date de publication</span>
+                        <input type="text" placeholder="21 mars 2009" ng-model="newsource.publicationDate">
+                    </label>
+
+                    <!-- Indication des pages de l'article -->
+                    <label class="item">
+                        <span class="input-label">Indication des pages de l'article</span>
+                    </label>
+                    <div class="flex-sub padding">
+                        <input type="number" placeholder="Début" ng-model="newsource.startPage" class="center">
+                        <input type="number" placeholder="Fin" ng-model="newsource.endPage" class="center">
+                    </div>
+                </div>
+                <!-- Site web -->
+                <div ng-if="newsource.type == 'internet'">
+                    <ion-checkbox ng-model="newsource.hasAuthors">La source a un auteur</ion-checkbox>
+                    <div ng-slide-down="newsource.hasAuthors" lazy-render>
+                        <div class="flex-sub padding">
+                            <input type="text" ng-model="newsource.author1firstname" placeholder="Prénom">
+                            <input type="text" ng-model="newsource.author1lastname" placeholder="Nom">
+                        </div>
+                        <div class="flex-sub padding" ng-if="(newsource.author1firstname != null && newsource.author1firstname != '') || (newsource.author1lastname != null && newsource.author1lastname != '')">
+                            <input type="text" placeholder="Prénom" ng-model="newsource.author2firstname">
+                            <input type="text" placeholder="Nom" ng-model="newsource.author2lastname">
+                        </div>
+                        <div class="flex-sub padding" ng-if="(newsource.author2firstname != null && newsource.author2firstname != '') || (newsource.author2lastname != null && newsource.author2lastname != '')">
+                            <input type="text" placeholder="Prénom" ng-model="newsource.author3firstname">
+                            <input type="text" placeholder="Nom" ng-model="newsource.author3lastname">
+                        </div>
+                    </div>
+
+                    <!-- Titre de la page web -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Titre de l'article</span>
+                        <input type="text" placeholder="Isaac Newton" ng-model="newsource.title">
+                    </label>
+
+                    <!-- Nom du site web -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Nom du site web</span>
+                        <input type="text" placeholder="Wikipédia, l'encyclopédie libre" ng-model="newsource.editor">
+                    </label>
+
+                    <!-- URL -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Adresse web</span>
+                        <input type="text" placeholder="http://www.fr.wikipedia.org" ng-model="newsource.url">
+                    </label>
+
+                    <!-- Date de consultation -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Date de consultation</span>
+                        <input type="date" placeholder="21 mars 2009" ng-model="newsource.consultationDate">
+                    </label>
+                </div>
+                <!-- CD -->
+                <div ng-if="newsource.type == 'cd'">
+                    <ion-checkbox ng-model="newsource.hasAuthors">La source a un auteur</ion-checkbox>
+                    <div ng-slide-down="newsource.hasAuthors" lazy-render>
+                        <div class="flex-sub padding">
+                            <input type="text" ng-model="newsource.author1firstname" placeholder="Prénom">
+                            <input type="text" ng-model="newsource.author1lastname" placeholder="Nom">
+                        </div>
+                        <div class="flex-sub padding" ng-if="(newsource.author1firstname != null && newsource.author1firstname != '') || (newsource.author1lastname != null && newsource.author1lastname != '')">
+                            <input type="text" placeholder="Prénom" ng-model="newsource.author2firstname">
+                            <input type="text" placeholder="Nom" ng-model="newsource.author2lastname">
+                        </div>
+                        <div class="flex-sub padding" ng-if="(newsource.author2firstname != null && newsource.author2firstname != '') || (newsource.author2lastname != null && newsource.author2lastname != '')">
+                            <input type="text" placeholder="Prénom" ng-model="newsource.author3firstname">
+                            <input type="text" placeholder="Nom" ng-model="newsource.author3lastname">
+                        </div>
+                    </div>
+
+                    <!-- Titre -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Titre du document</span>
+                        <input type="text" placeholder="Multidictionnaire de la langue française" ng-model="newsource.title">
+                    </label>
+
+                    <!-- Éditeur -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Éditeur</span>
+                        <input type="text" placeholder="Québec Amérique" ng-model="newsource.editor">
+                    </label>
+
+                    <!-- Lieu de publication -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Lieu de publication</span>
+                        <input type="text" placeholder="Montréal" ng-model="newsource.publicationLocation">
+                    </label>
+
+                    <!-- Date de publication -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Date de publication</span>
+                        <input type="text" placeholder="2002" ng-model="newsource.publicationDate">
+                    </label>
+                </div>
+                <!-- Vidéo -->
+                <div ng-if="newsource.type == 'movie'">
+                    <ion-checkbox ng-model="newsource.hasAuthors">La source a plus d'un auteur/réalisateur</ion-checkbox>
+                    <p class="center no-margin" ng-slide-down="newsource.hasAuthors" lazy-render>
+                        Vous devez entrer l'auteur/réalisateur principal, la mention «et al.» sera ajoutée afin de signifier qu'il y a plus d'un auteur/réalisateur.
+                    </p>
+                    <div>
+                        <label class="item">
+                            <span class="input-label">Auteur/réalisateur principal</span>
+                        </label>
+                        <div class="flex-sub padding">
+                            <input type="text" ng-model="newsource.author1firstname" placeholder="Prénom">
+                            <input type="text" ng-model="newsource.author1lastname" placeholder="Nom">
+                        </div>
+                    </div>
+
+                    <!-- Nom de l'émission ou du document -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Nom de l'émission ou du document</span>
+                        <input type="text" placeholder="Vengeance" ng-model="newsource.title">
+                    </label>
+
+                    <!-- Titre de l'épisode -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label dimmed-75">Titre de l'épisode</span>
+                        <input type="text" placeholder="La revanche" ng-model="newsource.episodeTitle">
+                    </label>
+
+                    <!-- Lieu de production -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Lieu de production</span>
+                        <input type="text" placeholder="Montréal" ng-model="newsource.productionLocation">
+                    </label>
+
+                    <!-- Producteur -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Producteur</span>
+                        <input type="text" placeholder="CC&C Clark Costelle et Cie" ng-model="newsource.productor">
+                    </label>
+
+                    <!-- Diffuseur -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Diffuseur</span>
+                        <input type="text" placeholder="ICI Radio-Canada" ng-model="newsource.broadcaster">
+                    </label>
+
+                    <!-- Durée -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Durée (minutes)</span>
+                        <input type="text" placeholder="55" ng-model="newsource.duration">
+                    </label>
+
+                    <!-- Date de publication -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Date de publication</span>
+                        <input type="text" placeholder="2002" ng-model="newsource.publicationDate">
+                    </label>
+
+                    <!-- Support -->
+                    <label class="item item-select item-stacked-label">
+                        <span class="input-label">Support</span>
+                        <select ng-model="newsource.support">
+                            <option value="cd">Cédérom</option>
+                            <option value="dvd" selected>DVD</option>
+                            <option value="internet">Vidéo Internet</option>
+                        </select>
+                    </label>
+                    <!-- Date de visionnement -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Date de visionnement</span>
+                        <input type="date" placeholder="2015-03-21" ng-model="newsource.consultationDate">
+                    </label>
+                </div>
+                <!-- Entrevue -->
+                <div ng-if="newsource.type == 'interview'">
+                    <!-- Nom de l'intervieweur -->
+                    <div>
+                        <label class="item">
+                            <span class="input-label">Nom de l'intervieweur</span>
+                        </label>
+                        <div class="flex-sub padding">
+                            <input type="text" ng-model="newsource.author1firstname" placeholder="Prénom">
+                            <input type="text" ng-model="newsource.author1lastname" placeholder="Nom">
+                        </div>
+                    </div>
+                    <!-- Nom de la personne rencontrée -->
+                    <div class="isolated">
+                        <label class="item">
+                            <span class="input-label">Nom de la personne rencontrée</span>
+                        </label>
+                        <div class="flex-sub padding">
+                            <select ng-model="newsource.civility">
+                                <option value="mister">M.</option>
+                                <option value="miss" selected>M<sup>me</sup></option>
+                                <option value="miss_young">M<sup>lle</sup></option>
+                            </select>
+                            <input type="text" ng-model="newsource.interviewed1firstname" placeholder="Prénom">
+                            <input type="text" ng-model="newsource.interviewed1lastname" placeholder="Nom">
+                        </div>
+                    </div>
+                    <!-- Civilité de la personne -->
+                    <label class="item item-select item-stacked-label">
+                        <span class="input-label">Civilitée de la personne</span>
+
+                    </label>
+                    <!-- Titre de la personne -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Titre de la personne rencontrée</span>
+                        <input type="text" placeholder="retraité et ancien combattant de la Deuxième Guerre mondiale" ng-model="newsource.interviewedTitle">
+                    </label>
+                    <!-- Lieu de l'entrevue -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Lieu de l'entrevue</span>
+                        <input type="text" placeholder="Carignan" ng-model="newsource.publicationLocation">
+                    </label>
+                    <!-- Date de l'entrevue -->
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Date de l'entrevue</span>
+                        <input type="date" placeholder="2016-03-02" ng-model="newsource.consultationDate">
+                    </label>
+                </div>
+        </form>
+        <!-- <p ng-bind="newsource.publicationDate">
+
+        </p> -->
+    </ion-content>
+    <ion-footer-bar align-title="center" class="bar-positive no-padding" ng-if="newsource.not_available">
+      <button class="button button-full footer-button-custom icon-left ion-qr-scanner" on-tap="openWebBrowser()">Navigateur web</button>
+    </ion-footer-bar>
+</ion-modal-view>

@@ -770,7 +770,7 @@ angular.module('metho.controllers.projects', [])
     $scope.editingIndex = null;
     $scope.sourceRepo = new PouchDB("sources");
 
-    $ionicModal.fromTemplateUrl('templates/modal_new_source.html', {
+    $ionicModal.fromTemplateUrl('templates/modal_pending_source.html', {
         scope: $scope,
         animation: 'slide-in-up',
     }).then(function(modal) {
@@ -888,6 +888,7 @@ angular.module('metho.controllers.projects', [])
                     });
                     alertPopup.then(function (res) {
                         if (res) {
+                            $scope.newsource.not_available = true;
                             $scope.projet.pendings[$scope.editingIndex].not_available = true;
                             // Open web browser
                             // Add footer with browser in it
