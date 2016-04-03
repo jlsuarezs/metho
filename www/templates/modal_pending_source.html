@@ -4,7 +4,7 @@
         <h1 class="title">Nouvelle source</h1>
         <button class="button button-positive button-clear" ng-click="submitSource()">Créer</button>
     </ion-header-bar>
-    <ion-content scrollbar-y="true" has-bouncing="true" ng-class="{ 'has-footer' : newsource.type == 'book' }">
+    <ion-content scrollbar-y="true" has-bouncing="true" ng-class="{ 'has-footer' : newsource.not_available }">
         <form ng-submit="submitSource()" ng-keyup="$event.keyCode == 13 && submitSource()">
                 <!-- Livre -->
                 <div ng-if="newsource.type == 'book'">

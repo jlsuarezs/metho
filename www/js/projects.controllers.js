@@ -761,9 +761,9 @@ angular.module('metho.controllers.projects', [])
 .controller("PendingCtrl", function ($scope, $stateParams, SharePendings, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicLoading, $http, $parseSource, $state) {
     $scope.project = {
         id: $stateParams.projectID,
-        pendings: SharePendings.getPendings(),
         sources: []
     };
+    $scope.pendings = SharePendings.getPendings();
     $scope.pendingRepo = new PouchDB("pendings");
     $scope.newsource = {};
     $scope.editingISBN = null;
@@ -779,13 +779,18 @@ angular.module('metho.controllers.projects', [])
 
     $scope.$on("$ionicView.beforeLeave", function () {
         SharePendings.setSources($scope.project.sources);
-        SharePendings.setPendings($scope.project.pendings);
+        SharePendings.setPendings($scope.pendings);
     });
 
     $scope.downloadDetails = function (index, isbn, id) {
         $scope.newsource.type = "book";
         $scope.newSourceModal.show();
-        $scope.fetchFromISBNdb(isbn);
+        if ($scope.pendings[index].not_available) {
+            $scope.newsource.not_available = true;
+            // Open web browser
+        }else {
+            $scope.fetchFromISBNdb(isbn);
+        }
         $scope.editingISBN = isbn;
         $scope.editingIndex = index;
         $scope.editingId = id;
@@ -801,7 +806,7 @@ angular.module('metho.controllers.projects', [])
                 creatingProj._rev = response.rev;
                 $scope.project.sources.push(creatingProj);
                 if ($scope.editingId) {
-                    $scope.project.pendings.splice($scope.editingIndex, 1);
+                    $scope.pendings.splice($scope.editingIndex, 1);
                     $scope.pendingRepo.get($scope.editingId).then(function(doc) {
                       return $scope.pendingRepo.remove(doc);
                     }).then(function (result) {
@@ -813,7 +818,7 @@ angular.module('metho.controllers.projects', [])
                 $scope.editingISBN = null;
                 $scope.editingIndex = null;
                 $scope.editingId = null;
-                if ($scope.project.pendings.length == 0) {
+                if ($scope.pendings.length == 0) {
                     $state.go("tab.project-detail", {projectID:$stateParams.projectID});
                 }
                 $scope.closeModal();
@@ -878,29 +883,26 @@ angular.module('metho.controllers.projects', [])
                 // alert(JSON.stringify(response));
                 if (!!response.data.error) {
                     loading.hide();
-                    var alertPopup = $ionicPopup.confirm({
+                    $ionicPopup.confirm({
                         title: 'Livre introuvable',
                         template: '<p class="center">Le code barre a bien été balayé, mais ce livre ne semble pas faire partie de notre base de données. Voulez-vous rechercher les informations sur Internet?</p>',
                         okText:"Rechercher",
-                        okType:"button-positive",
-                        cancelText:"Plus tard",
-                        cancelType:"button-outline button-energized"
-                    });
-                    alertPopup.then(function (res) {
-                        if (res) {
+                        cancelText:"Plus tard"
+                    }).then(function(res) {
+                        if(res) {
                             $scope.newsource.not_available = true;
-                            $scope.projet.pendings[$scope.editingIndex].not_available = true;
-                            // Open web browser
-                            // Add footer with browser in it
-                        }else {
+                            $scope.pendings[$scope.editingIndex].not_available = true;
+                            $scope.pendingRepo.put($scope.pendings[$scope.editingIndex]);
+                        } else {
                             $scope.newSourceModal.hide();
                             $scope.newsource = {};
-                            $scope.projet.pendings[$scope.editingIndex].not_available = true;
+                            $scope.pendings[$scope.editingIndex].not_available = true;
+                            $scope.pendingRepo.put($scope.pendings[$scope.editingIndex]);
                             $scope.editingId = null;
                             $scope.editingISBN = null;
                             $scope.editingIndex = null;
                         }
-                    });
+                   });
                 }else {
                     // Titre
                     $scope.newsource.title = response.data.data[0].title;
