@@ -38,6 +38,7 @@ angular.module('metho.services.projects', [])
 // Service to share pending items between project_detail and pending view
 .factory('SharePendings', function() {
   var pendings = [];
+  var sources = [];
 
   return {
     setPendings: function(settingVal) {
@@ -45,6 +46,12 @@ angular.module('metho.services.projects', [])
     },
     getPendings: function() {
         return pendings;
+    },
+    setSources: function(settingVal) {
+        sources = settingVal;
+    },
+    getSources: function() {
+        return sources;
     }
   };
 })
