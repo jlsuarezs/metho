@@ -512,6 +512,7 @@ angular.module('metho.controllers.projects', [])
                                 creating._rev = responseRepo.rev;
                                 $scope.project.pendings.push(creating);
                             });
+                            $scope.newSourceModal.hide();
                         }else {
                             $scope.fetchFromISBNdb(inputISBN);
                         }
@@ -535,6 +536,7 @@ angular.module('metho.controllers.projects', [])
                         creating._rev = responseRepo.rev;
                         $scope.project.pendings.push(creating);
                     });
+                    $scope.newSourceModal.hide();
                 }else {
                     $scope.fetchFromISBNdb(inputISBN);
                 }
@@ -876,19 +878,26 @@ angular.module('metho.controllers.projects', [])
                 // alert(JSON.stringify(response));
                 if (!!response.data.error) {
                     loading.hide();
-                    var alertPopup = $ionicPopup.alert({
+                    var alertPopup = $ionicPopup.confirm({
                         title: 'Livre introuvable',
-                        template: '<p class="center">Le code barre a bien été balayé, mais ce livre ne semble pas faire partie de notre base de données.</p>'
+                        template: '<p class="center">Le code barre a bien été balayé, mais ce livre ne semble pas faire partie de notre base de données. Voulez-vous rechercher les informations sur Internet?</p>',
+                        okText:"Rechercher",
+                        okType:"button-positive",
+                        cancelText:"Plus tard",
+                        cancelType:"button-outline button-energized"
                     });
                     alertPopup.then(function (res) {
-                        $scope.newSourceModal.hide();
-                        $scope.newsource = {};
-                        $scope.editingId = null;
-                        $scope.editingISBN = null;
-                        $scope.project.pending.splice($scope.editingIndex, 1);
-                        $scope.editingIndex = null;
-                        if ($scope.project.pendings.length == 0) {
-                            $state.go("tab.project-detail", {projectID:$stateParams.projectID});
+                        if (res) {
+                            $scope.projet.pendings[$scope.editingIndex].not_available = true;
+                            // Open web browser
+                            // Add footer with browser in it
+                        }else {
+                            $scope.newSourceModal.hide();
+                            $scope.newsource = {};
+                            $scope.projet.pendings[$scope.editingIndex].not_available = true;
+                            $scope.editingId = null;
+                            $scope.editingISBN = null;
+                            $scope.editingIndex = null;
                         }
                     });
                 }else {
@@ -951,22 +960,20 @@ angular.module('metho.controllers.projects', [])
                     loading.hide();
                     var alertPopup = $ionicPopup.confirm({
                         title: 'Erreur',
-                        template: "<p class='center'>Le temps d'attente est écoulé. Vous vous trouvez probablement sur un réseau lent. Voulez-vous ajouter ce code-barre dans la liste d'attente ou réessayer ?</p>",
-                        okText: "Ajouter",
-                        okType: "button-positive",
-                        cancelText: "Réessayer",
-                        cancelType: "button-balanced button-outline"
+                        template: "<p class='center'>Le temps d'attente est écoulé. Vous vous trouvez probablement sur un réseau lent. Voulez-vous réessayer ?</p>",
+                        okText: "Réessayer",
+                        okType: "button-balanced",
+                        cancelText: "Annuler"
                     });
                     alertPopup.then(function (res) {
                         if (res) {
-                            var creating = { isbn:inputISBN, date:new Date().toLocaleDateString()};
-                            $scope.pendingRepo.post(creating).then(function (responseRepo) {
-                                creating._id = responseRepo.id;
-                                creating._rev = responseRepo.rev;
-                                $scope.project.pendings.push(creating);
-                            });
-                        }else {
                             $scope.fetchFromISBNdb(inputISBN);
+                        }else {
+                            $scope.newSourceModal.hide();
+                            $scope.newsource = {};
+                            $scope.editingId = null;
+                            $scope.editingISBN = null;
+                            $scope.editingIndex = null;
                         }
                     });
                 }
@@ -974,22 +981,20 @@ angular.module('metho.controllers.projects', [])
         }else {
             var alertPopup = $ionicPopup.confirm({
                 title: 'Aucune connexion',
-                template: '<p class="center">Voulez-vous ajouter ce code barre à la liste d\'attente ?</p>',
-                okText: "Ajouter",
-                okType: "button-positive",
-                cancelText: "Réessayer",
-                cancelType: "button-outline button-balanced"
+                template: '<p class="center">Voulez-vous réessayer?</p>',
+                okText: "Réessayer",
+                okType: "button-balanced",
+                cancelText: "Annuler"
             });
             alertPopup.then(function (res) {
                 if (res) {
-                    var creating = { isbn:inputISBN, date:new Date().toLocaleDateString(), project_id:$stateParams.projectID};
-                    $scope.pendingRepo.post(creating).then(function (responseRepo) {
-                        creating._id = responseRepo.id;
-                        creating._rev = responseRepo.rev;
-                        $scope.project.pendings.push(creating);
-                    });
-                }else {
                     $scope.fetchFromISBNdb(inputISBN);
+                }else {
+                    $scope.newSourceModal.hide();
+                    $scope.newsource = {};
+                    $scope.editingId = null;
+                    $scope.editingISBN = null;
+                    $scope.editingIndex = null;
                 }
             });
         }
