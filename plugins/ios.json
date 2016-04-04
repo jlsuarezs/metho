@@ -30,6 +30,12 @@
         },
         "phonegap-plugin-barcodescanner": {
             "PACKAGE_NAME": "com.ionicframework.metho"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.ionicframework.metho"
+        },
+        "cordova-plugin-safariviewcontroller": {
+            "PACKAGE_NAME": "com.ionicframework.metho"
         }
     },
     "dependent_plugins": {}

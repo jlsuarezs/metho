@@ -51,6 +51,12 @@
     <feature name="BarcodeScanner">
         <param name="ios-package" value="CDVBarcodeScanner" />
     </feature>
+    <feature name="InAppBrowser">
+        <param name="ios-package" value="CDVInAppBrowser" />
+    </feature>
+    <feature name="SafariViewController">
+        <param name="ios-package" value="SafariViewController" />
+    </feature>
     <name>Metho</name>
     <description>
         An Ionic Framework and Cordova project.

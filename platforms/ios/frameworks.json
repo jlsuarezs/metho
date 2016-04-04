@@ -7,5 +7,6 @@
     "CoreVideo.framework": 2,
     "QuartzCore.framework": 2,
     "CoreImage.framework": 2,
-    "AudioToolbox.framework": 2
+    "AudioToolbox.framework": 2,
+    "SafariServices.framework": 1
 }

@@ -782,12 +782,32 @@ angular.module('metho.controllers.projects', [])
         SharePendings.setPendings($scope.pendings);
     });
 
+    $scope.openAtURL = function (url) {
+        SafariViewController.isAvailable(function (available) {
+            if (available) {
+              SafariViewController.show({
+                    url: url
+                  },
+                  // this success handler will be invoked for the lifecycle events 'opened', 'loaded' and 'closed'
+                  function(result) {
+
+                  },
+                  function(msg) {
+                    alert("KO: " + msg);
+                  })
+            } else {
+              // potentially powered by InAppBrowser because that (currently) clobbers window.open
+              window.open(url, '_blank', 'location=yes');
+            }
+        })
+    }
+
     $scope.downloadDetails = function (index, isbn, id) {
         $scope.newsource.type = "book";
         $scope.newSourceModal.show();
         if ($scope.pendings[index].not_available) {
             $scope.newsource.not_available = true;
-            // Open web browser
+            $scope.openAtURL("http://google.ca/search?q=isbn+"+$scope.pendings[index].isbn);
         }else {
             $scope.fetchFromISBNdb(isbn);
         }
@@ -796,6 +816,9 @@ angular.module('metho.controllers.projects', [])
         $scope.editingId = id;
     }
 
+    $scope.openWebBrowser = function () {
+        $scope.openAtURL("http://google.ca/search?q=isbn+"+$scope.pendings[$scope.editingIndex].isbn);
+    }
     $scope.submitSource = function () {
         if ($scope.newsource.type != "" && $scope.newsource.type != null) {
             var creatingProj = $parseSource.parseSource($scope.newsource);
@@ -893,6 +916,7 @@ angular.module('metho.controllers.projects', [])
                             $scope.newsource.not_available = true;
                             $scope.pendings[$scope.editingIndex].not_available = true;
                             $scope.pendingRepo.put($scope.pendings[$scope.editingIndex]);
+                            $scope.openAtURL("http://google.ca/search?q=isbn+"+$scope.pendings[$scope.editingIndex].isbn);
                         } else {
                             $scope.newSourceModal.hide();
                             $scope.newsource = {};
