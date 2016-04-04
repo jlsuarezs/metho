@@ -176,7 +176,7 @@ angular.module('metho.controllers.projects', [])
 
 
 // Project detail view
-.controller('ProjectDetailCtrl', function($scope, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $parseSource, ShareProject, ShareSource, $state, $ionicListDelegate, $ionicActionSheet, $http, $ionicLoading, SharePendings) {
+.controller('ProjectDetailCtrl', function($scope, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $parseSource, ShareProject, ShareSource, $state, $ionicListDelegate, $ionicActionSheet, $http, $ionicLoading, SharePendings, $ionicSlideBoxDelegate, Settings) {
     $scope.projectRepo = new PouchDB("projects");
     $scope.sourceRepo = new PouchDB("sources");
     $scope.pendingRepo = new PouchDB("pendings");
@@ -201,6 +201,31 @@ angular.module('metho.controllers.projects', [])
     }).then(function(modal) {
         $scope.newSourceModal = modal;
     });
+
+    $ionicModal.fromTemplateUrl('templates/modal_scan_boarding.html', {
+        scope: $scope,
+        animation: 'slide-in-up',
+    }).then(function(modal) {
+        $scope.scanBoardingModal = modal;
+    });
+
+    $scope.closeBoarding = function () {
+        $scope.scanBoardingModal.hide();
+        Settings.set("scanBoardingDone", true);
+        $scope.scanBook();
+    }
+
+    $scope.slideHasChanged = function (index) {
+        $scope.boardingIndex = index;
+    }
+
+    $scope.nextSlideBoarding = function () {
+        $ionicSlideBoxDelegate.next();
+    }
+
+    $scope.lastSlideBoarding = function () {
+        $ionicSlideBoxDelegate.previous();
+    }
 
     $scope.share = function () {
         var textToShare = "Voici les sources du projet « " + $scope.project.name + " » : <br><br>";
@@ -545,6 +570,14 @@ angular.module('metho.controllers.projects', [])
     }
 
     $scope.scanBook = function () {
+        if (!Settings.get("scanBoardingDone")) {
+            $scope.scanBoardingModal.show();
+            $scope.boardingIndex = 0;
+            $ionicSlideBoxDelegate.enableSlide(true);
+            return;
+        }else {
+            $scope.newsource.type = "book";
+        }
         cordova.plugins.barcodeScanner.scan(
             function (result) {
                 if (!result.cancelled) {

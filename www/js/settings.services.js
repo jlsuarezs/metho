@@ -14,11 +14,16 @@ angular.module('metho.services.settings', [])
   if (localStorageService.get("setting-defaultOrder") == null) {
       localStorageService.set("setting-defaultOrder", "alpha");
   }
+//  == null
+  if (localStorageService.get("setting-scanBoardingDone")) {
+      localStorageService.set("setting-scanBoardingDone", false);
+  }
 
   var settings = {
       advanced: localStorageService.get("setting-advanced"),
       askForOrder: localStorageService.get("setting-askForOrder"),
-      defaultOrder: localStorageService.get("setting-defaultOrder")
+      defaultOrder: localStorageService.get("setting-defaultOrder"),
+      scanBoardingDone: localStorageService.get("setting-scanBoardingDone")
   };
 
   return {
