@@ -573,7 +573,6 @@ angular.module('metho.controllers.projects', [])
         if (!Settings.get("scanBoardingDone")) {
             $scope.scanBoardingModal.show();
             $scope.boardingIndex = 0;
-            $ionicSlideBoxDelegate.enableSlide(true);
             return;
         }else {
             $scope.newsource.type = "book";
