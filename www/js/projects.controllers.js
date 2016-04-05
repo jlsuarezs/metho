@@ -176,7 +176,7 @@ angular.module('metho.controllers.projects', [])
 
 
 // Project detail view
-.controller('ProjectDetailCtrl', function($scope, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $parseSource, ShareProject, ShareSource, $state, $ionicListDelegate, $ionicActionSheet, $http, $ionicLoading, SharePendings, $ionicSlideBoxDelegate, Settings) {
+.controller('ProjectDetailCtrl', function($scope, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $parseSource, ShareProject, ShareSource, $state, $ionicListDelegate, $ionicActionSheet, $http, $ionicLoading, SharePendings, $ionicSlideBoxDelegate, Settings, $ionicBackdrop) {
     $scope.projectRepo = new PouchDB("projects");
     $scope.sourceRepo = new PouchDB("sources");
     $scope.pendingRepo = new PouchDB("pendings");
@@ -577,8 +577,10 @@ angular.module('metho.controllers.projects', [])
         }else {
             $scope.newsource.type = "book";
         }
+        $ionicBackdrop.retain();
         cordova.plugins.barcodeScanner.scan(
             function (result) {
+                $ionicBackdrop.release();
                 if (!result.cancelled) {
                     if (result.format == "EAN_13") {
                         $scope.fetchFromISBNdb(result.text);
@@ -591,6 +593,7 @@ angular.module('metho.controllers.projects', [])
                 }
             },
             function (error) {
+                $ionicBackdrop.release();
                 console.log("Scanning failed: " + error);
             }
         );
