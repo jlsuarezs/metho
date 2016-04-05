@@ -230,55 +230,130 @@ angular.module('metho.controllers.projects', [])
     $scope.share = function () {
         var textToShare = "Voici les sources du projet « " + $scope.project.name + " » : <br><br>";
         var errNum = 0;
-        for (var i = 0; i < $scope.project.sources.length; i++) {
-            textToShare += $scope.project.sources[i].parsedSource + "<br><br>";
-            errNum += $scope.project.sources[i].errors.length;
-        }
+        if (Settings.get("askForOrder")) {
+            var ok = Settings.get("defaultOrder") == "alpha" ? "button-positive" : "button-stable";
+            var cancel = Settings.get("defaultOrder") == "type" ? "button-positive" : "button-stable";
+            // display modal
+               var confirmPopup = $ionicPopup.confirm({
+                 title: 'Triage',
+                 template: 'Trier la bibliographie par',
+                 okText:"Ordre alphabétique",
+                 okType: ok,
+                 cancelText:"Type d'ouvrage",
+                 cancelType: cancel
+               });
+               confirmPopup.then(function(res) {
+                 if(res) { // Ordre alphabétique
+                     var arr_sources = JSON.parse(JSON.stringify($scope.project.sources)).sort(function (a, b) {
+                         return a.parsedSource.localeCompare(b.parsedSource);
+                     });
+                     for (var i = 0; i < arr_sources.length; i++) {
+                         textToShare += arr_sources[i].parsedSource + "<br><br>";
+                         errNum += arr_sources[i].errors.length;
+                     }
 
-        if (errNum > 0) {
-            var confirmPopup = $ionicPopup.confirm({
-                title: 'Erreur',
-                template: '<p class="center">Les sources que vous essayez de partager contiennent <strong>' + errNum + '</strong> erreur(s). Voulez-vous les partager quand même?</p>',
-                cancelText: 'Annuler',
-                okText: '<b>Partager</b>'
-            });
-            confirmPopup.then(function(res) {
-                if(res) {
-                    window.plugins.socialsharing.shareViaEmail(
-                      textToShare,
-                      $scope.project.name,
-                      [], // TO: must be null or an array
-                      [], // CC: must be null or an array
-                      null, // BCC: must be null or an array
-                      [], // FILES: can be null, a string, or an array
-                      function () { // Success
-                          console.log("success");
-                      },
-                      function () { // Error
-                          console.log("error");
-                      }
-                    );
-                } else {
-                    console.log("Cancelled by user");
-                }
-            });
-        }else {
-            window.plugins.socialsharing.shareViaEmail(
-              textToShare,
-              $scope.project.name,
-              [], // TO: must be null or an array
-              [], // CC: must be null or an array
-              null, // BCC: must be null or an array
-              [], // FILES: can be null, a string, or an array
-              function () { // Success
-                  console.log("success");
-              },
-              function () { // Error
-                  console.log("error");
-              }
-            );
-        }
+                     if (errNum > 0) {
+                         var confirmPopup = $ionicPopup.confirm({
+                             title: 'Erreur',
+                             template: '<p class="center">Les sources que vous essayez de partager contiennent <strong>' + errNum + '</strong> erreur(s). Voulez-vous les partager quand même?</p>',
+                             cancelText: 'Annuler',
+                             okText: '<b>Partager</b>'
+                         });
+                         confirmPopup.then(function(res) {
+                             if(res) {
+                                 window.plugins.socialsharing.shareViaEmail(
+                                   textToShare,
+                                   $scope.project.name,
+                                   [], // TO: must be null or an array
+                                   [], // CC: must be null or an array
+                                   null, // BCC: must be null or an array
+                                   [], // FILES: can be null, a string, or an array
+                                   function () { // Success
+                                       console.log("success");
+                                   },
+                                   function () { // Error
+                                       console.log("error");
+                                   }
+                                 );
+                             } else {
+                                 console.log("Cancelled by user");
+                             }
+                         });
+                     }else {
+                         window.plugins.socialsharing.shareViaEmail(
+                           textToShare,
+                           $scope.project.name,
+                           [], // TO: must be null or an array
+                           [], // CC: must be null or an array
+                           null, // BCC: must be null or an array
+                           [], // FILES: can be null, a string, or an array
+                           function () { // Success
+                               console.log("success");
+                           },
+                           function () { // Error
+                               console.log("error");
+                           }
+                         );
+                     }
+                 } else { // Type d'ouvrage
 
+                 }
+               });
+        }else if (Settings.get("defaultOrder") == "alpha") {
+            var arr_sources = JSON.parse(JSON.stringify($scope.project.sources)).sort(function (a, b) {
+                return a.parsedSource.localeCompare(b.parsedSource);
+            });
+            for (var i = 0; i < arr_sources.length; i++) {
+                textToShare += arr_sources[i].parsedSource + "<br><br>";
+                errNum += arr_sources[i].errors.length;
+            }
+
+            if (errNum > 0) {
+                var confirmPopup = $ionicPopup.confirm({
+                    title: 'Erreur',
+                    template: '<p class="center">Les sources que vous essayez de partager contiennent <strong>' + errNum + '</strong> erreur(s). Voulez-vous les partager quand même?</p>',
+                    cancelText: 'Annuler',
+                    okText: '<b>Partager</b>'
+                });
+                confirmPopup.then(function(res) {
+                    if(res) {
+                        window.plugins.socialsharing.shareViaEmail(
+                          textToShare,
+                          $scope.project.name,
+                          [], // TO: must be null or an array
+                          [], // CC: must be null or an array
+                          null, // BCC: must be null or an array
+                          [], // FILES: can be null, a string, or an array
+                          function () { // Success
+                              console.log("success");
+                          },
+                          function () { // Error
+                              console.log("error");
+                          }
+                        );
+                    } else {
+                        console.log("Cancelled by user");
+                    }
+                });
+            }else {
+                window.plugins.socialsharing.shareViaEmail(
+                  textToShare,
+                  $scope.project.name,
+                  [], // TO: must be null or an array
+                  [], // CC: must be null or an array
+                  null, // BCC: must be null or an array
+                  [], // FILES: can be null, a string, or an array
+                  function () { // Success
+                      console.log("success");
+                  },
+                  function () { // Error
+                      console.log("error");
+                  }
+                );
+            }
+        }else { // defaultOrder == type
+
+        }
     }
 
     $scope.resetModalVars = function () {
