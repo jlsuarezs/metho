@@ -361,7 +361,7 @@ angular.module('metho.controllers.projects', [])
                             categoryNum++;
                             textToShare += categoryNum + ". Entrevues<br>" + arr_interview;
                         }
-                        
+
                         window.plugins.socialsharing.shareViaEmail(
                           textToShare,
                           $scope.project.name,
@@ -553,15 +553,24 @@ angular.module('metho.controllers.projects', [])
                 creatingProj._id = response.id;
                 creatingProj._rev = response.rev;
                 $scope.project.sources.push(creatingProj);
+                $scope.project.sources.sort(function (a,b) {
+                    if (a.title && b.title) {
+                        return a.title.localeCompare(b.title);
+                    }else if (a.title) {
+                        return a.title.localeCompare(b.parsedSource);
+                    }else if (b.title) {
+                        return a.parsedSource.localeCompare(b.title);
+                    }
+                });
                 $scope.closeModal();
                 $scope.$apply();
             }).catch(function (err) {
                 console.log(err);
             });
         }else {
-            var alertPopup = $ionicPopup.alert({
+            $ionicPopup.alert({
              title: 'Erreur',
-             template: '<p class="center">La source doit avoir un type</p>'
+             template: '<p class="center">La source doit avoir un type.</p>'
             });
             return;
         }
@@ -760,6 +769,15 @@ angular.module('metho.controllers.projects', [])
                 $scope.project.sources.push(result.rows[i].doc);
             }
         }
+        $scope.project.sources.sort(function (a,b) {
+            if (a.title && b.title) {
+                return a.title.localeCompare(b.title);
+            }else if (a.title) {
+                return a.title.localeCompare(b.parsedSource);
+            }else if (b.title) {
+                return a.parsedSource.localeCompare(b.title);
+            }
+        });
         $scope.loading = false;
     }
 
@@ -779,11 +797,29 @@ angular.module('metho.controllers.projects', [])
             $scope.sourceRepo.get($scope.refreshID).then(function (result) {
                 $scope.project.sources[$scope.refreshIndex] = result;
             });
+            $scope.project.sources.sort(function (a,b) {
+                if (a.title && b.title) {
+                    return a.title.localeCompare(b.title);
+                }else if (a.title) {
+                    return a.title.localeCompare(b.parsedSource);
+                }else if (b.title) {
+                    return a.parsedSource.localeCompare(b.title);
+                }
+            });
         }
 
         if ($scope.refreshPending) {
             $scope.project.pendings = SharePendings.getPendings();
             $scope.project.sources = $scope.project.sources.concat(SharePendings.getSources());
+            $scope.project.sources.sort(function (a,b) {
+                if (a.title && b.title) {
+                    return a.title.localeCompare(b.title);
+                }else if (a.title) {
+                    return a.title.localeCompare(b.parsedSource);
+                }else if (b.title) {
+                    return a.parsedSource.localeCompare(b.title);
+                }
+            });
         }
     });
 
