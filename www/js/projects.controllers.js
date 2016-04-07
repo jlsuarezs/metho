@@ -431,7 +431,85 @@ angular.module('metho.controllers.projects', [])
                 );
             }
         }else { // defaultOrder == type
+            var arr_sources = JSON.parse(JSON.stringify($scope.project.sources)).sort(function (a, b) {
+                return a.parsedSource.localeCompare(b.parsedSource);
+            });
+            var arr_book = "";
+            var arr_article = "";
+            var arr_internet = "";
+            var arr_cd = "";
+            var arr_movie = "";
+            var arr_interview = "";
+            for (var i = 0; i < arr_sources.length; i++) {
+                switch (arr_sources[i].type) {
+                    case "book":
+                        arr_book += arr_sources[i].parsedSource + "<br>";
+                        break;
+                    case "article":
+                        arr_article += arr_sources[i].parsedSource + "<br>";
+                        break;
+                    case "internet":
+                        arr_internet += arr_sources[i].parsedSource + "<br>";
+                        break;
+                    case "cd":
+                        arr_cd += arr_sources[i].parsedSource + "<br>";
+                        break;
+                    case "movie":
+                        arr_movie += arr_sources[i].parsedSource + "<br>";
+                        break;
+                    case "interview":
+                        arr_interview += arr_sources[i].parsedSource + "<br>";
+                        break;
+                    default:
 
+                }
+            }
+            categoryNum = 0;
+            if (arr_book != "") {
+                categoryNum++;
+                textToShare += categoryNum + ". Ouvrages généraux<br>" + arr_book;
+            }
+
+            if (arr_article != "") {
+                categoryNum++;
+                textToShare += categoryNum + ". Articles de périodiques<br>" + arr_article;
+            }
+
+            if (arr_internet != "") {
+                categoryNum++;
+                textToShare += categoryNum + ". Sites Internet<br>" + arr_internet;
+            }
+
+            if (arr_cd != "" && arr_movie != "") {
+                categoryNum++;
+                textToShare += categoryNum + ". Documents audiovisuels<br>" + arr_cd + arr_movie;
+            }else if (arr_movie != "") {
+                categoryNum++;
+                textToShare += categoryNum + ". Documents audiovisuels<br>" + arr_movie;
+            }else if (arr_cd != "") {
+                categoryNum++;
+                textToShare += categoryNum + ". Documents audiovisuels<br>" + arr_cd;
+            }
+
+            if (arr_interview != "") {
+                categoryNum++;
+                textToShare += categoryNum + ". Entrevues<br>" + arr_interview;
+            }
+
+            window.plugins.socialsharing.shareViaEmail(
+              textToShare,
+              $scope.project.name,
+              [], // TO: must be null or an array
+              [], // CC: must be null or an array
+              null, // BCC: must be null or an array
+              [], // FILES: can be null, a string, or an array
+              function () { // Success
+                  console.log("success");
+              },
+              function () { // Error
+                  console.log("error");
+              }
+            );
         }
     }
 
