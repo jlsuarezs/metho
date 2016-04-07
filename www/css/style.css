@@ -331,3 +331,12 @@ p.left-aligned {
     border-radius: 50%;
     margin: 10% auto;
 }
+
+.popup-vertical-buttons .popup-buttons {
+  display: block;
+}
+
+.popup-vertical-buttons .popup-buttons .button{
+  display:block;
+  min-width: 100% !important;
+}
