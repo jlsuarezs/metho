@@ -899,6 +899,8 @@ angular.module('metho.controllers.projects', [])
                 }
             });
         }
+
+        $scope.isAdvanced = Settings.get("advanced");
     });
 
     $scope.openSourceDetail = function (id) {
