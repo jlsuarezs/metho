@@ -3,7 +3,10 @@ angular.module('metho.controllers.projects', [])
 // Project tab view
 .controller('ProjectsCtrl', function($scope, $ionicModal, $ionicPlatform, $ionicPopup, $ionicListDelegate, ShareProject, $state) {
     $scope.projects = [];
-    $scope.project = { name:"", matter:"" };
+    $scope.project = {
+        name: "",
+        matter: ""
+    };
     $scope.editingProject = {};
     $scope.err = "";
     $scope.errorName = false;
@@ -11,7 +14,9 @@ angular.module('metho.controllers.projects', [])
     // Initialize the DB
     $scope.projectsRepo = new PouchDB("projects");
     // Load the projects
-    $scope.projectsRepo.allDocs({include_docs:true}).then(function (result) {
+    $scope.projectsRepo.allDocs({
+        include_docs: true
+    }).then(function(result) {
         for (var i = 0; i < result.rows.length; i++) {
             var obj = {
                 name: result.rows[i].doc.name,
@@ -22,7 +27,7 @@ angular.module('metho.controllers.projects', [])
         }
         $scope.loading = false;
         $scope.$apply();
-    }).catch(function (err) {
+    }).catch(function(err) {
         console.log(err);
     });
 
@@ -40,32 +45,32 @@ angular.module('metho.controllers.projects', [])
         $scope.editProjectModal = modal;
     });
 
-    $scope.closeModal = function () {
+    $scope.closeModal = function() {
         $scope.newProjectModal.hide();
         $scope.errorName = false;
     }
 
-    $scope.closeEditModal = function () {
+    $scope.closeEditModal = function() {
         $scope.editProjectModal.hide();
         $scope.errorName = false;
     }
 
-    $scope.newProject = function () {
+    $scope.newProject = function() {
         $scope.newProjectModal.show();
     }
 
-    $scope.submitProject = function () {
-        if ($scope.project.name == "" || $scope.project.name == null) {
+    $scope.submitProject = function() {
+        if ($scope.project.name == "" ||  $scope.project.name == null) {
             $scope.errorName = true;
             var alertPopup = $ionicPopup.alert({
-             title: 'Erreur',
-             template: '<p class="center">Entrez un nom de projet</p>'
+                title: 'Erreur',
+                template: '<p class="center">Entrez un nom de projet</p>'
             });
-        }else {
+        } else {
             $scope.errorName = false;
             if ($scope.project.matter == "" || $scope.project.matter == null) {
                 var theMatter = "Matière inconnue";
-            }else {
+            } else {
                 var theMatter = $scope.project.matter;
             }
             var creatingProj = {
@@ -73,56 +78,59 @@ angular.module('metho.controllers.projects', [])
                 matter: theMatter
             };
 
-            $scope.projectsRepo.post(creatingProj).then(function (response) {
+            $scope.projectsRepo.post(creatingProj).then(function(response) {
                 creatingProj.id = response.id;
                 $scope.projects.push(creatingProj);
-                $scope.project = {name:"", matter:""};
+                $scope.project = {
+                    name: "",
+                    matter: ""
+                };
                 $scope.newProjectModal.hide();
                 $scope.$apply();
-            }).catch(function (err) {
+            }).catch(function(err) {
                 console.log(err);
             });
         }
     }
 
-    $scope.deleteProject = function (id) {
+    $scope.deleteProject = function(id) {
         var confirmPopup = $ionicPopup.confirm({
-          title: 'Voulez-vous supprimer ce projet ?',
-          template: '<p class="center">La suppression de ce projet entrainera la perte de toutes les sources contenues dans celui-ci. Cette action est irréversible.</p>',
-          cancelText: 'Annuler',
-          okText: '<b>Supprimer</b>',
-          okType: 'button-assertive',
-          cssClass: 'deleteProject'
+            title: 'Voulez-vous supprimer ce projet ?',
+            template: '<p class="center">La suppression de ce projet entrainera la perte de toutes les sources contenues dans celui-ci. Cette action est irréversible.</p>',
+            cancelText: 'Annuler',
+            okText: '<b>Supprimer</b>',
+            okType: 'button-assertive',
+            cssClass: 'deleteProject'
         });
         confirmPopup.then(function(res) {
-          if(res) {
-              $scope.projectsRepo.get(id).then(function(doc) {
-                return $scope.projectsRepo.remove(doc);
-              }).then(function (result) {
-                  for (var i = 0; i < $scope.projects.length; i++) {
-                      if ($scope.projects[i].id == result.id) {
-                          $scope.projects.splice(i, 1);
-                          $scope.$apply();
-                          return;
-                      }
-                  }
-              }).catch(function (err) {
-                console.log(err);
-              });
-          } else {
-            $ionicListDelegate.closeOptionButtons();
-          }
+            if (res) {
+                $scope.projectsRepo.get(id).then(function(doc) {
+                    return $scope.projectsRepo.remove(doc);
+                }).then(function(result) {
+                    for (var i = 0; i < $scope.projects.length; i++) {
+                        if ($scope.projects[i].id == result.id) {
+                            $scope.projects.splice(i, 1);
+                            $scope.$apply();
+                            return;
+                        }
+                    }
+                }).catch(function(err) {
+                    console.log(err);
+                });
+            } else {
+                $ionicListDelegate.closeOptionButtons();
+            }
         });
 
     }
 
-    $scope.editProject = function (id) {
+    $scope.editProject = function(id) {
         $scope.editingProject = {};
         $scope.projectsRepo.get(id).then(function(doc) {
             $scope.editingProject.name = doc.name;
             if (doc.matter == "Matière inconnue") {
                 $scope.editingProject.matter = "";
-            }else {
+            } else {
                 $scope.editingProject.matter = doc.matter;
             }
             $scope.editingProject.id = doc._id;
@@ -130,14 +138,14 @@ angular.module('metho.controllers.projects', [])
         $scope.editProjectModal.show();
     }
 
-    $scope.submitEditProject = function () {
+    $scope.submitEditProject = function() {
         if ($scope.editingProject.name == "") {
             $scope.errorName = true;
             var alertPopup = $ionicPopup.alert({
-             title: 'Erreur',
-             template: 'Le projet doit avoir un nom.'
+                title: 'Erreur',
+                template: 'Le projet doit avoir un nom.'
             });
-        }else {
+        } else {
             // make the change in the database
             $scope.projectsRepo.get($scope.editingProject.id).then(function(doc) {
                 return $scope.projectsRepo.put($scope.editingProject, $scope.editingProject.id, doc._rev);
@@ -148,20 +156,20 @@ angular.module('metho.controllers.projects', [])
                         $scope.projects[i].name = $scope.editingProject.name;
                         if ($scope.editingProject.matter == "") {
                             $scope.projects[i].matter = "Matière inconnue";
-                        }else {
+                        } else {
                             $scope.projects[i].matter = $scope.editingProject.matter;
                         }
                     }
                 }
-            }).catch(function (err) {
-              console.log(err);
+            }).catch(function(err) {
+                console.log(err);
             });
             $scope.editProjectModal.hide();
             $ionicListDelegate.closeOptionButtons();
         }
     }
 
-    $scope.openProjectDetail = function (id) {
+    $scope.openProjectDetail = function(id) {
         for (var i = 0; i < $scope.projects.length; i++) {
             if ($scope.projects[i].id == id) {
                 var index = i;
@@ -170,7 +178,9 @@ angular.module('metho.controllers.projects', [])
         }
         ShareProject.setName($scope.projects[index].name);
         ShareProject.setMatter($scope.projects[index].matter);
-        $state.go("tab.project-detail",{projectID:id});
+        $state.go("tab.project-detail", {
+            projectID: id
+        });
     }
 })
 
@@ -209,177 +219,174 @@ angular.module('metho.controllers.projects', [])
         $scope.scanBoardingModal = modal;
     });
 
-    $scope.closeBoarding = function () {
+    $scope.closeBoarding = function() {
         $scope.scanBoardingModal.hide();
         Settings.set("scanBoardingDone", true);
         $scope.scanBook();
     }
 
-    $scope.slideHasChanged = function (index) {
+    $scope.slideHasChanged = function(index) {
         $scope.boardingIndex = index;
     }
 
-    $scope.nextSlideBoarding = function () {
+    $scope.nextSlideBoarding = function() {
         $ionicSlideBoxDelegate.next();
     }
 
-    $scope.lastSlideBoarding = function () {
+    $scope.lastSlideBoarding = function() {
         $ionicSlideBoxDelegate.previous();
     }
 
-    $scope.share = function () {
+    $scope.share = function() {
         var textToShare = "Voici les sources du projet « " + $scope.project.name + " » : <br><br>BIBLIOGRAPHIE<br>";
         var errNum = 0;
         if (Settings.get("askForOrder")) {
             var cancel = Settings.get("defaultOrder") == "alpha" ? "button-positive" : "button-stable";
             var ok = Settings.get("defaultOrder") == "type" ? "button-positive" : "button-stable";
             // display modal
-               var confirmPopup = $ionicPopup.confirm({
-                 title: 'Triage',
-                 subTitle: 'Ordre de triage',
-                 cssClass: "popup-vertical-buttons",
-                 cancelText: "Alphabétique",
-                 cancelType: cancel,
-                 okText: "Type",
-                 okType: ok
-               });
-               confirmPopup.then(function(res) {
-                    if(!res) { // Ordre alphabétique
-                       var arr_sources = JSON.parse(JSON.stringify($scope.project.sources)).sort(function (a, b) {
-                           return a.parsedSource.localeCompare(b.parsedSource);
-                       });
-                       for (var i = 0; i < arr_sources.length; i++) {
-                           textToShare += arr_sources[i].parsedSource + "<br><br>";
-                           errNum += arr_sources[i].errors.length;
-                       }
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Triage',
+                subTitle: 'Ordre de triage',
+                cssClass: "popup-vertical-buttons",
+                cancelText: "Alphabétique",
+                cancelType: cancel,
+                okText: "Type",
+                okType: ok
+            });
+            confirmPopup.then(function(res) {
+                if (!res) { // Ordre alphabétique
+                    var arr_sources = JSON.parse(JSON.stringify($scope.project.sources)).sort(function(a, b) {
+                        return a.parsedSource.localeCompare(b.parsedSource);
+                    });
+                    for (var i = 0; i < arr_sources.length; i++) {
+                        textToShare += arr_sources[i].parsedSource + "<br><br>";
+                        errNum += arr_sources[i].errors.length;
+                    }
 
-                       if (errNum > 0) {
-                           var confirmPopup = $ionicPopup.confirm({
-                               title: 'Erreur',
-                               template: '<p class="center">Les sources que vous essayez de partager contiennent <strong>' + errNum + '</strong> erreur(s). Voulez-vous les partager quand même?</p>',
-                               cancelText: 'Annuler',
-                               okText: '<b>Partager</b>'
-                           });
-                           confirmPopup.then(function(res) {
-                               if(res) {
-                                   window.plugins.socialsharing.shareViaEmail(
-                                     textToShare,
-                                     $scope.project.name,
-                                     [], // TO: must be null or an array
-                                     [], // CC: must be null or an array
-                                     null, // BCC: must be null or an array
-                                     [], // FILES: can be null, a string, or an array
-                                     function () { // Success
-                                         console.log("success");
-                                     },
-                                     function () { // Error
-                                         console.log("error");
-                                     }
-                                   );
-                               } else {
-                                   console.log("Cancelled by user");
-                               }
-                           });
-                       }else {
-                           window.plugins.socialsharing.shareViaEmail(
-                             textToShare,
-                             $scope.project.name,
-                             [], // TO: must be null or an array
-                             [], // CC: must be null or an array
-                             null, // BCC: must be null or an array
-                             [], // FILES: can be null, a string, or an array
-                             function () { // Success
-                                 console.log("success");
-                             },
-                             function () { // Error
-                                 console.log("error");
-                             }
-                           );
-                       }
-                    } else { // Type d'ouvrage
-                        var arr_sources = JSON.parse(JSON.stringify($scope.project.sources)).sort(function (a, b) {
-                            return a.parsedSource.localeCompare(b.parsedSource);
+                    if (errNum > 0) {
+                        var confirmPopup = $ionicPopup.confirm({
+                            title: 'Erreur',
+                            template: '<p class="center">Les sources que vous essayez de partager contiennent <strong>' + errNum + '</strong> erreur(s). Voulez-vous les partager quand même?</p>',
+                            cancelText: 'Annuler',
+                            okText: '<b>Partager</b>'
                         });
-                        var arr_book = "";
-                        var arr_article = "";
-                        var arr_internet = "";
-                        var arr_cd = "";
-                        var arr_movie = "";
-                        var arr_interview = "";
-                        for (var i = 0; i < arr_sources.length; i++) {
-                            switch (arr_sources[i].type) {
-                                case "book":
-                                    arr_book += arr_sources[i].parsedSource + "<br>";
-                                    break;
-                                case "article":
-                                    arr_article += arr_sources[i].parsedSource + "<br>";
-                                    break;
-                                case "internet":
-                                    arr_internet += arr_sources[i].parsedSource + "<br>";
-                                    break;
-                                case "cd":
-                                    arr_cd += arr_sources[i].parsedSource + "<br>";
-                                    break;
-                                case "movie":
-                                    arr_movie += arr_sources[i].parsedSource + "<br>";
-                                    break;
-                                case "interview":
-                                    arr_interview += arr_sources[i].parsedSource + "<br>";
-                                    break;
-                                default:
-
+                        confirmPopup.then(function(res) {
+                            if (res) {
+                                window.plugins.socialsharing.shareViaEmail(
+                                    textToShare,
+                                    $scope.project.name, [], // TO: must be null or an array
+                                    [], // CC: must be null or an array
+                                    null, // BCC: must be null or an array
+                                    [], // FILES: can be null, a string, or an array
+                                    function() { // Success
+                                        console.log("success");
+                                    },
+                                    function() { // Error
+                                        console.log("error");
+                                    }
+                                );
+                            } else {
+                                console.log("Cancelled by user");
                             }
-                        }
-                        categoryNum = 0;
-                        if (arr_book != "") {
-                            categoryNum++;
-                            textToShare += categoryNum + ". Ouvrages généraux<br>" + arr_book;
-                        }
-
-                        if (arr_article != "") {
-                            categoryNum++;
-                            textToShare += categoryNum + ". Articles de périodiques<br>" + arr_article;
-                        }
-
-                        if (arr_internet != "") {
-                            categoryNum++;
-                            textToShare += categoryNum + ". Sites Internet<br>" + arr_internet;
-                        }
-
-                        if (arr_cd != "" && arr_movie != "") {
-                            categoryNum++;
-                            textToShare += categoryNum + ". Documents audiovisuels<br>" + arr_cd + arr_movie;
-                        }else if (arr_movie != "") {
-                            categoryNum++;
-                            textToShare += categoryNum + ". Documents audiovisuels<br>" + arr_movie;
-                        }else if (arr_cd != "") {
-                            categoryNum++;
-                            textToShare += categoryNum + ". Documents audiovisuels<br>" + arr_cd;
-                        }
-
-                        if (arr_interview != "") {
-                            categoryNum++;
-                            textToShare += categoryNum + ". Entrevues<br>" + arr_interview;
-                        }
-
+                        });
+                    } else {
                         window.plugins.socialsharing.shareViaEmail(
-                          textToShare,
-                          $scope.project.name,
-                          [], // TO: must be null or an array
-                          [], // CC: must be null or an array
-                          null, // BCC: must be null or an array
-                          [], // FILES: can be null, a string, or an array
-                          function () { // Success
-                              console.log("success");
-                          },
-                          function () { // Error
-                              console.log("error");
-                          }
+                            textToShare,
+                            $scope.project.name, [], // TO: must be null or an array
+                            [], // CC: must be null or an array
+                            null, // BCC: must be null or an array
+                            [], // FILES: can be null, a string, or an array
+                            function() { // Success
+                                console.log("success");
+                            },
+                            function() { // Error
+                                console.log("error");
+                            }
                         );
                     }
-               });
-        }else if (Settings.get("defaultOrder") == "alpha") {
-            var arr_sources = JSON.parse(JSON.stringify($scope.project.sources)).sort(function (a, b) {
+                } else { // Type d'ouvrage
+                    var arr_sources = JSON.parse(JSON.stringify($scope.project.sources)).sort(function(a, b) {
+                        return a.parsedSource.localeCompare(b.parsedSource);
+                    });
+                    var arr_book = "";
+                    var arr_article = "";
+                    var arr_internet = "";
+                    var arr_cd = "";
+                    var arr_movie = "";
+                    var arr_interview = "";
+                    for (var i = 0; i < arr_sources.length; i++) {
+                        switch (arr_sources[i].type) {
+                            case "book":
+                                arr_book += arr_sources[i].parsedSource + "<br>";
+                                break;
+                            case "article":
+                                arr_article += arr_sources[i].parsedSource + "<br>";
+                                break;
+                            case "internet":
+                                arr_internet += arr_sources[i].parsedSource + "<br>";
+                                break;
+                            case "cd":
+                                arr_cd += arr_sources[i].parsedSource + "<br>";
+                                break;
+                            case "movie":
+                                arr_movie += arr_sources[i].parsedSource + "<br>";
+                                break;
+                            case "interview":
+                                arr_interview += arr_sources[i].parsedSource + "<br>";
+                                break;
+                            default:
+
+                        }
+                    }
+                    categoryNum = 0;
+                    if (arr_book != "") {
+                        categoryNum++;
+                        textToShare += categoryNum + ". Ouvrages généraux<br>" + arr_book;
+                    }
+
+                    if (arr_article != "") {
+                        categoryNum++;
+                        textToShare += categoryNum + ". Articles de périodiques<br>" + arr_article;
+                    }
+
+                    if (arr_internet != "") {
+                        categoryNum++;
+                        textToShare += categoryNum + ". Sites Internet<br>" + arr_internet;
+                    }
+
+                    if (arr_cd != "" && arr_movie != "") {
+                        categoryNum++;
+                        textToShare += categoryNum + ". Documents audiovisuels<br>" + arr_cd + arr_movie;
+                    } else if (arr_movie != "") {
+                        categoryNum++;
+                        textToShare += categoryNum + ". Documents audiovisuels<br>" + arr_movie;
+                    } else if (arr_cd != "") {
+                        categoryNum++;
+                        textToShare += categoryNum + ". Documents audiovisuels<br>" + arr_cd;
+                    }
+
+                    if (arr_interview != "") {
+                        categoryNum++;
+                        textToShare += categoryNum + ". Entrevues<br>" + arr_interview;
+                    }
+
+                    window.plugins.socialsharing.shareViaEmail(
+                        textToShare,
+                        $scope.project.name, [], // TO: must be null or an array
+                        [], // CC: must be null or an array
+                        null, // BCC: must be null or an array
+                        [], // FILES: can be null, a string, or an array
+                        function() { // Success
+                            console.log("success");
+                        },
+                        function() { // Error
+                            console.log("error");
+                        }
+                    );
+                }
+            });
+        } else if (Settings.get("defaultOrder") == "alpha") {
+            var arr_sources = JSON.parse(JSON.stringify($scope.project.sources)).sort(function(a, b) {
                 return a.parsedSource.localeCompare(b.parsedSource);
             });
             for (var i = 0; i < arr_sources.length; i++) {
@@ -395,43 +402,41 @@ angular.module('metho.controllers.projects', [])
                     okText: '<b>Partager</b>'
                 });
                 confirmPopup.then(function(res) {
-                    if(res) {
+                    if (res) {
                         window.plugins.socialsharing.shareViaEmail(
-                          textToShare,
-                          $scope.project.name,
-                          [], // TO: must be null or an array
-                          [], // CC: must be null or an array
-                          null, // BCC: must be null or an array
-                          [], // FILES: can be null, a string, or an array
-                          function () { // Success
-                              console.log("success");
-                          },
-                          function () { // Error
-                              console.log("error");
-                          }
+                            textToShare,
+                            $scope.project.name, [], // TO: must be null or an array
+                            [], // CC: must be null or an array
+                            null, // BCC: must be null or an array
+                            [], // FILES: can be null, a string, or an array
+                            function() { // Success
+                                console.log("success");
+                            },
+                            function() { // Error
+                                console.log("error");
+                            }
                         );
                     } else {
                         console.log("Cancelled by user");
                     }
                 });
-            }else {
+            } else {
                 window.plugins.socialsharing.shareViaEmail(
-                  textToShare,
-                  $scope.project.name,
-                  [], // TO: must be null or an array
-                  [], // CC: must be null or an array
-                  null, // BCC: must be null or an array
-                  [], // FILES: can be null, a string, or an array
-                  function () { // Success
-                      console.log("success");
-                  },
-                  function () { // Error
-                      console.log("error");
-                  }
+                    textToShare,
+                    $scope.project.name, [], // TO: must be null or an array
+                    [], // CC: must be null or an array
+                    null, // BCC: must be null or an array
+                    [], // FILES: can be null, a string, or an array
+                    function() { // Success
+                        console.log("success");
+                    },
+                    function() { // Error
+                        console.log("error");
+                    }
                 );
             }
-        }else { // defaultOrder == type
-            var arr_sources = JSON.parse(JSON.stringify($scope.project.sources)).sort(function (a, b) {
+        } else { // defaultOrder == type
+            var arr_sources = JSON.parse(JSON.stringify($scope.project.sources)).sort(function(a, b) {
                 return a.parsedSource.localeCompare(b.parsedSource);
             });
             var arr_book = "";
@@ -483,10 +488,10 @@ angular.module('metho.controllers.projects', [])
             if (arr_cd != "" && arr_movie != "") {
                 categoryNum++;
                 textToShare += categoryNum + ". Documents audiovisuels<br>" + arr_cd + arr_movie;
-            }else if (arr_movie != "") {
+            } else if (arr_movie != "") {
                 categoryNum++;
                 textToShare += categoryNum + ". Documents audiovisuels<br>" + arr_movie;
-            }else if (arr_cd != "") {
+            } else if (arr_cd != "") {
                 categoryNum++;
                 textToShare += categoryNum + ". Documents audiovisuels<br>" + arr_cd;
             }
@@ -497,39 +502,38 @@ angular.module('metho.controllers.projects', [])
             }
 
             window.plugins.socialsharing.shareViaEmail(
-              textToShare,
-              $scope.project.name,
-              [], // TO: must be null or an array
-              [], // CC: must be null or an array
-              null, // BCC: must be null or an array
-              [], // FILES: can be null, a string, or an array
-              function () { // Success
-                  console.log("success");
-              },
-              function () { // Error
-                  console.log("error");
-              }
+                textToShare,
+                $scope.project.name, [], // TO: must be null or an array
+                [], // CC: must be null or an array
+                null, // BCC: must be null or an array
+                [], // FILES: can be null, a string, or an array
+                function() { // Success
+                    console.log("success");
+                },
+                function() { // Error
+                    console.log("error");
+                }
             );
         }
     }
 
-    $scope.resetModalVars = function () {
+    $scope.resetModalVars = function() {
         // Reset vars
         $scope.newsource = {};
         $scope.newsource.consultationDate = new Date();
     }
 
-    $scope.refreshModalScroll = function () {
+    $scope.refreshModalScroll = function() {
         $ionicScrollDelegate.resize();
     }
 
-    $scope.refreshModalScrollWithDelay = function () {
-        setTimeout(function () {
+    $scope.refreshModalScrollWithDelay = function() {
+        setTimeout(function() {
             $ionicScrollDelegate.resize();
         }, 1000);
     }
 
-    $scope.autoCompleteEditor = function () {
+    $scope.autoCompleteEditor = function() {
         if ($scope.newsource.type == "internet") {
             switch ($scope.newsource.editor.toLowerCase()) {
                 case "wikipédia, l'encyclopédie libre":
@@ -568,52 +572,57 @@ angular.module('metho.controllers.projects', [])
     window.addEventListener('keyboardDidHide', $scope.refreshModalScroll);
     window.addEventListener('keyboardWillShow', $scope.refreshModalScroll);
 
-    $scope.addSource = function () {
+    $scope.addSource = function() {
         // Open modal
         var hideSheet = $ionicActionSheet.show({
-          buttons: [
-            { text: 'Livre' },
-            { text: 'Article de périodique' },
-            { text: 'Site Internet' },
-            { text: 'Cédérom (CD)' },
-            { text: 'Document audiovisuel' },
-            { text: 'Entrevue' }
-          ],
-          titleText: 'Choisir le type de source',
-          cancelText: 'Annuler',
-          buttonClicked: function(index) {
-            switch (index) {
-                case 0:
-                    $scope.newsource.type = "book";
-                    break;
-                case 1:
-                    $scope.newsource.type = "article";
-                    break;
-                case 2:
-                    $scope.newsource.type = "internet";
-                    break;
-                case 3:
-                    $scope.newsource.type = "cd";
-                    break;
-                case 4:
-                    $scope.newsource.type = "movie";
-                    break;
-                case 5:
-                    $scope.newsource.type = "interview";
-                    break;
-                default:
+            buttons: [{
+                text: 'Livre'
+            }, {
+                text: 'Article de périodique'
+            }, {
+                text: 'Site Internet'
+            }, {
+                text: 'Cédérom (CD)'
+            }, {
+                text: 'Document audiovisuel'
+            }, {
+                text: 'Entrevue'
+            }],
+            titleText: 'Choisir le type de source',
+            cancelText: 'Annuler',
+            buttonClicked: function(index) {
+                switch (index) {
+                    case 0:
+                        $scope.newsource.type = "book";
+                        break;
+                    case 1:
+                        $scope.newsource.type = "article";
+                        break;
+                    case 2:
+                        $scope.newsource.type = "internet";
+                        break;
+                    case 3:
+                        $scope.newsource.type = "cd";
+                        break;
+                    case 4:
+                        $scope.newsource.type = "movie";
+                        break;
+                    case 5:
+                        $scope.newsource.type = "interview";
+                        break;
+                    default:
 
+                }
+                if (!!window.cordova) {
+                    cordova.plugins.Keyboard.disableScroll(true);
+                }
+                $scope.newSourceModal.show();
+                return true;
             }
-            if (!!window.cordova) {
-                cordova.plugins.Keyboard.disableScroll(true);
-            }
-            $scope.newSourceModal.show();
-            return true;
-          }
         });
     }
 
-    $scope.closeModal = function () {
+    $scope.closeModal = function() {
         $scope.newSourceModal.hide();
         $scope.resetModalVars();
     }
@@ -622,170 +631,176 @@ angular.module('metho.controllers.projects', [])
         $scope.resetModalVars();
     });
 
-    $scope.submitSource = function () {
+    $scope.submitSource = function() {
         if ($scope.newsource.type != "" && $scope.newsource.type != null) {
             var creatingProj = $parseSource.parseSource($scope.newsource);
             creatingProj.project_id = $stateParams.projectID;
             // Save to db
-            $scope.sourceRepo.post(creatingProj).then(function (response) {
+            $scope.sourceRepo.post(creatingProj).then(function(response) {
                 creatingProj._id = response.id;
                 creatingProj._rev = response.rev;
                 $scope.project.sources.push(creatingProj);
-                $scope.project.sources.sort(function (a,b) {
+                $scope.project.sources.sort(function(a, b) {
                     if (a.title && b.title) {
                         return a.title.localeCompare(b.title);
-                    }else if (a.title) {
+                    } else if (a.title) {
                         return a.title.localeCompare(b.parsedSource);
-                    }else if (b.title) {
+                    } else if (b.title) {
                         return a.parsedSource.localeCompare(b.title);
                     }
                 });
                 $scope.closeModal();
                 $scope.$apply();
-            }).catch(function (err) {
+            }).catch(function(err) {
                 console.log(err);
             });
-        }else {
+        } else {
             $ionicPopup.alert({
-             title: 'Erreur',
-             template: '<p class="center">La source doit avoir un type.</p>'
+                title: 'Erreur',
+                template: '<p class="center">La source doit avoir un type.</p>'
             });
             return;
         }
     }
 
-    $scope.deleteSource = function (id) {
+    $scope.deleteSource = function(id) {
         // Delete the source
         var confirmPopup = $ionicPopup.confirm({
-          title: 'Voulez-vous supprimer cet source ?',
-          template: '<p class="center">La suppression de cette source entrainera la perte de toutes les données ratachées à celle-ci. Cette action est irréversible.</p>',
-          cancelText: 'Annuler',
-          okText: '<b>Supprimer</b>',
-          okType: 'button-assertive',
-          cssClass: 'deleteProject'
+            title: 'Voulez-vous supprimer cet source ?',
+            template: '<p class="center">La suppression de cette source entrainera la perte de toutes les données ratachées à celle-ci. Cette action est irréversible.</p>',
+            cancelText: 'Annuler',
+            okText: '<b>Supprimer</b>',
+            okType: 'button-assertive',
+            cssClass: 'deleteProject'
         });
         confirmPopup.then(function(res) {
-          if(res) {
-              $scope.sourceRepo.get(id).then(function(doc) {
-                return $scope.sourceRepo.remove(doc);
-              }).then(function (result) {
-                  $scope.removeAnimate = true;
-                  $scope.$apply();
-                  for (var i = 0; i < $scope.project.sources.length; i++) {
-                      if ($scope.project.sources[i]._id == result.id) {
-                          $scope.project.sources.splice(i, 1);
-                          $scope.$apply();
-                          $scope.removeAnimate = false;
-                          $scope.$apply();
-                          return;
-                      }
-                  }
+            if (res) {
+                $scope.sourceRepo.get(id).then(function(doc) {
+                    return $scope.sourceRepo.remove(doc);
+                }).then(function(result) {
+                    $scope.removeAnimate = true;
+                    $scope.$apply();
+                    for (var i = 0; i < $scope.project.sources.length; i++) {
+                        if ($scope.project.sources[i]._id == result.id) {
+                            $scope.project.sources.splice(i, 1);
+                            $scope.$apply();
+                            $scope.removeAnimate = false;
+                            $scope.$apply();
+                            return;
+                        }
+                    }
 
-              }).catch(function (err) {
-                console.log(err);
-              });
-          } else {
-            $ionicListDelegate.closeOptionButtons();
-          }
+                }).catch(function(err) {
+                    console.log(err);
+                });
+            } else {
+                $ionicListDelegate.closeOptionButtons();
+            }
         });
     }
 
-    $scope.fetchFromISBNdb = function (inputISBN) {
+    $scope.fetchFromISBNdb = function(inputISBN) {
         if (navigator.onLine) {
             var loading = $ionicLoading.show({
-              template: '<ion-spinner></ion-spinner>'
+                template: '<ion-spinner></ion-spinner>'
             });
-            $http({ method:"GET", url:"http://isbndb.com/api/v2/json/YVFT6RLV/book/"+inputISBN})
-            .then(function (response) { // Success
-                // alert(JSON.stringify(response));
-                if (!!response.data.error) {
-                    loading.hide();
-                    var alertPopup = $ionicPopup.alert({
-                        title: 'Livre introuvable',
-                        template: '<p class="center">Le code barre a bien été balayé, mais ce livre ne semble pas faire partie de notre base de données. </p>'
-                    });
-                }else {
-                    // Titre
-                    $scope.newsource.title = response.data.data[0].title;
-                    // Publisher/Editor
-                    $scope.newsource.editor = response.data.data[0].publisher_name;
-                    // Date de publication
-                    if (!!response.data.data[0].edition_info && response.data.data[0].edition_info.match(/[0-9]{4}/)) {
-                        var working_on_date = response.data.data[0].edition_info.match(/[0-9]{4}/);
-                        $scope.newsource.publicationDate = response.data.data[0].edition_info.match(/[0-9]{4}/);
-                    }else if (!!response.data.data[0].publisher_text && response.data.data[0].publisher_text.match(/[0-9]{4}/)) {
-                        var working_on_date = response.data.data[0].publisher_text.match(/[0-9]{4}/);
-                        $scope.newsource.publicationDate = response.data.data[0].publisher_text.match(/[0-9]{4}/);
-                    }else {
-                        var working_on_date = "";
-                    }
+            $http({
+                    method: "GET",
+                    url: "http://isbndb.com/api/v2/json/YVFT6RLV/book/" + inputISBN
+                })
+                .then(function(response) { // Success
+                    // alert(JSON.stringify(response));
+                    if (!!response.data.error) {
+                        loading.hide();
+                        var alertPopup = $ionicPopup.alert({
+                            title: 'Livre introuvable',
+                            template: '<p class="center">Le code barre a bien été balayé, mais ce livre ne semble pas faire partie de notre base de données. </p>'
+                        });
+                    } else {
+                        // Titre
+                        $scope.newsource.title = response.data.data[0].title;
+                        // Publisher/Editor
+                        $scope.newsource.editor = response.data.data[0].publisher_name;
+                        // Date de publication
+                        if (!!response.data.data[0].edition_info && response.data.data[0].edition_info.match(/[0-9]{4}/)) {
+                            var working_on_date = response.data.data[0].edition_info.match(/[0-9]{4}/);
+                            $scope.newsource.publicationDate = response.data.data[0].edition_info.match(/[0-9]{4}/);
+                        } else if (!!response.data.data[0].publisher_text && response.data.data[0].publisher_text.match(/[0-9]{4}/)) {
+                            var working_on_date = response.data.data[0].publisher_text.match(/[0-9]{4}/);
+                            $scope.newsource.publicationDate = response.data.data[0].publisher_text.match(/[0-9]{4}/);
+                        } else {
+                            var working_on_date = "";
+                        }
 
-                    // Lieu de publication
-                    if (response.data.data[0].publisher_text != "") {
-                        var working_on_location = response.data.data[0].publisher_text;
-                        working_on_location = working_on_location.replace(response.data.data[0].publisher_name, "");
-                        working_on_location = working_on_location.replace(working_on_date, "");
-                        working_on_location = working_on_location.replace(/[^a-zA-z\s]/g, "");
-                        working_on_location = working_on_location.trim();
-                        if (working_on_location != "") {
-                            $scope.newsource.publicationLocation = working_on_location;
+                        // Lieu de publication
+                        if (response.data.data[0].publisher_text != "") {
+                            var working_on_location = response.data.data[0].publisher_text;
+                            working_on_location = working_on_location.replace(response.data.data[0].publisher_name, "");
+                            working_on_location = working_on_location.replace(working_on_date, "");
+                            working_on_location = working_on_location.replace(/[^a-zA-z\s]/g, "");
+                            working_on_location = working_on_location.trim();
+                            if (working_on_location != "") {
+                                $scope.newsource.publicationLocation = working_on_location;
+                            }
                         }
-                    }
-                    // Nombre de pages
-                    if (response.data.data[0].physical_description_text != "") {
-                        var arr_pages = response.data.data[0].physical_description_text.split(" ");
-                        if (arr_pages.indexOf("p.") != -1) {
-                            var indexOfPages = arr_pages.indexOf("p.") - 1;
-                            $scope.newsource.pageNumber = arr_pages[indexOfPages];
-                        }else if (arr_pages.indexOf("pages") != -1) {
-                            var indexOfPages = arr_pages.indexOf("pages") - 1;
-                            $scope.newsource.pageNumber = arr_pages[indexOfPages];
+                        // Nombre de pages
+                        if (response.data.data[0].physical_description_text != "") {
+                            var arr_pages = response.data.data[0].physical_description_text.split(" ");
+                            if (arr_pages.indexOf("p.") != -1) {
+                                var indexOfPages = arr_pages.indexOf("p.") - 1;
+                                $scope.newsource.pageNumber = arr_pages[indexOfPages];
+                            } else if (arr_pages.indexOf("pages") != -1) {
+                                var indexOfPages = arr_pages.indexOf("pages") - 1;
+                                $scope.newsource.pageNumber = arr_pages[indexOfPages];
+                            }
                         }
-                    }
 
-                    // Auteur
-                    if (response.data.data[0].author_data.length) {
-                        for (var i = 0; i < response.data.data[0].author_data.length; i++) {
-                            $scope.newsource["author" + String(i+1) + "lastname"] = response.data.data[0].author_data[i].name.split(",")[0];
-                            $scope.newsource["author" + String(i+1) + "firstname"] = response.data.data[0].author_data[i].name.split(",")[1];
+                        // Auteur
+                        if (response.data.data[0].author_data.length) {
+                            for (var i = 0; i < response.data.data[0].author_data.length; i++) {
+                                $scope.newsource["author" + String(i + 1) + "lastname"] = response.data.data[0].author_data[i].name.split(",")[0];
+                                $scope.newsource["author" + String(i + 1) + "firstname"] = response.data.data[0].author_data[i].name.split(",")[1];
+                            }
+                            var authorNum = response.data.data[0].author_data.length;
+                            if (authorNum >= 1 && authorNum <= 3) {
+                                $scope.newsource.hasAuthors = "13";
+                            } else if (authorNum > 3) {
+                                $scope.newsource.hasAuthors = "more3";
+                            }
                         }
-                        var authorNum = response.data.data[0].author_data.length;
-                        if (authorNum >= 1 && authorNum <= 3) {
-                            $scope.newsource.hasAuthors = "13";
-                        }else if (authorNum > 3) {
-                            $scope.newsource.hasAuthors = "more3";
-                        }
-                    }
 
-                    loading.hide();
-                }
-            }, function (response) { // Failure
-                if (response.status == 408) {
-                    loading.hide();
-                    var alertPopup = $ionicPopup.confirm({
-                        title: 'Erreur',
-                        template: "<p class='center'>Le temps d'attente est écoulé. Vous vous trouvez probablement sur un réseau lent. Voulez-vous ajouter ce code-barre dans la liste d'attente ou réessayer ?</p>",
-                        okText: "Ajouter",
-                        okType: "button-positive",
-                        cancelText: "Réessayer",
-                        cancelType: "button-balanced button-outline"
-                    });
-                    alertPopup.then(function (res) {
-                        if (res) {
-                            var creating = { isbn:inputISBN, date:new Date().toLocaleDateString()};
-                            $scope.pendingRepo.post(creating).then(function (responseRepo) {
-                                creating._id = responseRepo.id;
-                                creating._rev = responseRepo.rev;
-                                $scope.project.pendings.push(creating);
-                            });
-                            $scope.newSourceModal.hide();
-                        }else {
-                            $scope.fetchFromISBNdb(inputISBN);
-                        }
-                    });
-                }
-            });
-        }else {
+                        loading.hide();
+                    }
+                }, function(response) { // Failure
+                    if (response.status == 408) {
+                        loading.hide();
+                        var alertPopup = $ionicPopup.confirm({
+                            title: 'Erreur',
+                            template: "<p class='center'>Le temps d'attente est écoulé. Vous vous trouvez probablement sur un réseau lent. Voulez-vous ajouter ce code-barre dans la liste d'attente ou réessayer ?</p>",
+                            okText: "Ajouter",
+                            okType: "button-positive",
+                            cancelText: "Réessayer",
+                            cancelType: "button-balanced button-outline"
+                        });
+                        alertPopup.then(function(res) {
+                            if (res) {
+                                var creating = {
+                                    isbn: inputISBN,
+                                    date: new Date().toLocaleDateString()
+                                };
+                                $scope.pendingRepo.post(creating).then(function(responseRepo) {
+                                    creating._id = responseRepo.id;
+                                    creating._rev = responseRepo.rev;
+                                    $scope.project.pendings.push(creating);
+                                });
+                                $scope.newSourceModal.hide();
+                            } else {
+                                $scope.fetchFromISBNdb(inputISBN);
+                            }
+                        });
+                    }
+                });
+        } else {
             var alertPopup = $ionicPopup.confirm({
                 title: 'Aucune connexion',
                 template: '<p class="center">Voulez-vous ajouter ce code barre à la liste d\'attente ?</p>',
@@ -794,72 +809,76 @@ angular.module('metho.controllers.projects', [])
                 cancelText: "Réessayer",
                 cancelType: "button-outline button-balanced"
             });
-            alertPopup.then(function (res) {
+            alertPopup.then(function(res) {
                 if (res) {
-                    var creating = { isbn:inputISBN, date:new Date().toLocaleDateString(), project_id:$stateParams.projectID};
-                    $scope.pendingRepo.post(creating).then(function (responseRepo) {
+                    var creating = {
+                        isbn: inputISBN,
+                        date: new Date().toLocaleDateString(),
+                        project_id: $stateParams.projectID
+                    };
+                    $scope.pendingRepo.post(creating).then(function(responseRepo) {
                         creating._id = responseRepo.id;
                         creating._rev = responseRepo.rev;
                         $scope.project.pendings.push(creating);
                     });
                     $scope.newSourceModal.hide();
-                }else {
+                } else {
                     $scope.fetchFromISBNdb(inputISBN);
                 }
             });
         }
     }
 
-    $scope.scanBook = function () {
-        if (!Settings.get("scanBoardingDone")) {
-            $scope.scanBoardingModal.show();
-            $scope.boardingIndex = 0;
-            return;
-        }else {
-            $scope.newsource.type = "book";
-        }
-        $ionicBackdrop.retain();
-        cordova.plugins.barcodeScanner.scan(
-            function (result) {
-                $ionicBackdrop.release();
-                if (!result.cancelled) {
-                    if (result.format == "EAN_13") {
-                        $scope.fetchFromISBNdb(result.text);
-                    }else {
-                        var alertPopup = $ionicPopup.alert({
-                            title: 'Livre introuvable',
-                            template: '<p class="center">Le code barre a été balayé, mais ce type de code barre n\'est pas un code barre de livre. Le bon code barre possède habituellement une inscription ISBN par dessus celui-ci. Si deux code barre sont côte à côte, le mauvais a peut-être été balayé. Vous pouvez réessayer.</p>'
-                        });
-                    }
-                }
-            },
-            function (error) {
-                $ionicBackdrop.release();
-                console.log("Scanning failed: " + error);
+    $scope.scanBook = function() {
+            if (!Settings.get("scanBoardingDone")) {
+                $scope.scanBoardingModal.show();
+                $scope.boardingIndex = 0;
+                return;
+            } else {
+                $scope.newsource.type = "book";
             }
-        );
-    }
-    // Initialize
+            $ionicBackdrop.retain();
+            cordova.plugins.barcodeScanner.scan(
+                function(result) {
+                    $ionicBackdrop.release();
+                    if (!result.cancelled) {
+                        if (result.format == "EAN_13") {
+                            $scope.fetchFromISBNdb(result.text);
+                        } else {
+                            var alertPopup = $ionicPopup.alert({
+                                title: 'Livre introuvable',
+                                template: '<p class="center">Le code barre a été balayé, mais ce type de code barre n\'est pas un code barre de livre. Le bon code barre possède habituellement une inscription ISBN par dessus celui-ci. Si deux code barre sont côte à côte, le mauvais a peut-être été balayé. Vous pouvez réessayer.</p>'
+                            });
+                        }
+                    }
+                },
+                function(error) {
+                    $ionicBackdrop.release();
+                    console.log("Scanning failed: " + error);
+                }
+            );
+        }
+        // Initialize
 
-    $scope.analyseItemsInfo = function (result) {
+    $scope.analyseItemsInfo = function(result) {
         for (var i = 0; i < result.rows.length; i++) {
             if (result.rows[i].doc.project_id == $stateParams.projectID) {
                 $scope.project.sources.push(result.rows[i].doc);
             }
         }
-        $scope.project.sources.sort(function (a,b) {
+        $scope.project.sources.sort(function(a, b) {
             if (a.title && b.title) {
                 return a.title.localeCompare(b.title);
-            }else if (a.title) {
+            } else if (a.title) {
                 return a.title.localeCompare(b.parsedSource);
-            }else if (b.title) {
+            } else if (b.title) {
                 return a.parsedSource.localeCompare(b.title);
             }
         });
         $scope.loading = false;
     }
 
-    $scope.analysePendings = function (result) {
+    $scope.analysePendings = function(result) {
         for (var i = 0; i < result.rows.length; i++) {
             if (result.rows[i].doc.project_id == $stateParams.projectID) {
                 $scope.project.pendings.push(result.rows[i].doc);
@@ -867,20 +886,24 @@ angular.module('metho.controllers.projects', [])
         }
     }
 
-    $scope.sourceRepo.allDocs({ include_docs: true }).then($scope.analyseItemsInfo);
-    $scope.pendingRepo.allDocs({ include_docs: true }).then($scope.analysePendings);
+    $scope.sourceRepo.allDocs({
+        include_docs: true
+    }).then($scope.analyseItemsInfo);
+    $scope.pendingRepo.allDocs({
+        include_docs: true
+    }).then($scope.analysePendings);
 
-    $scope.$on("$ionicView.afterEnter", function () {
+    $scope.$on("$ionicView.afterEnter", function() {
         if ($scope.refreshID != null) {
-            $scope.sourceRepo.get($scope.refreshID).then(function (result) {
+            $scope.sourceRepo.get($scope.refreshID).then(function(result) {
                 $scope.project.sources[$scope.refreshIndex] = result;
             });
-            $scope.project.sources.sort(function (a,b) {
+            $scope.project.sources.sort(function(a, b) {
                 if (a.title && b.title) {
                     return a.title.localeCompare(b.title);
-                }else if (a.title) {
+                } else if (a.title) {
                     return a.title.localeCompare(b.parsedSource);
-                }else if (b.title) {
+                } else if (b.title) {
                     return a.parsedSource.localeCompare(b.title);
                 }
             });
@@ -889,12 +912,12 @@ angular.module('metho.controllers.projects', [])
         if ($scope.refreshPending) {
             $scope.project.pendings = SharePendings.getPendings();
             $scope.project.sources = $scope.project.sources.concat(SharePendings.getSources());
-            $scope.project.sources.sort(function (a,b) {
+            $scope.project.sources.sort(function(a, b) {
                 if (a.title && b.title) {
                     return a.title.localeCompare(b.title);
-                }else if (a.title) {
+                } else if (a.title) {
                     return a.title.localeCompare(b.parsedSource);
-                }else if (b.title) {
+                } else if (b.title) {
                     return a.parsedSource.localeCompare(b.title);
                 }
             });
@@ -903,7 +926,7 @@ angular.module('metho.controllers.projects', [])
         $scope.isAdvanced = Settings.get("advanced");
     });
 
-    $scope.openSourceDetail = function (id) {
+    $scope.openSourceDetail = function(id) {
         for (var i = 0; i < $scope.project.sources.length; i++) {
             if ($scope.project.sources[i]._id == id) {
                 var index = i;
@@ -911,21 +934,26 @@ angular.module('metho.controllers.projects', [])
             }
         }
         ShareSource.setSource($scope.project.sources[index]);
-        $state.go('tab.source-detail', {projectID:$stateParams.projectID, sourceID:id});
+        $state.go('tab.source-detail', {
+            projectID: $stateParams.projectID,
+            sourceID: id
+        });
         $scope.refreshID = id;
         $scope.refreshIndex = index;
     }
 
-    $scope.openPendings = function () {
+    $scope.openPendings = function() {
         SharePendings.setPendings($scope.project.pendings);
         $scope.refreshPending = true;
-        $state.go('tab.pending', {projectID:$scope.project.id});
+        $state.go('tab.pending', {
+            projectID: $scope.project.id
+        });
     }
 })
 
 
 // Source detail view
-.controller('SourceDetailCtrl', function ($scope, $stateParams, $ionicPopup, $parseSource, $ionicModal, ShareSource) {
+.controller('SourceDetailCtrl', function($scope, $stateParams, $ionicPopup, $parseSource, $ionicModal, ShareSource) {
     $scope.source = ShareSource.getSource();
     $scope.loading = false;
     $scope.sourceRepo = new PouchDB("sources");
@@ -938,7 +966,7 @@ angular.module('metho.controllers.projects', [])
         $scope.editSourceModal = modal;
     });
 
-    $scope.solveError = function (id) {
+    $scope.solveError = function(id) {
         if (!!window.cordova) {
             cordova.plugins.Keyboard.disableScroll(false);
         }
@@ -964,18 +992,18 @@ angular.module('metho.controllers.projects', [])
 
                     }
                     $scope.source = $parseSource.parseSource($scope.source);
-                    $scope.sourceRepo.put($scope.source, $scope.source._id, $scope.source._rev).then(function (response) {
+                    $scope.sourceRepo.put($scope.source, $scope.source._id, $scope.source._rev).then(function(response) {
                         if (response.ok) {
                             $scope.source._rev = response.rev;
-                        }else {
+                        } else {
                             console.log("not ok");
                         }
-                    }).catch(function (error) {
+                    }).catch(function(error) {
                         console.log(error);
                     });
                 }
             });
-        }else {
+        } else {
             $ionicPopup.prompt({
                 title: $scope.source.errors[id].promptTitle,
                 subTitle: $scope.source.errors[id].promptText,
@@ -986,13 +1014,13 @@ angular.module('metho.controllers.projects', [])
                 if (res != null) {
                     $scope.source[$scope.source.errors[id].var] = res;
                     $scope.source = $parseSource.parseSource($scope.source);
-                    $scope.sourceRepo.put($scope.source, $scope.source._id, $scope.source._rev).then(function (response) {
+                    $scope.sourceRepo.put($scope.source, $scope.source._id, $scope.source._rev).then(function(response) {
                         if (response.ok) {
                             $scope.source._rev = response.rev;
-                        }else {
+                        } else {
                             console.log("not ok");
                         }
-                    }).catch(function (error) {
+                    }).catch(function(error) {
                         console.log(error);
                     });
                 }
@@ -1001,7 +1029,7 @@ angular.module('metho.controllers.projects', [])
 
     }
 
-    $scope.solveWarning = function (id) {
+    $scope.solveWarning = function(id) {
         cordova.plugins.Keyboard.disableScroll(false);
         $ionicPopup.prompt({
             title: $scope.source.warnings[id].promptTitle,
@@ -1013,20 +1041,20 @@ angular.module('metho.controllers.projects', [])
             if (res != null) {
                 $scope.source[$scope.source.warnings[id].var] = res;
                 $scope.source = $parseSource.parseSource($scope.source);
-                $scope.sourceRepo.put($scope.source, $scope.source._id, $scope.source._rev).then(function (response) {
+                $scope.sourceRepo.put($scope.source, $scope.source._id, $scope.source._rev).then(function(response) {
                     if (response.ok) {
                         $scope.source._rev = response.rev;
-                    }else {
+                    } else {
                         console.log("not ok");
                     }
-                }).catch(function (error) {
+                }).catch(function(error) {
                     console.log(error);
                 });
             }
         });
     }
 
-    $scope.edit = function () {
+    $scope.edit = function() {
         cordova.plugins.Keyboard.disableScroll(true);
         $scope.newsource = JSON.parse(JSON.stringify($scope.source));
         if ($scope.newsource.consultationDate != null && $scope.newsource.consultationDate != "") {
@@ -1035,22 +1063,22 @@ angular.module('metho.controllers.projects', [])
         $scope.editSourceModal.show();
     }
 
-    $scope.cancelEdit = function () {
+    $scope.cancelEdit = function() {
         $scope.newsource = {};
         $scope.editSourceModal.hide();
     }
 
-    $scope.submitEdit = function () {
+    $scope.submitEdit = function() {
         $scope.source = $parseSource.parseSource($scope.newsource);
         $scope.editSourceModal.hide();
         $scope.newsource = {};
-        $scope.sourceRepo.put($scope.source, $scope.source._id, $scope.source._rev).then(function (response) {
+        $scope.sourceRepo.put($scope.source, $scope.source._id, $scope.source._rev).then(function(response) {
             if (response.ok) {
                 $scope.source._rev = response.rev;
-            }else {
+            } else {
                 console.log("not ok");
             }
-        }).catch(function (error) {
+        }).catch(function(error) {
             console.log(error);
         });
     }
@@ -1058,14 +1086,14 @@ angular.module('metho.controllers.projects', [])
     // Init if service is unavailable (debug when reloading the page)
     if ($scope.source == null) {
         $scope.loading = true;
-        $scope.sourceRepo.get($stateParams.sourceID).then(function (result) {
+        $scope.sourceRepo.get($stateParams.sourceID).then(function(result) {
             $scope.source = result;
             $scope.loading = false;
         });
     }
 })
 
-.controller("PendingCtrl", function ($scope, $stateParams, SharePendings, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicLoading, $http, $parseSource, $state) {
+.controller("PendingCtrl", function($scope, $stateParams, SharePendings, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicLoading, $http, $parseSource, $state) {
     $scope.project = {
         id: $stateParams.projectID,
         sources: []
@@ -1084,38 +1112,38 @@ angular.module('metho.controllers.projects', [])
         $scope.newSourceModal = modal;
     });
 
-    $scope.$on("$ionicView.beforeLeave", function () {
+    $scope.$on("$ionicView.beforeLeave", function() {
         SharePendings.setSources($scope.project.sources);
         SharePendings.setPendings($scope.pendings);
     });
 
-    $scope.openAtURL = function (url) {
-        SafariViewController.isAvailable(function (available) {
+    $scope.openAtURL = function(url) {
+        SafariViewController.isAvailable(function(available) {
             if (available) {
-              SafariViewController.show({
-                    url: url
-                  },
-                  // this success handler will be invoked for the lifecycle events 'opened', 'loaded' and 'closed'
-                  function(result) {
+                SafariViewController.show({
+                        url: url
+                    },
+                    // this success handler will be invoked for the lifecycle events 'opened', 'loaded' and 'closed'
+                    function(result) {
 
-                  },
-                  function(msg) {
-                    alert("KO: " + msg);
-                  })
+                    },
+                    function(msg) {
+                        alert("KO: " + msg);
+                    })
             } else {
-              // potentially powered by InAppBrowser because that (currently) clobbers window.open
-              window.open(url, '_blank', 'location=yes');
+                // potentially powered by InAppBrowser because that (currently) clobbers window.open
+                window.open(url, '_blank', 'location=yes');
             }
         })
     }
 
-    $scope.downloadDetails = function (index, isbn, id) {
+    $scope.downloadDetails = function(index, isbn, id) {
         $scope.newsource.type = "book";
         $scope.newSourceModal.show();
         if ($scope.pendings[index].not_available) {
             $scope.newsource.not_available = true;
-            $scope.openAtURL("http://google.ca/search?q=isbn+"+$scope.pendings[index].isbn);
-        }else {
+            $scope.openAtURL("http://google.ca/search?q=isbn+" + $scope.pendings[index].isbn);
+        } else {
             $scope.fetchFromISBNdb(isbn);
         }
         $scope.editingISBN = isbn;
@@ -1123,65 +1151,67 @@ angular.module('metho.controllers.projects', [])
         $scope.editingId = id;
     }
 
-    $scope.openWebBrowser = function () {
-        $scope.openAtURL("http://google.ca/search?q=isbn+"+$scope.pendings[$scope.editingIndex].isbn);
+    $scope.openWebBrowser = function() {
+        $scope.openAtURL("http://google.ca/search?q=isbn+" + $scope.pendings[$scope.editingIndex].isbn);
     }
-    $scope.submitSource = function () {
+    $scope.submitSource = function() {
         if ($scope.newsource.type != "" && $scope.newsource.type != null) {
             var creatingProj = $parseSource.parseSource($scope.newsource);
             creatingProj.project_id = $stateParams.projectID;
             // Save to db
-            $scope.sourceRepo.post(creatingProj).then(function (response) {
+            $scope.sourceRepo.post(creatingProj).then(function(response) {
                 creatingProj._id = response.id;
                 creatingProj._rev = response.rev;
                 $scope.project.sources.push(creatingProj);
                 if ($scope.editingId) {
                     $scope.pendings.splice($scope.editingIndex, 1);
                     $scope.pendingRepo.get($scope.editingId).then(function(doc) {
-                      return $scope.pendingRepo.remove(doc);
-                    }).then(function (result) {
-                      // handle result
-                    }).catch(function (err) {
-                      console.log(err);
+                        return $scope.pendingRepo.remove(doc);
+                    }).then(function(result) {
+                        // handle result
+                    }).catch(function(err) {
+                        console.log(err);
                     });
                 }
                 $scope.editingISBN = null;
                 $scope.editingIndex = null;
                 $scope.editingId = null;
                 if ($scope.pendings.length == 0) {
-                    $state.go("tab.project-detail", {projectID:$stateParams.projectID});
+                    $state.go("tab.project-detail", {
+                        projectID: $stateParams.projectID
+                    });
                 }
                 $scope.closeModal();
                 $scope.$apply();
-            }).catch(function (err) {
+            }).catch(function(err) {
                 alert(err);
             });
-        }else {
+        } else {
             var alertPopup = $ionicPopup.alert({
-             title: 'Erreur',
-             template: '<p class="center">La source doit avoir un type.</p>'
+                title: 'Erreur',
+                template: '<p class="center">La source doit avoir un type.</p>'
             });
             return;
         }
     }
 
-    $scope.closeModal = function () {
+    $scope.closeModal = function() {
         $scope.newSourceModal.hide();
         $scope.resetModalVars();
     }
 
-    $scope.resetModalVars = function () {
+    $scope.resetModalVars = function() {
         // Reset vars
         $scope.newsource = {};
         $scope.newsource.consultationDate = new Date();
     }
 
-    $scope.refreshModalScroll = function () {
+    $scope.refreshModalScroll = function() {
         $ionicScrollDelegate.resize();
     }
 
-    $scope.refreshModalScrollWithDelay = function () {
-        setTimeout(function () {
+    $scope.refreshModalScrollWithDelay = function() {
+        setTimeout(function() {
             $ionicScrollDelegate.resize();
         }, 1000);
     }
@@ -1203,116 +1233,119 @@ angular.module('metho.controllers.projects', [])
     window.addEventListener('keyboardDidHide', $scope.refreshModalScroll);
     window.addEventListener('keyboardWillShow', $scope.refreshModalScroll);
 
-    $scope.fetchFromISBNdb = function (inputISBN) {
+    $scope.fetchFromISBNdb = function(inputISBN) {
         if (navigator.onLine) {
             var loading = $ionicLoading.show({
-              template: '<ion-spinner></ion-spinner>'
+                template: '<ion-spinner></ion-spinner>'
             });
-            $http({ method:"GET", url:"http://isbndb.com/api/v2/json/YVFT6RLV/book/"+inputISBN})
-            .then(function (response) { // Success
-                // alert(JSON.stringify(response));
-                if (!!response.data.error) {
-                    loading.hide();
-                    $ionicPopup.confirm({
-                        title: 'Livre introuvable',
-                        template: '<p class="center">Le code barre a bien été balayé, mais ce livre ne semble pas faire partie de notre base de données. Voulez-vous rechercher les informations sur Internet?</p>',
-                        okText:"Rechercher",
-                        cancelText:"Plus tard"
-                    }).then(function(res) {
-                        if(res) {
-                            $scope.newsource.not_available = true;
-                            $scope.pendings[$scope.editingIndex].not_available = true;
-                            $scope.pendingRepo.put($scope.pendings[$scope.editingIndex]);
-                            $scope.openAtURL("http://google.ca/search?q=isbn+"+$scope.pendings[$scope.editingIndex].isbn);
+            $http({
+                    method: "GET",
+                    url: "http://isbndb.com/api/v2/json/YVFT6RLV/book/" + inputISBN
+                })
+                .then(function(response) { // Success
+                    // alert(JSON.stringify(response));
+                    if (!!response.data.error) {
+                        loading.hide();
+                        $ionicPopup.confirm({
+                            title: 'Livre introuvable',
+                            template: '<p class="center">Le code barre a bien été balayé, mais ce livre ne semble pas faire partie de notre base de données. Voulez-vous rechercher les informations sur Internet?</p>',
+                            okText: "Rechercher",
+                            cancelText: "Plus tard"
+                        }).then(function(res) {
+                            if (res) {
+                                $scope.newsource.not_available = true;
+                                $scope.pendings[$scope.editingIndex].not_available = true;
+                                $scope.pendingRepo.put($scope.pendings[$scope.editingIndex]);
+                                $scope.openAtURL("http://google.ca/search?q=isbn+" + $scope.pendings[$scope.editingIndex].isbn);
+                            } else {
+                                $scope.newSourceModal.hide();
+                                $scope.newsource = {};
+                                $scope.pendings[$scope.editingIndex].not_available = true;
+                                $scope.pendingRepo.put($scope.pendings[$scope.editingIndex]);
+                                $scope.editingId = null;
+                                $scope.editingISBN = null;
+                                $scope.editingIndex = null;
+                            }
+                        });
+                    } else {
+                        // Titre
+                        $scope.newsource.title = response.data.data[0].title;
+                        // Publisher/Editor
+                        $scope.newsource.editor = response.data.data[0].publisher_name;
+                        // Date de publication
+                        if (!!response.data.data[0].edition_info && response.data.data[0].edition_info.match(/[0-9]{4}/)) {
+                            var working_on_date = response.data.data[0].edition_info.match(/[0-9]{4}/);
+                            $scope.newsource.publicationDate = response.data.data[0].edition_info.match(/[0-9]{4}/);
+                        } else if (!!response.data.data[0].publisher_text && response.data.data[0].publisher_text.match(/[0-9]{4}/)) {
+                            var working_on_date = response.data.data[0].publisher_text.match(/[0-9]{4}/);
+                            $scope.newsource.publicationDate = response.data.data[0].publisher_text.match(/[0-9]{4}/);
                         } else {
-                            $scope.newSourceModal.hide();
-                            $scope.newsource = {};
-                            $scope.pendings[$scope.editingIndex].not_available = true;
-                            $scope.pendingRepo.put($scope.pendings[$scope.editingIndex]);
-                            $scope.editingId = null;
-                            $scope.editingISBN = null;
-                            $scope.editingIndex = null;
+                            var working_on_date = "";
                         }
-                   });
-                }else {
-                    // Titre
-                    $scope.newsource.title = response.data.data[0].title;
-                    // Publisher/Editor
-                    $scope.newsource.editor = response.data.data[0].publisher_name;
-                    // Date de publication
-                    if (!!response.data.data[0].edition_info && response.data.data[0].edition_info.match(/[0-9]{4}/)) {
-                        var working_on_date = response.data.data[0].edition_info.match(/[0-9]{4}/);
-                        $scope.newsource.publicationDate = response.data.data[0].edition_info.match(/[0-9]{4}/);
-                    }else if (!!response.data.data[0].publisher_text && response.data.data[0].publisher_text.match(/[0-9]{4}/)) {
-                        var working_on_date = response.data.data[0].publisher_text.match(/[0-9]{4}/);
-                        $scope.newsource.publicationDate = response.data.data[0].publisher_text.match(/[0-9]{4}/);
-                    }else {
-                        var working_on_date = "";
-                    }
 
-                    // Lieu de publication
-                    if (response.data.data[0].publisher_text != "") {
-                        var working_on_location = response.data.data[0].publisher_text;
-                        working_on_location = working_on_location.replace(response.data.data[0].publisher_name, "");
-                        working_on_location = working_on_location.replace(working_on_date, "");
-                        working_on_location = working_on_location.replace(/[^a-zA-z\s]/g, "");
-                        working_on_location = working_on_location.trim();
-                        if (working_on_location != "") {
-                            $scope.newsource.publicationLocation = working_on_location;
+                        // Lieu de publication
+                        if (response.data.data[0].publisher_text != "") {
+                            var working_on_location = response.data.data[0].publisher_text;
+                            working_on_location = working_on_location.replace(response.data.data[0].publisher_name, "");
+                            working_on_location = working_on_location.replace(working_on_date, "");
+                            working_on_location = working_on_location.replace(/[^a-zA-z\s]/g, "");
+                            working_on_location = working_on_location.trim();
+                            if (working_on_location != "") {
+                                $scope.newsource.publicationLocation = working_on_location;
+                            }
                         }
-                    }
-                    // Nombre de pages
-                    if (response.data.data[0].physical_description_text != "") {
-                        var arr_pages = response.data.data[0].physical_description_text.split(" ");
-                        if (arr_pages.indexOf("p.") != -1) {
-                            var indexOfPages = arr_pages.indexOf("p.") - 1;
-                            $scope.newsource.pageNumber = arr_pages[indexOfPages];
-                        }else if (arr_pages.indexOf("pages") != -1) {
-                            var indexOfPages = arr_pages.indexOf("pages") - 1;
-                            $scope.newsource.pageNumber = arr_pages[indexOfPages];
+                        // Nombre de pages
+                        if (response.data.data[0].physical_description_text != "") {
+                            var arr_pages = response.data.data[0].physical_description_text.split(" ");
+                            if (arr_pages.indexOf("p.") != -1) {
+                                var indexOfPages = arr_pages.indexOf("p.") - 1;
+                                $scope.newsource.pageNumber = arr_pages[indexOfPages];
+                            } else if (arr_pages.indexOf("pages") != -1) {
+                                var indexOfPages = arr_pages.indexOf("pages") - 1;
+                                $scope.newsource.pageNumber = arr_pages[indexOfPages];
+                            }
                         }
-                    }
 
-                    // Auteur
-                    if (response.data.data[0].author_data.length) {
-                        for (var i = 0; i < response.data.data[0].author_data.length; i++) {
-                            $scope.newsource["author" + String(i+1) + "lastname"] = response.data.data[0].author_data[i].name.split(",")[0];
-                            $scope.newsource["author" + String(i+1) + "firstname"] = response.data.data[0].author_data[i].name.split(",")[1];
+                        // Auteur
+                        if (response.data.data[0].author_data.length) {
+                            for (var i = 0; i < response.data.data[0].author_data.length; i++) {
+                                $scope.newsource["author" + String(i + 1) + "lastname"] = response.data.data[0].author_data[i].name.split(",")[0];
+                                $scope.newsource["author" + String(i + 1) + "firstname"] = response.data.data[0].author_data[i].name.split(",")[1];
+                            }
+                            var authorNum = response.data.data[0].author_data.length;
+                            if (authorNum >= 1 && authorNum <= 3) {
+                                $scope.newsource.hasAuthors = "13";
+                            } else if (authorNum > 3) {
+                                $scope.newsource.hasAuthors = "more3";
+                            }
                         }
-                        var authorNum = response.data.data[0].author_data.length;
-                        if (authorNum >= 1 && authorNum <= 3) {
-                            $scope.newsource.hasAuthors = "13";
-                        }else if (authorNum > 3) {
-                            $scope.newsource.hasAuthors = "more3";
-                        }
-                    }
 
-                    loading.hide();
-                }
-            }, function (response) { // Failure
-                if (response.status == 408) {
-                    loading.hide();
-                    var alertPopup = $ionicPopup.confirm({
-                        title: 'Erreur',
-                        template: "<p class='center'>Le temps d'attente est écoulé. Vous vous trouvez probablement sur un réseau lent. Voulez-vous réessayer ?</p>",
-                        okText: "Réessayer",
-                        okType: "button-balanced",
-                        cancelText: "Annuler"
-                    });
-                    alertPopup.then(function (res) {
-                        if (res) {
-                            $scope.fetchFromISBNdb(inputISBN);
-                        }else {
-                            $scope.newSourceModal.hide();
-                            $scope.newsource = {};
-                            $scope.editingId = null;
-                            $scope.editingISBN = null;
-                            $scope.editingIndex = null;
-                        }
-                    });
-                }
-            });
-        }else {
+                        loading.hide();
+                    }
+                }, function(response) { // Failure
+                    if (response.status == 408) {
+                        loading.hide();
+                        var alertPopup = $ionicPopup.confirm({
+                            title: 'Erreur',
+                            template: "<p class='center'>Le temps d'attente est écoulé. Vous vous trouvez probablement sur un réseau lent. Voulez-vous réessayer ?</p>",
+                            okText: "Réessayer",
+                            okType: "button-balanced",
+                            cancelText: "Annuler"
+                        });
+                        alertPopup.then(function(res) {
+                            if (res) {
+                                $scope.fetchFromISBNdb(inputISBN);
+                            } else {
+                                $scope.newSourceModal.hide();
+                                $scope.newsource = {};
+                                $scope.editingId = null;
+                                $scope.editingISBN = null;
+                                $scope.editingIndex = null;
+                            }
+                        });
+                    }
+                });
+        } else {
             var alertPopup = $ionicPopup.confirm({
                 title: 'Aucune connexion',
                 template: '<p class="center">Voulez-vous réessayer?</p>',
@@ -1320,10 +1353,10 @@ angular.module('metho.controllers.projects', [])
                 okType: "button-balanced",
                 cancelText: "Annuler"
             });
-            alertPopup.then(function (res) {
+            alertPopup.then(function(res) {
                 if (res) {
                     $scope.fetchFromISBNdb(inputISBN);
-                }else {
+                } else {
                     $scope.newSourceModal.hide();
                     $scope.newsource = {};
                     $scope.editingId = null;
