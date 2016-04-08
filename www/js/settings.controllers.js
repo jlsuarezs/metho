@@ -101,4 +101,8 @@ angular.module("metho.controllers.settings", [])
 
         }
     }
+})
+
+.controller("InfosAdvancedCtrl", function ($scope) {
+    
 });

@@ -125,8 +125,17 @@ angular.module('metho', ['ionic', 'metho.controllers.projects', 'metho.controlle
         controller: 'FeedbackCtrl'
       }
     }
-  });
+  })
 
+  .state('tab.infos-advanced', {
+    url: '/settings/infos-advanced',
+    views: {
+      'tab-settings': {
+        templateUrl: 'templates/infos-advanced.html',
+        controller: 'InfosAdvancedCtrl'
+      }
+    }
+  });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/projects');
 

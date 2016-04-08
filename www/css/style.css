@@ -265,7 +265,7 @@ p.left-aligned {
 }
 
 .big {
-    font-size: 96px;
+    font-size: 96px !important;
 }
 
 #imgISBN {
@@ -339,4 +339,32 @@ p.left-aligned {
 .popup-vertical-buttons .popup-buttons .button{
   display:block;
   min-width: 100% !important;
+}
+
+.link-beautiful {
+    text-decoration: none;
+    color: #387ef5;
+}
+
+.item-toggle{
+  pointer-events:initial !important;
+}
+
+.button-priced {
+    height: auto !important;
+    font-size: 72px;
+    margin: 0 !important;
+    padding: 0;
+    min-height: 144px;
+    border-style: solid;
+    border-width: 1px;
+    border-bottom-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+.wrap {
+    white-space: normal !important;
+}
+
+.avatar-notround > img {
+    border-radius: 0 !important;
 }
