@@ -1,8 +1,13 @@
 angular.module('metho.controllers.refs', [])
 
 // Ref Tab view
-.controller('RefCtrl', function($scope, Articles) {
+.controller('RefCtrl', function($scope, Articles, Settings) {
   $scope.articles = Articles.all();
+  $scope.isAdvanced = Settings.get("advanced");
+
+  $scope.$on("$ionicView.beforeEnter", function () {
+    $scope.isAdvanced = Settings.get("advanced");
+  });
 })
 
 
