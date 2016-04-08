@@ -10,6 +10,10 @@ angular.module("metho.controllers.settings", [])
     $scope.changeSettings = function (setting) {
         Settings.set(setting, $scope.settings[setting]);
     }
+
+    $scope.$on("$ionicView.afterEnter", function () {
+        $scope.settings = Settings.all();
+    });
 })
 
 
@@ -103,6 +107,21 @@ angular.module("metho.controllers.settings", [])
     }
 })
 
-.controller("InfosAdvancedCtrl", function ($scope) {
-    
+.controller("InfosAdvancedCtrl", function ($scope, Settings, $ionicPopup, $state) {
+    $scope.buy = function () {
+        if (Settings.get("advanced")) {
+            $ionicPopup.alert({
+                title: 'Mode avancé',
+                template: '<p class="center">Le mode avancé est déjà activé</p>'
+            }).then(function () {
+                $state.go("tab.settings", {});
+            });
+        }else {
+            // Buy
+            
+            // Activate
+            Settings.set("advanced", true);
+            $state.go("tab.settings", {});
+        }
+    }
 });
