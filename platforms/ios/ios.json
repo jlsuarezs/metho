@@ -21,10 +21,6 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"ActionSheet\"><param name=\"ios-package\" value=\"ActionSheet\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
                             "count": 1
                         },
@@ -66,9 +62,6 @@
             "PACKAGE_NAME": "com.ionicframework.metho"
         },
         "cordova-plugin-x-socialsharing": {
-            "PACKAGE_NAME": "com.ionicframework.metho"
-        },
-        "cordova-plugin-actionsheet": {
             "PACKAGE_NAME": "com.ionicframework.metho"
         },
         "ionic-plugin-keyboard": {
@@ -122,14 +115,6 @@
             ]
         },
         {
-            "file": "plugins/cordova-plugin-actionsheet/www/ActionSheet.js",
-            "id": "cordova-plugin-actionsheet.ActionSheet",
-            "pluginId": "cordova-plugin-actionsheet",
-            "clobbers": [
-                "window.plugins.actionsheet"
-            ]
-        },
-        {
             "file": "plugins/ionic-plugin-keyboard/www/ios/keyboard.js",
             "id": "ionic-plugin-keyboard.keyboard",
             "pluginId": "ionic-plugin-keyboard",
@@ -174,7 +159,6 @@
     ],
     "plugin_metadata": {
         "cordova-plugin-x-socialsharing": "5.0.10",
-        "cordova-plugin-actionsheet": "2.2.2",
         "ionic-plugin-keyboard": "2.0.1",
         "cordova-plugin-device": "1.1.1",
         "cordova-plugin-inappbrowser": "1.2.1",

@@ -8,3 +8,4 @@ platforms/ios/Metho.xcodeproj
 .bowerrc
 .editorconfig
 bower.json
+www/.tern-project

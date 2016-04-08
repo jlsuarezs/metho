@@ -937,7 +937,9 @@ angular.module('metho.controllers.projects', [])
     });
 
     $scope.solveError = function (id) {
-        cordova.plugins.Keyboard.disableScroll(false);
+        if (!!window.cordova) {
+            cordova.plugins.Keyboard.disableScroll(false);
+        }
         if ($scope.source.errors[id].complex) {
             $ionicPopup.prompt({
                 title: $scope.source.errors[id].promptTitle,
