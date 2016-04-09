@@ -1137,9 +1137,15 @@ angular.module('metho.controllers.projects', [])
         })
     }
 
-    $scope.downloadDetails = function(index, isbn, id) {
+    $scope.downloadDetails = function(isbn, id) {
         $scope.newsource.type = "book";
         $scope.newSourceModal.show();
+        for (var i = 0; i < $scope.pendings.length; i++) {
+            if ($scope.pendings[i]._id == id) {
+                var index = i;
+                break;
+            }
+        }
         if ($scope.pendings[index].not_available) {
             $scope.newsource.not_available = true;
             $scope.openAtURL("http://google.ca/search?q=isbn+" + $scope.pendings[index].isbn);
@@ -1154,6 +1160,7 @@ angular.module('metho.controllers.projects', [])
     $scope.openWebBrowser = function() {
         $scope.openAtURL("http://google.ca/search?q=isbn+" + $scope.pendings[$scope.editingIndex].isbn);
     }
+
     $scope.submitSource = function() {
         if ($scope.newsource.type != "" && $scope.newsource.type != null) {
             var creatingProj = $parseSource.parseSource($scope.newsource);
@@ -1193,6 +1200,21 @@ angular.module('metho.controllers.projects', [])
             });
             return;
         }
+    }
+
+    $scope.deletePending = function (id) {
+        $scope.pendingRepo.get(id).then(function (doc) {
+            return $scope.pendingRepo.remove(doc);
+        }).then(function (res) {
+            for (var i = 0; i < $scope.pendings.length; i++) {
+                if ($scope.pendings[i]._id == id) {
+                    $scope.pendings.splice(i, 1);
+                    $scope.$apply();
+                }
+            }
+        }).catch(function (err) {
+            console.log(err);
+        });
     }
 
     $scope.closeModal = function() {

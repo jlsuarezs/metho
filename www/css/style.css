@@ -368,3 +368,8 @@ p.left-aligned {
 .avatar-notround > img {
     border-radius: 0 !important;
 }
+
+.normal a {
+    text-decoration: none;
+    color: black;
+}
