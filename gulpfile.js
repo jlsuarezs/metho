@@ -16,18 +16,12 @@ var paths = {
   html: ['./www/templates/*.html']
 };
 
-gulp.task('default', ['beautifyjs', 'beautifyhtml']);
+gulp.task('default', ['beautifyjs']);
 
 gulp.task('beautifyjs', function() {
   gulp.src('./www/js/*.js')
     .pipe(beautify({indentSize: 4, maxPreserveNewline: 2, breakChainedOperation: true, endWithNewline: true}))
     .pipe(gulp.dest('./www/js/'));
-});
-
-gulp.task('beautifyhtml', function() {
-  gulp.src('./www/templates/*.html')
-    .pipe(prettify({indent_size: 4}))
-    .pipe(gulp.dest('./www/templates/'));
 });
 
 gulp.task('watch', function() {
