@@ -19,14 +19,14 @@ angular.module('metho.controller.projects.detail', [])
     $scope.removeAnimate = false;
     $scope.refreshPending = false;
 
-    $ionicModal.fromTemplateUrl('templates/modal_new_source.html', {
+    $ionicModal.fromTemplateUrl('templates/new.source.modal.html', {
         scope: $scope,
         animation: 'slide-in-up',
     }).then(function(modal) {
         $scope.newSourceModal = modal;
     });
 
-    $ionicModal.fromTemplateUrl('templates/modal_scan_boarding.html', {
+    $ionicModal.fromTemplateUrl('templates/boarding.scan.modal.html', {
         scope: $scope,
         animation: 'slide-in-up',
     }).then(function(modal) {

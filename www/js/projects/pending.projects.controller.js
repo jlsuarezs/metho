@@ -12,7 +12,7 @@ angular.module("metho.controller.projects.pending", [])
     $scope.editingIndex = null;
     $scope.sourceRepo = new PouchDB("sources");
 
-    $ionicModal.fromTemplateUrl('templates/modal_pending_source.html', {
+    $ionicModal.fromTemplateUrl('templates/pending.source.modal.html', {
         scope: $scope,
         animation: 'slide-in-up',
     }).then(function(modal) {

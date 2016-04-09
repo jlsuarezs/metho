@@ -6,7 +6,7 @@ angular.module("metho.controller.projects.source", [])
     $scope.sourceRepo = new PouchDB("sources");
     $scope.projectRepo = new PouchDB("projects");
 
-    $ionicModal.fromTemplateUrl('templates/modal_edit_source.html', {
+    $ionicModal.fromTemplateUrl('templates/edit.source.modal.html', {
         scope: $scope,
         animation: 'slide-in-up',
     }).then(function(modal) {

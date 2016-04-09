@@ -30,14 +30,14 @@ angular.module('metho.controller.projects.tab', [])
         console.log(err);
     });
 
-    $ionicModal.fromTemplateUrl('templates/modal_new_project.html', {
+    $ionicModal.fromTemplateUrl('templates/new.project.modal.html', {
         scope: $scope,
         animation: 'slide-in-up',
     }).then(function(modal) {
         $scope.newProjectModal = modal;
     });
 
-    $ionicModal.fromTemplateUrl('templates/modal_edit_project.html', {
+    $ionicModal.fromTemplateUrl('templates/edit.project.modal.html', {
         scope: $scope,
         animation: 'slide-in-up',
     }).then(function(modal) {

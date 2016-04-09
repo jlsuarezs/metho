@@ -37,7 +37,7 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
         url: '/projects',
         views: {
             'tab-projects': {
-                templateUrl: 'templates/tab-projects.html',
+                templateUrl: 'templates/tab.projects.html',
                 controller: 'ProjectsCtrl'
             }
         }
@@ -47,7 +47,7 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
         url: '/projects/:projectID',
         views: {
             'tab-projects': {
-                templateUrl: 'templates/project-detail.html',
+                templateUrl: 'templates/detail.projects.html',
                 controller: 'ProjectDetailCtrl'
             }
         }
@@ -57,7 +57,7 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
         url: '/projects/:projectID/:sourceID',
         views: {
             'tab-projects': {
-                templateUrl: 'templates/source-detail.html',
+                templateUrl: 'templates/source.projects.html',
                 controller: 'SourceDetailCtrl'
             }
         }
@@ -67,7 +67,7 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
         url: '/pending/:projectID',
         views: {
             'tab-projects': {
-                templateUrl: 'templates/pending.html',
+                templateUrl: 'templates/pending.projects.html',
                 controller: 'PendingCtrl'
             }
         }
@@ -77,7 +77,7 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
             url: '/ref',
             views: {
                 'tab-ref': {
-                    templateUrl: 'templates/tab-ref.html',
+                    templateUrl: 'templates/tab.references.html',
                     controller: 'RefCtrl'
                 }
             }
@@ -86,7 +86,7 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
             url: '/ref/:articleId',
             views: {
                 'tab-ref': {
-                    templateUrl: 'templates/ref-detail.html',
+                    templateUrl: 'templates/detail.references.html',
                     controller: 'RefDetailCtrl'
                 }
             }
@@ -95,7 +95,7 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
             url: '/ref/:articleId/:subId',
             views: {
                 'tab-ref': {
-                    templateUrl: 'templates/ref-sub-detail.html',
+                    templateUrl: 'templates/sub.references.html',
                     controller: 'RefSubDetailCtrl'
                 }
             }
@@ -105,7 +105,7 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
         url: '/settings',
         views: {
             'tab-settings': {
-                templateUrl: 'templates/tab-settings.html',
+                templateUrl: 'templates/tab.settings.html',
                 controller: 'SettingsCtrl'
             }
         }
@@ -115,7 +115,7 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
         url: '/settings/feedback',
         views: {
             'tab-settings': {
-                templateUrl: 'templates/feedback.html',
+                templateUrl: 'templates/feedback.settings.html',
                 controller: 'FeedbackCtrl'
             }
         }
@@ -125,7 +125,7 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
         url: '/settings/infos-advanced',
         views: {
             'tab-settings': {
-                templateUrl: 'templates/infos-advanced.html',
+                templateUrl: 'templates/advanced.settings.html',
                 controller: 'InfosAdvancedCtrl'
             }
         }
