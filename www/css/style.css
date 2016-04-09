@@ -361,6 +361,10 @@ p.left-aligned {
     border-bottom-color: rgba(0, 0, 0, 0.06) !important;
 }
 
+.button-priced span {
+    font-size: 36px;
+}
+
 .wrap {
     white-space: normal !important;
 }
