@@ -27,7 +27,6 @@ gulp.task('beautifyjs', function() {
 gulp.task('watch', function() {
   gulp.watch(paths.js, ['beautifyjs']);
   gulp.watch(paths.css, ['minifycss']);
-  gulp.watch(paths.html, ['beautifyhtml']);
 });
 
 gulp.task('minifycss', function () {
