@@ -1,6 +1,6 @@
 angular.module('metho.controller.projects.tab', [])
 
-.controller('ProjectsCtrl', function($scope, $ionicModal, $ionicPlatform, $ionicPopup, $ionicListDelegate, ShareProject, $state) {
+.controller('ProjectsCtrl', function($scope, $state, $ionicModal, $ionicPlatform, $ionicPopup, $ionicListDelegate, ShareProject) {
     $scope.projects = [];
     $scope.project = {
         name: "",

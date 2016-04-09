@@ -1,6 +1,6 @@
 angular.module("metho.controller.projects.source", [])
 
-.controller('SourceDetailCtrl', function($scope, $stateParams, $ionicPopup, $parseSource, $ionicModal, ShareSource) {
+.controller('SourceDetailCtrl', function($scope, $stateParams, $ionicPopup, $ionicModal, ParseSource, ShareSource) {
     $scope.source = ShareSource.getSource();
     $scope.loading = false;
     $scope.sourceRepo = new PouchDB("sources");
@@ -38,7 +38,7 @@ angular.module("metho.controller.projects.source", [])
                         default:
 
                     }
-                    $scope.source = $parseSource.parseSource($scope.source);
+                    $scope.source = ParseSource.parseSource($scope.source);
                     $scope.sourceRepo.put($scope.source, $scope.source._id, $scope.source._rev).then(function(response) {
                         if (response.ok) {
                             $scope.source._rev = response.rev;
@@ -60,7 +60,7 @@ angular.module("metho.controller.projects.source", [])
             }).then(function(res) {
                 if (res != null) {
                     $scope.source[$scope.source.errors[id].var] = res;
-                    $scope.source = $parseSource.parseSource($scope.source);
+                    $scope.source = ParseSource.parseSource($scope.source);
                     $scope.sourceRepo.put($scope.source, $scope.source._id, $scope.source._rev).then(function(response) {
                         if (response.ok) {
                             $scope.source._rev = response.rev;
@@ -87,7 +87,7 @@ angular.module("metho.controller.projects.source", [])
         }).then(function(res) {
             if (res != null) {
                 $scope.source[$scope.source.warnings[id].var] = res;
-                $scope.source = $parseSource.parseSource($scope.source);
+                $scope.source = ParseSource.parseSource($scope.source);
                 $scope.sourceRepo.put($scope.source, $scope.source._id, $scope.source._rev).then(function(response) {
                     if (response.ok) {
                         $scope.source._rev = response.rev;
@@ -116,7 +116,7 @@ angular.module("metho.controller.projects.source", [])
     }
 
     $scope.submitEdit = function() {
-        $scope.source = $parseSource.parseSource($scope.newsource);
+        $scope.source = ParseSource.parseSource($scope.newsource);
         $scope.editSourceModal.hide();
         $scope.newsource = {};
         $scope.sourceRepo.put($scope.source, $scope.source._id, $scope.source._rev).then(function(response) {

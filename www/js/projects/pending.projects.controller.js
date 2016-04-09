@@ -1,6 +1,6 @@
 angular.module("metho.controller.projects.pending", [])
 
-.controller("PendingCtrl", function($scope, $stateParams, SharePendings, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicLoading, $http, $parseSource, $state) {
+.controller("PendingCtrl", function($scope, $state, $http, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicLoading, ParseSource, SharePendings) {
     $scope.project = {
         id: $stateParams.projectID,
         sources: []
@@ -70,7 +70,7 @@ angular.module("metho.controller.projects.pending", [])
 
     $scope.submitSource = function() {
         if ($scope.newsource.type != "" && $scope.newsource.type != null) {
-            var creatingProj = $parseSource.parseSource($scope.newsource);
+            var creatingProj = ParseSource.parseSource($scope.newsource);
             creatingProj.project_id = $stateParams.projectID;
             // Save to db
             $scope.sourceRepo.post(creatingProj).then(function(response) {

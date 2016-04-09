@@ -1,6 +1,6 @@
 angular.module('metho.controller.projects.detail', [])
 
-.controller('ProjectDetailCtrl', function($scope, $state, $http, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicListDelegate, $ionicActionSheet, $ionicLoading, $ionicSlideBoxDelegate, $ionicBackdrop, $parseSource, ShareProject, ShareSource, SharePendings, Settings) {
+.controller('ProjectDetailCtrl', function($scope, $state, $http, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicListDelegate, $ionicActionSheet, $ionicLoading, $ionicSlideBoxDelegate, $ionicBackdrop, ParseSource, ShareProject, ShareSource, SharePendings, Settings) {
     $scope.projectRepo = new PouchDB("projects");
     $scope.sourceRepo = new PouchDB("sources");
     $scope.pendingRepo = new PouchDB("pendings");
@@ -447,7 +447,7 @@ angular.module('metho.controller.projects.detail', [])
 
     $scope.submitSource = function() {
         if ($scope.newsource.type != "" && $scope.newsource.type != null) {
-            var creatingProj = $parseSource.parseSource($scope.newsource);
+            var creatingProj = ParseSource.parseSource($scope.newsource);
             creatingProj.project_id = $stateParams.projectID;
             // Save to db
             $scope.sourceRepo.post(creatingProj).then(function(response) {

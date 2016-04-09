@@ -1,6 +1,6 @@
 angular.module("metho.service.projects.parse", [])
 
-.factory('$parseSource', function() {
+.factory('ParseSource', function() {
     return {
         parseSource: function(sourceToParse) {
             sourceToParse.parsedSource = "";
