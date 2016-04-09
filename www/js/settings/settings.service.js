@@ -1,4 +1,4 @@
-angular.module('metho.services.settings', [])
+angular.module('metho.service.settings', [])
 
 // Service sharing settings (allowing to edit them)
 .factory('Settings', function(localStorageService) {

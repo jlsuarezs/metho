@@ -1,10 +1,4 @@
-// Ionic Starter App
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
-angular.module('metho', ['ionic', 'metho.controllers.projects', 'metho.controllers.refs', 'metho.controllers.settings', 'metho.services.projects', 'metho.services.refs', 'metho.services.settings', 'ngCordova', 'LocalStorageModule', 'ng-slide-down'])
+angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.controller.projects.detail', 'metho.controller.projects.source', 'metho.controller.projects.pending', 'metho.controllers.references', 'metho.controller.settings.tab', 'metho.controller.settings.advanced', 'metho.controller.settings.feedback', 'metho.services.projects.share', 'metho.service.projects.parse', 'metho.services.references', 'metho.service.settings', 'ngCordova', 'LocalStorageModule', 'ng-slide-down'])
 
 .run(function($ionicPlatform, localStorageService) {
     $ionicPlatform.ready(function() {

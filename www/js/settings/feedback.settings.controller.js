@@ -1,23 +1,5 @@
-angular.module("metho.controllers.settings", [])
+angular.module("metho.controller.settings.feedback", [])
 
-
-// Settings tab view
-.controller('SettingsCtrl', function($scope, localStorageService, Settings) {
-    // Get settings from service
-    $scope.settings = Settings.all();
-
-    // Commit changes to settings service
-    $scope.changeSettings = function(setting) {
-        Settings.set(setting, $scope.settings[setting]);
-    }
-
-    $scope.$on("$ionicView.afterEnter", function() {
-        $scope.settings = Settings.all();
-    });
-})
-
-
-// Feedback view
 .controller('FeedbackCtrl', function($scope, $cordovaDevice) {
     $scope.newFeedback = function(name) {
         switch (name) {
@@ -98,25 +80,6 @@ angular.module("metho.controllers.settings", [])
                 break;
             default:
 
-        }
-    }
-})
-
-.controller("InfosAdvancedCtrl", function($scope, Settings, $ionicPopup, $state) {
-    $scope.buy = function() {
-        if (Settings.get("advanced")) {
-            $ionicPopup.alert({
-                title: 'Mode avancé',
-                template: '<p class="center">Le mode avancé est déjà activé</p>'
-            }).then(function() {
-                $state.go("tab.settings", {});
-            });
-        } else {
-            // Buy
-
-            // Activate
-            Settings.set("advanced", true);
-            $state.go("tab.settings", {});
         }
     }
 });

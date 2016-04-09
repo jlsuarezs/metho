@@ -1,4 +1,4 @@
-angular.module('metho.services.refs', [])
+angular.module('metho.services.references', [])
 
 // Service defining articles for Reference tab
 .factory('Articles', function() {

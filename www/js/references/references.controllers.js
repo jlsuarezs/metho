@@ -1,4 +1,4 @@
-angular.module('metho.controllers.refs', [])
+angular.module('metho.controllers.references', [])
 
 // Ref Tab view
 .controller('RefCtrl', function($scope, Articles, Settings) {
