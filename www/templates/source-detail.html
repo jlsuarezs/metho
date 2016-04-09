@@ -4,29 +4,19 @@
         <div class="page-title" ng-if="source.title">{{source.title}}</div>
         <div class="page-sub-title">{{source.parsedType}}</div>
     </ion-nav-title>
-    <ion-nav-buttons side="right">
-      <button class="button button-clear button-positive" ng-click="edit()">Modifier</button>
-    </ion-nav-buttons>
+    <ion-nav-buttons side="right"> <button class="button button-clear button-positive" ng-click="edit()">Modifier</button> </ion-nav-buttons>
     <ion-content ng-class="{ 'padding flex' : loading }">
         <!-- Source -->
         <p class="center padding" ng-bind-html="source.parsedSource"></p>
-
         <!-- Liste des erreurs -->
         <ion-list>
-            <ion-item ng-repeat="error in source.errors track by $index" class="item-icon-left item-remove-animate" ng-click="solveError($index)">
-                <i class="icon ion-android-alert icon-accessory red"></i>
-                <h2>{{error.errorTitle}}</h2>
-            </ion-item>
-            <ion-item ng-repeat="warning in source.warnings track by $index" class="item-icon-left item-remove-animate" ng-click="solveWarning($index)">
-                <i class="icon ion-alert-circled icon-accessory yellow"></i>
-                <h2>{{warning.errorTitle}}</h2>
-            </ion-item>
+            <ion-item ng-repeat="error in source.errors track by $index" class="item-icon-left item-remove-animate" ng-click="solveError($index)"> <i class="icon ion-android-alert icon-accessory red"></i>
+                <h2>{{error.errorTitle}}</h2> </ion-item>
+            <ion-item ng-repeat="warning in source.warnings track by $index" class="item-icon-left item-remove-animate" ng-click="solveWarning($index)"> <i class="icon ion-alert-circled icon-accessory yellow"></i>
+                <h2>{{warning.errorTitle}}</h2> </ion-item>
         </ion-list>
-
         <!-- Aucune erreur -->
         <h2 ng-if="!source.errors.length && !loading && !source.warnings.length" class="empty center">Aucune erreur</h2>
-
-
         <!-- Loading -->
         <div class="spinner" ng-if="loading">
             <ion-spinner></ion-spinner>

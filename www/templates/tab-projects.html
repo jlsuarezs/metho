@@ -1,15 +1,9 @@
 <ion-view view-title="Projets">
-    <ion-nav-buttons side="right">
-        <button class="button button-clear button-positive icon ion-ios-plus-empty" ng-click="newProject()"></button>
-    </ion-nav-buttons>
+    <ion-nav-buttons side="right"> <button class="button button-clear button-positive icon ion-ios-plus-empty" ng-click="newProject()"></button> </ion-nav-buttons>
     <ion-content ng-class="{ 'padding flex' : !projects.length }" scrollbar-y="true" has-bouncing="true">
-        <!-- When there is no elements -->
-        <button class="button ion-ios-plus-empty icon button-positive button-outline" class="centered" ng-if="!projects.length && !loading" ng-click="newProject()">
+        <!-- When there is no elements --><button class="button ion-ios-plus-empty icon button-positive button-outline" class="centered" ng-if="!projects.length && !loading" ng-click="newProject()">
         </button><br ng-if="!projects.length && !loading">
-        <p class="center dimmed-50" ng-if="!projects.length && !loading">
-            Aucun projet? Ça viendra...
-        </p>
-
+        <p class="center dimmed-50" ng-if="!projects.length && !loading"> Aucun projet? Ça viendra... </p>
         <!-- When there is -->
         <ion-list ng-if="projects.length">
             <ion-item ng-repeat="project in projects" class="item-icon-right item-remove-animate" type="item-text-wrap" ng-click="openProjectDetail('{{project.id}}')">

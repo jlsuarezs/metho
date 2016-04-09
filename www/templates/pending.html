@@ -4,15 +4,9 @@
         <ion-list>
             <ion-item ng-repeat="pending in pendings track by $index" class="item item-icon-right" type="item-text-wrap" ng-click="downloadDetails({{$index}}, '{{pending.isbn}}', '{{pending._id}}')">
                 <h2>{{pending.isbn}}</h2>
-                <p>{{pending.date}}</p>
-                <i class="icon ion-ios-cloud-download-outline" ng-if="!pending.not_available"></i>
-                <i class="icon ion-ios-close-outline" ng-if="pending.not_available"></i>
-            </ion-item>
+                <p>{{pending.date}}</p> <i class="icon ion-ios-cloud-download-outline" ng-if="!pending.not_available"></i> <i class="icon ion-ios-close-outline" ng-if="pending.not_available"></i> </ion-item>
         </ion-list>
-
         <!-- When there are no sources -->
-        <p class="center dimmed-50" ng-if="!pendings.length && !loading">
-            Aucune source en attente !
-        </p>
+        <p class="center dimmed-50" ng-if="!pendings.length && !loading"> Aucune source en attente ! </p>
     </ion-content>
 </ion-view>

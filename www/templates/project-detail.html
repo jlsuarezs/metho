@@ -3,9 +3,7 @@
         <div class="page-title">{{project.name}}</div>
         <div class="page-sub-title">{{project.matter}}</div>
     </ion-nav-title>
-    <ion-nav-buttons side="right">
-      <button class="button button-clear button-positive icon ion-ios-upload-outline" ng-click="share()" ng-disabled="project.sources.length == 0"></button>
-    </ion-nav-buttons>
+    <ion-nav-buttons side="right"> <button class="button button-clear button-positive icon ion-ios-upload-outline" ng-click="share()" ng-disabled="project.sources.length == 0"></button> </ion-nav-buttons>
     <ion-content ng-class="{ 'padding flex' : !project.sources.length }" class="has-footer">
         <!-- List of sources -->
         <ion-list ng-if="!loading">
@@ -13,35 +11,21 @@
                 <h2 ng-bind-html="source.parsedSource" ng-if="!source.title" ng-class="{'limited-width': source.errors.length || source.warnings.length}"></h2>
                 <h2 ng-if="source.title" ng-class="{'limited-width': source.errors.length || source.warnings.length}">{{source.title}}</h2>
                 <p>{{source.parsedType}}</p>
-                <div class="icon">
-                    <span class="error-nb" ng-if="source.warnings.length">{{source.warnings.length}}</span>
-                    <span class=" ion-alert-circled icon-accessory yellow" ng-if="source.warnings.length"></span>
-                    <span ng-if="source.warnings.length">&nbsp;</span>
-                    <span class="error-nb" ng-if="source.errors.length">{{source.errors.length}}</span>
-                    <span class=" ion-android-alert icon-accessory red" ng-if="source.errors.length"></span>
-                    &nbsp;
-                    <span class=" ion-chevron-right icon-accessory"></span>
-                </div>
-                <ion-option-button class="button-assertive" ng-click="deleteSource('{{source._id}}')">Supprimer</ion-option-button>
+                <div class="icon"> <span class="error-nb" ng-if="source.warnings.length">{{source.warnings.length}}</span> <span class=" ion-alert-circled icon-accessory yellow" ng-if="source.warnings.length"></span> <span ng-if="source.warnings.length">&nbsp;</span>
+                    <span
+                        class="error-nb" ng-if="source.errors.length">{{source.errors.length}}</span> <span class=" ion-android-alert icon-accessory red" ng-if="source.errors.length"></span> &nbsp; <span class=" ion-chevron-right icon-accessory"></span> </div>
+                <ion-option-button class="button-assertive"
+                    ng-click="deleteSource('{{source._id}}')">Supprimer</ion-option-button>
             </ion-item>
         </ion-list>
-
-        <!-- When there are no sources -->
-        <button class="button ion-ios-plus-empty icon button-positive button-outline" class="centered" ng-if="!project.sources.length && !loading" ng-click="addSource()">
+        <!-- When there are no sources --><button class="button ion-ios-plus-empty icon button-positive button-outline" class="centered" ng-if="!project.sources.length && !loading" ng-click="addSource()">
         </button><br ng-if="!project.sources.length && !loading">
-        <p class="center dimmed-50" ng-if="!project.sources.length && !loading">
-            Qu'est-ce qu'un projet sans sources ?
-        </p>
-
+        <p class="center dimmed-50" ng-if="!project.sources.length && !loading"> Qu'est-ce qu'un projet sans sources ? </p>
         <!-- Loading -->
         <div class="spinner" ng-if="loading">
             <ion-spinner></ion-spinner>
         </div>
     </ion-content>
     <ion-footer-bar align-title="center" class="bar-stable">
-        <div class="buttons">
-            <button class="button button-clear button-positive icon ion-ios-plus-empty" ng-click="addSource()"></button>
-        </div>
-        <a class="title padding-top button button-clear" ng-click="openPendings()">Éléments en attente({{project.pendings.length}})</a>
-    </ion-footer-bar>
+        <div class="buttons"> <button class="button button-clear button-positive icon ion-ios-plus-empty" ng-click="addSource()"></button> </div> <a class="title padding-top button button-clear" ng-click="openPendings()">Éléments en attente({{project.pendings.length}})</a>        </ion-footer-bar>
 </ion-view>

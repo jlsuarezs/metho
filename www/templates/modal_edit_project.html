@@ -1,22 +1,15 @@
 <ion-modal-view>
     <ion-header-bar class="bar-stable">
-        <h1 class="title">Modification du projet</h1>
-        <button class="button button-positive icon ion-ios-close-empty button-clear" ng-click="closeEditModal()">
-        </button>
-    </ion-header-bar>
+        <h1 class="title">Modification du projet</h1> <button class="button button-positive icon ion-ios-close-empty button-clear" ng-click="closeEditModal()">
+        </button> </ion-header-bar>
     <ion-content>
         <form ng-submit="submitEditProject()">
-            <div class="list">
-              <label class="item item-input item-stacked-label">
+            <div class="list"> <label class="item item-input item-stacked-label">
                 <span class="input-label">Nom du projet</span>
                 <input type="text" placeholder="Essai sur les moyens de communication" ng-model="editingProject.name" ng-readonly="false">
-              </label>
-              <label class="item item-input item-stacked-label" ng-class="{ 'red-border':errorName }">
+              </label> <label class="item item-input item-stacked-label" ng-class="{ 'red-border':errorName }">
                 <span class="input-label">Matière</span>
                 <input type="text" placeholder="Géographie" ng-model="editingProject.matter" ng-readonly="false">
-              </label>
-            </div>
-            <button type="submit" class="button button-full button-positive center">Modifier le projet</button>
-        </form>
+              </label> </div> <button type="submit" class="button button-full button-positive center">Modifier le projet</button> </form>
     </ion-content>
 </ion-modal-view>

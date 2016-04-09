@@ -1,32 +1,21 @@
 <ion-view view-title="Paramètres">
-  <ion-content scrollbar-y="true" has-bouncing="true">
-    <ion-list>
-        <label class="item item-stacked-label">
+    <ion-content scrollbar-y="true" has-bouncing="true">
+        <ion-list> <label class="item item-stacked-label">
             <span class="input-label"><b>Trier la bibliographie par</b></span>
         </label>
-        <ion-list>
-          <ion-radio ng-model="settings.defaultOrder" ng-value="'alpha'" ng-change="changeSettings('defaultOrder')">Ordre alphabétique</ion-radio>
-          <ion-radio ng-model="settings.defaultOrder" ng-value="'type'" ng-change="changeSettings('defaultOrder')">Type d'ouvrage</ion-radio>
+            <ion-list>
+                <ion-radio ng-model="settings.defaultOrder" ng-value="'alpha'" ng-change="changeSettings('defaultOrder')">Ordre alphabétique</ion-radio>
+                <ion-radio ng-model="settings.defaultOrder" ng-value="'type'" ng-change="changeSettings('defaultOrder')">Type d'ouvrage</ion-radio>
+            </ion-list>
+            <ion-toggle ng-model="settings.askForOrder" ng-change="changeSettings('askForOrder')" class="smaller"> Demander l'ordre lors du partage </ion-toggle>
+            <ion-toggle ng-model="settings.advanced" ng-change="changeSettings('advanced')"> Mode avancé &nbsp; <a href="#/tab/settings/infos-advanced" class="link-beautiful">En savoir plus...</a> </ion-toggle>
+            <ion-list>
+                <ion-item href="#/tab/settings/feedback" class="item item-icon-right" type="item-text-wrap">
+                    <h2>Problème/Commentaires</h2>
+                    <p>Rapporter un problème ou émettre un commentaire</p> <span class="icon ion-chevron-right icon-accessory"></span> </ion-item>
+            </ion-list>
         </ion-list>
-        <ion-toggle  ng-model="settings.askForOrder" ng-change="changeSettings('askForOrder')" class="smaller">
-            Demander l'ordre lors du partage
-        </ion-toggle>
-        <ion-toggle  ng-model="settings.advanced" ng-change="changeSettings('advanced')">
-            Mode avancé &nbsp; <a href="#/tab/settings/infos-advanced" class="link-beautiful">En savoir plus...</a>
-        </ion-toggle>
-        <ion-list>
-          <ion-item href="#/tab/settings/feedback" class="item item-icon-right" type="item-text-wrap">
-              <h2>Problème/Commentaires</h2>
-              <p>Rapporter un problème ou émettre un commentaire</p>
-              <span class="icon ion-chevron-right icon-accessory"></span>
-          </ion-item>
-        </ion-list>
-    </ion-list>
-    <p class="padding center">
-        Adapté à partir du <em>Guide de Méthodologie</em> de l'École d'éducation internationale de McMasterville écrit par Raymond Bédard.
-    </p>
-    <p class="padding center dimmed-50">
-        &copy; 2016 Francis Clavette
-    </p>
-  </ion-content>
+        <p class="padding center"> Adapté à partir du <em>Guide de Méthodologie</em> de l'École d'éducation internationale de McMasterville écrit par Raymond Bédard. </p>
+        <p class="padding center dimmed-50"> &copy; 2016 Francis Clavette </p>
+    </ion-content>
 </ion-view>
