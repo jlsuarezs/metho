@@ -238,7 +238,7 @@ angular.module('metho.controllers.projects', [])
     }
 
     $scope.share = function() {
-        var textToShare = "Voici les sources du projet « " + $scope.project.name + " » : <br><br>BIBLIOGRAPHIE<br>";
+        var textToShare = "Voici les sources du projet « " + $scope.project.name + " » : <br><br><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center'>BIBLIOGRAPHIE</td></tr></table><br>";
         var errNum = 0;
         if (Settings.get("askForOrder")) {
             var cancel = Settings.get("defaultOrder") == "alpha" ? "button-positive" : "button-stable";
