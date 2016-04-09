@@ -150,15 +150,8 @@ angular.module('metho.services.refs', [])
         }],
         icon: 'img/page-icon.png',
         text: "",
-        containsSub: true
-    }, {
-        id: 4,
-        name: 'La méthode des fiches',
-        description: "Cette méthode sert à organiser sa recherche en utilisant la reformulation",
-        subPages: [],
-        icon: 'img/fiche.png',
-        text: "",
-        containsSub: false
+        containsSub: true,
+        isPremium: true
     }];
 
     return {
