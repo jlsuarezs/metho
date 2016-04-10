@@ -1,6 +1,6 @@
-angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.controller.projects.detail', 'metho.controller.projects.source', 'metho.controller.projects.pending', 'metho.controllers.references', 'metho.controller.settings.tab', 'metho.controller.settings.advanced', 'metho.controller.settings.feedback', 'metho.services.projects.share', 'metho.service.projects.parse', 'metho.services.references', 'metho.service.settings', 'ngCordova', 'LocalStorageModule', 'ng-slide-down'])
+angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.controller.projects.detail', 'metho.controller.projects.source', 'metho.controller.projects.pending', 'metho.controllers.references', 'metho.controller.settings.tab', 'metho.controller.settings.advanced', 'metho.controller.settings.feedback', 'metho.services.projects.share', 'metho.service.projects.parse', 'metho.services.references', 'metho.service.settings', 'ngCordova', 'LocalStorageModule', 'ng-slide-down', 'pascalprecht.translate'])
 
-.run(function($ionicPlatform, localStorageService) {
+.run(function($ionicPlatform, localStorageService, $translate) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -13,15 +13,20 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
             StatusBar.styleDefault();
         }
 
+        if(typeof navigator.globalization !== "undefined") {
+            navigator.globalization.getPreferredLanguage(function(language) {
+                $translate.use((language.value).split("-")[0]).then(function(data) {
+                    console.log("SUCCESS -> " + data);
+                }, function(error) {
+                    console.log("ERROR -> " + error);
+                });
+            }, null);
+        }
+
     });
 })
 
-.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
-
-    // Ionic uses AngularUI Router which uses the concept of states
-    // Learn more here: https://github.com/angular-ui/ui-router
-    // Set up the various states which the app can be in.
-    // Each state's controller can be found in controllers.js
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $translateProvider) {
     $stateProvider
 
     // setup an abstract state for the tabs directive
@@ -31,8 +36,7 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
         templateUrl: 'templates/tabs.html'
     })
 
-    // Each tab has its own nav history stack:
-
+    // Project tab
     .state('tab.projects', {
         url: '/projects',
         views: {
@@ -73,34 +77,38 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
         }
     })
 
+    // Reference tab
     .state('tab.ref', {
-            url: '/ref',
-            views: {
-                'tab-ref': {
-                    templateUrl: 'templates/tab.references.html',
-                    controller: 'RefCtrl'
-                }
+        url: '/ref',
+        views: {
+            'tab-ref': {
+                templateUrl: 'templates/tab.references.html',
+                controller: 'RefCtrl'
             }
-        })
-        .state('tab.ref-detail', {
-            url: '/ref/:articleId',
-            views: {
-                'tab-ref': {
-                    templateUrl: 'templates/detail.references.html',
-                    controller: 'RefDetailCtrl'
-                }
-            }
-        })
-        .state('tab.ref-sub-detail', {
-            url: '/ref/:articleId/:subId',
-            views: {
-                'tab-ref': {
-                    templateUrl: 'templates/sub.references.html',
-                    controller: 'RefSubDetailCtrl'
-                }
-            }
-        })
+        }
+    })
 
+    .state('tab.ref-detail', {
+        url: '/ref/:articleId',
+        views: {
+            'tab-ref': {
+                templateUrl: 'templates/detail.references.html',
+                controller: 'RefDetailCtrl'
+            }
+        }
+    })
+
+    .state('tab.ref-sub-detail', {
+        url: '/ref/:articleId/:subId',
+        views: {
+            'tab-ref': {
+                templateUrl: 'templates/sub.references.html',
+                controller: 'RefSubDetailCtrl'
+            }
+        }
+    })
+
+    // Settings tab
     .state('tab.settings', {
         url: '/settings',
         views: {
@@ -130,8 +138,30 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
             }
         }
     });
-    // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/projects');
 
+    // Setup back button text
     $ionicConfigProvider.backButton.text("Retour");
+
+    // Translation
+    $translateProvider.registerAvailableLanguageKeys(['fr', 'en', 'es'], {
+        'en_*': 'en',
+        'fr_*': 'fr',
+        'es_*': 'es'
+    });
+    $translateProvider.translations('fr', {
+        "TAB_PROJECT": "Projets",
+        "TAB_REFERENCES": "Référence",
+        "TAB_SETTINGS": "Paramètres",
+        "PROJECT":{
+            "TAB_TITLE": "Projets"
+        }
+    });
+    $translateProvider.useStaticFilesLoader({
+        prefix: "translations/locale-",
+        suffix: ".json"
+    });
+    $translateProvider.preferredLanguage("fr");
+    $translateProvider.fallbackLanguage("fr");
+
 });
