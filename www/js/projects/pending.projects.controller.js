@@ -238,8 +238,13 @@ angular.module("metho.controller.projects.pending", [])
                         // Auteur
                         if (response.data.data[0].author_data.length) {
                             for (var i = 0; i < response.data.data[0].author_data.length; i++) {
-                                $scope.newsource["author" + String(i + 1) + "lastname"] = response.data.data[0].author_data[i].name.split(",")[0];
-                                $scope.newsource["author" + String(i + 1) + "firstname"] = response.data.data[0].author_data[i].name.split(",")[1];
+                                if (response.data.data[0].author_data[i].name.split(",")[0] == response.data.data[0].author_data[i].name) {
+                                    $scope.newsource["author" + String(i + 1) + "firstname"] = response.data.data[0].author_data[i].name.split(" ")[0];
+                                    $scope.newsource["author" + String(i + 1) + "lastname"] = response.data.data[0].author_data[i].name.split(" ")[1];
+                                } else {
+                                    $scope.newsource["author" + String(i + 1) + "lastname"] = response.data.data[0].author_data[i].name.split(",")[0];
+                                    $scope.newsource["author" + String(i + 1) + "firstname"] = response.data.data[0].author_data[i].name.split(",")[1];
+                                }
                             }
                             var authorNum = response.data.data[0].author_data.length;
                             if (authorNum >= 1 && authorNum <= 3) {
