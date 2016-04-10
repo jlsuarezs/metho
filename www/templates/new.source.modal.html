@@ -236,5 +236,5 @@
 
         </p> -->
     </ion-content>
-    <ion-footer-bar align-title="center" class="bar-positive no-padding" ng-if="newsource.type == 'book' && isAdvanced"> <button class="button button-full footer-button-custom icon-left ion-qr-scanner" on-tap="scanBook()">Balayer le code</button> </ion-footer-bar>
+    <ion-footer-bar align-title="center" class="bar-positive no-padding" ng-if="newsource.type == 'book' && isAdvanced"> <button class="button button-full footer-button-custom icon-left ion-qr-scanner" on-tap="scanBook()" ng-disabled="currentlyScanning">Balayer le code</button> </ion-footer-bar>
 </ion-modal-view>

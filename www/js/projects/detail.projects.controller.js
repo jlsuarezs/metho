@@ -649,37 +649,51 @@ angular.module('metho.controller.projects.detail', [])
     }
 
     $scope.scanBook = function() {
-            if (!Settings.get("scanBoardingDone")) {
-                $scope.scanBoardingModal.show();
-                $scope.boardingIndex = 0;
-                return;
-            } else {
-                $scope.newsource.type = "book";
-            }
-            $ionicBackdrop.retain();
-            cordova.plugins.barcodeScanner.scan(
-                function(result) {
-                    $ionicBackdrop.release();
-                    if (!result.cancelled) {
-                        if (result.format == "EAN_13") {
-                            $scope.fetchFromISBNdb(result.text);
-                        } else {
-                            var alertPopup = $ionicPopup.alert({
-                                title: 'Livre introuvable',
-                                template: '<p class="center">Le code barre a été balayé, mais ce type de code barre n\'est pas un code barre de livre. Le bon code barre possède habituellement une inscription ISBN par dessus celui-ci. Si deux code barre sont côte à côte, le mauvais a peut-être été balayé. Vous pouvez réessayer.</p>'
-                            });
-                        }
-                    }
-                },
-                function(error) {
-                    $ionicBackdrop.release();
-                    $ionicPopup.alert({
-                        title: 'Balayage impossible',
-                        template: '<p class="center">Essayez d\'activer l\'accès à l\'appareil photo pour cette application dans l\'onglet Confidentialité des Réglages.</p>'
-                    });
-                }
-            );
+        // If boarding
+        if (!Settings.get("scanBoardingDone")) {
+            $scope.scanBoardingModal.show();
+            $scope.boardingIndex = 0;
+            return;
+        } else {
+            $scope.newsource.type = "book";
         }
+        // If running
+        if ($scope.currentlyScanning === true) {
+            return;
+        }
+        else if (ionic.Platform.platforms.indexOf("browser") !== -1) {
+            return;
+        }
+        else {
+            $scope.currentlyScanning = true;
+        }
+        $ionicBackdrop.retain();
+        cordova.plugins.barcodeScanner.scan(
+            function(result) {
+                $ionicBackdrop.release();
+                $scope.currentlyScanning = false;
+                $scope.$apply();
+                if (!result.cancelled) {
+                    if (result.format == "EAN_13") {
+                        $scope.fetchFromISBNdb(result.text);
+                    } else {
+                        var alertPopup = $ionicPopup.alert({
+                            title: 'Livre introuvable',
+                            template: '<p class="center">Le code barre a été balayé, mais ce type de code barre n\'est pas un code barre de livre. Le bon code barre possède habituellement une inscription ISBN par dessus celui-ci. Si deux code barre sont côte à côte, le mauvais a peut-être été balayé. Vous pouvez réessayer.</p>'
+                        });
+                    }
+                }
+            },
+            function(error) {
+                $ionicBackdrop.release();
+                $scope.currentlyScanning = false;
+                $ionicPopup.alert({
+                    title: 'Balayage impossible',
+                    template: '<p class="center">Essayez d\'activer l\'accès à l\'appareil photo pour cette application dans l\'onglet Confidentialité des Réglages.</p>'
+                });
+            }
+        );
+    }
     // Initialize
 
     $scope.analyseItemsInfo = function(result) {
