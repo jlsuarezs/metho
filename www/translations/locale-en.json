@@ -1,0 +1,14 @@
+{
+    "TAB_PROJECT": "Projects",
+    "TAB_REFERENCES": "Reference",
+    "TAB_SETTINGS": "Settings",
+    "PROJECT":{
+        "TAB_TITLE": "Projects"
+    },
+    "REFERENCES":{
+        "TAB_TITLE": "Reference"
+    },
+    "SETTINGS":{
+        "TAB_TITLE": "Settings"
+    }
+}

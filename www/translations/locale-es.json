@@ -1,0 +1,14 @@
+{
+    "TAB_PROJECT": "Proyectos",
+    "TAB_REFERENCES": "Referencia",
+    "TAB_SETTINGS": "Parámetros",
+    "PROJECT":{
+        "TAB_TITLE": "Proyectos"
+    },
+    "REFERENCES":{
+        "TAB_TITLE": "Referencia"
+    },
+    "SETTINGS":{
+        "TAB_TITLE": "Parámetros"
+    }
+}
