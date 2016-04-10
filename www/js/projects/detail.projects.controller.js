@@ -673,7 +673,10 @@ angular.module('metho.controller.projects.detail', [])
                 },
                 function(error) {
                     $ionicBackdrop.release();
-                    console.log("Scanning failed: " + error);
+                    $ionicPopup.alert({
+                        title: 'Balayage impossible',
+                        template: '<p class="center">Essayez d\'activer l\'accès à l\'appareil photo pour cette application dans l\'onglet Confidentialité des Réglages.</p>'
+                    });
                 }
             );
         }
