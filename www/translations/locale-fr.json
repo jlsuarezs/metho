@@ -74,6 +74,38 @@
                     "INDICATION_START_END_LABEL": "Indication des pages de l'article",
                     "INDICATION_START_PLACEHOLDER": "Début",
                     "INDICATION_END_PLACEHOLDER": "Fin"
+                },
+                "INTERNET": {
+                    "FIRSTNAME":"Prénom",
+                    "LASTNAME": "Nom",
+                    "HAS_AUTHORS": "La source a un auteur",
+                    "WEBPAGE_NAME": "Titre de l'article",
+                    "WEBPAGE_NAME_PLACHOLDER": "Isaac Newton",
+                    "WEBSITE_NAME": "Nom du site web",
+                    "WEBSITE_NAME_PLACEHOLDER": "Wikipédia, l'encyclopédie libre",
+                    "URL": "Adresse web",
+                    "URL_PLACEHOLDER": "http://www.fr.wikipedia.org",
+                    "CONSULTATION_DATE": "Date de consultation",
+                    "CONSULTATION_DATE_PLACEHOLDER": "21 mars 2009"
+                },
+                "CD": {
+                    "FIRSTNAME": "Prénom",
+                    "LASTNAME": "Nom",
+                    "HAS_AUTHORS": "La source a un auteur",
+                    "DOC_TITLE": "Titre du document",
+                    "DOC_TITLE_PLACEHOLDER": "Multidictionnaire de la langue française",
+                    "EDITOR": "Éditeur",
+                    "EDITOR_PLACEHOLDER": "Québec Amérique",
+                    "PUBLICATION_LOCATION": "Lieu de publication",
+                    "PUBLICATION_LOCATION_PLACEHOLDER": "Montréal",
+                    "PUBLICATION_DATE": "Date de publication",
+                    "PUBLICATION_DATE_PLACEHOLDER": "2001"
+                },
+                "MOVIE": {
+
+                },
+                "INTERVIEW": {
+
                 }
             }
         },
