@@ -96,6 +96,15 @@
         "TAB_TITLE": "Référence"
     },
     "SETTINGS":{
-        "TAB_TITLE": "Paramètres"
+        "TAB_TITLE": "Paramètres",
+        "ORDER_BY": "Trier la bibliographie par",
+        "ALPHABETICAL": "Ordre alphabétique",
+        "TYPE": "Type d'ouvrage",
+        "ASK_FOR_ORDER": "Demander l'ordre lors du partage",
+        "ADVANCED_MODE": "Mode avancé",
+        "LEARN_MORE": "En savoir plus...",
+        "BUG_COMMENT": "Problème/Commentaire",
+        "BUG_COMMENT_LONG": "Rapporter un problème ou émettre un commentaire",
+        "ATTRIBUTIONS": "Adapté à partir du <em>Guide de Méthodologie</em> de l'École d'éducation internationale de McMasterville écrit par Raymond Bédard."
     }
 }
