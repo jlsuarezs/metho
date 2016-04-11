@@ -161,6 +161,7 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
         prefix: "translations/locale-",
         suffix: ".json"
     });
+    $translateProvider.forceAsyncReload(true);
     $translateProvider.preferredLanguage("fr");
     $translateProvider.fallbackLanguage("fr");
 
