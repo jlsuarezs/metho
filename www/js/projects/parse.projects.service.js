@@ -1283,10 +1283,10 @@ angular.module("metho.service.projects.parse", [])
 
                 // Date de l'entrevue
                 if (sourceToParse.consultationDate != null && sourceToParse.consultationDate != "") {
-                    sourceToParse.parsedSource += "le " + new Date(new Date(sourceToParse.consultationDate).getTime() - _userOffset) + ".";
+                    sourceToParse.parsedSource += "le " + new Date(new Date(sourceToParse.consultationDate).getTime() - _userOffset).toLocaleDateString() + ".";
                 } else {
                     sourceToParse.errors.push({
-                        errorTitle: "Date de consultation non spécifié",
+                        errorTitle: "Date de consultation non spécifiée",
                         promptTitle: "Date de consultation",
                         promptText: "Entrez le date de consultation",
                         var: "consultationDate",
