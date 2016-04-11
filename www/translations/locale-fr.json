@@ -2,8 +2,95 @@
     "TAB_PROJECT": "Projets",
     "TAB_REFERENCES": "Référence",
     "TAB_SETTINGS": "Paramètres",
+    "BACK_BUTTON": "Retour",
     "PROJECT":{
-        "TAB_TITLE": "Projets"
+        "TAB":{
+            "TAB_TITLE": "Projets",
+            "EMPTY_TAB": "Aucun projet? Ça viendra...",
+            "EDIT_ITEM": "Modifier",
+            "DELETE_ITEM": "Supprimer",
+            "UNKNOWN_MATTER": "Matière inconnue",
+            "MODAL":{
+                "CANCEL": "Annuler",
+                "TITLE": "Nouveau projet",
+                "ADD": "Créer",
+                "PROJECT_NAME_LABEL": "Nom du projet",
+                "PROJECT_NAME_PLACEHOLDER": "Essai sur les moyens de communication",
+                "MATTER_LABEL": "Matière",
+                "MATTER_PLACEHOLDER": "Géographie"
+            }
+        },
+        "DETAIL":{
+            "EMPTY_TAB": "Qu'est-ce qu'un projet sans sources ?",
+            "DELETE_ITEM": "Supprimer",
+            "PENDING_ELEMENTS": "Éléments en attente({{number}})",
+            "CHOOSE_TYPE": "Choisir le type de source",
+            "MODAL":{
+                "CANCEL": "Annuler",
+                "TITLE": "Nouvelle source",
+                "ADD": "Créer",
+                "SCAN": "Balayer le code",
+                "BOOK": {
+                    "FIRSTNAME": "Prénom",
+                    "LASTNAME": "Nom",
+                    "AUTHOR_1TO3": "La source a de 1 à 3 auteurs",
+                    "AUTHOR_MORE_3": "La source a plus de 3 auteurs",
+                    "AUTHOR_COLLLECTIVE": "La source est un collectif",
+                    "FIRST_2_AUTHOR_NAME": "Noms des deux premiers auteurs",
+                    "DIRECTOR_NAMES": "Nom du ou des directeurs",
+                    "TITLE_LABEL": "Titre du livre",
+                    "TITLE_PLACEHOLDER": "La revanche des chérubins",
+                    "EDITOR_LABEL": "Éditeur",
+                    "EDITOR_PLACEHOLDER": "Québec Amérique",
+                    "PUBLICATION_DATE_LABEL": "Date de publication",
+                    "PUBLICATION_DATE_PLACEHOLDER": "2010",
+                    "PUBLICATION_LOCATION_LABEL": "Lieu de publication",
+                    "PUBLICATION_LOCATION_PLACEHOLDER": "Montréal",
+                    "PAGE_NUMBER_LABEL": "Nombre de pages",
+                    "PAGE_NUMBER_PLACEHOLDER": "341",
+                    "EDITION_NUMBER_LABEL": "Numéro de l'édition",
+                    "EDITION_NUMBER_PLACEHOLDER": "3",
+                    "VOLUME_NUMBER_LABEL": "Numéro du volume",
+                    "VOLUME_NUMBER_PLACEHOLDER": "2",
+                    "COLLECTION_LABEL": "Collection",
+                    "COLLECTION_PLACEHOLDER": "Presses HEC",
+                    "HAS_BEEN_TRANSLATED": "Le livre a été traduit",
+                    "ORIGIN_LANGUAGE_LABEL": "Langue d'origine",
+                    "ORIGIN_LANGUAGE_PLACEHOLDER": "Anglais",
+                    "TRANSLATOR_NAME": "Nom du ou des traducteurs"
+                },
+                "ARTICLE": {
+                    "FIRSTNAME": "Prénom",
+                    "LASTNAME": "Nom",
+                    "AUTHOR_NAME": "Auteur",
+                    "TITLE_LABEL": "Titre de l'article",
+                    "TITLE_PLACEHOLDER": "Haïti, la lente reconstruction",
+                    "PERIODIC_LABEL": "Nom du périodique",
+                    "PERIODIC_PLACEHOLDER": "Le Devoir",
+                    "EDITION_NUMBER_LABEL": "Numéro de l'édition, du volume ou du périodique",
+                    "EDITION_NUMBER_PLACEHOLDER": "vol. 36, no 5",
+                    "PUBLICATION_DATE_LABEL": "Date de publication",
+                    "PUBLICATION_DATE_PLACEHOLDER": "21 mars 2009",
+                    "INDICATION_START_END_LABEL": "Indication des pages de l'article",
+                    "INDICATION_START_PLACEHOLDER": "Début",
+                    "INDICATION_END_PLACEHOLDER": "Fin"
+                }
+            }
+        },
+        "SOURCE":{
+
+        },
+        "PENDING":{
+
+        },
+        "TYPES":{
+            "BOOK": "Livre",
+            "CD": "Cédérom (CD)",
+            "INTERNET": "Site Internet",
+            "ARTICLE": "Article de périodique",
+            "MOVIE": "Document audiovisuel",
+            "INTERVIEW": "Entrevue"
+        }
     },
     "REFERENCES":{
         "TAB_TITLE": "Référence"

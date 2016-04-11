@@ -1,19 +1,19 @@
 <ion-modal-view>
     <ion-header-bar class="bar-stable">
-        <button class="button button-positive button-clear" ng-click="closeModal()">Annuler</button>
-        <h1 class="title">Nouveau projet</h1>
-        <button class="button button-positive button-clear" ng-click="submitProject()">Créer</button> 
+        <button class="button button-positive button-clear" ng-click="closeModal()" translate>PROJECT.TAB.MODAL.CANCEL</button>
+        <h1 class="title" translate>PROJECT.TAB.MODAL.TITLE</h1>
+        <button class="button button-positive button-clear" ng-click="submitProject()" translate>PROJECT.TAB.MODAL.ADD</button>
     </ion-header-bar>
     <ion-content>
         <form ng-submit="submitProject()" ng-keyup="$event.keyCode == 13 && submitProject()">
             <div class="list">
                 <label class="item item-input item-stacked-label">
-                    <span class="input-label">Nom du projet</span>
-                    <input type="text" placeholder="Essai sur les moyens de communication" ng-model="project.name" ng-readonly="false">
+                    <span class="input-label" translate>PROJECT.TAB.MODAL.PROJECT_NAME_LABEL</span>
+                    <input type="text" placeholder="{{ 'PROJECT.TAB.MODAL.PROJECT_NAME_PLACEHOLDER' | translate }}" ng-model="project.name" ng-readonly="false">
                 </label>
                 <label class="item item-input item-stacked-label" ng-class="{ 'red-border':errorName }">
-                    <span class="input-label">Matière</span>
-                    <input type="text" placeholder="Géographie" ng-model="project.matter" ng-readonly="false">
+                    <span class="input-label" translate>PROJECT.TAB.MODAL.MATTER_LABEL</span>
+                    <input type="text" placeholder="{{ 'PROJECT.TAB.MODAL.MATTER_PLACEHOLDER' | translate }}" ng-model="project.matter" ng-readonly="false">
                 </label>
             </div>
         </form>

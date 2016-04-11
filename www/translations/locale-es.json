@@ -2,8 +2,18 @@
     "TAB_PROJECT": "Proyectos",
     "TAB_REFERENCES": "Referencia",
     "TAB_SETTINGS": "Parámetros",
+    "BACK_BUTTON": "",
     "PROJECT":{
-        "TAB_TITLE": "Proyectos"
+        "TAB":{
+            "TAB_TITLE": "Proyectos",
+            "EMPTY_TAB": "Aucun projet? Ça viendra...",
+            "EDIT_ITEM": "Modifier",
+            "DELETE_ITEM": "Supprimer"
+        },
+        "DETAIL":{
+            "EMPTY_TAB": "Qué es un proyecto sin fuente ?",
+            "DELETE_ITEM": "Supprimer"
+        }
     },
     "REFERENCES":{
         "TAB_TITLE": "Referencia"
