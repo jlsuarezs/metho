@@ -1,8 +1,8 @@
 <ion-modal-view>
     <ion-header-bar class="bar-stable">
-        <button class="button button-positive button-clear" ng-click="closeModal()">Annuler</button>
-        <h1 class="title">Nouvelle source</h1>
-        <button class="button button-positive button-clear" ng-click="submitSource()">Créer</button>
+        <button class="button button-positive button-clear" ng-click="closeModal()">{{'PROJECT.DETAIL.MODAL.CANCEL' | translate}}</button>
+        <h1 class="title">{{'PROJECT.DETAIL.MODAL.TITLE' | translate}}</h1>
+        <button class="button button-positive button-clear" ng-click="submitSource()">{{'PROJECT.DETAIL.MODAL.ADD' | translate}}</button>
     </ion-header-bar>
     <ion-content scrollbar-y="true" has-bouncing="true" ng-class="{ 'has-footer' : newsource.type == 'book' && isAdvanced }">
         <form ng-submit="submitSource()" ng-keyup="$event.keyCode == 13 && submitSource()">

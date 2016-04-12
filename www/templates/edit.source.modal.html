@@ -1,7 +1,9 @@
 <ion-modal-view>
-    <ion-header-bar class="bar-stable"> <button class="button button-positive button-clear" ng-click="cancelEdit()">Annuler
-        </button>
-        <h1 class="title">Modifier la source</h1> <button class="button button-positive button-clear" ng-click="submitEdit()">Modifier</button> </ion-header-bar>
+    <ion-header-bar class="bar-stable">
+        <button class="button button-positive button-clear" ng-click="cancelEdit()">{{'PROJECT.SOURCE.MODAL.CANCEL' | translate}}</button>
+        <h1 class="title">{{'PROJECT.SOURCE.MODAL.TITLE' | translate}}</h1>
+        <button class="button button-positive button-clear" ng-click="submitEdit()">{{'PROJECT.SOURCE.MODAL.CONFIRM' | translate}}</button>
+    </ion-header-bar>
     <ion-content scrollbar-y="true" has-bouncing="true">
         <form ng-keyup="$event.keyCode == 13 && submitEdit()">
             <!-- Livre -->

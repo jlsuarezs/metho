@@ -1,27 +1,38 @@
 <ion-modal-view>
-    <ion-header-bar class="bar-stable"> <button class="button button-positive button-clear" ng-click="closeBoarding()" ng-if="boardingIndex == 0">Passer</button> <button class="button button-positive button-clear" ng-click="lastSlideBoarding()" ng-if="boardingIndex > 0">Précédent</button>
-        <h1 class="title">Balayage</h1> <button class="button button-positive button-clear" ng-click="nextSlideBoarding()" ng-if="boardingIndex < 2">Suivant</button> <button class="button button-positive button-clear" ng-click="closeBoarding()" ng-if="boardingIndex == 2">Fermer</button>        </ion-header-bar>
+    <ion-header-bar class="bar-stable">
+        <button class="button button-positive button-clear" ng-click="closeBoarding()" ng-if="boardingIndex == 0">{{'PROJECT.DETAIL.BOARDING.SKIP' | translate}}</button>
+        <button class="button button-positive button-clear" ng-click="lastSlideBoarding()" ng-if="boardingIndex > 0">{{'PROJECT.DETAIL.BOARDING.PREVIOUS' | translate}}</button>
+        <h1 class="title">{{'PROJECT.DETAIL.BOARDING.TITLE' | translate}}</h1>
+        <button class="button button-positive button-clear" ng-click="nextSlideBoarding()" ng-if="boardingIndex < 2">{{'PROJECT.DETAIL.BOARDING.NEXT' | translate}}</button>
+        <button class="button button-positive button-clear" ng-click="closeBoarding()" ng-if="boardingIndex == 2">{{'PROJECT.DETAIL.BOARDING.CLOSE' | translate}}</button>
+    </ion-header-bar>
     <ion-content has-bouncing="false" scroll="false">
         <ion-slide-box on-slide-changed="slideHasChanged(index)" show-pager="false">
             <ion-slide class="blue">
                 <div class="box">
                     <h1 class="big">75 %</h1>
-                    <p class="smallest"> des livres reconnus par l'application </p>
-                    <p class="justified padding-extreme padding-top-extreme"> Selon un test approfondi mené sur les livres de la bibliothèque de l'École d'Éducation de McMasterville, 75 % que vous balayerez avec cette application seront reconnus et les données sur ces livres seront remplies. Vous serez invité
-                        à entrer manuellement les données qui n'aurons pu être récupérées. </p>
+                    <p class="smallest" translate>PROJECT.DETAIL.BOARDING.OF_BOOK_RECOGNIZED</p>
+                    <p class="justified padding-extreme padding-top-extreme" translate>PROJECT.DETAIL.BOARDING.TEXT_RECOGNIZED</p>
                 </div>
             </ion-slide>
             <ion-slide class="yellow">
-                <div class="box"> <img src="img/isbn.png" alt="ISBN image" id="imgISBN" />
-                    <p class="center padding-extreme padding-top-extreme"> Balayez le code sous la mention ISBN. Assurez-vous d'être dans un environnement assez éclairé. </p>
+                <div class="box">
+                    <img src="img/isbn.png" alt="ISBN image" id="imgISBN" />
+                    <p class="center padding-extreme padding-top-extreme" translate>PROJECT.DETAIL.BOARDING.SCAN_TEXT</p>
                 </div>
             </ion-slide>
             <ion-slide class="green">
                 <div class="box">
-                    <div class="imitateSVG" ng-if="boardingIndex != 2"></div> <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" ng-if="boardingIndex == 2"><circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" /><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>
-                    <div class="padding"> <button class="button button-block button-stable margin-top-medium" ng-click="closeBoarding()">
-                            Balayer mon premier code
-                        </button> </div>
+                    <div class="imitateSVG" ng-if="boardingIndex != 2"></div>
+                    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" ng-if="boardingIndex == 2">
+                        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                    </svg>
+                    <div class="padding">
+                        <button class="button button-block button-stable margin-top-medium" ng-click="closeBoarding()">
+                            {{'PROJECT.DETAIL.BOARDING.SCAN_FIRST' | translate}}
+                        </button>
+                    </div>
                 </div>
             </ion-slide>
         </ion-slide-box>

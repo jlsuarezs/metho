@@ -18,6 +18,15 @@
                 "PROJECT_NAME_PLACEHOLDER": "Essai sur les moyens de communication",
                 "MATTER_LABEL": "Matière",
                 "MATTER_PLACEHOLDER": "Géographie"
+            },
+            "MODAL_EDIT":{
+                "CANCEL": "Annuler",
+                "TITLE": "Modifier le projet",
+                "CONFIRM": "Modifier",
+                "PROJECT_NAME_LABEL": "Nom du projet",
+                "PROJECT_NAME_PLACEHOLDER": "Essai sur les moyens de communication",
+                "MATTER_LABEL": "Matière",
+                "MATTER_PLACEHOLDER": "Géographie"
             }
         },
         "DETAIL":{
@@ -143,13 +152,37 @@
                     "INTERVIEW_DATE": "Date de l'entrevue",
                     "INTERVIEW_DATE_PLACEHOLDER": "9 mars 2016"
                 }
+            },
+            "BOARDING": {
+                "SKIP": "Passer",
+                "NEXT": "Suivant",
+                "PREVIOUS": "Précédent",
+                "TITLE": "Balayage",
+                "CLOSE": "Fermer",
+                "OF_BOOK_RECOGNIZED": "des livres reconnus par l'application",
+                "TEXT_RECOGNIZED": "Selon un test approfondi mené sur les livres de la bibliothèque de l'École d'Éducation de McMasterville, 75 % que vous balayerez avec cette application seront reconnus et les données sur ces livres seront remplies. Vous serez invité à entrer manuellement les données qui n'aurons pu être récupérées.",
+                "SCAN_TEXT": "Balayez le code sous la mention ISBN. Assurez-vous d'être dans un environnement assez éclairé.",
+                "SCAN_FIRST": "Balayer mon premier code"
             }
         },
         "SOURCE":{
-
+            "EDIT": "Modifier",
+            "NO_ERROR": "Aucune erreur",
+            "MODAL": {
+                "CANCEL": "Annuler",
+                "TITLE": "Modifier la source",
+                "CONFIRM": "Modifier"
+            }
         },
         "PENDING":{
-
+            "TITLE": "Éléments en attente",
+            "DELETE_ITEM": "Supprimer",
+            "EMPTY_TAB": "Aucune source en attente!",
+            "MODAL":{
+                "CANCEL": "Annuler",
+                "TITLE": "Nouvelle source",
+                "ADD": "Créer"
+            }
         },
         "TYPES":{
             "BOOK": "Livre",
@@ -169,10 +202,45 @@
         "ALPHABETICAL": "Ordre alphabétique",
         "TYPE": "Type d'ouvrage",
         "ASK_FOR_ORDER": "Demander l'ordre lors du partage",
-        "ADVANCED_MODE": "Mode avancé",
+        "ADVANCED_MODE_LABEL": "Mode avancé",
         "LEARN_MORE": "En savoir plus...",
         "BUG_COMMENT": "Problème/Commentaire",
         "BUG_COMMENT_LONG": "Rapporter un problème ou émettre un commentaire",
-        "ATTRIBUTIONS": "Adapté à partir du <em>Guide de Méthodologie</em> de l'École d'éducation internationale de McMasterville écrit par Raymond Bédard."
+        "ATTRIBUTIONS": "Adapté à partir du <em>Guide de Méthodologie</em> de l'École d'éducation internationale de McMasterville écrit par Raymond Bédard.",
+        "ADVANCED_MODE": {
+            "TITLE": "Mode avancé",
+            "WAITING_FOR": "Qu'attendez-vous pour essayer le mode avancé? Voici les fonctionalités incluses : ",
+            "SCANNING": "Balayage",
+            "SCAN_DESC": "Balayez l'ISBN d'un livre pour voir sa source se créer automatiquement (certains livres ne sont pas supportés)",
+            "MODELS": "Modèles",
+            "MODELS_DESC": "Utilisez des modèles préfaits au format DOCX dans vos travaux pour vous simplifier la vie",
+            "SHARING": "Partage avancé",
+            "SHARING_DESC": "Partagez un lien de Wikipédia à partir de Safari vers Metho pour créer une source automatiquement"
+        },
+        "FEEDBACK": {
+            "TITLE": "Problème/Commentaire",
+            "TAB_PROJECT": "Onglet Projets",
+            "TAB_PROJECT_DESC": "Problème dans l'onglet Projets",
+            "TAB_REFERENCE": "Onglet Référence",
+            "TAB_REFERENCE_DESC": "Problème dans l'onglet Référence",
+            "SETTINGS": "Paramètres",
+            "SETTINGS_DESC": "Problème concernant les paramètres",
+            "COMMENT": "Commentaire",
+            "COMMENT_DESC": "Émettre un commentaire",
+            "FEATURE": "Fonctionalité",
+            "FEATURE_DESC": "Proposer une nouvelle fonctionalité",
+            "EMAIL": {
+                "PROJECT": "<p>Merci de rapporter un problème. J'essaierai de le régler et de vous répondre rapidement. Veuillez répondre aux questions ci-dessous afin de m'aider à reproduire ce problème. Il n'est pas nécessaire d'inclure des réponses longues, quelques mots sont suffisants.</p><br><strong>À quel endroit se produit ce problème (à l'intérieur de l'onglet projets)?</strong><br><br><br><strong>Décrire le problème.</strong><br><br><br><strong>Décrire comment reproduire le problème (étapes).</strong><br><br><br><strong>Décrire les conséquences du problème (crash de l'application, impossibilité d'ajouter une source, etc.)</strong><br><br><br><p>Merci d'aider à améliorer cette application. Je communiquerai avec vous dans le cas où j'aurais besoin d'information supplémentaire.</p><h5>Ne pas modifier cette section</h5><p>",
+                "PROJECT_TITLE": "Problème dans l'onglet Projets",
+                "REFERENCE": "<p>Merci de rapporter un problème. J'essaierai de le régler et de vous répondre rapidement. Veuillez répondre aux questions ci-dessous afin de m'aider à reproduire ce problème. Il n'est pas nécessaire d'inclure des réponses longues, quelques mots sont suffisants.</p><br><strong>Quelle rubrique(s) sont concernés par le problème (tous?)?</strong><br><br><br><strong>Décrire le problème.</strong><br><br><br><strong>Décrire comment reproduire le problème (étapes).</strong><br><br><br><strong>Décrire les conséquences du problème (crash de l'application, erreur d'orthographe, etc.)</strong><br><br><br><p>Merci d'aider à améliorer cette application. Je communiquerai avec vous dans le cas où j'aurais besoin d'information supplémentaire.</p><h5>Ne pas modifier cette section</h5><p>",
+                "REFERENCE_TITLE": "Problème dans l'onglet Référence",
+                "SETTINGS": "<p>Merci de rapporter un problème. J'essaierai de le régler et de vous répondre rapidement. Veuillez répondre aux questions ci-dessous afin de m'aider à reproduire ce problème. Il n'est pas nécessaire d'inclure des réponses longues, quelques mots sont suffisants.</p><br><strong>Quelle paramètre(s) sont concernés par le problème (tous?)?</strong><br><br><br><strong>Décrire le problème.</strong><br><br><br><strong>Décrire comment reproduire le problème (étapes).</strong><br><br><br><strong>Décrire les conséquences du problème (crash de l'application, paramètre n'ayant aucun effet, etc.)</strong><br><br><br><p>Merci d'aider à améliorer cette application. Je communiquerai avec vous dans le cas où j'aurais besoin d'information supplémentaire.</p><h5>Ne pas modifier cette section</h5><p>",
+                "SETTINGS_TITLE": "Problème concernant les paramètres",
+                "COMMENT": "<p>Merci d'émettre un commentaire sur cette application. J'essaierai de vous répondre rapidement.</p><strong>Commentaire</strong><br><br><br>",
+                "COMMENT_TITLE": "Commentaire",
+                "FEATURE": "<p>Merci de proposer une fonctionalité. J'essaierai de vous répondre rapidement. Veuillez répondre aux questions ci-dessous afin de m'aider à comprendre votre idée. Il n'est pas nécessaire d'inclure des réponses longues, quelques mots sont suffisants.</p><br><strong>Quelle partie de l'application est concernée?</strong><br><br><br><strong>Décrire la fonctionalité.</strong><br><br><br><p>Merci d'aider à améliorer cette application. Je communiquerai avec vous dans le cas où j'aurais besoin d'information supplémentaire.</p>",
+                "FEATURE_TITLE": "Suggestion de fonctionalité"
+            }
+        }
     }
 }

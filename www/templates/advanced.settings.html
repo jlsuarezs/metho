@@ -1,19 +1,19 @@
-<ion-view view-title="Mode avancé">
+<ion-view view-title="{{'SETTINGS.ADVANCED_MODE.TITLE' | translate}}">
     <ion-content has-bouncing="true">
         <button ng-click="buy()" class="button button-full button-priced button-light">1,29 <span>$</span></button>
-        <p class="padding-top center"> Qu'attendez-vous pour essayer le mode avancé? Voici les fonctionalités incluses : </p>
+        <p class="padding-top center"> {{'SETTINGS.ADVANCED_MODE.WAITING_FOR' | translate}}</p>
         <ion-list>
             <ion-item class="item item-avatar" type="item-text-wrap"> <img src="img/barcode.png" alt="balayage" />
-                <h2>Balayage</h2>
-                <p class="wrap"> Balayez l'ISBN d'un livre pour voir sa source se créer automatiquement (certains livres ne sont pas supportés) </p>
+                <h2 translate>SETTINGS.ADVANCED_MODE.SCANNING</h2>
+                <p class="wrap" translate>SETTINGS.ADVANCED_MODE.SCAN_DESC</p>
             </ion-item>
             <ion-item class="item item-avatar" type="item-text-wrap"> <img src="img/models.png" alt="modèles" />
-                <h2>Modèles</h2>
-                <p class="wrap"> Utilisez des modèles préfaits au format DOCX dans vos travaux pour vous simplifier la vie </p>
+                <h2 translate>SETTINGS.ADVANCED_MODE.MODELS</h2>
+                <p class="wrap" translate>SETTINGS.ADVANCED_MODE.MODELS_DESC</p>
             </ion-item>
             <ion-item class="item item-avatar avatar-notround" type="item-text-wrap"> <img src="img/share.png" alt="partage" />
-                <h2>Partage avancé</h2>
-                <p class="wrap"> Partagez un lien de Wikipédia à partir de Safari vers Metho pour créer une source automatiquement </p>
+                <h2 translate>SETTINGS.ADVANCED_MODE.SHARING</h2>
+                <p class="wrap" translate>SETTINGS.ADVANCED_MODE.SHARING_DESC</p>
             </ion-item>
         </ion-list>
     </ion-content>

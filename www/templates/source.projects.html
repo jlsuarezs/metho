@@ -4,7 +4,7 @@
         <div class="page-title" ng-if="source.title">{{source.title}}</div>
         <div class="page-sub-title">{{source.parsedType}}</div>
     </ion-nav-title>
-    <ion-nav-buttons side="right"> <button class="button button-clear button-positive" ng-click="edit()">Modifier</button> </ion-nav-buttons>
+    <ion-nav-buttons side="right"> <button class="button button-clear button-positive" ng-click="edit()">{{'PROJECT.SOURCE.EDIT' | translate}}</button> </ion-nav-buttons>
     <ion-content ng-class="{ 'padding flex' : loading }">
         <!-- Source -->
         <p class="center padding" ng-bind-html="source.parsedSource"></p>
@@ -16,7 +16,7 @@
                 <h2>{{warning.errorTitle}}</h2> </ion-item>
         </ion-list>
         <!-- Aucune erreur -->
-        <h2 ng-if="!source.errors.length && !loading && !source.warnings.length" class="empty center">Aucune erreur</h2>
+        <h2 ng-if="!source.errors.length && !loading && !source.warnings.length" class="empty center">{{'PROJECT.SOURCE.NO_ERROR' | translate}}</h2>
         <!-- Loading -->
         <div class="spinner" ng-if="loading">
             <ion-spinner></ion-spinner>
