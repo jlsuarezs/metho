@@ -225,92 +225,113 @@
             </div>
             <!-- Vidéo -->
             <div ng-if="newsource.type == 'movie'">
-                <ion-checkbox ng-model="newsource.hasAuthors">La source a plus d'un auteur/réalisateur</ion-checkbox>
-                <p class="center no-margin" ng-slide-down="newsource.hasAuthors" lazy-render>Vous devez entrer l'auteur/réalisateur principal, la mention «et al.» sera ajoutée afin de signifier qu'il y a plus d'un auteur/réalisateur.</p>
+                <ion-checkbox ng-model="newsource.hasAuthors">{{'PROJECT.DETAIL.MODAL.MOVIE.HAS_MORE_THAN_ONE' | translate}}</ion-checkbox>
+                <p class="center no-margin" ng-slide-down="newsource.hasAuthors" lazy-render>{{'PROJECT.DETAIL.MODAL.MOVIE.HAS_MORE_THAN_ONE_TRUE' | translate}}</p>
                 <div>
                     <label class="item">
-                        <span class="input-label">Auteur/réalisateur principal</span>
+                        <span class="input-label" translate>PROJECT.DETAIL.MODAL.MOVIE.PRINCIPAL_AUTHOR</span>
                     </label>
-                    <div class="flex-sub padding"> <input type="text" ng-model="newsource.author1firstname" placeholder="Prénom"> <input type="text" ng-model="newsource.author1lastname" placeholder="Nom"> </div>
+                    <div class="flex-sub padding">
+                        <input type="text" ng-model="newsource.author1firstname" placeholder="{{'PROJECT.DETAIL.MODAL.MOVIE.FIRSTNAME' | translate}}">
+                        <input type="text" ng-model="newsource.author1lastname" placeholder="{{'PROJECT.DETAIL.MODAL.MOVIE.LASTNAME' | translate}}">
+                    </div>
                 </div>
-                <!-- Nom de l'émission ou du document --><label class="item item-input item-stacked-label">
-                        <span class="input-label">Nom de l'émission ou du document</span>
-                        <input type="text" placeholder="Vengeance" ng-model="newsource.title">
-                    </label>
-                <!-- Titre de l'épisode --><label class="item item-input item-stacked-label">
-                        <span class="input-label dimmed-75">Titre de l'épisode</span>
-                        <input type="text" placeholder="La revanche" ng-model="newsource.episodeTitle">
-                    </label>
-                <!-- Lieu de production --><label class="item item-input item-stacked-label">
-                        <span class="input-label">Lieu de production</span>
-                        <input type="text" placeholder="Montréal" ng-model="newsource.productionLocation">
-                    </label>
-                <!-- Producteur --><label class="item item-input item-stacked-label">
-                        <span class="input-label">Producteur</span>
-                        <input type="text" placeholder="CC&C Clark Costelle et Cie" ng-model="newsource.productor">
-                    </label>
-                <!-- Diffuseur --><label class="item item-input item-stacked-label">
-                        <span class="input-label">Diffuseur</span>
-                        <input type="text" placeholder="ICI Radio-Canada" ng-model="newsource.broadcaster">
-                    </label>
-                <!-- Durée --><label class="item item-input item-stacked-label">
-                        <span class="input-label">Durée (minutes)</span>
-                        <input type="text" placeholder="55" ng-model="newsource.duration">
-                    </label>
-                <!-- Date de publication --><label class="item item-input item-stacked-label">
-                        <span class="input-label">Date de publication</span>
-                        <input type="text" placeholder="2002" ng-model="newsource.publicationDate">
-                    </label>
-                <!-- Support --><label class="item item-select item-stacked-label">
-                        <span class="input-label">Support</span>
-                        <select ng-model="newsource.support">
-                            <option value="cd">Cédérom</option>
-                            <option value="dvd" selected>DVD</option>
-                            <option value="internet">Vidéo Internet</option>
-                        </select>
-                    </label>
-                <!-- Date de visionnement --><label class="item item-input item-stacked-label">
-                        <span class="input-label">Date de visionnement</span>
-                        <input type="date" placeholder="2015-03-21" ng-model="newsource.consultationDate">
-                    </label> </div>
+                <!-- Nom de l'émission ou du document -->
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label" translate>PROJECT.DETAIL.MODAL.MOVIE.DOC_NAME</span>
+                    <input type="text" placeholder="{{'PROJECT.DETAIL.MODAL.MOVIE.DOC_NAME_PLACEHOLDER' | translate}}" ng-model="newsource.title">
+                </label>
+                <!-- Titre de l'épisode -->
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label dimmed-75" translate>PROJECT.DETAIL.MODAL.MOVIE.EPISODE_NAME</span>
+                    <input type="text" placeholder="{{'PROJECT.DETAIL.MODAL.MOVIE.EPISODE_PLACEHOLDER' | translate}}" ng-model="newsource.episodeTitle">
+                </label>
+                <!-- Lieu de production -->
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label" translate>PROJECT.DETAIL.MODAL.MOVIE.PUBLICATION_LOCATION</span>
+                    <input type="text" placeholder="{{'PROJECT.DETAIL.MODAL.MOVIE.PUBLICATION_LOCATION_PLACEHOLDER' | translate}}" ng-model="newsource.productionLocation">
+                </label>
+                <!-- Producteur -->
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label" translate>PROJECT.DETAIL.MODAL.MOVIE.PRODUCTOR</span>
+                    <input type="text" placeholder="{{'PROJECT.DETAIL.MODAL.MOVIE.PRODUCTOR_PLACEHOLDER' | translate}}" ng-model="newsource.productor">
+                </label>
+                <!-- Diffuseur -->
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label" translate>PROJECT.DETAIL.MODAL.MOVIE.BROADCASTER</span>
+                    <input type="text" placeholder="{{'PROJECT.DETAIL.MODAL.MOVIE.BROADCASTER_PLACEHOLDER' | translate}}" ng-model="newsource.broadcaster">
+                </label>
+                <!-- Durée -->
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label" translate>PROJECT.DETAIL.MODAL.MOVIE.LENGTH</span>
+                    <input type="text" placeholder="{{'PROJECT.DETAIL.MODAL.MOVIE.LENGTH_PLACEHOLDER' | translate}}" ng-model="newsource.duration">
+                </label>
+                <!-- Date de publication -->
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label" translate>PROJECT.DETAIL.MODAL.MOVIE.PUBLICATION_DATE</span>
+                    <input type="text" placeholder="{{'PROJECT.DETAIL.MODAL.MOVIE.PUBLICATION_DATE_PLACEHOLDER' | translate}}" ng-model="newsource.publicationDate">
+                </label>
+                <!-- Support -->
+                <label class="item item-select item-stacked-label">
+                    <span class="input-label" translate>PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_TYPE</span>
+                    <select ng-model="newsource.support">
+                        <option value="cd" translate>PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_CD</option>
+                        <option value="dvd" selected translate>PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_DVD</option>
+                        <option value="internet" translate>PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_INTERNET</option>
+                    </select>
+                </label>
+                <!-- Date de visionnement -->
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label" translate>PROJECT.DETAIL.MODAL.MOVIE.CONSULTATION_DATE</span>
+                    <input type="date" placeholder="{{'PROJECT.DETAIL.MODAL.MOVIE.CONSULTATION_DATE_PLACEHOLDER' | translate}}" ng-model="newsource.consultationDate">
+                </label>
+            </div>
             <!-- Entrevue -->
             <div ng-if="newsource.type == 'interview'">
                 <!-- Nom de l'intervieweur -->
-                <div> <label class="item">
-                            <span class="input-label">Nom de l'intervieweur</span>
-                        </label>
-                    <div class="flex-sub padding"> <input type="text" ng-model="newsource.author1firstname" placeholder="Prénom"> <input type="text" ng-model="newsource.author1lastname" placeholder="Nom"> </div>
+                <div>
+                    <label class="item">
+                        <span class="input-label" translate>PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWER_NAME</span>
+                    </label>
+                    <div class="flex-sub padding">
+                        <input type="text" ng-model="newsource.author1firstname" placeholder="{{'PROJECT.DETAIL.MODAL.INTERVIEW.FIRSTNAME' | translate}}">
+                        <input type="text" ng-model="newsource.author1lastname" placeholder="{{'PROJECT.DETAIL.MODAL.INTERVIEW.LASTNAME' | translate}}">
+                    </div>
                 </div>
                 <!-- Nom de la personne rencontrée -->
-                <div class="isolated"> <label class="item">
-                            <span class="input-label">Nom de la personne rencontrée</span>
-                        </label>
-                    <div class="flex-sub padding"> <select ng-model="newsource.civility">
-                                <option value="mister">M.</option>
-                                <option value="miss" selected>M<sup>me</sup></option>
-                                <option value="miss_young">M<sup>lle</sup></option>
-                            </select> <input type="text" ng-model="newsource.interviewed1firstname" placeholder="Prénom"> <input type="text" ng-model="newsource.interviewed1lastname" placeholder="Nom"> </div>
+                <div class="isolated">
+                    <label class="item">
+                        <span class="input-label" translate>PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWED_NAME</span>
+                    </label>
+                    <div class="flex-sub padding">
+                        <select ng-model="newsource.civility">
+                            <option value="mister" translate>PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISTER</option>
+                            <option value="miss" selected translate>PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS</option>
+                            <option value="miss_young" translate>PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS_YOUNG</option>
+                        </select>
+                        <input type="text" ng-model="newsource.interviewed1firstname" placeholder="{{'PROJECT.DETAIL.MODAL.INTERVIEW.FIRSTNAME' | translate}}">
+                        <input type="text" ng-model="newsource.interviewed1lastname" placeholder="{{'PROJECT.DETAIL.MODAL.INTERVIEW.FIRSTNAME' | translate}}">
+                    </div>
                 </div>
-                <!-- Civilité de la personne --><label class="item item-select item-stacked-label">
-                        <span class="input-label">Civilitée de la personne</span>
-
-                    </label>
-                <!-- Titre de la personne --><label class="item item-input item-stacked-label">
-                        <span class="input-label">Titre de la personne rencontrée</span>
-                        <input type="text" placeholder="retraité et ancien combattant de la Deuxième Guerre mondiale" ng-model="newsource.interviewedTitle">
-                    </label>
-                <!-- Lieu de l'entrevue --><label class="item item-input item-stacked-label">
-                        <span class="input-label">Lieu de l'entrevue</span>
-                        <input type="text" placeholder="Carignan" ng-model="newsource.publicationLocation">
-                    </label>
-                <!-- Date de l'entrevue --><label class="item item-input item-stacked-label">
-                        <span class="input-label">Date de l'entrevue</span>
-                        <input type="date" placeholder="2016-03-02" ng-model="newsource.consultationDate">
-                    </label> </div>
+                <!-- Titre de la personne -->
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label" translate>PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWED_TITLE</span>
+                    <input type="text" placeholder="{{'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWED_TITLE_PLACEHOLDER' | translate}}" ng-model="newsource.interviewedTitle">
+                </label>
+                <!-- Lieu de l'entrevue -->
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label" translate>PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEW_LOCATION</span>
+                    <input type="text" placeholder="{{'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEW_LOCATION_PLACEHOLDER' | translate}}" ng-model="newsource.publicationLocation">
+                </label>
+                <!-- Date de l'entrevue -->
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label" translate>PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEW_DATE</span>
+                    <input type="date" placeholder="{{'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEW_DATE_PLACEHOLDER' | translate}}" ng-model="newsource.consultationDate">
+                </label>
+            </div>
         </form>
-        <!-- <p ng-bind="newsource.publicationDate">
-
-        </p> -->
     </ion-content>
-    <ion-footer-bar align-title="center" class="bar-positive no-padding" ng-if="newsource.type == 'book' && isAdvanced"> <button class="button button-full footer-button-custom icon-left ion-qr-scanner" on-tap="scanBook()" ng-disabled="currentlyScanning">Balayer le code</button> </ion-footer-bar>
+    <ion-footer-bar align-title="center" class="bar-positive no-padding" ng-if="newsource.type == 'book' && isAdvanced">
+        <button class="button button-full footer-button-custom icon-left ion-qr-scanner" on-tap="scanBook()" ng-disabled="currentlyScanning">{{'PROJECT.DETAIL.MODAL.SCAN' | translate}}</button>
+    </ion-footer-bar>
 </ion-modal-view>

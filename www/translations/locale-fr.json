@@ -102,10 +102,46 @@
                     "PUBLICATION_DATE_PLACEHOLDER": "2001"
                 },
                 "MOVIE": {
-
+                    "FIRSTNAME": "Prénom",
+                    "LASTNAME": "Nom",
+                    "HAS_MORE_THAN_ONE": "La source a plus d'un auteur/réalisateur",
+                    "HAS_MORE_THAN_ONE_TRUE": "Vous devez entrer l'auteur/réalisateur principal, la mention «et al.» sera ajoutée afin de signifier qu'il y a plus d'un auteur/réalisateur.",
+                    "PRINCIPAL_AUTHOR": "Auteur principal",
+                    "DOC_NAME": "Nom de l'émission ou du document",
+                    "DOC_NAME_PLACEHOLDER": "Veangeance",
+                    "EPISODE_NAME": "Titre de l'épisode",
+                    "EPISODE_PLACEHOLDER": "La revanche",
+                    "PUBLICATION_LOCATION": "Lieu de publication",
+                    "PUBLICATION_LOCATION_PLACEHOLDER": "Montréal",
+                    "PRODUCTOR": "Producteur",
+                    "PRODUCTOR_PLACEHOLDER": "CC&C Clark Costelle et Cie",
+                    "BROADCASTER": "Diffuseur",
+                    "BROADCASTER_PLACEHOLDER": "ICI Radio-Canada",
+                    "LENGTH": "Durée (minutes)",
+                    "LENGTH_PLACEHOLDER": "55",
+                    "PUBLICATION_DATE": "Date de publication",
+                    "PUBLICATION_DATE_PLACEHOLDER": "2002",
+                    "SUPPORT_TYPE": "Support",
+                    "SUPPORT_CD": "Cédérom",
+                    "SUPPORT_DVD": "DVD",
+                    "SUPPORT_INTERNET": "Vidéo Internet",
+                    "CONSULTATION_DATE": "Date de visionnement",
+                    "CONSULTATION_DATE_PLACEHOLDER": "29 mars 1991"
                 },
                 "INTERVIEW": {
-
+                    "FIRSTNAME": "Prénom",
+                    "LASTNAME": "Nom",
+                    "INTERVIEWER_NAME": "Nom de l'intervieweur",
+                    "INTERVIEWED_NAME": "Nom de la personne rencontrée",
+                    "CIVILITY_MISTER": "M.",
+                    "CIVILITY_MISS": "Mme",
+                    "CIVILITY_MISS_YOUNG": "Mlle",
+                    "INTERVIEWED_TITLE": "Titre de la personne rencontrée",
+                    "INTERVIEWED_TITLE_PLACEHOLDER": "retraité et combattant de la Deuxième Guerre mondiale",
+                    "INTERVIEW_LOCATION": "Lieu de l'entrevue",
+                    "INTERVIEW_LOCATION_PLACEHOLDER": "Carignan",
+                    "INTERVIEW_DATE": "Date de l'entrevue",
+                    "INTERVIEW_DATE_PLACEHOLDER": "9 mars 2016"
                 }
             }
         },
