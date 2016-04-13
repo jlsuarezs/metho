@@ -13,21 +13,27 @@ angular.module('metho.controller.projects.tab', [])
     // Initialize the DB
     $scope.projectsRepo = new PouchDB("projects");
     // Load the projects
-    $scope.projectsRepo.allDocs({
-        include_docs: true
-    }).then(function(result) {
-        for (var i = 0; i < result.rows.length; i++) {
-            var obj = {
-                name: result.rows[i].doc.name,
-                matter: result.rows[i].doc.matter,
-                id: result.rows[i].doc._id
+    $translate("PROJECT.TAB.UNKNOWN_MATTER").then(function (unknown) {
+        $scope.projectsRepo.allDocs({
+            include_docs: true
+        }).then(function(result) {
+            $scope.projects = [];
+            for (var i = 0; i < result.rows.length; i++) {
+                var obj = {
+                    name: result.rows[i].doc.name,
+                    matter: result.rows[i].doc.matter,
+                    id: result.rows[i].doc._id
+                }
+                if (obj.matter == "") {
+                    obj.matter = unknown;
+                }
+                $scope.projects.push(obj);
             }
-            $scope.projects.push(obj);
-        }
-        $scope.loading = false;
-        $scope.$apply();
-    }).catch(function(err) {
-        console.log(err);
+            $scope.loading = false;
+            $scope.$apply();
+        }).catch(function(err) {
+            console.log(err);
+        });
     });
 
     $ionicModal.fromTemplateUrl('templates/new.project.modal.html', {
@@ -46,11 +52,13 @@ angular.module('metho.controller.projects.tab', [])
 
     $scope.closeModal = function() {
         $scope.newProjectModal.hide();
+        $ionicListDelegate.closeOptionButtons();
         $scope.errorName = false;
     }
 
     $scope.closeEditModal = function() {
         $scope.editProjectModal.hide();
+        $ionicListDelegate.closeOptionButtons();
         $scope.errorName = false;
     }
 
@@ -71,7 +79,7 @@ angular.module('metho.controller.projects.tab', [])
             $translate("PROJECT.TAB.UNKNOWN_MATTER").then(function (unknown) {
                 $scope.errorName = false;
                 if ($scope.project.matter == "" || $scope.project.matter == null) {
-                    var theMatter = unknown;
+                    var theMatter = "";
                 } else {
                     var theMatter = $scope.project.matter;
                 }
@@ -132,11 +140,7 @@ angular.module('metho.controller.projects.tab', [])
             $scope.editingProject = {};
             $scope.projectsRepo.get(id).then(function(doc) {
                 $scope.editingProject.name = doc.name;
-                if (doc.matter == unknown) {
-                    $scope.editingProject.matter = "";
-                } else {
-                    $scope.editingProject.matter = doc.matter;
-                }
+                $scope.editingProject.matter = doc.matter;
                 $scope.editingProject.id = doc._id;
                 $scope.editProjectModal.show();
             });
