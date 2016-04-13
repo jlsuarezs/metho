@@ -1,6 +1,6 @@
 angular.module('metho.controller.projects.tab', [])
 
-.controller('ProjectsCtrl', function($scope, $state, $ionicModal, $ionicPlatform, $ionicPopup, $ionicListDelegate, ShareProject) {
+.controller('ProjectsCtrl', function($scope, $state, $translate, $ionicModal, $ionicPlatform, $ionicPopup, $ionicListDelegate, ShareProject) {
     $scope.projects = [];
     $scope.project = {
         name: "",
@@ -61,110 +61,120 @@ angular.module('metho.controller.projects.tab', [])
     $scope.submitProject = function() {
         if ($scope.project.name == "" ||  $scope.project.name == null) {
             $scope.errorName = true;
-            var alertPopup = $ionicPopup.alert({
-                title: 'Erreur',
-                template: '<p class="center">Entrez un nom de projet</p>'
+            $translate(["PROJECT.TAB.POPUP.ERROR_TEXT", "PROJECT.TAB.POPUP.NO_PROJECT_NAME"]).then(function (translations) {
+                $ionicPopup.alert({
+                    title: translations["PROJECT.TAB.POPUP.ERROR_TEXT"],
+                    template: '<p class="center">' + translations["PROJECT.TAB.POPUP.NO_PROJECT_NAME"] + '</p>'
+                });
             });
         } else {
-            $scope.errorName = false;
-            if ($scope.project.matter == "" || $scope.project.matter == null) {
-                var theMatter = "Matière inconnue";
-            } else {
-                var theMatter = $scope.project.matter;
-            }
-            var creatingProj = {
-                name: $scope.project.name,
-                matter: theMatter
-            };
-
-            $scope.projectsRepo.post(creatingProj).then(function(response) {
-                creatingProj.id = response.id;
-                $scope.projects.push(creatingProj);
-                $scope.project = {
-                    name: "",
-                    matter: ""
+            $translate("PROJECT.TAB.UNKNOWN_MATTER").then(function (unknown) {
+                $scope.errorName = false;
+                if ($scope.project.matter == "" || $scope.project.matter == null) {
+                    var theMatter = unknown;
+                } else {
+                    var theMatter = $scope.project.matter;
+                }
+                var creatingProj = {
+                    name: $scope.project.name,
+                    matter: theMatter
                 };
-                $scope.newProjectModal.hide();
-                $scope.$apply();
-            }).catch(function(err) {
-                console.log(err);
+
+                $scope.projectsRepo.post(creatingProj).then(function(response) {
+                    creatingProj.id = response.id;
+                    $scope.projects.push(creatingProj);
+                    $scope.project = {
+                        name: "",
+                        matter: ""
+                    };
+                    $scope.newProjectModal.hide();
+                    $scope.$apply();
+                }).catch(function(err) {
+                    console.log(err);
+                });
             });
         }
     }
 
     $scope.deleteProject = function(id) {
-        var confirmPopup = $ionicPopup.confirm({
-            title: 'Voulez-vous supprimer ce projet ?',
-            template: '<p class="center">La suppression de ce projet entrainera la perte de toutes les sources contenues dans celui-ci. Cette action est irréversible.</p>',
-            cancelText: 'Annuler',
-            okText: '<b>Supprimer</b>',
-            okType: 'button-assertive',
-            cssClass: 'deleteProject'
+        $translate(['PROJECT.TAB.POPUP.DELETE_PROJECT_TITLE', 'PROJECT.TAB.POPUP.DELETE_PROJECT', 'PROJECT.TAB.POPUP.CANCEL', 'PROJECT.TAB.POPUP.DELETE']).then(function (translations) {
+            $ionicPopup.confirm({
+                title: translations['PROJECT.TAB.POPUP.DELETE_PROJECT_TITLE'],
+                template: '<p class="center">' + translations['PROJECT.TAB.POPUP.DELETE_PROJECT'] + '</p>',
+                cancelText: translations['PROJECT.TAB.POPUP.CANCEL'],
+                okText: '<b>' + translations['PROJECT.TAB.POPUP.DELETE'] + '</b>',
+                okType: 'button-assertive',
+                cssClass: 'deleteProject'
+            }).then(function(res) {
+                if (res) {
+                    $scope.projectsRepo.get(id).then(function(doc) {
+                        return $scope.projectsRepo.remove(doc);
+                    }).then(function(result) {
+                        for (var i = 0; i < $scope.projects.length; i++) {
+                            if ($scope.projects[i].id == result.id) {
+                                $scope.projects.splice(i, 1);
+                                $scope.$apply();
+                                return;
+                            }
+                        }
+                    }).catch(function(err) {
+                        console.log(err);
+                    });
+                } else {
+                    $ionicListDelegate.closeOptionButtons();
+                }
+            });
         });
-        confirmPopup.then(function(res) {
-            if (res) {
-                $scope.projectsRepo.get(id).then(function(doc) {
-                    return $scope.projectsRepo.remove(doc);
-                }).then(function(result) {
+    }
+
+    $scope.editProject = function(id) {
+        $translate("PROJECT.TAB.UNKNOWN_MATTER").then(function (unknown) {
+            $scope.editingProject = {};
+            $scope.projectsRepo.get(id).then(function(doc) {
+                $scope.editingProject.name = doc.name;
+                if (doc.matter == unknown) {
+                    $scope.editingProject.matter = "";
+                } else {
+                    $scope.editingProject.matter = doc.matter;
+                }
+                $scope.editingProject.id = doc._id;
+                $scope.editProjectModal.show();
+            });
+        });
+    }
+
+    $scope.submitEditProject = function() {
+        if ($scope.editingProject.name == "") {
+            $translate(["PROJECT.TAB.POPUP.ERROR_TEXT", "PROJECT.TAB.POPUP.MUST_HAVE_TYPE"]).then(function (translations) {
+                $scope.errorName = true;
+                $ionicPopup.alert({
+                    title: translations["PROJECT.TAB.POPUP.ERROR_TEXT"],
+                    template: '<p class="center">' + translations["PROJECT.TAB.POPUP.MUST_HAVE_TYPE"] + '</p>'
+                });
+            });
+        } else {
+            $translate("PROJECT.TAB.UNKNOWN_MATTER").then(function (unknown) {
+                // make the change in the database
+                $scope.projectsRepo.get($scope.editingProject.id).then(function(doc) {
+                    return $scope.projectsRepo.put($scope.editingProject, $scope.editingProject.id, doc._rev);
+                }).then(function(response) {
+                    // edit the table's entry
                     for (var i = 0; i < $scope.projects.length; i++) {
-                        if ($scope.projects[i].id == result.id) {
-                            $scope.projects.splice(i, 1);
-                            $scope.$apply();
-                            return;
+                        if ($scope.projects[i].id == response.id) {
+                            $scope.projects[i].name = $scope.editingProject.name;
+                            if ($scope.editingProject.matter == "") {
+                                $scope.projects[i].matter = unknown;
+                            } else {
+                                $scope.projects[i].matter = $scope.editingProject.matter;
+                            }
                         }
                     }
                 }).catch(function(err) {
                     console.log(err);
                 });
-            } else {
+                $scope.editProjectModal.hide();
                 $ionicListDelegate.closeOptionButtons();
-            }
-        });
-
-    }
-
-    $scope.editProject = function(id) {
-        $scope.editingProject = {};
-        $scope.projectsRepo.get(id).then(function(doc) {
-            $scope.editingProject.name = doc.name;
-            if (doc.matter == "Matière inconnue") {
-                $scope.editingProject.matter = "";
-            } else {
-                $scope.editingProject.matter = doc.matter;
-            }
-            $scope.editingProject.id = doc._id;
-        });
-        $scope.editProjectModal.show();
-    }
-
-    $scope.submitEditProject = function() {
-        if ($scope.editingProject.name == "") {
-            $scope.errorName = true;
-            var alertPopup = $ionicPopup.alert({
-                title: 'Erreur',
-                template: 'Le projet doit avoir un nom.'
             });
-        } else {
-            // make the change in the database
-            $scope.projectsRepo.get($scope.editingProject.id).then(function(doc) {
-                return $scope.projectsRepo.put($scope.editingProject, $scope.editingProject.id, doc._rev);
-            }).then(function(response) {
-                // edit the table's entry
-                for (var i = 0; i < $scope.projects.length; i++) {
-                    if ($scope.projects[i].id == response.id) {
-                        $scope.projects[i].name = $scope.editingProject.name;
-                        if ($scope.editingProject.matter == "") {
-                            $scope.projects[i].matter = "Matière inconnue";
-                        } else {
-                            $scope.projects[i].matter = $scope.editingProject.matter;
-                        }
-                    }
-                }
-            }).catch(function(err) {
-                console.log(err);
-            });
-            $scope.editProjectModal.hide();
-            $ionicListDelegate.closeOptionButtons();
         }
     }
 

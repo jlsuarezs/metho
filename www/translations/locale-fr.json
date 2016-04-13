@@ -27,6 +27,15 @@
                 "PROJECT_NAME_PLACEHOLDER": "Essai sur les moyens de communication",
                 "MATTER_LABEL": "Matière",
                 "MATTER_PLACEHOLDER": "Géographie"
+            },
+            "POPUP": {
+                "ERROR_TEXT": "Erreur",
+                "NO_PROJECT_NAME": "Entrez un nom de projet",
+                "DELETE_PROJECT_TITLE": "Voulez-vous supprimer ce projet ?",
+                "DELETE_PROJECT": "La suppression de ce projet entrainera la perte de toutes les sources contenues dans celui-ci. Cette action est irréversible.",
+                "CANCEL": "Annuler",
+                "DELETE": "Supprimer",
+                "MUST_HAVE_TYPE": "Le projet doit avoir un nom"
             }
         },
         "DETAIL":{
@@ -215,7 +224,10 @@
             "MODELS": "Modèles",
             "MODELS_DESC": "Utilisez des modèles préfaits au format DOCX dans vos travaux pour vous simplifier la vie",
             "SHARING": "Partage avancé",
-            "SHARING_DESC": "Partagez un lien de Wikipédia à partir de Safari vers Metho pour créer une source automatiquement"
+            "SHARING_DESC": "Partagez un lien de Wikipédia à partir de Safari vers Metho pour créer une source automatiquement",
+            "POPUP": {
+                "ALREADY_TEXT": "Le mode avancé est déjà activé"
+            }
         },
         "FEEDBACK": {
             "TITLE": "Problème/Commentaire",
