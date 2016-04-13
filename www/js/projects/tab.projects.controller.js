@@ -90,6 +90,9 @@ angular.module('metho.controller.projects.tab', [])
 
                 $scope.projectsRepo.post(creatingProj).then(function(response) {
                     creatingProj.id = response.id;
+                    if (creatingProj.matter == "") {
+                        creatingProj.matter = unknown;
+                    }
                     $scope.projects.push(creatingProj);
                     $scope.project = {
                         name: "",
