@@ -50,6 +50,10 @@ angular.module('metho.controller.projects.tab', [])
         $scope.editProjectModal = modal;
     });
 
+    $scope.$on("modal.hidden", function () {
+        $ionicListDelegate.closeOptionButtons();
+    });
+
     $scope.closeModal = function() {
         $scope.newProjectModal.hide();
         $ionicListDelegate.closeOptionButtons();
