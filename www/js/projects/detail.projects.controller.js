@@ -1,6 +1,6 @@
 angular.module('metho.controller.projects.detail', [])
 
-.controller('ProjectDetailCtrl', function($scope, $state, $http, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicListDelegate, $ionicActionSheet, $ionicLoading, $ionicSlideBoxDelegate, $ionicBackdrop, ParseSource, ShareProject, ShareSource, SharePendings, Settings) {
+.controller('ProjectDetailCtrl', function($scope, $state, $http, $translate, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicListDelegate, $ionicActionSheet, $ionicLoading, $ionicSlideBoxDelegate, $ionicBackdrop, ParseSource, ShareProject, ShareSource, SharePendings, Settings) {
     $scope.projectRepo = new PouchDB("projects");
     $scope.sourceRepo = new PouchDB("sources");
     $scope.pendingRepo = new PouchDB("pendings");
@@ -52,170 +52,53 @@ angular.module('metho.controller.projects.detail', [])
     }
 
     $scope.share = function() {
-        var textToShare = "Voici les sources du projet « " + $scope.project.name + " » : <br><br><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center'>BIBLIOGRAPHIE</td></tr></table><br>";
-        var errNum = 0;
-        if (Settings.get("askForOrder")) {
-            var cancel = Settings.get("defaultOrder") == "alpha" ? "button-positive" : "button-stable";
-            var ok = Settings.get("defaultOrder") == "type" ? "button-positive" : "button-stable";
-            // display modal
-            var confirmPopup = $ionicPopup.confirm({
-                title: 'Triage',
-                subTitle: 'Ordre de triage',
-                cssClass: "popup-vertical-buttons",
-                cancelText: "Alphabétique",
-                cancelType: cancel,
-                okText: "Type",
-                okType: ok
-            });
-            confirmPopup.then(function(res) {
-                if (!res) { // Ordre alphabétique
-                    var arr_sources = JSON.parse(JSON.stringify($scope.project.sources)).sort(function(a, b) {
-                        return a.parsedSource.localeCompare(b.parsedSource);
-                    });
-                    for (var i = 0; i < arr_sources.length; i++) {
-                        textToShare += arr_sources[i].parsedSource + "<br><br>";
-                        errNum += arr_sources[i].errors.length;
+        $translate(["PROJECT.DETAIL.SHARE_TEXT1", "PROJECT.DETAIL.SHARE_TEXT2", "PROJECT.DETAIL.POPUP.ORDER_TITLE", "PROJECT.DETAIL.POPUP.ORDER_SUB", "PROJECT.DETAIL.POPUP.ALPHA", "PROJECT.DETAIL.POPUP.TYPE"]).then(function (translations) {
+            var textToShare = translations["PROJECT.DETAIL.SHARE_TEXT1"] + $scope.project.name + translations["PROJECT.DETAIL.SHARE_TEXT2"];
+            if (Settings.get("askForOrder")) {
+                var cancel = Settings.get("defaultOrder") == "alpha" ? "button-positive" : "button-stable";
+                var ok = Settings.get("defaultOrder") == "type" ? "button-positive" : "button-stable";
+                // display modal
+                $ionicPopup.confirm({
+                    title: translations["PROJECT.DETAIL.POPUP.ORDER_TITLE"],
+                    subTitle: translations["PROJECT.DETAIL.POPUP.ORDER_SUB"],
+                    cssClass: "popup-vertical-buttons",
+                    cancelText: translations["PROJECT.DETAIL.POPUP.ALPHA"],
+                    cancelType: cancel,
+                    okText: translations["PROJECT.DETAIL.POPUP.TYPE"],
+                    okType: ok
+                }).then(function(res) {
+                    if (!res) { // Ordre alphabétique
+                        $scope.shareByAlpha(textToShare);
+                    } else { // Type d'ouvrage
+                        $scope.shareByType(textToShare);
                     }
-
-                    if (errNum > 0) {
-                        var confirmPopup = $ionicPopup.confirm({
-                            title: 'Erreur',
-                            template: '<p class="center">Les sources que vous essayez de partager contiennent <strong>' + errNum + '</strong> erreur(s). Voulez-vous les partager quand même?</p>',
-                            cancelText: 'Annuler',
-                            okText: '<b>Partager</b>'
-                        });
-                        confirmPopup.then(function(res) {
-                            if (res) {
-                                window.plugins.socialsharing.shareViaEmail(
-                                    textToShare,
-                                    $scope.project.name, [], // TO: must be null or an array
-                                    [], // CC: must be null or an array
-                                    null, // BCC: must be null or an array
-                                    [], // FILES: can be null, a string, or an array
-                                    function() { // Success
-                                        console.log("success");
-                                    },
-                                    function() { // Error
-                                        console.log("error");
-                                    }
-                                );
-                            } else {
-                                console.log("Cancelled by user");
-                            }
-                        });
-                    } else {
-                        window.plugins.socialsharing.shareViaEmail(
-                            textToShare,
-                            $scope.project.name, [], // TO: must be null or an array
-                            [], // CC: must be null or an array
-                            null, // BCC: must be null or an array
-                            [], // FILES: can be null, a string, or an array
-                            function() { // Success
-                                console.log("success");
-                            },
-                            function() { // Error
-                                console.log("error");
-                            }
-                        );
-                    }
-                } else { // Type d'ouvrage
-                    var arr_sources = JSON.parse(JSON.stringify($scope.project.sources)).sort(function(a, b) {
-                        return a.parsedSource.localeCompare(b.parsedSource);
-                    });
-                    var arr_book = "";
-                    var arr_article = "";
-                    var arr_internet = "";
-                    var arr_cd = "";
-                    var arr_movie = "";
-                    var arr_interview = "";
-                    for (var i = 0; i < arr_sources.length; i++) {
-                        switch (arr_sources[i].type) {
-                            case "book":
-                                arr_book += arr_sources[i].parsedSource + "<br>";
-                                break;
-                            case "article":
-                                arr_article += arr_sources[i].parsedSource + "<br>";
-                                break;
-                            case "internet":
-                                arr_internet += arr_sources[i].parsedSource + "<br>";
-                                break;
-                            case "cd":
-                                arr_cd += arr_sources[i].parsedSource + "<br>";
-                                break;
-                            case "movie":
-                                arr_movie += arr_sources[i].parsedSource + "<br>";
-                                break;
-                            case "interview":
-                                arr_interview += arr_sources[i].parsedSource + "<br>";
-                                break;
-                            default:
-
-                        }
-                    }
-                    categoryNum = 0;
-                    if (arr_book != "") {
-                        categoryNum++;
-                        textToShare += categoryNum + ". Ouvrages généraux<br>" + arr_book;
-                    }
-
-                    if (arr_article != "") {
-                        categoryNum++;
-                        textToShare += categoryNum + ". Articles de périodiques<br>" + arr_article;
-                    }
-
-                    if (arr_internet != "") {
-                        categoryNum++;
-                        textToShare += categoryNum + ". Sites Internet<br>" + arr_internet;
-                    }
-
-                    if (arr_cd != "" && arr_movie != "") {
-                        categoryNum++;
-                        textToShare += categoryNum + ". Documents audiovisuels<br>" + arr_cd + arr_movie;
-                    } else if (arr_movie != "") {
-                        categoryNum++;
-                        textToShare += categoryNum + ". Documents audiovisuels<br>" + arr_movie;
-                    } else if (arr_cd != "") {
-                        categoryNum++;
-                        textToShare += categoryNum + ". Documents audiovisuels<br>" + arr_cd;
-                    }
-
-                    if (arr_interview != "") {
-                        categoryNum++;
-                        textToShare += categoryNum + ". Entrevues<br>" + arr_interview;
-                    }
-
-                    window.plugins.socialsharing.shareViaEmail(
-                        textToShare,
-                        $scope.project.name, [], // TO: must be null or an array
-                        [], // CC: must be null or an array
-                        null, // BCC: must be null or an array
-                        [], // FILES: can be null, a string, or an array
-                        function() { // Success
-                            console.log("success");
-                        },
-                        function() { // Error
-                            console.log("error");
-                        }
-                    );
-                }
-            });
-        } else if (Settings.get("defaultOrder") == "alpha") {
-            var arr_sources = JSON.parse(JSON.stringify($scope.project.sources)).sort(function(a, b) {
-                return a.parsedSource.localeCompare(b.parsedSource);
-            });
-            for (var i = 0; i < arr_sources.length; i++) {
-                textToShare += arr_sources[i].parsedSource + "<br><br>";
-                errNum += arr_sources[i].errors.length;
-            }
-
-            if (errNum > 0) {
-                var confirmPopup = $ionicPopup.confirm({
-                    title: 'Erreur',
-                    template: '<p class="center">Les sources que vous essayez de partager contiennent <strong>' + errNum + '</strong> erreur(s). Voulez-vous les partager quand même?</p>',
-                    cancelText: 'Annuler',
-                    okText: '<b>Partager</b>'
                 });
-                confirmPopup.then(function(res) {
+            } else if (Settings.get("defaultOrder") == "alpha") {
+                $scope.shareByAlpha(textToShare);
+            } else { // defaultOrder == type
+                $scope.shareByType(textToShare);
+            }
+        });
+    }
+
+    $scope.shareByAlpha = function (textToShare) {
+        var errNum = 0;
+        var arr_sources = JSON.parse(JSON.stringify($scope.project.sources)).sort(function(a, b) {
+            return a.parsedSource.localeCompare(b.parsedSource);
+        });
+        for (var i = 0; i < arr_sources.length; i++) {
+            textToShare += arr_sources[i].parsedSource + "<br><br>";
+            errNum += arr_sources[i].errors.length;
+        }
+
+        if (errNum > 0) {
+            $translate(["PROJECT.DETAIL.POPUP.ERRORS_SOURCES", "PROJECT.DETAIL.POPUP.SHARE_TEXT", "PROJECT.DETAIL.POPUP.SHARE", "PROJECT.DETAIL.POPUP.CANCEL"], { errNum:errNum }).then(function (translations) {
+                var confirmPopup = $ionicPopup.confirm({
+                    title: translations["PROJECT.DETAIL.POPUP.SHARE_TEXT"],
+                    template: '<p class="center">' + translations["PROJECT.DETAIL.POPUP.ERRORS_SOURCES"] + '</p>',
+                    cancelText: translations["PROJECT.DETAIL.POPUP.CANCEL"],
+                    okText: '<b>' + translations["PROJECT.DETAIL.POPUP.SHARE"] + '</b>'
+                }).then(function(res) {
                     if (res) {
                         window.plugins.socialsharing.shareViaEmail(
                             textToShare,
@@ -234,87 +117,120 @@ angular.module('metho.controller.projects.detail', [])
                         console.log("Cancelled by user");
                     }
                 });
-            } else {
-                window.plugins.socialsharing.shareViaEmail(
-                    textToShare,
-                    $scope.project.name, [], // TO: must be null or an array
-                    [], // CC: must be null or an array
-                    null, // BCC: must be null or an array
-                    [], // FILES: can be null, a string, or an array
-                    function() { // Success
-                        console.log("success");
-                    },
-                    function() { // Error
-                        console.log("error");
-                    }
-                );
-            }
-        } else { // defaultOrder == type
-            var arr_sources = JSON.parse(JSON.stringify($scope.project.sources)).sort(function(a, b) {
-                return a.parsedSource.localeCompare(b.parsedSource);
             });
-            var arr_book = "";
-            var arr_article = "";
-            var arr_internet = "";
-            var arr_cd = "";
-            var arr_movie = "";
-            var arr_interview = "";
-            for (var i = 0; i < arr_sources.length; i++) {
-                switch (arr_sources[i].type) {
-                    case "book":
-                        arr_book += arr_sources[i].parsedSource + "<br>";
-                        break;
-                    case "article":
-                        arr_article += arr_sources[i].parsedSource + "<br>";
-                        break;
-                    case "internet":
-                        arr_internet += arr_sources[i].parsedSource + "<br>";
-                        break;
-                    case "cd":
-                        arr_cd += arr_sources[i].parsedSource + "<br>";
-                        break;
-                    case "movie":
-                        arr_movie += arr_sources[i].parsedSource + "<br>";
-                        break;
-                    case "interview":
-                        arr_interview += arr_sources[i].parsedSource + "<br>";
-                        break;
-                    default:
-
+        } else {
+            window.plugins.socialsharing.shareViaEmail(
+                textToShare,
+                $scope.project.name, [], // TO: must be null or an array
+                [], // CC: must be null or an array
+                null, // BCC: must be null or an array
+                [], // FILES: can be null, a string, or an array
+                function() { // Success
+                    console.log("success");
+                },
+                function() { // Error
+                    console.log("error");
                 }
-            }
-            categoryNum = 0;
-            if (arr_book != "") {
-                categoryNum++;
-                textToShare += categoryNum + ". Ouvrages généraux<br>" + arr_book;
-            }
+            );
+        }
+    }
 
-            if (arr_article != "") {
-                categoryNum++;
-                textToShare += categoryNum + ". Articles de périodiques<br>" + arr_article;
-            }
+    $scope.shareByType = function (textToShare) {
+        var errNum = 0;
+        var arr_sources = JSON.parse(JSON.stringify($scope.project.sources)).sort(function(a, b) {
+            return a.parsedSource.localeCompare(b.parsedSource);
+        });
+        var arr_book = "";
+        var arr_article = "";
+        var arr_internet = "";
+        var arr_cd = "";
+        var arr_movie = "";
+        var arr_interview = "";
+        for (var i = 0; i < arr_sources.length; i++) {
+            switch (arr_sources[i].type) {
+                case "book":
+                    arr_book += arr_sources[i].parsedSource + "<br>";
+                    break;
+                case "article":
+                    arr_article += arr_sources[i].parsedSource + "<br>";
+                    break;
+                case "internet":
+                    arr_internet += arr_sources[i].parsedSource + "<br>";
+                    break;
+                case "cd":
+                    arr_cd += arr_sources[i].parsedSource + "<br>";
+                    break;
+                case "movie":
+                    arr_movie += arr_sources[i].parsedSource + "<br>";
+                    break;
+                case "interview":
+                    arr_interview += arr_sources[i].parsedSource + "<br>";
+                    break;
+                default:
 
-            if (arr_internet != "") {
-                categoryNum++;
-                textToShare += categoryNum + ". Sites Internet<br>" + arr_internet;
             }
+            errNum += arr_sources[i].errors.length;
+        }
+        categoryNum = 0;
+        if (arr_book != "") {
+            categoryNum++;
+            textToShare += categoryNum + ". Ouvrages généraux<br>" + arr_book;
+        }
 
-            if (arr_cd != "" && arr_movie != "") {
-                categoryNum++;
-                textToShare += categoryNum + ". Documents audiovisuels<br>" + arr_cd + arr_movie;
-            } else if (arr_movie != "") {
-                categoryNum++;
-                textToShare += categoryNum + ". Documents audiovisuels<br>" + arr_movie;
-            } else if (arr_cd != "") {
-                categoryNum++;
-                textToShare += categoryNum + ". Documents audiovisuels<br>" + arr_cd;
-            }
+        if (arr_article != "") {
+            categoryNum++;
+            textToShare += categoryNum + ". Articles de périodiques<br>" + arr_article;
+        }
 
-            if (arr_interview != "") {
-                categoryNum++;
-                textToShare += categoryNum + ". Entrevues<br>" + arr_interview;
-            }
+        if (arr_internet != "") {
+            categoryNum++;
+            textToShare += categoryNum + ". Sites Internet<br>" + arr_internet;
+        }
 
+        if (arr_cd != "" && arr_movie != "") {
+            categoryNum++;
+            textToShare += categoryNum + ". Documents audiovisuels<br>" + arr_cd + arr_movie;
+        } else if (arr_movie != "") {
+            categoryNum++;
+            textToShare += categoryNum + ". Documents audiovisuels<br>" + arr_movie;
+        } else if (arr_cd != "") {
+            categoryNum++;
+            textToShare += categoryNum + ". Documents audiovisuels<br>" + arr_cd;
+        }
+
+        if (arr_interview != "") {
+            categoryNum++;
+            textToShare += categoryNum + ". Entrevues<br>" + arr_interview;
+        }
+
+        if (errNum > 0) {
+            $translate(["PROJECT.DETAIL.POPUP.ERRORS_SOURCES", "PROJECT.DETAIL.POPUP.SHARE_TEXT", "PROJECT.DETAIL.POPUP.SHARE", "PROJECT.DETAIL.POPUP.CANCEL"], { errNum:errNum }).then(function (translations) {
+                $ionicPopup.confirm({
+                    title: translations["PROJECT.DETAIL.POPUP.SHARE_TEXT"],
+                    template: '<p class="center">' + translations["PROJECT.DETAIL.POPUP.ERRORS_SOURCES"] + '</p>',
+                    cancelText: translations["PROJECT.DETAIL.POPUP.CANCEL"],
+                    okText: '<b>' + translations["PROJECT.DETAIL.POPUP.SHARE"] + '</b>'
+                }).then(function(res) {
+                    if (res) {
+                        window.plugins.socialsharing.shareViaEmail(
+                            textToShare,
+                            $scope.project.name, [], // TO: must be null or an array
+                            [], // CC: must be null or an array
+                            null, // BCC: must be null or an array
+                            [], // FILES: can be null, a string, or an array
+                            function() { // Success
+                                console.log("success");
+                            },
+                            function() { // Error
+                                console.log("error");
+                            }
+                        );
+                    } else {
+                        console.log("Cancelled by user");
+                    }
+                });
+            });
+        }else {
             window.plugins.socialsharing.shareViaEmail(
                 textToShare,
                 $scope.project.name, [], // TO: must be null or an array
@@ -388,52 +304,55 @@ angular.module('metho.controller.projects.detail', [])
 
     $scope.addSource = function() {
         // Open modal
-        var hideSheet = $ionicActionSheet.show({
-            buttons: [{
-                text: 'Livre'
-            }, {
-                text: 'Article de périodique'
-            }, {
-                text: 'Site Internet'
-            }, {
-                text: 'Cédérom (CD)'
-            }, {
-                text: 'Document audiovisuel'
-            }, {
-                text: 'Entrevue'
-            }],
-            titleText: 'Choisir le type de source',
-            cancelText: 'Annuler',
-            buttonClicked: function(index) {
-                switch (index) {
-                    case 0:
-                        $scope.newsource.type = "book";
-                        break;
-                    case 1:
-                        $scope.newsource.type = "article";
-                        break;
-                    case 2:
-                        $scope.newsource.type = "internet";
-                        break;
-                    case 3:
-                        $scope.newsource.type = "cd";
-                        break;
-                    case 4:
-                        $scope.newsource.type = "movie";
-                        break;
-                    case 5:
-                        $scope.newsource.type = "interview";
-                        break;
-                    default:
+        $translate(["PROJECT.DETAIL.TYPES.BOOK", "PROJECT.DETAIL.TYPES.ARTICLE", "PROJECT.DETAIL.TYPES.INTERNET", "PROJECT.DETAIL.TYPES.CD", "PROJECT.DETAIL.TYPES.MOVIE", "PROJECT.DETAIL.TYPES.INTERVIEW", "PROJECT.DETAIL.CHOOSE_TYPE", "PROJECT.DETAIL.POPUP.CANCEL"]).then(function (translations) {
+            $ionicActionSheet.show({
+                buttons: [{
+                    text: translations["PROJECT.DETAIL.TYPES.BOOK"]
+                }, {
+                    text: translations["PROJECT.DETAIL.TYPES.ARTICLE"]
+                }, {
+                    text: translations["PROJECT.DETAIL.TYPES.INTERNET"]
+                }, {
+                    text: translations["PROJECT.DETAIL.TYPES.CD"]
+                }, {
+                    text: translations["PROJECT.DETAIL.TYPES.MOVIE"]
+                }, {
+                    text: translations["PROJECT.DETAIL.TYPES.INTERVIEW"]
+                }],
+                titleText: translations["PROJECT.DETAIL.CHOOSE_TYPE"],
+                cancelText: translations["PROJECT.DETAIL.POPUP.CANCEL"],
+                buttonClicked: function(index) {
+                    switch (index) {
+                        case 0:
+                            $scope.newsource.type = "book";
+                            break;
+                        case 1:
+                            $scope.newsource.type = "article";
+                            break;
+                        case 2:
+                            $scope.newsource.type = "internet";
+                            break;
+                        case 3:
+                            $scope.newsource.type = "cd";
+                            break;
+                        case 4:
+                            $scope.newsource.type = "movie";
+                            break;
+                        case 5:
+                            $scope.newsource.type = "interview";
+                            break;
+                        default:
 
+                    }
+                    if (!!window.cordova) {
+                        cordova.plugins.Keyboard.disableScroll(true);
+                    }
+                    $scope.newSourceModal.show();
+                    return true;
                 }
-                if (!!window.cordova) {
-                    cordova.plugins.Keyboard.disableScroll(true);
-                }
-                $scope.newSourceModal.show();
-                return true;
-            }
+            });
         });
+
     }
 
     $scope.closeModal = function() {
@@ -469,47 +388,49 @@ angular.module('metho.controller.projects.detail', [])
                 console.log(err);
             });
         } else {
-            $ionicPopup.alert({
-                title: 'Erreur',
-                template: '<p class="center">La source doit avoir un type.</p>'
+            $translate(["PROJECT.DETAIL.POPUP.NEW_SOURCE", "PROJECT.DETAIL.POPUP.MUST_HAVE_TYPE"]).then(function (translations) {
+                $ionicPopup.alert({
+                    title: translations["PROJECT.DETAIL.POPUP.NEW_SOURCE"],
+                    template: '<p class="center">' + translations["PROJECT.DETAIL.POPUP.MUST_HAVE_TYPE"] + '</p>'
+                });
             });
-            return;
         }
     }
 
     $scope.deleteSource = function(id) {
         // Delete the source
-        var confirmPopup = $ionicPopup.confirm({
-            title: 'Voulez-vous supprimer cet source ?',
-            template: '<p class="center">La suppression de cette source entrainera la perte de toutes les données ratachées à celle-ci. Cette action est irréversible.</p>',
-            cancelText: 'Annuler',
-            okText: '<b>Supprimer</b>',
-            okType: 'button-assertive',
-            cssClass: 'deleteProject'
-        });
-        confirmPopup.then(function(res) {
-            if (res) {
-                $scope.sourceRepo.get(id).then(function(doc) {
-                    return $scope.sourceRepo.remove(doc);
-                }).then(function(result) {
-                    $scope.removeAnimate = true;
-                    $scope.$apply();
-                    for (var i = 0; i < $scope.project.sources.length; i++) {
-                        if ($scope.project.sources[i]._id == result.id) {
-                            $scope.project.sources.splice(i, 1);
-                            $scope.$apply();
-                            $scope.removeAnimate = false;
-                            $scope.$apply();
-                            return;
+        $translate(["PROJECT.DETAIL.POPUP.DELETE_TITLE", "PROJECT.DETAIL.POPUP.DELETE_TEXT", "PROJECT.DETAIL.POPUP.DELETE", "PROJECT.DETAIL.POPUP.CANCEL"]).then(function (translations) {
+            $ionicPopup.confirm({
+                title: translations["PROJECT.DETAIL.POPUP.DELETE_TITLE"],
+                template: '<p class="center">' + translations["PROJECT.DETAIL.POPUP.DELETE_TEXT"] + '</p>',
+                cancelText: translations["PROJECT.DETAIL.POPUP.CANCEL"],
+                okText: '<b>' + translations["PROJECT.DETAIL.POPUP.DELETE"] + '</b>',
+                okType: 'button-assertive',
+                cssClass: 'deleteProject'
+            }).then(function(res) {
+                if (res) {
+                    $scope.sourceRepo.get(id).then(function(doc) {
+                        return $scope.sourceRepo.remove(doc);
+                    }).then(function(result) {
+                        $scope.removeAnimate = true;
+                        $scope.$apply();
+                        for (var i = 0; i < $scope.project.sources.length; i++) {
+                            if ($scope.project.sources[i]._id == result.id) {
+                                $scope.project.sources.splice(i, 1);
+                                $scope.$apply();
+                                $scope.removeAnimate = false;
+                                $scope.$apply();
+                                return;
+                            }
                         }
-                    }
 
-                }).catch(function(err) {
-                    console.log(err);
-                });
-            } else {
-                $ionicListDelegate.closeOptionButtons();
-            }
+                    }).catch(function(err) {
+                        console.log(err);
+                    });
+                } else {
+                    $ionicListDelegate.closeOptionButtons();
+                }
+            });
         });
     }
 
@@ -526,9 +447,11 @@ angular.module('metho.controller.projects.detail', [])
                     // alert(JSON.stringify(response));
                     if (!!response.data.error) {
                         loading.hide();
-                        var alertPopup = $ionicPopup.alert({
-                            title: 'Livre introuvable',
-                            template: '<p class="center">Le code barre a bien été balayé, mais ce livre ne semble pas faire partie de notre base de données. </p>'
+                        $translate(["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE", "PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TEXT"]).then(function (translations) {
+                            $ionicPopup.alert({
+                                title: translations["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE"],
+                                template: '<p class="center">' + translations["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TEXT"] + '</p>'
+                            });
                         });
                     } else {
                         // Titre
@@ -593,57 +516,59 @@ angular.module('metho.controller.projects.detail', [])
                 }, function(response) { // Failure
                     if (response.status == 408) {
                         loading.hide();
-                        var alertPopup = $ionicPopup.confirm({
-                            title: 'Erreur',
-                            template: "<p class='center'>Le temps d'attente est écoulé. Vous vous trouvez probablement sur un réseau lent. Voulez-vous ajouter ce code-barre dans la liste d'attente ou réessayer ?</p>",
-                            okText: "Ajouter",
-                            okType: "button-positive",
-                            cancelText: "Réessayer",
-                            cancelType: "button-balanced button-outline"
-                        });
-                        alertPopup.then(function(res) {
-                            if (res) {
-                                var creating = {
-                                    isbn: inputISBN,
-                                    date: new Date().toLocaleDateString()
-                                };
-                                $scope.pendingRepo.post(creating).then(function(responseRepo) {
-                                    creating._id = responseRepo.id;
-                                    creating._rev = responseRepo.rev;
-                                    $scope.project.pendings.push(creating);
-                                });
-                                $scope.newSourceModal.hide();
-                            } else {
-                                $scope.fetchFromISBNdb(inputISBN);
-                            }
+                        $translate(["PROJECT.DETAIL.POPUP.TIMEOUT_TITLE", "PROJECT.DETAIL.POPUP.TIMEOUT_TEXT", "PROJECT.DETAIL.POPUP.ADD", "PROJECT.DETAIL.POPUP.RETRY"]).then(function (translations) {
+                            $ionicPopup.confirm({
+                                title: translations["PROJECT.DETAIL.POPUP.TIMEOUT_TITLE"],
+                                template: "<p class='center'>" + translations["PROJECT.DETAIL.POPUP.TIMEOUT_TEXT"] + "</p>",
+                                okText: translations["PROJECT.DETAIL.POPUP.ADD"],
+                                okType: "button-positive",
+                                cancelText: translations["PROJECT.DETAIL.POPUP.RETRY"],
+                                cancelType: "button-balanced button-outline"
+                            }).then(function(res) {
+                                if (res) {
+                                    var creating = {
+                                        isbn: inputISBN,
+                                        date: new Date().toLocaleDateString()
+                                    };
+                                    $scope.pendingRepo.post(creating).then(function(responseRepo) {
+                                        creating._id = responseRepo.id;
+                                        creating._rev = responseRepo.rev;
+                                        $scope.project.pendings.push(creating);
+                                    });
+                                    $scope.newSourceModal.hide();
+                                } else {
+                                    $scope.fetchFromISBNdb(inputISBN);
+                                }
+                            });
                         });
                     }
                 });
         } else {
-            var alertPopup = $ionicPopup.confirm({
-                title: 'Aucune connexion',
-                template: '<p class="center">Voulez-vous ajouter ce code barre à la liste d\'attente ?</p>',
-                okText: "Ajouter",
-                okType: "button-positive",
-                cancelText: "Réessayer",
-                cancelType: "button-outline button-balanced"
-            });
-            alertPopup.then(function(res) {
-                if (res) {
-                    var creating = {
-                        isbn: inputISBN,
-                        date: new Date().toLocaleDateString(),
-                        project_id: $stateParams.projectID
-                    };
-                    $scope.pendingRepo.post(creating).then(function(responseRepo) {
-                        creating._id = responseRepo.id;
-                        creating._rev = responseRepo.rev;
-                        $scope.project.pendings.push(creating);
-                    });
-                    $scope.newSourceModal.hide();
-                } else {
-                    $scope.fetchFromISBNdb(inputISBN);
-                }
+            $translate(["PROJECT.DETAIL.POPUP.NO_CONNECTION", "PROJECT.DETAIL.POPUP.ADD_TO_PENDINGS", "PROJECT.DETAIL.POPUP.RETRY", "PROJECT.DETAIL.POPUP.ADD"]).then(function (translations) {
+                $ionicPopup.confirm({
+                    title: translations["PROJECT.DETAIL.POPUP.NO_CONNECTION"],
+                    template: '<p class="center">' + translations["PROJECT.DETAIL.POPUP.ADD_TO_PENDINGS"] + '</p>',
+                    okText: translations["PROJECT.DETAIL.POPUP.ADD"],
+                    okType: "button-positive",
+                    cancelText: translations["PROJECT.DETAIL.POPUP.RETRY"],
+                    cancelType: "button-outline button-balanced"
+                }).then(function(res) {
+                    if (res) {
+                        var creating = {
+                            isbn: inputISBN,
+                            date: new Date().toLocaleDateString(),
+                            project_id: $stateParams.projectID
+                        };
+                        $scope.pendingRepo.post(creating).then(function(responseRepo) {
+                            creating._id = responseRepo.id;
+                            creating._rev = responseRepo.rev;
+                            $scope.project.pendings.push(creating);
+                        });
+                        $scope.newSourceModal.hide();
+                    } else {
+                        $scope.fetchFromISBNdb(inputISBN);
+                    }
+                });
             });
         }
     }
@@ -677,9 +602,11 @@ angular.module('metho.controller.projects.detail', [])
                     if (result.format == "EAN_13") {
                         $scope.fetchFromISBNdb(result.text);
                     } else {
-                        var alertPopup = $ionicPopup.alert({
-                            title: 'Livre introuvable',
-                            template: '<p class="center">Le code barre a été balayé, mais ce type de code barre n\'est pas un code barre de livre. Le bon code barre possède habituellement une inscription ISBN par dessus celui-ci. Si deux code barre sont côte à côte, le mauvais a peut-être été balayé. Vous pouvez réessayer.</p>'
+                        $translate(["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE", "PROJECT.DETAIL.POPUP.NOT_RIGHT_BARCODE_TYPE"]).then(function (translations) {
+                            $ionicPopup.alert({
+                                title: translations["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE"],
+                                template: '<p class="center">' + translations["PROJECT.DETAIL.POPUP.NOT_RIGHT_BARCODE_TYPE"] + '</p>'
+                            });
                         });
                     }
                 }
@@ -687,9 +614,11 @@ angular.module('metho.controller.projects.detail', [])
             function(error) {
                 $ionicBackdrop.release();
                 $scope.currentlyScanning = false;
-                $ionicPopup.alert({
-                    title: 'Balayage impossible',
-                    template: '<p class="center">Essayez d\'activer l\'accès à l\'appareil photo pour cette application dans l\'onglet Confidentialité des Réglages.</p>'
+                $translate(["PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN", "PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN_TEXT"]).then(function (translations) {
+                    $ionicPopup.alert({
+                        title: translations["PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN"],
+                        template: '<p class="center">' + translations["PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN_TEXT"] + '</p>'
+                    });
                 });
             }
         );

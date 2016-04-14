@@ -43,6 +43,8 @@
             "DELETE_ITEM": "Supprimer",
             "PENDING_ELEMENTS": "Éléments en attente({{number}})",
             "CHOOSE_TYPE": "Choisir le type de source",
+            "SHARE_TEXT1": "Voici les sources du projet « ",
+            "SHARE_TEXT2": "» : <br><br><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center'>BIBLIOGRAPHIE</td></tr></table><br>",
             "MODAL":{
                 "CANCEL": "Annuler",
                 "TITLE": "Nouvelle source",
@@ -172,6 +174,33 @@
                 "TEXT_RECOGNIZED": "Selon un test approfondi mené sur les livres de la bibliothèque de l'École d'Éducation de McMasterville, 75 % que vous balayerez avec cette application seront reconnus et les données sur ces livres seront remplies. Vous serez invité à entrer manuellement les données qui n'aurons pu être récupérées.",
                 "SCAN_TEXT": "Balayez le code sous la mention ISBN. Assurez-vous d'être dans un environnement assez éclairé.",
                 "SCAN_FIRST": "Balayer mon premier code"
+            },
+            "POPUP": {
+                "ORDER_TITLE": "Triage",
+                "ORDER_SUB": "Ordre de triage",
+                "ALPHA": "Alphabétique",
+                "TYPE": "Type",
+                "ERRORS_SOURCES": "Les source que vous essayez de partager contiennent <strong>{{errNum}}</strong> erreur(s). Voulez-vous les partager quand même ?",
+                "ERROR_TEXT": "Erreur",
+                "SHARE_TEXT": "Partage",
+                "CANCEL": "Annuler",
+                "SHARE": "Partager",
+                "MUST_HAVE_TYPE": "La source doit avoir un type",
+                "NEW_SOURCE": "Nouvelle source",
+                "DELETE_TITLE": "Suppression",
+                "DELETE_TEXT": "La suppression de cette source entrainera la perte de toutes les données ratachées à celle-ci. Cette action est irréversible.",
+                "DELETE": "Supprimer",
+                "BOOK_UNAVAILABLE_TITLE": "Livre introuvable",
+                "BOOK_UNAVAILABLE_TEXT": "Le code barre a bien été balayé, mais ce livre ne semble pas faire partie de notre base de données.",
+                "TIMEOUT_TITLE": "Temps d'attente écoulé",
+                "TIMEOUT_TEXT": "Le temps d'attente est écoulé. Vous vous trouvez probablement sur un réseau lent. Voulez-vous ajouter ce code-barre dans la liste d'attente pour réessayer plus tard ?",
+                "ADD": "Ajouter",
+                "RETRY": "Réessayer",
+                "NO_CONNECTION": "Aucune connexion",
+                "ADD_TO_PENDINGS": "Voulez-vous ajouter ce code-barre à la liste d'éléments en attente ?",
+                "NOT_RIGHT_BARCODE_TYPE": "Le code barre a été balayé, mais ce type de code barre n'est pas un code barre de livre. Le bon code barre possède habituellement une inscription ISBN par dessus celui-ci. Si deux code barre sont côte à côte, le mauvais a peut-être été balayé. Vous pouvez réessayer.",
+                "UNABLE_TO_SCAN": "Balayage impossible",
+                "UNABLE_TO_SCAN_TEXT": "Essayez d'activer l'accès à l'appareil photo pour cette application dans l'onglet Confidentialité des Réglages."
             }
         },
         "SOURCE":{
