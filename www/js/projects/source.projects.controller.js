@@ -1,6 +1,6 @@
 angular.module("metho.controller.projects.source", [])
 
-.controller('SourceDetailCtrl', function($scope, $stateParams, $ionicPopup, $ionicModal, ParseSource, ShareSource) {
+.controller('SourceDetailCtrl', function($scope, $stateParams, $translate, $ionicPopup, $ionicModal, ParseSource, ShareSource) {
     $scope.source = ShareSource.getSource();
     $scope.loading = false;
     $scope.sourceRepo = new PouchDB("sources");
@@ -14,90 +14,93 @@ angular.module("metho.controller.projects.source", [])
     });
 
     $scope.solveError = function(id) {
-        if (!!window.cordova) {
-            cordova.plugins.Keyboard.disableScroll(false);
-        }
-        if ($scope.source.errors[id].complex) {
-            $ionicPopup.prompt({
-                title: $scope.source.errors[id].promptTitle,
-                subTitle: $scope.source.errors[id].promptText,
-                template: $scope.source.errors[id].template,
-                inputType: 'text',
-                cancelText: "Annuler",
-                okText: "<b>Confirmer</b>"
-            }).then(function(res) {
-                if (res != null) {
-                    var e = document.getElementById($scope.source.errors[id].id);
-                    switch ($scope.source.errors[id].type) {
-                        case "select":
-                            $scope.source[$scope.source.errors[id].var] = e.options[e.selectedIndex].value;
-                            break;
-                        case "input":
-                            $scope.source[$scope.source.errors[id].var] = e.value;
-                            break;
-                        default:
+        $translate(["PROJECT.SOURCE.CONFIRM", "PROJECT.SOURCE.CANCEL"]).then(function (translations) {
+            if (!!window.cordova) {
+                cordova.plugins.Keyboard.disableScroll(false);
+            }
+            if ($scope.source.errors[id].complex) {
+                $ionicPopup.prompt({
+                    title: $scope.source.errors[id].promptTitle,
+                    subTitle: $scope.source.errors[id].promptText,
+                    template: $scope.source.errors[id].template,
+                    inputType: 'text',
+                    cancelText: translations["PROJECT.SOURCE.CANCEL"],
+                    okText: "<b>" + translations["PROJECT.SOURCE.CONFIRM"] + "</b>"
+                }).then(function(res) {
+                    if (res != null) {
+                        var e = document.getElementById($scope.source.errors[id].id);
+                        switch ($scope.source.errors[id].type) {
+                            case "select":
+                                $scope.source[$scope.source.errors[id].var] = e.options[e.selectedIndex].value;
+                                break;
+                            case "input":
+                                $scope.source[$scope.source.errors[id].var] = e.value;
+                                break;
+                            default:
 
+                        }
+                        $scope.source = ParseSource.parseSource($scope.source);
+                        $scope.sourceRepo.put($scope.source, $scope.source._id, $scope.source._rev).then(function(response) {
+                            if (response.ok) {
+                                $scope.source._rev = response.rev;
+                            } else {
+                                console.log("not ok");
+                            }
+                        }).catch(function(error) {
+                            console.log(error);
+                        });
                     }
-                    $scope.source = ParseSource.parseSource($scope.source);
-                    $scope.sourceRepo.put($scope.source, $scope.source._id, $scope.source._rev).then(function(response) {
-                        if (response.ok) {
-                            $scope.source._rev = response.rev;
-                        } else {
-                            console.log("not ok");
-                        }
-                    }).catch(function(error) {
-                        console.log(error);
-                    });
-                }
-            });
-        } else {
-            $ionicPopup.prompt({
-                title: $scope.source.errors[id].promptTitle,
-                subTitle: $scope.source.errors[id].promptText,
-                inputType: 'text',
-                cancelText: "Annuler",
-                okText: "<b>Confirmer</b>"
-            }).then(function(res) {
-                if (res != null) {
-                    $scope.source[$scope.source.errors[id].var] = res;
-                    $scope.source = ParseSource.parseSource($scope.source);
-                    $scope.sourceRepo.put($scope.source, $scope.source._id, $scope.source._rev).then(function(response) {
-                        if (response.ok) {
-                            $scope.source._rev = response.rev;
-                        } else {
-                            console.log("not ok");
-                        }
-                    }).catch(function(error) {
-                        console.log(error);
-                    });
-                }
-            });
-        }
-
+                });
+            } else {
+                $ionicPopup.prompt({
+                    title: $scope.source.errors[id].promptTitle,
+                    subTitle: $scope.source.errors[id].promptText,
+                    inputType: 'text',
+                    cancelText: translations["PROJECT.SOURCE.CANCEL"],
+                    okText: "<b>" + translations["PROJECT.SOURCE.CONFIRM"] + "</b>"
+                }).then(function(res) {
+                    if (res != null) {
+                        $scope.source[$scope.source.errors[id].var] = res;
+                        $scope.source = ParseSource.parseSource($scope.source);
+                        $scope.sourceRepo.put($scope.source, $scope.source._id, $scope.source._rev).then(function(response) {
+                            if (response.ok) {
+                                $scope.source._rev = response.rev;
+                            } else {
+                                console.log("not ok");
+                            }
+                        }).catch(function(error) {
+                            console.log(error);
+                        });
+                    }
+                });
+            }
+        });
     }
 
     $scope.solveWarning = function(id) {
-        cordova.plugins.Keyboard.disableScroll(false);
-        $ionicPopup.prompt({
-            title: $scope.source.warnings[id].promptTitle,
-            subTitle: $scope.source.warnings[id].promptText,
-            inputType: 'text',
-            cancelText: "Annuler",
-            okText: "<b>Confirmer</b>"
-        }).then(function(res) {
-            if (res != null) {
-                $scope.source[$scope.source.warnings[id].var] = res;
-                $scope.source = ParseSource.parseSource($scope.source);
-                $scope.sourceRepo.put($scope.source, $scope.source._id, $scope.source._rev).then(function(response) {
-                    if (response.ok) {
-                        $scope.source._rev = response.rev;
-                    } else {
-                        console.log("not ok");
-                    }
-                }).catch(function(error) {
-                    console.log(error);
-                });
-            }
+        $translate(["PROJECT.SOURCE.CONFIRM", "PROJECT.SOURCE.CANCEL"]).then(function (translations) {
+            cordova.plugins.Keyboard.disableScroll(false);
+            $ionicPopup.prompt({
+                title: $scope.source.warnings[id].promptTitle,
+                subTitle: $scope.source.warnings[id].promptText,
+                inputType: 'text',
+                cancelText: translations["PROJECT.SOURCE.CANCEL"],
+                okText: "<b>" + translations["PROJECT.SOURCE.CONFIRM"] + "</b>"
+            }).then(function(res) {
+                if (res != null) {
+                    $scope.source[$scope.source.warnings[id].var] = res;
+                    $scope.source = ParseSource.parseSource($scope.source);
+                    $scope.sourceRepo.put($scope.source, $scope.source._id, $scope.source._rev).then(function(response) {
+                        if (response.ok) {
+                            $scope.source._rev = response.rev;
+                        } else {
+                            console.log("not ok");
+                        }
+                    }).catch(function(error) {
+                        console.log(error);
+                    });
+                }
+            });
         });
     }
 

@@ -206,6 +206,8 @@
         "SOURCE":{
             "EDIT": "Modifier",
             "NO_ERROR": "Aucune erreur",
+            "CONFIRM": "Confirmer",
+            "CANCEL": "Annuler",
             "MODAL": {
                 "CANCEL": "Annuler",
                 "TITLE": "Modifier la source",
