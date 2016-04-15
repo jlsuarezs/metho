@@ -304,20 +304,20 @@ angular.module('metho.controller.projects.detail', [])
 
     $scope.addSource = function() {
         // Open modal
-        $translate(["PROJECT.DETAIL.TYPES.BOOK", "PROJECT.DETAIL.TYPES.ARTICLE", "PROJECT.DETAIL.TYPES.INTERNET", "PROJECT.DETAIL.TYPES.CD", "PROJECT.DETAIL.TYPES.MOVIE", "PROJECT.DETAIL.TYPES.INTERVIEW", "PROJECT.DETAIL.CHOOSE_TYPE", "PROJECT.DETAIL.POPUP.CANCEL"]).then(function (translations) {
+        $translate(["PROJECT.TYPES.BOOK", "PROJECT.TYPES.ARTICLE", "PROJECT.TYPES.INTERNET", "PROJECT.TYPES.CD", "PROJECT.TYPES.MOVIE", "PROJECT.TYPES.INTERVIEW", "PROJECT.DETAIL.CHOOSE_TYPE", "PROJECT.DETAIL.POPUP.CANCEL"]).then(function (translations) {
             $ionicActionSheet.show({
                 buttons: [{
-                    text: translations["PROJECT.DETAIL.TYPES.BOOK"]
+                    text: translations["PROJECT.TYPES.BOOK"]
                 }, {
-                    text: translations["PROJECT.DETAIL.TYPES.ARTICLE"]
+                    text: translations["PROJECT.TYPES.ARTICLE"]
                 }, {
-                    text: translations["PROJECT.DETAIL.TYPES.INTERNET"]
+                    text: translations["PROJECT.TYPES.INTERNET"]
                 }, {
-                    text: translations["PROJECT.DETAIL.TYPES.CD"]
+                    text: translations["PROJECT.TYPES.CD"]
                 }, {
-                    text: translations["PROJECT.DETAIL.TYPES.MOVIE"]
+                    text: translations["PROJECT.TYPES.MOVIE"]
                 }, {
-                    text: translations["PROJECT.DETAIL.TYPES.INTERVIEW"]
+                    text: translations["PROJECT.TYPES.INTERVIEW"]
                 }],
                 titleText: translations["PROJECT.DETAIL.CHOOSE_TYPE"],
                 cancelText: translations["PROJECT.DETAIL.POPUP.CANCEL"],
