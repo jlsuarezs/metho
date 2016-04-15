@@ -216,10 +216,24 @@
             "TITLE": "Éléments en attente",
             "DELETE_ITEM": "Supprimer",
             "EMPTY_TAB": "Aucune source en attente!",
-            "MODAL":{
+            "MODAL": {
                 "CANCEL": "Annuler",
                 "TITLE": "Nouvelle source",
                 "ADD": "Créer"
+            },
+            "POPUP": {
+                "NEW_SOURCE": "Nouvelle source",
+                "MUST_HAVE_TYPE": "La source doit avoir un type",
+                "BOOK_UNAVAILABLE_TITLE": "Livre introuvable",
+                "BOOK_UNAVAILABLE_TEXT": "Le code barre a bien été balayé, mais ce livre ne semble pas faire partie de notre base de données. Voulez-vous rechercher les informations sur Internet?",
+                "SEARCH": "Rechercher",
+                "LATER": "Plus tard",
+                "RETRY": "Réessayer",
+                "TIMEOUT_TITLE": "Temps d'attente écoulé",
+                "TIMEOUT_TEXT": "Le temps d'attente est écoulé. Vous vous trouvez probablement sur un réseau lent. Voulez-vous ajouter ce code-barre dans la liste d'attente pour réessayer plus tard ?",
+                "NO_CONNECTION": "Aucune connexion",
+                "RETRY_?": "Voulez-vous réessayer ?",
+                "CANCEL": "Annuler"
             }
         },
         "TYPES":{

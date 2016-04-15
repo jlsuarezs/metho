@@ -1,6 +1,6 @@
 angular.module("metho.controller.projects.pending", [])
 
-.controller("PendingCtrl", function($scope, $state, $http, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicLoading, ParseSource, SharePendings) {
+.controller("PendingCtrl", function($scope, $state, $http, $translate, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicLoading, ParseSource, SharePendings) {
     $scope.project = {
         id: $stateParams.projectID,
         sources: []
@@ -101,11 +101,12 @@ angular.module("metho.controller.projects.pending", [])
                 alert(err);
             });
         } else {
-            var alertPopup = $ionicPopup.alert({
-                title: 'Erreur',
-                template: '<p class="center">La source doit avoir un type.</p>'
+            $translate(["PROJECT.PENDING.POPUP.NEW_SOURCE", "PROJECT.PENDING.POPUP.MUST_HAVE_TYPE"]).then(function (translations) {
+                $ionicPopup.alert({
+                    title: translations["PROJECT.PENDING.POPUP.NEW_SOURCE"],
+                    template: '<p class="center">' + translations["PROJECT.PENDING.POPUP.MUST_HAVE_TYPE"] + '</p>'
+                });
             });
-            return;
         }
     }
 
@@ -175,26 +176,28 @@ angular.module("metho.controller.projects.pending", [])
                     // alert(JSON.stringify(response));
                     if (!!response.data.error) {
                         loading.hide();
-                        $ionicPopup.confirm({
-                            title: 'Livre introuvable',
-                            template: '<p class="center">Le code barre a bien été balayé, mais ce livre ne semble pas faire partie de notre base de données. Voulez-vous rechercher les informations sur Internet?</p>',
-                            okText: "Rechercher",
-                            cancelText: "Plus tard"
-                        }).then(function(res) {
-                            if (res) {
-                                $scope.newsource.not_available = true;
-                                $scope.pendings[$scope.editingIndex].not_available = true;
-                                $scope.pendingRepo.put($scope.pendings[$scope.editingIndex]);
-                                $scope.openAtURL("http://google.ca/search?q=isbn+" + $scope.pendings[$scope.editingIndex].isbn);
-                            } else {
-                                $scope.newSourceModal.hide();
-                                $scope.newsource = {};
-                                $scope.pendings[$scope.editingIndex].not_available = true;
-                                $scope.pendingRepo.put($scope.pendings[$scope.editingIndex]);
-                                $scope.editingId = null;
-                                $scope.editingISBN = null;
-                                $scope.editingIndex = null;
-                            }
+                        $translate(["PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TITLE", "PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TEXT", "PROJECT.PENDING.POPUP.SEARCH", "PROJECT.PENDING.POPUP.LATER"]).then(function (translations) {
+                            $ionicPopup.confirm({
+                                title: translations["PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TITLE"],
+                                template: '<p class="center">' + translations["PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TEXT"] + '</p>',
+                                okText: translations["PROJECT.PENDING.POPUP.SEARCH"],
+                                cancelText: translations["PROJECT.PENDING.POPUP.LATER"]
+                            }).then(function(res) {
+                                if (res) {
+                                    $scope.newsource.not_available = true;
+                                    $scope.pendings[$scope.editingIndex].not_available = true;
+                                    $scope.pendingRepo.put($scope.pendings[$scope.editingIndex]);
+                                    $scope.openAtURL("http://google.ca/search?q=isbn+" + $scope.pendings[$scope.editingIndex].isbn);
+                                } else {
+                                    $scope.newSourceModal.hide();
+                                    $scope.newsource = {};
+                                    $scope.pendings[$scope.editingIndex].not_available = true;
+                                    $scope.pendingRepo.put($scope.pendings[$scope.editingIndex]);
+                                    $scope.editingId = null;
+                                    $scope.editingISBN = null;
+                                    $scope.editingIndex = null;
+                                }
+                            });
                         });
                     } else {
                         // Titre
@@ -259,44 +262,46 @@ angular.module("metho.controller.projects.pending", [])
                 }, function(response) { // Failure
                     if (response.status == 408) {
                         loading.hide();
-                        var alertPopup = $ionicPopup.confirm({
-                            title: 'Erreur',
-                            template: "<p class='center'>Le temps d'attente est écoulé. Vous vous trouvez probablement sur un réseau lent. Voulez-vous réessayer ?</p>",
-                            okText: "Réessayer",
-                            okType: "button-balanced",
-                            cancelText: "Annuler"
-                        });
-                        alertPopup.then(function(res) {
-                            if (res) {
-                                $scope.fetchFromISBNdb(inputISBN);
-                            } else {
-                                $scope.newSourceModal.hide();
-                                $scope.newsource = {};
-                                $scope.editingId = null;
-                                $scope.editingISBN = null;
-                                $scope.editingIndex = null;
-                            }
+                        $translate(["PROJECT.PENDING.POPUP.TIMEOUT_TITLE", "PROJECT.PENDING.POPUP.TIMEOUT_TEXT", "PROJECT.PENDING.POPUP.ADD", "PROJECT.PENDING.POPUP.RETRY"]).then(function (translations) {
+                            $ionicPopup.confirm({
+                                title: translations["PROJECT.PENDING.POPUP.TIMEOUT_TITLE"],
+                                template: "<p class='center'>" + translations["PROJECT.PENDING.POPUP.TIMEOUT_TEXT"] + "</p>",
+                                okText: translations["PROJECT.PENDING.POPUP.RETRY"],
+                                okType: "button-balanced",
+                                cancelText: translations["PROJECT.PENDING.POPUP.CANCEL"]
+                            }).then(function(res) {
+                                if (res) {
+                                    $scope.fetchFromISBNdb(inputISBN);
+                                } else {
+                                    $scope.newSourceModal.hide();
+                                    $scope.newsource = {};
+                                    $scope.editingId = null;
+                                    $scope.editingISBN = null;
+                                    $scope.editingIndex = null;
+                                }
+                            });
                         });
                     }
                 });
         } else {
-            var alertPopup = $ionicPopup.confirm({
-                title: 'Aucune connexion',
-                template: '<p class="center">Voulez-vous réessayer?</p>',
-                okText: "Réessayer",
-                okType: "button-balanced",
-                cancelText: "Annuler"
-            });
-            alertPopup.then(function(res) {
-                if (res) {
-                    $scope.fetchFromISBNdb(inputISBN);
-                } else {
-                    $scope.newSourceModal.hide();
-                    $scope.newsource = {};
-                    $scope.editingId = null;
-                    $scope.editingISBN = null;
-                    $scope.editingIndex = null;
-                }
+            $translate(["PROJECT.PENDING.POPUP.NO_CONNECTION", "PROJECT.PENDING.POPUP.RETRY_?", "PROJECT.PENDING.POPUP.RETRY", "PROJECT.PENDING.POPUP.CANCEL"]).then(function (translations) {
+                $ionicPopup.confirm({
+                    title: translations["PROJECT.PENDING.POPUP.NO_CONNECTION"],
+                    template: '<p class="center">' + translations["PROJECT.PENDING.POPUP.RETRY_?"] + '</p>',
+                    okText: translations["PROJECT.PENDING.POPUP.RETRY"],
+                    okType: "button-balanced",
+                    cancelText: translations["PROJECT.PENDING.POPUP.CANCEL"]
+                }).then(function(res) {
+                    if (res) {
+                        $scope.fetchFromISBNdb(inputISBN);
+                    } else {
+                        $scope.newSourceModal.hide();
+                        $scope.newsource = {};
+                        $scope.editingId = null;
+                        $scope.editingISBN = null;
+                        $scope.editingIndex = null;
+                    }
+                });
             });
         }
     }
