@@ -39,5 +39,11 @@
     <string/>
     <key>UIRequiresFullScreen</key>
     <true/>
+    <key>CFBundleLocalization</key>
+    <array>
+      <string>fr</string>
+      <string>es</string>
+      <string>en</string>
+    </array>
   </dict>
 </plist>

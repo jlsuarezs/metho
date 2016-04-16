@@ -241,10 +241,151 @@
         "TYPES":{
             "BOOK": "Livre",
             "CD": "Cédérom (CD)",
+            "CD_PARSE": "Cédérom",
             "INTERNET": "Site Internet",
             "ARTICLE": "Article de périodique",
             "MOVIE": "Document audiovisuel",
             "INTERVIEW": "Entrevue"
+        },
+        "PARSE":{
+            "FIRST_AUTHOR_FIRSTNAME": {
+                "TITLE": "Auteur",
+                "TEXT": "Entrez le prénom du premier auteur",
+                "DESC": "Prénom du premier auteur manquant"
+            },
+            "FIRST_AUTHOR_LASTNAME": {
+                "TITLE": "Auteur",
+                "TEXT": "Entrez le nom du premier auteur",
+                "DESC": "Nom du premier auteur manquant"
+            },
+            "SECOND_AUTHOR_FIRSTNAME": {
+                "TITLE": "Auteur",
+                "TEXT": "Entrez le prénom du deuxième auteur",
+                "DESC": "Prénom du deuxième auteur manquant"
+            },
+            "SECOND_AUTHOR_LASTNAME": {
+                "TITLE": "Auteur",
+                "TEXT": "Entrez le nom du deuxième auteur",
+                "DESC": "Nom du deuxième auteur manquant"
+            },
+            "THIRD_AUTHOR_FIRSTNAME": {
+                "TITLE": "Auteur",
+                "TEXT": "Entrez le prénom du troisième auteur",
+                "DESC": "Prénom du troisième auteur manquant"
+            },
+            "THIRD_AUTHOR_LASTNAME": {
+                "TITLE": "Auteur",
+                "TEXT": "Entrez le nom du troisième auteur",
+                "DESC": "Nom du troisième auteur manquant"
+            },
+            "AUTHOR_NUMBER": {
+                "TITLE": "Nombre d'auteurs",
+                "TEXT": "Sélectionnez le nombre d'auteurs",
+                "DESC": "Nombre d'auteurs non spécifié",
+                "AUTHOR_1TO3": "1 à 3 auteurs",
+                "AUTHOR_MORE_3": "Plus de 3 auteurs",
+                "AUTHOR_COLLECTIVE": "Collectif"
+            },
+            "BOOK_TITLE": {
+                "TITLE": "Titre",
+                "TEXT": "Entrez le titre",
+                "DESC": "Titre manquant"
+            },
+            "TRANSLATION_LANGUAGE": {
+                "TITLE": "Langue de traduction",
+                "TEXT": "Entrez la langue d'origine de la traduction",
+                "DESC": "Langue d'origine de la traduction manquante"
+            },
+            "FIRST_TRANSLATOR_FIRSTNAME": {
+                "TITLE": "Traducteur",
+                "TEXT": "Entrez le prénom du premier traducteur",
+                "DESC": "Prénom du premier tranducteur manquant"
+            },
+            "FIRST_TRANSLATOR_LASTNAME": {
+                "TITLE": "Traducteur",
+                "TEXT": "Entrez le nom du premier traducteur",
+                "DESC": "Nom du premier tranducteur manquant"
+            },
+            "SECOND_TRANSLATOR_FIRSTNAME": {
+                "TITLE": "Traducteur",
+                "TEXT": "Entrez le prénom du deuxième traducteur",
+                "DESC": "Prénom du deuxième tranducteur manquant"
+            },
+            "SECOND_TRANSLATOR_LASTNAME": {
+                "TITLE": "Traducteur",
+                "TEXT": "Entrez le nom du deuxième traducteur",
+                "DESC": "Nom du deuxième tranducteur manquant"
+            },
+            "EDITION_LOCATION": {
+                "TITLE": "Lieu d'édition",
+                "TEXT": "Entrez le lieu d'édition",
+                "DESC": "Lieu d'édition manquant"
+            },
+            "EDITOR": {
+                "TITLE": "Éditeur",
+                "TEXT": "Entrez l'éditeur",
+                "DESC": "Éditeur manquant"
+            },
+            "EDITION_DATE_TOO_HIGH": {
+                "TITLE": "Date de publication",
+                "TEXT": "Entrez la date de publication",
+                "DESC": "Date de publication supérieure à la date courante"
+            },
+            "EDITION_DATE": {
+                "TITLE": "Date de publication",
+                "TEXT": "Entrez la date de publication",
+                "DESC": "Date de publication manquante"
+            },
+            "PAGE_NUMBER": {
+                "TITLE": "Nombre de pages",
+                "TEXT": "Entrez le nombre de pages",
+                "DESC": "Nombre de pages manquant"
+            },
+            "PAGE_NUMBER_TOO_HIGH": {
+                "TITLE": "Nombre de pages",
+                "TEXT": "Entrez le nombre de pages",
+                "DESC": "Nombre de pages trop élevé"
+            },
+            "PAGE_NUMBER_TOO_LOW": {
+                "TITLE": "Nombre de pages",
+                "TEXT": "Entrez le nombre de pages",
+                "DESC": "Nombre de pages trop bas"
+            },
+            "AUTHOR_ARTICLE_FIRSTNAME": {
+                "TITLE": "Auteur",
+                "TEXT": "Entrez le prénom de l'auteur",
+                "DESC": "Prénom de l'auteur manquant"
+            },
+            "AUTHOR_ARTICLE_LASTNAME": {
+                "TITLE": "Auteur",
+                "TEXT": "Entrez le nom de l'auteur",
+                "DESC": "Nom de l'auteur manquant"
+            },
+            "ARTICLE_TITLE": {
+                "TITLE": "Titre de l'article",
+                "TEXT": "Entrez le titre de l'article",
+                "DESC": "Titre de l'article manquant"
+            },
+            "PERIODIC_NAME": {
+                "TITLE": "Nom du périodique",
+                "TEXT": "Entrez le nom du périodique",
+                "DESC": "Nom du périodique manquant"
+            },
+            "PERIODIC_NUMBER": {
+                "TITLE": "Numéro de volume",
+                "TEXT": "Entrez le numéro du volume",
+                "DESC": "Numéro de volume ou de périodique manquant"
+            },
+            "START_PAGE": {
+                "TITLE": "Page de début",
+                "TEXT": "Entrez la page de début",
+                "DESC": "Page de début manquante"
+            },
+            "END_PAGE": {
+                "TITLE": "Page de fin",
+                "TEXT": "Entrez la page de fin",
+                "DESC": "Page de fin manquante"
+            }
         }
     },
     "REFERENCES":{

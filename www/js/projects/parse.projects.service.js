@@ -1,27 +1,65 @@
 angular.module("metho.service.projects.parse", [])
 
-.factory('ParseSource', function() {
+.factory('ParseSource', function($translate) {
+    var addError = function (errorId, variable, complex) {
+        if (complex) {
+            var arr_parsed = complex.template.split("{{");
+            for (var i = 0; i < arr_parsed.length; i++) {
+                var id = arr_parsed[i].split("}}")[0];
+                if (id) {
+                    complex.template = complex.template.replace("{{" + id + "}}", $translate.instant(id));
+                }
+            }
+            sourceToParse.errors.push({
+                errorTitle: $translate.instant("PROJECT.PARSE." + errorId + ".DESC"),
+                promptTitle: $translate.instant("PROJECT.PARSE." + errorId + ".TITLE"),
+                promptText: $translate.instant("PROJECT.PARSE." + errorId + ".TEXT"),
+                var: variable,
+                template: complex.template,
+                complex: complex.complex,
+                id: complex.id,
+                type: complex.type
+            });
+        }else {
+            sourceToParse.errors.push({
+                errorTitle: $translate.instant("PROJECT.PARSE." + errorId + ".DESC"),
+                promptTitle: $translate.instant("PROJECT.PARSE." + errorId + ".TITLE"),
+                promptText: $translate.instant("PROJECT.PARSE." + errorId + ".TEXT"),
+                var: variable
+            });
+        }
+    };
+    var addWarning = function (errorId, variable) {
+        sourceToParse.warnings.push({
+            errorTitle: $translate.instant("PROJECT.PARSE." + errorId + ".DESC"),
+            promptTitle: $translate.instant("PROJECT.PARSE." + errorId + ".TITLE"),
+            promptText: $translate.instant("PROJECT.PARSE." + errorId + ".TEXT"),
+            var: variable
+        });
+    };
+    var sourceToParse = {};
     return {
-        parseSource: function(sourceToParse) {
+        parseSource: function(source) {
+            sourceToParse = source;
             sourceToParse.parsedSource = "";
             switch (sourceToParse.type) {
                 case "book":
-                    sourceToParse.parsedType = "Livre";
+                    sourceToParse.parsedType = $translate.instant("PROJECT.TYPES.BOOK");
                     break;
                 case "internet":
-                    sourceToParse.parsedType = "Site web";
+                    sourceToParse.parsedType = $translate.instant("PROJECT.TYPES.INTERNET");
                     break;
                 case "article":
-                    sourceToParse.parsedType = "Article de périodique";
+                    sourceToParse.parsedType = $translate.instant("PROJECT.TYPES.ARTICLE");
                     break;
                 case "cd":
-                    sourceToParse.parsedType = "Cédérom";
+                    sourceToParse.parsedType = $translate.instant("PROJECT.TYPES.CD_PARSE");
                     break;
                 case "movie":
-                    sourceToParse.parsedType = "Document audiovisuel";
+                    sourceToParse.parsedType = $translate.instant("PROJECT.TYPES.MOVIE");
                     break;
                 case "interview":
-                    sourceToParse.parsedType = "Entrevue";
+                    sourceToParse.parsedType = $translate.instant("PROJECT.TYPES.INTERVIEW");
                     break;
                 default:
 
@@ -39,39 +77,19 @@ angular.module("metho.service.projects.parse", [])
                         if (sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) {
                             sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
                         } else {
-                            sourceToParse.errors.push({
-                                errorTitle: "Nom du premier auteur manquant",
-                                promptTitle: "Auteur",
-                                promptText: "Entrez le nom du premier auteur",
-                                var: "author1lastname"
-                            });
+                            addError("FIRST_AUTHOR_LASTNAME", "author1lastname");
                             sourceToParse.parsedSource += "?, ";
                         }
                         // Author first name
                         if (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null) {
                             sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
                         } else {
-                            sourceToParse.errors.push({
-                                errorTitle: "Prénom du premier auteur manquant",
-                                promptTitle: "Auteur",
-                                promptText: "Entrez le prénom du premier auteur",
-                                var: "author1firstname"
-                            });
+                            addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname");
                             sourceToParse.parsedSource += "?";
                         }
                     } else {
-                        sourceToParse.errors.push({
-                            errorTitle: "Prénom du premier auteur manquant",
-                            promptTitle: "Auteur",
-                            promptText: "Entrez le prénom du premier auteur",
-                            var: "author1firstname"
-                        });
-                        sourceToParse.errors.push({
-                            errorTitle: "Nom du premier auteur manquant",
-                            promptTitle: "Auteur",
-                            promptText: "Entrez le nom du premier auteur",
-                            var: "author1lastname"
-                        });
+                        addError("FIRST_AUTHOR_LASTNAME", "author1lastname");
+                        addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname");
                         sourceToParse.parsedSource += "?";
                     }
 
@@ -80,24 +98,14 @@ angular.module("metho.service.projects.parse", [])
                         if (sourceToParse.author2lastname != "" && sourceToParse.author2lastname != null) {
                             sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
                         } else {
-                            sourceToParse.errors.push({
-                                errorTitle: "Nom du deuxième auteur manquant",
-                                promptTitle: "Auteur",
-                                promptText: "Entrez le nom du deuxième auteur",
-                                var: "author2lastname"
-                            });
+                            addError("SECOND_AUTHOR_LASTNAME", "author2lastname");
                             sourceToParse.parsedSource += "?, ";
                         }
                         // Author 2 first name
                         if (sourceToParse.author2firstname != "" && sourceToParse.author2firstname != null) {
                             sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
                         } else {
-                            sourceToParse.errors.push({
-                                errorTitle: "Prénom du deuxième auteur manquant",
-                                promptTitle: "Auteur",
-                                promptText: "Entrez le prénom du deuxième auteur",
-                                var: "author2firstname"
-                            });
+                            addError("SECOND_AUTHOR_FIRSTNAME", "author2firstname");
                             sourceToParse.parsedSource += "?";
                         }
                     }
@@ -107,24 +115,14 @@ angular.module("metho.service.projects.parse", [])
                         if (sourceToParse.author3lastname != "" && sourceToParse.author3lastname != null) {
                             sourceToParse.parsedSource += " et " + sourceToParse.author3lastname.toUpperCase().trim();
                         } else {
-                            sourceToParse.errors.push({
-                                errorTitle: "Nom du troisième auteur manquant",
-                                promptTitle: "Auteur",
-                                promptText: "Entrez le nom du troisième auteur",
-                                var: "author3lastname"
-                            });
+                            addError("THIRD_AUTHOR_LASTNAME", "author3lastname");
                             sourceToParse.parsedSource += ", ?";
                         }
                         // Author 3 first name
                         if (sourceToParse.author3firstname != "" && sourceToParse.author3firstname != null) {
                             sourceToParse.parsedSource += ", " + sourceToParse.author3firstname.trim() + ". ";
                         } else {
-                            sourceToParse.errors.push({
-                                errorTitle: "Prénom du troisième auteur manquant",
-                                promptTitle: "Auteur",
-                                promptText: "Entrez le prénom du troisième auteur",
-                                var: "author3firstname"
-                            });
+                            addError("THIRD_AUTHOR_FIRSTNAME", "author3firstname");
                             sourceToParse.parsedSource += ", ?.";
                         }
                     } else {
@@ -136,39 +134,19 @@ angular.module("metho.service.projects.parse", [])
                         if (sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) {
                             sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
                         } else {
-                            sourceToParse.errors.push({
-                                errorTitle: "Nom du premier auteur manquant",
-                                promptTitle: "Auteur",
-                                promptText: "Entrez le nom du premier auteur",
-                                var: "author1lastname"
-                            });
+                            addError("FIRST_AUTHOR_LASTNAME", "author1lastname");
                             sourceToParse.parsedSource += "?, ";
                         }
                         // Author first name
                         if (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null) {
                             sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
                         } else {
-                            sourceToParse.errors.push({
-                                errorTitle: "Prénom du premier auteur manquant",
-                                promptTitle: "Auteur",
-                                promptText: "Entrez le prénom du premier auteur",
-                                var: "author1firstname"
-                            });
+                            addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname");
                             sourceToParse.parsedSource += "?";
                         }
                     } else {
-                        sourceToParse.errors.push({
-                            errorTitle: "Prénom du premier auteur manquant",
-                            promptTitle: "Auteur",
-                            promptText: "Entrez le prénom du premier auteur",
-                            var: "author1firstname"
-                        });
-                        sourceToParse.errors.push({
-                            errorTitle: "Nom du premier auteur manquant",
-                            promptTitle: "Auteur",
-                            promptText: "Entrez le nom du premier auteur",
-                            var: "author1lastname"
-                        });
+                        addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname");
+                        addError("FIRST_AUTHOR_LASTNAME", "author1lastname");
                         sourceToParse.parsedSource += "?";
                     }
 
@@ -177,24 +155,14 @@ angular.module("metho.service.projects.parse", [])
                         if (sourceToParse.author2lastname != "" && sourceToParse.author2lastname != null) {
                             sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
                         } else {
-                            sourceToParse.errors.push({
-                                errorTitle: "Nom du deuxième auteur manquant",
-                                promptTitle: "Auteur",
-                                promptText: "Entrez le nom du deuxième auteur",
-                                var: "author2lastname"
-                            });
+                            addError("SECOND_AUTHOR_LASTNAME", "author2lastname");
                             sourceToParse.parsedSource += "?, ";
                         }
                         // Author 2 first name
                         if (sourceToParse.author2firstname != "" && sourceToParse.author2firstname != null) {
                             sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
                         } else {
-                            sourceToParse.errors.push({
-                                errorTitle: "Prénom du deuxième auteur manquant",
-                                promptTitle: "Auteur",
-                                promptText: "Entrez le prénom du deuxième auteur",
-                                var: "author2firstname"
-                            });
+                            addError("SECOND_AUTHOR_FIRSTNAME", "author2firstname");
                             sourceToParse.parsedSource += "?";
                         }
 
@@ -208,39 +176,19 @@ angular.module("metho.service.projects.parse", [])
                         if (sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) {
                             sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
                         } else {
-                            sourceToParse.errors.push({
-                                errorTitle: "Nom du premier auteur manquant",
-                                promptTitle: "Auteur",
-                                promptText: "Entrez le nom du premier auteur",
-                                var: "author1lastname"
-                            });
+                            addError("FIRST_AUTHOR_LASTNAME", "author1lastname");
                             sourceToParse.parsedSource += "?, ";
                         }
                         // Author first name
                         if (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null) {
                             sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
                         } else {
-                            sourceToParse.errors.push({
-                                errorTitle: "Prénom du premier auteur manquant",
-                                promptTitle: "Auteur",
-                                promptText: "Entrez le prénom du premier auteur",
-                                var: "author1firstname"
-                            });
+                            addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname");
                             sourceToParse.parsedSource += "?";
                         }
                     } else {
-                        sourceToParse.errors.push({
-                            errorTitle: "Prénom du premier auteur manquant",
-                            promptTitle: "Auteur",
-                            promptText: "Entrez le prénom du premier auteur",
-                            var: "author1firstname"
-                        });
-                        sourceToParse.errors.push({
-                            errorTitle: "Nom du premier auteur manquant",
-                            promptTitle: "Auteur",
-                            promptText: "Entrez le nom du premier auteur",
-                            var: "author1lastname"
-                        });
+                        addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname");
+                        addError("FIRST_AUTHOR_LASTNAME", "author1lastname");
                         sourceToParse.parsedSource += "?";
                     }
 
@@ -249,24 +197,14 @@ angular.module("metho.service.projects.parse", [])
                         if (sourceToParse.author2lastname != "" && sourceToParse.author2lastname != null) {
                             sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
                         } else {
-                            sourceToParse.errors.push({
-                                errorTitle: "Nom du deuxième auteur manquant",
-                                promptTitle: "Auteur",
-                                promptText: "Entrez le nom du deuxième auteur",
-                                var: "author2lastname"
-                            });
+                            addError("SECOND_AUTHOR_LASTNAME", "author2lastname");
                             sourceToParse.parsedSource += "?, ";
                         }
                         // Author 2 first name
                         if (sourceToParse.author2firstname != "" && sourceToParse.author2firstname != null) {
                             sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
                         } else {
-                            sourceToParse.errors.push({
-                                errorTitle: "Prénom du deuxième auteur manquant",
-                                promptTitle: "Auteur",
-                                promptText: "Entrez le prénom du deuxième auteur",
-                                var: "author2firstname"
-                            });
+                            addError("SECOND_AUTHOR_FIRSTNAME", "author2firstname");
                             sourceToParse.parsedSource += "?";
                         }
                         sourceToParse.parsedSource += " (dir). ";
@@ -275,15 +213,11 @@ angular.module("metho.service.projects.parse", [])
                     }
                 } else {
                     sourceToParse.parsedSource += "?. ";
-                    sourceToParse.errors.push({
-                        errorTitle: "Nombre d'auteurs non spécifié",
-                        promptTitle: "Nombre d'auteurs",
-                        promptText: "Sélectionnez le nombre d'auteurs",
-                        var: "hasAuthors",
-                        template: "<p class='center'><select id='authortype'><option value='13'>1 à 3 auteurs</option><option value='more3'>Plus de 3 auteurs</option><option value='collective'>Collectif</option></select></p>",
+                    addError("AUTHOR_NUMBER", "hasAuthors", {
+                        template:"<p class='center'><select id='authortype'><option value='13'>{{PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_1TO3}}</option><option value='more3'>{{PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_MORE_3}}</option><option value='collective'>{{PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_COLLECTIVE}}</option></select></p>",
                         complex: true,
-                        id: "authortype",
-                        type: "select"
+                        id:"authortype",
+                        type:"select"
                     });
                 }
 
@@ -291,12 +225,7 @@ angular.module("metho.service.projects.parse", [])
                 if (sourceToParse.title != null && sourceToParse.title.trim() != "") {
                     sourceToParse.parsedSource += "<em>" + sourceToParse.title.trim() + "</em>, ";
                 } else {
-                    sourceToParse.errors.push({
-                        errorTitle: "Aucun titre spécifié",
-                        promptTitle: "Titre",
-                        promptText: "Entrez le titre",
-                        var: "title"
-                    });
+                    addError("BOOK_TITLE", "title");
                     sourceToParse.parsedSource += "<em>?</em>, ";
                 }
 
@@ -337,12 +266,7 @@ angular.module("metho.service.projects.parse", [])
                             sourceToParse.parsedSource += "trad. du " + sourceToParse.translatedFrom.toLowerCase().trim() + " ";
                         }
                     } else {
-                        sourceToParse.errors.push({
-                            errorTitle: "Aucune langue d'origine de la traduction spécifiée",
-                            promptTitle: "Langue de traduction",
-                            promptText: "Entrez la langue de traduction",
-                            var: "translatedFrom"
-                        });
+                        addError("TRANSLATION_LANGUAGE", "translatedFrom");
                         sourceToParse.parsedSource += "trad. de ? ";
                     }
 
@@ -353,39 +277,19 @@ angular.module("metho.service.projects.parse", [])
                         if (sourceToParse.translator1firstname.trim() != "" && sourceToParse.translator1firstname != null) {
                             sourceToParse.parsedSource += sourceToParse.translator1firstname.trim() + " ";
                         } else {
-                            sourceToParse.errors.push({
-                                errorTitle: "Prénom du premier traducteur manquant",
-                                promptTitle: "Traducteur",
-                                promptText: "Entrez le prénom du premier traducteur",
-                                var: "translator1firstname"
-                            });
+                            addError("FIRST_TRANSLATOR_FIRSTNAME", "translator1firstname");
                             sourceToParse.parsedSource += "? ";
                         }
                         // Translator's last name
                         if (sourceToParse.translator1lastname.trim() != "" && sourceToParse.translator1lastname != null) {
                             sourceToParse.parsedSource += sourceToParse.translator1lastname.trim();
                         } else {
-                            sourceToParse.errors.push({
-                                errorTitle: "Nom du premier traducteur manquant",
-                                promptTitle: "Traducteur",
-                                promptText: "Entrez le nom du premier traducteur",
-                                var: "translator1lastname"
-                            });
+                            addError("FIRST_TRANSLATOR_LASTNAME", "translator1lastname");
                             sourceToParse.parsedSource += "? ";
                         }
                     } else {
-                        sourceToParse.errors.push({
-                            errorTitle: "Prénom du premier traducteur manquant",
-                            promptTitle: "Traducteur",
-                            promptText: "Entrez le prénom du premier traducteur",
-                            var: "translator1firstname"
-                        });
-                        sourceToParse.errors.push({
-                            errorTitle: "Nom du premier traducteur manquant",
-                            promptTitle: "Traducteur",
-                            promptText: "Entrez le nom du premier traducteur",
-                            var: "translator1lastname"
-                        });
+                        addError("FIRST_TRANSLATOR_FIRSTNAME", "translator1firstname");
+                        addError("FIRST_TRANSLATOR_LASTNAME", "translator1lastname");
                         sourceToParse.parsedSource += "?";
                     }
 
@@ -394,24 +298,14 @@ angular.module("metho.service.projects.parse", [])
                         if (sourceToParse.translator2firstname.trim() != "" && sourceToParse.translator2firstname != null) {
                             sourceToParse.parsedSource += ", " + sourceToParse.translator2firstname.trim();
                         } else {
-                            sourceToParse.errors.push({
-                                errorTitle: "Prénom du deuxième traducteur manquant",
-                                promptTitle: "Traducteur",
-                                promptText: "Entrez le prénom du deuxième traducteur",
-                                var: "translator2firstname"
-                            });
+                            addError("SECOND_TRANSLATOR_FIRSTNAME", "translator2firstname");
                             sourceToParse.parsedSource += "?";
                         }
                         // Translator 2 last name
                         if (sourceToParse.translator2lastname.trim() != "" && sourceToParse.translator2lastname != null) {
                             sourceToParse.parsedSource += " " + sourceToParse.translator2lastname.trim() + ", ";
                         } else {
-                            sourceToParse.errors.push({
-                                errorTitle: "Nom du deuxième traducteur manquant",
-                                promptTitle: "Traducteur",
-                                promptText: "Entrez le nom du deuxième traducteur",
-                                var: "translator2lastname"
-                            });
+                            addError("SECOND_TRANSLATOR_LASTNAME", "translator2lastname");
                             sourceToParse.parsedSource += "?, ";
                         }
                     } else {
@@ -424,12 +318,7 @@ angular.module("metho.service.projects.parse", [])
                     sourceToParse.parsedSource += sourceToParse.publicationLocation.capitalizeFirstLetter().trim() + ", ";
                 } else {
                     sourceToParse.parsedSource += "s.l., ";
-                    sourceToParse.warnings.push({
-                        errorTitle: "Lieu d'édition non spécifié",
-                        promptTitle: "Lieu d'édition",
-                        promptText: "Entrez le lieu d'édition",
-                        var: "publicationLocation"
-                    });
+                    addWarning("EDITION_LOCATION", "publicationLocation");
                 }
 
                 // Éditeur
@@ -437,12 +326,7 @@ angular.module("metho.service.projects.parse", [])
                     sourceToParse.parsedSource += sourceToParse.editor.trim() + ", ";
                 } else {
                     sourceToParse.parsedSource += "?, ";
-                    sourceToParse.errors.push({
-                        errorTitle: "Éditeur non spécifié",
-                        promptTitle: "Éditeur",
-                        promptText: "Entrez l'éditeur",
-                        var: "editor"
-                    });
+                    addError("EDITOR", "editor");
                 }
 
                 // Date
@@ -450,21 +334,11 @@ angular.module("metho.service.projects.parse", [])
                     sourceToParse.parsedSource += sourceToParse.publicationDate + ", ";
                     var today = new Date();
                     if (today.getFullYear() < Number(sourceToParse.publicationDate)) {
-                        sourceToParse.warnings.push({
-                            errorTitle: "Date de publication supérieure à la date courante",
-                            promptTitle: "Date d'édition",
-                            promptText: "Entrez la date d'édition",
-                            var: "publicationDate"
-                        });
+                        addWarning("EDITION_DATE_TOO_HIGH", "publicationDate");
                     }
                 } else {
                     sourceToParse.parsedSource += "s.d., ";
-                    sourceToParse.warnings.push({
-                        errorTitle: "Date d'édition non spécifiée",
-                        promptTitle: "Date d'édition",
-                        promptText: "Entrez la date d'édition",
-                        var: "publicationDate"
-                    });
+                    addWarning("EDITION_DATE", "publicationDate");
                 }
 
                 // Volume
@@ -476,28 +350,13 @@ angular.module("metho.service.projects.parse", [])
                 if (sourceToParse.pageNumber != null && sourceToParse.pageNumber != "") {
                     sourceToParse.parsedSource += sourceToParse.pageNumber + " p.";
                     if (sourceToParse.pageNumber > 15000) {
-                        sourceToParse.warnings.push({
-                            errorTitle: "Nombre de pages trop élevé",
-                            promptTitle: "Nombre de pages",
-                            promptText: "Entrez le nombre de pages",
-                            var: "pageNumber"
-                        });
-                    } else if (sourceToParse.pageNumber < 0) {
-                        sourceToParse.warnings.push({
-                            errorTitle: "Nombre de pages trop bas",
-                            promptTitle: "Nombre de pages",
-                            promptText: "Entrez le nombre de pages",
-                            var: "pageNumber"
-                        });
+                        addWarning("PAGE_NUMBER_TOO_HIGH", "pageNumber");
+                    } else if (sourceToParse.pageNumber <= 0) {
+                        addWarning("PAGE_NUMBER_TOO_LOW", "pageNumber");
                     }
                 } else {
                     sourceToParse.parsedSource += "? p.";
-                    sourceToParse.errors.push({
-                        errorTitle: "Nombre de page non spécifié",
-                        promptTitle: "Nombre de pages",
-                        promptText: "Entrez le nombre de pages",
-                        var: "pageNumber"
-                    });
+                    addError("PAGE_NUMBER", "pageNumber");
                 }
                 sourceToParse.pageNumber = Number(sourceToParse.pageNumber);
 
@@ -509,39 +368,19 @@ angular.module("metho.service.projects.parse", [])
                         sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase() + ", ";
                     } else {
                         sourceToParse.parsedSource += "?, ";
-                        sourceToParse.errors.push({
-                            errorTitle: "Nom de l'auteur non spécifié",
-                            promptTitle: "Auteur",
-                            promptText: "Entrez le nom de l'auteur",
-                            var: "author1lastname"
-                        });
+                        addError("AUTHOR_ARTICLE_LASTNAME", "author1lastname");
                     }
 
                     if (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null) {
                         sourceToParse.parsedSource += sourceToParse.author1firstname.toUpperCase() + ". ";
                     } else {
                         sourceToParse.parseSource += "?. ";
-                        sourceToParse.errors.push({
-                            errorTitle: "Prénom de l'auteur non spécifié",
-                            promptTitle: "Auteur",
-                            promptText: "Entrez le prénom de l'auteur",
-                            var: "author1firstname"
-                        });
+                        addError("AUTHOR_ARTICLE_FIRSTNAME", "author1firstname");
                     }
                 } else {
                     sourceToParse.parsedSource += "?. ";
-                    sourceToParse.errors.push({
-                        errorTitle: "Prénom de l'auteur non spécifié",
-                        promptTitle: "Auteur",
-                        promptText: "Entrez le prénom de l'auteur",
-                        var: "author1firstname"
-                    });
-                    sourceToParse.errors.push({
-                        errorTitle: "Nom de l'auteur non spécifié",
-                        promptTitle: "Auteur",
-                        promptText: "Entrez le nom de l'auteur",
-                        var: "author1lastname"
-                    });
+                    addError("AUTHOR_ARTICLE_FIRSTNAME", "author1firstname");
+                    addError("AUTHOR_ARTICLE_LASTNAME", "author1lastname");
                 }
 
                 // Titre de l'Article
@@ -549,12 +388,7 @@ angular.module("metho.service.projects.parse", [])
                     sourceToParse.parsedSource += "«" + sourceToParse.title + "», ";
                 } else {
                     sourceToParse.parsedSource += "«?», ";
-                    sourceToParse.errors.push({
-                        errorTitle: "Titre de l'article non spécifié",
-                        promptTitle: "Titre de l'article",
-                        promptText: "Entrez le titre de l'article",
-                        var: "title"
-                    });
+                    addError("ARTICLE_TITLE", "title");
                 }
 
                 // Nom du périodique
@@ -562,12 +396,7 @@ angular.module("metho.service.projects.parse", [])
                     sourceToParse.parsedSource += "<em>" + sourceToParse.editor + "</em>, ";
                 } else {
                     sourceToParse.parsedSource += "<em>?</em>, ";
-                    sourceToParse.errors.push({
-                        errorTitle: "Nom du périodique non spécifié",
-                        promptTitle: "Nom du périodique",
-                        promptText: "Entrez le nom du périodique",
-                        var: "editor"
-                    });
+                    addError("PERIODIC_NAME", "editor");
                 }
 
                 // Numéro du périodique
@@ -575,12 +404,7 @@ angular.module("metho.service.projects.parse", [])
                     sourceToParse.parsedSource += sourceToParse.editionNumber + ", ";
                 } else {
                     sourceToParse.parsedSource += "?, ";
-                    sourceToParse.errors.push({
-                        errorTitle: "Numéro de volume ou de périodique non spécifié",
-                        promptTitle: "Numéro de volume",
-                        promptText: "Entrez le numéro de volume",
-                        var: "editionNumber"
-                    });
+                    addError("PERIODIC_NUMBER", "editionNumber");
                 }
 
                 // Date de publication
@@ -588,12 +412,7 @@ angular.module("metho.service.projects.parse", [])
                     sourceToParse.parsedSource += sourceToParse.publicationDate + ", ";
                 } else {
                     sourceToParse.parsedSource += "?, ";
-                    sourceToParse.errors.push({
-                        errorTitle: "Date de publication non spécifiée",
-                        promptTitle: "Date de publication",
-                        promptText: "Entrez la date de publication",
-                        var: "publicationDate"
-                    });
+                    addError("EDITION_DATE", "publicationDate");
                 }
 
                 // Indication des pages
@@ -602,12 +421,7 @@ angular.module("metho.service.projects.parse", [])
                         sourceToParse.parsedSource += "p. " + sourceToParse.startPage;
                     } else {
                         sourceToParse.parsedSource += "p. ?";
-                        sourceToParse.errors.push({
-                            errorTitle: "La page de début n'est pas spécifiée",
-                            promptTitle: "Page de début",
-                            promptText: "Entrez la page de début",
-                            var: "startPage"
-                        });
+                        addError("START_PAGE", "startPage");
                     }
                     sourceToParse.parsedSource += "-";
 
@@ -615,28 +429,13 @@ angular.module("metho.service.projects.parse", [])
                         sourceToParse.parsedSource += sourceToParse.endPage;
                     } else {
                         sourceToParse.parsedSource += "?";
-                        sourceToParse.errors.push({
-                            errorTitle: "La page de fin n'est pas spécifiée",
-                            promptTitle: "Page de fin",
-                            promptText: "Entrez la page de fin",
-                            var: "endPage"
-                        });
+                        addError("END_PAGE", "endPage");
                     }
                     sourceToParse.parsedSource += ".";
                 } else {
                     sourceToParse.parsedSource += "p. ?-?.";
-                    sourceToParse.errors.push({
-                        errorTitle: "La page de début n'est pas spécifiée",
-                        promptTitle: "Page de début",
-                        promptText: "Entrez la page de début",
-                        var: "startPage"
-                    });
-                    sourceToParse.errors.push({
-                        errorTitle: "La page de fin n'est pas spécifiée",
-                        promptTitle: "Page de fin",
-                        promptText: "Entrez la page de fin",
-                        var: "endPage"
-                    });
+                    addError("START_PAGE", "startPage");
+                    addError("END_PAGE", "endPage");
                 }
 
                 return sourceToParse;
