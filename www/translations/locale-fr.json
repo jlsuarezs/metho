@@ -385,6 +385,26 @@
                 "TITLE": "Page de fin",
                 "TEXT": "Entrez la page de fin",
                 "DESC": "Page de fin manquante"
+            },
+            "HOMEPAGE_TITLE": {
+                "TITLE": "Titre de la page d'accueil",
+                "TEXT": "Entrez le titre de la page d'accueil",
+                "DESC": "Titre de la page d'accueil manquante"
+            },
+            "PAGE_TITLE": {
+                "TITLE": "Titre de la page",
+                "TEXT": "Entrez le titre de la page",
+                "DESC": "Titre de la page manquant"
+            },
+            "URL": {
+                "TITLE": "Adresse web",
+                "TEXT": "Entrez l'adresse web",
+                "DESC": "Adresse web manquante"
+            },
+            "CONSULTATION_DATE": {
+                "TITLE": "Date de consultation",
+                "TEXT": "Entrez la date de consultation",
+                "DESC": "Date de consultation manquante"
             }
         }
     },
