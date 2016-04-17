@@ -556,39 +556,19 @@ angular.module("metho.service.projects.parse", [])
                         if (sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) {
                             sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
                         } else {
-                            sourceToParse.errors.push({
-                                errorTitle: "Nom du premier auteur manquant",
-                                promptTitle: "Auteur",
-                                promptText: "Entrez le nom du premier auteur",
-                                var: "author1lastname"
-                            });
+                            addError("FIRST_AUTHOR_LASTNAME", "author1lastname");
                             sourceToParse.parsedSource += "?, ";
                         }
                         // Author first name
                         if (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null) {
                             sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
                         } else {
-                            sourceToParse.errors.push({
-                                errorTitle: "Prénom du premier auteur manquant",
-                                promptTitle: "Auteur",
-                                promptText: "Entrez le prénom du premier auteur",
-                                var: "author1firstname"
-                            });
+                            addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname");
                             sourceToParse.parsedSource += "?";
                         }
                     } else {
-                        sourceToParse.errors.push({
-                            errorTitle: "Prénom du premier auteur manquant",
-                            promptTitle: "Auteur",
-                            promptText: "Entrez le prénom du premier auteur",
-                            var: "author1firstname"
-                        });
-                        sourceToParse.errors.push({
-                            errorTitle: "Nom du premier auteur manquant",
-                            promptTitle: "Auteur",
-                            promptText: "Entrez le nom du premier auteur",
-                            var: "author1lastname"
-                        });
+                        addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname");
+                        addError("FIRST_AUTHOR_LASTNAME", "author1lastname");
                         sourceToParse.parsedSource += "?";
                     }
 
@@ -597,24 +577,14 @@ angular.module("metho.service.projects.parse", [])
                         if (sourceToParse.author2lastname != "" && sourceToParse.author2lastname != null) {
                             sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
                         } else {
-                            sourceToParse.errors.push({
-                                errorTitle: "Nom du deuxième auteur manquant",
-                                promptTitle: "Auteur",
-                                promptText: "Entrez le nom du deuxième auteur",
-                                var: "author2lastname"
-                            });
+                            addError("SECOND_AUTHOR_LASTNAME", "author2lastname");
                             sourceToParse.parsedSource += "?, ";
                         }
                         // Author 2 first name
                         if (sourceToParse.author2firstname != "" && sourceToParse.author2firstname != null) {
                             sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
                         } else {
-                            sourceToParse.errors.push({
-                                errorTitle: "Prénom du deuxième auteur manquant",
-                                promptTitle: "Auteur",
-                                promptText: "Entrez le prénom du deuxième auteur",
-                                var: "author2firstname"
-                            });
+                            addError("SECOND_AUTHOR_FIRSTNAME", "author2firstname");
                             sourceToParse.parsedSource += "?";
                         }
                     }
@@ -624,24 +594,14 @@ angular.module("metho.service.projects.parse", [])
                         if (sourceToParse.author3lastname != "" && sourceToParse.author3lastname != null) {
                             sourceToParse.parsedSource += " et " + sourceToParse.author3lastname.toUpperCase().trim();
                         } else {
-                            sourceToParse.errors.push({
-                                errorTitle: "Nom du troisième auteur manquant",
-                                promptTitle: "Auteur",
-                                promptText: "Entrez le nom du troisième auteur",
-                                var: "author3lastname"
-                            });
+                            addError("THIRD_AUTHOR_LASTNAME", "author3lastname");
                             sourceToParse.parsedSource += ", ?";
                         }
                         // Author 3 first name
                         if (sourceToParse.author3firstname != "" && sourceToParse.author3firstname != null) {
                             sourceToParse.parsedSource += ", " + sourceToParse.author3firstname.trim() + ". ";
                         } else {
-                            sourceToParse.errors.push({
-                                errorTitle: "Prénom du troisième auteur manquant",
-                                promptTitle: "Auteur",
-                                promptText: "Entrez le prénom du troisième auteur",
-                                var: "author3firstname"
-                            });
+                            addError("THIRD_AUTHOR_LASTNAME", "author3firstname");
                             sourceToParse.parsedSource += ", ?.";
                         }
                     } else {
@@ -654,12 +614,7 @@ angular.module("metho.service.projects.parse", [])
                     sourceToParse.parsedSource += "<em>" + sourceToParse.title + "</em>, ";
                 } else {
                     sourceToParse.parsedSource += "<em>?</em>, ";
-                    sourceToParse.errors.push({
-                        errorTitle: "Titre du document non spécifié",
-                        promptTitle: "Titre du document",
-                        promptText: "Entrez le titre du document",
-                        var: "title"
-                    })
+                    addError("DOCUMENT_TITLE", "title");
                 }
 
                 // Type de support
@@ -670,12 +625,7 @@ angular.module("metho.service.projects.parse", [])
                     sourceToParse.parsedSource += sourceToParse.publicationLocation + ", ";
                 } else {
                     sourceToParse.parsedSource += "s.l., ";
-                    sourceToParse.warnings.push({
-                        errorTitle: "Lieu de publication non spécifiée",
-                        promptTitle: "Lieu de publication",
-                        promptText: "Entrez la lieu de publication",
-                        var: "publicationLocation"
-                    });
+                    addWarning("PUBLICATION_LOCATION", "publicationLocation");
                 }
 
                 // Éditeur
@@ -683,12 +633,7 @@ angular.module("metho.service.projects.parse", [])
                     sourceToParse.parsedSource += sourceToParse.editor + ", ";
                 } else {
                     sourceToParse.parsedSource += "?, ";
-                    sourceToParse.errors.push({
-                        errorTitle: "Éditeur non spécifiée",
-                        promptTitle: "Éditeur",
-                        promptText: "Entrez l'éditeur",
-                        var: "editor"
-                    });
+                    addError("EDITOR", "editor");
                 }
 
                 // Date de publication
@@ -696,12 +641,7 @@ angular.module("metho.service.projects.parse", [])
                     sourceToParse.parsedSource += sourceToParse.publicationDate + ".";
                 } else {
                     sourceToParse.parsedSource += "s.d.";
-                    sourceToParse.warnings.push({
-                        errorTitle: "Date de publication non spécifiée",
-                        promptTitle: "Date de publication",
-                        promptText: "Entrez la date de publication",
-                        var: "publicationDate"
-                    });
+                    addWarning("PUBLICATION_DATE", "publicationDate");
                 }
 
                 return sourceToParse;

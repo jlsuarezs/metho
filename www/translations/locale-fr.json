@@ -405,6 +405,21 @@
                 "TITLE": "Date de consultation",
                 "TEXT": "Entrez la date de consultation",
                 "DESC": "Date de consultation manquante"
+            },
+            "DOCUMENT_TITLE": {
+                "TITLE": "Titre du document",
+                "TEXT": "Entrez le titre du document",
+                "DESC": "Titre du document manquant"
+            },
+            "PUBLICATION_LOCATION": {
+                "TITLE": "Lieu de publication",
+                "TEXT": "Entrez le lieu de publication",
+                "DESC": "Lieu de publication manquant"
+            },
+            "PUBLICATION_DATE": {
+                "TITLE": "Date de publication",
+                "TEXT": "Entrez la date de publication",
+                "DESC": "Date de publication manquante"
             }
         }
     },
