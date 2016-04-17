@@ -537,7 +537,7 @@ angular.module("metho.service.projects.parse", [])
 
                 // Date de consultation
                 if (sourceToParse.consultationDate != null && sourceToParse.consultationDate != "") {
-                    sourceToParse.parsedSource += "(" + new Date(new Date(sourceToParse.consultationDate).getTime() - _userOffset).toLocaleDateString() + ").";
+                    sourceToParse.parsedSource += "(" + new Date(new Date(sourceToParse.consultationDate).getTime() + _userOffset).toLocaleDateString() + ").";
                 } else {
                     sourceToParse.parsedSource += "(?).";
                     addError("CONSULTATION_DATE", "consultationDate", {
@@ -860,7 +860,7 @@ angular.module("metho.service.projects.parse", [])
 
                 // Date de visionnement
                 if (sourceToParse.consultationDate != null && sourceToParse.consultationDate != "") {
-                    sourceToParse.parsedSource += "(" + new Date(new Date(sourceToParse.consultationDate).getTime() - _userOffset) + ").";
+                    sourceToParse.parsedSource += "(" + new Date(new Date(sourceToParse.consultationDate).getTime() + _userOffset).toLocaleDateString() + ").";
                 } else {
                     sourceToParse.errors.push({
                         errorTitle: "Date de consultation non spécifié",
@@ -1018,7 +1018,7 @@ angular.module("metho.service.projects.parse", [])
 
                 // Date de l'entrevue
                 if (sourceToParse.consultationDate != null && sourceToParse.consultationDate != "") {
-                    sourceToParse.parsedSource += "le " + new Date(new Date(sourceToParse.consultationDate).getTime() - _userOffset).toLocaleDateString() + ".";
+                    sourceToParse.parsedSource += "le " + new Date(new Date(sourceToParse.consultationDate).getTime() + _userOffset).toLocaleDateString() + ".";
                 } else {
                     sourceToParse.errors.push({
                         errorTitle: "Date de consultation non spécifiée",
