@@ -420,6 +420,51 @@
                 "TITLE": "Date de publication",
                 "TEXT": "Entrez la date de publication",
                 "DESC": "Date de publication manquante"
+            },
+            "DIRECTOR_LASTNAME": {
+                "TITLE": "Réalisateur/auteur principal",
+                "TEXT": "Entrez le nom du réalisateur/auteur principal",
+                "DESC": "Nom du réalisateur/auteur principal manquant"
+            },
+            "DIRECTOR_FIRSTNAME": {
+                "TITLE": "Réalisateur/auteur principal",
+                "TEXT": "Entrez le prénom du réalisateur/auteur principal",
+                "DESC": "Prénom du réalisateur/auteur principal manquant"
+            },
+            "EMISSION_TITLE": {
+                "TITLE": "Nom de l'émission",
+                "TEXT": "Entrez le nom de l'émission",
+                "DESC": "Nom de l'émission manquant"
+            },
+            "PRODUCTION_LOCATION": {
+                "TITLE": "Lieu de production",
+                "TEXT": "Entrez le lieu de production",
+                "DESC": "Lieu de production manquant"
+            },
+            "PRODUCTOR": {
+                "TITLE": "Producteur",
+                "TEXT": "Entrez le nom du producteur",
+                "DESC": "Nom du producteur manquant"
+            },
+            "BROADCASTER": {
+                "TITLE": "Diffuseur",
+                "TEXT": "Entrez le nom du diffuseur",
+                "DESC": "Nom du diffuseur manquant"
+            },
+            "LENGTH": {
+                "TITLE": "Durée",
+                "TEXT": "Entrez la durée (minutes)",
+                "DESC": "Durée manquante"
+            },
+            "SUPPORT": {
+                "TITLE": "Type de support",
+                "TEXT": "Sélectionnez le type de support",
+                "DESC": "Type de support non spécifié"
+            },
+            "VIEWING_DATE": {
+                "TITLE": "Date de visionnement",
+                "TEXT": "Entrez la date de visionnement",
+                "DESC": "Date de visionnement manquante"
             }
         }
     },

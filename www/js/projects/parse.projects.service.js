@@ -651,43 +651,23 @@ angular.module("metho.service.projects.parse", [])
                     if (sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) {
                         sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
                     } else {
-                        sourceToParse.errors.push({
-                            errorTitle: "Nom de l'auteur/réalisateur manquant",
-                            promptTitle: "Auteur/Réalisateur",
-                            promptText: "Entrez le nom de l'auteur/réalisateur",
-                            var: "author1lastname"
-                        });
+                        addError("DIRECTOR_LASTNAME", "author1lastname");
                         sourceToParse.parsedSource += "?, ";
                     }
                     // Author first name
                     if (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null) {
                         sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
                     } else {
-                        sourceToParse.errors.push({
-                            errorTitle: "Prénom de l'auteur/réalisateur manquant",
-                            promptTitle: "Auteur/Réalisateur",
-                            promptText: "Entrez le prénom de l'auteur/réalisateur",
-                            var: "author1firstname"
-                        });
+                        addError("DIRECTOR_FIRSTNAME", "author1firstname");
                         sourceToParse.parsedSource += "?";
                     }
                 } else {
-                    sourceToParse.errors.push({
-                        errorTitle: "Prénom de l'auteur/réalisateur manquant",
-                        promptTitle: "Auteur/Réalisateur",
-                        promptText: "Entrez le prénom de l'auteur/réalisateur",
-                        var: "author1firstname"
-                    });
-                    sourceToParse.errors.push({
-                        errorTitle: "Nom de l'auteur/réalisateur manquant",
-                        promptTitle: "Auteur/Réalisateur",
-                        promptText: "Entrez le nom de l'auteur/réalisateur",
-                        var: "author1lastname"
-                    });
+                    addError("DIRECTOR_FIRSTNAME", "author1firstname");
+                    addError("DIRECTOR_LASTNAME", "author1lastname");
                     sourceToParse.parsedSource += "?";
                 }
 
-                if (sourceToParse.hasAuthors == true) { // Use longer syntax because it might have string value
+                if (sourceToParse.hasAuthors) {
                     sourceToParse.parsedSource += "et al., ";
                 } else {
                     sourceToParse.parsedSource += ". ";
@@ -703,12 +683,7 @@ angular.module("metho.service.projects.parse", [])
                     sourceToParse.parsedSource += "<em>" + sourceToParse.title + "</em>, ";
                 } else {
                     sourceToParse.parsedSource += "<em>?</em>, ";
-                    sourceToParse.errors.push({
-                        errorTitle: "Nom de l'émission manquant",
-                        promptTitle: "Nom de l'émission",
-                        promptText: "Entrez le nom de l'émission",
-                        var: "title"
-                    })
+                    addError("EMISSION_TITLE", "title");
                 }
 
                 // Lieu de production
@@ -716,12 +691,7 @@ angular.module("metho.service.projects.parse", [])
                     sourceToParse.parsedSource += sourceToParse.productionLocation + ", ";
                 } else {
                     sourceToParse.parsedSource += "s.l., ";
-                    sourceToParse.warnings.push({
-                        errorTitle: "Lieu de production non spécifié",
-                        promptTitle: "Lieu de production",
-                        promptText: "Entrez le lieu de production",
-                        var: "productionLocation"
-                    });
+                    addWarning("PRODUCTION_LOCATION", "productionLocation");
                 }
 
                 // Producteur
@@ -729,24 +699,14 @@ angular.module("metho.service.projects.parse", [])
                     sourceToParse.parsedSource += sourceToParse.productor + ", ";
                 } else {
                     sourceToParse.parsedSource += "?, ";
-                    sourceToParse.errors.push({
-                        errorTitle: "Producteur non spécifié",
-                        promptTitle: "Producteur",
-                        promptText: "Entrez le producteur",
-                        var: "productor"
-                    });
+                    addError("PRODUCTOR", "productor");
                 }
 
                 // Diffuseur
                 if (sourceToParse.broadcaster != null && sourceToParse.broadcaster != "") {
                     sourceToParse.parsedSource += sourceToParse.broadcaster + ", ";
                 } else {
-                    sourceToParse.warnings.push({
-                        errorTitle: "Diffuseur non spécifié",
-                        promptTitle: "Diffuseur",
-                        promptText: "Entrez le diffuseur",
-                        var: "broadcaster"
-                    });
+                    addWarning("BROADCASTER", "broadcaster");
                 }
 
                 // Durée
@@ -754,62 +714,44 @@ angular.module("metho.service.projects.parse", [])
                     sourceToParse.parsedSource += sourceToParse.duration + " min., ";
                 } else {
                     sourceToParse.parsedSource += "?, ";
-                    sourceToParse.errors.push({
-                        errorTitle: "Durée non spécifié",
-                        promptTitle: "Durée",
-                        promptText: "Entrez la durée",
-                        var: "duration"
-                    });
+                    addError("LENGTH", "duration");
                 }
 
                 // Date de publication
                 if (sourceToParse.publicationDate != null && sourceToParse.publicationDate != "") {
                     sourceToParse.parsedSource += sourceToParse.publicationDate + ", ";
                 } else {
-                    sourceToParse.warnings.push({
-                        errorTitle: "Date de publication non spécifié",
-                        promptTitle: "Date de publication",
-                        promptText: "Entrez la date de publication",
-                        var: "publicationDate"
-                    });
+                    addWarning("PUBLICATION_DATE", "publicationDate");
                     sourceToParse.parsedSource += "s.d., ";
                 }
 
                 // Support
                 if (sourceToParse.support) {
-                    switch (sourceToParse.support) {
-                        case "dvd":
-                            sourceToParse.parsedSource += "[DVD], ";
-                            break;
-                        case "cd":
-                            sourceToParse.parsedSource += "[cédérom], ";
-                            break;
-                        case "internet":
-                            sourceToParse.parsedSource += "[en ligne], ";
-                            break;
-                        default:
-                            sourceToParse.parsedSource += "[?], ";
-                            sourceToParse.errors.push({
-                                errorTitle: "Type de support non spécifié",
-                                promptTitle: "Type de support",
-                                promptText: "Entrez le type de support",
-                                var: "support"
-                            });
+                    if (sourceToParse.support == "dvd") {
+                        sourceToParse.parsedSource += "[DVD], ";
+                    } else if (sourceToParse.support == "cd") {
+                        sourceToParse.parsedSource += "[cédérom], ";
+                    } else if (sourceToParse.support == "internet") {
+                        sourceToParse.parsedSource += "[en ligne], ";
                     }
+                }else {
+                    sourceToParse.parsedSource += "[?], ";
+                    addError("SUPPORT", "support", {
+                        complex:true,
+                        id:"supporttype",
+                        type:"select",
+                        template: "<p class='center'><select id='supporttype'><option value='dvd'>{{PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_DVD}}</option><option value='cd'>{{PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_CD}}</option><option value='internet'>{{PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_INTERNET}}</option></select></p>"
+                    });
                 }
 
                 // Date de visionnement
                 if (sourceToParse.consultationDate != null && sourceToParse.consultationDate != "") {
                     sourceToParse.parsedSource += "(" + new Date(new Date(sourceToParse.consultationDate).getTime() + _userOffset).toLocaleDateString() + ").";
                 } else {
-                    sourceToParse.errors.push({
-                        errorTitle: "Date de consultation non spécifié",
-                        promptTitle: "Date de consultation",
-                        promptText: "Entrez le date de consultation",
-                        var: "consultationDate",
-                        type: "input",
-                        template: "<p class='center'><input type='date' id='consultationDate'></p>",
+                    addError("VIEWING_DATE", "consultationDate", {
                         complex: true,
+                        template: "<p class='center'><input type='date' id='consultationDate'></p>",
+                        type: "input",
                         id: "consultationDate"
                     });
                     sourceToParse.parsedSource += "(?).";
