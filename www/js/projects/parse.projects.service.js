@@ -358,8 +358,6 @@ angular.module("metho.service.projects.parse", [])
                     addError("PAGE_NUMBER", "pageNumber");
                 }
                 sourceToParse.pageNumber = Number(sourceToParse.pageNumber);
-
-                return sourceToParse;
             } else if (sourceToParse.type == "article") {
                 // Auteur
                 if ((sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) || (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null)) {
@@ -436,8 +434,6 @@ angular.module("metho.service.projects.parse", [])
                     addError("START_PAGE", "startPage");
                     addError("END_PAGE", "endPage");
                 }
-
-                return sourceToParse;
             } else if (sourceToParse.type == "internet") {
                 if (sourceToParse.hasAuthors) {
                     if ((sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) || (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null)) {
@@ -545,8 +541,6 @@ angular.module("metho.service.projects.parse", [])
                         id: "consultationDate"
                     });
                 }
-
-                return sourceToParse;
             } else if (sourceToParse.type == "cd") {
                 if (sourceToParse.hasAuthors) {
                     if ((sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) || (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null)) {
@@ -641,8 +635,6 @@ angular.module("metho.service.projects.parse", [])
                     sourceToParse.parsedSource += "s.d.";
                     addWarning("PUBLICATION_DATE", "publicationDate");
                 }
-
-                return sourceToParse;
             } else if (sourceToParse.type == "movie") {
                 if ((sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) || (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null)) {
                     // Author last name
@@ -752,8 +744,6 @@ angular.module("metho.service.projects.parse", [])
                     });
                     sourceToParse.parsedSource += "(?).";
                 }
-
-                return sourceToParse;
             } else if (sourceToParse.type == "interview") {
                 sourceToParse.title = "";
                 if ((sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) || (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null)) {
@@ -850,11 +840,10 @@ angular.module("metho.service.projects.parse", [])
                     });
                     sourceToParse.parsedSource += "le ?.";
                 }
-
-                return sourceToParse;
             } else {
                 return null;
             }
+            return sourceToParse;
         }
     };
 });
