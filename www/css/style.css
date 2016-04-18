@@ -392,7 +392,7 @@ p.left-aligned {
     box-sizing:border-box;
     width:200px;
     font-size:1rem;
-    background-image: url(http://i.imgur.com/nA9xx1X.png);
+    background-image: url(../img/select-arrow.png);
     text-indent:20px;
     padding:.3rem 0;
 }
