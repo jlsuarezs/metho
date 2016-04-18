@@ -377,3 +377,22 @@ p.left-aligned {
     text-decoration: none;
     color: black;
 }
+
+select {
+    -webkit-appearance:none;
+    background-repeat: no-repeat;
+    background-color: rgba(0,0,0,0);
+    border:thin solid #dddddd;
+    font-weight:300;
+    display:inline;
+    vertical-align:middle;
+    color:#333;
+    padding: auto 0;
+    overflow:hidden;
+    box-sizing:border-box;
+    width:200px;
+    font-size:1rem;
+    background-image: url(http://i.imgur.com/nA9xx1X.png);
+    text-indent:20px;
+    padding:.3rem 0;
+}
