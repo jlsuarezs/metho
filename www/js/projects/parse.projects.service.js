@@ -765,39 +765,19 @@ angular.module("metho.service.projects.parse", [])
                     if (sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) {
                         sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
                     } else {
-                        sourceToParse.errors.push({
-                            errorTitle: "Nom de l'intervieweur manquant",
-                            promptTitle: "Intervieweur",
-                            promptText: "Entrez le nom de l'intervieweur",
-                            var: "author1lastname"
-                        });
+                        addError("INTERVIEWER_LASTNAME", "author1lastname");
                         sourceToParse.parsedSource += "?, ";
                     }
                     // Author first name
                     if (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null) {
                         sourceToParse.parsedSource += sourceToParse.author1firstname.trim() + ". ";
                     } else {
-                        sourceToParse.errors.push({
-                            errorTitle: "Prénom de l'intervieweur manquant",
-                            promptTitle: "Intervieweur",
-                            promptText: "Entrez le prénom de l'intervieweur",
-                            var: "author1firstname"
-                        });
+                        addError("INTERVIEWER_FIRSTNAME", "author1firstname");
                         sourceToParse.parsedSource += "?. ";
                     }
                 } else {
-                    sourceToParse.errors.push({
-                        errorTitle: "Prénom de l'intervieweur manquant",
-                        promptTitle: "Intervieweur",
-                        promptText: "Entrez le prénom de l'intervieweur",
-                        var: "author1firstname"
-                    });
-                    sourceToParse.errors.push({
-                        errorTitle: "Nom de l'intervieweur manquant",
-                        promptTitle: "Intervieweur",
-                        promptText: "Entrez le nom de l'intervieweur",
-                        var: "author1lastname"
-                    });
+                    addError("INTERVIEWER_FIRSTNAME", "author1firstname");
+                    addError("INTERVIEWER_LASTNAME", "author1lastname");
                     sourceToParse.parsedSource += "?. ";
                 }
                 // Texte
@@ -814,15 +794,11 @@ angular.module("metho.service.projects.parse", [])
                         sourceToParse.parsedSource += "M<sup>lle</sup> ";
                         break;
                     default:
-                        sourceToParse.errors.push({
-                            errorTitle: "Titre de civilité manquant",
-                            promptTitle: "Titre de civilité",
-                            promptText: "Sélectionnez le titre de civilité",
-                            var: "civility",
+                        addError("CIVILITY_TITLE", "civility", {
                             complex: true,
-                            template: "<p class='center'><select id='civilityId'><option value='mister'>M.</option><option value='miss'>M<sup>me</sup></option><option value='miss_young'>M<sup>lle</sup></option></select></p>",
                             id: "civilityId",
-                            type: "select"
+                            type: "select",
+                            template: "<p class='center'><select id='civilityId'><option value='mister'>{{PROJECT.DETAIL.INTERVIEW.CIVILITY_MISTER}}</option><option value='miss'>{{PROJECT.DETAIL.INTERVIEW.CIVILITY_MISS}}</option><option value='miss_young'>{{PROJECT.DETAIL.INTERVIEW.CIVILITY_MISS_YOUNG}}</option></select></p>"
                         });
                         sourceToParse.parsedSource += "? ";
                 }
@@ -833,12 +809,7 @@ angular.module("metho.service.projects.parse", [])
                         sourceToParse.parsedSource += sourceToParse.interviewed1firstname.trim() + " ";
                         sourceToParse.title += sourceToParse.interviewed1firstname.trim() + " ";
                     } else {
-                        sourceToParse.errors.push({
-                            errorTitle: "Prénom de la personne rencontrée manquant",
-                            promptTitle: "Prénom de la personne rencontrée",
-                            promptText: "Entrez le prénom de la personne rencontrée",
-                            var: "interviewed1firstname"
-                        });
+                        addError("INTERVIEWED_FIRSTNAME", "interviewed1firstname");
                         sourceToParse.parsedSource += "? ";
                         sourceToParse.title += "? ";
                     }
@@ -847,28 +818,13 @@ angular.module("metho.service.projects.parse", [])
                         sourceToParse.parsedSource += sourceToParse.interviewed1lastname.trim() + ", ";
                         sourceToParse.title += sourceToParse.interviewed1lastname.trim();
                     } else {
-                        sourceToParse.errors.push({
-                            errorTitle: "Nom de la personne rencontrée manquant",
-                            promptTitle: "Nom de la personne rencontrée",
-                            promptText: "Entrez le nom de la personne rencontrée",
-                            var: "interviewed1lastname"
-                        });
+                        addError("INTERVIEWED_LASTNAME", "interviewed1lastname");
                         sourceToParse.parsedSource += "?, ";
                         sourceToParse.title += "?";
                     }
                 } else {
-                    sourceToParse.errors.push({
-                        errorTitle: "Prénom de la personne rencontrée manquant",
-                        promptTitle: "Prénom de la personne rencontrée",
-                        promptText: "Entrez le prénom de la personne rencontrée",
-                        var: "interviewed1firstname"
-                    });
-                    sourceToParse.errors.push({
-                        errorTitle: "Nom de la personne rencontrée manquant",
-                        promptTitle: "Nom de la personne rencontrée",
-                        promptText: "Entrez le nom de la personne rencontrée",
-                        var: "interviewed1lastname"
-                    });
+                    addError("INTERVIEWED_FIRSTNAME", "interviewed1firstname");
+                    addError("INTERVIEWED_LASTNAME", "interviewed1lastname");
                     sourceToParse.parsedSource += "?, ";
                 }
 
@@ -877,12 +833,7 @@ angular.module("metho.service.projects.parse", [])
                     sourceToParse.parsedSource += sourceToParse.interviewedTitle + ", ";
                 } else {
                     sourceToParse.parsedSource += "?, ";
-                    sourceToParse.errors.push({
-                        errorTitle: "Titre de la personne rencontrée manquant",
-                        promptTitle: "Titre de la personne rencontrée",
-                        promptText: "Entrez le titre de la personne rencontrée",
-                        var: "interviewedTitle"
-                    });
+                    addError("INTERVIEWED_TITLE", "interviewedTitle");
                 }
 
                 // Location
@@ -890,26 +841,17 @@ angular.module("metho.service.projects.parse", [])
                     sourceToParse.parsedSource += sourceToParse.publicationLocation + ", ";
                 } else {
                     sourceToParse.parsedSource += "?, ";
-                    sourceToParse.errors.push({
-                        errorTitle: "Lieu de l'entrevue manquant",
-                        promptTitle: "Lieu de l'entrevue",
-                        promptText: "Entrez le lieu de l'entrevue",
-                        var: "publicationLocation"
-                    });
+                    addError("INTERVIEW_LOCATION", "publicationLocation");
                 }
 
                 // Date de l'entrevue
                 if (sourceToParse.consultationDate != null && sourceToParse.consultationDate != "") {
                     sourceToParse.parsedSource += "le " + new Date(new Date(sourceToParse.consultationDate).getTime() + _userOffset).toLocaleDateString() + ".";
                 } else {
-                    sourceToParse.errors.push({
-                        errorTitle: "Date de consultation non spécifiée",
-                        promptTitle: "Date de consultation",
-                        promptText: "Entrez le date de consultation",
-                        var: "consultationDate",
-                        type: "input",
-                        template: "<p class='center'><input type='date' id='consultationDate'></p>",
+                    addError("CONSULTATION_DATE", "consultationDate", {
                         complex: true,
+                        template: "<p class='center'><input type='date' id='consultationDate'></p>",
+                        type: "input",
                         id: "consultationDate"
                     });
                     sourceToParse.parsedSource += "le ?.";

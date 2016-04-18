@@ -465,6 +465,41 @@
                 "TITLE": "Date de visionnement",
                 "TEXT": "Entrez la date de visionnement",
                 "DESC": "Date de visionnement manquante"
+            },
+            "INTERVIEWER_LASTNAME": {
+                "TITLE": "Nom de l'intervieweur",
+                "TEXT": "Entrez le nom de l'intervieweur",
+                "DESC": "Nom de l'intervieweur manquant"
+            },
+            "INTERVIEWER_FIRSTNAME": {
+                "TITLE": "Prénom de l'intervieweur",
+                "TEXT": "Entrez le prénom de l'intervieweur",
+                "DESC": "Prénom de l'intervieweur manquant"
+            },
+            "CIVILITY_TITLE": {
+                "TITLE": "Titre de civilité",
+                "TEXT": "Sélectionnez le titre de civilité de la personne rencontrée",
+                "DESC": "Titre de civilité non spécifié"
+            },
+            "INTERVIEWED_FIRSTNAME": {
+                "TITLE": "Prénom de la personne rencontrée",
+                "TEXT": "Entrez le prénom de la personne rencontrée",
+                "DESC": "Prénom de la personne rencontrée manquant"
+            },
+            "INTERVIEWED_LASTNAME": {
+                "TITLE": "Nom de la personne rencontrée",
+                "TEXT": "Entrez le nom de la personne rencontrée",
+                "DESC": "Nom de la personne rencontrée manquant"
+            },
+            "INTERVIEWED_TITLE": {
+                "TITLE": "Titre de la personne rencontrée",
+                "TEXT": "Entrez le titre de la personne rencontrée",
+                "DESC": "Titre de la personne rencontrée manquant"
+            },
+            "INTERVIEW_LOCATION": {
+                "TITLE": "Lieu de l'entrevue",
+                "TEXT": "Entrez le lieu de l'entrevue",
+                "DESC": "Lieu de l'entrevue manquant"
             }
         }
     },
