@@ -13,9 +13,6 @@
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.ionicframework.starter"
         },
-        "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "com.ionicframework.metho"
-        },
         "cordova-plugin-x-socialsharing": {
             "PACKAGE_NAME": "com.ionicframework.metho"
         },
@@ -35,6 +32,9 @@
             "PACKAGE_NAME": "com.ionicframework.metho"
         },
         "cordova-plugin-globalization": {
+            "PACKAGE_NAME": "com.ionicframework.metho"
+        },
+        "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.ionicframework.metho"
         }
     },
