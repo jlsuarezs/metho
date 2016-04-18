@@ -30,6 +30,9 @@ angular.module('metho.controller.projects.tab', [])
                 $scope.projects.push(obj);
             }
             $scope.loading = false;
+            $scope.projects.sort(function (a, b) {
+                return a.name.localeCompare(b.name);
+            });
             $scope.$apply();
         }).catch(function(err) {
             console.log(err);
@@ -103,6 +106,9 @@ angular.module('metho.controller.projects.tab', [])
                         matter: ""
                     };
                     $scope.newProjectModal.hide();
+                    $scope.projects.sort(function (a, b) {
+                        return a.name.localeCompare(b.name);
+                    });
                     $scope.$apply();
                 }).catch(function(err) {
                     console.log(err);
