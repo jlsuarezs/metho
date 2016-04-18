@@ -16,7 +16,7 @@ angular.module("metho.service.projects.parse", [])
                 promptText: $translate.instant("PROJECT.PARSE." + errorId + ".TEXT"),
                 var: variable,
                 template: complex.template,
-                complex: complex.complex,
+                complex: true,
                 id: complex.id,
                 type: complex.type
             });
@@ -215,7 +215,6 @@ angular.module("metho.service.projects.parse", [])
                     sourceToParse.parsedSource += "?. ";
                     addError("AUTHOR_NUMBER", "hasAuthors", {
                         template:"<p class='center'><select id='authortype'><option value='13'>{{PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_1TO3}}</option><option value='more3'>{{PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_MORE_3}}</option><option value='collective'>{{PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_COLLECTIVE}}</option></select></p>",
-                        complex: true,
                         id:"authortype",
                         type:"select"
                     });
@@ -541,7 +540,6 @@ angular.module("metho.service.projects.parse", [])
                 } else {
                     sourceToParse.parsedSource += "(?).";
                     addError("CONSULTATION_DATE", "consultationDate", {
-                        complex: true,
                         template: "<p class='center'><input type='date' id='consultationDate'></p>",
                         type: "input",
                         id: "consultationDate"
@@ -737,7 +735,6 @@ angular.module("metho.service.projects.parse", [])
                 }else {
                     sourceToParse.parsedSource += "[?], ";
                     addError("SUPPORT", "support", {
-                        complex:true,
                         id:"supporttype",
                         type:"select",
                         template: "<p class='center'><select id='supporttype'><option value='dvd'>{{PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_DVD}}</option><option value='cd'>{{PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_CD}}</option><option value='internet'>{{PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_INTERNET}}</option></select></p>"
@@ -749,7 +746,6 @@ angular.module("metho.service.projects.parse", [])
                     sourceToParse.parsedSource += "(" + new Date(sourceToParse.consultationDate).toLocaleDateString("", {timeZone:"UTC"}) + ").";
                 } else {
                     addError("VIEWING_DATE", "consultationDate", {
-                        complex: true,
                         template: "<p class='center'><input type='date' id='consultationDate'></p>",
                         type: "input",
                         id: "consultationDate"
@@ -795,7 +791,6 @@ angular.module("metho.service.projects.parse", [])
                         break;
                     default:
                         addError("CIVILITY_TITLE", "civility", {
-                            complex: true,
                             id: "civilityId",
                             type: "select",
                             template: "<p class='center'><select id='civilityId'><option value='mister'>{{PROJECT.DETAIL.INTERVIEW.CIVILITY_MISTER}}</option><option value='miss'>{{PROJECT.DETAIL.INTERVIEW.CIVILITY_MISS}}</option><option value='miss_young'>{{PROJECT.DETAIL.INTERVIEW.CIVILITY_MISS_YOUNG}}</option></select></p>"
@@ -849,7 +844,6 @@ angular.module("metho.service.projects.parse", [])
                     sourceToParse.parsedSource += "le " + new Date(sourceToParse.consultationDate).toLocaleDateString("", {timeZone:"UTC"}) + ".";
                 } else {
                     addError("CONSULTATION_DATE", "consultationDate", {
-                        complex: true,
                         template: "<p class='center'><input type='date' id='consultationDate'></p>",
                         type: "input",
                         id: "consultationDate"
