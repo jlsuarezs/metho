@@ -396,3 +396,26 @@ p.left-aligned {
     text-indent:20px;
     padding:.3rem 0;
 }
+
+.select-style {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: relative;
+    max-width: 65%;
+    border: none;
+    background: #fff;
+    color: #333;
+    text-indent: 20px;
+    text-overflow: '';
+    white-space: nowrap;
+    font-size: 14px;
+    cursor: pointer;
+    background-image: url(../img/select-arrow.png);
+    background-repeat: repeat;
+    background-color: rgba(0,0,0,0);
+    background-size: 100%;
+    box-sizing: border-box;
+    display:inline;
+    vertical-align:middle;
+}
