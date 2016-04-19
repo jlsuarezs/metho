@@ -19,6 +19,38 @@ angular.module('metho.controller.projects.detail', [])
     $scope.removeAnimate = false;
     $scope.refreshPending = false;
 
+    $scope.sourceRepo.allDocs({
+        include_docs: true
+    }).then(function(result) {
+        for (var i = 0; i < result.rows.length; i++) {
+            if (result.rows[i].doc.project_id == $stateParams.projectID) {
+                $scope.project.sources.push(result.rows[i].doc);
+            }
+        }
+        $scope.project.sources.sort(function(a, b) {
+            if (a.title && b.title) {
+                return a.title.localeCompare(b.title);
+            } else if (a.title) {
+                return a.title.localeCompare(b.parsedSource);
+            } else if (b.title) {
+                return a.parsedSource.localeCompare(b.title);
+            }
+        });
+        $scope.loading = false;
+    });
+
+    $scope.pendingRepo.allDocs({
+        include_docs: true
+    }).then(function(result) {
+        for (var i = 0; i < result.rows.length; i++) {
+            if (result.rows[i].doc.project_id == $stateParams.projectID) {
+                $scope.project.pendings.push(result.rows[i].doc);
+            }
+        }
+    });
+
+
+    // New source modal
     $ionicModal.fromTemplateUrl('templates/new.source.modal.html', {
         scope: $scope,
         animation: 'slide-in-up',
@@ -26,6 +58,120 @@ angular.module('metho.controller.projects.detail', [])
         $scope.newSourceModal = modal;
     });
 
+    $scope.addSource = function() {
+        // Open modal
+        $translate(["PROJECT.TYPES.BOOK", "PROJECT.TYPES.ARTICLE", "PROJECT.TYPES.INTERNET", "PROJECT.TYPES.CD", "PROJECT.TYPES.MOVIE", "PROJECT.TYPES.INTERVIEW", "PROJECT.DETAIL.CHOOSE_TYPE", "PROJECT.DETAIL.POPUP.CANCEL"]).then(function (translations) {
+            $ionicActionSheet.show({
+                buttons: [{
+                    text: translations["PROJECT.TYPES.BOOK"]
+                }, {
+                    text: translations["PROJECT.TYPES.ARTICLE"]
+                }, {
+                    text: translations["PROJECT.TYPES.INTERNET"]
+                }, {
+                    text: translations["PROJECT.TYPES.CD"]
+                }, {
+                    text: translations["PROJECT.TYPES.MOVIE"]
+                }, {
+                    text: translations["PROJECT.TYPES.INTERVIEW"]
+                }],
+                titleText: translations["PROJECT.DETAIL.CHOOSE_TYPE"],
+                cancelText: translations["PROJECT.DETAIL.POPUP.CANCEL"],
+                buttonClicked: function(index) {
+                    switch (index) {
+                        case 0:
+                            $scope.newsource.type = "book";
+                            break;
+                        case 1:
+                            $scope.newsource.type = "article";
+                            break;
+                        case 2:
+                            $scope.newsource.type = "internet";
+                            break;
+                        case 3:
+                            $scope.newsource.type = "cd";
+                            break;
+                        case 4:
+                            $scope.newsource.type = "movie";
+                            break;
+                        case 5:
+                            $scope.newsource.type = "interview";
+                            break;
+                        default:
+
+                    }
+                    if (!!window.cordova) {
+                        cordova.plugins.Keyboard.disableScroll(true);
+                    }
+                    $scope.newSourceModal.show();
+                    return true;
+                }
+            });
+        });
+    }
+
+    $scope.resetModalVars = function() {
+        // Reset vars
+        $scope.newsource = {};
+        $scope.newsource.consultationDate = new Date();
+    }
+
+    $scope.refreshModalScroll = function() {
+        $ionicScrollDelegate.resize();
+    }
+
+    $scope.refreshModalScrollWithDelay = function() {
+        setTimeout(function() {
+            $ionicScrollDelegate.resize();
+        }, 1000);
+    }
+
+    $scope.autoCompleteEditor = function() {
+        if ($scope.newsource.type == "internet") {
+            switch ($scope.newsource.editor.toLowerCase()) {
+                case "wikipédia, l'encyclopédie libre":
+                case "wikipédia l'encyclopédie libre":
+                case "wikipedia, l'encyclopédie libre":
+                case "wikipedia l'encyclopédie libre":
+                    $scope.newsource.url = "https://www.fr.wikipedia.org";
+                    $scope.newsource.editor = "Wikipédia, l'encyclopédie libre";
+                    break;
+                case "wikipedia the free encyclopedia":
+                case "wikipedia, the free encyclopedia":
+                    $scope.newsource.url = "https://www.en.wikipedia.org";
+                    $scope.newsource.editor = "Wikipedia, the free encyclopedia";
+                    break;
+                default:
+                    $scope.newsource.url = "";
+            }
+        }
+    }
+
+    $scope.closeModal = function() {
+        $scope.newSourceModal.hide();
+        $scope.resetModalVars();
+    }
+
+    // Refresh view on height change
+    // $scope.$watch("newsource.hasBeenTranslated", $scope.refreshModalScroll);
+    $scope.$watch("newsource.type", $scope.refreshModalScroll);
+    $scope.$watch("newsource.hasAuthors", $scope.refreshModalScrollWithDelay);
+    $scope.$watch("newsource.author1firstname", $scope.refreshModalScroll);
+    $scope.$watch("newsource.author1lastname", $scope.refreshModalScroll);
+    $scope.$watch("newsource.author2firstname", $scope.refreshModalScroll);
+    $scope.$watch("newsource.author2lastname", $scope.refreshModalScroll);
+    $scope.$watch("newsource.translator1firstname", $scope.refreshModalScroll);
+    $scope.$watch("newsource.translator1lastname", $scope.refreshModalScroll);
+    $scope.$watch("newsource.translator2firstname", $scope.refreshModalScroll);
+    $scope.$watch("newsource.translator2lastname", $scope.refreshModalScroll);
+    $scope.$watch("newsource.hasBeenTranslated", $scope.refreshModalScrollWithDelay);
+    $scope.$watch("newsource.editor", $scope.autoCompleteEditor);
+    // Keyboard events
+    window.addEventListener('keyboardDidHide', $scope.refreshModalScroll);
+    window.addEventListener('keyboardWillShow', $scope.refreshModalScroll);
+
+
+    // Boarding
     $ionicModal.fromTemplateUrl('templates/boarding.scan.modal.html', {
         scope: $scope,
         animation: 'slide-in-up',
@@ -51,6 +197,7 @@ angular.module('metho.controller.projects.detail', [])
         $ionicSlideBoxDelegate.previous();
     }
 
+    // Share
     $scope.share = function() {
         $translate(["PROJECT.DETAIL.SHARE_TEXT1", "PROJECT.DETAIL.SHARE_TEXT2", "PROJECT.DETAIL.POPUP.ORDER_TITLE", "PROJECT.DETAIL.POPUP.ORDER_SUB", "PROJECT.DETAIL.POPUP.ALPHA", "PROJECT.DETAIL.POPUP.TYPE"]).then(function (translations) {
             var textToShare = translations["PROJECT.DETAIL.SHARE_TEXT1"] + $scope.project.name + translations["PROJECT.DETAIL.SHARE_TEXT2"];
@@ -247,123 +394,7 @@ angular.module('metho.controller.projects.detail', [])
         }
     }
 
-    $scope.resetModalVars = function() {
-        // Reset vars
-        $scope.newsource = {};
-        $scope.newsource.consultationDate = new Date();
-    }
-
-    $scope.refreshModalScroll = function() {
-        $ionicScrollDelegate.resize();
-    }
-
-    $scope.refreshModalScrollWithDelay = function() {
-        setTimeout(function() {
-            $ionicScrollDelegate.resize();
-        }, 1000);
-    }
-
-    $scope.autoCompleteEditor = function() {
-        if ($scope.newsource.type == "internet") {
-            switch ($scope.newsource.editor.toLowerCase()) {
-                case "wikipédia, l'encyclopédie libre":
-                case "wikipédia l'encyclopédie libre":
-                case "wikipedia, l'encyclopédie libre":
-                case "wikipedia l'encyclopédie libre":
-                    $scope.newsource.url = "https://www.fr.wikipedia.org";
-                    $scope.newsource.editor = "Wikipédia, l'encyclopédie libre";
-                    break;
-                case "wikipedia the free encyclopedia":
-                case "wikipedia, the free encyclopedia":
-                    $scope.newsource.url = "https://www.en.wikipedia.org";
-                    $scope.newsource.editor = "Wikipedia, the free encyclopedia";
-                    break;
-                default:
-                    $scope.newsource.url = "";
-            }
-        }
-    }
-
-    // Refresh view on height change
-    // $scope.$watch("newsource.hasBeenTranslated", $scope.refreshModalScroll);
-    $scope.$watch("newsource.type", $scope.refreshModalScroll);
-    $scope.$watch("newsource.hasAuthors", $scope.refreshModalScrollWithDelay);
-    $scope.$watch("newsource.author1firstname", $scope.refreshModalScroll);
-    $scope.$watch("newsource.author1lastname", $scope.refreshModalScroll);
-    $scope.$watch("newsource.author2firstname", $scope.refreshModalScroll);
-    $scope.$watch("newsource.author2lastname", $scope.refreshModalScroll);
-    $scope.$watch("newsource.translator1firstname", $scope.refreshModalScroll);
-    $scope.$watch("newsource.translator1lastname", $scope.refreshModalScroll);
-    $scope.$watch("newsource.translator2firstname", $scope.refreshModalScroll);
-    $scope.$watch("newsource.translator2lastname", $scope.refreshModalScroll);
-    $scope.$watch("newsource.hasBeenTranslated", $scope.refreshModalScrollWithDelay);
-    $scope.$watch("newsource.editor", $scope.autoCompleteEditor);
-    // Keyboard events
-    window.addEventListener('keyboardDidHide', $scope.refreshModalScroll);
-    window.addEventListener('keyboardWillShow', $scope.refreshModalScroll);
-
-    $scope.addSource = function() {
-        // Open modal
-        $translate(["PROJECT.TYPES.BOOK", "PROJECT.TYPES.ARTICLE", "PROJECT.TYPES.INTERNET", "PROJECT.TYPES.CD", "PROJECT.TYPES.MOVIE", "PROJECT.TYPES.INTERVIEW", "PROJECT.DETAIL.CHOOSE_TYPE", "PROJECT.DETAIL.POPUP.CANCEL"]).then(function (translations) {
-            $ionicActionSheet.show({
-                buttons: [{
-                    text: translations["PROJECT.TYPES.BOOK"]
-                }, {
-                    text: translations["PROJECT.TYPES.ARTICLE"]
-                }, {
-                    text: translations["PROJECT.TYPES.INTERNET"]
-                }, {
-                    text: translations["PROJECT.TYPES.CD"]
-                }, {
-                    text: translations["PROJECT.TYPES.MOVIE"]
-                }, {
-                    text: translations["PROJECT.TYPES.INTERVIEW"]
-                }],
-                titleText: translations["PROJECT.DETAIL.CHOOSE_TYPE"],
-                cancelText: translations["PROJECT.DETAIL.POPUP.CANCEL"],
-                buttonClicked: function(index) {
-                    switch (index) {
-                        case 0:
-                            $scope.newsource.type = "book";
-                            break;
-                        case 1:
-                            $scope.newsource.type = "article";
-                            break;
-                        case 2:
-                            $scope.newsource.type = "internet";
-                            break;
-                        case 3:
-                            $scope.newsource.type = "cd";
-                            break;
-                        case 4:
-                            $scope.newsource.type = "movie";
-                            break;
-                        case 5:
-                            $scope.newsource.type = "interview";
-                            break;
-                        default:
-
-                    }
-                    if (!!window.cordova) {
-                        cordova.plugins.Keyboard.disableScroll(true);
-                    }
-                    $scope.newSourceModal.show();
-                    return true;
-                }
-            });
-        });
-
-    }
-
-    $scope.closeModal = function() {
-        $scope.newSourceModal.hide();
-        $scope.resetModalVars();
-    }
-
-    $scope.$on('modal.hidden', function() {
-        $scope.resetModalVars();
-    });
-
+    // Submit
     $scope.submitSource = function() {
         if ($scope.newsource.type != "" && $scope.newsource.type != null) {
             var creatingProj = ParseSource.parseSource($scope.newsource);
@@ -397,6 +428,7 @@ angular.module('metho.controller.projects.detail', [])
         }
     }
 
+    // Delete
     $scope.deleteSource = function(id) {
         // Delete the source
         $translate(["PROJECT.DETAIL.POPUP.DELETE_TITLE", "PROJECT.DETAIL.POPUP.DELETE_TEXT", "PROJECT.DETAIL.POPUP.DELETE", "PROJECT.DETAIL.POPUP.CANCEL"]).then(function (translations) {
@@ -434,6 +466,7 @@ angular.module('metho.controller.projects.detail', [])
         });
     }
 
+    // Scan
     $scope.fetchFromISBNdb = function(inputISBN) {
         if (navigator.onLine) {
             var loading = $ionicLoading.show({
@@ -623,41 +656,8 @@ angular.module('metho.controller.projects.detail', [])
             }
         );
     }
-    // Initialize
 
-    $scope.analyseItemsInfo = function(result) {
-        for (var i = 0; i < result.rows.length; i++) {
-            if (result.rows[i].doc.project_id == $stateParams.projectID) {
-                $scope.project.sources.push(result.rows[i].doc);
-            }
-        }
-        $scope.project.sources.sort(function(a, b) {
-            if (a.title && b.title) {
-                return a.title.localeCompare(b.title);
-            } else if (a.title) {
-                return a.title.localeCompare(b.parsedSource);
-            } else if (b.title) {
-                return a.parsedSource.localeCompare(b.title);
-            }
-        });
-        $scope.loading = false;
-    }
-
-    $scope.analysePendings = function(result) {
-        for (var i = 0; i < result.rows.length; i++) {
-            if (result.rows[i].doc.project_id == $stateParams.projectID) {
-                $scope.project.pendings.push(result.rows[i].doc);
-            }
-        }
-    }
-
-    $scope.sourceRepo.allDocs({
-        include_docs: true
-    }).then($scope.analyseItemsInfo);
-    $scope.pendingRepo.allDocs({
-        include_docs: true
-    }).then($scope.analysePendings);
-
+    // Event handlers
     $scope.$on("$ionicView.afterEnter", function() {
         if ($scope.refreshID != null) {
             $scope.sourceRepo.get($scope.refreshID).then(function(result) {
@@ -691,6 +691,11 @@ angular.module('metho.controller.projects.detail', [])
         $scope.isAdvanced = Settings.get("advanced");
     });
 
+    $scope.$on('modal.hidden', function() {
+        $scope.resetModalVars();
+    });
+
+    // Go to other view
     $scope.openSourceDetail = function(id) {
         for (var i = 0; i < $scope.project.sources.length; i++) {
             if ($scope.project.sources[i]._id == id) {
