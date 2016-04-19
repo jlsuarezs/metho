@@ -96,6 +96,8 @@ angular.module('metho.controller.projects.detail', [])
                             break;
                         case 5:
                             $scope.newsource.type = "interview";
+                            $scope.newsource.author1lastname = Settings.get("lastName");
+                            $scope.newsource.author1firstname = Settings.get("firstName");
                             break;
                         default:
 
@@ -396,36 +398,65 @@ angular.module('metho.controller.projects.detail', [])
 
     // Submit
     $scope.submitSource = function() {
-        if ($scope.newsource.type != "" && $scope.newsource.type != null) {
-            var creatingProj = ParseSource.parseSource($scope.newsource);
-            creatingProj.project_id = $stateParams.projectID;
-            // Save to db
-            $scope.sourceRepo.post(creatingProj).then(function(response) {
-                creatingProj._id = response.id;
-                creatingProj._rev = response.rev;
-                $scope.project.sources.push(creatingProj);
-                $scope.project.sources.sort(function(a, b) {
-                    if (a.title && b.title) {
-                        return a.title.localeCompare(b.title);
-                    } else if (a.title) {
-                        return a.title.localeCompare(b.parsedSource);
-                    } else if (b.title) {
-                        return a.parsedSource.localeCompare(b.title);
+        if ($scope.newsource.type == "interview" && $scope.newsource.author1lastname && $scope.newsource.author1firstname && Settings.get("firstName") == "") {
+            $translate(["PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWER_NAME", "PROJECT.DETAIL.POPUP.SAVE_INTERVIEWER_NAME", "YES", "NO"]).then(function (translations) {
+                $ionicPopup.confirm({
+                    title: translations["PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWER_NAME"],
+                    template: "<p class='center'>" + translations["PROJECT.DETAIL.POPUP.SAVE_INTERVIEWER_NAME"] + "</p>",
+                    okText: translations["YES"],
+                    cancelText: translations["NO"]
+                }).then(function(res) {
+                    if(res) {
+                        Settings.set("firstName", $scope.newsource.author1firstname);
+                        Settings.set("lastName", $scope.newsource.author1lastname);
                     }
+                    var creatingProj = ParseSource.parseSource($scope.newsource);
+                    creatingProj.project_id = $stateParams.projectID;
+                    // Save to db
+                    $scope.sourceRepo.post(creatingProj).then(function(response) {
+                        creatingProj._id = response.id;
+                        creatingProj._rev = response.rev;
+                        $scope.project.sources.push(creatingProj);
+                        $scope.project.sources.sort(function(a, b) {
+                            if (a.title && b.title) {
+                                return a.title.localeCompare(b.title);
+                            } else if (a.title) {
+                                return a.title.localeCompare(b.parsedSource);
+                            } else if (b.title) {
+                                return a.parsedSource.localeCompare(b.title);
+                            }
+                        });
+                        $scope.closeModal();
+                        $scope.$apply();
+                    }).catch(function(err) {
+                        console.log(err);
+                    });
                 });
-                $scope.closeModal();
-                $scope.$apply();
-            }).catch(function(err) {
-                console.log(err);
             });
         } else {
-            $translate(["PROJECT.DETAIL.POPUP.NEW_SOURCE", "PROJECT.DETAIL.POPUP.MUST_HAVE_TYPE"]).then(function (translations) {
-                $ionicPopup.alert({
-                    title: translations["PROJECT.DETAIL.POPUP.NEW_SOURCE"],
-                    template: '<p class="center">' + translations["PROJECT.DETAIL.POPUP.MUST_HAVE_TYPE"] + '</p>'
-                });
-            });
+           var creatingProj = ParseSource.parseSource($scope.newsource);
+           creatingProj.project_id = $stateParams.projectID;
+           // Save to db
+           $scope.sourceRepo.post(creatingProj).then(function(response) {
+               creatingProj._id = response.id;
+               creatingProj._rev = response.rev;
+               $scope.project.sources.push(creatingProj);
+               $scope.project.sources.sort(function(a, b) {
+                   if (a.title && b.title) {
+                       return a.title.localeCompare(b.title);
+                   } else if (a.title) {
+                       return a.title.localeCompare(b.parsedSource);
+                   } else if (b.title) {
+                       return a.parsedSource.localeCompare(b.title);
+                   }
+               });
+               $scope.closeModal();
+               $scope.$apply();
+           }).catch(function(err) {
+               console.log(err);
+           });
         }
+
     }
 
     // Delete

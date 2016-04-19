@@ -1,14 +1,25 @@
 <ion-view view-title="{{ 'SETTINGS.TAB_TITLE' | translate }}">
     <ion-content scrollbar-y="true" has-bouncing="true">
-        <ion-list> <label class="item item-stacked-label">
-            <span class="input-label"><b translate>SETTINGS.ORDER_BY</b></span>
-        </label>
+        <ion-list>
+            <label class="item item-stacked-label">
+                <span class="input-label"><b translate>SETTINGS.ORDER_BY</b></span>
+            </label>
             <ion-list>
                 <ion-radio ng-model="settings.defaultOrder" ng-value="'alpha'" ng-change="changeSettings('defaultOrder')">{{ 'SETTINGS.ALPHABETICAL' | translate }}</ion-radio>
                 <ion-radio ng-model="settings.defaultOrder" ng-value="'type'" ng-change="changeSettings('defaultOrder')">{{ 'SETTINGS.TYPE' | translate }}</ion-radio>
             </ion-list>
             <ion-toggle ng-model="settings.askForOrder" ng-change="changeSettings('askForOrder')" class="smaller">{{'SETTINGS.ASK_FOR_ORDER' | translate }}</ion-toggle>
-            <ion-toggle ng-model="settings.advanced" ng-change="changeSettings('advanced')"> {{ 'SETTINGS.ADVANCED_MODE_LABEL' | translate }} &nbsp; <a href="#/tab/settings/infos-advanced" class="link-beautiful">{{ 'SETTINGS.LEARN_MORE' | translate }}</a> </ion-toggle>
+            <ion-item class="item" ng-if="settings.firstName != ''">
+                {{'SETTINGS.YOUR_NAME' | translate}}
+                <span class="item-note">
+                    {{settings.firstName + " " + settings.lastName}}
+                </span>
+                <ion-option-button class="button-positive">{{ 'SETTINGS.EDIT' | translate }}</ion-option-button>
+            </ion-item>
+            <ion-toggle ng-model="settings.advanced" ng-change="changeSettings('advanced')">
+                {{ 'SETTINGS.ADVANCED_MODE_LABEL' | translate }} &nbsp;
+                <a href="#/tab/settings/infos-advanced" class="link-beautiful">{{ 'SETTINGS.LEARN_MORE' | translate }}</a>
+            </ion-toggle>
             <ion-list>
                 <ion-item href="#/tab/settings/feedback" class="item item-icon-right" type="item-text-wrap">
                     <h2 translate>SETTINGS.BUG_COMMENT</h2>

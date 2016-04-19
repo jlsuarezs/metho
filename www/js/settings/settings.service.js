@@ -19,11 +19,21 @@ angular.module('metho.service.settings', [])
         localStorageService.set("setting-scanBoardingDone", false);
     }
 
+    if (localStorageService.get("setting-firstName") == null) {
+        localStorageService.set("setting-firstName", "");
+    }
+
+    if (localStorageService.get("setting-lastName") == null) {
+        localStorageService.set("setting-lastName", "");
+    }
+
     var settings = {
         advanced: localStorageService.get("setting-advanced"),
         askForOrder: localStorageService.get("setting-askForOrder"),
         defaultOrder: localStorageService.get("setting-defaultOrder"),
-        scanBoardingDone: localStorageService.get("setting-scanBoardingDone")
+        scanBoardingDone: localStorageService.get("setting-scanBoardingDone"),
+        firstName: localStorageService.get("setting-firstName"),
+        lastName: localStorageService.get("setting-lastName")
     };
 
     return {

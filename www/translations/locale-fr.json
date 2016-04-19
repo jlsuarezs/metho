@@ -3,6 +3,8 @@
     "TAB_REFERENCES": "Référence",
     "TAB_SETTINGS": "Paramètres",
     "BACK_BUTTON": "Retour",
+    "YES": "Oui",
+    "NO": "Non",
     "PROJECT":{
         "TAB":{
             "TAB_TITLE": "Projets",
@@ -200,7 +202,8 @@
                 "ADD_TO_PENDINGS": "Voulez-vous ajouter ce code-barre à la liste d'éléments en attente ?",
                 "NOT_RIGHT_BARCODE_TYPE": "Le code barre a été balayé, mais ce type de code barre n'est pas un code barre de livre. Le bon code barre possède habituellement une inscription ISBN par dessus celui-ci. Si deux code barre sont côte à côte, le mauvais a peut-être été balayé. Vous pouvez réessayer.",
                 "UNABLE_TO_SCAN": "Balayage impossible",
-                "UNABLE_TO_SCAN_TEXT": "Essayez d'activer l'accès à l'appareil photo pour cette application dans l'onglet Confidentialité des Réglages."
+                "UNABLE_TO_SCAN_TEXT": "Essayez d'activer l'accès à l'appareil photo pour cette application dans l'onglet Confidentialité des Réglages.",
+                "SAVE_INTERVIEWER_NAME": "Voulez-vous sauvegarder le nom de l'intervieweur pour une utilisation future?"
             }
         },
         "SOURCE":{
@@ -512,6 +515,8 @@
         "ALPHABETICAL": "Ordre alphabétique",
         "TYPE": "Type d'ouvrage",
         "ASK_FOR_ORDER": "Demander l'ordre lors du partage",
+        "YOUR_NAME": "Votre nom",
+        "EDIT": "Modifier",
         "ADVANCED_MODE_LABEL": "Mode avancé",
         "LEARN_MORE": "En savoir plus...",
         "BUG_COMMENT": "Problème/Commentaire",
