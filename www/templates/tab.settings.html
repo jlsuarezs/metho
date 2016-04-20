@@ -9,12 +9,13 @@
                 <ion-radio ng-model="settings.defaultOrder" ng-value="'type'" ng-change="changeSettings('defaultOrder')">{{ 'SETTINGS.TYPE' | translate }}</ion-radio>
             </ion-list>
             <ion-toggle ng-model="settings.askForOrder" ng-change="changeSettings('askForOrder')" class="smaller">{{'SETTINGS.ASK_FOR_ORDER' | translate }}</ion-toggle>
-            <ion-item class="item" ng-if="settings.firstName != ''">
+            <ion-item class="item item-remove-animate" ng-if="settings.firstName != ''">
                 {{'SETTINGS.YOUR_NAME' | translate}}
                 <span class="item-note">
                     {{settings.firstName + " " + settings.lastName}}
                 </span>
-                <ion-option-button class="button-positive">{{ 'SETTINGS.EDIT' | translate }}</ion-option-button>
+                <ion-option-button class="button-positive" ng-click="editName()">{{ 'SETTINGS.EDIT' | translate }}</ion-option-button>
+                <ion-option-button class="button-assertive" ng-click="deleteName()">{{ 'SETTINGS.DELETE' | translate }}</ion-option-button>
             </ion-item>
             <ion-toggle ng-model="settings.advanced" ng-change="changeSettings('advanced')">
                 {{ 'SETTINGS.ADVANCED_MODE_LABEL' | translate }} &nbsp;
