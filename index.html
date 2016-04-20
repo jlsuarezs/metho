@@ -23,17 +23,17 @@
 					<p>La bibliographie,<br />
 					réinventée</p>
 					<ul class="actions">
-						<li><a href="#" class="button special icon fa-paperclip">En savoir plus</a></li>
+						<li><a href="#one" class="button special icon fa-arrow-down">En savoir plus</a></li>
 					</ul>
 				</div>
-				<div class="image phone"><div class="inner"><img src="images/screen.png" alt="" /></div></div>
+				<div class="image phone"><div class="inner"><img src="images/screen.png" alt="Logo/Splashscreen" /></div></div>
 			</header>
 
 		<!-- One -->
 			<section id="one" class="wrapper style2 special">
 				<header class="major">
-					<h2>Plus besoin de se souvenir des règles,<br />
-					Metho s'en souvient</h2>
+					<h2>Pour suivre les règles,<br />
+					à la lettre</h2>
 				</header>
 				<ul class="icons major">
 					<li><span class="icon fa-keyboard-o"><span class="label">Taper</span></span></li>
@@ -60,19 +60,26 @@
 						</div>
 					</section>
 					<section class="spotlight">
-						<div class="image"><img src="images/pic03.jpg" alt="" /></div>
+						<div class="image"><img src="images/pic03.jpeg" alt="" /></div>
 						<div class="content">
-							<h3>Aliquam sed magna</h3>
-							<p>Morbi mattis ornare ornare. Duis quam turpis, gravida at leo elementum elit fusce accumsan dui libero, quis vehicula lectus ultricies eu. In convallis amet leo non sapien iaculis efficitur consequat lorem ipsum.</p>
+							<h3>Partagez les sources</h3>
+							<p>Une fois les sources recueillies, vous pouvez les partager en ordre alphabétique ou de type. Une fois le courriel reçu, il suffit de coller dans le document et d'effectuer la mise en forme.</p>
 						</div>
 					</section>
+					<section class="spotlight">
+						 <div class="image"><img src="images/pic04.jpeg" alt="" /></div>
+						 <div class="content">
+							 <h3>Mode avancé</h3>
+							 <p>À l'aide d'un achat intégré, vous pouvez passer à la vitesse supérieure : balayer un livre pour que sa source soit faite automatiquement, modèles de pages prêt à l'usage et partagez une page Wikipedia à partir de Safari vers Metho pour voir sa source crée.</p>
+						 </div>
+					 </section>
 					<section class="special">
 						<ul class="icons labeled">
-							<li><span class="icon fa-camera-retro"><span class="label">Ipsum lorem accumsan</span></span></li>
-							<li><span class="icon fa-refresh"><span class="label">Sed vehicula elementum</span></span></li>
-							<li><span class="icon fa-cloud"><span class="label">Elit fusce consequat</span></span></li>
-							<li><span class="icon fa-code"><span class="label">Lorem nullam tempus</span></span></li>
-							<li><span class="icon fa-desktop"><span class="label">Adipiscing amet sapien</span></span></li>
+							<li><span class="icon fa-keyboard-o"><span class="label">Tapez</span></span></li>
+							<li><span class="icon fa-refresh"><span class="label">Créez</span></span></li>
+							<li><span class="icon fa-share"><span class="label">Partagez</span></span></li><br>
+							<li><span class="icon fa-barcode"><span class="label">Balayez</span></span></li>
+							<li><span class="icon fa-plus"><span class="label">Créez</span></span></li>
 						</ul>
 					</section>
 				</div>
@@ -81,13 +88,12 @@
 		<!-- Three -->
 			<section id="three" class="wrapper style2 special">
 				<header class="major">
-					<h2>Magna leo sapien gravida</h2>
-					<p>Gravida at leo elementum elit fusce accumsan dui libero, quis vehicula<br />
-					lectus ultricies eu. In convallis amet leo sapien iaculis efficitur.</p>
+					<h2>Téléchargez maintenant</h2>
+					<p>Pour commencer à faire vos sources bibliographiques facilement.</p>
 				</header>
 				<ul class="actions">
-					<li><a href="#" class="button special icon fa-download">Download</a></li>
-					<li><a href="#" class="button">Learn More</a></li>
+					<li><a href="#" class="button icon fa-apple">App Store</a></li>
+					<li><a href="#" class="button icon fa-play">Google Play Store</a></li>
 				</ul>
 			</section>
 
@@ -416,19 +422,20 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			<footer id="footer">
 				<ul class="icons">
 					<li><a href="http://github.com/bouzmine/metho" class="icon fa-github"><span class="label">GitHub</span></a></li>
-					<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-					<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
 				</ul>
-				<p class="copyright">&copy; Francis Clavette. Attributions: <a href="http://html5up.net">HTML5 UP</a></p>
+				<p class="copyright">&copy; 2016 Francis Clavette. Attributions: <a href="http://html5up.net">HTML5 UP</a></p>
 			</footer>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollTo.min.js"></script>
+			<script src="assets/js/jquery.localScroll.min.js"></script>
 			<script src="assets/js/skel.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="assets/js/main.js"></script>
-
+			<script type="text/javascript">
+				$.localScroll(0, 400);
+			</script>
 	</body>
 </html>

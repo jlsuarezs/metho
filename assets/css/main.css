@@ -2374,7 +2374,7 @@
 
 			.image.phone .inner, .image.phone:before, .image.phone:after {
 				display: block;
-				border: solid 5px rgba(255, 255, 255, 0.25);
+				border: solid 10px rgba(255, 255, 255, 0.25);
 			}
 
 			.image.phone .inner {
@@ -2388,7 +2388,7 @@
 				}
 
 				.image.phone .inner:before {
-					top: -1.375em;
+					top: -1.75em;
 					margin-left: -1em;
 					width: 2em;
 					height: 0.25em;
@@ -2397,7 +2397,7 @@
 				}
 
 				.image.phone .inner:after {
-					bottom: -2.75em;
+					bottom: -3.1em;
 					margin-left: -1em;
 					width: 2em;
 					height: 2em;
