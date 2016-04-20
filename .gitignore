@@ -1,0 +1,6 @@
+.bowerrc
+.editorconfig
+www/
+bower.json
+platforms/
+node_modules/
