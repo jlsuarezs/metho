@@ -20,8 +20,12 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
                 }, function(error) {
                     console.log("ERROR -> " + error);
                 });
+                numeral.language((language.value).split("-")[0]);
             }, null);
+        }else {
+            numeral.language("fr");
         }
+
 
     });
 })

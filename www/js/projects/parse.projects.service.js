@@ -347,7 +347,12 @@ angular.module("metho.service.projects.parse", [])
 
                 // Nombre de pages
                 if (sourceToParse.pageNumber != null && sourceToParse.pageNumber != "" && !isNaN(sourceToParse.pageNumber)) {
-                    sourceToParse.parsedSource += sourceToParse.pageNumber + " p.";
+                    if (sourceToParse.pageNumber >= 1000) {
+                        sourceToParse.parsedSource += numeral(sourceToParse.pageNumber).format() + " p.";
+                    }else {
+                        sourceToParse.parsedSource += sourceToParse.pageNumber + " p.";
+                    }
+
                     if (sourceToParse.pageNumber > 15000) {
                         addWarning("PAGE_NUMBER_TOO_HIGH", "pageNumber");
                     } else if (sourceToParse.pageNumber <= 0) {
