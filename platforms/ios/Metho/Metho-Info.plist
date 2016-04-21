@@ -16,6 +16,12 @@
     <string>com.ionicframework.metho</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
+    <key>CFBundleLocalization</key>
+    <array>
+      <string>fr</string>
+      <string>es</string>
+      <string>en</string>
+    </array>
     <key>CFBundleName</key>
     <string>${PRODUCT_NAME}</string>
     <key>CFBundlePackageType</key>
@@ -39,11 +45,5 @@
     <string/>
     <key>UIRequiresFullScreen</key>
     <true/>
-    <key>CFBundleLocalization</key>
-    <array>
-      <string>fr</string>
-      <string>es</string>
-      <string>en</string>
-    </array>
   </dict>
 </plist>
