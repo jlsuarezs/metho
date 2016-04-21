@@ -9,6 +9,10 @@
                 <ion-radio ng-model="settings.defaultOrder" ng-value="'type'" ng-change="changeSettings('defaultOrder')">{{ 'SETTINGS.TYPE' | translate }}</ion-radio>
             </ion-list>
             <ion-toggle ng-model="settings.askForOrder" ng-change="changeSettings('askForOrder')" class="smaller">{{'SETTINGS.ASK_FOR_ORDER' | translate }}</ion-toggle>
+            <ion-toggle ng-model="settings.advanced" ng-change="changeSettings('advanced')">
+                {{ 'SETTINGS.ADVANCED_MODE_LABEL' | translate }} &nbsp;
+                <a href="#/tab/settings/infos-advanced" class="link-beautiful">{{ 'SETTINGS.LEARN_MORE' | translate }}</a>
+            </ion-toggle>
             <ion-item class="item item-remove-animate" ng-if="settings.firstName != ''">
                 {{'SETTINGS.YOUR_NAME' | translate}}
                 <span class="item-note">
@@ -17,17 +21,15 @@
                 <ion-option-button class="button-positive" ng-click="editName()">{{ 'SETTINGS.EDIT' | translate }}</ion-option-button>
                 <ion-option-button class="button-assertive" ng-click="deleteName()">{{ 'SETTINGS.DELETE' | translate }}</ion-option-button>
             </ion-item>
-            <ion-toggle ng-model="settings.advanced" ng-change="changeSettings('advanced')">
-                {{ 'SETTINGS.ADVANCED_MODE_LABEL' | translate }} &nbsp;
-                <a href="#/tab/settings/infos-advanced" class="link-beautiful">{{ 'SETTINGS.LEARN_MORE' | translate }}</a>
-            </ion-toggle>
-            <ion-list>
-                <ion-item href="#/tab/settings/feedback" class="item item-icon-right" type="item-text-wrap">
-                    <h2 translate>SETTINGS.BUG_COMMENT</h2>
-                    <p translate>SETTINGS.BUG_COMMENT_LONG</p>
-                    <span class="icon ion-chevron-right icon-accessory"></span>
-                </ion-item>
-            </ion-list>
+            <ion-item class="item item-icon-right" href="#/tab/settings/attributions">
+                <h2 translate>SETTINGS.ATTRIBUTION_TAB</h2>
+                <span class="icon ion-chevron-right icon-accessory"></span>
+            </ion-item>
+            <ion-item href="#/tab/settings/feedback" class="item item-icon-right" type="item-text-wrap">
+                <h2 translate>SETTINGS.BUG_COMMENT</h2>
+                <p translate>SETTINGS.BUG_COMMENT_LONG</p>
+                <span class="icon ion-chevron-right icon-accessory"></span>
+            </ion-item>
         </ion-list>
         <p class="padding center" translate>SETTINGS.ATTRIBUTIONS</p>
         <p class="padding center dimmed-50"> &copy; 2016 Francis Clavette </p>

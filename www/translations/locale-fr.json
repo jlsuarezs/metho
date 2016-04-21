@@ -524,6 +524,11 @@
         "LEARN_MORE": "En savoir plus...",
         "BUG_COMMENT": "Problème/Commentaire",
         "BUG_COMMENT_LONG": "Rapporter un problème ou émettre un commentaire",
+        "ATTRIBUTION_TAB": "Attributions",
+        "ATTRIBUTION_ICONBY": "Icône par",
+        "MIT_LICENSE": "Licence MIT",
+        "BSD_LICENSE": "Licence BSD",
+        "APACHE_LICENSE": "Licence Apache",
         "ATTRIBUTIONS": "Adapté à partir du <em>Guide de Méthodologie</em> de l'École d'éducation internationale de McMasterville écrit par Raymond Bédard.",
         "ADVANCED_MODE": {
             "TITLE": "Mode avancé",

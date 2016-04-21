@@ -137,6 +137,42 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
                 controller: 'InfosAdvancedCtrl'
             }
         }
+    })
+
+    .state('tab.attributions', {
+        url: '/settings/attributions',
+        views: {
+            'tab-settings': {
+                templateUrl: 'templates/attributions.settings.html'
+            }
+        }
+    })
+
+    .state('tab.mit', {
+        url: '/settings/attributions/mit',
+        views: {
+            'tab-settings': {
+                templateUrl: 'templates/mit.settings.html'
+            }
+        }
+    })
+
+    .state('tab.bsd', {
+        url: '/settings/attributions/bsd',
+        views: {
+            'tab-settings': {
+                templateUrl: 'templates/bsd.settings.html'
+            }
+        }
+    })
+
+    .state('tab.apache', {
+        url: '/settings/attributions/apache',
+        views: {
+            'tab-settings': {
+                templateUrl: 'templates/apache.settings.html'
+            }
+        }
     });
     $urlRouterProvider.otherwise('/tab/projects');
 
