@@ -41,8 +41,6 @@ angular.module('metho.controller.projects.tab', [])
         });
     }
 
-    $scope.loadProjects();
-
     $rootScope.$on("$translateChangeSuccess", function () {
         $scope.loadProjects();
     });
