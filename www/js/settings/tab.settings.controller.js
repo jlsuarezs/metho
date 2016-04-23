@@ -1,6 +1,6 @@
 angular.module("metho.controller.settings.tab", [])
 
-.controller('SettingsCtrl', function($scope, $translate, $ionicConfig, $ionicPopup, localStorageService, Settings, ParseSource) {
+.controller('SettingsCtrl', function($scope, $rootScope, $translate, $ionicConfig, $ionicPopup, localStorageService, Settings, ParseSource) {
     // Get settings from service
     $scope.settings = Settings.all();
     $scope.name = {
@@ -50,6 +50,16 @@ angular.module("metho.controller.settings.tab", [])
         $scope.settings = Settings.all();
     });
 
+    $rootScope.$on("$translateChangeSuccess", function () {
+        $scope.sourceRepo = new PouchDB("sources");
+        // Reparse every source
+        $scope.sourceRepo.allDocs({include_docs:true}).then(function (docs) {
+            for (var i = 0; i < docs.rows.length; i++) {
+                $scope.sourceRepo.put(ParseSource.parseSource(docs.rows[i].doc));
+            }
+        });
+    });
+
     $scope.changeLanguage = function () {
         $scope.changeSettings("overideLang");
         if ($scope.settings.overideLang == "") {
@@ -61,25 +71,11 @@ angular.module("metho.controller.settings.tab", [])
                         console.log("ERROR -> " + error);
                     });
                     numeral.language((language.value).split("-")[0]);
-                    $scope.sourceRepo = new PouchDB("sources");
-                    // Reparse every source
-                    $scope.sourceRepo.allDocs({include_docs:true}).then(function (docs) {
-                        for (var i = 0; i < docs.rows.length; i++) {
-                            $scope.sourceRepo.put(ParseSource.parseSource(docs.rows[i]));
-                        }
-                    });
                 }, null);
             }
         }else {
             $translate.use($scope.settings.overideLang);
             numeral.language($scope.settings.overideLang);
-            $scope.sourceRepo = new PouchDB("sources");
-            // Reparse every source
-            $scope.sourceRepo.allDocs({include_docs:true}).then(function (docs) {
-                for (var i = 0; i < docs.rows.length; i++) {
-                    $scope.sourceRepo.put(ParseSource.parseSource(docs.rows[i]));
-                }
-            });
         }
     }
 });
