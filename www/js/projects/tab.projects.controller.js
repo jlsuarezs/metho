@@ -1,6 +1,6 @@
 angular.module('metho.controller.projects.tab', [])
 
-.controller('ProjectsCtrl', function($scope, $state, $translate, $ionicModal, $ionicPlatform, $ionicPopup, $ionicListDelegate, ShareProject) {
+.controller('ProjectsCtrl', function($scope, $rootScope, $state, $translate, $ionicModal, $ionicPlatform, $ionicPopup, $ionicListDelegate, ShareProject) {
     $scope.projects = [];
     $scope.project = {
         name: "",
@@ -13,30 +13,38 @@ angular.module('metho.controller.projects.tab', [])
     // Initialize the DB
     $scope.projectsRepo = new PouchDB("projects");
     // Load the projects
-    $translate("PROJECT.TAB.UNKNOWN_MATTER").then(function (unknown) {
-        $scope.projectsRepo.allDocs({
-            include_docs: true
-        }).then(function(result) {
-            $scope.projects = [];
-            for (var i = 0; i < result.rows.length; i++) {
-                var obj = {
-                    name: result.rows[i].doc.name,
-                    matter: result.rows[i].doc.matter,
-                    id: result.rows[i].doc._id
+    $scope.loadProjects = function () {
+        $translate("PROJECT.TAB.UNKNOWN_MATTER").then(function (unknown) {
+            $scope.projectsRepo.allDocs({
+                include_docs: true
+            }).then(function(result) {
+                $scope.projects = [];
+                for (var i = 0; i < result.rows.length; i++) {
+                    var obj = {
+                        name: result.rows[i].doc.name,
+                        matter: result.rows[i].doc.matter,
+                        id: result.rows[i].doc._id
+                    }
+                    if (obj.matter == "") {
+                        obj.matter = unknown;
+                    }
+                    $scope.projects.push(obj);
                 }
-                if (obj.matter == "") {
-                    obj.matter = unknown;
-                }
-                $scope.projects.push(obj);
-            }
-            $scope.loading = false;
-            $scope.projects.sort(function (a, b) {
-                return a.name.localeCompare(b.name);
+                $scope.loading = false;
+                $scope.projects.sort(function (a, b) {
+                    return a.name.localeCompare(b.name);
+                });
+                $scope.$apply();
+            }).catch(function(err) {
+                console.log(err);
             });
-            $scope.$apply();
-        }).catch(function(err) {
-            console.log(err);
         });
+    }
+
+    $scope.loadProjects();
+
+    $rootScope.$on("$translateChangeSuccess", function () {
+        $scope.loadProjects();
     });
 
     $ionicModal.fromTemplateUrl('templates/new.project.modal.html', {

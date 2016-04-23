@@ -1,6 +1,6 @@
 angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.controller.projects.detail', 'metho.controller.projects.source', 'metho.controller.projects.pending', 'metho.controllers.references', 'metho.controller.settings.tab', 'metho.controller.settings.advanced', 'metho.controller.settings.feedback', 'metho.services.projects.share', 'metho.service.projects.parse', 'metho.services.references', 'metho.service.settings', 'ngCordova', 'LocalStorageModule', 'ng-slide-down', 'pascalprecht.translate'])
 
-.run(function($ionicPlatform, localStorageService, $translate) {
+.run(function($ionicPlatform, localStorageService, $translate, $ionicConfig, Settings, $rootScope) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -14,19 +14,33 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
         }
 
         if(typeof navigator.globalization !== "undefined") {
-            navigator.globalization.getPreferredLanguage(function(language) {
-                $translate.use((language.value).split("-")[0]).then(function(data) {
-                    console.log("SUCCESS -> " + data);
-                }, function(error) {
-                    console.log("ERROR -> " + error);
-                });
-                numeral.language((language.value).split("-")[0]);
-            }, null);
+            if (Settings.get("overideLang") == "") {
+                navigator.globalization.getPreferredLanguage(function(language) {
+                    $translate.use((language.value).split("-")[0]).then(function(data) {
+                        console.log("SUCCESS -> " + data);
+                    }, function(error) {
+                        console.log("ERROR -> " + error);
+                    });
+                    numeral.language((language.value).split("-")[0]);
+                }, null);
+            }else {
+                $translate.use(Settings.get("overideLang"));
+                numeral.language(Settings.get("overideLang"));
+            }
         }else {
-            numeral.language("fr");
+            if (Settings.get("overideLang") != "") {
+                $translate.use(Settings.get("overideLang"));
+                numeral.language(Settings.get("overideLang"));
+            }else {
+                numeral.language("fr");
+            }
         }
 
-
+        $rootScope.$on("$translateChangeSuccess", function () {
+            $translate("BACK_BUTTON").then(function (back) {
+                $ionicConfig.backButton.text(back);
+            });
+        });
     });
 })
 
@@ -179,9 +193,6 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
         }
     });
     $urlRouterProvider.otherwise('/tab/projects');
-
-    // Setup back button text
-    $ionicConfigProvider.backButton.text("Retour");
 
     // Translation
     $translateProvider.registerAvailableLanguageKeys(['fr', 'en', 'es'], {

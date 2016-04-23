@@ -530,6 +530,11 @@
         "MIT_LICENSE": "Licence MIT",
         "BSD_LICENSE": "Licence BSD",
         "APACHE_LICENSE": "Licence Apache",
+        "LANGUAGE":"Langue",
+        "FRENCH": "Français",
+        "ENGLISH": "Anglais",
+        "SPANISH": "Espagnol",
+        "DEFAULT": "Par défaut",
         "ATTRIBUTIONS": "Adapté à partir du <em>Guide de Méthodologie</em> de l'École d'éducation internationale de McMasterville écrit par Raymond Bédard.",
         "ADVANCED_MODE": {
             "TITLE": "Mode avancé",
