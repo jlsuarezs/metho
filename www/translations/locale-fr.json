@@ -45,8 +45,7 @@
             "DELETE_ITEM": "Supprimer",
             "PENDING_ELEMENTS": "Éléments en attente({{number}})",
             "CHOOSE_TYPE": "Choisir le type de source",
-            "SHARE_TEXT1": "Voici les sources du projet « ",
-            "SHARE_TEXT2": "» : <br><br><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center'>BIBLIOGRAPHIE</td></tr></table><br>",
+            "SHARE_TEXT": "Voici les sources du projet « {{project_title}} » : <br><br><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center'>BIBLIOGRAPHIE</td></tr></table><br>",
             "MODAL":{
                 "CANCEL": "Annuler",
                 "TITLE": "Nouvelle source",

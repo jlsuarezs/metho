@@ -201,8 +201,8 @@ angular.module('metho.controller.projects.detail', [])
 
     // Share
     $scope.share = function() {
-        $translate(["PROJECT.DETAIL.SHARE_TEXT1", "PROJECT.DETAIL.SHARE_TEXT2", "PROJECT.DETAIL.POPUP.ORDER_TITLE", "PROJECT.DETAIL.POPUP.ORDER_SUB", "PROJECT.DETAIL.POPUP.ALPHA", "PROJECT.DETAIL.POPUP.TYPE"]).then(function (translations) {
-            var textToShare = translations["PROJECT.DETAIL.SHARE_TEXT1"] + $scope.project.name + translations["PROJECT.DETAIL.SHARE_TEXT2"];
+        $translate(["PROJECT.DETAIL.SHARE_TEXT", "PROJECT.DETAIL.POPUP.ORDER_TITLE", "PROJECT.DETAIL.POPUP.ORDER_SUB", "PROJECT.DETAIL.POPUP.ALPHA", "PROJECT.DETAIL.POPUP.TYPE"], { project_title: $scope.project.name }).then(function (translations) {
+            var textToShare = translations["PROJECT.DETAIL.SHARE_TEXT"];
             if (Settings.get("askForOrder")) {
                 var cancel = Settings.get("defaultOrder") == "alpha" ? "button-positive" : "button-stable";
                 var ok = Settings.get("defaultOrder") == "type" ? "button-positive" : "button-stable";
