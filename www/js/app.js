@@ -1,6 +1,6 @@
 angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.controller.projects.detail', 'metho.controller.projects.source', 'metho.controller.projects.pending', 'metho.controllers.references', 'metho.controller.settings.tab', 'metho.controller.settings.advanced', 'metho.controller.settings.feedback', 'metho.services.projects.share', 'metho.service.projects.parse', 'metho.services.references', 'metho.service.settings', 'ngCordova', 'LocalStorageModule', 'ng-slide-down', 'pascalprecht.translate'])
 
-.run(function($ionicPlatform, localStorageService, $translate, $ionicConfig, Settings, $rootScope) {
+.run(function($ionicPlatform, localStorageService, $translate, $ionicConfig, Settings, $rootScope, ParseSource) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -16,12 +16,23 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
         if(typeof navigator.globalization !== "undefined") {
             if (Settings.get("overideLang") == "") {
                 navigator.globalization.getPreferredLanguage(function(language) {
-                    $translate.use((language.value).split("-")[0]).then(function(data) {
+                    var two = (language.value).split("-")[0];
+                    $translate.use(two).then(function(data) {
                         console.log("SUCCESS -> " + data);
                     }, function(error) {
                         console.log("ERROR -> " + error);
                     });
-                    numeral.language((language.value).split("-")[0]);
+                    numeral.language(two);
+                    if (two != Settings.get("lastLang")) {
+                        var sourceRepo = new PouchDB("sources");
+                        // Reparse every source
+                        sourceRepo.allDocs({include_docs:true}).then(function (docs) {
+                            for (var i = 0; i < docs.rows.length; i++) {
+                                sourceRepo.put(ParseSource.parseSource(docs.rows[i].doc));
+                            }
+                        });
+                    }
+                    Settings.set("lastLang", two);
                 }, null);
             }else {
                 $translate.use(Settings.get("overideLang"));
