@@ -519,9 +519,9 @@ angular.module('metho.controller.projects.detail', [])
                         });
                     } else {
                         // Titre
-                        $scope.newsource.title = response.data.data[0].title;
+                        $scope.newsource.title = response.data.data[0].title.replace(/\ufffd/g, "é");
                         // Publisher/Editor
-                        $scope.newsource.editor = response.data.data[0].publisher_name;
+                        $scope.newsource.editor = response.data.data[0].publisher_name.replace(/\ufffd/g, "é");
                         // Date de publication
                         if (!!response.data.data[0].edition_info && response.data.data[0].edition_info.match(/[0-9]{4}/)) {
                             var working_on_date = response.data.data[0].edition_info.match(/[0-9]{4}/);
@@ -535,7 +535,7 @@ angular.module('metho.controller.projects.detail', [])
 
                         // Lieu de publication
                         if (response.data.data[0].publisher_text != "") {
-                            var working_on_location = response.data.data[0].publisher_text;
+                            var working_on_location = response.data.data[0].publisher_text.replace(/\ufffd/g, "é");
                             working_on_location = working_on_location.replace(response.data.data[0].publisher_name, "");
                             working_on_location = working_on_location.replace(working_on_date, "");
                             working_on_location = working_on_location.replace(/[^a-zA-z\s]/g, "");
@@ -560,11 +560,11 @@ angular.module('metho.controller.projects.detail', [])
                         if (response.data.data[0].author_data.length) {
                             for (var i = 0; i < response.data.data[0].author_data.length; i++) {
                                 if (response.data.data[0].author_data[i].name.split(",")[0] == response.data.data[0].author_data[i].name) {
-                                    $scope.newsource["author" + String(i + 1) + "firstname"] = response.data.data[0].author_data[i].name.split(" ")[0];
-                                    $scope.newsource["author" + String(i + 1) + "lastname"] = response.data.data[0].author_data[i].name.split(" ")[1];
+                                    $scope.newsource["author" + String(i + 1) + "firstname"] = response.data.data[0].author_data[i].name.split(" ")[0].replace(/\ufffd/g, "é");
+                                    $scope.newsource["author" + String(i + 1) + "lastname"] = response.data.data[0].author_data[i].name.split(" ")[1].replace(/\ufffd/g, "é");
                                 } else {
-                                    $scope.newsource["author" + String(i + 1) + "lastname"] = response.data.data[0].author_data[i].name.split(",")[0];
-                                    $scope.newsource["author" + String(i + 1) + "firstname"] = response.data.data[0].author_data[i].name.split(",")[1];
+                                    $scope.newsource["author" + String(i + 1) + "lastname"] = response.data.data[0].author_data[i].name.split(",")[0].replace(/\ufffd/g, "é");
+                                    $scope.newsource["author" + String(i + 1) + "firstname"] = response.data.data[0].author_data[i].name.split(",")[1].replace(/\ufffd/g, "é");
                                 }
                             }
                             var authorNum = response.data.data[0].author_data.length;
