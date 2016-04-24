@@ -63,9 +63,9 @@
                     "TITLE_PLACEHOLDER": "La revanche des chérubins",
                     "EDITOR_LABEL": "Éditeur",
                     "EDITOR_PLACEHOLDER": "Québec Amérique",
-                    "PUBLICATION_DATE_LABEL": "Date de publication",
+                    "PUBLICATION_DATE_LABEL": "Date d'édition",
                     "PUBLICATION_DATE_PLACEHOLDER": "2010",
-                    "PUBLICATION_LOCATION_LABEL": "Lieu de publication",
+                    "PUBLICATION_LOCATION_LABEL": "Lieu d'édition",
                     "PUBLICATION_LOCATION_PLACEHOLDER": "Montréal",
                     "PAGE_NUMBER_LABEL": "Nombre de pages",
                     "PAGE_NUMBER_PLACEHOLDER": "341",
@@ -90,7 +90,7 @@
                     "PERIODIC_PLACEHOLDER": "Le Devoir",
                     "EDITION_NUMBER_LABEL": "Numéro de l'édition, du volume ou du périodique",
                     "EDITION_NUMBER_PLACEHOLDER": "vol. 36, no 5",
-                    "PUBLICATION_DATE_LABEL": "Date de publication",
+                    "PUBLICATION_DATE_LABEL": "Date d'édition",
                     "PUBLICATION_DATE_PLACEHOLDER": "21 mars 2009",
                     "INDICATION_START_END_LABEL": "Indication des pages de l'article",
                     "INDICATION_START_PLACEHOLDER": "Début",
@@ -117,9 +117,9 @@
                     "DOC_TITLE_PLACEHOLDER": "Multidictionnaire de la langue française",
                     "EDITOR": "Éditeur",
                     "EDITOR_PLACEHOLDER": "Québec Amérique",
-                    "PUBLICATION_LOCATION": "Lieu de publication",
+                    "PUBLICATION_LOCATION": "Lieu d'édition",
                     "PUBLICATION_LOCATION_PLACEHOLDER": "Montréal",
-                    "PUBLICATION_DATE": "Date de publication",
+                    "PUBLICATION_DATE": "Date d'édition",
                     "PUBLICATION_DATE_PLACEHOLDER": "2001"
                 },
                 "MOVIE": {
@@ -132,7 +132,7 @@
                     "DOC_NAME_PLACEHOLDER": "Veangeance",
                     "EPISODE_NAME": "Titre de l'épisode",
                     "EPISODE_PLACEHOLDER": "La revanche",
-                    "PUBLICATION_LOCATION": "Lieu de publication",
+                    "PUBLICATION_LOCATION": "Lieu d'édition",
                     "PUBLICATION_LOCATION_PLACEHOLDER": "Montréal",
                     "PRODUCTOR": "Producteur",
                     "PRODUCTOR_PLACEHOLDER": "CC&C Clark Costelle et Cie",
@@ -140,7 +140,7 @@
                     "BROADCASTER_PLACEHOLDER": "ICI Radio-Canada",
                     "LENGTH": "Durée (minutes)",
                     "LENGTH_PLACEHOLDER": "55",
-                    "PUBLICATION_DATE": "Date de publication",
+                    "PUBLICATION_DATE": "Date d'édition",
                     "PUBLICATION_DATE_PLACEHOLDER": "2002",
                     "SUPPORT_TYPE": "Support",
                     "SUPPORT_CD": "Cédérom",
@@ -172,7 +172,7 @@
                 "TITLE": "Balayage",
                 "CLOSE": "Fermer",
                 "OF_BOOK_RECOGNIZED": "des livres reconnus par l'application",
-                "TEXT_RECOGNIZED": "Selon un test approfondi mené sur les livres de la bibliothèque de l'École d'Éducation de McMasterville, 75 % que vous balayerez avec cette application seront reconnus et les données sur ces livres seront remplies. Vous serez invité à entrer manuellement les données qui n'aurons pu être récupérées.",
+                "TEXT_RECOGNIZED": "Selon un test approfondi mené sur les livres de la bibliothèque de l'École d'Éducation de McMasterville, 75 % des livres que vous balayerez avec cette application seront reconnus et les données sur ces livres seront remplies. Vous serez invité à entrer manuellement les données qui n'aurons pu être récupérées.",
                 "SCAN_TEXT": "Balayez le code sous la mention ISBN. Assurez-vous d'être dans un environnement assez éclairé.",
                 "SCAN_FIRST": "Balayer mon premier code"
             },
@@ -329,14 +329,14 @@
                 "DESC": "Éditeur manquant"
             },
             "EDITION_DATE_TOO_HIGH": {
-                "TITLE": "Date de publication",
-                "TEXT": "Entrez la date de publication",
-                "DESC": "Date de publication supérieure à la date courante"
+                "TITLE": "Date d'édition",
+                "TEXT": "Entrez la date d'édition",
+                "DESC": "Date d'édition supérieure à la date courante"
             },
             "EDITION_DATE": {
-                "TITLE": "Date de publication",
-                "TEXT": "Entrez la date de publication",
-                "DESC": "Date de publication manquante"
+                "TITLE": "Date d'édition",
+                "TEXT": "Entrez la date d'édition",
+                "DESC": "Date d'édition manquante"
             },
             "PAGE_NUMBER": {
                 "TITLE": "Nombre de pages",
@@ -414,14 +414,14 @@
                 "DESC": "Titre du document manquant"
             },
             "PUBLICATION_LOCATION": {
-                "TITLE": "Lieu de publication",
-                "TEXT": "Entrez le lieu de publication",
-                "DESC": "Lieu de publication manquant"
+                "TITLE": "Lieu d'édition",
+                "TEXT": "Entrez le lieu d'édition",
+                "DESC": "Lieu d'édition manquant"
             },
             "PUBLICATION_DATE": {
-                "TITLE": "Date de publication",
-                "TEXT": "Entrez la date de publication",
-                "DESC": "Date de publication manquante"
+                "TITLE": "Date d'édition",
+                "TEXT": "Entrez la date d'édition",
+                "DESC": "Date d'édition manquante"
             },
             "DIRECTOR_LASTNAME": {
                 "TITLE": "Réalisateur/auteur principal",
@@ -543,7 +543,7 @@
             "MODELS": "Modèles",
             "MODELS_DESC": "Utilisez des modèles préfaits au format DOCX dans vos travaux pour vous simplifier la vie",
             "SHARING": "Partage avancé",
-            "SHARING_DESC": "Partagez un lien de Wikipédia à partir de Safari vers Metho pour créer une source automatiquement",
+            "SHARING_DESC": "Partagez un lien à partir d'un site supporté (Wikipédia) vers Metho pour créer une source automatiquement",
             "POPUP": {
                 "ALREADY_TEXT": "Le mode avancé est déjà activé"
             }
