@@ -45,6 +45,12 @@ angular.module('metho.controller.projects.tab', [])
         $scope.loadProjects();
     });
 
+    setTimeout(function () {
+        if ($scope.loading) {
+            $scope.loadProjects();
+        }
+    }, 2000);
+
     $ionicModal.fromTemplateUrl('templates/new.project.modal.html', {
         scope: $scope,
         animation: 'slide-in-up',
