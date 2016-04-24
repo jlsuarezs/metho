@@ -1,7 +1,7 @@
-<ion-view view-title="Référence">
+<ion-view view-title="{{'REFERENCES.TAB_TITLE' | translate}}">
     <ion-content scrollbar-y="true" has-bouncing="true">
         <ion-list>
-            <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="article in articles" type="item-text-wrap" href="#/tab/ref/{{article.id}}" ng-if="!article.isPremium || isAdvanced"> 
+            <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="article in articles" type="item-text-wrap" href="#/tab/ref/{{article.id}}" ng-if="!article.isPremium || isAdvanced">
                 <img ng-src="{{article.icon}}">
                 <h2>{{article.name}}</h2>
                 <p>{{article.description}}</p> <i class="icon ion-chevron-right icon-accessory"></i>
