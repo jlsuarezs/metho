@@ -531,13 +531,13 @@ angular.module("metho.service.projects.parse", [])
                 if (sourceToParse.url != null && sourceToParse.url != "") {
                     if (sourceToParse.url.search(/^((http|https):\/\/){1}(www\.){1}[^\/._]{2,}\.{1}[a-z]{2,}$/) != -1) {
                         sourceToParse.parsedSource += "[" + sourceToParse.url + "] ";
-                        console.log("normal");
-                    }else if (sourceToParse.url.search(/^((http|https):\/\/)?(www\.)?[^\/._]{2,}\.{1}[a-z]{2,}(\/.*)?$/) != -1) {
+                        // console.log("normal");
+                    }else if (sourceToParse.url.search(/^((http|https):\/\/)?(www\.)?[^\/_]{2,}\.{1}[a-z]{2,}(\/.*)?$/i) != -1) {
                         var http = sourceToParse.url.search(/^(http:\/\/){1}/);
                         var https = sourceToParse.url.search(/^(https:\/\/){1}/);
                         sourceToParse.url = sourceToParse.url.replace(/www.|http:\/\/|https:\/\//gi, "");
                         var afterSlash = sourceToParse.url.search(/\/.*$/);
-                        console.log(sourceToParse.url);
+                        // console.log(sourceToParse.url);
                         if (afterSlash != -1) {
                             var afterSlash = afterSlash - sourceToParse.url.length;
                             sourceToParse.url = sourceToParse.url.slice(0, afterSlash);
@@ -556,6 +556,7 @@ angular.module("metho.service.projects.parse", [])
 
                         sourceToParse.parsedSource += "[" + sourceToParse.url + "]";
                     }else {
+                        sourceToParse.parsedSource += "[" + sourceToParse.url + "]";
                         addWarning("INVALID_URL", "url");
                     }
                 } else {
