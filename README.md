@@ -1,5 +1,5 @@
 # Metho
-####This app is being worked on (developpement on hold from April 28^th^ to May 1^st^ 2016)
+####This app is being worked on (developpement on hold from April 28th to May 1st 2016)
 
 This app (iOS only currently) permits to students of the *École d'Éducation internationale* of McMasterville, Quebec aka *ÉÉI* to make bibliographic references automagically. It currently doesn't work, as it's being developed. 
 
