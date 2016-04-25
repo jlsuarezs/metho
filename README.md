@@ -40,3 +40,10 @@ If you have any problem post that as an issue.
 
 The technologies in use in this project are [Ionic](ionicframework.com) and [Cordova](cordova.apache.org). This means it is an hybrid app.
 
+## Attributions and licences
+
+Attributions and licences are inside the app in Settings->Attributions view.
+
+
+
+Francis Clavette © 2016. All rights reserved.
