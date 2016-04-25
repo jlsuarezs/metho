@@ -398,6 +398,11 @@
                 "TEXT": "Entrez le titre de la page",
                 "DESC": "Titre de la page manquant"
             },
+            "INVALID_URL": {
+                "TITLE": "Adresse web",
+                "TEXT": "Entrez l'adresse web",
+                "DESC": "Adresse web invalide"
+            },
             "URL": {
                 "TITLE": "Adresse web",
                 "TEXT": "Entrez l'adresse web",

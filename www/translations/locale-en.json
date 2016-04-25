@@ -398,6 +398,11 @@
                 "TEXT": "Enter webpage's title",
                 "DESC": "Webpage's title missing"
             },
+            "INVALID_URL": {
+                "TITLE": "Web address",
+                "TEXT": "Enter the web address",
+                "DESC": "Invalid web address"
+            },
             "URL": {
                 "TITLE": "Web address",
                 "TEXT": "Enter the web address",

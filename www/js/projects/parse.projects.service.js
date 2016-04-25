@@ -529,7 +529,35 @@ angular.module("metho.service.projects.parse", [])
 
                 // URL
                 if (sourceToParse.url != null && sourceToParse.url != "") {
-                    sourceToParse.parsedSource += "[" + sourceToParse.url + "] ";
+                    if (sourceToParse.url.search(/^((http|https):\/\/){1}(www\.){1}[^\/._]{2,}\.{1}[a-z]{2,}$/) != -1) {
+                        sourceToParse.parsedSource += "[" + sourceToParse.url + "] ";
+                        console.log("normal");
+                    }else if (sourceToParse.url.search(/^((http|https):\/\/)?(www\.)?[^\/._]{2,}\.{1}[a-z]{2,}(\/.*)?$/) != -1) {
+                        var http = sourceToParse.url.search(/^(http:\/\/){1}/);
+                        var https = sourceToParse.url.search(/^(https:\/\/){1}/);
+                        sourceToParse.url = sourceToParse.url.replace(/www.|http:\/\/|https:\/\//gi, "");
+                        var afterSlash = sourceToParse.url.search(/\/.*$/);
+                        console.log(sourceToParse.url);
+                        if (afterSlash != -1) {
+                            var afterSlash = afterSlash - sourceToParse.url.length;
+                            sourceToParse.url = sourceToParse.url.slice(0, afterSlash);
+                            console.log(sourceToParse.url);
+                        }
+
+                        sourceToParse.url = "www." + sourceToParse.url;
+
+                        if (http != -1) {
+                            sourceToParse.url = "http://" + sourceToParse.url;
+                        }else if (https != -1) {
+                            sourceToParse.url = "https://" + sourceToParse.url;
+                        }else {
+                            sourceToParse.url = "http://" + sourceToParse.url;
+                        }
+
+                        sourceToParse.parsedSource += "[" + sourceToParse.url + "]";
+                    }else {
+                        addWarning("INVALID_URL", "url");
+                    }
                 } else {
                     sourceToParse.parsedSource += "[?] ";
                     addError("URL", "url");
