@@ -57,6 +57,10 @@
         <param name="ios-package" value="CDVSplashScreen" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="ThreeDeeTouch">
+        <param name="ios-package" value="ThreeDeeTouch" />
+        <param name="onload" value="true" />
+    </feature>
     <config-file parent="UISupportedInterfaceOrientations" platform="ios" target="*-Info.plist">
         <array>
             <string>UIInterfaceOrientationPortrait</string>
@@ -66,6 +70,8 @@
     <config-file parent="UISupportedInterfaceOrientations~ipad" platform="ios" target="*-Info.plist">
         <array>
             <string>UIInterfaceOrientationPortrait</string>
+            <string>UIInterfaceOrientationLandscapeLeft</string>
+            <string>UIInterfaceOrientationLandscapeRight</string>
             <string>UIInterfaceOrientationPortraitUpsideDown</string>
         </array>
     </config-file>

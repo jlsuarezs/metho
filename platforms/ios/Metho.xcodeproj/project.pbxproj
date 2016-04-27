@@ -39,6 +39,8 @@
 		C2E55B8D40F145439F696D36 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 598B3B94225B41B88E2AD270 /* CoreVideo.framework */; };
 		CF85CC544DDE44A18E60A1B5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F34577EC90424ABB7C91AA /* QuartzCore.framework */; };
 		F246E9B3514847FEB4B4B8DB /* SocialSharing.m in Sources */ = {isa = PBXBuildFile; fileRef = 2801797C97A34CD4AB6A9F4E /* SocialSharing.m */; };
+		784AC15294E9449AABB9140D /* ThreeDeeTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = E144AA85A54D48E18E7BC14A /* ThreeDeeTouch.m */; };
+		94AA20A538C14807A2549FA0 /* AppDelegate+threedeetouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD959D198594481BD5BA203 /* AppDelegate+threedeetouch.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +126,10 @@
 		F558ED8C14244B709F66475B /* SafariServices.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = Metho/config.xml; sourceTree = "<group>"; };
 		FA7B78C471B6409B851DC703 /* Social.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		E144AA85A54D48E18E7BC14A /* ThreeDeeTouch.m */ = {isa = PBXFileReference; name = "ThreeDeeTouch.m"; path = "cordova-plugin-3dtouch/ThreeDeeTouch.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		9FD959D198594481BD5BA203 /* AppDelegate+threedeetouch.m */ = {isa = PBXFileReference; name = "AppDelegate+threedeetouch.m"; path = "cordova-plugin-3dtouch/AppDelegate+threedeetouch.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		9CB0AAF2506E4268B5C8B7B8 /* ThreeDeeTouch.h */ = {isa = PBXFileReference; name = "ThreeDeeTouch.h"; path = "cordova-plugin-3dtouch/ThreeDeeTouch.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		CDF5DC983BB648908159AC51 /* AppDelegate+threedeetouch.h */ = {isa = PBXFileReference; name = "AppDelegate+threedeetouch.h"; path = "cordova-plugin-3dtouch/AppDelegate+threedeetouch.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,6 +277,10 @@
 				04265B9DC69C4BAE84241E4B /* CDVViewController+SplashScreen.m */,
 				47C778C489514E4ABF371120 /* CDVSplashScreen.h */,
 				6E461A45CE5849549CA555F0 /* CDVViewController+SplashScreen.h */,
+				E144AA85A54D48E18E7BC14A /* ThreeDeeTouch.m */,
+				9FD959D198594481BD5BA203 /* AppDelegate+threedeetouch.m */,
+				9CB0AAF2506E4268B5C8B7B8 /* ThreeDeeTouch.h */,
+				CDF5DC983BB648908159AC51 /* AppDelegate+threedeetouch.h */,
 			);
 			name = Plugins;
 			path = Metho/Plugins;
@@ -419,6 +429,8 @@
 				BBAFEEDAADAB45859B8F7660 /* CDVGlobalization.m in Sources */,
 				91F0AA3DB5934E229C9BBA3F /* CDVSplashScreen.m in Sources */,
 				AF3E7F14475643F0BAA02593 /* CDVViewController+SplashScreen.m in Sources */,
+				784AC15294E9449AABB9140D /* ThreeDeeTouch.m in Sources */,
+				94AA20A538C14807A2549FA0 /* AppDelegate+threedeetouch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

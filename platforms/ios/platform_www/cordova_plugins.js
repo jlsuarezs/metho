@@ -89,6 +89,14 @@ module.exports = [
         "clobbers": [
             "navigator.splashscreen"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-3dtouch/www/ThreeDeeTouch.js",
+        "id": "cordova-plugin-3dtouch.ThreeDeeTouch",
+        "pluginId": "cordova-plugin-3dtouch",
+        "clobbers": [
+            "ThreeDeeTouch"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -102,7 +110,8 @@ module.exports.metadata =
     "phonegap-plugin-barcodescanner": "4.1.0",
     "cordova-plugin-globalization": "1.0.3",
     "cordova-plugin-splashscreen": "3.2.1",
-    "cordova-custom-config": "2.0.0"
+    "cordova-custom-config": "2.0.0",
+    "cordova-plugin-3dtouch": "1.3.5"
 }
 // BOTTOM OF METADATA
 });
