@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		0207DA581B56EA530066E2B4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0207DA571B56EA530066E2B4 /* Images.xcassets */; };
 		0CE850FC2A554C77914B68E7 /* IonicKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 064EE0BEF6014001B674E3D2 /* IonicKeyboard.m */; };
@@ -452,7 +453,7 @@
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "Metho/Metho-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.fclavette.metho;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ionicframework.metho;
 				PRODUCT_NAME = Metho;
 			};
 			name = Debug;
@@ -473,7 +474,7 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "Metho/Metho-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = com.fclavette.metho;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ionicframework.metho;
 				PRODUCT_NAME = Metho;
 			};
 			name = Release;
