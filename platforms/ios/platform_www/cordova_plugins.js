@@ -101,7 +101,8 @@ module.exports.metadata =
     "cordova-plugin-safariviewcontroller": "1.4.1",
     "phonegap-plugin-barcodescanner": "4.1.0",
     "cordova-plugin-globalization": "1.0.3",
-    "cordova-plugin-splashscreen": "3.2.1"
+    "cordova-plugin-splashscreen": "3.2.1",
+    "cordova-custom-config": "2.0.0"
 }
 // BOTTOM OF METADATA
 });

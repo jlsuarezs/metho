@@ -57,7 +57,18 @@
         <param name="ios-package" value="CDVSplashScreen" />
         <param name="onload" value="true" />
     </feature>
-    <preference name="Orientation" value="all" />
+    <config-file parent="UISupportedInterfaceOrientations" platform="ios" target="*-Info.plist">
+        <array>
+            <string>UIInterfaceOrientationPortrait</string>
+            <string>UIInterfaceOrientationPortraitUpsideDown</string>
+        </array>
+    </config-file>
+    <config-file parent="UISupportedInterfaceOrientations~ipad" platform="ios" target="*-Info.plist">
+        <array>
+            <string>UIInterfaceOrientationPortrait</string>
+            <string>UIInterfaceOrientationPortraitUpsideDown</string>
+        </array>
+    </config-file>
     <icon height="57" src="resources/ios/icon/icon.png" width="57" />
     <icon height="114" src="resources/ios/icon/icon@2x.png" width="114" />
     <icon height="40" src="resources/ios/icon/icon-40.png" width="40" />
