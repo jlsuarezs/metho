@@ -12,8 +12,27 @@ angular.module("metho.controller.settings.advanced", [])
                 });
             });
         } else {
+            // Restore purchases
             // Buy
-            
+            // Add Quick Actions
+            if (!!window.cordova) {
+                ThreeDeeTouch.isAvailable(function (avail) {
+                    ThreeDeeTouch.configureQuickActions([
+                        {
+                            type: 'newsource',
+                            title: "Nouvelle source",
+                            subtitle: "Créer une nouvelle source",
+                            iconType: "Add"
+                        },
+                        {
+                            type: 'scan',
+                            title: "Balayage",
+                            subtitle: "Balayer un code-barre",
+                            iconType: "CapturePhoto"
+                        }
+                    ]);
+                });
+            }
             // Activate
             Settings.set("advanced", true);
             $state.go("tab.settings", {});

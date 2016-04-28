@@ -45,5 +45,30 @@
     <string/>
     <key>UIRequiresFullScreen</key>
     <true/>
+    <key>UIApplicationShortcutItem</key>
+    <array>
+      <dict>
+        <key>UIApplicationShortcutItemIconFile</key>
+        <string>Add</string>
+        <key>UIApplicationShortcutItemTitle</key>
+        <string>Nouvelle source</string>
+        <key>UIApplicationShortcutItemSubtitle</key>
+        <string>Créer une nouvelle source</string>
+        <key>UIApplicationShortcutItemType</key>
+        <string>newsource</string>
+      </dict>
+    </array>
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+      <string>UIInterfaceOrientationPortrait</string>
+      <string>UIInterfaceOrientationPortraitUpsideDown</string>
+    </array>
+    <key>UISupportedInterfaceOrientations~ipad</key>
+    <array>
+      <string>UIInterfaceOrientationPortrait</string>
+      <string>UIInterfaceOrientationLandscapeLeft</string>
+      <string>UIInterfaceOrientationLandscapeRight</string>
+      <string>UIInterfaceOrientationPortraitUpsideDown</string>
+    </array>
   </dict>
 </plist>

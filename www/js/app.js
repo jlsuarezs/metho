@@ -1,9 +1,22 @@
 angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.controller.projects.detail', 'metho.controller.projects.source', 'metho.controller.projects.pending', 'metho.controllers.references', 'metho.controller.settings.tab', 'metho.controller.settings.advanced', 'metho.controller.settings.feedback', 'metho.services.projects.share', 'metho.service.projects.parse', 'metho.services.references', 'metho.service.settings', 'ngCordova', 'LocalStorageModule', 'ng-slide-down', 'pascalprecht.translate'])
 
-.run(function($ionicPlatform, localStorageService, $translate, $ionicConfig, Settings, $rootScope, ParseSource) {
+.run(function($ionicPlatform, localStorageService, $translate, $ionicConfig, Settings, $rootScope, ParseSource, $state, $ionicPopup, ShareProject) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
+        if (Settings.get("firstRun")) {
+            ThreeDeeTouch.isAvailable(function (avail) {
+                ThreeDeeTouch.configureQuickActions([
+                    {
+                        type: 'newsource',
+                        title: "Nouvelle source",
+                        subtitle: "Créer une nouvelle source",
+                        iconType: "Add"
+                    }
+                ]);
+            });
+            Settings.set("firstRun", false);
+        }
         if (!!window.cordova) {
             cordova.plugins.Keyboard.disableScroll(false);
         }
@@ -52,6 +65,70 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
                 $ionicConfig.backButton.text(back);
             });
         });
+
+        ThreeDeeTouch.onHomeIconPressed = function (payload) {
+            if (payload.type == 'newsource') {
+                $state.go("tab.projects");
+                var projectRepo = new PouchDB("projects");
+                projectRepo.allDocs({include_docs:true}).then(function (res) {
+                    var projects = "<select id='projectselect'>";
+                    for (var i = 0; i < res.rows.length; i++) {
+                        projects += "<option value='" + res.rows[i].id + "'>" + res.rows[i].doc.name + "</option>";
+                    }
+                    projects += "</select>";
+                    $ionicPopup.confirm({
+                        title: "Choisissez le projet",
+                        template: projects,
+                        okText: "Choisir",
+                        cancelText: "Annuler"
+                    }).then(function (result) {
+                        if (result) {
+                            var e = document.getElementById("projectselect");
+                            var id = e.options[e.selectedIndex].value;
+                            for (var i = 0; i < res.rows.length; i++) {
+                                if (res.rows[i].id == id) {
+                                    ShareProject.setName(res.rows[i].doc.name);
+                                    ShareProject.setMatter(res.rows[i].doc.matter);
+                                    break;
+                                }
+                            }
+                            $state.go('tab.project-detail', {projectID:id, newSource:true});
+                        }
+                    });
+
+                });
+            } else if (payload.type == 'scan') {
+                $state.go("tab.projects");
+                var projectRepo = new PouchDB("projects");
+                projectRepo.allDocs({include_docs:true}).then(function (res) {
+                    var projects = "<select id='projectselect'>";
+                    for (var i = 0; i < res.rows.length; i++) {
+                        projects += "<option value='" + res.rows[i].id + "'>" + res.rows[i].doc.name + "</option>";
+                    }
+                    projects += "</select>";
+                    $ionicPopup.confirm({
+                        title: "Choisissez le projet",
+                        template: projects,
+                        okText: "Choisir",
+                        cancelText: "Annuler"
+                    }).then(function (result) {
+                        if (result) {
+                            var e = document.getElementById("projectselect");
+                            var id = e.options[e.selectedIndex].value;
+                            for (var i = 0; i < res.rows.length; i++) {
+                                if (res.rows[i].id == id) {
+                                    ShareProject.setName(res.rows[i].doc.name);
+                                    // Replace with unknown subject when empty
+                                    ShareProject.setMatter(res.rows[i].doc.matter);
+                                    break;
+                                }
+                            }
+                            $state.go('tab.project-detail', {projectID:id, scanSource:true});
+                        }
+                    });
+                });
+            }
+        }
     });
 })
 
@@ -77,7 +154,7 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
     })
 
     .state('tab.project-detail', {
-        url: '/projects/:projectID',
+        url: '/projects/:projectID?new=:newSource&scan=:scanSource',
         views: {
             'tab-projects': {
                 templateUrl: 'templates/detail.projects.html',

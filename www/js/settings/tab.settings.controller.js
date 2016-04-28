@@ -78,4 +78,36 @@ angular.module("metho.controller.settings.tab", [])
             numeral.language($scope.settings.overideLang);
         }
     }
+
+    $scope.$watch("settings.advanced", function () {
+        if ($scope.settings.advanced == true) {
+            ThreeDeeTouch.isAvailable(function (avail) {
+                ThreeDeeTouch.configureQuickActions([
+                    {
+                        type: 'newsource',
+                        title: "Nouvelle source",
+                        subtitle: "Créer une nouvelle source",
+                        iconType: "Add"
+                    },
+                    {
+                        type: 'scan',
+                        title: "Balayage",
+                        subtitle: "Balayer un code-barre",
+                        iconType: "CapturePhoto"
+                    }
+                ]);
+            });
+        }else {
+            ThreeDeeTouch.isAvailable(function (avail) {
+                ThreeDeeTouch.configureQuickActions([
+                    {
+                        type: 'newsource',
+                        title: "Nouvelle source",
+                        subtitle: "Créer une nouvelle source",
+                        iconType: "Add"
+                    }
+                ]);
+            });
+        }
+    })
 });

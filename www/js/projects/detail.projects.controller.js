@@ -56,6 +56,14 @@ angular.module('metho.controller.projects.detail', [])
         animation: 'slide-in-up',
     }).then(function(modal) {
         $scope.newSourceModal = modal;
+        if ($stateParams.scanSource){
+            if (!!window.cordova) {
+                cordova.plugins.Keyboard.disableScroll(true);
+            }
+            $scope.newsource.type = "book";
+            $scope.newSourceModal.show();
+            $scope.scanBook();
+        }
     });
 
     $scope.addSource = function() {
@@ -749,5 +757,9 @@ angular.module('metho.controller.projects.detail', [])
         $state.go('tab.pending', {
             projectID: $scope.project.id
         });
+    }
+
+    if ($stateParams.newSource) {
+        $scope.addSource();
     }
 });
