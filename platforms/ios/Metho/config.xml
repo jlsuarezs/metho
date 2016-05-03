@@ -75,20 +75,6 @@
             <string>UIInterfaceOrientationPortraitUpsideDown</string>
         </array>
     </config-file>
-    <config-file parent="UIApplicationShortcutItem" platform="ios" target="*-Info.plist">
-        <array>
-            <dict>
-                <key>UIApplicationShortcutItemIconFile</key>
-                <string>Add</string>
-                <key>UIApplicationShortcutItemTitle</key>
-                <string>Nouvelle source</string>
-                <key>UIApplicationShortcutItemSubtitle</key>
-                <string>Créer une nouvelle source</string>
-                <key>UIApplicationShortcutItemType</key>
-                <string>newsource</string>
-            </dict>
-        </array>
-    </config-file>
     <icon height="57" src="resources/ios/icon/icon.png" width="57" />
     <icon height="114" src="resources/ios/icon/icon@2x.png" width="114" />
     <icon height="40" src="resources/ios/icon/icon-40.png" width="40" />
