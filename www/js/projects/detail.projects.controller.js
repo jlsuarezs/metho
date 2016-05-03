@@ -491,10 +491,10 @@ angular.module('metho.controller.projects.detail', [])
                                 $scope.$apply();
                                 $scope.removeAnimate = false;
                                 $scope.$apply();
+                                $ionicScrollDelegate.resize();
                                 return;
                             }
                         }
-
                     }).catch(function(err) {
                         console.log(err);
                     });
