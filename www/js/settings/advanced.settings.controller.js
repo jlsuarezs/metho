@@ -17,20 +17,24 @@ angular.module("metho.controller.settings.advanced", [])
             // Add Quick Actions
             if (!!window.cordova) {
                 ThreeDeeTouch.isAvailable(function (avail) {
-                    ThreeDeeTouch.configureQuickActions([
-                        {
-                            type: 'newsource',
-                            title: "Nouvelle source",
-                            subtitle: "Créer une nouvelle source",
-                            iconType: "Add"
-                        },
-                        {
-                            type: 'scan',
-                            title: "Balayage",
-                            subtitle: "Balayer un code-barre",
-                            iconType: "CapturePhoto"
-                        }
-                    ]);
+                    if (avail) {
+                        $translate(["3D_TOUCH.NEW_SOURCE", "3D_TOUCH.NEW_SOURCE_DESC", "3D_TOUCH.SCAN", "3D_TOUCH.SCAN_DESC"]).then(function (translations) {
+                            ThreeDeeTouch.configureQuickActions([
+                                {
+                                    type: 'newsource',
+                                    title: translations["3D_TOUCH.NEW_SOURCE"],
+                                    subtitle: translations["3D_TOUCH.NEW_SOURCE_DESC"],
+                                    iconType: "Add"
+                                },
+                                {
+                                    type: 'scan',
+                                    title: translations["3D_TOUCH.SCAN"],
+                                    subtitle: translations["3D_TOUCH.SCAN_DESC"],
+                                    iconType: "CapturePhoto"
+                                }
+                            ]);
+                        });
+                    }
                 });
             }
             // Activate

@@ -5,15 +5,20 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if (Settings.get("firstRun")) {
+            // Restore purchase + add a var if user is not online
             ThreeDeeTouch.isAvailable(function (avail) {
-                ThreeDeeTouch.configureQuickActions([
-                    {
-                        type: 'newsource',
-                        title: "Nouvelle source",
-                        subtitle: "Créer une nouvelle source",
-                        iconType: "Add"
-                    }
-                ]);
+                if (avail) {
+                    $translate(["3D_TOUCH.NEW_SOURCE", "3D_TOUCH.NEW_SOURCE_DESC"]).then(function (translations) {
+                        ThreeDeeTouch.configureQuickActions([
+                            {
+                                type: 'newsource',
+                                title: translations["3D_TOUCH.NEW_SOURCE"],
+                                subtitle: translations["3D_TOUCH.NEW_SOURCE_DESC"],
+                                iconType: "Add"
+                            }
+                        ]);
+                    });
+                }
             });
             Settings.set("firstRun", false);
         }
@@ -63,6 +68,37 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
         $rootScope.$on("$translateChangeSuccess", function () {
             $translate("BACK_BUTTON").then(function (back) {
                 $ionicConfig.backButton.text(back);
+            });
+            ThreeDeeTouch.isAvailable(function (avail) {
+                if (avail) {
+                    $translate(["3D_TOUCH.NEW_SOURCE", "3D_TOUCH.NEW_SOURCE_DESC", "3D_TOUCH.SCAN", "3D_TOUCH.SCAN_DESC"]).then(function (translations) {
+                        if (Settings.get("advanced")) {
+                            ThreeDeeTouch.configureQuickActions([
+                                {
+                                    type: 'newsource',
+                                    title: translations["3D_TOUCH.NEW_SOURCE"],
+                                    subtitle: translations["3D_TOUCH.NEW_SOURCE_DESC"],
+                                    iconType: "Add"
+                                },
+                                {
+                                    type: 'scan',
+                                    title: translations["3D_TOUCH.SCAN"],
+                                    subtitle: translations["3D_TOUCH.SCAN_DESC"],
+                                    iconType: "CapturePhoto"
+                                }
+                            ]);
+                        }else {
+                            ThreeDeeTouch.configureQuickActions([
+                                {
+                                    type: 'newsource',
+                                    title: translations["3D_TOUCH.NEW_SOURCE"],
+                                    subtitle: translations["3D_TOUCH.NEW_SOURCE_DESC"],
+                                    iconType: "Add"
+                                }
+                            ]);
+                        }
+                    });
+                }
             });
         });
 
