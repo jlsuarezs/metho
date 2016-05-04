@@ -40,7 +40,6 @@ angular.module('metho.controller.projects.detail', [])
                 }
             });
             $scope.loading = false;
-            console.log("fired");
         });
     }
 
@@ -48,6 +47,12 @@ angular.module('metho.controller.projects.detail', [])
 
     $rootScope.$on("$translateChangeSuccess", function () {
         setTimeout($scope.loadSources, 500);
+        if (["Unknown subject", "Matière inconnue"].indexOf($scope.project.matter) >= 0) {
+            $translate("PROJECT.TAB.UNKNOWN_MATTER").then(function (unknown) {
+                $scope.project.matter = unknown;
+                $scope.$apply();
+            });
+        }
     });
 
     $scope.pendingRepo.allDocs({
