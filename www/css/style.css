@@ -171,18 +171,22 @@ p.left-aligned {
 }
 
 .page-title{
-         margin-top : -10px;
-         color: black;
-         font-size: 1em;
-         overflow: hidden;
-         text-overflow: ellipsis !important;
+    margin-top : -10px;
+    color: black;
+    font-size: 1em;
+    padding-left: 25px;
+    padding-right: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis !important;
 }
 .page-sub-title{
-         margin-top: -25px;
-         color: rgba(0, 0, 0, 0.6);
-         font-size : .75em;
-         overflow: hidden;
-         text-overflow: ellipsis !important;
+    margin-top: -25px;
+    color: rgba(0, 0, 0, 0.6);
+    font-size : .75em;
+    padding-left: 25px;
+    padding-right: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis !important;
 }
 
 .preload1 { background: url('../img/biblio.png') no-repeat -9999px -9999px; }
