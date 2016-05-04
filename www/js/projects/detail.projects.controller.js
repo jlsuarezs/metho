@@ -1,6 +1,6 @@
 angular.module('metho.controller.projects.detail', [])
 
-.controller('ProjectDetailCtrl', function($scope, $state, $http, $translate, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicListDelegate, $ionicActionSheet, $ionicLoading, $ionicSlideBoxDelegate, $ionicBackdrop, ParseSource, ShareProject, ShareSource, SharePendings, Settings) {
+.controller('ProjectDetailCtrl', function($scope, $rootScope, $state, $http, $translate, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicListDelegate, $ionicActionSheet, $ionicLoading, $ionicSlideBoxDelegate, $ionicBackdrop, ParseSource, ShareProject, ShareSource, SharePendings, Settings) {
     $scope.projectRepo = new PouchDB("projects");
     $scope.sourceRepo = new PouchDB("sources");
     $scope.pendingRepo = new PouchDB("pendings");
@@ -19,24 +19,35 @@ angular.module('metho.controller.projects.detail', [])
     $scope.removeAnimate = false;
     $scope.refreshPending = false;
 
-    $scope.sourceRepo.allDocs({
-        include_docs: true
-    }).then(function(result) {
-        for (var i = 0; i < result.rows.length; i++) {
-            if (result.rows[i].doc.project_id == $stateParams.projectID) {
-                $scope.project.sources.push(result.rows[i].doc);
+    $scope.loadSources = function () {
+        $scope.sourceRepo.allDocs({
+            include_docs: true
+        }).then(function(result) {
+            $scope.loading = true;
+            $scope.project.sources = [];
+            for (var i = 0; i < result.rows.length; i++) {
+                if (result.rows[i].doc.project_id == $stateParams.projectID) {
+                    $scope.project.sources.push(result.rows[i].doc);
+                }
             }
-        }
-        $scope.project.sources.sort(function(a, b) {
-            if (a.title && b.title) {
-                return a.title.localeCompare(b.title);
-            } else if (a.title) {
-                return a.title.localeCompare(b.parsedSource);
-            } else if (b.title) {
-                return a.parsedSource.localeCompare(b.title);
-            }
+            $scope.project.sources.sort(function(a, b) {
+                if (a.title && b.title) {
+                    return a.title.localeCompare(b.title);
+                } else if (a.title) {
+                    return a.title.localeCompare(b.parsedSource);
+                } else if (b.title) {
+                    return a.parsedSource.localeCompare(b.title);
+                }
+            });
+            $scope.loading = false;
+            console.log("fired");
         });
-        $scope.loading = false;
+    }
+
+    $scope.loadSources();
+
+    $rootScope.$on("$translateChangeSuccess", function () {
+        setTimeout($scope.loadSources, 500);
     });
 
     $scope.pendingRepo.allDocs({
@@ -491,8 +502,9 @@ angular.module('metho.controller.projects.detail', [])
                                 $scope.$apply();
                                 $scope.removeAnimate = false;
                                 $scope.$apply();
-                                $ionicScrollDelegate.resize();
-                                return;
+                                setTimeout(function () {
+                                    $ionicScrollDelegate.resize();
+                                }, 400);
                             }
                         }
                     }).catch(function(err) {
