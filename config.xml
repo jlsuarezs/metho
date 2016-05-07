@@ -32,8 +32,6 @@
         <string>UIInterfaceOrientationPortraitUpsideDown</string>
       </array>
     </config-file>
-
-    <!-- Set orientation on iPad -->
     <config-file platform="ios" target="*-Info.plist" parent="UISupportedInterfaceOrientations~ipad">
       <array>
         <string>UIInterfaceOrientationPortrait</string>
