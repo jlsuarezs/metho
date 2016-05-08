@@ -1,6 +1,6 @@
 angular.module('metho.controller.projects.tab', [])
 
-.controller('ProjectsCtrl', function($scope, $rootScope, $state, $translate, $ionicModal, $ionicPlatform, $ionicPopup, $ionicListDelegate, ShareProject, Storage) {
+.controller('ProjectsCtrl', function($scope, $rootScope, $state, $timeout, $translate, $ionicModal, $ionicPlatform, $ionicPopup, $ionicListDelegate, ShareProject, Storage) {
     $scope.projects = [];
     $scope.project = {
         name: "",
@@ -10,6 +10,7 @@ angular.module('metho.controller.projects.tab', [])
     $scope.err = "";
     $scope.errorName = false;
     $scope.loading = true;
+    $scope.removeAnimate = false;
     // Load the projects
     $scope.loadProjects = function () {
         $translate("PROJECT.TAB.UNKNOWN_MATTER").then(function (unknown) {
@@ -142,12 +143,15 @@ angular.module('metho.controller.projects.tab', [])
             }).then(function(res) {
                 if (res) {
                     Storage.deleteProject(id).then(function (result) {
-                        for (var i = 0; i < $scope.projects.length; i++) {
-                            if ($scope.projects[i].id == result.id) {
-                                $scope.projects.splice(i, 1);
-                                return;
+                        $scope.removeAnimate = true;
+                        $timeout(function () {
+                            for (var i = 0; i < $scope.projects.length; i++) {
+                                if ($scope.projects[i].id == result.id) {
+                                    $scope.projects.splice(i, 1);
+                                    return;
+                                }
                             }
-                        }
+                        });
                     }).catch(function (err) {
                         console.log(err);
                     });

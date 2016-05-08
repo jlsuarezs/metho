@@ -9,7 +9,7 @@
         <p class="center dimmed-50" ng-if="!projects.length && !loading" translate>PROJECT.TAB.EMPTY_TAB</p>
         <!-- When there is -->
         <ion-list ng-if="projects.length">
-            <ion-item ng-repeat="project in projects" class="item-icon-right item-remove-animate" type="item-text-wrap" ng-click="openProjectDetail('{{project.id}}')">
+            <ion-item ng-repeat="project in projects" class="item-icon-right" type="item-text-wrap" ng-class="{'item-remove-animate': removeAnimate}" ng-click="openProjectDetail('{{project.id}}')">
                 <h2>{{project.name}}</h1>
                 <p>{{project.matter}}</p>
                 <i class="icon ion-chevron-right icon-accessory"></i>
