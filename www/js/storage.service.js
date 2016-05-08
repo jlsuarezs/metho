@@ -45,8 +45,8 @@ angular.module("metho.service.storage", [])
         loadingSources = false;
         $rootScope.$broadcast("sourceLoadingEnded");
     }).catch(function (err) {
-        $rootScope.$broadcast("sourceLoadingError", err);
         loadingSources = false;
+        $rootScope.$broadcast("sourceLoadingError", err);
         console.log(err);
     });
 
@@ -191,35 +191,75 @@ angular.module("metho.service.storage", [])
         },
         parseSources: function () {
             var p = $q.defer();
-            loadingSources = true;
             var errors = [];
-            var arr_sources = Array.prototype.fromObject(sources);
-            for (var i = 0; i < arr_sources.length; i++) {
-                var source = ParseSource.parseSource(arr_sources[i]);
-                if (i == arr_sources.length - 1) {
-                    sourceRepo.put(source).then(function (response) {
-                        source._id = response.id;
-                        source._rev = response.rev;
-                        sources[source._id] = source;
-                        sourcesByProject[source.project_id][source._id] = source;
-                        p.resolve({ok:true});
-                        $rootScope.$broadcast("sourceLoadingEnded");
-                        loadingSources = false;
-                    }).catch(function (err) {
-                        errors.push(err);
-                        p.reject(errors);
-                        $rootScope.$broadcast("sourceLoadingEnded");
-                        loadingSources = false;
-                    });
-                }else {
-                    sourceRepo.put(source).then(function (response) {
-                        source._id = response.id;
-                        source._rev = response.rev;
-                        sources[source._id] = source;
-                        sourcesByProject[source.project_id][source._id] = source;
-                    }).catch(function (err) {
-                        errors.push(err);
-                    });
+            if (loadingSources) {
+                var unregister = $rootScope.$on("sourceLoadingEnded", function () {
+                    var arr_sources = Array.prototype.fromObject(sources);
+                    loadingSources = true;
+                    var source = {};
+                    for (var i = 0; i < arr_sources.length; i++) {
+                        source[arr_sources[i]._id] = ParseSource.parseSource(arr_sources[i]);
+                        if (i == arr_sources.length - 1) {
+                            sourceRepo.put(source[arr_sources[i]._id]).then(function (response) {
+                                source[response.id]._rev = response.rev;
+                                sources[response.id] = source[response.id];
+                                sourcesByProject[source[response.id].project_id][response.id] = source[response.id];
+                                loadingSources = false;
+                                unregister();
+                                $rootScope.$broadcast("sourceLoadingEnded");
+                                console.log(loadingSources);
+                                p.resolve({ok:true});
+                            }).catch(function (err) {
+                                errors.push(err);
+                                loadingSources = false;
+                                unregister();
+                                $rootScope.$broadcast("sourceLoadingEnded");
+                                p.reject(errors);
+                            });
+                        }else {
+                            sourceRepo.put(source[arr_sources[i]._id]).then(function (response) {
+                                source[response.id]._rev = response.rev;
+                                sources[response.id] = source[response.id];
+                                sourcesByProject[source[response.id].project_id][response.id] = source[response.id];
+                            }).catch(function (err) {
+                                console.log(err);
+                                errors.push(err);
+                            });
+                        }
+                    }
+                });
+            }else {
+                var arr_sources = Array.prototype.fromObject(sources);
+                loadingSources = true;
+                var source = {};
+                for (var i = 0; i < arr_sources.length; i++) {
+                    source[arr_sources[i]._id] = ParseSource.parseSource(arr_sources[i]);
+                    if (i == arr_sources.length - 1) {
+                        console.log(true);
+                        sourceRepo.put(source[arr_sources[i]._id]).then(function (response) {
+                            source[response.id]._rev = response.rev;
+                            sources[response.id] = source[response.id];
+                            sourcesByProject[source[response.id].project_id][response.id] = source[response.id];
+                            loadingSources = false;
+                            $rootScope.$broadcast("sourceLoadingEnded");
+                            console.log(loadingSources);
+                            p.resolve({ok:true});
+                        }).catch(function (err) {
+                            errors.push(err);
+                            loadingSources = false;
+                            $rootScope.$broadcast("sourceLoadingEnded");
+                            p.reject(errors);
+                        });
+                    }else {
+                        sourceRepo.put(source[arr_sources[i]._id]).then(function (response) {
+                            source[response.id]._rev = response.rev;
+                            sources[response.id] = source[response.id];
+                            sourcesByProject[source[response.id].project_id][response.id] = source[response.id];
+                        }).catch(function (err) {
+                            console.log(err);
+                            errors.push(err);
+                        });
+                    }
                 }
             }
 
