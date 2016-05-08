@@ -1,9 +1,6 @@
 angular.module('metho.controller.projects.detail', [])
 
-.controller('ProjectDetailCtrl', function($scope, $rootScope, $state, $http, $translate, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicListDelegate, $ionicActionSheet, $ionicLoading, $ionicSlideBoxDelegate, $ionicBackdrop, ParseSource, ShareProject, ShareSource, SharePendings, Settings) {
-    $scope.projectRepo = new PouchDB("projects");
-    $scope.sourceRepo = new PouchDB("sources");
-    $scope.pendingRepo = new PouchDB("pendings");
+.controller('ProjectDetailCtrl', function($scope, $rootScope, $state, $http, $timeout, $translate, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicListDelegate, $ionicActionSheet, $ionicLoading, $ionicSlideBoxDelegate, $ionicBackdrop, ParseSource, ShareProject, ShareSource, SharePendings, Settings, Storage) {
     $scope.project = {
         name: ShareProject.getName(),
         id: $stateParams.projectID,
@@ -20,16 +17,9 @@ angular.module('metho.controller.projects.detail', [])
     $scope.refreshPending = false;
 
     $scope.loadSources = function () {
-        $scope.sourceRepo.allDocs({
-            include_docs: true
-        }).then(function(result) {
+        Storage.getSourcesFromProjectId($scope.project.id).then(function(result) {
             $scope.loading = true;
-            $scope.project.sources = [];
-            for (var i = 0; i < result.rows.length; i++) {
-                if (result.rows[i].doc.project_id == $stateParams.projectID) {
-                    $scope.project.sources.push(result.rows[i].doc);
-                }
-            }
+            $scope.project.sources = result;
             $scope.project.sources.sort(function(a, b) {
                 if (a.title && b.title) {
                     return a.title.localeCompare(b.title);
@@ -46,23 +36,16 @@ angular.module('metho.controller.projects.detail', [])
     $scope.loadSources();
 
     $rootScope.$on("$translateChangeSuccess", function () {
-        setTimeout($scope.loadSources, 500);
-        if (["Unknown subject", "Matière inconnue"].indexOf($scope.project.matter) >= 0) {
+        $scope.loadSources();
+        if (unknown_subjects.indexOf($scope.project.matter) >= 0) {
             $translate("PROJECT.TAB.UNKNOWN_MATTER").then(function (unknown) {
                 $scope.project.matter = unknown;
-                $scope.$apply();
             });
         }
     });
 
-    $scope.pendingRepo.allDocs({
-        include_docs: true
-    }).then(function(result) {
-        for (var i = 0; i < result.rows.length; i++) {
-            if (result.rows[i].doc.project_id == $stateParams.projectID) {
-                $scope.project.pendings.push(result.rows[i].doc);
-            }
-        }
+    Storage.getPendings().then(function(result) {
+        $scope.project.pendings = result;
     });
 
 
@@ -155,6 +138,7 @@ angular.module('metho.controller.projects.detail', [])
     $scope.autoCompleteEditor = function() {
         if ($scope.newsource.type == "internet") {
             switch ($scope.newsource.editor.toLowerCase()) {
+                case "wikipédia":
                 case "wikipédia, l'encyclopédie libre":
                 case "wikipédia l'encyclopédie libre":
                 case "wikipedia, l'encyclopédie libre":
@@ -162,6 +146,7 @@ angular.module('metho.controller.projects.detail', [])
                     $scope.newsource.url = "https://www.fr.wikipedia.org";
                     $scope.newsource.editor = "Wikipédia, l'encyclopédie libre";
                     break;
+                case "wikipedia":
                 case "wikipedia the free encyclopedia":
                 case "wikipedia, the free encyclopedia":
                     $scope.newsource.url = "https://www.en.wikipedia.org";
@@ -437,7 +422,7 @@ angular.module('metho.controller.projects.detail', [])
                     var creatingProj = ParseSource.parseSource($scope.newsource);
                     creatingProj.project_id = $stateParams.projectID;
                     // Save to db
-                    $scope.sourceRepo.post(creatingProj).then(function(response) {
+                    Storage.createSource(creatingProj).then(function(response) {
                         creatingProj._id = response.id;
                         creatingProj._rev = response.rev;
                         $scope.project.sources.push(creatingProj);
@@ -451,7 +436,6 @@ angular.module('metho.controller.projects.detail', [])
                             }
                         });
                         $scope.closeModal();
-                        $scope.$apply();
                     }).catch(function(err) {
                         console.log(err);
                     });
@@ -461,7 +445,7 @@ angular.module('metho.controller.projects.detail', [])
            var creatingProj = ParseSource.parseSource($scope.newsource);
            creatingProj.project_id = $stateParams.projectID;
            // Save to db
-           $scope.sourceRepo.post(creatingProj).then(function(response) {
+           Storage.createSource(creatingProj).then(function(response) {
                creatingProj._id = response.id;
                creatingProj._rev = response.rev;
                $scope.project.sources.push(creatingProj);
@@ -475,7 +459,6 @@ angular.module('metho.controller.projects.detail', [])
                    }
                });
                $scope.closeModal();
-               $scope.$apply();
            }).catch(function(err) {
                console.log(err);
            });
@@ -496,22 +479,19 @@ angular.module('metho.controller.projects.detail', [])
                 cssClass: 'deleteProject'
             }).then(function(res) {
                 if (res) {
-                    $scope.sourceRepo.get(id).then(function(doc) {
-                        return $scope.sourceRepo.remove(doc);
-                    }).then(function(result) {
+                    Storage.deleteSource(id).then(function(result) {
                         $scope.removeAnimate = true;
-                        $scope.$apply();
-                        for (var i = 0; i < $scope.project.sources.length; i++) {
-                            if ($scope.project.sources[i]._id == result.id) {
-                                $scope.project.sources.splice(i, 1);
-                                $scope.$apply();
-                                $scope.removeAnimate = false;
-                                $scope.$apply();
-                                setTimeout(function () {
-                                    $ionicScrollDelegate.resize();
-                                }, 400);
+                        $timeout(function () {
+                            for (var i = 0; i < $scope.project.sources.length; i++) {
+                                if ($scope.project.sources[i]._id == id) {
+                                    $scope.project.sources.splice(i, 1);
+                                    $scope.removeAnimate = false;
+                                    setTimeout(function () {
+                                        $ionicScrollDelegate.resize();
+                                    }, 400);
+                                }
                             }
-                        }
+                        });
                     }).catch(function(err) {
                         console.log(err);
                     });
@@ -619,10 +599,12 @@ angular.module('metho.controller.projects.detail', [])
                                         isbn: inputISBN,
                                         date: new Date().toLocaleDateString()
                                     };
-                                    $scope.pendingRepo.post(creating).then(function(responseRepo) {
+                                    Storage.createPending(creating).then(function(responseRepo) {
                                         creating._id = responseRepo.id;
                                         creating._rev = responseRepo.rev;
                                         $scope.project.pendings.push(creating);
+                                    }).catch(function (err) {
+                                        console.log(err);
                                     });
                                     $scope.newSourceModal.hide();
                                 } else {
@@ -648,10 +630,12 @@ angular.module('metho.controller.projects.detail', [])
                             date: new Date().toLocaleDateString(),
                             project_id: $stateParams.projectID
                         };
-                        $scope.pendingRepo.post(creating).then(function(responseRepo) {
+                        Storage.createPending(creating).then(function(responseRepo) {
                             creating._id = responseRepo.id;
                             creating._rev = responseRepo.rev;
                             $scope.project.pendings.push(creating);
+                        }).catch(function (err) {
+                            console.log(err);
                         });
                         $scope.newSourceModal.hide();
                     } else {
@@ -714,34 +698,26 @@ angular.module('metho.controller.projects.detail', [])
     }
 
     // Event handlers
-    $scope.$on("$ionicView.afterEnter", function() {
+    $scope.$on("$ionicView.beforeEnter", function() {
         if ($scope.refreshID != null) {
-            $scope.sourceRepo.get($scope.refreshID).then(function(result) {
+            Storage.getSourceFromId($scope.refreshID).then(function(result) {
                 $scope.project.sources[$scope.refreshIndex] = result;
-            });
-            $scope.project.sources.sort(function(a, b) {
-                if (a.title && b.title) {
-                    return a.title.localeCompare(b.title);
-                } else if (a.title) {
-                    return a.title.localeCompare(b.parsedSource);
-                } else if (b.title) {
-                    return a.parsedSource.localeCompare(b.title);
-                }
+                $scope.project.sources.sort(function(a, b) {
+                    if (a.title && b.title) {
+                        return a.title.localeCompare(b.title);
+                    } else if (a.title) {
+                        return a.title.localeCompare(b.parsedSource);
+                    } else if (b.title) {
+                        return a.parsedSource.localeCompare(b.title);
+                    }
+                });
+            }).catch(function (err) {
+                console.log(err);
             });
         }
 
         if ($scope.refreshPending) {
-            $scope.project.pendings = SharePendings.getPendings();
-            $scope.project.sources = $scope.project.sources.concat(SharePendings.getSources());
-            $scope.project.sources.sort(function(a, b) {
-                if (a.title && b.title) {
-                    return a.title.localeCompare(b.title);
-                } else if (a.title) {
-                    return a.title.localeCompare(b.parsedSource);
-                } else if (b.title) {
-                    return a.parsedSource.localeCompare(b.title);
-                }
-            });
+            $scope.loadSources();
         }
 
         $scope.isAdvanced = Settings.get("advanced");
