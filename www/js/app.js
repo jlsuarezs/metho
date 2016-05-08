@@ -1,6 +1,6 @@
-angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.controller.projects.detail', 'metho.controller.projects.source', 'metho.controller.projects.pending', 'metho.controllers.references', 'metho.controller.settings.tab', 'metho.controller.settings.advanced', 'metho.controller.settings.feedback', 'metho.services.projects.share', 'metho.service.projects.parse', 'metho.services.references', 'metho.service.settings', "metho.service.storage", 'ngCordova', 'LocalStorageModule', 'ng-slide-down', 'pascalprecht.translate'])
+angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.controller.projects.detail', 'metho.controller.projects.source', 'metho.controller.projects.pending', 'metho.controllers.references', 'metho.controller.settings.tab', 'metho.controller.settings.advanced', 'metho.controller.settings.feedback', 'metho.service.projects.parse', 'metho.services.references', 'metho.service.settings', "metho.service.storage", 'ngCordova', 'LocalStorageModule', 'ng-slide-down', 'pascalprecht.translate'])
 
-.run(function($ionicPlatform, localStorageService, $translate, $ionicConfig, Settings, $rootScope, ParseSource, $state, $ionicPopup, ShareProject, Storage) {
+.run(function($ionicPlatform, localStorageService, $translate, $ionicConfig, Settings, $rootScope, ParseSource, $state, $ionicPopup, Storage) {
     $ionicPlatform.ready(function() {
         if (Settings.get("firstRun")) {
             // Restore purchase + add a var if user is not online
@@ -118,13 +118,6 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
                             if (result) {
                                 var e = document.getElementById("projectselect");
                                 var id = e.options[e.selectedIndex].value;
-                                for (var i = 0; i < res.rows.length; i++) {
-                                    if (res.rows[i].id == id) {
-                                        ShareProject.setName(res.rows[i].doc.name);
-                                        ShareProject.setMatter(res.rows[i].doc.matter);
-                                        break;
-                                    }
-                                }
                                 $state.go('tab.project-detail', {projectID:id, newSource:true});
                             }
                         });
@@ -148,14 +141,6 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
                             if (result) {
                                 var e = document.getElementById("projectselect");
                                 var id = e.options[e.selectedIndex].value;
-                                for (var i = 0; i < res.rows.length; i++) {
-                                    if (res.rows[i].id == id) {
-                                        ShareProject.setName(res.rows[i].doc.name);
-                                        // Replace with unknown subject when empty
-                                        ShareProject.setMatter(res.rows[i].doc.matter);
-                                        break;
-                                    }
-                                }
                                 $state.go('tab.project-detail', {projectID:id, scanSource:true});
                             }
                         });
