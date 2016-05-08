@@ -1,11 +1,11 @@
 angular.module("metho.controller.projects.pending", [])
 
-.controller("PendingCtrl", function($scope, $state, $http, $translate, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicLoading, ParseSource, SharePendings, Storage) {
+.controller("PendingCtrl", function($scope, $state, $http, $translate, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicLoading, ParseSource, Storage) {
     $scope.project = {
         id: $stateParams.projectID,
         sources: []
     };
-    $scope.pendings = SharePendings.getPendings();
+    $scope.pendings = [];
     $scope.newsource = {};
     $scope.editingISBN = null;
     $scope.editingIndex = null;
@@ -17,10 +17,13 @@ angular.module("metho.controller.projects.pending", [])
         $scope.newSourceModal = modal;
     });
 
-    $scope.$on("$ionicView.beforeLeave", function() {
-        SharePendings.setSources($scope.project.sources);
-        SharePendings.setPendings($scope.pendings);
-    });
+    $scope.loadPendings = function () {
+        Storage.getPendings().then(function (pendings) {
+            $scope.pendings = pendings;
+        });
+    }
+
+    $scope.loadPendings();
 
     $scope.openAtURL = function(url) {
         SafariViewController.isAvailable(function(available) {
@@ -71,14 +74,9 @@ angular.module("metho.controller.projects.pending", [])
             creatingProj.project_id = $stateParams.projectID;
             // Save to db
             Storage.createSource(creatingProj).then(function(response) {
-                creatingProj._id = response.id;
-                creatingProj._rev = response.rev;
-                $scope.project.sources.push(creatingProj);
                 if ($scope.editingId) {
                     $scope.pendings.splice($scope.editingIndex, 1);
-                    Storage.deletePending($scope.editingId).then(function (response) {
-
-                    }).catch(function (err) {
+                    Storage.deletePending($scope.editingId).catch(function (err) {
                         console.log(err);
                     });
                 }

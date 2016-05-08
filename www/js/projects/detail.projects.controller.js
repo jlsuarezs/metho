@@ -1,6 +1,6 @@
 angular.module('metho.controller.projects.detail', [])
 
-.controller('ProjectDetailCtrl', function($scope, $rootScope, $state, $http, $timeout, $translate, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicListDelegate, $ionicActionSheet, $ionicLoading, $ionicSlideBoxDelegate, $ionicBackdrop, ParseSource, ShareSource, SharePendings, Settings, Storage) {
+.controller('ProjectDetailCtrl', function($scope, $rootScope, $state, $http, $timeout, $translate, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicListDelegate, $ionicActionSheet, $ionicLoading, $ionicSlideBoxDelegate, $ionicBackdrop, ParseSource, ShareSource, Settings, Storage) {
     $scope.project = {
         name: "",
         id: $stateParams.projectID,
@@ -17,6 +17,7 @@ angular.module('metho.controller.projects.detail', [])
     $scope.refreshPending = false;
 
     $scope.loadSources = function () {
+        console.time("loadSource");
         Storage.getSourcesFromProjectId($scope.project.id).then(function(result) {
             $scope.loading = true;
             $scope.project.sources = result;
@@ -30,6 +31,7 @@ angular.module('metho.controller.projects.detail', [])
                 }
             });
             $scope.loading = false;
+            console.timeEnd("loadSource");
         });
     }
 
@@ -760,6 +762,7 @@ angular.module('metho.controller.projects.detail', [])
 
         if ($scope.refreshPending) {
             $scope.loadSources();
+            $scope.loadPendings();
         }
 
         $scope.isAdvanced = Settings.get("advanced");
@@ -787,7 +790,6 @@ angular.module('metho.controller.projects.detail', [])
     }
 
     $scope.openPendings = function() {
-        SharePendings.setPendings($scope.project.pendings);
         $scope.refreshPending = true;
         $state.go('tab.pending', {
             projectID: $scope.project.id
