@@ -1,6 +1,6 @@
 angular.module('metho.controller.projects.tab', [])
 
-.controller('ProjectsCtrl', function($scope, $rootScope, $state, $timeout, $translate, $ionicModal, $ionicPlatform, $ionicPopup, $ionicListDelegate, ShareProject, Storage) {
+.controller('ProjectsCtrl', function($scope, $rootScope, $state, $timeout, $translate, $ionicModal, $ionicPlatform, $ionicPopup, $ionicListDelegate, Storage) {
     $scope.projects = [];
     $scope.project = {
         name: "",
@@ -15,6 +15,7 @@ angular.module('metho.controller.projects.tab', [])
     $scope.loadProjects = function () {
         $translate("PROJECT.TAB.UNKNOWN_MATTER").then(function (unknown) {
             Storage.getProjects().then(function(result) {
+                $scope.loading = false;
                 $scope.projects = [];
                 for (var i = 0; i < result.length; i++) {
                     var obj = {
@@ -27,12 +28,11 @@ angular.module('metho.controller.projects.tab', [])
                     }
                     $scope.projects.push(obj);
                 }
-                $scope.loading = false;
                 $scope.projects.sort(function (a, b) {
                     return a.name.localeCompare(b.name);
                 });
             }, function (err) {
-
+                console.log(err);
             }, function (notif) {
                 console.log(notif);
                 if (notif == "loading") {
@@ -208,14 +208,6 @@ angular.module('metho.controller.projects.tab', [])
     }
 
     $scope.openProjectDetail = function(id) {
-        for (var i = 0; i < $scope.projects.length; i++) {
-            if ($scope.projects[i].id == id) {
-                var index = i;
-                break;
-            }
-        }
-        ShareProject.setName($scope.projects[index].name);
-        ShareProject.setMatter($scope.projects[index].matter);
         $state.go("tab.project-detail", {
             projectID: id
         });

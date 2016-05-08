@@ -1,10 +1,10 @@
 angular.module('metho.controller.projects.detail', [])
 
-.controller('ProjectDetailCtrl', function($scope, $rootScope, $state, $http, $timeout, $translate, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicListDelegate, $ionicActionSheet, $ionicLoading, $ionicSlideBoxDelegate, $ionicBackdrop, ParseSource, ShareProject, ShareSource, SharePendings, Settings, Storage) {
+.controller('ProjectDetailCtrl', function($scope, $rootScope, $state, $http, $timeout, $translate, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicListDelegate, $ionicActionSheet, $ionicLoading, $ionicSlideBoxDelegate, $ionicBackdrop, ParseSource, ShareSource, SharePendings, Settings, Storage) {
     $scope.project = {
-        name: ShareProject.getName(),
+        name: "",
         id: $stateParams.projectID,
-        matter: ShareProject.getMatter(),
+        matter: "",
         sources: [],
         pendings: []
     };
@@ -35,6 +35,17 @@ angular.module('metho.controller.projects.detail', [])
 
     $scope.loadSources();
 
+    $scope.loadProjectInfo = function () {
+        Storage.getProjectFromId($scope.project.id).then(function (project) {
+            $translate("PROJECT.TAB.UNKNOWN_MATTER").then(function (unknown) {
+                $scope.project.name = project.name;
+                $scope.project.matter = project.matter == "" ? unknown : project.matter;
+            });
+        });
+    }
+
+    $scope.loadProjectInfo();
+
     $rootScope.$on("$translateChangeSuccess", function () {
         $scope.loadSources();
         if (unknown_subjects.indexOf($scope.project.matter) >= 0) {
@@ -44,10 +55,13 @@ angular.module('metho.controller.projects.detail', [])
         }
     });
 
-    Storage.getPendings().then(function(result) {
-        $scope.project.pendings = result;
-    });
+    $scope.loadPendings = function () {
+        Storage.getPendings().then(function(result) {
+            $scope.project.pendings = result;
+        });
+    }
 
+    $scope.loadPendings();
 
     // New source modal
     $ionicModal.fromTemplateUrl('templates/new.source.modal.html', {
