@@ -1,6 +1,6 @@
 angular.module('metho.controller.projects.detail', [])
 
-.controller('ProjectDetailCtrl', function($scope, $rootScope, $state, $http, $timeout, $translate, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicListDelegate, $ionicActionSheet, $ionicLoading, $ionicSlideBoxDelegate, $ionicBackdrop, ParseSource, ShareSource, Settings, Storage) {
+.controller('ProjectDetailCtrl', function($scope, $rootScope, $state, $http, $timeout, $translate, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicListDelegate, $ionicActionSheet, $ionicLoading, $ionicSlideBoxDelegate, $ionicBackdrop, ParseSource, Settings, Storage) {
     $scope.project = {
         name: "",
         id: $stateParams.projectID,
@@ -17,7 +17,6 @@ angular.module('metho.controller.projects.detail', [])
     $scope.refreshPending = false;
 
     $scope.loadSources = function () {
-        console.time("loadSource");
         Storage.getSourcesFromProjectId($scope.project.id).then(function(result) {
             $scope.loading = true;
             $scope.project.sources = result;
@@ -31,7 +30,6 @@ angular.module('metho.controller.projects.detail', [])
                 }
             });
             $scope.loading = false;
-            console.timeEnd("loadSource");
         });
     }
 
@@ -743,21 +741,8 @@ angular.module('metho.controller.projects.detail', [])
 
     // Event handlers
     $scope.$on("$ionicView.beforeEnter", function() {
-        if ($scope.refreshID != null) {
-            Storage.getSourceFromId($scope.refreshID).then(function(result) {
-                $scope.project.sources[$scope.refreshIndex] = result;
-                $scope.project.sources.sort(function(a, b) {
-                    if (a.title && b.title) {
-                        return a.title.localeCompare(b.title);
-                    } else if (a.title) {
-                        return a.title.localeCompare(b.parsedSource);
-                    } else if (b.title) {
-                        return a.parsedSource.localeCompare(b.title);
-                    }
-                });
-            }).catch(function (err) {
-                console.log(err);
-            });
+        if ($scope.refreshSources) {
+            $scope.loadSources();
         }
 
         if ($scope.refreshPending) {
@@ -774,19 +759,11 @@ angular.module('metho.controller.projects.detail', [])
 
     // Go to other view
     $scope.openSourceDetail = function(id) {
-        for (var i = 0; i < $scope.project.sources.length; i++) {
-            if ($scope.project.sources[i]._id == id) {
-                var index = i;
-                break;
-            }
-        }
-        ShareSource.setSource($scope.project.sources[index]);
         $state.go('tab.source-detail', {
-            projectID: $stateParams.projectID,
+            projectID: $scope.project.id,
             sourceID: id
         });
-        $scope.refreshID = id;
-        $scope.refreshIndex = index;
+        $scope.refreshSources = true;
     }
 
     $scope.openPendings = function() {

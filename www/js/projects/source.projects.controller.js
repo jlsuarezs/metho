@@ -1,8 +1,16 @@
 angular.module("metho.controller.projects.source", [])
 
-.controller('SourceDetailCtrl', function($scope, $stateParams, $translate, $ionicPopup, $ionicModal, ParseSource, ShareSource, Storage) {
-    $scope.source = ShareSource.getSource();
+.controller('SourceDetailCtrl', function($scope, $stateParams, $translate, $ionicPopup, $ionicModal, ParseSource, Storage) {
+    $scope.source = {};
     $scope.loading = false;
+
+    $scope.loadSource = function () {
+        Storage.getSourceFromId($stateParams.sourceID).then(function (result) {
+            $scope.source = result;
+        });
+    }
+
+    $scope.loadSource();
 
     $ionicModal.fromTemplateUrl('templates/edit.source.modal.html', {
         scope: $scope,
