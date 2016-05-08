@@ -258,38 +258,52 @@ angular.module('metho.controller.projects.detail', [])
                     okText: '<b>' + translations["PROJECT.DETAIL.POPUP.SHARE"] + '</b>'
                 }).then(function(res) {
                     if (res) {
-                        window.plugins.socialsharing.shareViaEmail(
-                            textToShare,
-                            $scope.project.name, [], // TO: must be null or an array
-                            [], // CC: must be null or an array
-                            null, // BCC: must be null or an array
-                            [], // FILES: can be null, a string, or an array
-                            function() { // Success
-                                console.log("success");
-                            },
-                            function() { // Error
-                                console.log("error");
-                            }
-                        );
+                        if (!!window.cordova) {
+                            window.plugins.socialsharing.shareViaEmail(
+                                textToShare,
+                                $scope.project.name, [], // TO: must be null or an array
+                                [], // CC: must be null or an array
+                                null, // BCC: must be null or an array
+                                [], // FILES: can be null, a string, or an array
+                                function() { // Success
+                                    console.log("success");
+                                },
+                                function() { // Error
+                                    console.log("error");
+                                }
+                            );
+                        }else {
+                           $ionicPopup.alert({
+                             title: $scope.project.name,
+                             template: '<div class="interact">' + textToShare + "</div>"
+                           });
+                        }
                     } else {
                         console.log("Cancelled by user");
                     }
                 });
             });
         } else {
-            window.plugins.socialsharing.shareViaEmail(
-                textToShare,
-                $scope.project.name, [], // TO: must be null or an array
-                [], // CC: must be null or an array
-                null, // BCC: must be null or an array
-                [], // FILES: can be null, a string, or an array
-                function() { // Success
-                    console.log("success");
-                },
-                function() { // Error
-                    console.log("error");
-                }
-            );
+            if (!!window.cordova) {
+                window.plugins.socialsharing.shareViaEmail(
+                    textToShare,
+                    $scope.project.name, [], // TO: must be null or an array
+                    [], // CC: must be null or an array
+                    null, // BCC: must be null or an array
+                    [], // FILES: can be null, a string, or an array
+                    function() { // Success
+                        console.log("success");
+                    },
+                    function() { // Error
+                        console.log("error");
+                    }
+                );
+            }else {
+               $ionicPopup.alert({
+                 title: $scope.project.name,
+                 template: '<div class="interact">' + textToShare + "</div>"
+               });
+            }
         }
     }
 
@@ -370,38 +384,52 @@ angular.module('metho.controller.projects.detail', [])
                     okText: '<b>' + translations["PROJECT.DETAIL.POPUP.SHARE"] + '</b>'
                 }).then(function(res) {
                     if (res) {
-                        window.plugins.socialsharing.shareViaEmail(
-                            textToShare,
-                            $scope.project.name, [], // TO: must be null or an array
-                            [], // CC: must be null or an array
-                            null, // BCC: must be null or an array
-                            [], // FILES: can be null, a string, or an array
-                            function() { // Success
-                                console.log("success");
-                            },
-                            function() { // Error
-                                console.log("error");
-                            }
-                        );
+                        if (!!window.cordova) {
+                            window.plugins.socialsharing.shareViaEmail(
+                                textToShare,
+                                $scope.project.name, [], // TO: must be null or an array
+                                [], // CC: must be null or an array
+                                null, // BCC: must be null or an array
+                                [], // FILES: can be null, a string, or an array
+                                function() { // Success
+                                    console.log("success");
+                                },
+                                function() { // Error
+                                    console.log("error");
+                                }
+                            );
+                        }else {
+                           $ionicPopup.alert({
+                             title: $scope.project.name,
+                             template: '<div class="interact">' + textToShare + "</div>"
+                           });
+                        }
                     } else {
                         console.log("Cancelled by user");
                     }
                 });
             });
         }else {
-            window.plugins.socialsharing.shareViaEmail(
-                textToShare,
-                $scope.project.name, [], // TO: must be null or an array
-                [], // CC: must be null or an array
-                null, // BCC: must be null or an array
-                [], // FILES: can be null, a string, or an array
-                function() { // Success
-                    console.log("success");
-                },
-                function() { // Error
-                    console.log("error");
-                }
-            );
+            if (!!window.cordova) {
+                window.plugins.socialsharing.shareViaEmail(
+                    textToShare,
+                    $scope.project.name, [], // TO: must be null or an array
+                    [], // CC: must be null or an array
+                    null, // BCC: must be null or an array
+                    [], // FILES: can be null, a string, or an array
+                    function() { // Success
+                        console.log("success");
+                    },
+                    function() { // Error
+                        console.log("error");
+                    }
+                );
+            }else {
+               $ionicPopup.alert({
+                 title: $scope.project.name,
+                 template: '<div class="interact">' + textToShare + "</div>"
+               });
+            }
         }
     }
 
