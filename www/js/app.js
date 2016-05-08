@@ -1,6 +1,6 @@
 angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.controller.projects.detail', 'metho.controller.projects.source', 'metho.controller.projects.pending', 'metho.controllers.references', 'metho.controller.settings.tab', 'metho.controller.settings.advanced', 'metho.controller.settings.feedback', 'metho.services.projects.share', 'metho.service.projects.parse', 'metho.services.references', 'metho.service.settings', "metho.service.storage", 'ngCordova', 'LocalStorageModule', 'ng-slide-down', 'pascalprecht.translate'])
 
-.run(function($ionicPlatform, localStorageService, $translate, $ionicConfig, Settings, $rootScope, ParseSource, $state, $ionicPopup, ShareProject) {
+.run(function($ionicPlatform, localStorageService, $translate, $ionicConfig, Settings, $rootScope, ParseSource, $state, $ionicPopup, ShareProject, Storage) {
     $ionicPlatform.ready(function() {
         if (Settings.get("firstRun")) {
             // Restore purchase + add a var if user is not online
@@ -42,13 +42,7 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
                     });
                     numeral.language(two);
                     if (two != Settings.get("lastLang")) {
-                        var sourceRepo = new PouchDB("sources");
-                        // Reparse every source
-                        sourceRepo.allDocs({include_docs:true}).then(function (docs) {
-                            for (var i = 0; i < docs.rows.length; i++) {
-                                sourceRepo.put(ParseSource.parseSource(docs.rows[i].doc));
-                            }
-                        });
+                        Storage.parseSources();
                     }
                     Settings.set("lastLang", two);
                 }, null);
