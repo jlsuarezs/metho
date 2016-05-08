@@ -127,10 +127,13 @@ angular.module("metho.service.storage", [])
             var p = $q.defer();
 
             if (loadingProjects) {
-                $rootScope.$on("projectLoadingEnded", function () {
+                var unregister = $rootScope.$on("projectLoadingEnded", function () {
+                    unregister();
                     p.resolve(projects[id]);
                 });
-                $rootScope.$on("projectLoadingError", function (err) {
+                var unregisterErr = $rootScope.$on("projectLoadingError", function (err) {
+                    unregisterErr();
+                    unregister();
                     p.reject(err);
                 });
             }else {
@@ -160,10 +163,13 @@ angular.module("metho.service.storage", [])
 
             if (loadingSources) {
                 p.notify("loading");
-                $rootScope.$on("sourceLoadingEnded", function () {
+                var unregister = $rootScope.$on("sourceLoadingEnded", function () {
+                    unregister();
                     p.resolve(Array.prototype.fromObject(sourcesByProject[id]));
                 });
-                $rootScope.$on("sourceLoadingError", function (err) {
+                var unregisterErr = $rootScope.$on("sourceLoadingError", function (err) {
+                    unregister();
+                    unregisterErr();
                     p.reject(err);
                 });
             }else {
@@ -177,10 +183,13 @@ angular.module("metho.service.storage", [])
 
             if (loadingSources) {
                 p.notify("loading");
-                $rootScope.$on("sourceLoadingEnded", function () {
+                var unregister = $rootScope.$on("sourceLoadingEnded", function () {
+                    unregister();
                     p.resolve(sources[id]);
                 });
-                $rootScope.$on("sourceLoadingError", function (err) {
+                var unregisterErr = $rootScope.$on("sourceLoadingError", function (err) {
+                    unregister();
+                    unregisterErr();
                     p.reject(err);
                 });
             }else {
@@ -207,7 +216,6 @@ angular.module("metho.service.storage", [])
                                 loadingSources = false;
                                 unregister();
                                 $rootScope.$broadcast("sourceLoadingEnded");
-                                console.log(loadingSources);
                                 p.resolve({ok:true});
                             }).catch(function (err) {
                                 errors.push(err);
@@ -235,14 +243,12 @@ angular.module("metho.service.storage", [])
                 for (var i = 0; i < arr_sources.length; i++) {
                     source[arr_sources[i]._id] = ParseSource.parseSource(arr_sources[i]);
                     if (i == arr_sources.length - 1) {
-                        console.log(true);
                         sourceRepo.put(source[arr_sources[i]._id]).then(function (response) {
                             source[response.id]._rev = response.rev;
                             sources[response.id] = source[response.id];
                             sourcesByProject[source[response.id].project_id][response.id] = source[response.id];
                             loadingSources = false;
                             $rootScope.$broadcast("sourceLoadingEnded");
-                            console.log(loadingSources);
                             p.resolve({ok:true});
                         }).catch(function (err) {
                             errors.push(err);
@@ -269,18 +275,20 @@ angular.module("metho.service.storage", [])
             var p = $q.defer();
 
             if (loadingSources) {
-                $rootScope.$on("sourceLoadingEnded", function () {
+                var unregister = $rootScope.$on("sourceLoadingEnded", function () {
                     loadingSources = true;
                     sourceRepo.put(set, id, sources[id]._rev).then(function (response) {
                         sources[id] = set;
                         sources[id]._rev = response.rev;
                         sourcesByProject[sources[id].project_id][id] = set;
                         sourcesByProject[sources[id].project_id][id]._rev = response.rev;
+                        unregister();
                         $rootScope.$broadcast("sourceLoadingEnded");
                         loadingSources = false;
                         p.resolve(response);
                     }).catch(function (err) {
                         p.reject(err);
+                        unregister();
                         $rootScope.$broadcast("sourceLoadingError");
                         loadingSources = false;
                     });
@@ -340,10 +348,13 @@ angular.module("metho.service.storage", [])
 
             if (loadingPendings) {
                 p.notify("loading");
-                $rootScope.$on("sourceLoadingEnded", function () {
+                var unregister = $rootScope.$on("sourceLoadingEnded", function () {
+                    unregister();
                     p.resolve(Array.prototype.fromObject(pendings));
                 });
-                $rootScope.$on("sourceLoadingError", function (err) {
+                var unregisterErr = $rootScope.$on("sourceLoadingError", function (err) {
+                    unregister();
+                    unregisterErr();
                     p.reject(err);
                 });
             }else {
