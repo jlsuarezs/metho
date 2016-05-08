@@ -207,7 +207,7 @@
         },
         "SOURCE":{
             "EDIT": "Edit",
-            "NO_ERROR": "No error",
+            "NO_ERROR": "Zero error",
             "CONFIRM": "Confirm",
             "CANCEL": "Cancel",
             "MODAL": {
