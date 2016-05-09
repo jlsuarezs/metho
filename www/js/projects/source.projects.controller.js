@@ -1,6 +1,6 @@
 angular.module("metho.controller.projects.source", [])
 
-.controller('SourceDetailCtrl', function($scope, $stateParams, $translate, $ionicPopup, $ionicModal, ParseSource, Storage) {
+.controller('SourceDetailCtrl', function($scope, $rootScope, $stateParams, $translate, $ionicPopup, $ionicModal, ParseSource, Storage) {
     $scope.source = {};
     $scope.loading = false;
 
@@ -11,6 +11,10 @@ angular.module("metho.controller.projects.source", [])
     }
 
     $scope.loadSource();
+
+    $rootScope.$on("$translateChangeSuccess", function () {
+        $scope.loadSource();
+    });
 
     $ionicModal.fromTemplateUrl('templates/edit.source.modal.html', {
         scope: $scope,
