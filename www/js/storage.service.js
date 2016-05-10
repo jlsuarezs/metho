@@ -406,7 +406,21 @@ angular.module("metho.service.storage", [])
                 p.reject(err);
             })
 
-            return
+            return p.promise;
+        },
+        getPendingNumber: function () {
+            var p = $q.defer();
+
+            if (loadingPendings) {
+                var unregister = $rootScope.$on("pendingLoadingEnded", function () {
+                    unregister();
+                    p.resolve(pendings.length ? pendings.length : 0);
+                });
+            }else {
+                p.resolve(pendings.length ? pendings.length : 0);
+            }
+
+            return p.promise;
         }
     };
 });

@@ -6,7 +6,7 @@ angular.module('metho.controller.projects.detail', [])
         id: $stateParams.projectID,
         matter: "",
         sources: [],
-        pendings: []
+        pendings: 0
     };
     $scope.loading = true;
     $scope.newsource = {};
@@ -56,7 +56,7 @@ angular.module('metho.controller.projects.detail', [])
     });
 
     $scope.loadPendings = function () {
-        Storage.getPendings().then(function(result) {
+        Storage.getPendingNumber().then(function(result) {
             $scope.project.pendings = result;
         });
     }
@@ -642,9 +642,7 @@ angular.module('metho.controller.projects.detail', [])
                                         date: new Date().toLocaleDateString()
                                     };
                                     Storage.createPending(creating).then(function(responseRepo) {
-                                        creating._id = responseRepo.id;
-                                        creating._rev = responseRepo.rev;
-                                        $scope.project.pendings.push(creating);
+                                        $scope.project.pendings++;
                                     }).catch(function (err) {
                                         console.log(err);
                                     });
@@ -673,9 +671,7 @@ angular.module('metho.controller.projects.detail', [])
                             project_id: $stateParams.projectID
                         };
                         Storage.createPending(creating).then(function(responseRepo) {
-                            creating._id = responseRepo.id;
-                            creating._rev = responseRepo.rev;
-                            $scope.project.pendings.push(creating);
+                            $scope.project.pendings++;
                         }).catch(function (err) {
                             console.log(err);
                         });
