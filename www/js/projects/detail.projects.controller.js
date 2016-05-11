@@ -125,6 +125,7 @@ angular.module('metho.controller.projects.detail', [])
                     }
                     if (!!window.cordova) {
                         cordova.plugins.Keyboard.disableScroll(true);
+                        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
                     }
                     $scope.newSourceModal.show();
                     return true;

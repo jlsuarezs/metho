@@ -16,9 +16,6 @@
         "cordova-plugin-x-socialsharing": {
             "PACKAGE_NAME": "com.ionicframework.metho"
         },
-        "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "com.ionicframework.metho"
-        },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "com.ionicframework.metho"
         },
@@ -41,6 +38,9 @@
             "PACKAGE_NAME": "com.ionicframework.metho"
         },
         "cordova-plugin-3dtouch": {
+            "PACKAGE_NAME": "com.ionicframework.metho"
+        },
+        "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.ionicframework.metho"
         }
     },

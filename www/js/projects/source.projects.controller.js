@@ -27,6 +27,7 @@ angular.module("metho.controller.projects.source", [])
         $translate(["PROJECT.SOURCE.CONFIRM", "PROJECT.SOURCE.CANCEL"]).then(function (translations) {
             if (!!window.cordova) {
                 cordova.plugins.Keyboard.disableScroll(false);
+                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             }
             if ($scope.source.errors[id].complex) {
                 $ionicPopup.prompt({
@@ -83,6 +84,7 @@ angular.module("metho.controller.projects.source", [])
         $translate(["PROJECT.SOURCE.CONFIRM", "PROJECT.SOURCE.CANCEL"]).then(function (translations) {
             if (!!window.cordova) {
                 cordova.plugins.Keyboard.disableScroll(false);
+                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             }
             $ionicPopup.prompt({
                 title: $scope.source.warnings[id].promptTitle,

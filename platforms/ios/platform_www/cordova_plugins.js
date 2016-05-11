@@ -25,15 +25,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/ionic-plugin-keyboard/www/ios/keyboard.js",
-        "id": "ionic-plugin-keyboard.keyboard",
-        "pluginId": "ionic-plugin-keyboard",
-        "clobbers": [
-            "cordova.plugins.Keyboard"
-        ],
-        "runs": true
-    },
-    {
         "file": "plugins/cordova-plugin-device/www/device.js",
         "id": "cordova-plugin-device.device",
         "pluginId": "cordova-plugin-device",
@@ -97,13 +88,21 @@ module.exports = [
         "clobbers": [
             "ThreeDeeTouch"
         ]
+    },
+    {
+        "file": "plugins/ionic-plugin-keyboard/www/ios/keyboard.js",
+        "id": "ionic-plugin-keyboard.keyboard",
+        "pluginId": "ionic-plugin-keyboard",
+        "clobbers": [
+            "cordova.plugins.Keyboard"
+        ],
+        "runs": true
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
     "cordova-plugin-x-socialsharing": "5.0.10",
-    "ionic-plugin-keyboard": "2.0.1",
     "cordova-plugin-device": "1.1.1",
     "cordova-plugin-inappbrowser": "1.2.1",
     "cordova-plugin-safariviewcontroller": "1.4.1",
@@ -111,7 +110,8 @@ module.exports.metadata =
     "cordova-plugin-globalization": "1.0.3",
     "cordova-plugin-splashscreen": "3.2.1",
     "cordova-custom-config": "2.0.0",
-    "cordova-plugin-3dtouch": "1.3.5"
+    "cordova-plugin-3dtouch": "1.3.5",
+    "ionic-plugin-keyboard": "2.2.0"
 }
 // BOTTOM OF METADATA
 });

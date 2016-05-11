@@ -7,7 +7,6 @@
 	objects = {
 /* Begin PBXBuildFile section */
 		0207DA581B56EA530066E2B4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0207DA571B56EA530066E2B4 /* Images.xcassets */; };
-		0CE850FC2A554C77914B68E7 /* IonicKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 064EE0BEF6014001B674E3D2 /* IonicKeyboard.m */; };
 		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		20A3FC0D6956479E8FC5F933 /* SafariViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54EBB8D035AA4E0B97D5927F /* SafariViewController.m */; };
@@ -41,6 +40,7 @@
 		F246E9B3514847FEB4B4B8DB /* SocialSharing.m in Sources */ = {isa = PBXBuildFile; fileRef = 2801797C97A34CD4AB6A9F4E /* SocialSharing.m */; };
 		784AC15294E9449AABB9140D /* ThreeDeeTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = E144AA85A54D48E18E7BC14A /* ThreeDeeTouch.m */; };
 		94AA20A538C14807A2549FA0 /* AppDelegate+threedeetouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD959D198594481BD5BA203 /* AppDelegate+threedeetouch.m */; };
+		23EB8032F43D4CB7BF0CA675 /* IonicKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F21AB5B21484F3FB1EB8523 /* IonicKeyboard.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,7 +77,6 @@
 		0207DA571B56EA530066E2B4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Metho/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		032D94ED742A492BA348DC2B /* SocialSharing.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = SocialSharing.h; path = "cordova-plugin-x-socialsharing/SocialSharing.h"; sourceTree = "<group>"; };
 		04265B9DC69C4BAE84241E4B /* CDVViewController+SplashScreen.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = "CDVViewController+SplashScreen.m"; path = "cordova-plugin-splashscreen/CDVViewController+SplashScreen.m"; sourceTree = "<group>"; };
-		064EE0BEF6014001B674E3D2 /* IonicKeyboard.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = IonicKeyboard.m; path = "ionic-plugin-keyboard/IonicKeyboard.m"; sourceTree = "<group>"; };
 		1D3623240D0F684500981E51 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* Metho.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Metho.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,7 +116,6 @@
 		BB26DB1AAC0B40019015FD27 /* CDVDevice.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVDevice.m; path = "cordova-plugin-device/CDVDevice.m"; sourceTree = "<group>"; };
 		C4F34577EC90424ABB7C91AA /* QuartzCore.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CC9BF991DBA4454AA467F77C /* zxing-all-in-one.cpp */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "zxing-all-in-one.cpp"; path = "phonegap-plugin-barcodescanner/zxing-all-in-one.cpp"; sourceTree = "<group>"; };
-		CE453CAD43F94D2E96D2814E /* IonicKeyboard.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = IonicKeyboard.h; path = "ionic-plugin-keyboard/IonicKeyboard.h"; sourceTree = "<group>"; };
 		EA66CCA3336A453E9A5DA6E7 /* MessageUI.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		EB87FDF31871DA8E0020F90C /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../www; sourceTree = "<group>"; };
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
@@ -130,6 +128,8 @@
 		9FD959D198594481BD5BA203 /* AppDelegate+threedeetouch.m */ = {isa = PBXFileReference; name = "AppDelegate+threedeetouch.m"; path = "cordova-plugin-3dtouch/AppDelegate+threedeetouch.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 		9CB0AAF2506E4268B5C8B7B8 /* ThreeDeeTouch.h */ = {isa = PBXFileReference; name = "ThreeDeeTouch.h"; path = "cordova-plugin-3dtouch/ThreeDeeTouch.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 		CDF5DC983BB648908159AC51 /* AppDelegate+threedeetouch.h */ = {isa = PBXFileReference; name = "AppDelegate+threedeetouch.h"; path = "cordova-plugin-3dtouch/AppDelegate+threedeetouch.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		5F21AB5B21484F3FB1EB8523 /* IonicKeyboard.m */ = {isa = PBXFileReference; name = "IonicKeyboard.m"; path = "ionic-plugin-keyboard/IonicKeyboard.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		8A3F2D36D02A4CAD83C0B735 /* IonicKeyboard.h */ = {isa = PBXFileReference; name = "IonicKeyboard.h"; path = "ionic-plugin-keyboard/IonicKeyboard.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,8 +260,6 @@
 			children = (
 				2801797C97A34CD4AB6A9F4E /* SocialSharing.m */,
 				032D94ED742A492BA348DC2B /* SocialSharing.h */,
-				064EE0BEF6014001B674E3D2 /* IonicKeyboard.m */,
-				CE453CAD43F94D2E96D2814E /* IonicKeyboard.h */,
 				BB26DB1AAC0B40019015FD27 /* CDVDevice.m */,
 				1DC8C63A3E084F09952347D6 /* CDVDevice.h */,
 				A33AEC1B20F34B4283A06D12 /* CDVInAppBrowser.m */,
@@ -281,6 +279,8 @@
 				9FD959D198594481BD5BA203 /* AppDelegate+threedeetouch.m */,
 				9CB0AAF2506E4268B5C8B7B8 /* ThreeDeeTouch.h */,
 				CDF5DC983BB648908159AC51 /* AppDelegate+threedeetouch.h */,
+				5F21AB5B21484F3FB1EB8523 /* IonicKeyboard.m */,
+				8A3F2D36D02A4CAD83C0B735 /* IonicKeyboard.h */,
 			);
 			name = Plugins;
 			path = Metho/Plugins;
@@ -420,7 +420,6 @@
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
 				F246E9B3514847FEB4B4B8DB /* SocialSharing.m in Sources */,
-				0CE850FC2A554C77914B68E7 /* IonicKeyboard.m in Sources */,
 				A756DA34FF84490B9EB3642E /* CDVDevice.m in Sources */,
 				265373A77EE34FCC87231DBC /* CDVInAppBrowser.m in Sources */,
 				20A3FC0D6956479E8FC5F933 /* SafariViewController.m in Sources */,
@@ -431,6 +430,7 @@
 				AF3E7F14475643F0BAA02593 /* CDVViewController+SplashScreen.m in Sources */,
 				784AC15294E9449AABB9140D /* ThreeDeeTouch.m in Sources */,
 				94AA20A538C14807A2549FA0 /* AppDelegate+threedeetouch.m in Sources */,
+				23EB8032F43D4CB7BF0CA675 /* IonicKeyboard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
