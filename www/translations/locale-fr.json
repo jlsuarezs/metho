@@ -234,7 +234,7 @@
                 "LATER": "Plus tard",
                 "RETRY": "Réessayer",
                 "TIMEOUT_TITLE": "Temps d'attente écoulé",
-                "TIMEOUT_TEXT": "Le temps d'attente est écoulé. Vous vous trouvez probablement sur un réseau lent. Voulez-vous ajouter ce code-barre dans la liste d'attente pour réessayer plus tard ?",
+                "TIMEOUT_TEXT": "Le temps d'attente est écoulé. Vous vous trouvez probablement sur un réseau lent. Voulez-vous réessayer ?",
                 "NO_CONNECTION": "Aucune connexion",
                 "RETRY_?": "Voulez-vous réessayer ?",
                 "CANCEL": "Annuler"
