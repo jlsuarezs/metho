@@ -10,4 +10,4 @@ Array.prototype.fromObject = function (obj) {
     return ar;
 };
 
-var unknown_subjects = ["Matière inconnue", "Unknown subject"];
+var unknown_subjects = ["Matière inconnue", "Unknown subject", "Materia desconocida"];
