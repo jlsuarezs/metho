@@ -8,6 +8,11 @@ angular.module("metho.controller.settings.tab", [])
         lastname: $scope.settings["lastName"]
     };
 
+    $scope.$on("$ionicView.enter", function () {
+        if (!!window.cordova) {
+            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
+        }
+    })
     // Commit changes to settings service
     $scope.changeSettings = function(setting) {
         Settings.set(setting, $scope.settings[setting]);
