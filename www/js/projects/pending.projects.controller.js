@@ -252,7 +252,7 @@ angular.module("metho.controller.projects.pending", [])
                 }, function(response) { // Failure
                     if (response.status == 408) {
                         loading.hide();
-                        $translate(["PROJECT.PENDING.POPUP.TIMEOUT_TITLE", "PROJECT.PENDING.POPUP.TIMEOUT_TEXT", "PROJECT.PENDING.POPUP.ADD", "PROJECT.PENDING.POPUP.RETRY"]).then(function (translations) {
+                        $translate(["PROJECT.PENDING.POPUP.TIMEOUT_TITLE", "PROJECT.PENDING.POPUP.TIMEOUT_TEXT", "PROJECT.PENDING.POPUP.CANCEL", "PROJECT.PENDING.POPUP.RETRY"]).then(function (translations) {
                             $ionicPopup.confirm({
                                 title: translations["PROJECT.PENDING.POPUP.TIMEOUT_TITLE"],
                                 template: "<p class='center'>" + translations["PROJECT.PENDING.POPUP.TIMEOUT_TEXT"] + "</p>",
