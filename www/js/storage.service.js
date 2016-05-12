@@ -386,8 +386,11 @@ angular.module("metho.service.storage", [])
             pendingRepo.remove(pendings[id]).then(function (response) {
                 delete pendings[id];
                 $rootScope.$broadcast("pendingLoadingEnded");
+                loadingPendings = false;
                 p.resolve(response);
             }).catch(function (err) {
+                loadingPendings = false;
+                $rootScope.$broadcast("pendingLoadingError", err);
                 p.reject(err);
             });
 
@@ -414,10 +417,12 @@ angular.module("metho.service.storage", [])
             if (loadingPendings) {
                 var unregister = $rootScope.$on("pendingLoadingEnded", function () {
                     unregister();
-                    p.resolve(pendings.length ? pendings.length : 0);
+                    var arr_pendings = Array.prototype.fromObject(pendings);
+                    p.resolve(arr_pendings.length ? arr_pendings.length : 0);
                 });
             }else {
-                p.resolve(pendings.length ? pendings.length : 0);
+                var arr_pendings = Array.prototype.fromObject(pendings);
+                p.resolve(arr_pendings.length ? arr_pendings.length : 0);
             }
 
             return p.promise;
