@@ -1,6 +1,6 @@
 angular.module("metho.controller.projects.pending", [])
 
-.controller("PendingCtrl", function($scope, $state, $http, $translate, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicLoading, ParseSource, Storage) {
+.controller("PendingCtrl", function($scope, $state, $http, $translate, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicLoading, ParseSource, Storage, Fetch) {
     $scope.project = {
         id: $stateParams.projectID,
         sources: []
@@ -158,121 +158,173 @@ angular.module("metho.controller.projects.pending", [])
             var loading = $ionicLoading.show({
                 template: '<ion-spinner></ion-spinner>'
             });
-            $http({
-                    method: "GET",
-                    url: "http://isbndb.com/api/v2/json/YVFT6RLV/book/" + inputISBN
-                })
-                .then(function(response) { // Success
-                    // alert(JSON.stringify(response));
-                    if (!!response.data.error) {
-                        loading.hide();
-                        $translate(["PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TITLE", "PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TEXT", "PROJECT.PENDING.POPUP.SEARCH", "PROJECT.PENDING.POPUP.LATER"]).then(function (translations) {
-                            $ionicPopup.confirm({
-                                title: translations["PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TITLE"],
-                                template: '<p class="center">' + translations["PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TEXT"] + '</p>',
-                                okText: translations["PROJECT.PENDING.POPUP.SEARCH"],
-                                cancelText: translations["PROJECT.PENDING.POPUP.LATER"]
-                            }).then(function(res) {
-                                if (res) {
-                                    $scope.newsource.not_available = true;
-                                    $scope.pendings[$scope.editingIndex].not_available = true;
-                                    Storage.setPendingFromId($scope.editingId, $scope.pendings[$scope.editingIndex]);
-                                    $scope.openAtURL("http://google.ca/search?q=isbn+" + $scope.pendings[$scope.editingIndex].isbn);
-                                } else {
-                                    $scope.newSourceModal.hide();
-                                    $scope.newsource = {};
-                                    $scope.pendings[$scope.editingIndex].not_available = true;
-                                    Storage.setPendingFromId($scope.editingId, $scope.pendings[$scope.editingIndex]);
-                                    $scope.editingId = null;
-                                    $scope.editingISBN = null;
-                                    $scope.editingIndex = null;
-                                }
-                            });
+            Fetch.fromISBNdb(inputISBN).then(function (response) {
+                $scope.newsource = response;
+                $scope.newsource.type = "book";
+                loading.hide();
+            }).catch(function (response) {
+                loading.hide();
+                if (response == 404) {
+                    $translate(["PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TITLE", "PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TEXT", "PROJECT.PENDING.POPUP.SEARCH", "PROJECT.PENDING.POPUP.LATER"]).then(function (translations) {
+                        $ionicPopup.confirm({
+                            title: translations["PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TITLE"],
+                            template: '<p class="center">' + translations["PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TEXT"] + '</p>',
+                            okText: translations["PROJECT.PENDING.POPUP.SEARCH"],
+                            cancelText: translations["PROJECT.PENDING.POPUP.LATER"]
+                        }).then(function(res) {
+                            if (res) {
+                                $scope.newsource.not_available = true;
+                                $scope.pendings[$scope.editingIndex].not_available = true;
+                                Storage.setPendingFromId($scope.editingId, $scope.pendings[$scope.editingIndex]);
+                                $scope.openAtURL("http://google.ca/search?q=isbn+" + $scope.pendings[$scope.editingIndex].isbn);
+                            } else {
+                                $scope.newSourceModal.hide();
+                                $scope.newsource = {};
+                                $scope.pendings[$scope.editingIndex].not_available = true;
+                                Storage.setPendingFromId($scope.editingId, $scope.pendings[$scope.editingIndex]);
+                                $scope.editingId = null;
+                                $scope.editingISBN = null;
+                                $scope.editingIndex = null;
+                            }
                         });
-                    } else {
-                        // Titre
-                        $scope.newsource.title = response.data.data[0].title.replace(/\ufffd/g, "é");
-                        // Publisher/Editor
-                        $scope.newsource.editor = response.data.data[0].publisher_name.replace(/\ufffd/g, "é");
-                        // Date de publication
-                        if (!!response.data.data[0].edition_info && response.data.data[0].edition_info.match(/[0-9]{4}/)) {
-                            var working_on_date = response.data.data[0].edition_info.match(/[0-9]{4}/);
-                            $scope.newsource.publicationDate = response.data.data[0].edition_info.match(/[0-9]{4}/);
-                        } else if (!!response.data.data[0].publisher_text && response.data.data[0].publisher_text.match(/[0-9]{4}/)) {
-                            var working_on_date = response.data.data[0].publisher_text.match(/[0-9]{4}/);
-                            $scope.newsource.publicationDate = response.data.data[0].publisher_text.match(/[0-9]{4}/);
-                        } else {
-                            var working_on_date = "";
-                        }
-
-                        // Lieu de publication
-                        if (response.data.data[0].publisher_text != "") {
-                            var working_on_location = response.data.data[0].publisher_text.replace(/\ufffd/g, "é");
-                            working_on_location = working_on_location.replace(response.data.data[0].publisher_name, "");
-                            working_on_location = working_on_location.replace(working_on_date, "");
-                            working_on_location = working_on_location.replace(/[^a-zA-z\s]/g, "");
-                            working_on_location = working_on_location.trim();
-                            if (working_on_location != "") {
-                                $scope.newsource.publicationLocation = working_on_location;
+                    });
+                }else if (response == 408) {
+                    $translate(["PROJECT.PENDING.POPUP.TIMEOUT_TITLE", "PROJECT.PENDING.POPUP.TIMEOUT_TEXT", "PROJECT.PENDING.POPUP.CANCEL", "PROJECT.PENDING.POPUP.RETRY"]).then(function (translations) {
+                        $ionicPopup.confirm({
+                            title: translations["PROJECT.PENDING.POPUP.TIMEOUT_TITLE"],
+                            template: "<p class='center'>" + translations["PROJECT.PENDING.POPUP.TIMEOUT_TEXT"] + "</p>",
+                            okText: translations["PROJECT.PENDING.POPUP.RETRY"],
+                            okType: "button-balanced",
+                            cancelText: translations["PROJECT.PENDING.POPUP.CANCEL"]
+                        }).then(function(res) {
+                            if (res) {
+                                $scope.fetchFromISBNdb(inputISBN);
+                            } else {
+                                $scope.newSourceModal.hide();
+                                $scope.newsource = {};
+                                $scope.editingId = null;
+                                $scope.editingISBN = null;
+                                $scope.editingIndex = null;
                             }
-                        }
-                        // Nombre de pages
-                        if (response.data.data[0].physical_description_text != "") {
-                            var arr_pages = response.data.data[0].physical_description_text.split(" ");
-                            if (arr_pages.indexOf("p.") != -1) {
-                                var indexOfPages = arr_pages.indexOf("p.") - 1;
-                                $scope.newsource.pageNumber = arr_pages[indexOfPages];
-                            } else if (arr_pages.indexOf("pages") != -1) {
-                                var indexOfPages = arr_pages.indexOf("pages") - 1;
-                                $scope.newsource.pageNumber = arr_pages[indexOfPages];
-                            }
-                        }
-
-                        // Auteur
-                        if (response.data.data[0].author_data.length) {
-                            for (var i = 0; i < response.data.data[0].author_data.length; i++) {
-                                if (response.data.data[0].author_data[i].name.split(",")[0] == response.data.data[0].author_data[i].name) {
-                                    $scope.newsource["author" + String(i + 1) + "firstname"] = response.data.data[0].author_data[i].name.split(" ")[0].replace(/\ufffd/g, "é");
-                                    $scope.newsource["author" + String(i + 1) + "lastname"] = response.data.data[0].author_data[i].name.split(" ")[1].replace(/\ufffd/g, "é");
-                                } else {
-                                    $scope.newsource["author" + String(i + 1) + "lastname"] = response.data.data[0].author_data[i].name.split(",")[0].replace(/\ufffd/g, "é");
-                                    $scope.newsource["author" + String(i + 1) + "firstname"] = response.data.data[0].author_data[i].name.split(",")[1].replace(/\ufffd/g, "é");
-                                }
-                            }
-                            var authorNum = response.data.data[0].author_data.length;
-                            if (authorNum >= 1 && authorNum <= 3) {
-                                $scope.newsource.hasAuthors = "13";
-                            } else if (authorNum > 3) {
-                                $scope.newsource.hasAuthors = "more3";
-                            }
-                        }
-
-                        loading.hide();
-                    }
-                }, function(response) { // Failure
-                    if (response.status == 408) {
-                        loading.hide();
-                        $translate(["PROJECT.PENDING.POPUP.TIMEOUT_TITLE", "PROJECT.PENDING.POPUP.TIMEOUT_TEXT", "PROJECT.PENDING.POPUP.CANCEL", "PROJECT.PENDING.POPUP.RETRY"]).then(function (translations) {
-                            $ionicPopup.confirm({
-                                title: translations["PROJECT.PENDING.POPUP.TIMEOUT_TITLE"],
-                                template: "<p class='center'>" + translations["PROJECT.PENDING.POPUP.TIMEOUT_TEXT"] + "</p>",
-                                okText: translations["PROJECT.PENDING.POPUP.RETRY"],
-                                okType: "button-balanced",
-                                cancelText: translations["PROJECT.PENDING.POPUP.CANCEL"]
-                            }).then(function(res) {
-                                if (res) {
-                                    $scope.fetchFromISBNdb(inputISBN);
-                                } else {
-                                    $scope.newSourceModal.hide();
-                                    $scope.newsource = {};
-                                    $scope.editingId = null;
-                                    $scope.editingISBN = null;
-                                    $scope.editingIndex = null;
-                                }
-                            });
                         });
-                    }
-                });
+                    });
+                }
+            });
+            // $http({
+            //         method: "GET",
+            //         url: "http://isbndb.com/api/v2/json/YVFT6RLV/book/" + inputISBN
+            //     })
+            //     .then(function(response) { // Success
+            //         // alert(JSON.stringify(response));
+            //         if (!!response.data.error) {
+            //             loading.hide();
+            //             $translate(["PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TITLE", "PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TEXT", "PROJECT.PENDING.POPUP.SEARCH", "PROJECT.PENDING.POPUP.LATER"]).then(function (translations) {
+            //                 $ionicPopup.confirm({
+            //                     title: translations["PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TITLE"],
+            //                     template: '<p class="center">' + translations["PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TEXT"] + '</p>',
+            //                     okText: translations["PROJECT.PENDING.POPUP.SEARCH"],
+            //                     cancelText: translations["PROJECT.PENDING.POPUP.LATER"]
+            //                 }).then(function(res) {
+            //                     if (res) {
+            //                         $scope.newsource.not_available = true;
+            //                         $scope.pendings[$scope.editingIndex].not_available = true;
+            //                         Storage.setPendingFromId($scope.editingId, $scope.pendings[$scope.editingIndex]);
+            //                         $scope.openAtURL("http://google.ca/search?q=isbn+" + $scope.pendings[$scope.editingIndex].isbn);
+            //                     } else {
+            //                         $scope.newSourceModal.hide();
+            //                         $scope.newsource = {};
+            //                         $scope.pendings[$scope.editingIndex].not_available = true;
+            //                         Storage.setPendingFromId($scope.editingId, $scope.pendings[$scope.editingIndex]);
+            //                         $scope.editingId = null;
+            //                         $scope.editingISBN = null;
+            //                         $scope.editingIndex = null;
+            //                     }
+            //                 });
+            //             });
+            //         } else {
+            //             // Titre
+            //             $scope.newsource.title = response.data.data[0].title.replace(/\ufffd/g, "é");
+            //             // Publisher/Editor
+            //             $scope.newsource.editor = response.data.data[0].publisher_name.replace(/\ufffd/g, "é");
+            //             // Date de publication
+            //             if (!!response.data.data[0].edition_info && response.data.data[0].edition_info.match(/[0-9]{4}/)) {
+            //                 var working_on_date = response.data.data[0].edition_info.match(/[0-9]{4}/);
+            //                 $scope.newsource.publicationDate = response.data.data[0].edition_info.match(/[0-9]{4}/);
+            //             } else if (!!response.data.data[0].publisher_text && response.data.data[0].publisher_text.match(/[0-9]{4}/)) {
+            //                 var working_on_date = response.data.data[0].publisher_text.match(/[0-9]{4}/);
+            //                 $scope.newsource.publicationDate = response.data.data[0].publisher_text.match(/[0-9]{4}/);
+            //             } else {
+            //                 var working_on_date = "";
+            //             }
+            //
+            //             // Lieu de publication
+            //             if (response.data.data[0].publisher_text != "") {
+            //                 var working_on_location = response.data.data[0].publisher_text.replace(/\ufffd/g, "é");
+            //                 working_on_location = working_on_location.replace(response.data.data[0].publisher_name, "");
+            //                 working_on_location = working_on_location.replace(working_on_date, "");
+            //                 working_on_location = working_on_location.replace(/[^a-zA-z\s]/g, "");
+            //                 working_on_location = working_on_location.trim();
+            //                 if (working_on_location != "") {
+            //                     $scope.newsource.publicationLocation = working_on_location;
+            //                 }
+            //             }
+            //             // Nombre de pages
+            //             if (response.data.data[0].physical_description_text != "") {
+            //                 var arr_pages = response.data.data[0].physical_description_text.split(" ");
+            //                 if (arr_pages.indexOf("p.") != -1) {
+            //                     var indexOfPages = arr_pages.indexOf("p.") - 1;
+            //                     $scope.newsource.pageNumber = arr_pages[indexOfPages];
+            //                 } else if (arr_pages.indexOf("pages") != -1) {
+            //                     var indexOfPages = arr_pages.indexOf("pages") - 1;
+            //                     $scope.newsource.pageNumber = arr_pages[indexOfPages];
+            //                 }
+            //             }
+            //
+            //             // Auteur
+            //             if (response.data.data[0].author_data.length) {
+            //                 for (var i = 0; i < response.data.data[0].author_data.length; i++) {
+            //                     if (response.data.data[0].author_data[i].name.split(",")[0] == response.data.data[0].author_data[i].name) {
+            //                         $scope.newsource["author" + String(i + 1) + "firstname"] = response.data.data[0].author_data[i].name.split(" ")[0].replace(/\ufffd/g, "é");
+            //                         $scope.newsource["author" + String(i + 1) + "lastname"] = response.data.data[0].author_data[i].name.split(" ")[1].replace(/\ufffd/g, "é");
+            //                     } else {
+            //                         $scope.newsource["author" + String(i + 1) + "lastname"] = response.data.data[0].author_data[i].name.split(",")[0].replace(/\ufffd/g, "é");
+            //                         $scope.newsource["author" + String(i + 1) + "firstname"] = response.data.data[0].author_data[i].name.split(",")[1].replace(/\ufffd/g, "é");
+            //                     }
+            //                 }
+            //                 var authorNum = response.data.data[0].author_data.length;
+            //                 if (authorNum >= 1 && authorNum <= 3) {
+            //                     $scope.newsource.hasAuthors = "13";
+            //                 } else if (authorNum > 3) {
+            //                     $scope.newsource.hasAuthors = "more3";
+            //                 }
+            //             }
+            //
+            //             loading.hide();
+            //         }
+            //     }, function(response) { // Failure
+            //         if (response.status == 408) {
+            //             loading.hide();
+            //             $translate(["PROJECT.PENDING.POPUP.TIMEOUT_TITLE", "PROJECT.PENDING.POPUP.TIMEOUT_TEXT", "PROJECT.PENDING.POPUP.CANCEL", "PROJECT.PENDING.POPUP.RETRY"]).then(function (translations) {
+            //                 $ionicPopup.confirm({
+            //                     title: translations["PROJECT.PENDING.POPUP.TIMEOUT_TITLE"],
+            //                     template: "<p class='center'>" + translations["PROJECT.PENDING.POPUP.TIMEOUT_TEXT"] + "</p>",
+            //                     okText: translations["PROJECT.PENDING.POPUP.RETRY"],
+            //                     okType: "button-balanced",
+            //                     cancelText: translations["PROJECT.PENDING.POPUP.CANCEL"]
+            //                 }).then(function(res) {
+            //                     if (res) {
+            //                         $scope.fetchFromISBNdb(inputISBN);
+            //                     } else {
+            //                         $scope.newSourceModal.hide();
+            //                         $scope.newsource = {};
+            //                         $scope.editingId = null;
+            //                         $scope.editingISBN = null;
+            //                         $scope.editingIndex = null;
+            //                     }
+            //                 });
+            //             });
+            //         }
+            //     });
         } else {
             $translate(["PROJECT.PENDING.POPUP.NO_CONNECTION", "PROJECT.PENDING.POPUP.RETRY_?", "PROJECT.PENDING.POPUP.RETRY", "PROJECT.PENDING.POPUP.CANCEL"]).then(function (translations) {
                 $ionicPopup.confirm({
