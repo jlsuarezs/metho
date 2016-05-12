@@ -1,6 +1,6 @@
 angular.module('metho.controller.projects.detail', [])
 
-.controller('ProjectDetailCtrl', function($scope, $rootScope, $state, $http, $timeout, $translate, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicListDelegate, $ionicActionSheet, $ionicLoading, $ionicSlideBoxDelegate, $ionicBackdrop, ParseSource, Settings, Storage) {
+.controller('ProjectDetailCtrl', function($scope, $rootScope, $state, $http, $timeout, $translate, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicListDelegate, $ionicActionSheet, $ionicLoading, $ionicSlideBoxDelegate, $ionicBackdrop, ParseSource, Settings, Storage, Fetch) {
     $scope.project = {
         name: "",
         id: $stateParams.projectID,
@@ -15,6 +15,7 @@ angular.module('metho.controller.projects.detail', [])
     $scope.refreshIndex = null;
     $scope.removeAnimate = false;
     $scope.refreshPending = false;
+    $scope.isAdvanced = Settings.get("advanced");
 
     $scope.loadSources = function () {
         Storage.getSourcesFromProjectId($scope.project.id).then(function(result) {
@@ -551,110 +552,57 @@ angular.module('metho.controller.projects.detail', [])
             var loading = $ionicLoading.show({
                 template: '<ion-spinner></ion-spinner>'
             });
-            $http({
-                    method: "GET",
-                    url: "http://isbndb.com/api/v2/json/YVFT6RLV/book/" + inputISBN
-                })
-                .then(function(response) { // Success
-                    // alert(JSON.stringify(response));
-                    if (!!response.data.error) {
-                        loading.hide();
-                        $translate(["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE", "PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TEXT"]).then(function (translations) {
-                            $ionicPopup.alert({
-                                title: translations["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE"],
-                                template: '<p class="center">' + translations["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TEXT"] + '</p>'
-                            });
+            Fetch.fromISBNdb(inputISBN).then(function (response) {
+                $scope.newsource.author1firstname = response.author1firstname;
+                $scope.newsource.author1lastname = response.author1lastname;
+                $scope.newsource.author2firstname = response.author2firstname;
+                $scope.newsource.author2lastname = response.author2lastname;
+                $scope.newsource.author3firstname = response.author3firstname;
+                $scope.newsource.author3lastname = response.author3lastname;
+                $scope.newsource.hasAuthors = response.hasAuthors;
+                $scope.newsource.title = response.title;
+                $scope.newsource.editor = response.editor;
+                $scope.newsource.publicationDate = response.publicationDate;
+                $scope.newsource.publicationLocation = response.publicationLocation;
+                $scope.newsource.pageNumber = response.pageNumber;
+                loading.hide();
+            }).catch(function (response) {
+                loading.hide();
+                if (response == 404) {
+                    $translate(["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE", "PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TEXT"]).then(function (translations) {
+                        $ionicPopup.alert({
+                            title: translations["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE"],
+                            template: '<p class="center">' + translations["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TEXT"] + '</p>'
                         });
-                    } else {
-                        // Titre
-                        $scope.newsource.title = response.data.data[0].title.replace(/\ufffd/g, "é");
-                        // Publisher/Editor
-                        $scope.newsource.editor = response.data.data[0].publisher_name.replace(/\ufffd/g, "é");
-                        // Date de publication
-                        if (!!response.data.data[0].edition_info && response.data.data[0].edition_info.match(/[0-9]{4}/)) {
-                            var working_on_date = response.data.data[0].edition_info.match(/[0-9]{4}/);
-                            $scope.newsource.publicationDate = response.data.data[0].edition_info.match(/[0-9]{4}/);
-                        } else if (!!response.data.data[0].publisher_text && response.data.data[0].publisher_text.match(/[0-9]{4}/)) {
-                            var working_on_date = response.data.data[0].publisher_text.match(/[0-9]{4}/);
-                            $scope.newsource.publicationDate = response.data.data[0].publisher_text.match(/[0-9]{4}/);
-                        } else {
-                            var working_on_date = "";
-                        }
-
-                        // Lieu de publication
-                        if (response.data.data[0].publisher_text != "") {
-                            var working_on_location = response.data.data[0].publisher_text.replace(/\ufffd/g, "é");
-                            working_on_location = working_on_location.replace(response.data.data[0].publisher_name, "");
-                            working_on_location = working_on_location.replace(working_on_date, "");
-                            working_on_location = working_on_location.replace(/[^a-zA-z\s]/g, "");
-                            working_on_location = working_on_location.trim();
-                            if (working_on_location != "") {
-                                $scope.newsource.publicationLocation = working_on_location;
+                    });
+                }else if (response == 408) {
+                    $translate(["PROJECT.DETAIL.POPUP.TIMEOUT_TITLE", "PROJECT.DETAIL.POPUP.TIMEOUT_TEXT", "PROJECT.DETAIL.POPUP.ADD", "PROJECT.DETAIL.POPUP.RETRY"]).then(function (translations) {
+                        $ionicPopup.confirm({
+                            title: translations["PROJECT.DETAIL.POPUP.TIMEOUT_TITLE"],
+                            template: "<p class='center'>" + translations["PROJECT.DETAIL.POPUP.TIMEOUT_TEXT"] + "</p>",
+                            okText: translations["PROJECT.DETAIL.POPUP.ADD"],
+                            okType: "button-positive",
+                            cancelText: translations["PROJECT.DETAIL.POPUP.RETRY"],
+                            cancelType: "button-balanced button-outline"
+                        }).then(function(res) {
+                            if (res) {
+                                var creating = {
+                                    isbn: inputISBN,
+                                    date: new Date().toLocaleDateString()
+                                };
+                                Storage.createPending(creating).then(function(responseRepo) {
+                                    $scope.project.pendings++;
+                                }).catch(function (err) {
+                                    console.log(err);
+                                });
+                                $scope.newSourceModal.hide();
+                            } else {
+                                $scope.fetchFromISBNdb(inputISBN);
                             }
-                        }
-                        // Nombre de pages
-                        if (response.data.data[0].physical_description_text != "") {
-                            var arr_pages = response.data.data[0].physical_description_text.split(" ");
-                            if (arr_pages.indexOf("p.") != -1) {
-                                var indexOfPages = arr_pages.indexOf("p.") - 1;
-                                $scope.newsource.pageNumber = arr_pages[indexOfPages];
-                            } else if (arr_pages.indexOf("pages") != -1) {
-                                var indexOfPages = arr_pages.indexOf("pages") - 1;
-                                $scope.newsource.pageNumber = arr_pages[indexOfPages];
-                            }
-                        }
-
-                        // Auteur
-                        if (response.data.data[0].author_data.length) {
-                            for (var i = 0; i < response.data.data[0].author_data.length; i++) {
-                                if (response.data.data[0].author_data[i].name.split(",")[0] == response.data.data[0].author_data[i].name) {
-                                    $scope.newsource["author" + String(i + 1) + "firstname"] = response.data.data[0].author_data[i].name.split(" ")[0].replace(/\ufffd/g, "é");
-                                    $scope.newsource["author" + String(i + 1) + "lastname"] = response.data.data[0].author_data[i].name.split(" ")[1].replace(/\ufffd/g, "é");
-                                } else {
-                                    $scope.newsource["author" + String(i + 1) + "lastname"] = response.data.data[0].author_data[i].name.split(",")[0].replace(/\ufffd/g, "é");
-                                    $scope.newsource["author" + String(i + 1) + "firstname"] = response.data.data[0].author_data[i].name.split(",")[1].replace(/\ufffd/g, "é");
-                                }
-                            }
-                            var authorNum = response.data.data[0].author_data.length;
-                            if (authorNum >= 1 && authorNum <= 3) {
-                                $scope.newsource.hasAuthors = "13";
-                            } else if (authorNum > 3) {
-                                $scope.newsource.hasAuthors = "more3";
-                            }
-                        }
-
-                        loading.hide();
-                    }
-                }, function(response) { // Failure
-                    if (response.status == 408) {
-                        loading.hide();
-                        $translate(["PROJECT.DETAIL.POPUP.TIMEOUT_TITLE", "PROJECT.DETAIL.POPUP.TIMEOUT_TEXT", "PROJECT.DETAIL.POPUP.ADD", "PROJECT.DETAIL.POPUP.RETRY"]).then(function (translations) {
-                            $ionicPopup.confirm({
-                                title: translations["PROJECT.DETAIL.POPUP.TIMEOUT_TITLE"],
-                                template: "<p class='center'>" + translations["PROJECT.DETAIL.POPUP.TIMEOUT_TEXT"] + "</p>",
-                                okText: translations["PROJECT.DETAIL.POPUP.ADD"],
-                                okType: "button-positive",
-                                cancelText: translations["PROJECT.DETAIL.POPUP.RETRY"],
-                                cancelType: "button-balanced button-outline"
-                            }).then(function(res) {
-                                if (res) {
-                                    var creating = {
-                                        isbn: inputISBN,
-                                        date: new Date().toLocaleDateString()
-                                    };
-                                    Storage.createPending(creating).then(function(responseRepo) {
-                                        $scope.project.pendings++;
-                                    }).catch(function (err) {
-                                        console.log(err);
-                                    });
-                                    $scope.newSourceModal.hide();
-                                } else {
-                                    $scope.fetchFromISBNdb(inputISBN);
-                                }
-                            });
                         });
-                    }
-                });
+                    });
+                }
+            });
         } else {
             $translate(["PROJECT.DETAIL.POPUP.NO_CONNECTION", "PROJECT.DETAIL.POPUP.ADD_TO_PENDINGS", "PROJECT.DETAIL.POPUP.RETRY", "PROJECT.DETAIL.POPUP.ADD"]).then(function (translations) {
                 $ionicPopup.confirm({
@@ -671,11 +619,13 @@ angular.module('metho.controller.projects.detail', [])
                             date: new Date().toLocaleDateString(),
                             project_id: $stateParams.projectID
                         };
+
                         Storage.createPending(creating).then(function(responseRepo) {
                             $scope.project.pendings++;
                         }).catch(function (err) {
                             console.log(err);
                         });
+
                         $scope.newSourceModal.hide();
                     } else {
                         $scope.fetchFromISBNdb(inputISBN);
