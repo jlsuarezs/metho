@@ -10,7 +10,7 @@ angular.module("metho.service.projects.fetch", [])
         // Titre
         newobj.title = response.title.replace(/\ufffd/g, "é");
         // Publisher/Editor
-        newobjct.editor = response.publisher_name.replace(/\ufffd/g, "é");
+        newobj.editor = response.publisher_name.replace(/\ufffd/g, "é");
         // Date de publication
         if (!!response.edition_info && response.edition_info.match(/[0-9]{4}/)) {
             var working_on_date = response.edition_info.match(/[0-9]{4}/);
