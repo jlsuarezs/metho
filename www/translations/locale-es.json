@@ -1,24 +1,588 @@
 {
     "TAB_PROJECT": "Proyectos",
     "TAB_REFERENCES": "Referencia",
-    "TAB_SETTINGS": "Parámetros",
-    "BACK_BUTTON": "",
+    "TAB_SETTINGS": "Ajustes",
+    "BACK_BUTTON": "Atrás",
+    "YES": "Sí",
+    "NO": "No",
     "PROJECT":{
         "TAB":{
-            "TAB_TITLE": "Proyectos",
-            "EMPTY_TAB": "Aucun projet? Ça viendra...",
-            "EDIT_ITEM": "Modifier",
-            "DELETE_ITEM": "Supprimer"
+            "TAB_TITLE": "@:TAB_PROJECT",
+            "EMPTY_TAB": "No proyecto? Va a venir...",
+            "EDIT_ITEM": "Editar",
+            "DELETE_ITEM": "Eliminar",
+            "UNKNOWN_MATTER": "Materia desconocida",
+            "MODAL":{
+                "CANCEL": "Cancelar",
+                "TITLE": "Nuevo proyecto",
+                "ADD": "Añadir",
+                "PROJECT_NAME_LABEL": "Nombre del proyecto",
+                "PROJECT_NAME_PLACEHOLDER": "Ensayo sobre los medios de comunicación",
+                "MATTER_LABEL": "Materia",
+                "MATTER_PLACEHOLDER": "Geografía"
+            },
+            "MODAL_EDIT":{
+                "CANCEL": "@:PROJECT.TAB.MODAL.CANCEL",
+                "TITLE": "Modificar el proyecto",
+                "CONFIRM": "Modificar",
+                "PROJECT_NAME_LABEL": "@:PROJECT.TAB.MODAL.PROJECT_NAME_LABEL",
+                "PROJECT_NAME_PLACEHOLDER": "@:PROJECT.TAB.MODAL.PROJECT_NAME_PLACEHOLDER",
+                "MATTER_LABEL": "@:PROJECT.TAB.MODAL.MATTER_LABEL",
+                "MATTER_PLACEHOLDER": "@:PROJECT.TAB.MODAL.MATTER_PLACEHOLDER"
+            },
+            "POPUP": {
+                "ERROR_TEXT": "Error",
+                "NO_PROJECT_NAME": "Introduzca el nombre del proyecto",
+                "DELETE_PROJECT_TITLE": "Eliminar el proyecto ?",
+                "DELETE_PROJECT": "La eliminación de este proyecto arrastrará la pérdida de todas las fuentes en eso. La eliminación es irreversible.",
+                "CANCEL": "@:PROJECT.TAB.MODAL.CANCEL",
+                "DELETE": "Eliminar",
+                "MUST_HAVE_TYPE": "El proyecto debe tener un nombre"
+            }
         },
         "DETAIL":{
-            "EMPTY_TAB": "Qué es un proyecto sin fuente ?",
-            "DELETE_ITEM": "Supprimer"
+            "EMPTY_TAB": "Qué es un proyecto sin fuentes ?",
+            "DELETE_ITEM": "Eliminar",
+            "PENDING_ELEMENTS": "Elementos pendientes({{number}})",
+            "CHOOSE_TYPE": "Elegir un typo de fuente",
+            "SHARE_TEXT": "Aquí está las fuentes del proyecto « {{project_title}} » : <br><br><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center'>BIBLIOGRAPHIE</td></tr></table><br>",
+            "MODAL":{
+                "CANCEL": "@:PROJECT.TAB.MODAL.CANCEL",
+                "TITLE": "Nueva fuente",
+                "ADD": "Añadir",
+                "SCAN": "Escáner el código de barras",
+                "BOOK": {
+                    "FIRSTNAME": "Nombre",
+                    "LASTNAME": "Apellido",
+                    "AUTHOR_1TO3": "La fuente tiene de 1 hasta 3 autores",
+                    "AUTHOR_MORE_3": "La fuente tiene más de 3 autores",
+                    "AUTHOR_COLLLECTIVE": "La fuente es un colectivo",
+                    "FIRST_2_AUTHOR_NAME": "Nombre de los dos primeros autores",
+                    "DIRECTOR_NAMES": "Nombre del/de los directores",
+                    "TITLE_LABEL": "Titulo del libro",
+                    "TITLE_PLACEHOLDER": "Olvidé decirte quiero",
+                    "EDITOR_LABEL": "Editor",
+                    "EDITOR_PLACEHOLDER": "Planeta de libros",
+                    "PUBLICATION_DATE_LABEL": "Fecha de edición",
+                    "PUBLICATION_DATE_PLACEHOLDER": "2010",
+                    "PUBLICATION_LOCATION_LABEL": "Lugar de edición",
+                    "PUBLICATION_LOCATION_PLACEHOLDER": "Montréal",
+                    "PAGE_NUMBER_LABEL": "Número de páginas",
+                    "PAGE_NUMBER_PLACEHOLDER": "341",
+                    "EDITION_NUMBER_LABEL": "Número de la edición",
+                    "EDITION_NUMBER_PLACEHOLDER": "3",
+                    "VOLUME_NUMBER_LABEL": "Número de la edición",
+                    "VOLUME_NUMBER_PLACEHOLDER": "2",
+                    "COLLECTION_LABEL": "Colección",
+                    "COLLECTION_PLACEHOLDER": "Libro infantil",
+                    "HAS_BEEN_TRANSLATED": "El libro es traducido",
+                    "ORIGIN_LANGUAGE_LABEL": "Lengua de origen",
+                    "ORIGIN_LANGUAGE_PLACEHOLDER": "Inglès",
+                    "TRANSLATOR_NAME": "Nombre del/de los traductores"
+                },
+                "ARTICLE": {
+                    "FIRSTNAME": "@:PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME",
+                    "LASTNAME": "@:PROJECT.DETAIL.MODAL.BOOK.LASTNAME",
+                    "AUTHOR_NAME": "Autor",
+                    "TITLE_LABEL": "Titule del artículo",
+                    "TITLE_PLACEHOLDER": "El enigma Colón",
+                    "PERIODIC_LABEL": "Nombre del periódico",
+                    "PERIODIC_PLACEHOLDER": "El sol",
+                    "EDITION_NUMBER_LABEL": "Número de la edición, del volumen o del periódico",
+                    "EDITION_NUMBER_PLACEHOLDER": "vol. 36, no 5",
+                    "PUBLICATION_DATE_LABEL": "Fecha de edición",
+                    "PUBLICATION_DATE_PLACEHOLDER": "21 de marzo de 2009",
+                    "INDICATION_START_END_LABEL": "Páginas del articulo",
+                    "INDICATION_START_PLACEHOLDER": "Comienzo",
+                    "INDICATION_END_PLACEHOLDER": "Fin"
+                },
+                "INTERNET": {
+                    "FIRSTNAME":"@:PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME",
+                    "LASTNAME": "@:PROJECT.DETAIL.MODAL.BOOK.LASTNAME",
+                    "HAS_AUTHORS": "La fuente tiene un autor",
+                    "WEBPAGE_NAME": "Titulo del articulo",
+                    "WEBPAGE_NAME_PLACHOLDER": "Isaac Newton",
+                    "WEBSITE_NAME": "Nombre del sitio web",
+                    "WEBSITE_NAME_PLACEHOLDER": "Wikipedia, la encyclopedia libre",
+                    "URL": "Dirección web",
+                    "URL_PLACEHOLDER": "http://www.es.wikipedia.org",
+                    "CONSULTATION_DATE": "Fecha de consulta",
+                    "CONSULTATION_DATE_PLACEHOLDER": "21 mars 2009"
+                },
+                "CD": {
+                    "FIRSTNAME": "@:PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME",
+                    "LASTNAME": "@:PROJECT.DETAIL.MODAL.BOOK.LASTNAME",
+                    "HAS_AUTHORS": "La fuente tiene un autor",
+                    "DOC_TITLE": "Titulo del documento",
+                    "DOC_TITLE_PLACEHOLDER": "Lleno de vida",
+                    "EDITOR": "Editor",
+                    "EDITOR_PLACEHOLDER": "Planeta de libros",
+                    "PUBLICATION_LOCATION": "Lugar de edición",
+                    "PUBLICATION_LOCATION_PLACEHOLDER": "Montréal",
+                    "PUBLICATION_DATE": "Fecha de edición",
+                    "PUBLICATION_DATE_PLACEHOLDER": "2001"
+                },
+                "MOVIE": {
+                    "FIRSTNAME": "@:PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME",
+                    "LASTNAME": "@:PROJECT.DETAIL.MODAL.BOOK.LASTNAME",
+                    "HAS_MORE_THAN_ONE": "La fuente tiene más de un autor/director",
+                    "HAS_MORE_THAN_ONE_TRUE": "Tiene que introducir el nombre del primero autor, la mención «et al.» será añadida para significar que hay más de un author/director.",
+                    "PRINCIPAL_AUTHOR": "Autor principal",
+                    "DOC_NAME": "Nombre del programa o del documento",
+                    "DOC_NAME_PLACEHOLDER": "Águila roja",
+                    "EPISODE_NAME": "Titulo del episodio",
+                    "EPISODE_PLACEHOLDER": "El Conde de Queiroz",
+                    "PUBLICATION_LOCATION": "Lugar de edición",
+                    "PUBLICATION_LOCATION_PLACEHOLDER": "Montréal",
+                    "PRODUCTOR": "Productor",
+                    "PRODUCTOR_PLACEHOLDER": "César Ruíz de Diego",
+                    "BROADCASTER": "Difusor",
+                    "BROADCASTER_PLACEHOLDER": "La 1",
+                    "LENGTH": "Duración (minutos)",
+                    "LENGTH_PLACEHOLDER": "55",
+                    "PUBLICATION_DATE": "Fecha de edición",
+                    "PUBLICATION_DATE_PLACEHOLDER": "2002",
+                    "SUPPORT_TYPE": "Soporte",
+                    "SUPPORT_CD": "CD",
+                    "SUPPORT_DVD": "DVD",
+                    "SUPPORT_INTERNET": "Vídeo Internet",
+                    "CONSULTATION_DATE": "Fecha de consulta",
+                    "CONSULTATION_DATE_PLACEHOLDER": "29 de marzo de 1991"
+                },
+                "INTERVIEW": {
+                    "FIRSTNAME": "@:PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME",
+                    "LASTNAME": "@:PROJECT.DETAIL.MODAL.BOOK.LASTNAME",
+                    "INTERVIEWER_NAME": "Nombre del entrevistador",
+                    "INTERVIEWED_NAME": "Nombre de la persona encontrada",
+                    "CIVILITY_MISTER": "Sr.",
+                    "CIVILITY_MISS": "Sra.",
+                    "CIVILITY_MISS_YOUNG": "Srita.",
+                    "INTERVIEWED_TITLE": "Título de la persona encontrada",
+                    "INTERVIEWED_TITLE_PLACEHOLDER": "retirado et combatiente de la Segunda Guerra mundial",
+                    "INTERVIEW_LOCATION": "Lugar de la entrevista",
+                    "INTERVIEW_LOCATION_PLACEHOLDER": "Madrid",
+                    "INTERVIEW_DATE": "Fecha de la entrevista",
+                    "INTERVIEW_DATE_PLACEHOLDER": "9 de marzo de 2016"
+                }
+            },
+            "BOARDING": {
+                "SKIP": "Saltar",
+                "NEXT": "Siguiente",
+                "PREVIOUS": "Ultimó",
+                "TITLE": "Escáner",
+                "CLOSE": "Cerrar",
+                "OF_BOOK_RECOGNIZED": "de los libros reconocidos por la aplicación",
+                "TEXT_RECOGNIZED": "Según un testo profundo sobre los libros de la biblioteca de la Escuela de Educación International, 75 % de los libros que va a escáner con este aplicación serán reconocidos y las informaciónes van a ser completados. Serán invitados a introducir la información manualmente si el libro no es reconocido.",
+                "SCAN_TEXT": "Escáner el codigo de barras bajo la mención ISBN. Escána el codigo sobre un luz suficiente.",
+                "SCAN_FIRST": "Escáner mi primero codigo"
+            },
+            "POPUP": {
+                "ORDER_TITLE": "Clasificación",
+                "ORDER_SUB": "Orden de clasificación",
+                "ALPHA": "Alphabetica",
+                "TYPE": "Typo",
+                "ERRORS_SOURCES": "Las fuentes que trata de compartir contienen <strong>{{errNum}}</strong> error(es). Quiere compartirlas ?",
+                "ERROR_TEXT": "Error",
+                "SHARE_TEXT": "Compartición",
+                "CANCEL": "Cancelar",
+                "SHARE": "Compartir",
+                "MUST_HAVE_TYPE": "La fuente debe tener un typo",
+                "NEW_SOURCE": "Nueva fuente",
+                "DELETE_TITLE": "Eliminación",
+                "DELETE_TEXT": "La eliminación de esta fuente arrastrará la pérdida de todas la información en eso. La eliminación es irreversible.",
+                "DELETE": "Eliminar",
+                "BOOK_UNAVAILABLE_TITLE": "Libro inencontrable",
+                "BOOK_UNAVAILABLE_TEXT": "El codigo de barras era bien escánado pero este libro no es en nuestra base de datos.",
+                "TIMEOUT_TITLE": "Se acabó el tiempo",
+                "TIMEOUT_TEXT": "Se acabó el tiempo. Es probablemente en un red lento. Quiere añadir el codigo de barras en la lista de los elementos pendientes ?",
+                "ADD": "Añadir",
+                "RETRY": "Reintentar",
+                "NO_CONNECTION": "No conexión",
+                "ADD_TO_PENDINGS": "Quiere añadir el codigo de barras en la lista de los elementos pendientes ?",
+                "NOT_RIGHT_BARCODE_TYPE": "El codigo de barras era escánado pero este codigo de barras no es uno de libro. El codigo de barras normalmente tiene una mención ISBN sobre lo. Si hay dos codigos de barras, el incorrecto era tal vez escánado. Puede reintentar.",
+                "UNABLE_TO_SCAN": "Imposible de escáner",
+                "UNABLE_TO_SCAN_TEXT": "Essayez d'activer l'accès à l'appareil photo pour cette application dans l'onglet Confidentialité des Réglages. Pruebe de activar el acceso a la cámara en la pestaña Confidentialidad de los Ajustes",
+                "SAVE_INTERVIEWER_NAME": "Quiere salvaguardar el nombre del entrevistador para una utilisación futura ?"
+            }
+        },
+        "SOURCE":{
+            "EDIT": "Modificar",
+            "NO_ERROR": "Ningún error",
+            "CONFIRM": "Confirmar",
+            "CANCEL": "Cancelar",
+            "MODAL": {
+                "CANCEL": "Cancelar",
+                "TITLE": "Modificar la fuente",
+                "CONFIRM": "Modificar"
+            }
+        },
+        "PENDING":{
+            "TITLE": "Elementos pendientes",
+            "DELETE_ITEM": "Eliminar",
+            "EMPTY_TAB": "Ningún fuente pendiente!",
+            "MODAL": {
+                "CANCEL": "Cancelar",
+                "TITLE": "Nueva fuente",
+                "ADD": "Añadir"
+            },
+            "POPUP": {
+                "NEW_SOURCE": "Nueva fuente",
+                "MUST_HAVE_TYPE": "La fuente debe tener un typo",
+                "BOOK_UNAVAILABLE_TITLE": "Libro inencontrable",
+                "BOOK_UNAVAILABLE_TEXT": "El codigo de barras era bien escánado pero este libro no es en nuestra base de datos. Quiere buscar las informaciónes sobre Internet ?",
+                "SEARCH": "Buscar",
+                "LATER": "Más tarde",
+                "RETRY": "Reintentar",
+                "TIMEOUT_TITLE": "Se acabó el tiempo",
+                "TIMEOUT_TEXT": "Se acabó el tiempo. Es probablemente en un red lento. Quiere reintentar ?",
+                "NO_CONNECTION": "No conexión",
+                "RETRY_?": "Quiere reintentar ?",
+                "CANCEL": "Cancelar"
+            }
+        },
+        "TYPES":{
+            "BOOK": "Libro",
+            "CD": "CD",
+            "CD_PARSE": "CD",
+            "INTERNET": "Sitio Web",
+            "ARTICLE": "Articulo de periódico",
+            "MOVIE": "Documento audiovisual",
+            "INTERVIEW": "Entrevista"
+        },
+        "PARSE":{
+            "FIRST_AUTHOR_FIRSTNAME": {
+                "TITLE": "Autor",
+                "TEXT": "Introduzca el nombre del primer autor",
+                "DESC": "Nombre del primer autor faltante"
+            },
+            "FIRST_AUTHOR_LASTNAME": {
+                "TITLE": "Autor",
+                "TEXT": "Introduzca el apellido del primer autor",
+                "DESC": "Apellido del primer autor faltante"
+            },
+            "SECOND_AUTHOR_FIRSTNAME": {
+                "TITLE": "Autor",
+                "TEXT": "Introduzca el nombre del según autor",
+                "DESC": "Nombre del según autor faltante"
+            },
+            "SECOND_AUTHOR_LASTNAME": {
+                "TITLE": "Autor",
+                "TEXT": "Introduzca el apellido del según autor",
+                "DESC": "Apellido del según autor faltante"
+            },
+            "THIRD_AUTHOR_FIRSTNAME": {
+                "TITLE": "Autor",
+                "TEXT": "Introduzca el nombre del tercer autor",
+                "DESC": "Nombre del tercer autor faltante"
+            },
+            "THIRD_AUTHOR_LASTNAME": {
+                "TITLE": "Autor",
+                "TEXT": "Introduzca el apellido del tercer autor",
+                "DESC": "Apellido del tercer autor faltante"
+            },
+            "AUTHOR_NUMBER": {
+                "TITLE": "Número de autores",
+                "TEXT": "Seleccione el número de autores",
+                "DESC": "Número de autores faltante",
+                "AUTHOR_1TO3": "1 hasta 3 autores",
+                "AUTHOR_MORE_3": "Más de 3 autores",
+                "AUTHOR_COLLECTIVE": "Colectivo"
+            },
+            "BOOK_TITLE": {
+                "TITLE": "Titulo",
+                "TEXT": "Introduzca el titulo",
+                "DESC": "Titulo faltante"
+            },
+            "TRANSLATION_LANGUAGE": {
+                "TITLE": "Lengua de traducción",
+                "TEXT": "Introduzca la lengua de origen de la traducción",
+                "DESC": "Lengua de origen de la traducción faltante"
+            },
+            "FIRST_TRANSLATOR_FIRSTNAME": {
+                "TITLE": "Traductor",
+                "TEXT": "Introduzca el nombre del primer traductor",
+                "DESC": "Nombre del primer traductor faltante"
+            },
+            "FIRST_TRANSLATOR_LASTNAME": {
+                "TITLE": "Traductor",
+                "TEXT": "Introduzca el apellido del primer traductor",
+                "DESC": "Apellido del primer traductor faltante"
+            },
+            "SECOND_TRANSLATOR_FIRSTNAME": {
+                "TITLE": "Traductor",
+                "TEXT": "Introduzca el nombre del según traductor",
+                "DESC": "Nombre del según traductor faltante"
+            },
+            "SECOND_TRANSLATOR_LASTNAME": {
+                "TITLE": "Traductor",
+                "TEXT": "Introduzca el apellido del según traductor",
+                "DESC": "Apellido del según traductor faltante"
+            },
+            "EDITION_LOCATION": {
+                "TITLE": "Lugar de edición",
+                "TEXT": "Introduzca la lugar de edición",
+                "DESC": "Lugar de edición faltante"
+            },
+            "EDITOR": {
+                "TITLE": "Editor",
+                "TEXT": "Introduzca el autor",
+                "DESC": "Editor faltante"
+            },
+            "EDITION_DATE_TOO_HIGH": {
+                "TITLE": "Fecha de edición",
+                "TEXT": "Introduzca la fecha de edición",
+                "DESC": "Fecha de edición superior a hoy"
+            },
+            "EDITION_DATE": {
+                "TITLE": "Fecha de edición",
+                "TEXT": "Introduzca la fecha de edición",
+                "DESC": "Fecha de edición faltante"
+            },
+            "PAGE_NUMBER": {
+                "TITLE": "Número de páginas",
+                "TEXT": "Introduza el número de páginas",
+                "DESC": "Número de páginas faltante"
+            },
+            "PAGE_NUMBER_TOO_HIGH": {
+                "TITLE": "Número de páginas",
+                "TEXT": "Introduza el número de páginas",
+                "DESC": "Número de páginas afilado"
+            },
+            "PAGE_NUMBER_TOO_LOW": {
+                "TITLE": "Número de páginas",
+                "TEXT": "Introduza el número de páginas",
+                "DESC": "Número de páginas demasiado bajo"
+            },
+            "AUTHOR_ARTICLE_FIRSTNAME": {
+                "TITLE": "Autor",
+                "TEXT": "Introduzca el nombre del autor",
+                "DESC": "Nombre del autor faltante"
+            },
+            "AUTHOR_ARTICLE_LASTNAME": {
+                "TITLE": "Autor",
+                "TEXT": "Introduzca el apellido del autor",
+                "DESC": "Apellido del autor faltante"
+            },
+            "ARTICLE_TITLE": {
+                "TITLE": "Titulo del articulo",
+                "TEXT": "Introduzca el titulo del articulo",
+                "DESC": "Titulo del articulo faltante"
+            },
+            "PERIODIC_NAME": {
+                "TITLE": "Nombre del periodicó",
+                "TEXT": "Introduzca el nombre del periodicó",
+                "DESC": "Nombre del periodicó faltante"
+            },
+            "PERIODIC_NUMBER": {
+                "TITLE": "Número del volumen",
+                "TEXT": "Introduzca el número del volumen",
+                "DESC": "Número del volumen o del periodicó faltante"
+            },
+            "START_PAGE": {
+                "TITLE": "Página de inicio",
+                "TEXT": "Introduzca la página de inicio",
+                "DESC": "Página de inicio faltante"
+            },
+            "END_PAGE": {
+                "TITLE": "Página de fin",
+                "TEXT": "Introduzca la página de fin",
+                "DESC": "Página de fin faltante"
+            },
+            "HOMEPAGE_TITLE": {
+                "TITLE": "Nombre del sitio web",
+                "TEXT": "Introduzca el nombre del sitio web",
+                "DESC": "Nombre del sitio web faltante"
+            },
+            "PAGE_TITLE": {
+                "TITLE": "Titulo del articulo",
+                "TEXT": "Introduzca el titulo del articulo",
+                "DESC": "Titulo del articulo faltante"
+            },
+            "INVALID_URL": {
+                "TITLE": "Dirección web",
+                "TEXT": "Introduzca la dirección web",
+                "DESC": "Dirreción web inválida"
+            },
+            "URL": {
+                "TITLE": "Dirección web",
+                "TEXT": "Introduzca la dirección web",
+                "DESC": "Dirección web faltante"
+            },
+            "CONSULTATION_DATE": {
+                "TITLE": "Fecha de consulta",
+                "TEXT": "Introduzca la fecha de consulta",
+                "DESC": "Fecha de consulta faltante"
+            },
+            "DOCUMENT_TITLE": {
+                "TITLE": "Titulo del documento",
+                "TEXT": "Introduzca el titulo del documento",
+                "DESC": "Titulo del documento faltante"
+            },
+            "PUBLICATION_LOCATION": {
+                "TITLE": "Lugar de edición",
+                "TEXT": "Introduzca la lugar de edición",
+                "DESC": "Lugar de edición faltante"
+            },
+            "PUBLICATION_DATE": {
+                "TITLE": "Fecha de edición",
+                "TEXT": "Introduzca la fecha de edición",
+                "DESC": "Fecha de edición faltante"
+            },
+            "DIRECTOR_LASTNAME": {
+                "TITLE": "Realisador/autor principal",
+                "TEXT": "Introduzca el apellido realisador/autor principal",
+                "DESC": "Apellido del realisador/autor principal faltante"
+            },
+            "DIRECTOR_FIRSTNAME": {
+                "TITLE": "Realisador/autor principal",
+                "TEXT": "Introduzca el nombre del realisador/autor principal",
+                "DESC": "Nombre del realisador/autor principal faltante"
+            },
+            "EMISSION_TITLE": {
+                "TITLE": "Nombre del programa",
+                "TEXT": "Introduzca el nombre del programa o del documento",
+                "DESC": "Nombre del programa faltante"
+            },
+            "PRODUCTION_LOCATION": {
+                "TITLE": "Lugar de edición",
+                "TEXT": "Introduzca la lugar de edición",
+                "DESC": "Lugar de edición faltante"
+            },
+            "PRODUCTOR": {
+                "TITLE": "Productor",
+                "TEXT": "Introduzca el nombre del productor",
+                "DESC": "Nombre del productor faltante"
+            },
+            "BROADCASTER": {
+                "TITLE": "Difusor",
+                "TEXT": "Introduzca el nombre del difusor",
+                "DESC": "Nombre del difusor faltante"
+            },
+            "LENGTH": {
+                "TITLE": "Duración",
+                "TEXT": "Introduzca la duración (minutos)",
+                "DESC": "Duración faltante"
+            },
+            "SUPPORT": {
+                "TITLE": "Typo de suporte",
+                "TEXT": "Selecciona el typo de suporte",
+                "DESC": "Typo de suporte faltante"
+            },
+            "VIEWING_DATE": {
+                "TITLE": "Fecha de consulta",
+                "TEXT": "Introduzca la fecha de consulta",
+                "DESC": "Fecha de consulta faltante"
+            },
+            "INTERVIEWER_LASTNAME": {
+                "TITLE": "Entrevistador",
+                "TEXT": "Introduzca el apellido del entrevistador",
+                "DESC": "Apellido del entrevistador faltante"
+            },
+            "INTERVIEWER_FIRSTNAME": {
+                "TITLE": "Entrevistador",
+                "TEXT": "Introduzca el nombre del entrevistador",
+                "DESC": "Nombre del entrevistador faltante"
+            },
+            "CIVILITY_TITLE": {
+                "TITLE": "Estado civil",
+                "TEXT": "Selecciona el estado civil de la persona encontrada",
+                "DESC": "Estado civil faltante"
+            },
+            "INTERVIEWED_FIRSTNAME": {
+                "TITLE": "Persona encontrada",
+                "TEXT": "Introduzca el nombre de la persona encontrada",
+                "DESC": "Nombre de la persona encontrada faltante"
+            },
+            "INTERVIEWED_LASTNAME": {
+                "TITLE": "Persona encontrada",
+                "TEXT": "Introduzca el apellido de la persona encontrada",
+                "DESC": "Apellido de la persona encontrada faltante"
+            },
+            "INTERVIEWED_TITLE": {
+                "TITLE": "Persona encontrada",
+                "TEXT": "Introduzca el título de la persona encontrada",
+                "DESC": "Título de la persona encontrada faltante"
+            },
+            "INTERVIEW_LOCATION": {
+                "TITLE": "Lugar de la entrevista",
+                "TEXT": "Introduzca la lugar de la entrevista",
+                "DESC": "Lugar de la entrevista faltante"
+            }
         }
     },
     "REFERENCES":{
         "TAB_TITLE": "Referencia"
     },
     "SETTINGS":{
-        "TAB_TITLE": "Parámetros"
+        "TAB_TITLE": "Ajustes",
+        "ORDER_BY": "Ordenar la bibliographia según",
+        "ALPHABETICAL": "Orden alfabético",
+        "TYPE": "Typo de obra",
+        "ASK_FOR_ORDER": "Preguntar la orden",
+        "YOUR_NAME": "Usted nombre",
+        "EDIT": "Modificar",
+        "EDIT_NAME": "Modificar el nombre",
+        "DELETE": "Eliminar",
+        "FORGET": "Olvidar",
+        "CANCEL": "Cancelar",
+        "ADVANCED_MODE_LABEL": "Modo avanzado",
+        "LEARN_MORE": "Saber más...",
+        "BUG_COMMENT": "Problema/Comentario",
+        "BUG_COMMENT_LONG": "Devolver un problema o emitir un comentario",
+        "ATTRIBUTION_TAB": "Atribucíon",
+        "ATTRIBUTION_ICONBY": "Ícono por",
+        "MIT_LICENSE": "Licencia MIT",
+        "BSD_LICENSE": "Licencia BSD",
+        "APACHE_LICENSE": "Licencia Apache",
+        "LANGUAGE":"Lengua",
+        "FRENCH": "Francès",
+        "ENGLISH": "Inglès",
+        "SPANISH": "Español",
+        "DEFAULT": "Por defecto",
+        "ATTRIBUTIONS": "Adaptado a partir del <em>Guide de Méthodologie</em> de la Escuela de educación internacional de McMasterville escrito por Raymond Bédard.",
+        "ADVANCED_MODE": {
+            "TITLE": "Modo avanzado",
+            "WAITING_FOR": "Qué estàs esperando ? Pruebe el modo avanzado. Estos son las funcionalidades incluidas : ",
+            "SCANNING": "Escáner",
+            "SCAN_DESC": "Escána el ISBN de un libro para hacer su fuente automáticamente (ciertos libros no son compatibles)",
+            "MODELS": "Modelos",
+            "MODELS_DESC": "Utilice modelos al formato DOCX para simplificar su vida",
+            "SHARING": "Reparto avanzado",
+            "SHARING_DESC": "Reparta un sitio Web de Safari hasta Metho para creer la fuente",
+            "POPUP": {
+                "ALREADY_TEXT": "El modo avanzado es ya activado"
+            }
+        },
+        "FEEDBACK": {
+            "TITLE": "Problema/Comentario",
+            "TAB_PROJECT": "Pestaña Proyectos",
+            "TAB_PROJECT_DESC": "Problema en la pestaña Proyectos",
+            "TAB_REFERENCE": "Pestaña Referencia",
+            "TAB_REFERENCE_DESC": "Problema en la pestaña Referencia",
+            "SETTINGS": "Ajustes",
+            "SETTINGS_DESC": "Problema con los ajustes",
+            "COMMENT": "Comentario",
+            "COMMENT_DESC": "Emitir un comentario",
+            "FEATURE": "Funcionalidad",
+            "FEATURE_DESC": "Sugerir una nueva funcionalidad",
+            "EMAIL": {
+                "PROJECT": "<p>Gracias de devolver un problema. Intentaré de arreglarlo y de responder a usted rapidamente. Responda a las preguntas mas abajo para ayudarme a arreglar el problema. Respuestas largas no son necesarias, algunas palabras son suficientes.</p><br><strong>Donde se produce este problema (al interior del pestaña proyectos)?</strong><br><br><br><strong>Describe el problema.</strong><br><br><br><strong>Describe cómo reproducir este problema (etapas).</strong><br><br><br><strong>Describe las consecuencia del problema (forzoso de la aplicación, imposible de añadir una fuente, etc.)</strong><br><br><br><p>Gracias por su ayuda a mejorar la aplicación. Comunicaré con usted si necesito más information.</p><h5>No modifica esta sección</h5><p>",
+                "PROJECT_TITLE": "Problema en la pestaña Proyectos",
+                "REFERENCE": "<p>Gracias de devolver un problema. Intentaré de arreglarlo y de responder a usted rapidamente. Responda a las preguntas mas abajo para ayudarme a arreglar el problema. Respuestas largas no son necesarias, algunas palabras son suficientes.</p><br><strong>Cuáles son las sección donde el problema es (todas?)?</strong><br><br><br><strong>Describe el problema.</strong><br><br><br><strong>Describe cómo reproducir este problema (etapas).</strong><br><br><br><strong>Describe las consecuencia del problema (forzoso de la aplicación, error de gramática, etc.)</strong><br><br><br><p>Gracias por su ayuda a mejorar la aplicación. Comunicaré con usted si necesito más information.</p><h5>No modifica esta sección</h5><p>",
+                "REFERENCE_TITLE": "Problema en la pestaña Referencia",
+                "SETTINGS": "<p>Gracias de devolver un problema. Intentaré de arreglarlo y de responder a usted rapidamente. Responda a las preguntas mas abajo para ayudarme a arreglar el problema. Respuestas largas no son necesarias, algunas palabras son suficientes.</p><br><strong>Cuáles parametros son concernidos por el problema (todos?)?</strong><br><br><br><strong>Describe el problema.</strong><br><br><br><strong>Describe cómo reproducir este problema (etapas).</strong><br><br><br><strong>Describe las consecuencia del problema (forzoso de la aplicación, el parametro no fonciona, etc.)</strong><br><br><br><p>Gracias por su ayuda a mejorar la aplicación. Comunicaré con usted si necesito más information.</p><h5>No modifica esta sección</h5><p>",
+                "SETTINGS_TITLE": "Problema con los ajustes",
+                "COMMENT": "<p>Gracias de emitir un comentario sobre esta aplicación. Intentaré de responder rapidamente.</p><strong>Comentario</strong><br><br><br>",
+                "COMMENT_TITLE": "Comentario",
+                "FEATURE": "<p>Gracias de sugerir una funcionalidad. Intentaré de responder rapidamente. Responda a las preguntas mas abajo para ayudarme a comprender su idea. Respuestas largas no son necesarias, algunas palabras son suficientes.</p><br><strong>Cuál parte de la aplicación es concernida ?</strong><br><br><br><strong>Describe la funcionalidad.</strong><br><br><br><p>Gracias por su ayuda a mejorar la aplicación. Comunicaré con usted si necesito más information.</p>",
+                "FEATURE_TITLE": "Sugerir una funcionalidad"
+            }
+        }
+    },
+    "3D_TOUCH": {
+        "NEW_SOURCE": "Nueva fuente",
+        "NEW_SOURCE_DESC": "Añadir una nueva fuente",
+        "SCAN": "Escáner",
+        "SCAN_DESC": "Escáner un código de barras"
     }
 }
