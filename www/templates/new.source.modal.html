@@ -63,7 +63,7 @@
                             <ion-scroll direction="y" ng-class="{'scroll-height-one': suggestions.length == 1, 'scroll-height-one-and-a-half': suggestions.length == 2, 'scroll-height-normal': suggestions.length > 2}">
                                 <ion-list>
                                     <ion-item ng-repeat="suggestion in suggestions track by $index" class="item item-icon-right item-icon-left" type="item-text-wrap" ng-click="fillWithInfos({{$index}})">
-                                        <span class="icon ion-ios-book-outline"></span>
+                                        <span class="icon ion-ios-bookmarks-outline"></span>
                                         {{suggestion.title}} <span ng-if="suggestion.author1lastname || suggestions.author1firstname">(<em>{{suggestion.author1firstname}} {{suggestion.author1lastname}}</em>)</span>                                        <span class="icon ion-ios-plus-outline"></span>
                                     </ion-item>
                                 </ion-list>
