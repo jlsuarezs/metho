@@ -199,6 +199,11 @@ angular.module('metho.controller.projects.detail', [])
         // Reset vars
         $scope.newsource = {};
         $scope.newsource.consultationDate = new Date();
+        $scope.suggestions = [];
+        $scope.showSuggestions = false;
+        $scope.endSuggestionLoading = false;
+        $scope.noSuggestion = false;
+        $scope.loadingSuggestions = false;
     }
 
     $scope.refreshModalScroll = function() {
