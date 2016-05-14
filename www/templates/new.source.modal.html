@@ -52,51 +52,51 @@
                 </div>
                 <!-- Autres champs -->
                 <div class="list black-top">
-                        <div class="item item-input item-stacked-label item-icon-right">
-                            <span class="input-label" translate>PROJECT.DETAIL.MODAL.BOOK.TITLE_LABEL</span>
-                            <input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.TITLE_PLACEHOLDER' | translate }}" ng-model="newsource.title" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1500, 'blur': 0}}">
-                            <ion-spinner ng-if="loadingSuggestions" icon="ios-small" class="spinner-suggestions"></ion-spinner>
-                            <button type="button" ng-if="endSuggestionLoading" class="icon ion-chevron-right button button-light button-small" ng-click="toggleShowSuggestion()" ng-class="{ 'rotate-90': showSuggestions }"></button>
-                            <button type="button" ng-if="noSuggestion" class="icon ion-close-circled button button-light button-small" ng-click="openExplainingPopup()"></button>
-                        </div>
-                        <div ng-slide-down="showSuggestions">
-                            <ion-scroll direction="y" ng-class="{'scroll-height-one': suggestions.length == 1, 'scroll-height-one-and-a-half': suggestions.length == 2, 'scroll-height-normal': suggestions.length > 2}">
-                                <ion-list>
-                                    <ion-item ng-repeat="suggestion in suggestions track by $index" class="item item-icon-right item-icon-left" type="item-text-wrap" ng-click="fillWithInfos({{$index}})">
-                                        <span class="icon ion-ios-bookmarks-outline"></span>
-                                        {{suggestion.title}} <span ng-if="suggestion.author1lastname || suggestions.author1firstname">(<em>{{suggestion.author1firstname}} {{suggestion.author1lastname}}</em>)</span>                                        <span class="icon ion-ios-plus-outline"></span>
-                                    </ion-item>
-                                </ion-list>
-                            </ion-scroll>
-                        </div>
-                        <label class="item item-input item-stacked-label">
-                            <span class="input-label" translate>PROJECT.DETAIL.MODAL.BOOK.EDITOR_LABEL</span>
-                            <input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.EDITOR_PLACEHOLDER' | translate }}" ng-model="newsource.editor">
-                        </label>
-                        <label class="item item-input item-stacked-label item-button-left">
-                            <span class="input-label" translate>PROJECT.DETAIL.MODAL.BOOK.PUBLICATION_DATE_LABEL</span>
-                            <input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.PUBLICATION_DATE_PLACEHOLDER' | translate }}" ng-model="newsource.publicationDate">
-                        </label>
-                        <label class="item item-input item-stacked-label">
-                            <span class="input-label" translate>PROJECT.DETAIL.MODAL.BOOK.PUBLICATION_LOCATION_LABEL</span>
-                            <input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.PUBLICATION_LOCATION_PLACEHOLDER' | translate }}" ng-model="newsource.publicationLocation">
-                        </label>
-                        <label class="item item-input item-stacked-label">
-                            <span class="input-label" translate>PROJECT.DETAIL.MODAL.BOOK.PAGE_NUMBER_LABEL</span>
-                            <input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.PAGE_NUMBER_PLACEHOLDER' | translate }}" ng-model="newsource.pageNumber">
-                        </label>
-                        <label class="item item-input item-stacked-label">
-                            <span class="input-label dimmed-75" translate>PROJECT.DETAIL.MODAL.BOOK.EDITION_NUMBER_LABEL</span>
-                            <input type="number" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.EDITION_NUMBER_PLACEHOLDER' | translate }}" ng-model="newsource.editionNumber">
-                        </label>
-                        <label class="item item-input item-stacked-label">
-                            <span class="input-label dimmed-75" translate>PROJECT.DETAIL.MODAL.BOOK.VOLUME_NUMBER_LABEL</span>
-                            <input type="number" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.VOLUME_NUMBER_PLACEHOLDER' | translate }}" ng-model="newsource.volumeNumber" min="1">
-                        </label>
-                        <label class="item item-input item-stacked-label">
-                            <span class="input-label dimmed-75" translate>PROJECT.DETAIL.MODAL.BOOK.COLLECTION_LABEL</span>
-                            <input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.COLLECTION_PLACEHOLDER' | translate }}" ng-model="newsource.collection">
-                        </label>
+                    <div class="item item-input item-stacked-label item-icon-right">
+                        <span class="input-label" translate>PROJECT.DETAIL.MODAL.BOOK.TITLE_LABEL</span>
+                        <input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.TITLE_PLACEHOLDER' | translate }}" ng-model="newsource.title" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1500, 'blur': 0}}">
+                        <ion-spinner ng-if="loadingSuggestions" icon="ios-small" class="spinner-suggestions"></ion-spinner>
+                        <button type="button" ng-if="endSuggestionLoading" class="icon ion-chevron-right button button-light button-small" ng-click="toggleShowSuggestion()" ng-class="{ 'rotate-90': showSuggestions }"></button>
+                        <button type="button" ng-if="noSuggestion" class="icon ion-close-circled button button-light button-small" ng-click="openExplainingPopup()"></button>
+                    </div>
+                    <div ng-slide-down="showSuggestions">
+                        <ion-scroll direction="y" ng-class="{'scroll-height-one': suggestions.length == 1, 'scroll-height-one-and-a-half': suggestions.length == 2, 'scroll-height-normal': suggestions.length > 2}">
+                            <ion-list>
+                                <ion-item ng-repeat="suggestion in suggestions track by $index" class="item item-icon-right item-icon-left" type="item-text-wrap" ng-click="fillWithInfos({{$index}})">
+                                    <span class="icon ion-ios-bookmarks-outline"></span>
+                                    {{suggestion.title}} <span ng-if="suggestion.author1lastname || suggestions.author1firstname">(<em>{{suggestion.author1firstname}} {{suggestion.author1lastname}}</em>)</span>                                        <span class="icon ion-ios-plus-outline"></span>
+                                </ion-item>
+                            </ion-list>
+                        </ion-scroll>
+                    </div>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label" translate>PROJECT.DETAIL.MODAL.BOOK.EDITOR_LABEL</span>
+                        <input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.EDITOR_PLACEHOLDER' | translate }}" ng-model="newsource.editor">
+                    </label>
+                    <label class="item item-input item-stacked-label item-button-left">
+                        <span class="input-label" translate>PROJECT.DETAIL.MODAL.BOOK.PUBLICATION_DATE_LABEL</span>
+                        <input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.PUBLICATION_DATE_PLACEHOLDER' | translate }}" ng-model="newsource.publicationDate">
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label" translate>PROJECT.DETAIL.MODAL.BOOK.PUBLICATION_LOCATION_LABEL</span>
+                        <input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.PUBLICATION_LOCATION_PLACEHOLDER' | translate }}" ng-model="newsource.publicationLocation">
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label" translate>PROJECT.DETAIL.MODAL.BOOK.PAGE_NUMBER_LABEL</span>
+                        <input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.PAGE_NUMBER_PLACEHOLDER' | translate }}" ng-model="newsource.pageNumber">
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label dimmed-75" translate>PROJECT.DETAIL.MODAL.BOOK.EDITION_NUMBER_LABEL</span>
+                        <input type="number" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.EDITION_NUMBER_PLACEHOLDER' | translate }}" ng-model="newsource.editionNumber">
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label dimmed-75" translate>PROJECT.DETAIL.MODAL.BOOK.VOLUME_NUMBER_LABEL</span>
+                        <input type="number" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.VOLUME_NUMBER_PLACEHOLDER' | translate }}" ng-model="newsource.volumeNumber" min="1">
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label dimmed-75" translate>PROJECT.DETAIL.MODAL.BOOK.COLLECTION_LABEL</span>
+                        <input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.COLLECTION_PLACEHOLDER' | translate }}" ng-model="newsource.collection">
+                    </label>
                     <ion-checkbox ng-model="newsource.hasBeenTranslated">{{'PROJECT.DETAIL.MODAL.BOOK.HAS_BEEN_TRANSLATED' | translate}}</ion-checkbox>
                     <div ng-slide-down="newsource.hasBeenTranslated" lazy-render>
                         <label class="item item-input item-stacked-label">
