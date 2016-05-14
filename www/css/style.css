@@ -438,3 +438,20 @@ p.left-aligned {
     -o-user-select: auto !important;
     user-select: auto !important;
 }
+
+.ion-chevron-right.button-light {
+    -webkit-transition:-webkit-transform .9s;
+    transition: transform 0.5s;
+    background-color: transparent !important;
+}
+
+.ion-chevron-right.rotate-90 {
+    -webkit-transform: rotate(90deg) !important;
+    transform: rotate(90deg) !important;
+}
+
+.spinner-suggestions {
+    float: right;
+    margin-top: -40px;
+    margin-right: 15px;
+}

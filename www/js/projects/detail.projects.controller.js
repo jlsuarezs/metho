@@ -70,6 +70,36 @@ angular.module('metho.controller.projects.detail', [])
         animation: 'slide-in-up',
     }).then(function(modal) {
         $scope.newSourceModal = modal;
+        if ($scope.isAdvanced) {
+            $scope.$watch("newsource.title", function () {
+                if ($scope.newSourceModal.isShown() && !$scope.insertingFromScan) {
+                    $scope.showSuggestions = false;
+                    $scope.endSuggestionLoading = false;
+                    $scope.noSuggestion = false;
+                    $scope.loadingSuggestions = true;
+                    Fetch.fromNameISBNdb($scope.newsource.title).then(function (response) {
+                        if (response.length == 0) {
+                            $scope.loadingSuggestions = false;
+                            $scope.noSuggestion = true;
+                        }else {
+                            $scope.suggestions = response.slice(0, 4);
+                            $scope.loadingSuggestions = false;
+                            $scope.endSuggestionLoading = true;
+                        }
+                    }).catch(function (err) {
+                        $scope.loadingSuggestions = false;
+                        if (err == 404) {
+                            $scope.noSuggestion = true;
+                        }else if (err == 408) {
+                            $scope.slowConnection = true;
+                        }else {
+                            console.log(err);
+                            $scope.noSuggestion = true;
+                        }
+                    });
+                }
+            });
+        }
         if ($stateParams.scanSource){
             if (!!window.cordova) {
                 cordova.plugins.Keyboard.disableScroll(true);
@@ -79,6 +109,27 @@ angular.module('metho.controller.projects.detail', [])
             $scope.scanBook();
         }
     });
+
+    $scope.toggleShowSuggestion = function () {
+        $scope.showSuggestions = $scope.showSuggestions ? false : true;
+    }
+
+    $scope.fillWithInfos = function (index) {
+        $scope.newsource.author1firstname = $scope.suggestions[index].author1firstname;
+        $scope.newsource.author1lastname = $scope.suggestions[index].author1lastname;
+        $scope.newsource.author2firstname = $scope.suggestions[index].author2firstname;
+        $scope.newsource.author2lastname = $scope.suggestions[index].author2lastname;
+        $scope.newsource.author3firstname = $scope.suggestions[index].author3firstname;
+        $scope.newsource.author3lastname = $scope.suggestions[index].author3lastname;
+        $scope.newsource.hasAuthors = $scope.suggestions[index].hasAuthors;
+        $scope.newsource.title = $scope.suggestions[index].title;
+        $scope.newsource.editor = $scope.suggestions[index].editor;
+        $scope.newsource.publicationDate = $scope.suggestions[index].publicationDate;
+        $scope.newsource.publicationLocation = $scope.suggestions[index].publicationLocation;
+        $scope.newsource.pageNumber = $scope.suggestions[index].pageNumber;
+
+        $scope.showSuggestions = false;
+    }
 
     $scope.addSource = function() {
         // Open modal
@@ -687,7 +738,7 @@ angular.module('metho.controller.projects.detail', [])
     }
 
     // Event handlers
-    $scope.$on("$ionicView.beforeEnter", function() {
+    $scope.$on("$ionicView.enter", function() {
         if ($scope.refreshSources) {
             $scope.loadSources();
         }

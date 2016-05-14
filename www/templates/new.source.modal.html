@@ -52,10 +52,22 @@
                 </div>
                 <!-- Autres champs -->
                 <div class="list black-top">
-                        <label class="item item-input item-stacked-label">
+                        <div class="item item-input item-stacked-label item-icon-right">
                             <span class="input-label" translate>PROJECT.DETAIL.MODAL.BOOK.TITLE_LABEL</span>
-                            <input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.TITLE_PLACEHOLDER' | translate }}" ng-model="newsource.title">
-                        </label>
+                            <input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.TITLE_PLACEHOLDER' | translate }}" ng-model="newsource.title" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1500, 'blur': 0}}">
+                            <ion-spinner ng-if="loadingSuggestions" icon="ios-small" class="spinner-suggestions"></ion-spinner>
+                            <button type="button" ng-if="endSuggestionLoading" class="icon ion-chevron-right button button-light button-small" ng-click="toggleShowSuggestion()" ng-class="{ 'rotate-90': showSuggestions }"></button>
+                            <button type="button" ng-if="noSuggestion" class="icon ion-close-circled button button-light button-small" ng-click="openExplainingPopup()"></button>
+                        </div>
+                        <div ng-slide-down="showSuggestions">
+                            <ion-list>
+                                <ion-item ng-repeat="suggestion in suggestions track by $index" class="item item-icon-right item-icon-left" type="item-text-wrap" ng-click="fillWithInfos({{$index}})">
+                                    <span class="icon ion-ios-book-outline"></span>
+                                    {{suggestion.title}} (<em>{{suggestion.author1firstname}} {{suggestion.author1lastname}}</em>)
+                                    <span class="icon ion-ios-plus-outline"></span>
+                                </ion-item>
+                            </ion-list>
+                        </div>
                         <label class="item item-input item-stacked-label">
                             <span class="input-label" translate>PROJECT.DETAIL.MODAL.BOOK.EDITOR_LABEL</span>
                             <input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.EDITOR_PLACEHOLDER' | translate }}" ng-model="newsource.editor">
