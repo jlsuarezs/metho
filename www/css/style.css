@@ -455,3 +455,15 @@ p.left-aligned {
     margin-top: -40px;
     margin-right: 15px;
 }
+
+.scroll-height-one {
+    height: 54px;
+}
+
+.scroll-height-one-and-a-half {
+    height: 81px;
+}
+
+.scroll-height-normal {
+    height: 135px;
+}
