@@ -8,18 +8,19 @@ angular.module("metho.service.projects.fetch", [])
     var parseFromISBNdb = function (response) {
         var newobj = {};
         // Titre
-        newobj.title = response.title.replace(/\ufffd/g, "é");
+        newobj.title = response.title.replace(/\ufffd/g, "é").trim();
         // Publisher/Editor
-        newobj.editor = response.publisher_name.replace(/\ufffd/g, "é");
+        newobj.editor = response.publisher_name.replace(/\ufffd/g, "é").trim();
         // Date de publication
         if (!!response.edition_info && response.edition_info.match(/[0-9]{4}/)) {
             var working_on_date = response.edition_info.match(/[0-9]{4}/);
-            newobj.publicationDate = response.edition_info.match(/[0-9]{4}/);
+            newobj.publicationDate = response.edition_info.match(/[0-9]{4}/)[0].trim();
         } else if (!!response.publisher_text && response.publisher_text.match(/[0-9]{4}/)) {
             var working_on_date = response.publisher_text.match(/[0-9]{4}/);
-            newobj.publicationDate = response.publisher_text.match(/[0-9]{4}/);
+            newobj.publicationDate = response.publisher_text.match(/[0-9]{4}/)[0].trim();
         } else {
             var working_on_date = "";
+            newobj.publicationDate = "";
         }
 
         // Lieu de publication
@@ -54,11 +55,11 @@ angular.module("metho.service.projects.fetch", [])
         if (response.author_data.length) {
             for (var i = 0; i < response.author_data.length; i++) {
                 if (response.author_data[i].name.split(",")[0] == response.author_data[i].name) {
-                    newobj["author" + String(i + 1) + "firstname"] = response.author_data[i].name.split(" ")[0].replace(/\ufffd/g, "é");
-                    newobj["author" + String(i + 1) + "lastname"] = response.author_data[i].name.split(" ")[1].replace(/\ufffd/g, "é");
+                    newobj["author" + String(i + 1) + "firstname"] = response.author_data[i].name.split(" ")[0].replace(/\ufffd/g, "é").trim();
+                    newobj["author" + String(i + 1) + "lastname"] = response.author_data[i].name.split(" ")[1].replace(/\ufffd/g, "é").trim();
                 } else {
-                    newobj["author" + String(i + 1) + "lastname"] = response.author_data[i].name.split(",")[0].replace(/\ufffd/g, "é");
-                    newobj["author" + String(i + 1) + "firstname"] = response.author_data[i].name.split(",")[1].replace(/\ufffd/g, "é");
+                    newobj["author" + String(i + 1) + "lastname"] = response.author_data[i].name.split(",")[0].replace(/\ufffd/g, "é").trim();
+                    newobj["author" + String(i + 1) + "firstname"] = response.author_data[i].name.split(",")[1].replace(/\ufffd/g, "é").trim();
                 }
             }
             var authorNum = response.author_data.length;
