@@ -88,7 +88,7 @@ angular.module("metho.service.projects.fetch", [])
                 for (var i = 0; i < response.data.data.length; i++) {
                     objects[i] = parseFromISBNdb(response.data.data[i]);
                 }
-                cacheByName[name] = objects;
+                cacheByName[name.toLowerCase()] = objects;
                 p.resolve(objects);
             }
         }
@@ -97,16 +97,20 @@ angular.module("metho.service.projects.fetch", [])
             p.reject(response.status);
         }
 
-        if (author != "" && author != null) {
-            $http({
-                method: "GET",
-                url: "http://isbndb.com/api/v2/json/YVFT6RLV/books?q=" + encodeURIComponent(name + " " + author) + "&i=combined"
-            }).then(onSuccess).catch(onFailure);
+        if (cacheByName[name.toLowerCase()]) {
+            p.resolve(cacheByName[name.toLowerCase()]);
         }else {
-            $http({
-                method: "GET",
-                url: "http://isbndb.com/api/v2/json/YVFT6RLV/books?q=" + encodeURIComponent(name)
-            }).then(onSuccess).catch(onFailure);
+            if (author != "" && author != null) {
+                $http({
+                    method: "GET",
+                    url: "http://isbndb.com/api/v2/json/YVFT6RLV/books?q=" + encodeURIComponent(name + " " + author) + "&i=combined"
+                }).then(onSuccess).catch(onFailure);
+            }else {
+                $http({
+                    method: "GET",
+                    url: "http://isbndb.com/api/v2/json/YVFT6RLV/books?q=" + encodeURIComponent(name)
+                }).then(onSuccess).catch(onFailure);
+            }
         }
 
         return p.promise;
