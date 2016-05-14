@@ -202,7 +202,9 @@
                 "NOT_RIGHT_BARCODE_TYPE": "Le code barre a été balayé, mais ce type de code barre n'est pas un code barre de livre. Le bon code barre possède habituellement une inscription ISBN par dessus celui-ci. Si deux code barre sont côte à côte, le mauvais a peut-être été balayé. Vous pouvez réessayer.",
                 "UNABLE_TO_SCAN": "Balayage impossible",
                 "UNABLE_TO_SCAN_TEXT": "Essayez d'activer l'accès à l'appareil photo pour cette application dans l'onglet Confidentialité des Réglages.",
-                "SAVE_INTERVIEWER_NAME": "Voulez-vous sauvegarder le nom de l'intervieweur pour une utilisation future?"
+                "SAVE_INTERVIEWER_NAME": "Voulez-vous sauvegarder le nom de l'intervieweur pour une utilisation future?",
+                "NO_SUGGESTIONS": "Aucune suggestion",
+                "NO_SUGGESTIONS_DESC": "Il n'y a aucune suggestion disponible"
             }
         },
         "SOURCE":{

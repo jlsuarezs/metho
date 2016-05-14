@@ -131,6 +131,15 @@ angular.module('metho.controller.projects.detail', [])
         $scope.showSuggestions = false;
     }
 
+    $scope.openExplainingPopup = function () {
+        $translate(["PROJECT.DETAIL.POPUP.NO_SUGGESTIONS", "PROJECT.DETAIL.POPUP.NO_SUGGESTIONS_DESC"]).then(function (translations) {
+            $ionicPopup.alert({
+                title: translations["PROJECT.DETAIL.POPUP.NO_SUGGESTIONS"],
+                template: "<p class='center'>" + translations["PROJECT.DETAIL.POPUP.NO_SUGGESTIONS_DESC"] + "</p>"
+            });
+        });
+    }
+
     $scope.addSource = function() {
         // Open modal
         $translate(["PROJECT.TYPES.BOOK", "PROJECT.TYPES.ARTICLE", "PROJECT.TYPES.INTERNET", "PROJECT.TYPES.CD", "PROJECT.TYPES.MOVIE", "PROJECT.TYPES.INTERVIEW", "PROJECT.DETAIL.CHOOSE_TYPE", "PROJECT.DETAIL.POPUP.CANCEL"]).then(function (translations) {

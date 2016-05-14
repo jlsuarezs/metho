@@ -202,7 +202,9 @@
                 "NOT_RIGHT_BARCODE_TYPE": "Barcode has been scanned, but this barcode type is not a book barcode. The right barcode normally has ISBN label above it. If two barcodes are side by side, the wrong one might have been scanned. You may retry.",
                 "UNABLE_TO_SCAN": "Unable to scan",
                 "UNABLE_TO_SCAN_TEXT": "You may try going into Settings > Privacy and turning on camera access for this app.",
-                "SAVE_INTERVIEWER_NAME": "Do you want to save interviewer's name for future usage ?"
+                "SAVE_INTERVIEWER_NAME": "Do you want to save interviewer's name for future usage ?",
+                "NO_SUGGESTIONS": "No suggestion",
+                "NO_SUGGESTIONS_DESC": "There are no suggestion available"
             }
         },
         "SOURCE":{
