@@ -13,44 +13,26 @@ angular.module("metho.service.projects.fetch", [])
         newobj.editor = response.publisher_name.replace(/\ufffd/g, "é").trim();
         // Date de publication
         if (!!response.edition_info && response.edition_info.match(/[0-9]{4}/)) {
-            var working_on_date = response.edition_info.match(/[0-9]{4}/);
             newobj.publicationDate = response.edition_info.match(/[0-9]{4}/)[0].trim();
         } else if (!!response.publisher_text && response.publisher_text.match(/[0-9]{4}/)) {
-            var working_on_date = response.publisher_text.match(/[0-9]{4}/);
             newobj.publicationDate = response.publisher_text.match(/[0-9]{4}/)[0].trim();
         } else {
-            var working_on_date = "";
             newobj.publicationDate = "";
         }
 
         // Lieu de publication
         if (response.publisher_text != "") {
-            var working_on_location = response.publisher_text.replace(/\ufffd/g, "é");
-            working_on_location = working_on_location.replace(response.publisher_name, "");
-            working_on_location = working_on_location.replace(working_on_date, "");
-            working_on_location = working_on_location.replace(/[^a-zA-z\s]/g, "");
-            working_on_location = working_on_location.trim();
-            if (working_on_location != "") {
-                newobj.publicationLocation = working_on_location;
-            }
+            newobj.publicationLocation = response.publisher_text.replace(/\ufffd/g, "é").replace(response.publisher_name, "").replace(newobj.publicationDate, "").replace(/[^a-zA-z\s]/g, "").trim();
         }
         // Nombre de pages
         if (response.physical_description_text != "") {
             var arr_pages = response.physical_description_text.split(" ");
             if (arr_pages.indexOf("p.") != -1) {
-                var indexOfPages = arr_pages.indexOf("p.") - 1;
-                newobj.pageNumber = arr_pages[indexOfPages];
+                newobj.pageNumber = arr_pages[arr_pages.indexOf("p.") - 1];
             } else if (arr_pages.indexOf("pages") != -1) {
-                var indexOfPages = arr_pages.indexOf("pages") - 1;
-                newobj.pageNumber = arr_pages[indexOfPages];
+                newobj.pageNumber = arr_pages[arr_pages.indexOf("pages") - 1];
             }
         }
-        response.author1firstname = "";
-        response.author1lastname = "";
-        response.author2lastname = "";
-        response.author2firstname = "";
-        response.author3lastname = "";
-        response.author3firstname = "";
         // Auteur
         if (response.author_data.length) {
             for (var i = 0; i < response.author_data.length; i++) {
@@ -62,10 +44,9 @@ angular.module("metho.service.projects.fetch", [])
                     newobj["author" + String(i + 1) + "firstname"] = response.author_data[i].name.split(",")[1].replace(/\ufffd/g, "é").trim();
                 }
             }
-            var authorNum = response.author_data.length;
-            if (authorNum >= 1 && authorNum <= 3) {
+            if (response.author_data.length >= 1 && response.author_data.length <= 3) {
                 newobj.hasAuthors = "13";
-            } else if (authorNum > 3) {
+            } else if (response.author_data.length > 3) {
                 newobj.hasAuthors = "more3";
             }else {
                 newobj.hasAuthors = "13";
