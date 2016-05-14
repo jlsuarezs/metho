@@ -72,12 +72,8 @@ angular.module('metho.controller.projects.detail', [])
         $scope.newSourceModal = modal;
         if ($scope.isAdvanced) {
             $scope.$watch("newsource.title", function () {
-                if ($scope.newSourceModal.isShown() && !$scope.insertingFromScan) {
-                    $scope.showSuggestions = false;
-                    $scope.endSuggestionLoading = false;
-                    $scope.noSuggestion = false;
-                    $scope.loadingSuggestions = true;
-                    Fetch.fromNameISBNdb($scope.newsource.title).then(function (response) {
+                if ($scope.newSourceModal.isShown() && $scope.newsource.type == "book" && !$scope.insertingFromScan) {
+                    var onSuccess = function (response) {
                         if (response.length == 0) {
                             $scope.loadingSuggestions = false;
                             $scope.noSuggestion = true;
@@ -86,7 +82,8 @@ angular.module('metho.controller.projects.detail', [])
                             $scope.loadingSuggestions = false;
                             $scope.endSuggestionLoading = true;
                         }
-                    }).catch(function (err) {
+                    }
+                    var onFailure = function (err) {
                         $scope.loadingSuggestions = false;
                         if (err == 404) {
                             $scope.noSuggestion = true;
@@ -96,7 +93,18 @@ angular.module('metho.controller.projects.detail', [])
                             console.log(err);
                             $scope.noSuggestion = true;
                         }
-                    });
+                    }
+                    $scope.showSuggestions = false;
+                    $scope.endSuggestionLoading = false;
+                    $scope.noSuggestion = false;
+                    $scope.loadingSuggestions = true;
+                    if ($scope.newsource.author1firstname || $scope.newsource.author1lastname) {
+                        Fetch.fromNameISBNdb($scope.newsource.title, ($scope.newsource.author1firstname ? $scope.newsource.author1firstname : "") + " " + ($scope.newsource.author1lastname ? $scope.newsource.author1lastname : "")).then(onSuccess).catch(onFailure);
+                    }else {
+                        Fetch.fromNameISBNdb($scope.newsource.title).then(onSuccess).catch(onFailure);
+                    }
+                }else {
+                    $scope.insertingFromScan = false;
                 }
             });
         }
@@ -129,6 +137,7 @@ angular.module('metho.controller.projects.detail', [])
         $scope.newsource.pageNumber = $scope.suggestions[index].pageNumber;
 
         $scope.showSuggestions = false;
+        $scope.insertingFromScan = true;
     }
 
     $scope.openExplainingPopup = function () {
@@ -630,6 +639,7 @@ angular.module('metho.controller.projects.detail', [])
                 $scope.newsource.publicationDate = response.publicationDate;
                 $scope.newsource.publicationLocation = response.publicationLocation;
                 $scope.newsource.pageNumber = response.pageNumber;
+                $scope.insertingFromScan = true;
                 loading.hide();
             }).catch(function (response) {
                 loading.hide();

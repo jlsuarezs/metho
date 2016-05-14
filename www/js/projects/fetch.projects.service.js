@@ -96,12 +96,10 @@ angular.module("metho.service.projects.fetch", [])
         return p.promise;
     }
 
-    methods.fromNameISBNdb = function (name) {
+    methods.fromNameISBNdb = function (name, author) {
         var p = $q.defer();
-        $http({
-            method: "GET",
-            url: "http://isbndb.com/api/v2/json/YVFT6RLV/books?q=" + encodeURIComponent(name)
-        }).then(function (response) {
+
+        var onSuccess = function (response) {
             if (!!response.data.error) {
                 p.reject(404);
             }else {
@@ -112,9 +110,23 @@ angular.module("metho.service.projects.fetch", [])
                 cacheByName[name] = objects;
                 p.resolve(objects);
             }
-        }).catch(function (response) {
+        }
+
+        var onFailure = function (response) {
             p.reject(response.status);
-        });
+        }
+
+        if (author != "" && author != null) {
+            $http({
+                method: "GET",
+                url: "http://isbndb.com/api/v2/json/YVFT6RLV/books?q=" + encodeURIComponent(name + " " + author) + "&i=combined"
+            }).then(onSuccess).catch(onFailure);
+        }else {
+            $http({
+                method: "GET",
+                url: "http://isbndb.com/api/v2/json/YVFT6RLV/books?q=" + encodeURIComponent(name)
+            }).then(onSuccess).catch(onFailure);
+        }
 
         return p.promise;
     }
