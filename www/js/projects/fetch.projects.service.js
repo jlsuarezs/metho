@@ -8,9 +8,15 @@ angular.module("metho.service.projects.fetch", [])
     var parseFromISBNdb = function (response) {
         var newobj = {};
         // Titre
-        newobj.title = response.title.replace(/\ufffd/g, "é").trim();
+        if (response.title.isUpperCase()) {
+            newobj.title = response.title.replace(/\ufffd/g, "é").trim().toLowerCase().capitalizeEveryFirstLetter();
+        }else if (response.title.isLowerCase()) {
+            newobj.title = response.title.replace(/\ufffd/g, "é").trim().capitalizeEveryFirstLetter();
+        }else {
+            newobj.title = response.title.replace(/\ufffd/g, "é").trim();
+        }
         // Publisher/Editor
-        newobj.editor = response.publisher_name.replace(/\ufffd/g, "é").trim();
+        newobj.editor = response.publisher_name.replace(/\ufffd/g, "é").trim().toLowerCase().capitalizeEveryFirstLetter();
         // Date de publication
         if (!!response.edition_info && response.edition_info.match(/[0-9]{4}/)) {
             newobj.publicationDate = response.edition_info.match(/[0-9]{4}/)[0].trim();
@@ -22,7 +28,7 @@ angular.module("metho.service.projects.fetch", [])
 
         // Lieu de publication
         if (response.publisher_text != "") {
-            newobj.publicationLocation = response.publisher_text.replace(/\ufffd/g, "é").replace(response.publisher_name, "").replace(newobj.publicationDate, "").replace(/[^a-zA-z\s]/g, "").trim();
+            newobj.publicationLocation = response.publisher_text.replace(/\ufffd/g, "é").replace(response.publisher_name, "").replace(newobj.publicationDate, "").replace(/[^a-zA-z\s]/g, "").trim().toLowerCase().capitalizeFirstLetter();
         }
         // Nombre de pages
         if (response.physical_description_text != "") {
@@ -37,11 +43,11 @@ angular.module("metho.service.projects.fetch", [])
         if (response.author_data.length) {
             for (var i = 0; i < response.author_data.length; i++) {
                 if (response.author_data[i].name.split(",")[0] == response.author_data[i].name) {
-                    newobj["author" + String(i + 1) + "firstname"] = response.author_data[i].name.split(" ")[0].replace(/\ufffd/g, "é").trim();
-                    newobj["author" + String(i + 1) + "lastname"] = response.author_data[i].name.split(" ")[1].replace(/\ufffd/g, "é").trim();
+                    newobj["author" + String(i + 1) + "firstname"] = response.author_data[i].name.split(" ")[0].replace(/\ufffd/g, "é").trim().capitalizeFirstLetter();
+                    newobj["author" + String(i + 1) + "lastname"] = response.author_data[i].name.split(" ")[1].replace(/\ufffd/g, "é").trim().capitalizeFirstLetter();
                 } else {
-                    newobj["author" + String(i + 1) + "lastname"] = response.author_data[i].name.split(",")[0].replace(/\ufffd/g, "é").trim();
-                    newobj["author" + String(i + 1) + "firstname"] = response.author_data[i].name.split(",")[1].replace(/\ufffd/g, "é").trim();
+                    newobj["author" + String(i + 1) + "lastname"] = response.author_data[i].name.split(",")[0].replace(/\ufffd/g, "é").trim().capitalizeFirstLetter();
+                    newobj["author" + String(i + 1) + "firstname"] = response.author_data[i].name.split(",")[1].replace(/\ufffd/g, "é").trim().capitalizeFirstLetter();
                 }
             }
             if (response.author_data.length >= 1 && response.author_data.length <= 3) {
