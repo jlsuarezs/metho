@@ -1,6 +1,6 @@
 angular.module('metho.controller.projects.detail', [])
 
-.controller('ProjectDetailCtrl', function($scope, $rootScope, $state, $http, $timeout, $translate, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicListDelegate, $ionicActionSheet, $ionicLoading, $ionicSlideBoxDelegate, $ionicBackdrop, ParseSource, Settings, Storage, Fetch) {
+.controller('ProjectDetailCtrl', function($scope, $rootScope, $state, $http, $timeout, $translate, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicListDelegate, $ionicActionSheet, $ionicLoading, $ionicSlideBoxDelegate, $ionicBackdrop, ParseSource, Settings, Storage, Fetch, Autocomplete) {
     $scope.project = {
         name: "",
         id: $stateParams.projectID,
@@ -15,6 +15,7 @@ angular.module('metho.controller.projects.detail', [])
     $scope.refreshIndex = null;
     $scope.removeAnimate = false;
     $scope.refreshPending = false;
+    $scope.autocompletes = {};
     $scope.isAdvanced = Settings.get("advanced");
 
     $scope.loadSources = function () {
@@ -63,6 +64,10 @@ angular.module('metho.controller.projects.detail', [])
     }
 
     $scope.loadPendings();
+
+    Autocomplete.getAutocompletes().then(function (response) {
+        $scope.autocompletes = response;
+    });
 
     // New source modal
     $ionicModal.fromTemplateUrl('templates/new.source.modal.html', {
@@ -226,23 +231,9 @@ angular.module('metho.controller.projects.detail', [])
 
     $scope.autoCompleteEditor = function() {
         if ($scope.newsource.type == "internet") {
-            switch ($scope.newsource.editor.toLowerCase()) {
-                case "wikipédia":
-                case "wikipédia, l'encyclopédie libre":
-                case "wikipédia l'encyclopédie libre":
-                case "wikipedia, l'encyclopédie libre":
-                case "wikipedia l'encyclopédie libre":
-                    $scope.newsource.url = "https://www.fr.wikipedia.org";
-                    $scope.newsource.editor = "Wikipédia, l'encyclopédie libre";
-                    break;
-                case "wikipedia":
-                case "wikipedia the free encyclopedia":
-                case "wikipedia, the free encyclopedia":
-                    $scope.newsource.url = "https://www.en.wikipedia.org";
-                    $scope.newsource.editor = "Wikipedia, the free encyclopedia";
-                    break;
-                default:
-                    $scope.newsource.url = "";
+            if ($scope.autocompletes[$scope.newsource.editor.toLowerCase()]) {
+                $scope.newsource.url = $scope.autocompletes[$scope.newsource.editor.toLowerCase()].url;
+                $scope.newsource.editor = $scope.autocompletes[$scope.newsource.editor.toLowerCase()].title;
             }
         }
     }
