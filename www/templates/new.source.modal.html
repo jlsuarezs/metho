@@ -55,7 +55,7 @@
                     <div class="item item-input item-stacked-label item-icon-right">
                         <span class="input-label" translate>PROJECT.DETAIL.MODAL.BOOK.TITLE_LABEL</span>
                         <input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.TITLE_PLACEHOLDER' | translate }}" ng-model="newsource.title" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1500, 'blur': 0}}">
-                        <ion-spinner ng-if="loadingSuggestions" icon="ios-small" class="spinner-suggestions"></ion-spinner>
+                        <ion-spinner ng-if="loadingSuggestions" icon="ios-small" class="spinner-suggestions" ng-class="{ 'extra-padding-right': endSuggestionLoading }"></ion-spinner>
                         <button type="button" ng-if="endSuggestionLoading" class="icon ion-chevron-right button button-light button-small" ng-click="toggleShowSuggestion()" ng-class="{ 'rotate-90': showSuggestions }"></button>
                         <button type="button" ng-if="noSuggestion" class="icon ion-close-circled button button-light button-small" ng-click="openExplainingPopup()"></button>
                     </div>

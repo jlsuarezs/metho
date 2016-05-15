@@ -95,7 +95,6 @@ angular.module('metho.controller.projects.detail', [])
                         }
                     }
                     $scope.showSuggestions = false;
-                    $scope.endSuggestionLoading = false;
                     $scope.noSuggestion = false;
                     $scope.loadingSuggestions = true;
                     if ($scope.newsource.author1firstname || $scope.newsource.author1lastname) {
