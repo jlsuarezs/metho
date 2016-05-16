@@ -1,6 +1,6 @@
 angular.module("metho.controller.projects.pending", [])
 
-.controller("PendingCtrl", function($scope, $state, $http, $translate, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicLoading, ParseSource, Storage, Fetch) {
+.controller("PendingCtrl", function($scope, $state, $http, $translate, $timeout, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicLoading, ParseSource, Storage, Fetch) {
     $scope.project = {
         id: $stateParams.projectID,
         sources: []
@@ -9,6 +9,7 @@ angular.module("metho.controller.projects.pending", [])
     $scope.newsource = {};
     $scope.editingISBN = null;
     $scope.editingIndex = null;
+    $scope.removeAnimate = false;
 
     $ionicModal.fromTemplateUrl('templates/pending.source.modal.html', {
         scope: $scope,
@@ -104,12 +105,15 @@ angular.module("metho.controller.projects.pending", [])
 
     $scope.deletePending = function (id) {
         Storage.deletePending(id).then(function (res) {
-            for (var i = 0; i < $scope.pendings.length; i++) {
-                if ($scope.pendings[i]._id == id) {
-                    $scope.pendings.splice(i, 1);
-                    $scope.$apply();
+            $scope.removeAnimate = true;
+            $timeout(function () {
+                for (var i = 0; i < $scope.pendings.length; i++) {
+                    if ($scope.pendings[i]._id == id) {
+                        $scope.pendings.splice(i, 1);
+                        $scope.removeAnimate = false;
+                    }
                 }
-            }
+            });
         }).catch(function (err) {
             console.log(err);
         });
