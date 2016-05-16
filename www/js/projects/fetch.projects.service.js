@@ -1,6 +1,6 @@
 angular.module("metho.service.projects.fetch", [])
 
-.factory("Fetch", function ($http, $q) {
+.factory("Fetch", function ($http, $q, $ionicLoading) {
     var methods = {};
     var cacheByISBN = {};
     var cacheByName = {};
@@ -70,20 +70,29 @@ angular.module("metho.service.projects.fetch", [])
     methods.fromISBNdb = function (isbn) {
         var p = $q.defer();
 
-        $http({
-            method: "GET",
-            url: "http://isbndb.com/api/v2/json/" + pickKey() + "/book/" + isbn
-        }).then(function (response) {
-            if (!!response.data.error) {
-                p.reject(404);
-            }else {
-                var newobject = parseFromISBNdb(response.data.data[0]);
-                cacheByISBN[isbn] = newobject;
-                p.resolve(newobject);
-            }
-        }).catch(function (response) {
-            p.reject(response.status);
-        });
+        if (cacheByISBN[isbn]) {
+            p.resolve(cacheByISBN[isbn]);
+        }else {
+            var loading = $ionicLoading.show({
+                template: "<ion-spinner></ion-spinner>"
+            });
+            $http({
+                method: "GET",
+                url: "http://isbndb.com/api/v2/json/" + pickKey() + "/book/" + isbn
+            }).then(function (response) {
+                if (!!response.data.error) {
+                    loading.hide();
+                    p.reject(404);
+                }else {
+                    var newobject = parseFromISBNdb(response.data.data[0]);
+                    cacheByISBN[isbn] = newobject;
+                    loading.hide();
+                    p.resolve(newobject);
+                }
+            }).catch(function (response) {
+                p.reject(response.status);
+            });
+        }
 
         return p.promise;
     }

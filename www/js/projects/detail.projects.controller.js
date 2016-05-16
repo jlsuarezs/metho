@@ -613,9 +613,6 @@ angular.module('metho.controller.projects.detail', [])
     // Scan
     $scope.fetchFromISBNdb = function(inputISBN) {
         if (navigator.onLine) {
-            var loading = $ionicLoading.show({
-                template: '<ion-spinner></ion-spinner>'
-            });
             Fetch.fromISBNdb(inputISBN).then(function (response) {
                 $scope.newsource.author1firstname = response.author1firstname;
                 $scope.newsource.author1lastname = response.author1lastname;
@@ -630,9 +627,7 @@ angular.module('metho.controller.projects.detail', [])
                 $scope.newsource.publicationLocation = response.publicationLocation;
                 $scope.newsource.pageNumber = response.pageNumber;
                 $scope.insertingFromScan = true;
-                loading.hide();
             }).catch(function (response) {
-                loading.hide();
                 if (response == 404) {
                     $translate(["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE", "PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TEXT"]).then(function (translations) {
                         $ionicPopup.alert({
