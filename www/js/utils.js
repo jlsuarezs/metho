@@ -22,4 +22,8 @@ Array.prototype.fromObject = function (obj) {
     return ar;
 };
 
+function random(min, max) {
+    return Math.floor(Math.random()*(max-min+1)+min);  
+}
+
 var unknown_subjects = ["Matière inconnue", "Unknown subject", "Materia desconocida"];
