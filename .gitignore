@@ -8,3 +8,6 @@ platforms/ios/www/*
 .editorconfig
 bower.json
 www/.tern-project
+www/**/tags
+www/.tags
+www/.tags1
