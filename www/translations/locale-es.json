@@ -8,7 +8,7 @@
     "PROJECT":{
         "TAB":{
             "TAB_TITLE": "@:TAB_PROJECT",
-            "EMPTY_TAB": "No proyecto? Va a venir...",
+            "EMPTY_TAB": "¿ No proyecto ? Va a venir...",
             "EDIT_ITEM": "Editar",
             "DELETE_ITEM": "Eliminar",
             "UNKNOWN_MATTER": "Materia desconocida",
@@ -33,7 +33,7 @@
             "POPUP": {
                 "ERROR_TEXT": "Error",
                 "NO_PROJECT_NAME": "Introduzca el nombre del proyecto",
-                "DELETE_PROJECT_TITLE": "Eliminar el proyecto ?",
+                "DELETE_PROJECT_TITLE": "¿ Eliminar el proyecto ?",
                 "DELETE_PROJECT": "La eliminación de este proyecto arrastrará la pérdida de todas las fuentes en eso. La eliminación es irreversible.",
                 "CANCEL": "@:PROJECT.TAB.MODAL.CANCEL",
                 "DELETE": "Eliminar",
@@ -41,7 +41,7 @@
             }
         },
         "DETAIL":{
-            "EMPTY_TAB": "Qué es un proyecto sin fuentes ?",
+            "EMPTY_TAB": "¿ Qué es un proyecto sin fuentes ?",
             "DELETE_ITEM": "Eliminar",
             "PENDING_ELEMENTS": "Elementos pendientes({{number}})",
             "CHOOSE_TYPE": "Elegir un typo de fuente",
@@ -181,7 +181,7 @@
                 "ORDER_SUB": "Orden de clasificación",
                 "ALPHA": "Alphabetica",
                 "TYPE": "Typo",
-                "ERRORS_SOURCES": "Las fuentes que trata de compartir contienen <strong>{{errNum}}</strong> error(es). Quiere compartirlas ?",
+                "ERRORS_SOURCES": "Las fuentes que trata de compartir contienen <strong>{{errNum}}</strong> error(es). ¿ Quiere compartirlas ?",
                 "ERROR_TEXT": "Error",
                 "SHARE_TEXT": "Compartición",
                 "CANCEL": "Cancelar",
@@ -194,15 +194,15 @@
                 "BOOK_UNAVAILABLE_TITLE": "Libro inencontrable",
                 "BOOK_UNAVAILABLE_TEXT": "El codigo de barras era bien escánado pero este libro no es en nuestra base de datos.",
                 "TIMEOUT_TITLE": "Se acabó el tiempo",
-                "TIMEOUT_TEXT": "Se acabó el tiempo. Es probablemente en un red lento. Quiere añadir el codigo de barras en la lista de los elementos pendientes ?",
+                "TIMEOUT_TEXT": "Se acabó el tiempo. Es probablemente en un red lento. ¿ Quiere añadir el codigo de barras en la lista de los elementos pendientes ?",
                 "ADD": "Añadir",
                 "RETRY": "Reintentar",
                 "NO_CONNECTION": "No conexión",
-                "ADD_TO_PENDINGS": "Quiere añadir el codigo de barras en la lista de los elementos pendientes ?",
+                "ADD_TO_PENDINGS": "¿ Quiere añadir el codigo de barras en la lista de los elementos pendientes ?",
                 "NOT_RIGHT_BARCODE_TYPE": "El codigo de barras era escánado pero este codigo de barras no es uno de libro. El codigo de barras normalmente tiene una mención ISBN sobre lo. Si hay dos codigos de barras, el incorrecto era tal vez escánado. Puede reintentar.",
                 "UNABLE_TO_SCAN": "Imposible de escáner",
                 "UNABLE_TO_SCAN_TEXT": "Essayez d'activer l'accès à l'appareil photo pour cette application dans l'onglet Confidentialité des Réglages. Pruebe de activar el acceso a la cámara en la pestaña Confidentialidad de los Ajustes",
-                "SAVE_INTERVIEWER_NAME": "Quiere salvaguardar el nombre del entrevistador para una utilisación futura ?",
+                "SAVE_INTERVIEWER_NAME": "¿ Quiere salvaguardar el nombre del entrevistador para una utilisación futura ?",
                 "NO_SUGGESTIONS": "Ningún sugerencia",
                 "NO_SUGGESTIONS_DESC": "No hay ningún sugerencia disponible"
             }
@@ -231,14 +231,14 @@
                 "NEW_SOURCE": "Nueva fuente",
                 "MUST_HAVE_TYPE": "La fuente debe tener un typo",
                 "BOOK_UNAVAILABLE_TITLE": "Libro inencontrable",
-                "BOOK_UNAVAILABLE_TEXT": "El codigo de barras era bien escánado pero este libro no es en nuestra base de datos. Quiere buscar las informaciónes sobre Internet ?",
+                "BOOK_UNAVAILABLE_TEXT": "El codigo de barras era bien escánado pero este libro no es en nuestra base de datos. ¿ Quiere buscar las informaciónes sobre Internet ?",
                 "SEARCH": "Buscar",
                 "LATER": "Más tarde",
                 "RETRY": "Reintentar",
                 "TIMEOUT_TITLE": "Se acabó el tiempo",
-                "TIMEOUT_TEXT": "Se acabó el tiempo. Es probablemente en un red lento. Quiere reintentar ?",
+                "TIMEOUT_TEXT": "Se acabó el tiempo. Es probablemente en un red lento. ¿ Quiere reintentar ?",
                 "NO_CONNECTION": "No conexión",
-                "RETRY_?": "Quiere reintentar ?",
+                "RETRY_?": "¿ Quiere reintentar ?",
                 "CANCEL": "Cancelar"
             }
         },
@@ -544,7 +544,7 @@
         "ATTRIBUTIONS": "Adaptado a partir del <em>Guide de Méthodologie</em> de la Escuela de educación internacional de McMasterville escrito por Raymond Bédard.",
         "ADVANCED_MODE": {
             "TITLE": "Modo avanzado",
-            "WAITING_FOR": "Qué estàs esperando ? Pruebe el modo avanzado. Estos son las funcionalidades incluidas : ",
+            "WAITING_FOR": "¿ Qué estàs esperando ? Pruebe el modo avanzado. Estos son las funcionalidades incluidas : ",
             "SCANNING": "Escáner",
             "SCAN_DESC": "Escána el ISBN de un libro para hacer su fuente automáticamente (ciertos libros no son compatibles)",
             "MODELS": "Modelos",
@@ -568,15 +568,15 @@
             "FEATURE": "Funcionalidad",
             "FEATURE_DESC": "Sugerir una nueva funcionalidad",
             "EMAIL": {
-                "PROJECT": "<p>Gracias de devolver un problema. Intentaré de arreglarlo y de responder a usted rapidamente. Responda a las preguntas mas abajo para ayudarme a arreglar el problema. Respuestas largas no son necesarias, algunas palabras son suficientes.</p><br><strong>Donde se produce este problema (al interior del pestaña proyectos)?</strong><br><br><br><strong>Describe el problema.</strong><br><br><br><strong>Describe cómo reproducir este problema (etapas).</strong><br><br><br><strong>Describe las consecuencia del problema (forzoso de la aplicación, imposible de añadir una fuente, etc.)</strong><br><br><br><p>Gracias por su ayuda a mejorar la aplicación. Comunicaré con usted si necesito más information.</p><h5>No modifica esta sección</h5><p>",
+                "PROJECT": "<p>Gracias de devolver un problema. Intentaré de arreglarlo y de responder a usted rapidamente. Responda a las preguntas mas abajo para ayudarme a arreglar el problema. Respuestas largas no son necesarias, algunas palabras son suficientes.</p><br><strong>¿ Donde se produce este problema (al interior del pestaña proyectos)?</strong><br><br><br><strong>Describe el problema.</strong><br><br><br><strong>Describe cómo reproducir este problema (etapas).</strong><br><br><br><strong>Describe las consecuencia del problema (forzoso de la aplicación, imposible de añadir una fuente, etc.)</strong><br><br><br><p>Gracias por su ayuda a mejorar la aplicación. Comunicaré con usted si necesito más information.</p><h5>No modifica esta sección</h5><p>",
                 "PROJECT_TITLE": "Problema en la pestaña Proyectos",
-                "REFERENCE": "<p>Gracias de devolver un problema. Intentaré de arreglarlo y de responder a usted rapidamente. Responda a las preguntas mas abajo para ayudarme a arreglar el problema. Respuestas largas no son necesarias, algunas palabras son suficientes.</p><br><strong>Cuáles son las sección donde el problema es (todas?)?</strong><br><br><br><strong>Describe el problema.</strong><br><br><br><strong>Describe cómo reproducir este problema (etapas).</strong><br><br><br><strong>Describe las consecuencia del problema (forzoso de la aplicación, error de gramática, etc.)</strong><br><br><br><p>Gracias por su ayuda a mejorar la aplicación. Comunicaré con usted si necesito más information.</p><h5>No modifica esta sección</h5><p>",
+                "REFERENCE": "<p>Gracias de devolver un problema. Intentaré de arreglarlo y de responder a usted rapidamente. Responda a las preguntas mas abajo para ayudarme a arreglar el problema. Respuestas largas no son necesarias, algunas palabras son suficientes.</p><br><strong>¿ Cuáles son las sección donde el problema es (¿todas?)?</strong><br><br><br><strong>Describe el problema.</strong><br><br><br><strong>Describe cómo reproducir este problema (etapas).</strong><br><br><br><strong>Describe las consecuencia del problema (forzoso de la aplicación, error de gramática, etc.)</strong><br><br><br><p>Gracias por su ayuda a mejorar la aplicación. Comunicaré con usted si necesito más information.</p><h5>No modifica esta sección</h5><p>",
                 "REFERENCE_TITLE": "Problema en la pestaña Referencia",
-                "SETTINGS": "<p>Gracias de devolver un problema. Intentaré de arreglarlo y de responder a usted rapidamente. Responda a las preguntas mas abajo para ayudarme a arreglar el problema. Respuestas largas no son necesarias, algunas palabras son suficientes.</p><br><strong>Cuáles parametros son concernidos por el problema (todos?)?</strong><br><br><br><strong>Describe el problema.</strong><br><br><br><strong>Describe cómo reproducir este problema (etapas).</strong><br><br><br><strong>Describe las consecuencia del problema (forzoso de la aplicación, el parametro no fonciona, etc.)</strong><br><br><br><p>Gracias por su ayuda a mejorar la aplicación. Comunicaré con usted si necesito más information.</p><h5>No modifica esta sección</h5><p>",
+                "SETTINGS": "<p>Gracias de devolver un problema. Intentaré de arreglarlo y de responder a usted rapidamente. Responda a las preguntas mas abajo para ayudarme a arreglar el problema. Respuestas largas no son necesarias, algunas palabras son suficientes.</p><br><strong>¿ Cuáles parametros son concernidos por el problema (¿todos?)?</strong><br><br><br><strong>Describe el problema.</strong><br><br><br><strong>Describe cómo reproducir este problema (etapas).</strong><br><br><br><strong>Describe las consecuencia del problema (forzoso de la aplicación, el parametro no fonciona, etc.)</strong><br><br><br><p>Gracias por su ayuda a mejorar la aplicación. Comunicaré con usted si necesito más information.</p><h5>No modifica esta sección</h5><p>",
                 "SETTINGS_TITLE": "Problema con los ajustes",
                 "COMMENT": "<p>Gracias de emitir un comentario sobre esta aplicación. Intentaré de responder rapidamente.</p><strong>Comentario</strong><br><br><br>",
                 "COMMENT_TITLE": "Comentario",
-                "FEATURE": "<p>Gracias de sugerir una funcionalidad. Intentaré de responder rapidamente. Responda a las preguntas mas abajo para ayudarme a comprender su idea. Respuestas largas no son necesarias, algunas palabras son suficientes.</p><br><strong>Cuál parte de la aplicación es concernida ?</strong><br><br><br><strong>Describe la funcionalidad.</strong><br><br><br><p>Gracias por su ayuda a mejorar la aplicación. Comunicaré con usted si necesito más information.</p>",
+                "FEATURE": "<p>Gracias de sugerir una funcionalidad. Intentaré de responder rapidamente. Responda a las preguntas mas abajo para ayudarme a comprender su idea. Respuestas largas no son necesarias, algunas palabras son suficientes.</p><br><strong>¿ Cuál parte de la aplicación es concernida ?</strong><br><br><br><strong>Describe la funcionalidad.</strong><br><br><br><p>Gracias por su ayuda a mejorar la aplicación. Comunicaré con usted si necesito más information.</p>",
                 "FEATURE_TITLE": "Sugerir una funcionalidad"
             }
         }
