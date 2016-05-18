@@ -204,7 +204,10 @@
                 "UNABLE_TO_SCAN_TEXT": "Essayez d'activer l'accès à l'appareil photo pour cette application dans l'onglet Confidentialité des Réglages. Pruebe de activar el acceso a la cámara en la pestaña Confidentialidad de los Ajustes",
                 "SAVE_INTERVIEWER_NAME": "¿ Quiere salvaguardar el nombre del entrevistador para una utilisación futura ?",
                 "NO_SUGGESTIONS": "Ningún sugerencia",
-                "NO_SUGGESTIONS_DESC": "No hay ningún sugerencia disponible"
+                "NO_SUGGESTIONS_DESC": "No hay ningún sugerencia disponible",
+                "AUTO_FILL_TITLE": "Llenado automático",
+                "AUTO_FILL_DESC": "La fuente no es vacío. Las informaciónes anteriores pudieron ser sobreescritas. ¿ Quiere continuar ?",
+                "OVERWRITE": "Sobreescribir"
             }
         },
         "SOURCE":{

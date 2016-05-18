@@ -204,7 +204,10 @@
                 "UNABLE_TO_SCAN_TEXT": "Essayez d'activer l'accès à l'appareil photo pour cette application dans l'onglet Confidentialité des Réglages.",
                 "SAVE_INTERVIEWER_NAME": "Voulez-vous sauvegarder le nom de l'intervieweur pour une utilisation future?",
                 "NO_SUGGESTIONS": "Aucune suggestion",
-                "NO_SUGGESTIONS_DESC": "Il n'y a aucune suggestion disponible"
+                "NO_SUGGESTIONS_DESC": "Il n'y a aucune suggestion disponible",
+                "AUTO_FILL_TITLE": "Remplissage",
+                "AUTO_FILL_DESC": "La source n'est pas vide. Les données précédentes pourraient être écrasées. Voulez-vous continuer ?",
+                "OVERWRITE": "Écraser"
             }
         },
         "SOURCE":{

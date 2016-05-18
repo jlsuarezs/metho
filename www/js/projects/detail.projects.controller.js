@@ -127,21 +127,53 @@ angular.module('metho.controller.projects.detail', [])
     }
 
     $scope.fillWithInfos = function (index) {
-        $scope.newsource.author1firstname = $scope.suggestions[index].author1firstname;
-        $scope.newsource.author1lastname = $scope.suggestions[index].author1lastname;
-        $scope.newsource.author2firstname = $scope.suggestions[index].author2firstname;
-        $scope.newsource.author2lastname = $scope.suggestions[index].author2lastname;
-        $scope.newsource.author3firstname = $scope.suggestions[index].author3firstname;
-        $scope.newsource.author3lastname = $scope.suggestions[index].author3lastname;
-        $scope.newsource.hasAuthors = $scope.suggestions[index].hasAuthors;
-        $scope.newsource.title = $scope.suggestions[index].title;
-        $scope.newsource.editor = $scope.suggestions[index].editor;
-        $scope.newsource.publicationDate = $scope.suggestions[index].publicationDate;
-        $scope.newsource.publicationLocation = $scope.suggestions[index].publicationLocation;
-        $scope.newsource.pageNumber = $scope.suggestions[index].pageNumber;
+        if ($scope.isNewSourceEmpty(false)) {
+            $scope.newsource.author1firstname = $scope.suggestions[index].author1firstname;
+            $scope.newsource.author1lastname = $scope.suggestions[index].author1lastname;
+            $scope.newsource.author2firstname = $scope.suggestions[index].author2firstname;
+            $scope.newsource.author2lastname = $scope.suggestions[index].author2lastname;
+            $scope.newsource.author3firstname = $scope.suggestions[index].author3firstname;
+            $scope.newsource.author3lastname = $scope.suggestions[index].author3lastname;
+            $scope.newsource.hasAuthors = $scope.suggestions[index].hasAuthors;
+            $scope.newsource.title = $scope.suggestions[index].title;
+            $scope.newsource.editor = $scope.suggestions[index].editor;
+            $scope.newsource.publicationDate = $scope.suggestions[index].publicationDate;
+            $scope.newsource.publicationLocation = $scope.suggestions[index].publicationLocation;
+            $scope.newsource.pageNumber = $scope.suggestions[index].pageNumber;
 
-        $scope.showSuggestions = false;
-        $scope.insertingFromScan = true;
+            $scope.showSuggestions = false;
+            $scope.insertingFromScan = true;
+        }else {
+            $translate(["PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE", "PROJECT.DETAIL.POPUP.AUTO_FILL_DESC", "PROJECT.DETAIL.POPUP.OVERWRITE", "PROJECT.DETAIL.POPUP.CANCEL"]).then(function (translations) {
+                $ionicPopup.confirm({
+                    title: translations["PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE"],
+                    template: "<p class='center'>" + translations["PROJECT.DETAIL.POPUP.AUTO_FILL_DESC"] + "</p>",
+                    okText: translations["PROJECT.DETAIL.POPUP.OVERWRITE"],
+                    okType: "button-assertive",
+                    cancelText: translations["PROJECT.DETAIL.POPUP.CANCEL"]
+                }).then(function(res) {
+                    if(res) {
+                        $scope.newsource.author1firstname = $scope.suggestions[index].author1firstname;
+                        $scope.newsource.author1lastname = $scope.suggestions[index].author1lastname;
+                        $scope.newsource.author2firstname = $scope.suggestions[index].author2firstname;
+                        $scope.newsource.author2lastname = $scope.suggestions[index].author2lastname;
+                        $scope.newsource.author3firstname = $scope.suggestions[index].author3firstname;
+                        $scope.newsource.author3lastname = $scope.suggestions[index].author3lastname;
+                        $scope.newsource.hasAuthors = $scope.suggestions[index].hasAuthors;
+                        $scope.newsource.title = $scope.suggestions[index].title;
+                        $scope.newsource.editor = $scope.suggestions[index].editor;
+                        $scope.newsource.publicationDate = $scope.suggestions[index].publicationDate;
+                        $scope.newsource.publicationLocation = $scope.suggestions[index].publicationLocation;
+                        $scope.newsource.pageNumber = $scope.suggestions[index].pageNumber;
+
+                        $scope.showSuggestions = false;
+                        $scope.insertingFromScan = true;
+                    }else {
+                        $scope.showSuggestions = false;
+                    }
+                });
+            });
+        }
     }
 
     $scope.openExplainingPopup = function () {
@@ -235,6 +267,22 @@ angular.module('metho.controller.projects.detail', [])
                 $scope.newsource.url = $scope.autocompletes[$scope.newsource.editor.toLowerCase()].url;
                 $scope.newsource.editor = $scope.autocompletes[$scope.newsource.editor.toLowerCase()].title;
             }
+        }
+    }
+
+    $scope.isNewSourceEmpty = function (includeTitle) {
+        if (!$scope.newsource.author1firstname && !$scope.newsource.author1lastname && !$scope.newsource.author2firstname && !$scope.newsource.author2lastname && !$scope.newsource.author3firstname && !$scope.newsource.author3lastname && !$scope.newsource.editor && !$scope.newsource.hasAuthors && !$scope.newsource.pageNumber && !$scope.newsource.publicationDate && !$scope.newsource.publicationLocation && !$scope.newsource.url) {
+            if (includeTitle) {
+                if (!$scope.newsource.title) {
+                    return true;
+                }else {
+                    return false;
+                }
+            }else {
+                return true;
+            }
+        }else {
+            return false;
         }
     }
 
@@ -614,19 +662,47 @@ angular.module('metho.controller.projects.detail', [])
     $scope.fetchFromISBNdb = function(inputISBN) {
         if (navigator.onLine) {
             Fetch.fromISBNdb(inputISBN).then(function (response) {
-                $scope.newsource.author1firstname = response.author1firstname;
-                $scope.newsource.author1lastname = response.author1lastname;
-                $scope.newsource.author2firstname = response.author2firstname;
-                $scope.newsource.author2lastname = response.author2lastname;
-                $scope.newsource.author3firstname = response.author3firstname;
-                $scope.newsource.author3lastname = response.author3lastname;
-                $scope.newsource.hasAuthors = response.hasAuthors;
-                $scope.newsource.title = response.title;
-                $scope.newsource.editor = response.editor;
-                $scope.newsource.publicationDate = response.publicationDate;
-                $scope.newsource.publicationLocation = response.publicationLocation;
-                $scope.newsource.pageNumber = response.pageNumber;
-                $scope.insertingFromScan = true;
+                if ($scope.isNewSourceEmpty(true)) {
+                    $scope.newsource.author1firstname = response.author1firstname;
+                    $scope.newsource.author1lastname = response.author1lastname;
+                    $scope.newsource.author2firstname = response.author2firstname;
+                    $scope.newsource.author2lastname = response.author2lastname;
+                    $scope.newsource.author3firstname = response.author3firstname;
+                    $scope.newsource.author3lastname = response.author3lastname;
+                    $scope.newsource.hasAuthors = response.hasAuthors;
+                    $scope.newsource.title = response.title;
+                    $scope.newsource.editor = response.editor;
+                    $scope.newsource.publicationDate = response.publicationDate;
+                    $scope.newsource.publicationLocation = response.publicationLocation;
+                    $scope.newsource.pageNumber = response.pageNumber;
+                    $scope.insertingFromScan = true;
+                }else {
+                    $translate(["PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE", "PROJECT.DETAIL.POPUP.AUTO_FILL_DESC", "PROJECT.DETAIL.POPUP.OVERWRITE", "PROJECT.DETAIL.POPUP.CANCEL"]).then(function (translations) {
+                        $ionicPopup.confirm({
+                            title: translations["PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE"],
+                            template: "<p class='center'>" + translations["PROJECT.DETAIL.POPUP.AUTO_FILL_DESC"] + "</p>",
+                            okText: translations["PROJECT.DETAIL.POPUP.OVERWRITE"],
+                            okType: "button-assertive",
+                            cancelText: translations["PROJECT.DETAIL.POPUP.CANCEL"]
+                        }).then(function(res) {
+                            if(res) {
+                                $scope.newsource.author1firstname = response.author1firstname;
+                                $scope.newsource.author1lastname = response.author1lastname;
+                                $scope.newsource.author2firstname = response.author2firstname;
+                                $scope.newsource.author2lastname = response.author2lastname;
+                                $scope.newsource.author3firstname = response.author3firstname;
+                                $scope.newsource.author3lastname = response.author3lastname;
+                                $scope.newsource.hasAuthors = response.hasAuthors;
+                                $scope.newsource.title = response.title;
+                                $scope.newsource.editor = response.editor;
+                                $scope.newsource.publicationDate = response.publicationDate;
+                                $scope.newsource.publicationLocation = response.publicationLocation;
+                                $scope.newsource.pageNumber = response.pageNumber;
+                                $scope.insertingFromScan = true;
+                            }
+                        });
+                    });
+                }
             }).catch(function (response) {
                 if (response == 404) {
                     $translate(["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE", "PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TEXT"]).then(function (translations) {
