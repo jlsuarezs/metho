@@ -1,6 +1,9 @@
 angular.module("metho.service.storage", [])
 
 .factory("Storage", function (localStorageService, ParseSource, $q, $rootScope) {
+    if (localStorageService.get("theresProjects") == null) {
+        localStorageService.set("theresProjects", false);
+    }
     var theresProjects = localStorageService.get("theresProjects");
     var sourceRepo = new PouchDB("sources");
     var projectRepo = new PouchDB("projects");
@@ -15,7 +18,7 @@ angular.module("metho.service.storage", [])
     var pendings = {};
     var loadingPendings = true;
 
-    if (theresProjects == true) {
+    if (theresProjects) {
         var loadingProjects = true;
         projectRepo.allDocs({include_docs: true}).then(function (docs) {
             for (var i = 0; i < docs.rows.length; i++) {
@@ -144,11 +147,18 @@ angular.module("metho.service.storage", [])
         },
         createProject: function (newproject) {
             var p = $q.defer();
+
+            loadingProjects = true;
+            loadingSources = true;
             projectRepo.post(newproject).then(function(response) {
                 sourcesByProject[response.id] = {};
                 newproject._id = response.id;
                 newproject._rev = response.rev;
                 projects[response.id] = newproject;
+                loadingProjects = false;
+                loadingSources = false;
+                $rootScope.$broadcast("sourceLoadingEnded");
+                $rootScope.$broadcast("projectLoadingEnded");
                 p.resolve(response);
             }).catch(function(err) {
                 p.reject(err);
