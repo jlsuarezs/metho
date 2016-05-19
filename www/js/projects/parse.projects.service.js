@@ -72,16 +72,16 @@ angular.module("metho.service.projects.parse", [])
             if (sourceToParse.type == "book") {
                 if (sourceToParse.hasAuthors == "13") {
 
-                    if ((sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) || (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null)) {
+                    if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
                         // Author last name
-                        if (sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) {
+                        if (sourceToParse.author1lastname) {
                             sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
                         } else {
                             addError("FIRST_AUTHOR_LASTNAME", "author1lastname");
                             sourceToParse.parsedSource += "?, ";
                         }
                         // Author first name
-                        if (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null) {
+                        if (sourceToParse.author1firstname) {
                             sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
                         } else {
                             addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname");
@@ -93,16 +93,16 @@ angular.module("metho.service.projects.parse", [])
                         sourceToParse.parsedSource += "?";
                     }
 
-                    if ((sourceToParse.author2lastname != "" && sourceToParse.author2lastname != null) || (sourceToParse.author2firstname != "" && sourceToParse.author2firstname != null)) {
+                    if (sourceToParse.author2lastname || sourceToParse.author2firstname) {
                         // Author 2 last name
-                        if (sourceToParse.author2lastname != "" && sourceToParse.author2lastname != null) {
+                        if (sourceToParse.author2lastname) {
                             sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
                         } else {
                             addError("SECOND_AUTHOR_LASTNAME", "author2lastname");
                             sourceToParse.parsedSource += "?, ";
                         }
                         // Author 2 first name
-                        if (sourceToParse.author2firstname != "" && sourceToParse.author2firstname != null) {
+                        if (sourceToParse.author2firstname) {
                             sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
                         } else {
                             addError("SECOND_AUTHOR_FIRSTNAME", "author2firstname");
@@ -110,16 +110,16 @@ angular.module("metho.service.projects.parse", [])
                         }
                     }
 
-                    if ((sourceToParse.author3lastname != "" && sourceToParse.author3lastname != null) || (sourceToParse.author3firstname != "" && sourceToParse.author3firstname != null)) {
+                    if (sourceToParse.author3lastname || sourceToParse.author3firstname) {
                         // Author 3 last name
-                        if (sourceToParse.author3lastname != "" && sourceToParse.author3lastname != null) {
+                        if (sourceToParse.author3lastname) {
                             sourceToParse.parsedSource += " et " + sourceToParse.author3lastname.toUpperCase().trim();
                         } else {
                             addError("THIRD_AUTHOR_LASTNAME", "author3lastname");
                             sourceToParse.parsedSource += ", ?";
                         }
                         // Author 3 first name
-                        if (sourceToParse.author3firstname != "" && sourceToParse.author3firstname != null) {
+                        if (sourceToParse.author3firstname) {
                             sourceToParse.parsedSource += ", " + sourceToParse.author3firstname.trim() + ". ";
                         } else {
                             addError("THIRD_AUTHOR_FIRSTNAME", "author3firstname");
@@ -129,16 +129,16 @@ angular.module("metho.service.projects.parse", [])
                         sourceToParse.parsedSource += ". ";
                     }
                 } else if (sourceToParse.hasAuthors == "more3") {
-                    if ((sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) || (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null)) {
+                    if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
                         // Author last name
-                        if (sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) {
+                        if (sourceToParse.author1lastname) {
                             sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
                         } else {
                             addError("FIRST_AUTHOR_LASTNAME", "author1lastname");
                             sourceToParse.parsedSource += "?, ";
                         }
                         // Author first name
-                        if (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null) {
+                        if (sourceToParse.author1firstname) {
                             sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
                         } else {
                             addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname");
@@ -150,16 +150,16 @@ angular.module("metho.service.projects.parse", [])
                         sourceToParse.parsedSource += "?";
                     }
 
-                    if ((sourceToParse.author2lastname != "" && sourceToParse.author2lastname != null) || (sourceToParse.author2firstname != "" && sourceToParse.author2firstname != null)) {
+                    if (sourceToParse.author2lastname || sourceToParse.author2firstname) {
                         // Author 2 last name
-                        if (sourceToParse.author2lastname != "" && sourceToParse.author2lastname != null) {
+                        if (sourceToParse.author2lastname) {
                             sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
                         } else {
                             addError("SECOND_AUTHOR_LASTNAME", "author2lastname");
                             sourceToParse.parsedSource += "?, ";
                         }
                         // Author 2 first name
-                        if (sourceToParse.author2firstname != "" && sourceToParse.author2firstname != null) {
+                        if (sourceToParse.author2firstname) {
                             sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
                         } else {
                             addError("SECOND_AUTHOR_FIRSTNAME", "author2firstname");
@@ -171,16 +171,16 @@ angular.module("metho.service.projects.parse", [])
                         sourceToParse.parsedSource += " et al. ";
                     }
                 } else if (sourceToParse.hasAuthors == "collective") {
-                    if ((sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) || (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null)) {
+                    if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
                         // Author last name
-                        if (sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) {
+                        if (sourceToParse.author1lastname) {
                             sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
                         } else {
                             addError("FIRST_AUTHOR_LASTNAME", "author1lastname");
                             sourceToParse.parsedSource += "?, ";
                         }
                         // Author first name
-                        if (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null) {
+                        if (sourceToParse.author1firstname) {
                             sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
                         } else {
                             addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname");
@@ -192,16 +192,16 @@ angular.module("metho.service.projects.parse", [])
                         sourceToParse.parsedSource += "?";
                     }
 
-                    if ((sourceToParse.author2lastname != "" && sourceToParse.author2lastname != null) || (sourceToParse.author2firstname != "" && sourceToParse.author2firstname != null)) {
+                    if (sourceToParse.author2lastname || sourceToParse.author2firstname) {
                         // Author 2 last name
-                        if (sourceToParse.author2lastname != "" && sourceToParse.author2lastname != null) {
+                        if (sourceToParse.author2lastname) {
                             sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
                         } else {
                             addError("SECOND_AUTHOR_LASTNAME", "author2lastname");
                             sourceToParse.parsedSource += "?, ";
                         }
                         // Author 2 first name
-                        if (sourceToParse.author2firstname != "" && sourceToParse.author2firstname != null) {
+                        if (sourceToParse.author2firstname) {
                             sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
                         } else {
                             addError("SECOND_AUTHOR_FIRSTNAME", "author2firstname");
@@ -221,7 +221,7 @@ angular.module("metho.service.projects.parse", [])
                 }
 
                 // Titre
-                if (sourceToParse.title != null && sourceToParse.title.trim() != "") {
+                if (sourceToParse.title) {
                     sourceToParse.parsedSource += "<em>" + sourceToParse.title.trim() + "</em>, ";
                 } else {
                     addError("BOOK_TITLE", "title");
@@ -229,7 +229,7 @@ angular.module("metho.service.projects.parse", [])
                 }
 
                 // Édition
-                if (sourceToParse.editionNumber != null && sourceToParse.editionNumber != "") {
+                if (sourceToParse.editionNumber) {
                     switch (sourceToParse.editionNumber) {
                         case 1:
                             sourceToParse.parsedSource += "1<sup>re</sup> ";
@@ -241,14 +241,14 @@ angular.module("metho.service.projects.parse", [])
                 }
 
                 // Collection
-                if (sourceToParse.collection != null && sourceToParse.collection != "") {
+                if (sourceToParse.collection) {
                     sourceToParse.parsedSource += "coll. " + sourceToParse.collection.trim() + ", ";
                 }
 
                 // Traduction
                 if (sourceToParse.hasBeenTranslated) {
                     // Langue
-                    if (sourceToParse.translatedFrom != null && sourceToParse.translatedFrom != "") {
+                    if (sourceToParse.translatedFrom) {
                         if ((/^[aeiou]$/i).test(sourceToParse.translatedFrom.substr(0, 1))) {
                             sourceToParse.parsedSource += "trad. de l'" + sourceToParse.translatedFrom.toLowerCase().trim() + " ";
                         } else if (sourceToParse.translatedFrom.toLowerCase().substr(0, 1) == "h") {
@@ -270,17 +270,17 @@ angular.module("metho.service.projects.parse", [])
                     }
 
                     // Traducteurs
-                    if ((sourceToParse.translator1lastname != "" && sourceToParse.translator1lastname != null) || (sourceToParse.translator1firstname != "" && sourceToParse.translator1firstname != null)) {
+                    if (sourceToParse.translator1lastname || sourceToParse.translator1firstname) {
                         sourceToParse.parsedSource += "par ";
                         // Translator's first name
-                        if (sourceToParse.translator1firstname.trim() != "" && sourceToParse.translator1firstname != null) {
+                        if (sourceToParse.translator1firstname) {
                             sourceToParse.parsedSource += sourceToParse.translator1firstname.trim() + " ";
                         } else {
                             addError("FIRST_TRANSLATOR_FIRSTNAME", "translator1firstname");
                             sourceToParse.parsedSource += "? ";
                         }
                         // Translator's last name
-                        if (sourceToParse.translator1lastname.trim() != "" && sourceToParse.translator1lastname != null) {
+                        if (sourceToParse.translator1lastname) {
                             sourceToParse.parsedSource += sourceToParse.translator1lastname.trim();
                         } else {
                             addError("FIRST_TRANSLATOR_LASTNAME", "translator1lastname");
@@ -292,16 +292,16 @@ angular.module("metho.service.projects.parse", [])
                         sourceToParse.parsedSource += "?";
                     }
 
-                    if ((sourceToParse.translator2lastname.trim() != "" && sourceToParse.translator2lastname != null) || (sourceToParse.translator2firstname.trim() != "" && sourceToParse.translator2firstname != null)) {
+                    if (sourceToParse.translator2lastname || sourceToParse.translator2firstname) {
                         // Translator 2 first name
-                        if (sourceToParse.translator2firstname.trim() != "" && sourceToParse.translator2firstname != null) {
+                        if (sourceToParse.translator2firstname) {
                             sourceToParse.parsedSource += ", " + sourceToParse.translator2firstname.trim();
                         } else {
                             addError("SECOND_TRANSLATOR_FIRSTNAME", "translator2firstname");
                             sourceToParse.parsedSource += "?";
                         }
                         // Translator 2 last name
-                        if (sourceToParse.translator2lastname.trim() != "" && sourceToParse.translator2lastname != null) {
+                        if (sourceToParse.translator2lastname) {
                             sourceToParse.parsedSource += " " + sourceToParse.translator2lastname.trim() + ", ";
                         } else {
                             addError("SECOND_TRANSLATOR_LASTNAME", "translator2lastname");
@@ -313,7 +313,7 @@ angular.module("metho.service.projects.parse", [])
                 }
 
                 // Lieu
-                if (sourceToParse.publicationLocation != null && sourceToParse.publicationLocation.trim() != "") {
+                if (sourceToParse.publicationLocation) {
                     sourceToParse.parsedSource += sourceToParse.publicationLocation.capitalizeFirstLetter().trim() + ", ";
                 } else {
                     sourceToParse.parsedSource += "s.l., ";
@@ -321,7 +321,7 @@ angular.module("metho.service.projects.parse", [])
                 }
 
                 // Éditeur
-                if (sourceToParse.editor != null && sourceToParse.editor.trim() != "") {
+                if (sourceToParse.editor) {
                     sourceToParse.parsedSource += sourceToParse.editor.trim() + ", ";
                 } else {
                     sourceToParse.parsedSource += "?, ";
@@ -329,7 +329,7 @@ angular.module("metho.service.projects.parse", [])
                 }
 
                 // Date
-                if (sourceToParse.publicationDate != null && sourceToParse.publicationDate != "") {
+                if (sourceToParse.publicationDate) {
                     sourceToParse.parsedSource += sourceToParse.publicationDate + ", ";
                     var today = new Date();
                     if (today.getFullYear() < Number(sourceToParse.publicationDate)) {
@@ -341,12 +341,12 @@ angular.module("metho.service.projects.parse", [])
                 }
 
                 // Volume
-                if (sourceToParse.volumeNumber != null && sourceToParse.volumeNumber != "") {
+                if (sourceToParse.volumeNumber) {
                     sourceToParse.parsedSource += "vol. " + sourceToParse.volumeNumber + ", ";
                 }
 
                 // Nombre de pages
-                if (sourceToParse.pageNumber != null && sourceToParse.pageNumber != "" && !isNaN(sourceToParse.pageNumber)) {
+                if (sourceToParse.pageNumber && !isNaN(sourceToParse.pageNumber)) {
                     if (sourceToParse.pageNumber >= 1000) {
                         sourceToParse.parsedSource += numeral(sourceToParse.pageNumber).format() + " p.";
                     }else {
@@ -365,15 +365,15 @@ angular.module("metho.service.projects.parse", [])
                 sourceToParse.pageNumber = Number(sourceToParse.pageNumber);
             } else if (sourceToParse.type == "article") {
                 // Auteur
-                if ((sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) || (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null)) {
-                    if (sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) {
+                if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
+                    if (sourceToParse.author1lastname) {
                         sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase() + ", ";
                     } else {
                         sourceToParse.parsedSource += "?, ";
                         addError("AUTHOR_ARTICLE_LASTNAME", "author1lastname");
                     }
 
-                    if (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null) {
+                    if (sourceToParse.author1firstname) {
                         sourceToParse.parsedSource += sourceToParse.author1firstname.toUpperCase() + ". ";
                     } else {
                         sourceToParse.parseSource += "?. ";
@@ -386,7 +386,7 @@ angular.module("metho.service.projects.parse", [])
                 }
 
                 // Titre de l'Article
-                if (sourceToParse.title != "" && sourceToParse.title != null) {
+                if (sourceToParse.title) {
                     sourceToParse.parsedSource += "«" + sourceToParse.title + "», ";
                 } else {
                     sourceToParse.parsedSource += "«?», ";
@@ -394,7 +394,7 @@ angular.module("metho.service.projects.parse", [])
                 }
 
                 // Nom du périodique
-                if (sourceToParse.editor != "" && sourceToParse.editor != null) {
+                if (sourceToParse.editor) {
                     sourceToParse.parsedSource += "<em>" + sourceToParse.editor + "</em>, ";
                 } else {
                     sourceToParse.parsedSource += "<em>?</em>, ";
@@ -402,7 +402,7 @@ angular.module("metho.service.projects.parse", [])
                 }
 
                 // Numéro du périodique
-                if (sourceToParse.editionNumber != "" && sourceToParse.editionNumber != null) {
+                if (sourceToParse.editionNumber) {
                     sourceToParse.parsedSource += sourceToParse.editionNumber + ", ";
                 } else {
                     sourceToParse.parsedSource += "?, ";
@@ -410,7 +410,7 @@ angular.module("metho.service.projects.parse", [])
                 }
 
                 // Date de publication
-                if (sourceToParse.publicationDate != "" && sourceToParse.publicationDate != null) {
+                if (sourceToParse.publicationDate) {
                     sourceToParse.parsedSource += sourceToParse.publicationDate + ", ";
                 } else {
                     sourceToParse.parsedSource += "?, ";
@@ -418,8 +418,8 @@ angular.module("metho.service.projects.parse", [])
                 }
 
                 // Indication des pages
-                if ((sourceToParse.endPage != "" && sourceToParse.endPage != null) || (sourceToParse.startPage != "" && sourceToParse.startPage != null)) {
-                    if (sourceToParse.startPage != "" && sourceToParse.startPage != null) {
+                if (sourceToParse.endPage || sourceToParse.startPage) {
+                    if (sourceToParse.startPage) {
                         sourceToParse.parsedSource += "p. " + sourceToParse.startPage;
                     } else {
                         sourceToParse.parsedSource += "p. ?";
@@ -427,7 +427,7 @@ angular.module("metho.service.projects.parse", [])
                     }
                     sourceToParse.parsedSource += "-";
 
-                    if (sourceToParse.endPage != "" && sourceToParse.endPage != null) {
+                    if (sourceToParse.endPage) {
                         sourceToParse.parsedSource += sourceToParse.endPage;
                     } else {
                         sourceToParse.parsedSource += "?";
@@ -441,16 +441,16 @@ angular.module("metho.service.projects.parse", [])
                 }
             } else if (sourceToParse.type == "internet") {
                 if (sourceToParse.hasAuthors) {
-                    if ((sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) || (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null)) {
+                    if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
                         // Author last name
-                        if (sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) {
+                        if (sourceToParse.author1lastname) {
                             sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
                         } else {
                             addError("FIRST_AUTHOR_LASTNAME", "author1lastname");
                             sourceToParse.parsedSource += "?, ";
                         }
                         // Author first name
-                        if (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null) {
+                        if (sourceToParse.author1firstname) {
                             sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
                         } else {
                             addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname");
@@ -462,16 +462,16 @@ angular.module("metho.service.projects.parse", [])
                         sourceToParse.parsedSource += "?";
                     }
 
-                    if ((sourceToParse.author2lastname != "" && sourceToParse.author2lastname != null) || (sourceToParse.author2firstname != "" && sourceToParse.author2firstname != null)) {
+                    if (sourceToParse.author2lastname || sourceToParse.author2firstname) {
                         // Author 2 last name
-                        if (sourceToParse.author2lastname != "" && sourceToParse.author2lastname != null) {
+                        if (sourceToParse.author2lastname) {
                             sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
                         } else {
                             addError("SECOND_AUTHOR_LASTNAME", "author2lastname");
                             sourceToParse.parsedSource += "?, ";
                         }
                         // Author 2 first name
-                        if (sourceToParse.author2firstname != "" && sourceToParse.author2firstname != null) {
+                        if (sourceToParse.author2firstname) {
                             sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
                         } else {
                             addError("SECOND_AUTHOR_FIRSTNAME", "author2firstname");
@@ -479,16 +479,16 @@ angular.module("metho.service.projects.parse", [])
                         }
                     }
 
-                    if ((sourceToParse.author3lastname != "" && sourceToParse.author3lastname != null) || (sourceToParse.author3firstname != "" && sourceToParse.author3firstname != null)) {
+                    if (sourceToParse.author3lastname || sourceToParse.author3firstname) {
                         // Author 3 last name
-                        if (sourceToParse.author3lastname != "" && sourceToParse.author3lastname != null) {
+                        if (sourceToParse.author3lastname) {
                             sourceToParse.parsedSource += " et " + sourceToParse.author3lastname.toUpperCase().trim();
                         } else {
                             addError("THIRD_AUTHOR_LASTNAME", "author3lastname");
                             sourceToParse.parsedSource += ", ?";
                         }
                         // Author 3 first name
-                        if (sourceToParse.author3firstname != "" && sourceToParse.author3firstname != null) {
+                        if (sourceToParse.author3firstname) {
                             sourceToParse.parsedSource += ", " + sourceToParse.author3firstname.trim() + ". ";
                         } else {
                             addError("THIRD_AUTHOR_FIRSTNAME", "author3firstname");
@@ -498,7 +498,7 @@ angular.module("metho.service.projects.parse", [])
                         sourceToParse.parsedSource += ". ";
                     }
                 } else {
-                    if (sourceToParse.editor != null && sourceToParse.editor != "") {
+                    if (sourceToParse.editor) {
                         sourceToParse.parsedSource += sourceToParse.editor + ", ";
                     } else {
                         sourceToParse.parsedSource += "?, ";
@@ -507,7 +507,7 @@ angular.module("metho.service.projects.parse", [])
                 }
 
                 // Titre de l'article
-                if (sourceToParse.title != null && sourceToParse.title != "") {
+                if (sourceToParse.title) {
                     sourceToParse.parsedSource += "«" + sourceToParse.title + "», ";
                 } else {
                     sourceToParse.parsedSource += "«?», ";
@@ -516,7 +516,7 @@ angular.module("metho.service.projects.parse", [])
 
                 // Titre de la page d'accueil (si il y a des auteurs)
                 if (sourceToParse.hasAuthors) {
-                    if (sourceToParse.editor != null && sourceToParse.editor != "") {
+                    if (sourceToParse.editor) {
                         sourceToParse.parsedSource += "<em>" + sourceToParse.editor + "</em>, ";
                     } else {
                         sourceToParse.parsedSource += "<em>?</em>, ";
@@ -528,7 +528,7 @@ angular.module("metho.service.projects.parse", [])
                 sourceToParse.parsedSource += "[en ligne]. ";
 
                 // URL
-                if (sourceToParse.url != null && sourceToParse.url != "") {
+                if (sourceToParse.url) {
                     if (sourceToParse.url.search(/^((http|https):\/\/){1}(www\.){1}[^\/._]{2,}\.{1}[a-z]{2,}$/) != -1) {
                         sourceToParse.parsedSource += "[" + sourceToParse.url + "] ";
                         // console.log("normal");
@@ -565,7 +565,7 @@ angular.module("metho.service.projects.parse", [])
                 }
 
                 // Date de consultation
-                if (sourceToParse.consultationDate != null && sourceToParse.consultationDate != "") {
+                if (sourceToParse.consultationDate) {
                     sourceToParse.parsedSource += "(" + new Date(sourceToParse.consultationDate).toLocaleDateString("", {timeZone:"UTC"}) + ").";
                 } else {
                     sourceToParse.parsedSource += "(?).";
@@ -577,16 +577,16 @@ angular.module("metho.service.projects.parse", [])
                 }
             } else if (sourceToParse.type == "cd") {
                 if (sourceToParse.hasAuthors) {
-                    if ((sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) || (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null)) {
+                    if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
                         // Author last name
-                        if (sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) {
+                        if (sourceToParse.author1lastname) {
                             sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
                         } else {
                             addError("FIRST_AUTHOR_LASTNAME", "author1lastname");
                             sourceToParse.parsedSource += "?, ";
                         }
                         // Author first name
-                        if (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null) {
+                        if (sourceToParse.author1firstname) {
                             sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
                         } else {
                             addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname");
@@ -598,16 +598,16 @@ angular.module("metho.service.projects.parse", [])
                         sourceToParse.parsedSource += "?";
                     }
 
-                    if ((sourceToParse.author2lastname != "" && sourceToParse.author2lastname != null) || (sourceToParse.author2firstname != "" && sourceToParse.author2firstname != null)) {
+                    if (sourceToParse.author2lastname || sourceToParse.author2firstname) {
                         // Author 2 last name
-                        if (sourceToParse.author2lastname != "" && sourceToParse.author2lastname != null) {
+                        if (sourceToParse.author2lastname) {
                             sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
                         } else {
                             addError("SECOND_AUTHOR_LASTNAME", "author2lastname");
                             sourceToParse.parsedSource += "?, ";
                         }
                         // Author 2 first name
-                        if (sourceToParse.author2firstname != "" && sourceToParse.author2firstname != null) {
+                        if (sourceToParse.author2firstname) {
                             sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
                         } else {
                             addError("SECOND_AUTHOR_FIRSTNAME", "author2firstname");
@@ -615,16 +615,16 @@ angular.module("metho.service.projects.parse", [])
                         }
                     }
 
-                    if ((sourceToParse.author3lastname != "" && sourceToParse.author3lastname != null) || (sourceToParse.author3firstname != "" && sourceToParse.author3firstname != null)) {
+                    if (sourceToParse.author3lastname || sourceToParse.author3firstname) {
                         // Author 3 last name
-                        if (sourceToParse.author3lastname != "" && sourceToParse.author3lastname != null) {
+                        if (sourceToParse.author3lastname) {
                             sourceToParse.parsedSource += " et " + sourceToParse.author3lastname.toUpperCase().trim();
                         } else {
                             addError("THIRD_AUTHOR_LASTNAME", "author3lastname");
                             sourceToParse.parsedSource += ", ?";
                         }
                         // Author 3 first name
-                        if (sourceToParse.author3firstname != "" && sourceToParse.author3firstname != null) {
+                        if (sourceToParse.author3firstname) {
                             sourceToParse.parsedSource += ", " + sourceToParse.author3firstname.trim() + ". ";
                         } else {
                             addError("THIRD_AUTHOR_LASTNAME", "author3firstname");
@@ -636,7 +636,7 @@ angular.module("metho.service.projects.parse", [])
                 }
 
                 // Titre de l'article
-                if (sourceToParse.title != null && sourceToParse.title != "") {
+                if (sourceToParse.title) {
                     sourceToParse.parsedSource += "<em>" + sourceToParse.title + "</em>, ";
                 } else {
                     sourceToParse.parsedSource += "<em>?</em>, ";
@@ -647,7 +647,7 @@ angular.module("metho.service.projects.parse", [])
                 sourceToParse.parsedSource += "[cédérom], ";
 
                 // Lieu de publication
-                if (sourceToParse.publicationLocation != null && sourceToParse.publicationLocation != "") {
+                if (sourceToParse.publicationLocation) {
                     sourceToParse.parsedSource += sourceToParse.publicationLocation + ", ";
                 } else {
                     sourceToParse.parsedSource += "s.l., ";
@@ -655,7 +655,7 @@ angular.module("metho.service.projects.parse", [])
                 }
 
                 // Éditeur
-                if (sourceToParse.editor != null && sourceToParse.editor != "") {
+                if (sourceToParse.editor) {
                     sourceToParse.parsedSource += sourceToParse.editor + ", ";
                 } else {
                     sourceToParse.parsedSource += "?, ";
@@ -663,23 +663,23 @@ angular.module("metho.service.projects.parse", [])
                 }
 
                 // Date de publication
-                if (sourceToParse.publicationDate != null && sourceToParse.publicationDate != "") {
+                if (sourceToParse.publicationDate) {
                     sourceToParse.parsedSource += sourceToParse.publicationDate + ".";
                 } else {
                     sourceToParse.parsedSource += "s.d.";
                     addWarning("PUBLICATION_DATE", "publicationDate");
                 }
             } else if (sourceToParse.type == "movie") {
-                if ((sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) || (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null)) {
+                if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
                     // Author last name
-                    if (sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) {
+                    if (sourceToParse.author1lastname  && sourceToParse.author1lastname != null) {
                         sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
                     } else {
                         addError("DIRECTOR_LASTNAME", "author1lastname");
                         sourceToParse.parsedSource += "?, ";
                     }
                     // Author first name
-                    if (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null) {
+                    if (sourceToParse.author1firstname  && sourceToParse.author1firstname != null) {
                         sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
                     } else {
                         addError("DIRECTOR_FIRSTNAME", "author1firstname");
@@ -698,12 +698,12 @@ angular.module("metho.service.projects.parse", [])
                 }
 
                 // Titre de l'épisode
-                if (sourceToParse.episodeTitle != null && sourceToParse.episodeTitle != "") {
+                if (sourceToParse.episodeTitle) {
                     sourceToParse.parsedSource += "«" + sourceToParse.episodeTitle + "», ";
                 }
 
                 // Nom de l'émission ou du document
-                if (sourceToParse.title != null && sourceToParse.title != "") {
+                if (sourceToParse.title) {
                     sourceToParse.parsedSource += "<em>" + sourceToParse.title + "</em>, ";
                 } else {
                     sourceToParse.parsedSource += "<em>?</em>, ";
@@ -711,7 +711,7 @@ angular.module("metho.service.projects.parse", [])
                 }
 
                 // Lieu de production
-                if (sourceToParse.productionLocation != null && sourceToParse.productionLocation != "") {
+                if (sourceToParse.productionLocation) {
                     sourceToParse.parsedSource += sourceToParse.productionLocation + ", ";
                 } else {
                     sourceToParse.parsedSource += "s.l., ";
@@ -719,7 +719,7 @@ angular.module("metho.service.projects.parse", [])
                 }
 
                 // Producteur
-                if (sourceToParse.productor != null && sourceToParse.productor != "") {
+                if (sourceToParse.productor) {
                     sourceToParse.parsedSource += sourceToParse.productor + ", ";
                 } else {
                     sourceToParse.parsedSource += "?, ";
@@ -727,14 +727,14 @@ angular.module("metho.service.projects.parse", [])
                 }
 
                 // Diffuseur
-                if (sourceToParse.broadcaster != null && sourceToParse.broadcaster != "") {
+                if (sourceToParse.broadcaster) {
                     sourceToParse.parsedSource += sourceToParse.broadcaster + ", ";
                 } else {
                     addWarning("BROADCASTER", "broadcaster");
                 }
 
                 // Durée
-                if (sourceToParse.duration != null && sourceToParse.duration != "") {
+                if (sourceToParse.duration) {
                     sourceToParse.parsedSource += sourceToParse.duration + " min., ";
                 } else {
                     sourceToParse.parsedSource += "?, ";
@@ -742,7 +742,7 @@ angular.module("metho.service.projects.parse", [])
                 }
 
                 // Date de publication
-                if (sourceToParse.publicationDate != null && sourceToParse.publicationDate != "") {
+                if (sourceToParse.publicationDate) {
                     sourceToParse.parsedSource += sourceToParse.publicationDate + ", ";
                 } else {
                     addWarning("PUBLICATION_DATE", "publicationDate");
@@ -768,7 +768,7 @@ angular.module("metho.service.projects.parse", [])
                 }
 
                 // Date de visionnement
-                if (sourceToParse.consultationDate != null && sourceToParse.consultationDate != "") {
+                if (sourceToParse.consultationDate) {
                     sourceToParse.parsedSource += "(" + new Date(sourceToParse.consultationDate).toLocaleDateString("", {timeZone:"UTC"}) + ").";
                 } else {
                     addError("VIEWING_DATE", "consultationDate", {
@@ -780,16 +780,16 @@ angular.module("metho.service.projects.parse", [])
                 }
             } else if (sourceToParse.type == "interview") {
                 sourceToParse.title = "";
-                if ((sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) || (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null)) {
+                if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
                     // Author last name
-                    if (sourceToParse.author1lastname != "" && sourceToParse.author1lastname != null) {
+                    if (sourceToParse.author1lastname) {
                         sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
                     } else {
                         addError("INTERVIEWER_LASTNAME", "author1lastname");
                         sourceToParse.parsedSource += "?, ";
                     }
                     // Author first name
-                    if (sourceToParse.author1firstname != "" && sourceToParse.author1firstname != null) {
+                    if (sourceToParse.author1firstname) {
                         sourceToParse.parsedSource += sourceToParse.author1firstname.trim() + ". ";
                     } else {
                         addError("INTERVIEWER_FIRSTNAME", "author1firstname");
@@ -822,9 +822,9 @@ angular.module("metho.service.projects.parse", [])
                         sourceToParse.parsedSource += "? ";
                 }
                 // Personne rencontrée
-                if ((sourceToParse.interviewed1lastname != "" && sourceToParse.interviewed1lastname != null) || (sourceToParse.interviewed1firstname != "" && sourceToParse.interviewed1firstname != null)) {
+                if (sourceToParse.interviewed1lastname || sourceToParse.interviewed1firstname) {
                     // interviewed first name
-                    if (sourceToParse.interviewed1firstname != "" && sourceToParse.interviewed1firstname != null) {
+                    if (sourceToParse.interviewed1firstname) {
                         sourceToParse.parsedSource += sourceToParse.interviewed1firstname.trim() + " ";
                         sourceToParse.title += sourceToParse.interviewed1firstname.trim() + " ";
                     } else {
@@ -833,7 +833,7 @@ angular.module("metho.service.projects.parse", [])
                         sourceToParse.title += "? ";
                     }
                     // interviewed last name
-                    if (sourceToParse.interviewed1lastname != "" && sourceToParse.interviewed1lastname != null) {
+                    if (sourceToParse.interviewed1lastname) {
                         sourceToParse.parsedSource += sourceToParse.interviewed1lastname.trim() + ", ";
                         sourceToParse.title += sourceToParse.interviewed1lastname.trim();
                     } else {
@@ -848,7 +848,7 @@ angular.module("metho.service.projects.parse", [])
                 }
 
                 // Titre de la personne
-                if (sourceToParse.interviewedTitle != null && sourceToParse.interviewedTitle != "") {
+                if (sourceToParse.interviewedTitle) {
                     sourceToParse.parsedSource += sourceToParse.interviewedTitle + ", ";
                 } else {
                     sourceToParse.parsedSource += "?, ";
@@ -856,7 +856,7 @@ angular.module("metho.service.projects.parse", [])
                 }
 
                 // Location
-                if (sourceToParse.publicationLocation != null && sourceToParse.publicationLocation != "") {
+                if (sourceToParse.publicationLocation) {
                     sourceToParse.parsedSource += sourceToParse.publicationLocation + ", ";
                 } else {
                     sourceToParse.parsedSource += "?, ";
@@ -864,7 +864,7 @@ angular.module("metho.service.projects.parse", [])
                 }
 
                 // Date de l'entrevue
-                if (sourceToParse.consultationDate != null && sourceToParse.consultationDate != "") {
+                if (sourceToParse.consultationDate) {
                     sourceToParse.parsedSource += "le " + new Date(sourceToParse.consultationDate).toLocaleDateString("", {timeZone:"UTC"}) + ".";
                 } else {
                     addError("CONSULTATION_DATE", "consultationDate", {
