@@ -554,6 +554,8 @@
             "MODELS_DESC": "Utilice modelos al formato DOCX para simplificar su vida",
             "SHARING": "Reparto avanzado",
             "SHARING_DESC": "Reparta un sitio Web de Safari hasta Metho para creer la fuente",
+            "INSTANT_SEARCH": "Búsqueda instantánea",
+            "INSTANT_SEARCH_DESC": "Introduzca el nombre de un libro en el campo \"Titulo\" para lanzar la búsqueda y poder llenar las informaciónes automaticamente (ciertos libros no son compatibles)",
             "POPUP": {
                 "ALREADY_TEXT": "El modo avanzado es ya activado"
             }

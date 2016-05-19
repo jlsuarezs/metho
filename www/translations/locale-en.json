@@ -554,6 +554,8 @@
             "MODELS_DESC": "Use templates in DOCX format in your assignments to ease your life",
             "SHARING": "Advanced sharing",
             "SHARING_DESC": "Share a link from a supported website (e.g. Wikipedia) to create its source automatically",
+            "INSTANT_SEARCH": "Instant search",
+            "INSTANT_SEARCH_DESC": "Enter a book's name in \"Title\" text field to launch a search on this title and autofill the informations (some books are not supported)",
             "POPUP": {
                 "ALREADY_TEXT": "Advanced mode is already activated"
             }
