@@ -10,6 +10,7 @@ angular.module("metho.service.storage", [])
     var pendingRepo = new PouchDB("pendings");
 
     var projects = {};
+    var loadingProjects = true;
 
     var sources = {};
     var sourcesByProject = {};
@@ -19,7 +20,6 @@ angular.module("metho.service.storage", [])
     var loadingPendings = true;
 
     if (theresProjects) {
-        var loadingProjects = true;
         projectRepo.allDocs({include_docs: true}).then(function (docs) {
             for (var i = 0; i < docs.rows.length; i++) {
                 projects[docs.rows[i].doc._id] = docs.rows[i].doc;
@@ -34,7 +34,7 @@ angular.module("metho.service.storage", [])
             loadingProjects = false;
         });
     }else {
-        var loadingProjects = false;
+        loadingProjects = false;
     }
 
     sourceRepo.allDocs({include_docs: true}).then(function (docs) {
@@ -213,6 +213,7 @@ angular.module("metho.service.storage", [])
             var errors = [];
             if (loadingSources) {
                 var unregister = $rootScope.$on("sourceLoadingEnded", function () {
+                    unregister();
                     var arr_sources = Array.prototype.fromObject(sources);
                     loadingSources = true;
                     var source = {};
@@ -224,13 +225,11 @@ angular.module("metho.service.storage", [])
                                 sources[response.id] = source[response.id];
                                 sourcesByProject[source[response.id].project_id][response.id] = source[response.id];
                                 loadingSources = false;
-                                unregister();
                                 $rootScope.$broadcast("sourceLoadingEnded");
                                 p.resolve({ok:true});
                             }).catch(function (err) {
                                 errors.push(err);
                                 loadingSources = false;
-                                unregister();
                                 $rootScope.$broadcast("sourceLoadingEnded");
                                 p.reject(errors);
                             });
