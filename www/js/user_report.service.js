@@ -3,6 +3,9 @@ angular.module("metho.service.user_report", [])
 .factory("ReportUser", function ($ionicPopup, $translate) {
     return {
         report: function (errString) {
+            if (typeof errString != String) {
+                errString = JSON.parse(errString);
+            }
             $translate(["YES", "NO", "REPORT.ERROR", "REPORT.UNKNOWN", "REPORT.REPORT_?","REPORT.DO_NOT_EDIT", "REPORT.TITLE"]).then(function (translations) {
                 $ionicPopup.confirm({
                     title: translations["REPORT.ERROR"],
