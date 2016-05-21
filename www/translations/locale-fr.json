@@ -591,5 +591,11 @@
         "NEW_SOURCE_DESC": "Créer une nouvelle source",
         "SCAN": "Balayage",
         "SCAN_DESC": "Balayer un code-barre"
+    },
+    "REPORT": {
+        "ERROR": "Erreur",
+        "UNKNOWN": "Une erreur inconnue s'est produite",
+        "REPORT_?": "Voulez-vous rapporter cette erreur au développeur ?",
+        "DO_NOT_EDIT": "Ne pas modifier cette section"
     }
 }

@@ -591,5 +591,11 @@
         "NEW_SOURCE_DESC": "Añadir una nueva fuente",
         "SCAN": "Escáner",
         "SCAN_DESC": "Escáner un código de barras"
+    },
+    "REPORT": {
+        "ERROR": "Error",
+        "UNKNOWN": "Un error fue",
+        "REPORT_?": "Quiere referir la error al desarrollador ?",
+        "DO_NOT_EDIT": "No modifica esta sección"
     }
 }

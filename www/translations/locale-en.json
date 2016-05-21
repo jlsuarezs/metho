@@ -591,5 +591,11 @@
         "NEW_SOURCE_DESC": "Create a new source",
         "SCAN": "Scanning",
         "SCAN_DESC": "Scan a barcode"
+    },
+    "REPORT": {
+        "ERROR": "Error",
+        "UNKNOWN": "An unknown error happened",
+        "REPORT_?": "Do you want to report this error to the developer ?",
+        "DO_NOT_EDIT": "Do not edit this section"
     }
 }
