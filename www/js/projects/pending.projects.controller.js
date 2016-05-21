@@ -39,7 +39,6 @@ angular.module("metho.controller.projects.pending", [])
                         ReportUser.report(msg);
                 });
             } else {
-                // potentially powered by InAppBrowser because that (currently) clobbers window.open
                 window.open(url, '_blank', 'location=yes');
             }
         })
@@ -77,9 +76,7 @@ angular.module("metho.controller.projects.pending", [])
             Storage.createSource(creatingProj).then(function(response) {
                 if ($scope.editingId) {
                     $scope.pendings.splice($scope.editingIndex, 1);
-                    Storage.deletePending($scope.editingId).catch(function (err) {
-                        console.log(err);
-                    });
+                    Storage.deletePending($scope.editingId);
                 }
                 $scope.editingISBN = null;
                 $scope.editingIndex = null;
@@ -90,8 +87,6 @@ angular.module("metho.controller.projects.pending", [])
                     });
                 }
                 $scope.closeModal();
-            }).catch(function(err) {
-                alert(err);
             });
         } else {
             $translate(["PROJECT.PENDING.POPUP.NEW_SOURCE", "PROJECT.PENDING.POPUP.MUST_HAVE_TYPE"]).then(function (translations) {
@@ -114,8 +109,6 @@ angular.module("metho.controller.projects.pending", [])
                     }
                 }
             });
-        }).catch(function (err) {
-            console.log(err);
         });
     }
 

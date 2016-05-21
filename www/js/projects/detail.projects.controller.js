@@ -595,8 +595,6 @@ angular.module('metho.controller.projects.detail', [])
                             }
                         });
                         $scope.closeModal();
-                    }).catch(function(err) {
-                        console.log(err);
                     });
                 });
             });
@@ -618,8 +616,6 @@ angular.module('metho.controller.projects.detail', [])
                    }
                });
                $scope.closeModal();
-           }).catch(function(err) {
-               console.log(err);
            });
         }
 
@@ -651,8 +647,6 @@ angular.module('metho.controller.projects.detail', [])
                                 }
                             }
                         });
-                    }).catch(function(err) {
-                        console.log(err);
                     });
                 } else {
                     $ionicListDelegate.closeOptionButtons();
@@ -730,11 +724,11 @@ angular.module('metho.controller.projects.detail', [])
                                     date: new Date().toLocaleDateString(),
                                     project_id: $scope.project.id
                                 };
+
                                 Storage.createPending(creating).then(function(responseRepo) {
                                     $scope.project.pendings++;
-                                }).catch(function (err) {
-                                    console.log(err);
                                 });
+
                                 $scope.newSourceModal.hide();
                             } else {
                                 $scope.fetchFromISBNdb(inputISBN);
@@ -762,8 +756,6 @@ angular.module('metho.controller.projects.detail', [])
 
                         Storage.createPending(creating).then(function(responseRepo) {
                             $scope.project.pendings++;
-                        }).catch(function (err) {
-                            console.log(err);
                         });
 
                         $scope.newSourceModal.hide();
