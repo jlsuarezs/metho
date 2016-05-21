@@ -17,6 +17,7 @@ angular.module("metho.service.storage", [])
     var loadingSources = true;
 
     var pendings = {};
+    var pendingsByProject = {};
     var loadingPendings = true;
 
     if (theresProjects) {
@@ -57,6 +58,10 @@ angular.module("metho.service.storage", [])
     pendingRepo.allDocs({include_docs: true}).then(function (docs) {
         for (var i = 0; i < docs.rows.length; i++) {
             pendings[docs.rows[i].doc._id] = docs.rows[i].doc;
+            if (pendingsByProject[docs.rows[i].doc.project_id] == null) {
+                pendingsByProject[docs.rows[i].doc.project_id] = {};
+            }
+            pendingsByProject[docs.rows[i].doc.project_id][docs.rows[i].doc._id] = docs.rows[i].doc;
         }
         loadingPendings = false;
         $rootScope.$broadcast("pendingLoadingEnded");
@@ -364,6 +369,21 @@ angular.module("metho.service.storage", [])
 
             return p.promise;
         },
+        getPendingsFromProjectId: function (id) {
+            var p = $q.defer();
+
+            if (loadingPendings) {
+                p.notify("loading");
+                var unregister = $rootScope.$on("pendingLoadingEnded", function () {
+                    unregister();
+                    p.resolve(Array.prototype.fromObject(pendingsByProject[id]));
+                });
+            }else {
+                p.resolve(Array.prototype.fromObject(pendingsByProject[id]));
+            }
+
+            return p.promise;
+        },
         createPending: function (newpending) {
             var p = $q.defer();
 
@@ -371,7 +391,12 @@ angular.module("metho.service.storage", [])
                 newpending._id = response.id;
                 newpending._rev = response.rev;
 
+                if (!pendingsByProject[newpending.project_id]) {
+                    pendingsByProject[newpending.project_id] = {};
+                }
+
                 pendings[newpending._id] = newpending;
+                pendingsByProject[newpending.project_id][newpending._id] = newpending;
 
                 p.resolve(response);
             }).catch(function (err) {
@@ -386,6 +411,7 @@ angular.module("metho.service.storage", [])
 
             loadingPendings = true;
             pendingRepo.remove(pendings[id]).then(function (response) {
+                delete pendingsByProject[pendings[id].project_id][id];
                 delete pendings[id];
                 $rootScope.$broadcast("pendingLoadingEnded");
                 loadingPendings = false;
@@ -406,6 +432,7 @@ angular.module("metho.service.storage", [])
                 set._rev = response.rev;
 
                 pendings[id] = set;
+                pendingsByProject[set.project_id][id] = set;
 
                 p.resolve(response);
             }).catch(function (err) {
@@ -415,17 +442,17 @@ angular.module("metho.service.storage", [])
 
             return p.promise;
         },
-        getPendingNumber: function () {
+        getPendingNumber: function (id) {
             var p = $q.defer();
 
             if (loadingPendings) {
                 var unregister = $rootScope.$on("pendingLoadingEnded", function () {
                     unregister();
-                    var arr_pendings = Array.prototype.fromObject(pendings);
+                    var arr_pendings = Array.prototype.fromObject(pendingsByProject[id]);
                     p.resolve(arr_pendings.length ? arr_pendings.length : 0);
                 });
             }else {
-                var arr_pendings = Array.prototype.fromObject(pendings);
+                var arr_pendings = Array.prototype.fromObject(pendingsByProject[id]);
                 p.resolve(arr_pendings.length ? arr_pendings.length : 0);
             }
 

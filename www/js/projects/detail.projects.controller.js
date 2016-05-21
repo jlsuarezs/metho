@@ -61,7 +61,7 @@ angular.module('metho.controller.projects.detail', [])
     });
 
     $scope.loadPendings = function () {
-        Storage.getPendingNumber().then(function(result) {
+        Storage.getPendingNumber($scope.project.id).then(function(result) {
             $scope.project.pendings = result;
         });
     }
@@ -727,7 +727,8 @@ angular.module('metho.controller.projects.detail', [])
                             if (res) {
                                 var creating = {
                                     isbn: inputISBN,
-                                    date: new Date().toLocaleDateString()
+                                    date: new Date().toLocaleDateString(),
+                                    project_id: $scope.project.id
                                 };
                                 Storage.createPending(creating).then(function(responseRepo) {
                                     $scope.project.pendings++;
@@ -756,7 +757,7 @@ angular.module('metho.controller.projects.detail', [])
                         var creating = {
                             isbn: inputISBN,
                             date: new Date().toLocaleDateString(),
-                            project_id: $stateParams.projectID
+                            project_id: $scope.project.id
                         };
 
                         Storage.createPending(creating).then(function(responseRepo) {

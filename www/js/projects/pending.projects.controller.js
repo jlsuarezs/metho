@@ -19,7 +19,7 @@ angular.module("metho.controller.projects.pending", [])
     });
 
     $scope.loadPendings = function () {
-        Storage.getPendings().then(function (pendings) {
+        Storage.getPendingsFromProjectId($scope.project.id).then(function (pendings) {
             $scope.pendings = pendings;
         });
     }
