@@ -1,6 +1,6 @@
 angular.module("metho.service.user_report", [])
 
-.factory("UserReport", function ($ionicPopup) {
+.factory("ReportUser", function ($ionicPopup, $translate) {
     return {
         report: function (errString) {
             $translate(["YES", "NO", "REPORT.ERROR", "REPORT.UNKNOWN", "REPORT.REPORT_?","REPORT.DO_NOT_EDIT", "REPORT.TITLE"]).then(function (translations) {

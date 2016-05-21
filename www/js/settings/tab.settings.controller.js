@@ -1,6 +1,6 @@
 angular.module("metho.controller.settings.tab", [])
 
-.controller('SettingsCtrl', function($scope, $rootScope, $translate, $ionicConfig, $ionicPopup, localStorageService, Settings, ParseSource, Storage) {
+.controller('SettingsCtrl', function($scope, $rootScope, $translate, $ionicConfig, $ionicPopup, localStorageService, Settings, ParseSource, Storage, ReportUser) {
     // Get settings from service
     $scope.settings = Settings.all();
     $scope.name = {
@@ -67,7 +67,7 @@ angular.module("metho.controller.settings.tab", [])
                     $translate.use((language.value).split("-")[0]).then(function(data) {
                         console.log("SUCCESS -> " + data);
                     }, function(error) {
-                        console.log("ERROR -> " + error);
+                        ReportUser.report(error);
                     });
                     numeral.language((language.value).split("-")[0]);
                 }, null);

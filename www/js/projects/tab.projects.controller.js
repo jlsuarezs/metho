@@ -31,13 +31,6 @@ angular.module('metho.controller.projects.tab', [])
                 $scope.projects.sort(function (a, b) {
                     return a.name.localeCompare(b.name);
                 });
-            }, function (err) {
-                console.log(err);
-            }, function (notif) {
-                console.log(notif);
-                if (notif == "loading") {
-                    $scope.loading = true;
-                }
             });
         });
     }
@@ -124,8 +117,6 @@ angular.module('metho.controller.projects.tab', [])
                     $scope.projects.sort(function (a, b) {
                         return a.name.localeCompare(b.name);
                     });
-                }).catch(function (err) {
-                    console.log(err);
                 });
             });
         }
@@ -152,8 +143,6 @@ angular.module('metho.controller.projects.tab', [])
                                 }
                             }
                         });
-                    }).catch(function (err) {
-                        console.log(err);
                     });
                 } else {
                     $ionicListDelegate.closeOptionButtons();
@@ -198,8 +187,6 @@ angular.module('metho.controller.projects.tab', [])
                             return;
                         }
                     }
-                }).catch(function (err) {
-                    console.log(err);
                 });
                 $scope.editProjectModal.hide();
                 $ionicListDelegate.closeOptionButtons();

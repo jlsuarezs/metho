@@ -1,6 +1,6 @@
 angular.module("metho.service.storage", [])
 
-.factory("Storage", function (localStorageService, ParseSource, $q, $rootScope) {
+.factory("Storage", function (localStorageService, ParseSource, $q, $rootScope, ReportUser) {
     if (localStorageService.get("theresProjects") == null) {
         localStorageService.set("theresProjects", false);
     }
@@ -99,6 +99,7 @@ angular.module("metho.service.storage", [])
             projectRepo.remove(doc).then(function(result) {
                 p.resolve(result);
             }).catch(function(err) {
+                ReportUser.report(err);
                 p.reject(err);
             });
 
@@ -121,6 +122,7 @@ angular.module("metho.service.storage", [])
                 projects[id] = set;
                 p.resolve(response);
             }).catch(function(err) {
+                ReportUser.report(err);
                 p.reject(err);
             });
 
@@ -161,6 +163,7 @@ angular.module("metho.service.storage", [])
                 $rootScope.$broadcast("projectLoadingEnded");
                 p.resolve(response);
             }).catch(function(err) {
+                ReportUser.report(err);
                 p.reject(err);
             });
 
@@ -231,6 +234,7 @@ angular.module("metho.service.storage", [])
                                 errors.push(err);
                                 loadingSources = false;
                                 $rootScope.$broadcast("sourceLoadingEnded");
+                                ReportUser.report(JSON.parse(errors));
                                 p.reject(errors);
                             });
                         }else {
@@ -263,6 +267,7 @@ angular.module("metho.service.storage", [])
                             errors.push(err);
                             loadingSources = false;
                             $rootScope.$broadcast("sourceLoadingEnded");
+                            ReportUser.report(JSON.parse(errors));
                             p.reject(errors);
                         });
                     }else {
@@ -296,6 +301,7 @@ angular.module("metho.service.storage", [])
                         loadingSources = false;
                         p.resolve(response);
                     }).catch(function (err) {
+                        ReportUser.report(err);
                         p.reject(err);
                         unregister();
                         $rootScope.$broadcast("sourceLoadingError");
@@ -313,6 +319,7 @@ angular.module("metho.service.storage", [])
                     p.resolve(response);
                     loadingSources = false;
                 }).catch(function (err) {
+                    ReportUser.report(err);
                     p.reject(err);
                     $rootScope.$broadcast("sourceLoadingError");
                     loadingSources = false;
@@ -332,6 +339,7 @@ angular.module("metho.service.storage", [])
 
                 p.resolve(response);
             }).catch(function (err) {
+                ReportUser.report(err);
                 p.reject(err);
             });
 
@@ -347,6 +355,7 @@ angular.module("metho.service.storage", [])
             sourceRepo.remove(doc).then(function(result) {
                 p.resolve(result);
             }).catch(function(err) {
+                ReportUser.report(err);
                 p.reject(err);
             });
 
@@ -383,6 +392,7 @@ angular.module("metho.service.storage", [])
 
                 p.resolve(response);
             }).catch(function (err) {
+                ReportUser.report(err);
                 p.reject(err);
             });
 
@@ -400,6 +410,7 @@ angular.module("metho.service.storage", [])
             }).catch(function (err) {
                 loadingPendings = false;
                 $rootScope.$broadcast("pendingLoadingError", err);
+                ReportUser.report(err);
                 p.reject(err);
             });
 
@@ -415,6 +426,7 @@ angular.module("metho.service.storage", [])
 
                 p.resolve(response);
             }).catch(function (err) {
+                ReportUser.report(err);
                 p.reject(err);
             })
 

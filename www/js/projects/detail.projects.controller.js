@@ -1,6 +1,6 @@
 angular.module('metho.controller.projects.detail', [])
 
-.controller('ProjectDetailCtrl', function($scope, $rootScope, $state, $http, $timeout, $translate, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicListDelegate, $ionicActionSheet, $ionicLoading, $ionicSlideBoxDelegate, $ionicBackdrop, ParseSource, Settings, Storage, Fetch, Autocomplete) {
+.controller('ProjectDetailCtrl', function($scope, $rootScope, $state, $http, $timeout, $translate, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicListDelegate, $ionicActionSheet, $ionicLoading, $ionicSlideBoxDelegate, $ionicBackdrop, ParseSource, Settings, Storage, Fetch, Autocomplete, ReportUser) {
     $scope.project = {
         name: "",
         id: $stateParams.projectID,
@@ -32,6 +32,9 @@ angular.module('metho.controller.projects.detail', [])
                 }
             });
             $scope.loading = false;
+        }).then(function (err) {
+            $scope.loading = false;
+            $scope.project.sources = [];
         });
     }
 
@@ -95,7 +98,7 @@ angular.module('metho.controller.projects.detail', [])
                         }else if (err == 408) {
                             $scope.slowConnection = true;
                         }else {
-                            console.log(err);
+                            ReportUser.report(err);
                             $scope.noSuggestion = true;
                         }
                     }

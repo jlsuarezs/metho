@@ -1,6 +1,6 @@
 angular.module("metho.controller.projects.pending", [])
 
-.controller("PendingCtrl", function($scope, $state, $http, $translate, $timeout, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicLoading, ParseSource, Storage, Fetch) {
+.controller("PendingCtrl", function($scope, $state, $http, $translate, $timeout, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicLoading, ParseSource, Storage, Fetch, ReportUser) {
     $scope.project = {
         id: $stateParams.projectID,
         sources: []
@@ -36,8 +36,8 @@ angular.module("metho.controller.projects.pending", [])
 
                     },
                     function(msg) {
-                        console.log(msg);
-                    })
+                        ReportUser.report(msg);
+                });
             } else {
                 // potentially powered by InAppBrowser because that (currently) clobbers window.open
                 window.open(url, '_blank', 'location=yes');

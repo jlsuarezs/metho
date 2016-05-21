@@ -1,6 +1,6 @@
 angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.controller.projects.detail', 'metho.controller.projects.source', 'metho.controller.projects.pending', 'metho.controllers.references', 'metho.controller.settings.tab', 'metho.controller.settings.advanced', 'metho.controller.settings.feedback', 'metho.service.projects.parse', 'metho.service.projects.fetch', 'metho.service.projects.autocomplete', 'metho.services.references', 'metho.service.settings', "metho.service.storage", "metho.service.user_report", 'ngCordova', 'LocalStorageModule', 'ng-slide-down', 'pascalprecht.translate'])
 
-.run(function($ionicPlatform, localStorageService, $translate, $ionicConfig, Settings, $rootScope, ParseSource, $state, $ionicPopup, Storage) {
+.run(function($ionicPlatform, localStorageService, $translate, $ionicConfig, Settings, $rootScope, ParseSource, $state, $ionicPopup, Storage, ReportUser) {
     $ionicPlatform.ready(function() {
         if (Settings.get("firstRun")) {
             // Restore purchase + add a var if user is not online
@@ -38,7 +38,7 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
                     $translate.use(two).then(function(data) {
                         console.log("SUCCESS -> " + data);
                     }, function(error) {
-                        console.log("ERROR -> " + error);
+                        ReportUser.report(error);
                     });
                     numeral.language(two);
                     if (two != Settings.get("lastLang")) {

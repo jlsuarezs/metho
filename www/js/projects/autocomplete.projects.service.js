@@ -1,6 +1,6 @@
 angular.module("metho.service.projects.autocomplete", [])
 
-.factory("Autocomplete", function ($http, $rootScope, $q) {
+.factory("Autocomplete", function ($http, $rootScope, $q, UserReport) {
     var autocompletes = {};
 
     var loadingAutocompletes = true;
@@ -13,7 +13,7 @@ angular.module("metho.service.projects.autocomplete", [])
         loadingAutocompletes = false;
         $rootScope.$broadcast("autocompletesLoadingEnded");
     }).catch(function (err) {
-        console.log(err);
+        UserReport.report(err);
     });
 
     return {

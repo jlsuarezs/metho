@@ -53,8 +53,6 @@ angular.module("metho.controller.projects.source", [])
                         $scope.source = ParseSource.parseSource($scope.source);
                         Storage.setSourceFromId($scope.source._id, $scope.source).then(function(response) {
                             $scope.source._rev = response.rev;
-                        }).catch(function(error) {
-                            console.log(error);
                         });
                     }
                 });
@@ -71,8 +69,6 @@ angular.module("metho.controller.projects.source", [])
                         $scope.source = ParseSource.parseSource($scope.source);
                         Storage.setSourceFromId($scope.source._id, $scope.source).then(function(response) {
                             $scope.source._rev = response.rev;
-                        }).catch(function(error) {
-                            console.log(error);
                         });
                     }
                 });
@@ -98,8 +94,6 @@ angular.module("metho.controller.projects.source", [])
                     $scope.source = ParseSource.parseSource($scope.source);
                     Storage.setSourceFromId($scope.source._id, $scope.source).then(function(response) {
                         $scope.source._rev = response.rev;
-                    }).catch(function(error) {
-                        console.log(error);
                     });
                 }
             });
@@ -128,8 +122,6 @@ angular.module("metho.controller.projects.source", [])
         $scope.newsource = {};
         Storage.setSourceFromId($scope.source._id, $scope.source).then(function(response) {
             $scope.source._rev = response.rev;
-        }).catch(function(error) {
-            console.log(error);
         });
     }
 
