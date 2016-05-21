@@ -99,8 +99,6 @@ angular.module("metho.service.storage", [])
             }
             delete sourcesByProject[id];
 
-            // Apply
-            // Delete project
             projectRepo.remove(doc).then(function(result) {
                 p.resolve(result);
             }).catch(function(err) {
@@ -108,7 +106,6 @@ angular.module("metho.service.storage", [])
                 p.reject(err);
             });
 
-            // Delete sources of project
             for (var i = 0; i < arr_sourcesToDelete.length; i++) {
                 sourceRepo.remove(arr_sourcesToDelete[i]);
             }
@@ -413,8 +410,10 @@ angular.module("metho.service.storage", [])
             pendingRepo.remove(pendings[id]).then(function (response) {
                 delete pendingsByProject[pendings[id].project_id][id];
                 delete pendings[id];
+
                 $rootScope.$broadcast("pendingLoadingEnded");
                 loadingPendings = false;
+
                 p.resolve(response);
             }).catch(function (err) {
                 loadingPendings = false;
