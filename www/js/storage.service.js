@@ -30,9 +30,9 @@ angular.module("metho.service.storage", [])
             loadingProjects = false;
             $rootScope.$broadcast("projectLoadingEnded");
         }).catch(function (err) {
+            loadingProjects = false;
             $rootScope.$broadcast("projectLoadingEnded");
             ReportUser.report(err);
-            loadingProjects = false;
         });
     }else {
         loadingProjects = false;

@@ -32,7 +32,7 @@ angular.module('metho.controller.projects.detail', [])
                 }
             });
             $scope.loading = false;
-        }).then(function (err) {
+        }).catch(function (err) {
             $scope.loading = false;
             $scope.project.sources = [];
         });
