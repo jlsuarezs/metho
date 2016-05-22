@@ -29,9 +29,13 @@ angular.module("metho.controller.projects.source", [])
         $translate(["PROJECT.SOURCE.CONFIRM", "PROJECT.SOURCE.CANCEL"]).then(function (translations) {
             if (!!window.cordova) {
                 cordova.plugins.Keyboard.disableScroll(false);
-                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             }
             if ($scope.source.errors[id].complex) {
+                if (!!window.cordova && $scope.source.errors[id].type == "select") {
+                    cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
+                }else {
+                    cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+                }
                 $ionicPopup.show({
                     title: $scope.source.errors[id].promptTitle,
                     subTitle: $scope.source.errors[id].promptText,
@@ -60,6 +64,9 @@ angular.module("metho.controller.projects.source", [])
                     }
                 });
             } else {
+                if (!!window.cordova) {
+                    cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+                }
                 var popup = $ionicPopup.show({
                     title: $scope.source.errors[id].promptTitle,
                     subTitle: $scope.source.errors[id].promptText,
@@ -140,6 +147,7 @@ angular.module("metho.controller.projects.source", [])
     $scope.edit = function() {
         if (!!window.cordova) {
             cordova.plugins.Keyboard.disableScroll(false);
+            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
         }
         $scope.newsource = JSON.parse(JSON.stringify($scope.source));
         if ($scope.newsource.consultationDate != null && $scope.newsource.consultationDate != "") {
