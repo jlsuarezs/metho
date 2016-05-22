@@ -3,6 +3,8 @@ angular.module("metho.controller.projects.source", [])
 .controller('SourceDetailCtrl', function($scope, $rootScope, $stateParams, $translate, $ionicPopup, $ionicModal, ParseSource, Storage) {
     $scope.source = {};
     $scope.loading = false;
+    $scope.errors = {};
+    $scope.warnings = {};
 
     $scope.loadSource = function () {
         Storage.getSourceFromId($stateParams.sourceID).then(function (result) {
@@ -30,26 +32,27 @@ angular.module("metho.controller.projects.source", [])
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             }
             if ($scope.source.errors[id].complex) {
-                $ionicPopup.prompt({
+                $ionicPopup.show({
                     title: $scope.source.errors[id].promptTitle,
                     subTitle: $scope.source.errors[id].promptText,
                     template: $scope.source.errors[id].template,
-                    inputType: 'text',
-                    cancelText: translations["PROJECT.SOURCE.CANCEL"],
-                    okText: "<b>" + translations["PROJECT.SOURCE.CONFIRM"] + "</b>"
-                }).then(function(res) {
-                    if (res != null) {
-                        var e = document.getElementById($scope.source.errors[id].id);
-                        switch ($scope.source.errors[id].type) {
-                            case "select":
-                                $scope.source[$scope.source.errors[id].var] = e.options[e.selectedIndex].value;
-                                break;
-                            case "input":
-                                $scope.source[$scope.source.errors[id].var] = e.value;
-                                break;
-                            default:
-
+                    scope: $scope,
+                    buttons: [
+                        {
+                            text: translations["PROJECT.SOURCE.CANCEL"]
+                        },
+                        {
+                            text: "<b>" + translations["PROJECT.SOURCE.CONFIRM"] + "</b>",
+                            type: "button-positive",
+                            onTap: function(e) {
+                                return true;
+                            }
                         }
+                    ]
+                }).then(function(res) {
+                    if (res) {
+                        $scope.source[$scope.source.errors[id].var] = $scope.errors.result;
+                        $scope.errors.result = null;
                         $scope.source = ParseSource.parseSource($scope.source);
                         Storage.setSourceFromId($scope.source._id, $scope.source).then(function(response) {
                             $scope.source._rev = response.rev;
@@ -57,15 +60,32 @@ angular.module("metho.controller.projects.source", [])
                     }
                 });
             } else {
-                $ionicPopup.prompt({
+                var popup = $ionicPopup.show({
                     title: $scope.source.errors[id].promptTitle,
                     subTitle: $scope.source.errors[id].promptText,
-                    inputType: 'text',
-                    cancelText: translations["PROJECT.SOURCE.CANCEL"],
-                    okText: "<b>" + translations["PROJECT.SOURCE.CONFIRM"] + "</b>"
-                }).then(function(res) {
-                    if (res != null) {
-                        $scope.source[$scope.source.errors[id].var] = res;
+                    scope: $scope,
+                    template: '<input type="text" ng-model="errors.result" ng-keyup="$event.keyCode == 13 && popup.close()">',
+                    buttons: [
+                        {
+                            text: translations["PROJECT.SOURCE.CANCEL"],
+                            onTap: function (e) {
+                                return false;
+                            }
+                        },
+                        {
+                            text: "<b>" + translations["PROJECT.SOURCE.CONFIRM"] + "</b>",
+                            type: "button-positive",
+                            onTap: function (e) {
+                                return true;
+                            }
+                        }
+                    ]
+                });
+                $scope.popup = popup;
+                popup.then(function(res) {
+                    if (res != false) {
+                        $scope.source[$scope.source.errors[id].var] = $scope.errors.result;
+                        $scope.errors.result = null;
                         $scope.source = ParseSource.parseSource($scope.source);
                         Storage.setSourceFromId($scope.source._id, $scope.source).then(function(response) {
                             $scope.source._rev = response.rev;
@@ -82,15 +102,32 @@ angular.module("metho.controller.projects.source", [])
                 cordova.plugins.Keyboard.disableScroll(false);
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             }
-            $ionicPopup.prompt({
+            var popup = $ionicPopup.show({
                 title: $scope.source.warnings[id].promptTitle,
                 subTitle: $scope.source.warnings[id].promptText,
-                inputType: 'text',
-                cancelText: translations["PROJECT.SOURCE.CANCEL"],
-                okText: "<b>" + translations["PROJECT.SOURCE.CONFIRM"] + "</b>"
-            }).then(function(res) {
-                if (res != null) {
-                    $scope.source[$scope.source.warnings[id].var] = res;
+                scope: $scope,
+                template: '<input type="text" ng-model="warnings.result" ng-keyup="$event.keyCode == 13 && popup.close()">',
+                buttons: [
+                    {
+                        text: translations["PROJECT.SOURCE.CANCEL"],
+                        onTap: function (e) {
+                            return false;
+                        }
+                    },
+                    {
+                        text: "<b>" + translations["PROJECT.SOURCE.CONFIRM"] + "</b>",
+                        type: "button-positive",
+                        onTap: function (e) {
+                            return true;
+                        }
+                    }
+                ]
+            });
+            $scope.popup = popup;
+            popup.then(function(res) {
+                if (res != false) {
+                    $scope.source[$scope.source.warnings[id].var] = $scope.warnings.result;
+                    $scope.warnings.results = null;
                     $scope.source = ParseSource.parseSource($scope.source);
                     Storage.setSourceFromId($scope.source._id, $scope.source).then(function(response) {
                         $scope.source._rev = response.rev;
