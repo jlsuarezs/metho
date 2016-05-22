@@ -3,6 +3,7 @@
 
 node_modules/
 platforms/ios/www/*
+platforms/ios/Metho/config.xml
 .DS_Store
 .bowerrc
 .editorconfig
