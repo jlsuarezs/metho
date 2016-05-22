@@ -1,5 +1,5 @@
 <ion-view view-title="{{'PROJECT.PENDING.TITLE' | translate}}">
-    <ion-content ng-class="{ 'padding flex' : !pendings.length }">
+    <ion-content ng-class="{ 'padding flex-pending' : !pendings.length }">
         <!-- List of sources -->
         <ion-list ng-if="pendings.length">
             <ion-item ng-repeat="pending in pendings" class="item item-icon-right" type="item-text-wrap" ng-click="downloadDetails('{{pending.isbn}}', '{{pending._id}}')" ng-class="{ 'item-remove-animate': removeAnimate }">
@@ -12,7 +12,13 @@
         </ion-list>
         <!-- When there are no sources -->
         <p class="center dimmed-50" ng-if="!pendings.length && !loading" translate>
+            PROJECT.PENDING.SCAN_TO_ADD
+        </p>
+        <p class="center" ng-if="!pendings.length && !loading" translate>
             PROJECT.PENDING.EMPTY_TAB
+        </p>
+        <p class="center dimmed-50" ng-if="!pendings.length && !loading" translate>
+            PROJECT.PENDING.NEED_ADVANCED
         </p>
     </ion-content>
 </ion-view>

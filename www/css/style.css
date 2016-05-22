@@ -74,6 +74,14 @@ p.left-aligned {
     flex-direction: column;
 }
 
+.flex-pending > .scroll {
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    flex-direction: column;
+}
+
 .flex-sub {
     display: flex;
     align-items: center;
