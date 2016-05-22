@@ -64,7 +64,7 @@ angular.module("metho.controller.projects.source", [])
                     title: $scope.source.errors[id].promptTitle,
                     subTitle: $scope.source.errors[id].promptText,
                     scope: $scope,
-                    template: '<input type="text" ng-model="errors.result" ng-keyup="$event.keyCode == 13 && popup.close()">',
+                    template: '<input type="text" ng-model="errors.result" ng-autofocus delay="125" ng-keyup="$event.keyCode == 13 && popup.close()">',
                     buttons: [
                         {
                             text: translations["PROJECT.SOURCE.CANCEL"],
@@ -106,7 +106,7 @@ angular.module("metho.controller.projects.source", [])
                 title: $scope.source.warnings[id].promptTitle,
                 subTitle: $scope.source.warnings[id].promptText,
                 scope: $scope,
-                template: '<input type="text" ng-model="warnings.result" ng-keyup="$event.keyCode == 13 && popup.close()">',
+                template: '<input type="text" ng-model="warnings.result" ng-autofocus delay="125" ng-keyup="$event.keyCode == 13 && popup.close()">',
                 buttons: [
                     {
                         text: translations["PROJECT.SOURCE.CANCEL"],
