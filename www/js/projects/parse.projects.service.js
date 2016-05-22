@@ -214,7 +214,7 @@ angular.module("metho.service.projects.parse", [])
                 } else {
                     sourceToParse.parsedSource += "?. ";
                     addError("AUTHOR_NUMBER", "hasAuthors", {
-                        template:"<p class='center'><select id='authortype'><option value='13'>{{PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_1TO3}}</option><option value='more3'>{{PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_MORE_3}}</option><option value='collective'>{{PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_COLLECTIVE}}</option></select></p>",
+                        template:"<p class='center'><select id='authortype' ng-model='errors.result'><option value='13'>{{PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_1TO3}}</option><option value='more3'>{{PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_MORE_3}}</option><option value='collective'>{{PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_COLLECTIVE}}</option></select></p>",
                         id:"authortype",
                         type:"select"
                     });
@@ -570,7 +570,7 @@ angular.module("metho.service.projects.parse", [])
                 } else {
                     sourceToParse.parsedSource += "(?).";
                     addError("CONSULTATION_DATE", "consultationDate", {
-                        template: "<p class='center'><input type='date' id='consultationDate'></p>",
+                        template: "<p class='center'><input type='date' id='consultationDate' ng-model='errors.result'></p>",
                         type: "input",
                         id: "consultationDate"
                     });
@@ -763,7 +763,7 @@ angular.module("metho.service.projects.parse", [])
                     addError("SUPPORT", "support", {
                         id:"supporttype",
                         type:"select",
-                        template: "<p class='center'><select id='supporttype'><option value='dvd'>{{PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_DVD}}</option><option value='cd'>{{PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_CD}}</option><option value='internet'>{{PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_INTERNET}}</option></select></p>"
+                        template: "<p class='center'><select id='supporttype' ng-model='errors.result'><option value='dvd'>{{PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_DVD}}</option><option value='cd'>{{PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_CD}}</option><option value='internet'>{{PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_INTERNET}}</option></select></p>"
                     });
                 }
 
@@ -772,7 +772,7 @@ angular.module("metho.service.projects.parse", [])
                     sourceToParse.parsedSource += "(" + new Date(sourceToParse.consultationDate).toLocaleDateString("", {timeZone:"UTC"}) + ").";
                 } else {
                     addError("VIEWING_DATE", "consultationDate", {
-                        template: "<p class='center'><input type='date' id='consultationDate'></p>",
+                        template: "<p class='center'><input type='date' id='consultationDate' ng-model='errors.result'></p>",
                         type: "input",
                         id: "consultationDate"
                     });
@@ -817,7 +817,7 @@ angular.module("metho.service.projects.parse", [])
                         addError("CIVILITY_TITLE", "civility", {
                             id: "civilityId",
                             type: "select",
-                            template: "<p class='center'><select id='civilityId'><option value='mister'>{{PROJECT.DETAIL.INTERVIEW.CIVILITY_MISTER}}</option><option value='miss'>{{PROJECT.DETAIL.INTERVIEW.CIVILITY_MISS}}</option><option value='miss_young'>{{PROJECT.DETAIL.INTERVIEW.CIVILITY_MISS_YOUNG}}</option></select></p>"
+                            template: "<p class='center'><select id='civilityId' ng-model='errors.result'><option value='mister'>{{PROJECT.DETAIL.INTERVIEW.CIVILITY_MISTER}}</option><option value='miss'>{{PROJECT.DETAIL.INTERVIEW.CIVILITY_MISS}}</option><option value='miss_young'>{{PROJECT.DETAIL.INTERVIEW.CIVILITY_MISS_YOUNG}}</option></select></p>"
                         });
                         sourceToParse.parsedSource += "? ";
                 }
@@ -868,7 +868,7 @@ angular.module("metho.service.projects.parse", [])
                     sourceToParse.parsedSource += "le " + new Date(sourceToParse.consultationDate).toLocaleDateString("", {timeZone:"UTC"}) + ".";
                 } else {
                     addError("CONSULTATION_DATE", "consultationDate", {
-                        template: "<p class='center'><input type='date' id='consultationDate'></p>",
+                        template: "<p class='center'><input type='date' id='consultationDate' ng-model='errors.result'></p>",
                         type: "input",
                         id: "consultationDate"
                     });
