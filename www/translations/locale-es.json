@@ -224,7 +224,9 @@
         "PENDING":{
             "TITLE": "Elementos pendientes",
             "DELETE_ITEM": "Eliminar",
+            "SCAN_TO_ADD": "Para añadir un elemento pendiente, tiene que escáner un código de barras cuando es desconectado",
             "EMPTY_TAB": "Ningún fuente pendiente!",
+            "NEED_ADVANCED": "El modo avanzado es necesario para escáner",
             "MODAL": {
                 "CANCEL": "Cancelar",
                 "TITLE": "Nueva fuente",

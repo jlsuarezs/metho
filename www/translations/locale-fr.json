@@ -224,7 +224,9 @@
         "PENDING":{
             "TITLE": "Éléments en attente",
             "DELETE_ITEM": "Supprimer",
-            "EMPTY_TAB": "Aucune source en attente!",
+            "SCAN_TO_ADD": "Pour ajouter un élément en attente, balayez un code-barre lorsqu'hors-ligne",
+            "EMPTY_TAB": "Aucune source en attente",
+            "NEED_ADVANCED": "Le mode avancé est requis pour utiliser le balayage",
             "MODAL": {
                 "CANCEL": "Annuler",
                 "TITLE": "Nouvelle source",

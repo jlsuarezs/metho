@@ -224,7 +224,9 @@
         "PENDING":{
             "TITLE": "Pending elements",
             "DELETE_ITEM": "Delete",
+            "SCAN_TO_ADD": "You can add a pending element by scaning a barcode when offline",
             "EMPTY_TAB": "No pending element!",
+            "NEED_ADVANCED": "Advanced mode is required to use scan feature",
             "MODAL": {
                 "CANCEL": "Cancel",
                 "TITLE": "New source",
