@@ -31,10 +31,12 @@ angular.module("metho.controller.projects.source", [])
                 cordova.plugins.Keyboard.disableScroll(false);
             }
             if ($scope.source.errors[id].complex) {
-                if (!!window.cordova && $scope.source.errors[id].type == "select") {
-                    cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
-                }else {
-                    cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+                if (!!window.cordova) {
+                    if ($scope.source.errors[id].type == "select") {
+                        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
+                    }else {
+                        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+                    }
                 }
                 $ionicPopup.show({
                     title: $scope.source.errors[id].promptTitle,
