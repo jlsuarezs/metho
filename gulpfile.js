@@ -8,6 +8,9 @@ var rename = require('gulp-rename');
 var sh = require('shelljs');
 var beautify = require('gulp-jsbeautify');
 var prettify = require('gulp-prettify');
+var jeditor = require('gulp-json-editor');
+var cversion = require('gulp-cordova-version');
+var minimist = require('minimist');
 
 var paths = {
   sass: ['./scss/**/*.scss'],
@@ -15,6 +18,13 @@ var paths = {
   css: ['./www/css/*.css'],
   html: ['./www/templates/*.html']
 };
+
+var knownOptions = {
+  string: 'version',
+  default: { version: require("./package.json").version }
+};
+
+var options = minimist(process.argv.slice(2), knownOptions);
 
 gulp.task('default', ['beautifyjs']);
 
@@ -37,4 +47,15 @@ gulp.task('minifycss', function () {
             return path;
         }))
         .pipe(gulp.dest('./www/css/'));
+});
+
+gulp.task('version', function () {
+  gulp.src("./package.json")
+    .pipe(jeditor({
+      'version': options.version
+    }))
+    .pipe(gulp.dest("."));
+
+  gulp.src(".")
+    .pipe(cversion(options.version));
 });
