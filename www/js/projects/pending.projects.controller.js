@@ -205,6 +205,21 @@ angular.module("metho.controller.projects.pending", [])
                             }
                         });
                     });
+                }else if (response >= 500 && response <= 599) {
+                    $translate(["PROJECT.DETAIL.POPUP.ERROR", "PROJECT.DETAIL.POPUP.ERROR_500"]).then(function (translations) {
+                        $ionicPopup.alert({
+                            title: translations["PROJECT.DETAIL.POPUP.ERROR"],
+                            template: '<p class="center">' + translations["PROJECT.DETAIL.POPUP.ERROR_500"] + '</p>'
+                        }).then(function () {
+                            $scope.newSourceModal.hide();
+                            $scope.newsource = {};
+                            $scope.editingId = null;
+                            $scope.editingISBN = null;
+                            $scope.editingIndex = null;
+                        });
+                    });
+                }else {
+                    ReportUser.report(response);
                 }
             });
         } else {

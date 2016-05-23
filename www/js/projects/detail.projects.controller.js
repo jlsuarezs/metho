@@ -97,6 +97,8 @@ angular.module('metho.controller.projects.detail', [])
                             $scope.noSuggestion = true;
                         }else if (err == 408) {
                             $scope.slowConnection = true;
+                        }else if (err >= 500 && err <= 600) {
+                            $scope.errServer = true;
                         }else {
                             ReportUser.report(err);
                             $scope.noSuggestion = true;
@@ -105,6 +107,7 @@ angular.module('metho.controller.projects.detail', [])
                     $scope.showSuggestions = false;
                     $scope.noSuggestion = false;
                     $scope.loadingSuggestions = true;
+                    $scope.errServer = false;
                     if ($scope.newsource.author1firstname || $scope.newsource.author1lastname) {
                         Fetch.fromNameISBNdb($scope.newsource.title, ($scope.newsource.author1firstname ? $scope.newsource.author1firstname : "") + " " + ($scope.newsource.author1lastname ? $scope.newsource.author1lastname : "")).then(onSuccess).catch(onFailure);
                     }else {
@@ -180,12 +183,21 @@ angular.module('metho.controller.projects.detail', [])
     }
 
     $scope.openExplainingPopup = function () {
-        $translate(["PROJECT.DETAIL.POPUP.NO_SUGGESTIONS", "PROJECT.DETAIL.POPUP.NO_SUGGESTIONS_DESC"]).then(function (translations) {
-            $ionicPopup.alert({
-                title: translations["PROJECT.DETAIL.POPUP.NO_SUGGESTIONS"],
-                template: "<p class='center'>" + translations["PROJECT.DETAIL.POPUP.NO_SUGGESTIONS_DESC"] + "</p>"
+        if ($scope.noSuggestion) {
+            $translate(["PROJECT.DETAIL.POPUP.NO_SUGGESTIONS", "PROJECT.DETAIL.POPUP.NO_SUGGESTIONS_DESC"]).then(function (translations) {
+                $ionicPopup.alert({
+                    title: translations["PROJECT.DETAIL.POPUP.NO_SUGGESTIONS"],
+                    template: "<p class='center'>" + translations["PROJECT.DETAIL.POPUP.NO_SUGGESTIONS_DESC"] + "</p>"
+                });
             });
-        });
+        }else if ($scope.errServer) {
+            $translate(["PROJECT.DETAIL.POPUP.ERROR", "PROJECT.DETAIL.POPUP.ERROR_500"]).then(function (translations) {
+                $ionicPopup.alert({
+                    title: translations["PROJECT.DETAIL.POPUP.ERROR"],
+                    template: '<p class="center">' + translations["PROJECT.DETAIL.POPUP.ERROR_500"] + '</p>'
+                });
+            });
+        }
     }
 
     $scope.addSource = function() {
@@ -735,6 +747,15 @@ angular.module('metho.controller.projects.detail', [])
                             }
                         });
                     });
+                }else if (response >= 500 && response <= 599) {
+                    $translate(["PROJECT.DETAIL.POPUP.ERROR", "PROJECT.DETAIL.POPUP.ERROR_500"]).then(function (translations) {
+                        $ionicPopup.alert({
+                            title: translations["PROJECT.DETAIL.POPUP.ERROR"],
+                            template: '<p class="center">' + translations["PROJECT.DETAIL.POPUP.ERROR_500"] + '</p>'
+                        });
+                    });
+                }else {
+                    ReportUser.report(response);
                 }
             });
         } else {

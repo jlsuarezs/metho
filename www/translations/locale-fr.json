@@ -207,7 +207,9 @@
                 "NO_SUGGESTIONS_DESC": "Il n'y a aucune suggestion disponible",
                 "AUTO_FILL_TITLE": "Remplissage",
                 "AUTO_FILL_DESC": "La source n'est pas vide. Les données précédentes pourraient être écrasées. Voulez-vous continuer ?",
-                "OVERWRITE": "Écraser"
+                "OVERWRITE": "Écraser",
+                "ERROR": "Erreur",
+                "ERROR_500": "Nous éprouvons des problèmes avec nos serveurs, veuillez réessayer plus tard."
             }
         },
         "SOURCE":{

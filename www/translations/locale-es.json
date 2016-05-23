@@ -207,7 +207,9 @@
                 "NO_SUGGESTIONS_DESC": "No hay ningún sugerencia disponible",
                 "AUTO_FILL_TITLE": "Llenado automático",
                 "AUTO_FILL_DESC": "La fuente no es vacío. Las informaciónes anteriores pudieron ser sobreescritas. ¿ Quiere continuar ?",
-                "OVERWRITE": "Sobreescribir"
+                "OVERWRITE": "Sobreescribir",
+                "ERROR": "Error",
+                "ERROR_500": "Tenemos problemos con nuestros servidores, reintenta más tarde."
             }
         },
         "SOURCE":{

@@ -58,6 +58,7 @@
                         <ion-spinner ng-if="loadingSuggestions" icon="ios-small" class="spinner-suggestions" ng-class="{ 'extra-padding-right': endSuggestionLoading }"></ion-spinner>
                         <button type="button" ng-if="endSuggestionLoading" class="icon ion-chevron-right button button-light button-small" ng-click="toggleShowSuggestion()" ng-class="{ 'rotate-90': showSuggestions }"></button>
                         <button type="button" ng-if="noSuggestion" class="icon ion-close-circled button button-light button-small" ng-click="openExplainingPopup()"></button>
+                        <button type="button" ng-if="errServer" class="icon ion-alert button button-light button-small" ng-click="openExplainingPopup()"></button>
                     </div>
                     <div ng-slide-down="showSuggestions">
                         <ion-scroll direction="y" ng-class="{'scroll-height-one': suggestions.length == 1, 'scroll-height-one-and-a-half': suggestions.length == 2, 'scroll-height-normal': suggestions.length > 2}">

@@ -90,6 +90,7 @@ angular.module("metho.service.projects.fetch", [])
                     p.resolve(newobject);
                 }
             }).catch(function (response) {
+                loading.hide();
                 p.reject(response.status);
             });
         }
