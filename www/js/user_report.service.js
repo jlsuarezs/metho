@@ -1,6 +1,6 @@
 angular.module("metho.service.user_report", [])
 
-.factory("ReportUser", function ($ionicPopup, $translate) {
+.factory("ReportUser", function ($ionicPopup, $translate, $cordovaDevice) {
     return {
         report: function (errString) {
             if (typeof errString != String) {
