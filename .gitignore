@@ -7,7 +7,6 @@ platforms/ios/Metho/config.xml
 .DS_Store
 .bowerrc
 .editorconfig
-bower.json
 www/.tern-project
 www/**/tags
 www/.tags
