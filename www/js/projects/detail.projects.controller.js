@@ -17,6 +17,7 @@ angular.module('metho.controller.projects.detail', [])
     $scope.refreshPending = false;
     $scope.autocompletes = {};
     $scope.isAdvanced = Settings.get("advanced");
+    var _timeout;
 
     $scope.loadSources = function () {
         Storage.getSourcesFromProjectId($scope.project.id).then(function(result) {
@@ -81,6 +82,9 @@ angular.module('metho.controller.projects.detail', [])
         if ($scope.isAdvanced) {
             $scope.$watch("newsource.title", function () {
                 if ($scope.newSourceModal.isShown() && $scope.newsource.type == "book" && !$scope.insertingFromScan) {
+                    if (_timeout) {
+                        $timeout.cancel(_timeout);
+                    }
                     var onSuccess = function (response) {
                         if (response.length == 0) {
                             $scope.loadingSuggestions = false;
@@ -104,16 +108,24 @@ angular.module('metho.controller.projects.detail', [])
                             $scope.noSuggestion = true;
                         }
                     }
-                    $scope.showSuggestions = false;
-                    $scope.noSuggestion = false;
-                    $scope.loadingSuggestions = true;
-                    $scope.errServer = false;
-                    if ($scope.newsource.author1firstname || $scope.newsource.author1lastname) {
-                        Fetch.fromNameISBNdb($scope.newsource.title, ($scope.newsource.author1firstname ? $scope.newsource.author1firstname : "") + " " + ($scope.newsource.author1lastname ? $scope.newsource.author1lastname : "")).then(onSuccess).catch(onFailure);
-                    }else {
-                        Fetch.fromNameISBNdb($scope.newsource.title).then(onSuccess).catch(onFailure);
-                    }
+                    _timeout = $timeout(function () {
+                        if ($scope.newSourceModal.isShown()) {
+                            $scope.showSuggestions = false;
+                            $scope.noSuggestion = false;
+                            $scope.loadingSuggestions = true;
+                            $scope.errServer = false;
+                            $timeout(function () {
+                                if ($scope.newsource.author1firstname || $scope.newsource.author1lastname) {
+                                    Fetch.fromNameISBNdb($scope.newsource.title, ($scope.newsource.author1firstname ? $scope.newsource.author1firstname : "") + " " + ($scope.newsource.author1lastname ? $scope.newsource.author1lastname : "")).then(onSuccess).catch(onFailure);
+                                }else {
+                                    Fetch.fromNameISBNdb($scope.newsource.title).then(onSuccess).catch(onFailure);
+                                }
+                                _timeout = null;
+                            });
+                        }
+                    }, 1500);
                 }else {
+                    _timeout = null;
                     $scope.insertingFromScan = false;
                 }
             });
