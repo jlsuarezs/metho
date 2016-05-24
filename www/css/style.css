@@ -411,7 +411,6 @@ select:not(.already-styled) {
 
     background-color: rgba(0,0,0,0);
     border:thin solid #dddddd;
-    /*font-weight:300;*/
     display:inline;
     vertical-align:middle;
     color:#333;
