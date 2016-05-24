@@ -25,7 +25,7 @@
                 <div class="input-label">
                     {{ 'SETTINGS.LANGUAGE' | translate }}
                 </div>
-                <select ng-model="settings.overideLang" ng-change="changeLanguage()">
+                <select ng-model="settings.overideLang" ng-change="changeLanguage()" class="already-styled">
                     <option value="">{{ 'SETTINGS.DEFAULT' | translate }}</option>
                     <option value="fr">{{ 'SETTINGS.FRENCH' | translate }}</option>
                     <option value="en">{{ 'SETTINGS.ENGLISH' | translate }}</option>
