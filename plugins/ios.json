@@ -42,6 +42,9 @@
         },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.ionicframework.metho"
+        },
+        "cordova-plugin-sqlite-2": {
+            "PACKAGE_NAME": "com.ionicframework.metho"
         }
     },
     "dependent_plugins": {}

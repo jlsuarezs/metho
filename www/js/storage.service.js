@@ -1,13 +1,13 @@
 angular.module("metho.service.storage", [])
 
-.factory("Storage", function (localStorageService, ParseSource, $q, $rootScope, ReportUser) {
+.factory("Storage", function (localStorageService, ParseSource, $q, $rootScope, ReportUser, $ionicPlatform) {
     if (localStorageService.get("theresProjects") == null) {
         localStorageService.set("theresProjects", false);
     }
     var theresProjects = localStorageService.get("theresProjects");
-    var sourceRepo = new PouchDB("sources");
-    var projectRepo = new PouchDB("projects");
-    var pendingRepo = new PouchDB("pendings");
+    this.projectRepo = null;
+    this.sourceRepo = null;
+    this.pendingRepo = null;
 
     var projects = {};
     var loadingProjects = true;
@@ -20,58 +20,65 @@ angular.module("metho.service.storage", [])
     var pendingsByProject = {};
     var loadingPendings = true;
 
-    if (theresProjects) {
-        projectRepo.allDocs({include_docs: true}).then(function (docs) {
-            for (var i = 0; i < docs.rows.length; i++) {
-                projects[docs.rows[i].doc._id] = docs.rows[i].doc;
-                if (sourcesByProject[docs.rows[i].doc._id] == null) {
-                    sourcesByProject[docs.rows[i].doc._id] = {};
-                }
-            }
-            loadingProjects = false;
-            $rootScope.$broadcast("projectLoadingEnded");
-        }).catch(function (err) {
-            loadingProjects = false;
-            $rootScope.$broadcast("projectLoadingEnded");
-            ReportUser.report(err);
-        });
-    }else {
+    if (!theresProjects) {
         loadingProjects = false;
     }
 
-    sourceRepo.allDocs({include_docs: true}).then(function (docs) {
-        for (var i = 0; i < docs.rows.length; i++) {
-            sources[docs.rows[i].doc._id] = docs.rows[i].doc;
-            if (sourcesByProject[docs.rows[i].doc.project_id] == null) {
-                sourcesByProject[docs.rows[i].doc.project_id] = {};
-            }
-            sourcesByProject[docs.rows[i].doc.project_id][docs.rows[i].doc._id] = docs.rows[i].doc;
-        }
-        loadingSources = false;
-        $rootScope.$broadcast("sourceLoadingEnded");
-    }).catch(function (err) {
-        loadingSources = false;
-        $rootScope.$broadcast("sourceLoadingEnded");
-        ReportUser.report(err);
-    });
-
-    pendingRepo.allDocs({include_docs: true}).then(function (docs) {
-        for (var i = 0; i < docs.rows.length; i++) {
-            pendings[docs.rows[i].doc._id] = docs.rows[i].doc;
-            if (pendingsByProject[docs.rows[i].doc.project_id] == null) {
-                pendingsByProject[docs.rows[i].doc.project_id] = {};
-            }
-            pendingsByProject[docs.rows[i].doc.project_id][docs.rows[i].doc._id] = docs.rows[i].doc;
-        }
-        loadingPendings = false;
-        $rootScope.$broadcast("pendingLoadingEnded");
-    }).catch(function (err) {
-        $rootScope.$broadcast("pendingLoadingEnded");
-        loadingPendings = false;
-        ReportUser.report(err);
-    });
-
     return {
+        init: function () {
+            this.sourceRepo = new PouchDB("sources");
+            this.projectRepo = new PouchDB("projects");
+            this.pendingRepo = new PouchDB("pendings");
+
+            if (theresProjects) {
+                this.projectRepo.allDocs({include_docs: true}).then(function (docs) {
+                    for (var i = 0; i < docs.rows.length; i++) {
+                        projects[docs.rows[i].doc._id] = docs.rows[i].doc;
+                        if (sourcesByProject[docs.rows[i].doc._id] == null) {
+                            sourcesByProject[docs.rows[i].doc._id] = {};
+                        }
+                    }
+                    loadingProjects = false;
+                    $rootScope.$broadcast("projectLoadingEnded");
+                }).catch(function (err) {
+                    loadingProjects = false;
+                    $rootScope.$broadcast("projectLoadingEnded");
+                    ReportUser.report(err);
+                });
+            }
+
+            this.sourceRepo.allDocs({include_docs: true}).then(function (docs) {
+                for (var i = 0; i < docs.rows.length; i++) {
+                    sources[docs.rows[i].doc._id] = docs.rows[i].doc;
+                    if (sourcesByProject[docs.rows[i].doc.project_id] == null) {
+                        sourcesByProject[docs.rows[i].doc.project_id] = {};
+                    }
+                    sourcesByProject[docs.rows[i].doc.project_id][docs.rows[i].doc._id] = docs.rows[i].doc;
+                }
+                loadingSources = false;
+                $rootScope.$broadcast("sourceLoadingEnded");
+            }).catch(function (err) {
+                loadingSources = false;
+                $rootScope.$broadcast("sourceLoadingEnded");
+                ReportUser.report(err);
+            });
+
+            this.pendingRepo.allDocs({include_docs: true}).then(function (docs) {
+                for (var i = 0; i < docs.rows.length; i++) {
+                    pendings[docs.rows[i].doc._id] = docs.rows[i].doc;
+                    if (pendingsByProject[docs.rows[i].doc.project_id] == null) {
+                        pendingsByProject[docs.rows[i].doc.project_id] = {};
+                    }
+                    pendingsByProject[docs.rows[i].doc.project_id][docs.rows[i].doc._id] = docs.rows[i].doc;
+                }
+                loadingPendings = false;
+                $rootScope.$broadcast("pendingLoadingEnded");
+            }).catch(function (err) {
+                $rootScope.$broadcast("pendingLoadingEnded");
+                loadingPendings = false;
+                ReportUser.report(err);
+            });
+        },
         getProjects: function () {
             var p = $q.defer();
 
@@ -99,7 +106,7 @@ angular.module("metho.service.storage", [])
             }
             delete sourcesByProject[id];
 
-            projectRepo.remove(doc).then(function(result) {
+            this.projectRepo.remove(doc).then(function(result) {
                 p.resolve(result);
             }).catch(function(err) {
                 ReportUser.report(err);
@@ -107,7 +114,7 @@ angular.module("metho.service.storage", [])
             });
 
             for (var i = 0; i < arr_sourcesToDelete.length; i++) {
-                sourceRepo.remove(arr_sourcesToDelete[i]);
+                this.sourceRepo.remove(arr_sourcesToDelete[i]);
             }
 
             if (Array.prototype.fromObject(projects) == 0) {
@@ -119,7 +126,7 @@ angular.module("metho.service.storage", [])
         setProjectFromId: function (id, set) {
             var p = $q.defer();
 
-            projectRepo.put(set, id, projects[id]._rev).then(function(response) {
+            this.projectRepo.put(set, id, projects[id]._rev).then(function(response) {
                 set._rev = response.rev;
                 projects[id] = set;
                 p.resolve(response);
@@ -149,7 +156,7 @@ angular.module("metho.service.storage", [])
 
             loadingProjects = true;
             loadingSources = true;
-            projectRepo.post(newproject).then(function(response) {
+            this.projectRepo.post(newproject).then(function(response) {
                 sourcesByProject[response.id] = {};
                 newproject._id = response.id;
                 newproject._rev = response.rev;
@@ -214,7 +221,7 @@ angular.module("metho.service.storage", [])
                     for (var i = 0; i < arr_sources.length; i++) {
                         source[arr_sources[i]._id] = ParseSource.parseSource(arr_sources[i]);
                         if (i == arr_sources.length - 1) {
-                            sourceRepo.put(source[arr_sources[i]._id]).then(function (response) {
+                            this.sourceRepo.put(source[arr_sources[i]._id]).then(function (response) {
                                 source[response.id]._rev = response.rev;
                                 sources[response.id] = source[response.id];
                                 sourcesByProject[source[response.id].project_id][response.id] = source[response.id];
@@ -229,7 +236,7 @@ angular.module("metho.service.storage", [])
                                 p.reject(errors);
                             });
                         }else {
-                            sourceRepo.put(source[arr_sources[i]._id]).then(function (response) {
+                            this.sourceRepo.put(source[arr_sources[i]._id]).then(function (response) {
                                 source[response.id]._rev = response.rev;
                                 sources[response.id] = source[response.id];
                                 sourcesByProject[source[response.id].project_id][response.id] = source[response.id];
@@ -247,7 +254,7 @@ angular.module("metho.service.storage", [])
                 for (var i = 0; i < arr_sources.length; i++) {
                     source[arr_sources[i]._id] = ParseSource.parseSource(arr_sources[i]);
                     if (i == arr_sources.length - 1) {
-                        sourceRepo.put(source[arr_sources[i]._id]).then(function (response) {
+                        this.sourceRepo.put(source[arr_sources[i]._id]).then(function (response) {
                             source[response.id]._rev = response.rev;
                             sources[response.id] = source[response.id];
                             sourcesByProject[source[response.id].project_id][response.id] = source[response.id];
@@ -262,7 +269,7 @@ angular.module("metho.service.storage", [])
                             p.reject(errors);
                         });
                     }else {
-                        sourceRepo.put(source[arr_sources[i]._id]).then(function (response) {
+                        this.sourceRepo.put(source[arr_sources[i]._id]).then(function (response) {
                             source[response.id]._rev = response.rev;
                             sources[response.id] = source[response.id];
                             sourcesByProject[source[response.id].project_id][response.id] = source[response.id];
@@ -283,7 +290,7 @@ angular.module("metho.service.storage", [])
                 var unregister = $rootScope.$on("sourceLoadingEnded", function () {
                     unregister();
                     loadingSources = true;
-                    sourceRepo.put(set, id, sources[id]._rev).then(function (response) {
+                    this.sourceRepo.put(set, id, sources[id]._rev).then(function (response) {
                         sources[id] = set;
                         sources[id]._rev = response.rev;
                         sourcesByProject[sources[id].project_id][id] = set;
@@ -300,7 +307,7 @@ angular.module("metho.service.storage", [])
                 });
             }else {
                 loadingSources = true;
-                sourceRepo.put(set, id, sources[id]._rev).then(function (response) {
+                this.sourceRepo.put(set, id, sources[id]._rev).then(function (response) {
                     sources[id] = set;
                     sources[id]._rev = response.rev;
                     sourcesByProject[sources[id].project_id][id] = set;
@@ -320,7 +327,7 @@ angular.module("metho.service.storage", [])
         createSource: function (newsource) {
             var p = $q.defer();
 
-            sourceRepo.post(newsource).then(function (response) {
+            this.sourceRepo.post(newsource).then(function (response) {
                 newsource._id = response.id;
                 newsource._rev = response.rev;
 
@@ -342,7 +349,7 @@ angular.module("metho.service.storage", [])
             delete sources[id];
             delete sourcesByProject[doc.project_id][id];
 
-            sourceRepo.remove(doc).then(function(result) {
+            this.sourceRepo.remove(doc).then(function(result) {
                 p.resolve(result);
             }).catch(function(err) {
                 ReportUser.report(err);
@@ -384,7 +391,7 @@ angular.module("metho.service.storage", [])
         createPending: function (newpending) {
             var p = $q.defer();
 
-            pendingRepo.post(newpending).then(function(response) {
+            this.pendingRepo.post(newpending).then(function(response) {
                 newpending._id = response.id;
                 newpending._rev = response.rev;
 
@@ -407,7 +414,7 @@ angular.module("metho.service.storage", [])
             var p = $q.defer();
 
             loadingPendings = true;
-            pendingRepo.remove(pendings[id]).then(function (response) {
+            this.pendingRepo.remove(pendings[id]).then(function (response) {
                 delete pendingsByProject[pendings[id].project_id][id];
                 delete pendings[id];
 
@@ -427,7 +434,7 @@ angular.module("metho.service.storage", [])
         setPendingFromId: function (id, set) {
             var p = $q.defer();
 
-            pendingRepo.put(set, id, pendings[id]._rev).then(function (response) {
+            this.pendingRepo.put(set, id, pendings[id]._rev).then(function (response) {
                 set._rev = response.rev;
 
                 pendings[id] = set;

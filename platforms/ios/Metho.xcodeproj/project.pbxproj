@@ -41,6 +41,7 @@
 		784AC15294E9449AABB9140D /* ThreeDeeTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = E144AA85A54D48E18E7BC14A /* ThreeDeeTouch.m */; };
 		94AA20A538C14807A2549FA0 /* AppDelegate+threedeetouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD959D198594481BD5BA203 /* AppDelegate+threedeetouch.m */; };
 		23EB8032F43D4CB7BF0CA675 /* IonicKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F21AB5B21484F3FB1EB8523 /* IonicKeyboard.m */; };
+		46727B6DA30C46ADACE4BA89 /* SQLitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB478BF79354E72A64A7597 /* SQLitePlugin.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +131,8 @@
 		CDF5DC983BB648908159AC51 /* AppDelegate+threedeetouch.h */ = {isa = PBXFileReference; name = "AppDelegate+threedeetouch.h"; path = "cordova-plugin-3dtouch/AppDelegate+threedeetouch.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 		5F21AB5B21484F3FB1EB8523 /* IonicKeyboard.m */ = {isa = PBXFileReference; name = "IonicKeyboard.m"; path = "ionic-plugin-keyboard/IonicKeyboard.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 		8A3F2D36D02A4CAD83C0B735 /* IonicKeyboard.h */ = {isa = PBXFileReference; name = "IonicKeyboard.h"; path = "ionic-plugin-keyboard/IonicKeyboard.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		7EB478BF79354E72A64A7597 /* SQLitePlugin.m */ = {isa = PBXFileReference; name = "SQLitePlugin.m"; path = "cordova-plugin-sqlite-2/SQLitePlugin.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		4AD257E5EE5D48AF8C2F502E /* SQLitePlugin.h */ = {isa = PBXFileReference; name = "SQLitePlugin.h"; path = "cordova-plugin-sqlite-2/SQLitePlugin.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -281,6 +284,8 @@
 				CDF5DC983BB648908159AC51 /* AppDelegate+threedeetouch.h */,
 				5F21AB5B21484F3FB1EB8523 /* IonicKeyboard.m */,
 				8A3F2D36D02A4CAD83C0B735 /* IonicKeyboard.h */,
+				7EB478BF79354E72A64A7597 /* SQLitePlugin.m */,
+				4AD257E5EE5D48AF8C2F502E /* SQLitePlugin.h */,
 			);
 			name = Plugins;
 			path = Metho/Plugins;
@@ -431,6 +436,7 @@
 				784AC15294E9449AABB9140D /* ThreeDeeTouch.m in Sources */,
 				94AA20A538C14807A2549FA0 /* AppDelegate+threedeetouch.m in Sources */,
 				23EB8032F43D4CB7BF0CA675 /* IonicKeyboard.m in Sources */,
+				46727B6DA30C46ADACE4BA89 /* SQLitePlugin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

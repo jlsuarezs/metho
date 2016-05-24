@@ -97,6 +97,14 @@ module.exports = [
             "cordova.plugins.Keyboard"
         ],
         "runs": true
+    },
+    {
+        "file": "plugins/cordova-plugin-sqlite-2/dist/sqlite-plugin.js",
+        "id": "cordova-plugin-sqlite-2.sqlitePlugin",
+        "pluginId": "cordova-plugin-sqlite-2",
+        "clobbers": [
+            "sqlitePlugin"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -111,7 +119,8 @@ module.exports.metadata =
     "cordova-plugin-splashscreen": "3.2.1",
     "cordova-custom-config": "2.0.0",
     "cordova-plugin-3dtouch": "1.3.5",
-    "ionic-plugin-keyboard": "2.2.0"
+    "ionic-plugin-keyboard": "2.2.0",
+    "cordova-plugin-sqlite-2": "1.0.3"
 }
 // BOTTOM OF METADATA
 });
