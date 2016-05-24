@@ -2,6 +2,7 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
 
 .run(function($ionicPlatform, localStorageService, $translate, $ionicConfig, Settings, $rootScope, ParseSource, $state, $ionicPopup, Storage, ReportUser) {
     $ionicPlatform.ready(function() {
+        Storage.init();
         if (Settings.get("firstRun")) {
             // Restore purchase + add a var if user is not online
             if (!!window.cordova) {
