@@ -30,10 +30,6 @@ angular.module("metho.service.storage", [])
             this.projectRepo = new PouchDB("projects");
             this.pendingRepo = new PouchDB("pendings");
 
-            this.sourceRepo.info().then(function (info) {
-                alert(JSON.stringify(info));
-            });
-
             if (theresProjects) {
                 this.projectRepo.allDocs({include_docs: true}).then(function (docs) {
                     for (var i = 0; i < docs.rows.length; i++) {
