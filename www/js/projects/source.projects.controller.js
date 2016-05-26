@@ -69,9 +69,16 @@ angular.module("metho.controller.projects.source", [])
                 if (!!window.cordova) {
                     cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
                 }
+                // Wrap firstname or lastname mention in <b></b>
+                if (author_label.indexOf($scope.source.errors[id].promptTitle.toLowerCase()) >= 0) {
+                    var subtitle = wrapInBold($scope.source.errors[id].promptText, name_labels);
+                }else {
+                    var subtitle = $scope.source.errors[id].promptText;
+                }
+
                 var popup = $ionicPopup.show({
                     title: $scope.source.errors[id].promptTitle,
-                    subTitle: $scope.source.errors[id].promptText,
+                    subTitle: subtitle,
                     scope: $scope,
                     template: '<input type="text" ng-model="errors.result" ng-autofocus delay="275" ng-keyup="$event.keyCode == 13 && popup.close()">',
                     buttons: [
