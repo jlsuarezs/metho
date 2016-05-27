@@ -745,7 +745,7 @@ angular.module('metho.controller.projects.detail', [])
                             if (res) {
                                 var creating = {
                                     isbn: inputISBN,
-                                    date: new Date().toLocaleDateString(),
+                                    date: moment().toObject(),
                                     project_id: $scope.project.id
                                 };
 
@@ -783,7 +783,7 @@ angular.module('metho.controller.projects.detail', [])
                     if (res) {
                         var creating = {
                             isbn: inputISBN,
-                            date: new Date().toLocaleDateString(),
+                            date: moment().toObject(),
                             project_id: $scope.project.id
                         };
 

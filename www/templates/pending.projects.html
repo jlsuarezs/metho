@@ -4,7 +4,7 @@
         <ion-list ng-if="pendings.length">
             <ion-item ng-repeat="pending in pendings" class="item item-icon-right" type="item-text-wrap" ng-click="downloadDetails('{{pending.isbn}}', '{{pending._id}}')" ng-class="{ 'item-remove-animate': removeAnimate }">
                 <h2 class="normal">{{pending.isbn}}</h2>
-                <p>{{pending.date}}</p>
+                <p>{{pending.datestring}}</p>
                 <i class="icon ion-ios-cloud-download-outline" ng-if="!pending.not_available"></i>
                 <i class="icon ion-ios-close-outline" ng-if="pending.not_available"></i>
                 <ion-option-button class="button-assertive" ng-click="deletePending('{{pending._id}}')">{{'PROJECT.PENDING.DELETE_ITEM' | translate}}</ion-option-button>

@@ -42,6 +42,7 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
                         ReportUser.report(error);
                     });
                     numeral.language(two);
+                    moment.locale(two);
                     if (two != Settings.get("lastLang")) {
                         Storage.parseSources();
                     }
@@ -50,13 +51,16 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
             }else {
                 $translate.use(Settings.get("overideLang"));
                 numeral.language(Settings.get("overideLang"));
+                moment.locale(Settings.get("overideLang"));
             }
         }else {
             if (Settings.get("overideLang") != "") {
                 $translate.use(Settings.get("overideLang"));
                 numeral.language(Settings.get("overideLang"));
+                moment.locale(Settings.get("overideLang"));
             }else {
                 numeral.language("fr");
+                moment.locale("fr");
             }
         }
 

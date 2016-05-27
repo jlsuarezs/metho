@@ -70,11 +70,13 @@ angular.module("metho.controller.settings.tab", [])
                         ReportUser.report(error);
                     });
                     numeral.language((language.value).split("-")[0]);
+                    moment.locale((language.value).split("-")[0]);
                 }, null);
             }
         }else {
             $translate.use($scope.settings.overideLang);
             numeral.language($scope.settings.overideLang);
+            moment.locale($scope.settings.overideLang);
         }
     }
 

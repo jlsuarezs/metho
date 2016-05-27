@@ -1,6 +1,6 @@
 angular.module("metho.controller.projects.pending", [])
 
-.controller("PendingCtrl", function($scope, $state, $http, $translate, $timeout, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicLoading, ParseSource, Storage, Fetch, ReportUser) {
+.controller("PendingCtrl", function($scope, $rootScope, $state, $http, $translate, $timeout, $stateParams, $ionicModal, $ionicPopup, $ionicScrollDelegate, $ionicLoading, ParseSource, Storage, Fetch, ReportUser) {
     $scope.project = {
         id: $stateParams.projectID,
         sources: []
@@ -19,12 +19,22 @@ angular.module("metho.controller.projects.pending", [])
     });
 
     $scope.loadPendings = function () {
+        $scope.pendings = [];
         Storage.getPendingsFromProjectId($scope.project.id).then(function (pendings) {
             $scope.pendings = pendings;
+            for (var i = 0; i < $scope.pendings.length; i++) {
+                $scope.pendings[i].datestring = moment($scope.pendings[i].date).format("LL");
+            }
         });
     }
 
     $scope.loadPendings();
+
+    $rootScope.$on("$translateChangeSuccess", function () {
+        for (var i = 0; i < $scope.pendings.length; i++) {
+            $scope.pendings[i].datestring = moment($scope.pendings[i].date).format("LL");
+        }
+    });
 
     $scope.openAtURL = function(url) {
         SafariViewController.isAvailable(function(available) {

@@ -12,6 +12,7 @@
     "angular-local-storage": "^0.2.7",
     "numeral": "adamwdraper/Numeral-js#^1.5.3",
     "angular-translate": "^2.11.0",
-    "angular-translate-loader-static-files": "^2.11.0"
+    "angular-translate-loader-static-files": "^2.11.0",
+    "moment": "^2.13.0"
   }
 }
