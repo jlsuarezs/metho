@@ -70,7 +70,7 @@ angular.module("metho.controller.projects.source", [])
                     cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
                 }
                 // Wrap firstname or lastname mention in <b></b>
-                if (author_label.indexOf($scope.source.errors[id].promptTitle.toLowerCase()) >= 0) {
+                if (["FIRST_AUTHOR_FIRSTNAME", "FIRST_AUTHOR_LASTNAME", "SECOND_AUTHOR_FIRSTNAME", "SECOND_AUTHOR_LASTNAME", "THIRD_AUTHOR_FIRSTNAME", "THIRD_AUTHOR_LASTNAME", "INTERVIEWED_LASTNAME", "INTERVIEWED_FIRSTNAME"].indexOf($scope.source.errors[id].key) >= 0) {
                     var subtitle = wrapInBold($scope.source.errors[id].promptText, name_labels);
                 }else {
                     var subtitle = $scope.source.errors[id].promptText;

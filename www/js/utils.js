@@ -37,7 +37,6 @@ function random(min, max) {
 
 var unknown_subjects = ["Matière inconnue", "Unknown subject", "Materia desconocida"];
 var name_labels = ["prénom", "nombre", "firstname", "lastname", "nom", "apellido"];
-var author_label = ["auteur", "author", "autor"];
 
 function wrapInBold (stringToWrap, arr_wrap) {
     if (found = new RegExp(arr_wrap.join("|"), 'i').exec(stringToWrap)) {

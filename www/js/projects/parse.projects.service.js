@@ -18,14 +18,16 @@ angular.module("metho.service.projects.parse", [])
                 template: complex.template,
                 complex: true,
                 id: complex.id,
-                type: complex.type
+                type: complex.type,
+                key: errorId
             });
         }else {
             sourceToParse.errors.push({
                 errorTitle: $translate.instant("PROJECT.PARSE." + errorId + ".DESC"),
                 promptTitle: $translate.instant("PROJECT.PARSE." + errorId + ".TITLE"),
                 promptText: $translate.instant("PROJECT.PARSE." + errorId + ".TEXT"),
-                var: variable
+                var: variable,
+                key: errorId
             });
         }
     };
