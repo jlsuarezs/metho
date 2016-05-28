@@ -70,12 +70,16 @@ p.left-aligned {
 }
 
 /* Empty tab state for Project Tab */
-.flex > .scroll {
+.flex {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
   flex-direction: column;
+}
+
+.full-height > .scroll {
+  height: 100%;
 }
 
 .flex-pending > .scroll {

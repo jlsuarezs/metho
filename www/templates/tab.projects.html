@@ -2,11 +2,13 @@
     <ion-nav-buttons side="right">
         <button class="button button-clear button-positive icon ion-ios-plus-empty" ng-click="newProject()"></button>
     </ion-nav-buttons>
-    <ion-content ng-class="{ 'padding flex' : !projects.length }" scrollbar-y="true" has-bouncing="true">
+    <ion-content scrollbar-y="true" has-bouncing="true" class="full-height">
         <!-- When there is no elements -->
-        <button class="button ion-ios-plus-empty icon button-positive button-outline" class="centered" ng-if="!projects.length && !loading" ng-click="newProject()">
-        </button><br ng-if="!projects.length && !loading">
-        <p class="center dimmed-50" ng-if="!projects.length && !loading" translate>PROJECT.TAB.EMPTY_TAB</p>
+        <div class="padding flex" ng-if="!projects.length && !loading">
+            <button class="button ion-ios-plus-empty icon button-positive button-outline" class="centered" ng-click="newProject()">
+            </button><br>
+            <p class="center dimmed-50" translate>PROJECT.TAB.EMPTY_TAB</p>
+        </div>
         <!-- When there is -->
         <ion-list ng-if="projects.length">
             <ion-item ng-repeat="project in projects" class="item-icon-right" type="item-text-wrap" ng-class="{'item-remove-animate': removeAnimate}" ng-click="openProjectDetail('{{project.id}}')">
@@ -19,7 +21,7 @@
         </ion-list>
 
         <!-- Loading -->
-        <div class="spinner" ng-if="loading">
+        <div class="flex spinner" ng-if="loading">
             <ion-spinner></ion-spinner>
         </div>
     </ion-content>
