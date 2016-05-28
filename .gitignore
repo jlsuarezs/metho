@@ -4,6 +4,7 @@
 node_modules/
 platforms/ios/www/*
 platforms/ios/Metho/config.xml
+platforms/ios/Metho/Metho-Info.plist
 .DS_Store
 .bowerrc
 .editorconfig
