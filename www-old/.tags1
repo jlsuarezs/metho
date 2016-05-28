@@ -1,0 +1,116 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	0	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+.center	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.center {$/;"	function	line:2
+.dimmed-50	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.dimmed-50 {$/;"	function	line:6
+.dimmed-75	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.dimmed-75 {$/;"	function	line:10
+em	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^em {$/;"	function	line:14
+.item-avatar .item-content > img:first-child	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.item-avatar .item-content > img:first-child {$/;"	function	line:19
+.justify p	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.justify p {$/;"	function	line:23
+.diag-fract	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.diag-fract {$/;"	function	line:27
+@supports (font-variant-numeric: diagonal-fractions)	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^@supports (font-variant-numeric: diagonal-fractions) {$/;"	function	line:32
+.diag-fract	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^  .diag-fract {$/;"	function	line:33
+ul li::before	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^ul li::before {$/;"	function	line:40
+ul.ulvl2	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^ul.ulvl2 {$/;"	function	line:44
+ul.ulvl2 li::before	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^ul.ulvl2 li::before {$/;"	function	line:49
+ul + p	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^ul + p,$/;"	function	line:53
+ol + p	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^ol + p {$/;"	function	line:54
+ol	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^ol,$/;"	function	line:58
+ol li	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^ol li {$/;"	function	line:59
+p.left-aligned	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^p.left-aligned {$/;"	function	line:64
+.flex > .scroll	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.flex > .scroll {$/;"	function	line:69
+.flex-pending > .scroll	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.flex-pending > .scroll {$/;"	function	line:77
+.flex-sub	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.flex-sub {$/;"	function	line:85
+.flex-sub > *	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.flex-sub > * {$/;"	function	line:91
+.flex-sub input	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.flex-sub input {$/;"	function	line:96
+.red-border	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.red-border {$/;"	function	line:100
+/* .table100	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^\/* .table100 {$/;"	function	line:104
+.table100 tr	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.table100 tr {$/;"	function	line:109
+.table100 input	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.table100 input {$/;"	function	line:113
+/* .table100 tr > td:first-child input	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^\/* .table100 tr > td:first-child input {$/;"	function	line:119
+.condensed	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.condensed {$/;"	function	line:124
+.smaller	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.smaller {$/;"	function	line:128
+.smallest	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.smallest {$/;"	function	line:132
+.item-stacked-label:first-child	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.item-stacked-label:first-child {$/;"	function	line:136
+.item-button-left .item-checkbox	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.item-button-left .item-checkbox {$/;"	function	line:140
+.item-radio:first-child	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.item-radio:first-child {$/;"	function	line:146
+.black-top > .item-stacked-label:first-child	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.black-top > .item-stacked-label:first-child {$/;"	function	line:150
+.deleteProject .popup	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.deleteProject .popup {$/;"	function	line:154
+.error-nb	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.error-nb {$/;"	function	line:158
+.yellow	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.yellow {$/;"	function	line:163
+.red	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.red {$/;"	function	line:167
+.limited-width	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.limited-width {$/;"	function	line:171
+.empty	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.empty {$/;"	function	line:175
+.titles	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.titles {$/;"	function	line:181
+.page-title	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.page-title {$/;"	function	line:186
+.page-sub-title	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.page-sub-title {$/;"	function	line:200
+.preload1	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.preload1 { background: url('..\/img\/biblio.png') no-repeat -9999px -9999px; }$/;"	function	line:211
+.preload2	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.preload2 { background: url('..\/img\/layout.png') no-repeat -9999px -9999px; }$/;"	function	line:212
+.preload3	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.preload3 { background: url('..\/img\/tableOfContents.png') no-repeat -9999px -9999px; }$/;"	function	line:213
+.preload4	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.preload4 { background: url('..\/img\/page-icon.png') no-repeat -9999px -9999px; }$/;"	function	line:214
+.preload5	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.preload5 { background: url('..\/img\/fiche.png') no-repeat -9999px -9999px; }$/;"	function	line:215
+.no-margin	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.no-margin {$/;"	function	line:217
+.footer-button-custom	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.footer-button-custom {$/;"	function	line:221
+.no-padding	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.no-padding {$/;"	function	line:226
+.padding-top	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.padding-top {$/;"	function	line:230
+.box	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.box {$/;"	function	line:235
+.slider	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.slider {$/;"	function	line:243
+.slider-slide	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.slider-slide {$/;"	function	line:247
+.blue.slider-slide	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.blue.slider-slide {$/;"	function	line:255
+.yellow.slider-slide	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.yellow.slider-slide {$/;"	function	line:259
+.yellow p	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.yellow p {$/;"	function	line:263
+.green.slider-slide	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.green.slider-slide {$/;"	function	line:267
+.box h1	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.box h1 {$/;"	function	line:271
+.justified	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.justified {$/;"	function	line:275
+.padding-extreme	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.padding-extreme {$/;"	function	line:279
+.padding-top-extreme	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.padding-top-extreme {$/;"	function	line:283
+.box p	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.box p {$/;"	function	line:287
+.big	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.big {$/;"	function	line:291
+#imgISBN	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^#imgISBN {$/;"	function	line:295
+.checkmark__circle	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.checkmark__circle {$/;"	function	line:299
+.checkmark	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.checkmark {$/;"	function	line:309
+.checkmark__check	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.checkmark__check {$/;"	function	line:322
+@keyframes stroke	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^@keyframes stroke {$/;"	function	line:329
+100%	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^  100% {$/;"	function	line:330
+@keyframes scale	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^@keyframes scale {$/;"	function	line:335
+0%	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^  0%,$/;"	function	line:336
+100%	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^  100% {$/;"	function	line:337
+50%	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^  50% {$/;"	function	line:340
+@keyframes fill	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^@keyframes fill {$/;"	function	line:345
+100%	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^  100% {$/;"	function	line:346
+.margin-top-medium	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.margin-top-medium {$/;"	function	line:351
+.imitateSVG	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.imitateSVG {$/;"	function	line:355
+.popup-vertical-buttons .popup-buttons	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.popup-vertical-buttons .popup-buttons {$/;"	function	line:363
+.popup-vertical-buttons .popup-buttons .button	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.popup-vertical-buttons .popup-buttons .button {$/;"	function	line:367
+.link-beautiful	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.link-beautiful {$/;"	function	line:373
+/* .item-toggle	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^\/* .item-toggle {$/;"	function	line:378
+.button-priced	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.button-priced {$/;"	function	line:382
+.button-priced span	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.button-priced span {$/;"	function	line:393
+.wrap	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.wrap {$/;"	function	line:397
+.avatar-notround > img	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.avatar-notround > img {$/;"	function	line:401
+.normal a	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.normal a {$/;"	function	line:405
+select:not(.already-styled)	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^select:not(.already-styled) {$/;"	function	line:410
+linear-gradient(45deg, transparent 50%, gray 50%)	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^    linear-gradient(45deg, transparent 50%, gray 50%),$/;"	function	line:429
+calc(100% - 20px) calc(1em + 2px)	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^    calc(100% - 20px) calc(1em + 2px),$/;"	function	line:432
+calc(100% - 15px) calc(1em + 2px)	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^    calc(100% - 15px) calc(1em + 2px),$/;"	function	line:433
+5px 5px	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^    5px 5px,$/;"	function	line:436
+5px 5px	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^    5px 5px,$/;"	function	line:437
+select.borderless	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^select.borderless {$/;"	function	line:442
+.popup select	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.popup select {$/;"	function	line:446
+linear-gradient(45deg, transparent 50%, gray 50%)	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^    linear-gradient(45deg, transparent 50%, gray 50%),$/;"	function	line:448
+linear-gradient(135deg, gray 50%, transparent 50%)	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^    linear-gradient(135deg, gray 50%, transparent 50%),$/;"	function	line:449
+calc(100% - 20px) calc(1em + 2px)	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^    calc(100% - 20px) calc(1em + 2px),$/;"	function	line:452
+calc(100% - 15px) calc(1em + 2px)	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^    calc(100% - 15px) calc(1em + 2px),$/;"	function	line:453
+5px 5px	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^    5px 5px,$/;"	function	line:456
+5px 5px	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^    5px 5px,$/;"	function	line:457
+.interact	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.interact {$/;"	function	line:462
+.ion-chevron-right.button-light	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.ion-chevron-right.button-light {$/;"	function	line:471
+.ion-chevron-right.rotate-90	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.ion-chevron-right.rotate-90 {$/;"	function	line:477
+.spinner-suggestions	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.spinner-suggestions {$/;"	function	line:482
+.spinner-suggestions.extra-padding-right	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.spinner-suggestions.extra-padding-right {$/;"	function	line:488
+.scroll-height-one	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.scroll-height-one {$/;"	function	line:492
+.scroll-height-one-and-a-half	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.scroll-height-one-and-a-half {$/;"	function	line:496
+.scroll-height-normal	/Users/francis/Documents/IonicProjects/Metho/www/css/style.css	/^.scroll-height-normal {$/;"	function	line:500
