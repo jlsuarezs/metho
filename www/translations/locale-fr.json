@@ -498,17 +498,17 @@
                 "DESC": "Titre de civilité non spécifié"
             },
             "INTERVIEWED_FIRSTNAME": {
-                "TITLE": "Prénom de la personne rencontrée",
+                "TITLE": "Personne rencontrée",
                 "TEXT": "Entrez le prénom de la personne rencontrée",
                 "DESC": "Prénom de la personne rencontrée manquant"
             },
             "INTERVIEWED_LASTNAME": {
-                "TITLE": "Nom de la personne rencontrée",
+                "TITLE": "Personne rencontrée",
                 "TEXT": "Entrez le nom de la personne rencontrée",
                 "DESC": "Nom de la personne rencontrée manquant"
             },
             "INTERVIEWED_TITLE": {
-                "TITLE": "Titre de la personne rencontrée",
+                "TITLE": "Personne rencontrée",
                 "TEXT": "Entrez le titre de la personne rencontrée",
                 "DESC": "Titre de la personne rencontrée manquant"
             },
