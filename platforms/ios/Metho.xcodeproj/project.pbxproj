@@ -10,7 +10,6 @@
 		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		20A3FC0D6956479E8FC5F933 /* SafariViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54EBB8D035AA4E0B97D5927F /* SafariViewController.m */; };
-		265373A77EE34FCC87231DBC /* CDVInAppBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = A33AEC1B20F34B4283A06D12 /* CDVInAppBrowser.m */; };
 		29FF3D314F3B4A5C9A0BA294 /* zxing-all-in-one.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CC9BF991DBA4454AA467F77C /* zxing-all-in-one.cpp */; };
 		301BF552109A68D80062928A /* libCordova.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 301BF535109A57CC0062928A /* libCordova.a */; };
 		302D95F114D2391D003F00A1 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 302D95EF14D2391D003F00A1 /* MainViewController.m */; };
@@ -42,6 +41,7 @@
 		94AA20A538C14807A2549FA0 /* AppDelegate+threedeetouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD959D198594481BD5BA203 /* AppDelegate+threedeetouch.m */; };
 		23EB8032F43D4CB7BF0CA675 /* IonicKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F21AB5B21484F3FB1EB8523 /* IonicKeyboard.m */; };
 		46727B6DA30C46ADACE4BA89 /* SQLitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB478BF79354E72A64A7597 /* SQLitePlugin.m */; };
+		C3D3E546ACC24F8D852E40B2 /* CDVInAppBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D95E98560484F12A41692B5 /* CDVInAppBrowser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,7 +93,6 @@
 		3047A50F1AB8059700498E2A /* build-debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "build-debug.xcconfig"; path = "cordova/build-debug.xcconfig"; sourceTree = SOURCE_ROOT; };
 		3047A5101AB8059700498E2A /* build-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "build-release.xcconfig"; path = "cordova/build-release.xcconfig"; sourceTree = SOURCE_ROOT; };
 		3047A5111AB8059700498E2A /* build.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = build.xcconfig; path = cordova/build.xcconfig; sourceTree = SOURCE_ROOT; };
-		31EA2B4579A346C6855412B5 /* CDVInAppBrowser.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVInAppBrowser.h; path = "cordova-plugin-inappbrowser/CDVInAppBrowser.h"; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Metho-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Metho-Prefix.pch"; sourceTree = "<group>"; };
 		364B52C18D1C4CCBAF617429 /* SafariViewController.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = SafariViewController.h; path = "cordova-plugin-safariviewcontroller/SafariViewController.h"; sourceTree = "<group>"; };
 		40691E49FE944615B9279511 /* AudioToolbox.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -110,7 +109,6 @@
 		7734679CC7D640D4BF067B99 /* CDVGlobalization.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVGlobalization.h; path = "cordova-plugin-globalization/CDVGlobalization.h"; sourceTree = "<group>"; };
 		81783E3A63984F5A81092110 /* UIKit.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* Metho-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Metho-Info.plist"; path = "Metho/Metho-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = SOURCE_ROOT; };
-		A33AEC1B20F34B4283A06D12 /* CDVInAppBrowser.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVInAppBrowser.m; path = "cordova-plugin-inappbrowser/CDVInAppBrowser.m"; sourceTree = "<group>"; };
 		ACAD8E66E82E4A47A7844BF0 /* zxing-all-in-one.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = "zxing-all-in-one.h"; path = "phonegap-plugin-barcodescanner/zxing-all-in-one.h"; sourceTree = "<group>"; };
 		B3C1288E07374452AE67FE54 /* CoreImage.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		B4E2CECF28A94F8C83EEFDB0 /* CDVBarcodeScanner.bundle */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.plug-in"; path = CDVBarcodeScanner.bundle; sourceTree = "<group>"; };
@@ -133,6 +131,8 @@
 		8A3F2D36D02A4CAD83C0B735 /* IonicKeyboard.h */ = {isa = PBXFileReference; name = "IonicKeyboard.h"; path = "ionic-plugin-keyboard/IonicKeyboard.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 		7EB478BF79354E72A64A7597 /* SQLitePlugin.m */ = {isa = PBXFileReference; name = "SQLitePlugin.m"; path = "cordova-plugin-sqlite-2/SQLitePlugin.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 		4AD257E5EE5D48AF8C2F502E /* SQLitePlugin.h */ = {isa = PBXFileReference; name = "SQLitePlugin.h"; path = "cordova-plugin-sqlite-2/SQLitePlugin.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		1D95E98560484F12A41692B5 /* CDVInAppBrowser.m */ = {isa = PBXFileReference; name = "CDVInAppBrowser.m"; path = "cordova-plugin-inappbrowser/CDVInAppBrowser.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		3C8795AA75CF40D48953C0BA /* CDVInAppBrowser.h */ = {isa = PBXFileReference; name = "CDVInAppBrowser.h"; path = "cordova-plugin-inappbrowser/CDVInAppBrowser.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,8 +265,6 @@
 				032D94ED742A492BA348DC2B /* SocialSharing.h */,
 				BB26DB1AAC0B40019015FD27 /* CDVDevice.m */,
 				1DC8C63A3E084F09952347D6 /* CDVDevice.h */,
-				A33AEC1B20F34B4283A06D12 /* CDVInAppBrowser.m */,
-				31EA2B4579A346C6855412B5 /* CDVInAppBrowser.h */,
 				54EBB8D035AA4E0B97D5927F /* SafariViewController.m */,
 				364B52C18D1C4CCBAF617429 /* SafariViewController.h */,
 				418E379A4B074C069B34A254 /* CDVBarcodeScanner.mm */,
@@ -286,6 +284,8 @@
 				8A3F2D36D02A4CAD83C0B735 /* IonicKeyboard.h */,
 				7EB478BF79354E72A64A7597 /* SQLitePlugin.m */,
 				4AD257E5EE5D48AF8C2F502E /* SQLitePlugin.h */,
+				1D95E98560484F12A41692B5 /* CDVInAppBrowser.m */,
+				3C8795AA75CF40D48953C0BA /* CDVInAppBrowser.h */,
 			);
 			name = Plugins;
 			path = Metho/Plugins;
@@ -426,7 +426,6 @@
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
 				F246E9B3514847FEB4B4B8DB /* SocialSharing.m in Sources */,
 				A756DA34FF84490B9EB3642E /* CDVDevice.m in Sources */,
-				265373A77EE34FCC87231DBC /* CDVInAppBrowser.m in Sources */,
 				20A3FC0D6956479E8FC5F933 /* SafariViewController.m in Sources */,
 				51E714708A49416F87645307 /* CDVBarcodeScanner.mm in Sources */,
 				29FF3D314F3B4A5C9A0BA294 /* zxing-all-in-one.cpp in Sources */,
@@ -437,6 +436,7 @@
 				94AA20A538C14807A2549FA0 /* AppDelegate+threedeetouch.m in Sources */,
 				23EB8032F43D4CB7BF0CA675 /* IonicKeyboard.m in Sources */,
 				46727B6DA30C46ADACE4BA89 /* SQLitePlugin.m in Sources */,
+				C3D3E546ACC24F8D852E40B2 /* CDVInAppBrowser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

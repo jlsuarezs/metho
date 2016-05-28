@@ -33,15 +33,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-        "id": "cordova-plugin-inappbrowser.inappbrowser",
-        "pluginId": "cordova-plugin-inappbrowser",
-        "clobbers": [
-            "cordova.InAppBrowser.open",
-            "window.open"
-        ]
-    },
-    {
         "file": "plugins/cordova-plugin-safariviewcontroller/www/SafariViewController.js",
         "id": "cordova-plugin-safariviewcontroller.SafariViewController",
         "pluginId": "cordova-plugin-safariviewcontroller",
@@ -105,6 +96,15 @@ module.exports = [
         "clobbers": [
             "sqlitePlugin"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+        "id": "cordova-plugin-inappbrowser.inappbrowser",
+        "pluginId": "cordova-plugin-inappbrowser",
+        "clobbers": [
+            "cordova.InAppBrowser.open",
+            "window.open"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -112,7 +112,6 @@ module.exports.metadata =
 {
     "cordova-plugin-x-socialsharing": "5.0.10",
     "cordova-plugin-device": "1.1.1",
-    "cordova-plugin-inappbrowser": "1.2.1",
     "cordova-plugin-safariviewcontroller": "1.4.1",
     "phonegap-plugin-barcodescanner": "4.1.0",
     "cordova-plugin-globalization": "1.0.3",
@@ -120,7 +119,8 @@ module.exports.metadata =
     "cordova-custom-config": "2.0.0",
     "cordova-plugin-3dtouch": "1.3.5",
     "ionic-plugin-keyboard": "2.2.0",
-    "cordova-plugin-sqlite-2": "1.0.3"
+    "cordova-plugin-sqlite-2": "1.0.3",
+    "cordova-plugin-inappbrowser": "1.4.0"
 }
 // BOTTOM OF METADATA
 });
