@@ -1,46 +1,68 @@
 <ion-view title="{{'SETTINGS.ATTRIBUTION_TAB' | translate}}">
-    <ion-content class="padding-top-extreme" has-bouncing="true">
-        <p class="dimmed-75 center">
-            Ionic Framework
-        </p>
-        <p class="dimmed-75 center">
-            AngularJS
-        </p>
-        <p class="dimmed-75 center">
-            Angular Translate
-        </p>
-        <p class="dimmed-75 center">
-            Angular Local Storage
-        </p>
-        <p class="dimmed-75 center">
-            Apache Cordova
-        </p>
-        <p class="dimmed-75 center">
-            ngCordova
-        </p>
-        <p class="dimmed-75 center">
-            PouchDB
-        </p>
-        <p class="dimmed-75 center">
-            MomentJS
-        </p>
-        <p class="dimmed-75 center">
-            NumeralJS
-        </p>
-        <p class="dimmed-75 center">
-            ng-slide-down
-        </p>
-        <p class="dimmed-75 center">
+    <ion-content has-bouncing="true">
+        <ion-list>
+            <ion-item class="item item-thumbnail-left" ng-click="openWebBrowser('http://www.ionicframework.com')">
+                <img src="img/ionic.png" alt="Ionic Logo" />
+                <h2 class="item-text-center">Ionic Framework</h2>
+            </ion-item>
+            <ion-item class="item item-thumbnail-left" ng-click="openWebBrowser('http://www.angularjs.org')">
+                <img src="img/angular.png" alt="Angular Logo" />
+                <h2 class="item-text-center">AngularJS</h2>
+            </ion-item>
+            <ion-item class="item item-thumbnail-left" ng-click="openWebBrowser('https://cordova.apache.org')">
+                <img src="img/cordova.png" alt="Cordova Logo" />
+                <h2 class="item-text-center">Cordova</h2>
+            </ion-item>
+            <ion-item class="item item-thumbnail-left" ng-click="openWebBrowser('http://www.ngcordova.com')">
+                <img src="img/ngcordova.png" alt="ngCordova Logo" />
+                <h2 class="item-text-center">ngCordova</h2>
+            </ion-item>
+            <ion-item class="item item-thumbnail-left" ng-click="openWebBrowser('http://www.pouchdb.com')">
+                <img src="img/pouchdb.png" alt="PouchDB Logo" />
+                <h2 class="item-text-center">PouchDB</h2>
+            </ion-item>
+            <ion-item class="item item-thumbnail-left" ng-click="openWebBrowser('http://www.momentjs.com')">
+                <img src="img/momentjs.png" alt="MomentJS Logo" />
+                <h2 class="item-text-center">MomentJS</h2>
+            </ion-item>
+            <ion-item class="item" ng-click="openWebBrowser('http://angular-translate.github.io')">
+                <h2 class="center">Angular Translate</h2>
+            </ion-item>
+            <ion-item class="item" ng-click="openWebBrowser('https://github.com/grevory/angular-local-storage')">
+                <h2 class="center">Angular Local Storage</h2>
+            </ion-item>
+            <ion-item class="item" ng-click="openWebBrowser('http://www.numeraljs.com')">
+                <h2 class="center">NumeralJS</h2>
+            </ion-item>
+            <ion-item class="item" ng-click="openWebBrowser('https://github.com/TheRusskiy/ng-slide-down')">
+                <h2 class="center">ng-slide-down</h2>
+            </ion-item>
+        </ion-list>
+        <ion-list>
+            <ion-item class="item" ng-click="openWebBrowser('https://www.npmjs.com/package/cordova-plugin-globalization')">
+                <h2 class="center">cordova-plugin-globalization</h2>
+            </ion-item>
+            <ion-item class="item" ng-click="openWebBrowser('https://www.npmjs.com/package/cordova-plugin-inappbrowser')">
+                <h2 class="center">cordova-plugin-inappbrowser</h2>
+            </ion-item>
+            <ion-item class="item" ng-click="openWebBrowser('https://www.npmjs.com/package/cordova-plugin-safariviewcontroller')">
+                <h2 class="center">cordova-plugin-safariviewcontroller</h2>
+            </ion-item>
+            <ion-item class="item" ng-click="openWebBrowser('https://www.npmjs.com/package/cordova-plugin-splashscreen')">
+                <h2 class="center">cordova-plugin-splashscreen</h2>
+            </ion-item>
+            <ion-item class="item" ng-click="openWebBrowser('https://www.npmjs.com/package/cordova-plugin-x-socialsharing')">
+                <h2 class="center">cordova-plugin-x-socialsharing</h2>
+            </ion-item>
+            <ion-item class="item" ng-click="openWebBrowser('https://www.npmjs.com/package/cordova-plugin-barcodescanner')">
+                <h2 class="center">cordova-plugin-barcodescanner</h2>
+            </ion-item>
+            <ion-item class="item" ng-click="openWebBrowser('https://www.npmjs.com/package/ionic-plugin-keyboard')">
+                <h2 class="center">ionic-plugin-keyboard</h2>
+            </ion-item>
+        </ion-list>
+        <p class="dimmed-75 center padding-top">
             {{ 'SETTINGS.ATTRIBUTION_ICONBY' | translate}} Sonal Panchal
-        </p>
-        <p class="dimmed-75 center">
-            cordova-plugin-globalization<br>
-            cordova-plugin-inappbrowser<br>
-            cordova-plugin-safariviewcontroller<br>
-            cordova-plugin-splashscreen<br>
-            cordova-plugin-x-socialsharing<br>
-            ionic-plugin-keyboard<br>
-            phonegap-plugin-barcodescanner
         </p>
         <ion-list>
             <ion-item class="item item-icon-right" href="#/tab/settings/attributions/mit">

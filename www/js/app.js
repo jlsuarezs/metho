@@ -1,4 +1,4 @@
-angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.controller.projects.detail', 'metho.controller.projects.source', 'metho.controller.projects.pending', 'metho.controllers.references', 'metho.controller.settings.tab', 'metho.controller.settings.advanced', 'metho.controller.settings.feedback', 'metho.service.projects.parse', 'metho.service.projects.fetch', 'metho.service.projects.autocomplete', 'metho.services.references', 'metho.service.settings', "metho.service.storage", "metho.service.user_report", 'metho.directive.autofocus', 'ngCordova', 'LocalStorageModule', 'ng-slide-down', 'pascalprecht.translate'])
+angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.controller.projects.detail', 'metho.controller.projects.source', 'metho.controller.projects.pending', 'metho.controllers.references', 'metho.controller.settings.tab', 'metho.controller.settings.advanced', 'metho.controller.settings.feedback', 'metho.controller.settings.attributions', 'metho.service.projects.parse', 'metho.service.projects.fetch', 'metho.service.projects.autocomplete', 'metho.services.references', 'metho.service.settings', "metho.service.storage", "metho.service.user_report", 'metho.directive.autofocus', 'ngCordova', 'LocalStorageModule', 'ng-slide-down', 'pascalprecht.translate'])
 
 .run(function($ionicPlatform, localStorageService, $translate, $ionicConfig, Settings, $rootScope, ParseSource, $state, $ionicPopup, Storage, ReportUser) {
     $ionicPlatform.ready(function() {
@@ -273,7 +273,8 @@ angular.module('metho', ['ionic', 'metho.controller.projects.tab', 'metho.contro
         url: '/settings/attributions',
         views: {
             'tab-settings': {
-                templateUrl: 'templates/attributions.settings.html'
+                templateUrl: 'templates/attributions.settings.html',
+                controller: 'AttributionsCtrl'
             }
         }
     })
