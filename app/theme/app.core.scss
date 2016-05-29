@@ -7,6 +7,40 @@
 // By default each design mode includes these shared imports.
 // App Shared Sass variables belong in app.variables.scss.
 
-@import "../pages/page1/page1";
-@import "../pages/page2/page2";
-@import "../pages/page3/page3";
+@import "../pages/projects/projects.scss";
+@import "../pages/sources/sources.scss";
+@import "../pages/source/source.scss";
+@import "../pages/pendings/pendings.scss";
+@import "../pages/references/references.scss";
+@import "../pages/references-sub/references-sub.scss";
+@import "../pages/references-detail/references-detail.scss";
+@import "../pages/settings/settings.scss";
+@import "../pages/advanced-mode/advanced-mode.scss";
+@import "../pages/attributions/attributions.scss";
+@import "../pages/license/license.scss";
+@import "../pages/feedback/feedback.scss";
+
+@import "../pages/boarding-scan/boarding-scan.scss";
+@import "../pages/project-modal/project-modal.scss";
+@import "../pages/source-modal/source-modal.scss";
+
+
+.center {
+  text-align: center;
+}
+
+.justified {
+  text-align: justify;
+}
+
+.dimmed-50 {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.dimmed-75 {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+em {
+  font-style: italic;
+}

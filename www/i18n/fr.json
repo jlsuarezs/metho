@@ -1,0 +1,605 @@
+{
+    "TAB_PROJECT": "Projets",
+    "TAB_REFERENCES": "Référence",
+    "TAB_SETTINGS": "Paramètres",
+    "BACK_BUTTON": "Retour",
+    "YES": "Oui",
+    "NO": "Non",
+    "PROJECT":{
+        "TAB":{
+            "TAB_TITLE": "Projets",
+            "EMPTY_TAB": "Aucun projet? Ça viendra...",
+            "EDIT_ITEM": "Modifier",
+            "DELETE_ITEM": "Supprimer",
+            "UNKNOWN_MATTER": "Matière inconnue",
+            "MODAL":{
+                "CANCEL": "Annuler",
+                "TITLE": "Nouveau projet",
+                "ADD": "Créer",
+                "PROJECT_NAME_LABEL": "Nom du projet",
+                "PROJECT_NAME_PLACEHOLDER": "Essai sur les moyens de communication",
+                "MATTER_LABEL": "Matière",
+                "MATTER_PLACEHOLDER": "Géographie"
+            },
+            "MODAL_EDIT":{
+                "CANCEL": "Annuler",
+                "TITLE": "Modifier le projet",
+                "CONFIRM": "Modifier",
+                "PROJECT_NAME_LABEL": "Nom du projet",
+                "PROJECT_NAME_PLACEHOLDER": "Essai sur les moyens de communication",
+                "MATTER_LABEL": "Matière",
+                "MATTER_PLACEHOLDER": "Géographie"
+            },
+            "POPUP": {
+                "ERROR_TEXT": "Erreur",
+                "NO_PROJECT_NAME": "Entrez un nom de projet",
+                "DELETE_PROJECT_TITLE": "Voulez-vous supprimer ce projet ?",
+                "DELETE_PROJECT": "La suppression de ce projet entrainera la perte de toutes les sources contenues dans celui-ci. Cette action est irréversible.",
+                "CANCEL": "Annuler",
+                "DELETE": "Supprimer",
+                "MUST_HAVE_TYPE": "Le projet doit avoir un nom"
+            }
+        },
+        "DETAIL":{
+            "EMPTY_TAB": "Qu'est-ce qu'un projet sans sources ?",
+            "DELETE_ITEM": "Supprimer",
+            "PENDING_ELEMENTS": "Éléments en attente({{number}})",
+            "CHOOSE_TYPE": "Choisir le type de source",
+            "SHARE_TEXT": "Voici les sources du projet « {{project_title}} » : <br><br><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center'>BIBLIOGRAPHIE</td></tr></table><br>",
+            "MODAL":{
+                "CANCEL": "Annuler",
+                "TITLE": "Nouvelle source",
+                "ADD": "Créer",
+                "SCAN": "Balayer le code",
+                "BOOK": {
+                    "FIRSTNAME": "Prénom",
+                    "LASTNAME": "Nom",
+                    "AUTHOR_1TO3": "La source a de 1 à 3 auteurs",
+                    "AUTHOR_MORE_3": "La source a plus de 3 auteurs",
+                    "AUTHOR_COLLLECTIVE": "La source est un collectif",
+                    "FIRST_2_AUTHOR_NAME": "Noms des deux premiers auteurs",
+                    "DIRECTOR_NAMES": "Nom du ou des directeurs",
+                    "TITLE_LABEL": "Titre du livre",
+                    "TITLE_PLACEHOLDER": "La revanche des chérubins",
+                    "EDITOR_LABEL": "Éditeur",
+                    "EDITOR_PLACEHOLDER": "Québec Amérique",
+                    "PUBLICATION_DATE_LABEL": "Date d'édition",
+                    "PUBLICATION_DATE_PLACEHOLDER": "2010",
+                    "PUBLICATION_LOCATION_LABEL": "Lieu d'édition",
+                    "PUBLICATION_LOCATION_PLACEHOLDER": "Montréal",
+                    "PAGE_NUMBER_LABEL": "Nombre de pages",
+                    "PAGE_NUMBER_PLACEHOLDER": "341",
+                    "EDITION_NUMBER_LABEL": "Numéro de l'édition",
+                    "EDITION_NUMBER_PLACEHOLDER": "3",
+                    "VOLUME_NUMBER_LABEL": "Numéro du volume",
+                    "VOLUME_NUMBER_PLACEHOLDER": "2",
+                    "COLLECTION_LABEL": "Collection",
+                    "COLLECTION_PLACEHOLDER": "Presses HEC",
+                    "HAS_BEEN_TRANSLATED": "Le livre a été traduit",
+                    "ORIGIN_LANGUAGE_LABEL": "Langue d'origine",
+                    "ORIGIN_LANGUAGE_PLACEHOLDER": "Anglais",
+                    "TRANSLATOR_NAME": "Nom du ou des traducteurs"
+                },
+                "ARTICLE": {
+                    "FIRSTNAME": "Prénom",
+                    "LASTNAME": "Nom",
+                    "AUTHOR_NAME": "Auteur",
+                    "TITLE_LABEL": "Titre de l'article",
+                    "TITLE_PLACEHOLDER": "Haïti, la lente reconstruction",
+                    "PERIODIC_LABEL": "Nom du périodique",
+                    "PERIODIC_PLACEHOLDER": "Le Devoir",
+                    "EDITION_NUMBER_LABEL": "Numéro de l'édition, du volume ou du périodique",
+                    "EDITION_NUMBER_PLACEHOLDER": "vol. 36, no 5",
+                    "PUBLICATION_DATE_LABEL": "Date d'édition",
+                    "PUBLICATION_DATE_PLACEHOLDER": "21 mars 2009",
+                    "INDICATION_START_END_LABEL": "Indication des pages de l'article",
+                    "INDICATION_START_PLACEHOLDER": "Début",
+                    "INDICATION_END_PLACEHOLDER": "Fin"
+                },
+                "INTERNET": {
+                    "FIRSTNAME":"Prénom",
+                    "LASTNAME": "Nom",
+                    "HAS_AUTHORS": "La source a un auteur",
+                    "WEBPAGE_NAME": "Titre de l'article",
+                    "WEBPAGE_NAME_PLACHOLDER": "Isaac Newton",
+                    "WEBSITE_NAME": "Nom du site web",
+                    "WEBSITE_NAME_PLACEHOLDER": "Wikipédia, l'encyclopédie libre",
+                    "URL": "Adresse web",
+                    "URL_PLACEHOLDER": "http://www.fr.wikipedia.org",
+                    "CONSULTATION_DATE": "Date de consultation",
+                    "CONSULTATION_DATE_PLACEHOLDER": "21 mars 2009"
+                },
+                "CD": {
+                    "FIRSTNAME": "Prénom",
+                    "LASTNAME": "Nom",
+                    "HAS_AUTHORS": "La source a un auteur",
+                    "DOC_TITLE": "Titre du document",
+                    "DOC_TITLE_PLACEHOLDER": "Multidictionnaire de la langue française",
+                    "EDITOR": "Éditeur",
+                    "EDITOR_PLACEHOLDER": "Québec Amérique",
+                    "PUBLICATION_LOCATION": "Lieu d'édition",
+                    "PUBLICATION_LOCATION_PLACEHOLDER": "Montréal",
+                    "PUBLICATION_DATE": "Date d'édition",
+                    "PUBLICATION_DATE_PLACEHOLDER": "2001"
+                },
+                "MOVIE": {
+                    "FIRSTNAME": "Prénom",
+                    "LASTNAME": "Nom",
+                    "HAS_MORE_THAN_ONE": "La source a plus d'un auteur/réalisateur",
+                    "HAS_MORE_THAN_ONE_TRUE": "Vous devez entrer l'auteur/réalisateur principal, la mention «et al.» sera ajoutée afin de signifier qu'il y a plus d'un auteur/réalisateur.",
+                    "PRINCIPAL_AUTHOR": "Auteur principal",
+                    "DOC_NAME": "Nom de l'émission ou du document",
+                    "DOC_NAME_PLACEHOLDER": "Veangeance",
+                    "EPISODE_NAME": "Titre de l'épisode",
+                    "EPISODE_PLACEHOLDER": "La revanche",
+                    "PUBLICATION_LOCATION": "Lieu d'édition",
+                    "PUBLICATION_LOCATION_PLACEHOLDER": "Montréal",
+                    "PRODUCTOR": "Producteur",
+                    "PRODUCTOR_PLACEHOLDER": "CC&C Clark Costelle et Cie",
+                    "BROADCASTER": "Diffuseur",
+                    "BROADCASTER_PLACEHOLDER": "ICI Radio-Canada",
+                    "LENGTH": "Durée (minutes)",
+                    "LENGTH_PLACEHOLDER": "55",
+                    "PUBLICATION_DATE": "Date d'édition",
+                    "PUBLICATION_DATE_PLACEHOLDER": "2002",
+                    "SUPPORT_TYPE": "Support",
+                    "SUPPORT_CD": "Cédérom",
+                    "SUPPORT_DVD": "DVD",
+                    "SUPPORT_INTERNET": "Vidéo Internet",
+                    "CONSULTATION_DATE": "Date de visionnement",
+                    "CONSULTATION_DATE_PLACEHOLDER": "29 mars 1991"
+                },
+                "INTERVIEW": {
+                    "FIRSTNAME": "Prénom",
+                    "LASTNAME": "Nom",
+                    "INTERVIEWER_NAME": "Nom de l'intervieweur",
+                    "INTERVIEWED_NAME": "Nom de la personne rencontrée",
+                    "CIVILITY_MISTER": "M.",
+                    "CIVILITY_MISS": "Mme",
+                    "CIVILITY_MISS_YOUNG": "Mlle",
+                    "INTERVIEWED_TITLE": "Titre de la personne rencontrée",
+                    "INTERVIEWED_TITLE_PLACEHOLDER": "retraité et combattant de la Deuxième Guerre mondiale",
+                    "INTERVIEW_LOCATION": "Lieu de l'entrevue",
+                    "INTERVIEW_LOCATION_PLACEHOLDER": "Carignan",
+                    "INTERVIEW_DATE": "Date de l'entrevue",
+                    "INTERVIEW_DATE_PLACEHOLDER": "9 mars 2016"
+                }
+            },
+            "BOARDING": {
+                "SKIP": "Passer",
+                "NEXT": "Suivant",
+                "PREVIOUS": "Précédent",
+                "TITLE": "Balayage",
+                "CLOSE": "Fermer",
+                "OF_BOOK_RECOGNIZED": "des livres reconnus par l'application",
+                "TEXT_RECOGNIZED": "Selon un test approfondi mené sur les livres de la bibliothèque de l'École d'Éducation de McMasterville, 75 % des livres que vous balayerez avec cette application seront reconnus et les données sur ces livres seront remplies. Vous serez invité à entrer manuellement les données qui n'aurons pu être récupérées.",
+                "SCAN_TEXT": "Balayez le code sous la mention ISBN. Assurez-vous d'être dans un environnement assez éclairé.",
+                "SCAN_FIRST": "Balayer mon premier code"
+            },
+            "POPUP": {
+                "ORDER_TITLE": "Triage",
+                "ORDER_SUB": "Ordre de triage",
+                "ALPHA": "Alphabétique",
+                "TYPE": "Type",
+                "ERRORS_SOURCES": "Les source que vous essayez de partager contiennent <strong>{{errNum}}</strong> erreur(s). Voulez-vous les partager quand même ?",
+                "ERROR_TEXT": "Erreur",
+                "SHARE_TEXT": "Partage",
+                "CANCEL": "Annuler",
+                "SHARE": "Partager",
+                "MUST_HAVE_TYPE": "La source doit avoir un type",
+                "NEW_SOURCE": "Nouvelle source",
+                "DELETE_TITLE": "Suppression",
+                "DELETE_TEXT": "La suppression de cette source entrainera la perte de toutes les données ratachées à celle-ci. Cette action est irréversible.",
+                "DELETE": "Supprimer",
+                "BOOK_UNAVAILABLE_TITLE": "Livre introuvable",
+                "BOOK_UNAVAILABLE_TEXT": "Le code barre a bien été balayé, mais ce livre ne semble pas faire partie de notre base de données.",
+                "TIMEOUT_TITLE": "Temps d'attente écoulé",
+                "TIMEOUT_TEXT": "Le temps d'attente est écoulé. Vous vous trouvez probablement sur un réseau lent. Voulez-vous ajouter ce code-barre dans la liste d'attente pour réessayer plus tard ?",
+                "ADD": "Ajouter",
+                "RETRY": "Réessayer",
+                "NO_CONNECTION": "Aucune connexion",
+                "ADD_TO_PENDINGS": "Voulez-vous ajouter ce code-barre à la liste d'éléments en attente ?",
+                "NOT_RIGHT_BARCODE_TYPE": "Le code barre a été balayé, mais ce type de code barre n'est pas un code barre de livre. Le bon code barre possède habituellement une inscription ISBN par dessus celui-ci. Si deux code barre sont côte à côte, le mauvais a peut-être été balayé. Vous pouvez réessayer.",
+                "UNABLE_TO_SCAN": "Balayage impossible",
+                "UNABLE_TO_SCAN_TEXT": "Essayez d'activer l'accès à l'appareil photo pour cette application dans l'onglet Confidentialité des Réglages.",
+                "SAVE_INTERVIEWER_NAME": "Voulez-vous sauvegarder le nom de l'intervieweur pour une utilisation future?",
+                "NO_SUGGESTIONS": "Aucune suggestion",
+                "NO_SUGGESTIONS_DESC": "Il n'y a aucune suggestion disponible",
+                "AUTO_FILL_TITLE": "Remplissage",
+                "AUTO_FILL_DESC": "La source n'est pas vide. Les données précédentes pourraient être écrasées. Voulez-vous continuer ?",
+                "OVERWRITE": "Écraser",
+                "ERROR": "Erreur",
+                "ERROR_500": "Nous éprouvons des problèmes avec nos serveurs, veuillez réessayer plus tard."
+            }
+        },
+        "SOURCE":{
+            "EDIT": "Modifier",
+            "NO_ERROR": "Aucune erreur",
+            "CONFIRM": "Confirmer",
+            "CANCEL": "Annuler",
+            "MODAL": {
+                "CANCEL": "Annuler",
+                "TITLE": "Modifier la source",
+                "CONFIRM": "Modifier"
+            }
+        },
+        "PENDING":{
+            "TITLE": "Éléments en attente",
+            "DELETE_ITEM": "Supprimer",
+            "SCAN_TO_ADD": "Pour ajouter un élément en attente, balayez un code-barre lorsqu'hors-ligne",
+            "EMPTY_TAB": "Aucune source en attente",
+            "NEED_ADVANCED": "Le mode avancé est requis pour utiliser le balayage",
+            "MODAL": {
+                "CANCEL": "Annuler",
+                "TITLE": "Nouvelle source",
+                "ADD": "Créer"
+            },
+            "POPUP": {
+                "NEW_SOURCE": "Nouvelle source",
+                "MUST_HAVE_TYPE": "La source doit avoir un type",
+                "BOOK_UNAVAILABLE_TITLE": "Livre introuvable",
+                "BOOK_UNAVAILABLE_TEXT": "Le code barre a bien été balayé, mais ce livre ne semble pas faire partie de notre base de données. Voulez-vous rechercher les informations sur Internet?",
+                "SEARCH": "Rechercher",
+                "LATER": "Plus tard",
+                "RETRY": "Réessayer",
+                "TIMEOUT_TITLE": "Temps d'attente écoulé",
+                "TIMEOUT_TEXT": "Le temps d'attente est écoulé. Vous vous trouvez probablement sur un réseau lent. Voulez-vous réessayer ?",
+                "NO_CONNECTION": "Aucune connexion",
+                "RETRY_?": "Voulez-vous réessayer ?",
+                "CANCEL": "Annuler"
+            }
+        },
+        "TYPES":{
+            "BOOK": "Livre",
+            "CD": "Cédérom (CD)",
+            "CD_PARSE": "Cédérom",
+            "INTERNET": "Site Internet",
+            "ARTICLE": "Article de périodique",
+            "MOVIE": "Document audiovisuel",
+            "INTERVIEW": "Entrevue"
+        },
+        "PARSE":{
+            "FIRST_AUTHOR_FIRSTNAME": {
+                "TITLE": "Auteur",
+                "TEXT": "Entrez le prénom du premier auteur",
+                "DESC": "Prénom du premier auteur manquant"
+            },
+            "FIRST_AUTHOR_LASTNAME": {
+                "TITLE": "Auteur",
+                "TEXT": "Entrez le nom du premier auteur",
+                "DESC": "Nom du premier auteur manquant"
+            },
+            "SECOND_AUTHOR_FIRSTNAME": {
+                "TITLE": "Auteur",
+                "TEXT": "Entrez le prénom du deuxième auteur",
+                "DESC": "Prénom du deuxième auteur manquant"
+            },
+            "SECOND_AUTHOR_LASTNAME": {
+                "TITLE": "Auteur",
+                "TEXT": "Entrez le nom du deuxième auteur",
+                "DESC": "Nom du deuxième auteur manquant"
+            },
+            "THIRD_AUTHOR_FIRSTNAME": {
+                "TITLE": "Auteur",
+                "TEXT": "Entrez le prénom du troisième auteur",
+                "DESC": "Prénom du troisième auteur manquant"
+            },
+            "THIRD_AUTHOR_LASTNAME": {
+                "TITLE": "Auteur",
+                "TEXT": "Entrez le nom du troisième auteur",
+                "DESC": "Nom du troisième auteur manquant"
+            },
+            "AUTHOR_NUMBER": {
+                "TITLE": "Nombre d'auteurs",
+                "TEXT": "Sélectionnez le nombre d'auteurs",
+                "DESC": "Nombre d'auteurs non spécifié",
+                "AUTHOR_1TO3": "1 à 3 auteurs",
+                "AUTHOR_MORE_3": "Plus de 3 auteurs",
+                "AUTHOR_COLLECTIVE": "Collectif"
+            },
+            "BOOK_TITLE": {
+                "TITLE": "Titre",
+                "TEXT": "Entrez le titre",
+                "DESC": "Titre manquant"
+            },
+            "TRANSLATION_LANGUAGE": {
+                "TITLE": "Langue de traduction",
+                "TEXT": "Entrez la langue d'origine de la traduction",
+                "DESC": "Langue d'origine de la traduction manquante"
+            },
+            "FIRST_TRANSLATOR_FIRSTNAME": {
+                "TITLE": "Traducteur",
+                "TEXT": "Entrez le prénom du premier traducteur",
+                "DESC": "Prénom du premier tranducteur manquant"
+            },
+            "FIRST_TRANSLATOR_LASTNAME": {
+                "TITLE": "Traducteur",
+                "TEXT": "Entrez le nom du premier traducteur",
+                "DESC": "Nom du premier tranducteur manquant"
+            },
+            "SECOND_TRANSLATOR_FIRSTNAME": {
+                "TITLE": "Traducteur",
+                "TEXT": "Entrez le prénom du deuxième traducteur",
+                "DESC": "Prénom du deuxième tranducteur manquant"
+            },
+            "SECOND_TRANSLATOR_LASTNAME": {
+                "TITLE": "Traducteur",
+                "TEXT": "Entrez le nom du deuxième traducteur",
+                "DESC": "Nom du deuxième tranducteur manquant"
+            },
+            "EDITION_LOCATION": {
+                "TITLE": "Lieu d'édition",
+                "TEXT": "Entrez le lieu d'édition",
+                "DESC": "Lieu d'édition manquant"
+            },
+            "EDITOR": {
+                "TITLE": "Éditeur",
+                "TEXT": "Entrez l'éditeur",
+                "DESC": "Éditeur manquant"
+            },
+            "EDITION_DATE_TOO_HIGH": {
+                "TITLE": "Date d'édition",
+                "TEXT": "Entrez la date d'édition",
+                "DESC": "Date d'édition supérieure à la date courante"
+            },
+            "EDITION_DATE": {
+                "TITLE": "Date d'édition",
+                "TEXT": "Entrez la date d'édition",
+                "DESC": "Date d'édition manquante"
+            },
+            "PAGE_NUMBER": {
+                "TITLE": "Nombre de pages",
+                "TEXT": "Entrez le nombre de pages",
+                "DESC": "Nombre de pages manquant"
+            },
+            "PAGE_NUMBER_TOO_HIGH": {
+                "TITLE": "Nombre de pages",
+                "TEXT": "Entrez le nombre de pages",
+                "DESC": "Nombre de pages trop élevé"
+            },
+            "PAGE_NUMBER_TOO_LOW": {
+                "TITLE": "Nombre de pages",
+                "TEXT": "Entrez le nombre de pages",
+                "DESC": "Nombre de pages trop bas"
+            },
+            "AUTHOR_ARTICLE_FIRSTNAME": {
+                "TITLE": "Auteur",
+                "TEXT": "Entrez le prénom de l'auteur",
+                "DESC": "Prénom de l'auteur manquant"
+            },
+            "AUTHOR_ARTICLE_LASTNAME": {
+                "TITLE": "Auteur",
+                "TEXT": "Entrez le nom de l'auteur",
+                "DESC": "Nom de l'auteur manquant"
+            },
+            "ARTICLE_TITLE": {
+                "TITLE": "Titre de l'article",
+                "TEXT": "Entrez le titre de l'article",
+                "DESC": "Titre de l'article manquant"
+            },
+            "PERIODIC_NAME": {
+                "TITLE": "Nom du périodique",
+                "TEXT": "Entrez le nom du périodique",
+                "DESC": "Nom du périodique manquant"
+            },
+            "PERIODIC_NUMBER": {
+                "TITLE": "Numéro de volume",
+                "TEXT": "Entrez le numéro du volume",
+                "DESC": "Numéro de volume ou de périodique manquant"
+            },
+            "START_PAGE": {
+                "TITLE": "Page de début",
+                "TEXT": "Entrez la page de début",
+                "DESC": "Page de début manquante"
+            },
+            "END_PAGE": {
+                "TITLE": "Page de fin",
+                "TEXT": "Entrez la page de fin",
+                "DESC": "Page de fin manquante"
+            },
+            "HOMEPAGE_TITLE": {
+                "TITLE": "Titre de la page d'accueil",
+                "TEXT": "Entrez le titre de la page d'accueil",
+                "DESC": "Titre de la page d'accueil manquante"
+            },
+            "PAGE_TITLE": {
+                "TITLE": "Titre de la page",
+                "TEXT": "Entrez le titre de la page",
+                "DESC": "Titre de la page manquant"
+            },
+            "INVALID_URL": {
+                "TITLE": "Adresse web",
+                "TEXT": "Entrez l'adresse web",
+                "DESC": "Adresse web invalide"
+            },
+            "URL": {
+                "TITLE": "Adresse web",
+                "TEXT": "Entrez l'adresse web",
+                "DESC": "Adresse web manquante"
+            },
+            "CONSULTATION_DATE": {
+                "TITLE": "Date de consultation",
+                "TEXT": "Entrez la date de consultation",
+                "DESC": "Date de consultation manquante"
+            },
+            "DOCUMENT_TITLE": {
+                "TITLE": "Titre du document",
+                "TEXT": "Entrez le titre du document",
+                "DESC": "Titre du document manquant"
+            },
+            "PUBLICATION_LOCATION": {
+                "TITLE": "Lieu d'édition",
+                "TEXT": "Entrez le lieu d'édition",
+                "DESC": "Lieu d'édition manquant"
+            },
+            "PUBLICATION_DATE": {
+                "TITLE": "Date d'édition",
+                "TEXT": "Entrez la date d'édition",
+                "DESC": "Date d'édition manquante"
+            },
+            "DIRECTOR_LASTNAME": {
+                "TITLE": "Réalisateur/auteur principal",
+                "TEXT": "Entrez le nom du réalisateur/auteur principal",
+                "DESC": "Nom du réalisateur/auteur principal manquant"
+            },
+            "DIRECTOR_FIRSTNAME": {
+                "TITLE": "Réalisateur/auteur principal",
+                "TEXT": "Entrez le prénom du réalisateur/auteur principal",
+                "DESC": "Prénom du réalisateur/auteur principal manquant"
+            },
+            "EMISSION_TITLE": {
+                "TITLE": "Nom de l'émission",
+                "TEXT": "Entrez le nom de l'émission",
+                "DESC": "Nom de l'émission manquant"
+            },
+            "PRODUCTION_LOCATION": {
+                "TITLE": "Lieu de production",
+                "TEXT": "Entrez le lieu de production",
+                "DESC": "Lieu de production manquant"
+            },
+            "PRODUCTOR": {
+                "TITLE": "Producteur",
+                "TEXT": "Entrez le nom du producteur",
+                "DESC": "Nom du producteur manquant"
+            },
+            "BROADCASTER": {
+                "TITLE": "Diffuseur",
+                "TEXT": "Entrez le nom du diffuseur",
+                "DESC": "Nom du diffuseur manquant"
+            },
+            "LENGTH": {
+                "TITLE": "Durée",
+                "TEXT": "Entrez la durée (minutes)",
+                "DESC": "Durée manquante"
+            },
+            "SUPPORT": {
+                "TITLE": "Type de support",
+                "TEXT": "Sélectionnez le type de support",
+                "DESC": "Type de support non spécifié"
+            },
+            "VIEWING_DATE": {
+                "TITLE": "Date de visionnement",
+                "TEXT": "Entrez la date de visionnement",
+                "DESC": "Date de visionnement manquante"
+            },
+            "INTERVIEWER_LASTNAME": {
+                "TITLE": "Nom de l'intervieweur",
+                "TEXT": "Entrez le nom de l'intervieweur",
+                "DESC": "Nom de l'intervieweur manquant"
+            },
+            "INTERVIEWER_FIRSTNAME": {
+                "TITLE": "Prénom de l'intervieweur",
+                "TEXT": "Entrez le prénom de l'intervieweur",
+                "DESC": "Prénom de l'intervieweur manquant"
+            },
+            "CIVILITY_TITLE": {
+                "TITLE": "Titre de civilité",
+                "TEXT": "Sélectionnez le titre de civilité de la personne rencontrée",
+                "DESC": "Titre de civilité non spécifié"
+            },
+            "INTERVIEWED_FIRSTNAME": {
+                "TITLE": "Personne rencontrée",
+                "TEXT": "Entrez le prénom de la personne rencontrée",
+                "DESC": "Prénom de la personne rencontrée manquant"
+            },
+            "INTERVIEWED_LASTNAME": {
+                "TITLE": "Personne rencontrée",
+                "TEXT": "Entrez le nom de la personne rencontrée",
+                "DESC": "Nom de la personne rencontrée manquant"
+            },
+            "INTERVIEWED_TITLE": {
+                "TITLE": "Personne rencontrée",
+                "TEXT": "Entrez le titre de la personne rencontrée",
+                "DESC": "Titre de la personne rencontrée manquant"
+            },
+            "INTERVIEW_LOCATION": {
+                "TITLE": "Lieu de l'entrevue",
+                "TEXT": "Entrez le lieu de l'entrevue",
+                "DESC": "Lieu de l'entrevue manquant"
+            }
+        }
+    },
+    "REFERENCES":{
+        "TAB_TITLE": "Référence"
+    },
+    "SETTINGS":{
+        "TAB_TITLE": "Paramètres",
+        "ORDER_BY": "Trier la bibliographie par",
+        "ALPHABETICAL": "Ordre alphabétique",
+        "TYPE": "Type d'ouvrage",
+        "ASK_FOR_ORDER": "Demander l'ordre lors du partage",
+        "YOUR_NAME": "Votre nom",
+        "EDIT": "Modifier",
+        "EDIT_NAME": "Modifier le nom",
+        "DELETE": "Supprimer",
+        "FORGET": "Oublier",
+        "CANCEL": "Annuler",
+        "ADVANCED_MODE_LABEL": "Mode avancé",
+        "LEARN_MORE": "En savoir plus...",
+        "BUG_COMMENT": "Problème/Commentaire",
+        "BUG_COMMENT_LONG": "Rapporter un problème ou émettre un commentaire",
+        "ATTRIBUTION_TAB": "Attributions",
+        "ATTRIBUTION_ICONBY": "Icône par",
+        "MIT_LICENSE": "Licence MIT",
+        "BSD_LICENSE": "Licence BSD",
+        "APACHE_LICENSE": "Licence Apache",
+        "LANGUAGE":"Langue",
+        "FRENCH": "Français",
+        "ENGLISH": "Anglais",
+        "SPANISH": "Espagnol",
+        "DEFAULT": "Par défaut",
+        "ATTRIBUTIONS": "Adapté à partir du <em>Guide de Méthodologie</em> de l'École d'éducation internationale de McMasterville écrit par Raymond Bédard.",
+        "ADVANCED_MODE": {
+            "TITLE": "Mode avancé",
+            "WAITING_FOR": "Qu'attendez-vous pour essayer le mode avancé? Voici les fonctionalités incluses : ",
+            "SCANNING": "Balayage",
+            "SCAN_DESC": "Balayez l'ISBN d'un livre pour voir sa source se créer automatiquement (certains livres ne sont pas supportés)",
+            "MODELS": "Modèles",
+            "MODELS_DESC": "Utilisez des modèles préfaits au format DOCX dans vos travaux pour vous simplifier la vie",
+            "SHARING": "Partage avancé",
+            "SHARING_DESC": "Partagez un lien à partir d'un site supporté (Wikipédia) vers Metho pour créer une source automatiquement",
+            "INSTANT_SEARCH": "Recherche instantanée",
+            "INSTANT_SEARCH_DESC": "Entrez un nom de livre dans la champ «Titre» lors de la création d'une source pour lancer une recherche sur ce titre et ainsi pouvoir utiliser le remplissage automatique (certains livres ne sont pas supportés)",
+            "POPUP": {
+                "ALREADY_TEXT": "Le mode avancé est déjà activé"
+            }
+        },
+        "FEEDBACK": {
+            "TITLE": "Problème/Commentaire",
+            "TAB_PROJECT": "Onglet Projets",
+            "TAB_PROJECT_DESC": "Problème dans l'onglet Projets",
+            "TAB_REFERENCE": "Onglet Référence",
+            "TAB_REFERENCE_DESC": "Problème dans l'onglet Référence",
+            "SETTINGS": "Paramètres",
+            "SETTINGS_DESC": "Problème concernant les paramètres",
+            "COMMENT": "Commentaire",
+            "COMMENT_DESC": "Émettre un commentaire",
+            "FEATURE": "Fonctionalité",
+            "FEATURE_DESC": "Proposer une nouvelle fonctionalité",
+            "EMAIL": {
+                "PROJECT": "<p>Merci de rapporter un problème. J'essaierai de le régler et de vous répondre rapidement. Veuillez répondre aux questions ci-dessous afin de m'aider à reproduire ce problème. Il n'est pas nécessaire d'inclure des réponses longues, quelques mots sont suffisants.</p><br><strong>À quel endroit se produit ce problème (à l'intérieur de l'onglet projets)?</strong><br><br><br><strong>Décrire le problème.</strong><br><br><br><strong>Décrire comment reproduire le problème (étapes).</strong><br><br><br><strong>Décrire les conséquences du problème (crash de l'application, impossibilité d'ajouter une source, etc.)</strong><br><br><br><p>Merci d'aider à améliorer cette application. Je communiquerai avec vous dans le cas où j'aurais besoin d'information supplémentaire.</p><h5>Ne pas modifier cette section</h5><p>",
+                "PROJECT_TITLE": "Problème dans l'onglet Projets",
+                "REFERENCE": "<p>Merci de rapporter un problème. J'essaierai de le régler et de vous répondre rapidement. Veuillez répondre aux questions ci-dessous afin de m'aider à reproduire ce problème. Il n'est pas nécessaire d'inclure des réponses longues, quelques mots sont suffisants.</p><br><strong>Quelle rubrique(s) sont concernés par le problème (tous?)?</strong><br><br><br><strong>Décrire le problème.</strong><br><br><br><strong>Décrire comment reproduire le problème (étapes).</strong><br><br><br><strong>Décrire les conséquences du problème (crash de l'application, erreur d'orthographe, etc.)</strong><br><br><br><p>Merci d'aider à améliorer cette application. Je communiquerai avec vous dans le cas où j'aurais besoin d'information supplémentaire.</p><h5>Ne pas modifier cette section</h5><p>",
+                "REFERENCE_TITLE": "Problème dans l'onglet Référence",
+                "SETTINGS": "<p>Merci de rapporter un problème. J'essaierai de le régler et de vous répondre rapidement. Veuillez répondre aux questions ci-dessous afin de m'aider à reproduire ce problème. Il n'est pas nécessaire d'inclure des réponses longues, quelques mots sont suffisants.</p><br><strong>Quelle paramètre(s) sont concernés par le problème (tous?)?</strong><br><br><br><strong>Décrire le problème.</strong><br><br><br><strong>Décrire comment reproduire le problème (étapes).</strong><br><br><br><strong>Décrire les conséquences du problème (crash de l'application, paramètre n'ayant aucun effet, etc.)</strong><br><br><br><p>Merci d'aider à améliorer cette application. Je communiquerai avec vous dans le cas où j'aurais besoin d'information supplémentaire.</p><h5>Ne pas modifier cette section</h5><p>",
+                "SETTINGS_TITLE": "Problème concernant les paramètres",
+                "COMMENT": "<p>Merci d'émettre un commentaire sur cette application. J'essaierai de vous répondre rapidement.</p><strong>Commentaire</strong><br><br><br>",
+                "COMMENT_TITLE": "Commentaire",
+                "FEATURE": "<p>Merci de proposer une fonctionalité. J'essaierai de vous répondre rapidement. Veuillez répondre aux questions ci-dessous afin de m'aider à comprendre votre idée. Il n'est pas nécessaire d'inclure des réponses longues, quelques mots sont suffisants.</p><br><strong>Quelle partie de l'application est concernée?</strong><br><br><br><strong>Décrire la fonctionalité.</strong><br><br><br><p>Merci d'aider à améliorer cette application. Je communiquerai avec vous dans le cas où j'aurais besoin d'information supplémentaire.</p>",
+                "FEATURE_TITLE": "Suggestion de fonctionalité"
+            }
+        }
+    },
+    "3D_TOUCH": {
+        "NEW_SOURCE": "Nouvelle source",
+        "NEW_SOURCE_DESC": "Créer une nouvelle source",
+        "SCAN": "Balayage",
+        "SCAN_DESC": "Balayer un code-barre"
+    },
+    "REPORT": {
+        "ERROR": "Erreur",
+        "UNKNOWN": "Une erreur inconnue s'est produite",
+        "REPORT_?": "Voulez-vous rapporter cette erreur au développeur ?",
+        "DO_NOT_EDIT": "Ne pas modifier cette section"
+    }
+}
