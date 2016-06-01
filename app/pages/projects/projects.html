@@ -1,13 +1,7 @@
-<!--
-  Generated template for the ProjectsPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-navbar *navbar>
   <ion-title>{{'TAB_PROJECT' | translate}}</ion-title>
   <ion-buttons end>
-    <button>
+    <button (click)="createProject()">
       <ion-icon name="add" primary></ion-icon>
     </button>
   </ion-buttons>
@@ -16,7 +10,7 @@
 <ion-content class="projects">
   <!-- When there is no elements -->
   <div class="padding flex" *ngIf="!projects.length && !loading">
-    <button outline class="centered" (click)="newProject()">
+    <button outline class="centered" (click)="createProject()">
       <ion-icon name="add" primary></ion-icon>
     </button><br>
     <p class="center dimmed-50">{{'PROJECT.TAB.EMPTY_TAB' | translate}}</p>
@@ -24,11 +18,10 @@
   <!-- When there is -->
   <ion-list *ngIf="projects.length">
     <ion-item-sliding *ngFor="let project of projects">
-      <ion-item (click)="openProjectDetail(project)">
+      <button ion-item (click)="openProjectDetail(project)">
         <h2>{{ project.name }}</h2>
-        <p>{{ project.matter }}</p>
-        <ion-icon name="arrow-forward" item-right></ion-icon>
-      </ion-item>
+        <p>{{ project.matter ? project.matter : ('PROJECT.TAB.UNKNOWN_MATTER' | translate) }}</p>
+      </button>
 
       <ion-item-options>
         <button default (click)="editProject(project)">{{'PROJECT.TAB.EDIT_ITEM' | translate}}</button>
