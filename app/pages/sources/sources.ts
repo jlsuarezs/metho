@@ -120,7 +120,8 @@ export class SourcesPage {
   openModal(type: string, existing: any) {
     let modal = Modal.create(SourceModalPage, {
       type: type,
-      edit: existing ? existing : false
+      edit: existing ? existing : false,
+      project_id: this.projectId
     });
 
     modal.onDismiss(() => {
