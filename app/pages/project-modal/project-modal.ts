@@ -9,17 +9,11 @@ import {AppStorage} from '../../providers/app-storage/app-storage.ts';
   pipes: [TranslatePipe]
 })
 export class ProjectModalPage {
-  public viewCtrl: ViewController;
-  public navParams: NavParams;
   public isNew: Boolean;
   public previous: any;
   public projectForm: ControlGroup;
-  private storage: AppStorage;
 
-  constructor(viewCtrl: ViewController, navParams: NavParams, fb: FormBuilder, storage: AppStorage) {
-    this.viewCtrl = viewCtrl;
-    this.navParams = navParams;
-    this.storage = storage;
+  constructor(public viewCtrl: ViewController, public navParams: NavParams, fb: FormBuilder, public storage: AppStorage) {
     if(this.navParams.get('previous')) {
       this.isNew = false;
       this.previous = this.navParams.get('previous');
