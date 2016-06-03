@@ -1,7 +1,7 @@
 import {Injectable, EventEmitter} from '@angular/core';
 import {Storage, LocalStorage} from 'ionic-angular';
 import {Parse} from '../parse/parse';
-import {ReportUser} from '../user-report/user-report';
+import {UserReport} from '../user-report/user-report';
 
 var PouchDB = require("pouchdb");
 
@@ -27,7 +27,7 @@ export class AppStorage {
   private pendingsEvents = new EventEmitter();
 
 
-  constructor(public parse: Parse) {
+  constructor(public parse: Parse, public report: UserReport) {
     this.local = new Storage(LocalStorage);
     if(this.local.get("theresProjects") == null) {
       this.local.set("theresProjects", false);
@@ -53,7 +53,7 @@ export class AppStorage {
       }).catch(err => {
         this.loadingProjects = false;
         this.projectEvents.emit("projectLoadingEnded");
-        // ReportUser.report(err);
+        this.report.report(err);
       });
     }
 
@@ -70,7 +70,7 @@ export class AppStorage {
     }).catch(err => {
       this.loadingSources = false;
       this.sourcesEvents.emit("sourceLoadingEnded");
-      // ReportUser.report(err);
+      this.report.report(err);
     });
 
     this.pendingDB.allDocs({include_docs: true}).then(docs => {
@@ -86,7 +86,7 @@ export class AppStorage {
     }).catch(err => {
       this.loadingPendings = false;
       this.pendingsEvents.emit("pendingLoadingEnded");
-      // ReportUser.report(err);
+      this.report.report(err);
     });
   }
 
@@ -125,7 +125,7 @@ export class AppStorage {
       this.projectDB.remove(doc).then(result => {
         resolve(result);
       }).catch(err => {
-        // ReportUser.report(err);
+        this.report.report(err);
         resolve(err);
       });
     });
@@ -138,7 +138,7 @@ export class AppStorage {
         this.projects[id] = set;
         resolve(response);
       }).catch(err =>{
-        // ReportUser.report(err);
+        this.report.report(err);
         resolve(err);
       });
     });
@@ -177,7 +177,7 @@ export class AppStorage {
         this.projectEvents.emit("projectLoadingEnded");
         this.sourcesEvents.emit("sourceLoadingEnded");
         this.local.set("theresProjects", true);
-        // ReportUser.report(err);
+        this.report.report(err);
         resolve(err);
       });
     });
@@ -214,7 +214,7 @@ export class AppStorage {
         this.sources[id] = set;
         resolve(response);
       }).catch(err => {
-        // ReportUser.report(err);
+        this.report.report(err);
         resolve(err);
       });
     });
@@ -234,7 +234,7 @@ export class AppStorage {
       }).catch(function(err) {
         this.loadingSources = false;
         this.sourcesEvents.emit("sourceLoadingEnded");
-        // ReportUser.report(err);
+        this.report.report(err);
         resolve(err);
       });
     });
@@ -249,7 +249,7 @@ export class AppStorage {
       this.sourceDB.remove(doc).then(result => {
         resolve(result);
       }).catch(err => {
-        // ReportUser.report(err);
+        this.report.report(err);
         resolve(err);
       });
     });
@@ -337,7 +337,7 @@ export class AppStorage {
       }).catch(function(err) {
         this.loadingPendings = false;
         this.pendingsEvents.emit("pendingLoadingEnded");
-        // ReportUser.report(err);
+        this.report.report(err);
         resolve(err);
       });
     });
@@ -352,7 +352,7 @@ export class AppStorage {
       this.pendingDB.remove(doc).then(result => {
         resolve(result);
       }).catch(err => {
-        // ReportUser.report(err);
+        this.report.report(err);
         resolve(err);
       });
     });
@@ -365,7 +365,7 @@ export class AppStorage {
         this.pendings[id] = set;
         resolve(response);
       }).catch(err => {
-        // ReportUser.report(err);
+        this.report.report(err);
         resolve(err);
       });
     });

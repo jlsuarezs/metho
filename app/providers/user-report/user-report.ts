@@ -1,39 +1,44 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
-import 'rxjs/add/operator/map';
+import {Alert, NavController} from 'ionic-angular';
+import {EmailComposer, Device} from 'ionic-native';
+import {TranslateService} from 'ng2-translate/ng2-translate';
 
-/*
-  Generated class for the UserReport provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class UserReport {
-  data: any = null;
 
-  constructor(public http: Http) {}
+  constructor(public translate: TranslateService, public nav: NavController) {}
 
-  load() {
-    if (this.data) {
-      // already loaded data
-      return Promise.resolve(this.data);
+  report(err: any) {
+    if (typeof err != String) {
+      err = JSON.parse(err);
     }
+    this.translate.get(["YES", "NO", "REPORT.ERROR", "REPORT.UNKNOWN", "REPORT.REPORT_?","REPORT.DO_NOT_EDIT", "REPORT.TITLE"]).subscribe(translations => {
+      let alert = Alert.create({
+        title: translations["REPORT.UNKNOWN"],
+        message: translations["REPORT.REPORT_?"],
+        buttons: [
+          {
+            text: translations["NO"]
+          },
+          {
+            text: translations["YES"],
+            handler: () => {
+              EmailComposer.isAvailable().then(isAvail => {
+                if (isAvail) {
+                  EmailComposer.open({
+                    to: 'methoappeei@gmail.com',
+                    subject: translations['REPORT.TITLE'],
+                    body: translations['REPORT.DO_NOT_EDIT'] + Device.device.platform + " " + Device.device.version + "<br>" + Device.device.model + "<br>" + (window.screen.width * window.devicePixelRatio) + "x" + (window.screen.height * window.devicePixelRatio) + "<br>Cordova " + Device.device.cordova + "</p><br>" + err,
+                    isHtml: true
+                  });
+                }
+              });
+            }
+          }
+        ]
+      });
 
-    // don't have the data yet
-    return new Promise(resolve => {
-      // We're using Angular Http provider to request the data,
-      // then on the response it'll map the JSON data to a parsed JS object.
-      // Next we process the data and resolve the promise with the new data.
-      this.http.get('path/to/data.json')
-        .map(res => res.json())
-        .subscribe(data => {
-          // we've got back the raw data, now generate the core schedule data
-          // and save the data for later reference
-          this.data = data;
-          resolve(this.data);
-        });
+      this.nav.present(alert);
     });
   }
 }
-
