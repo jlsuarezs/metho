@@ -6,6 +6,8 @@ import {TabsPage} from './pages/tabs/tabs';
 import {TranslateLoader, TranslateStaticLoader, TranslateService} from 'ng2-translate/ng2-translate';
 import {AppStorage} from './providers/app-storage/app-storage.ts';
 import {Parse} from './providers/parse/parse.ts';
+import {Fetch} from './providers/fetch/fetch.ts';
+import {Settings} from './providers/settings/settings.ts';
 
 
 @Component({
@@ -31,5 +33,7 @@ ionicBootstrap(MyApp, [
     }),
     TranslateService,
     AppStorage,
-    Parse
+    Parse,
+    Fetch,
+    Settings
   ], {});
