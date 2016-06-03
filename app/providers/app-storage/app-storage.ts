@@ -183,7 +183,7 @@ export class AppStorage {
     });
   }
 
-  getSourcesFromProjectId(id: string) {
+  getSourcesFromProjectId(id: string): Promise<Array<any>> {
     if(this.loadingSources){
       return new Promise(resolve => {
         this.sourcesEvents.subscribe(event => {
@@ -371,7 +371,7 @@ export class AppStorage {
     });
   }
 
-  getPendingNumber(id: string) {
+  getPendingNumber(id: string): Promise<number> {
     if (this.loadingPendings) {
       return new Promise(resolve => {
         this.pendingsEvents.subscribe(event => {
@@ -385,8 +385,8 @@ export class AppStorage {
     }
   }
 
-  fromObject(obj: Object) {
-    var ar: Array<Object> = [];
+  fromObject(obj: Object): Array<any> {
+    var ar: Array<any> = [];
     for(var item in obj){
         ar.push(obj[item]);
     }
