@@ -27,7 +27,7 @@ export class AppStorage {
   private pendingsEvents = new EventEmitter();
 
 
-  constructor() {
+  constructor(public parse: Parse) {
     this.local = new Storage(LocalStorage);
     if(this.local.get("theresProjects") == null) {
       this.local.set("theresProjects", false);
@@ -260,10 +260,10 @@ export class AppStorage {
       return new Promise(resolve => {
         this.sourcesEvents.subscribe(() => {
           this.loadingSources = true;
-          let arrSources = this.fromObject(this.sources);
+          let arrSources: Array<any> = this.fromObject(this.sources);
           let source: any = {};
           for (var i = 0; i < arrSources.length; i++) {
-            source[arrSources[i]._id] = Parse.parse(arrSources[i]);
+            source[arrSources[i]._id] = this.parse.parse(arrSources[i]);
             if(i == arrSources.length - 1) {
               this.sourceDB.put(source[arrSources[i]._id]).then(response => {
                 source[response.id]._rev = response.rev;
@@ -286,10 +286,10 @@ export class AppStorage {
     }else {
       return new Promise(resolve => {
         this.loadingSources = true;
-        let arrSources = this.fromObject(this.sources);
+        let arrSources: Array<any> = this.fromObject(this.sources);
         let source = {};
         for (var i = 0; i < arrSources.length; i++) {
-          source[arrSources[i]._id] = Parse.parse(arrSources[i]);
+          source[arrSources[i]._id] = this.parse.parse(arrSources[i]);
           if(i == arrSources.length - 1) {
             this.sourceDB.put(source[arrSources[i]._id]).then(response => {
               source[response.id]._rev = response.rev;
