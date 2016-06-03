@@ -1,23 +1,15 @@
-import {App, Platform} from 'ionic-angular';
+import {Platform, ionicBootstrap} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
-import {provide} from '@angular/core';
+import {provide, Component} from '@angular/core';
 import {Http} from '@angular/http';
 import {TabsPage} from './pages/tabs/tabs';
 import {TranslateLoader, TranslateStaticLoader, TranslateService} from 'ng2-translate/ng2-translate';
 import {AppStorage} from './providers/app-storage/app-storage.ts';
+import {Parse} from './providers/parse/parse.ts';
 
 
-@App({
-  template: '<ion-nav [root]="rootPage"></ion-nav>',
-  config: {},
-  providers: [
-    provide(TranslateLoader, {
-      useFactory: (http: Http) => new TranslateStaticLoader(http, 'i18n/', '.json'),
-      deps: [Http]
-    }),
-    TranslateService,
-    AppStorage
-  ]
+@Component({
+  template: '<ion-nav [root]="rootPage"></ion-nav>'
 })
 export class MyApp {
   rootPage: any = TabsPage;
@@ -31,3 +23,13 @@ export class MyApp {
     });
   }
 }
+
+ionicBootstrap(MyApp, [
+    provide(TranslateLoader, {
+      useFactory: (http: Http) => new TranslateStaticLoader(http, 'i18n/', '.json'),
+      deps: [Http]
+    }),
+    TranslateService,
+    AppStorage,
+    Parse
+  ], {});
