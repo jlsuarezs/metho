@@ -209,7 +209,8 @@
                 "AUTO_FILL_DESC": "La fuente no es vacío. Las informaciónes anteriores pudieron ser sobreescritas. ¿ Quiere continuar ?",
                 "OVERWRITE": "Sobreescribir",
                 "ERROR": "Error",
-                "ERROR_500": "Tenemos problemos con nuestros servidores, reintenta más tarde."
+                "ERROR_500": "Tenemos problemos con nuestros servidores, reintenta más tarde.",
+                "OK": "OK"
             }
         },
         "SOURCE":{

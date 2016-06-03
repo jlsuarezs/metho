@@ -209,7 +209,8 @@
                 "AUTO_FILL_DESC": "Source is not empty. Previous data could be overwritten. Do you want to continue ?",
                 "OVERWRITE": "Overwrite",
                 "ERROR": "Error",
-                "ERROR_500": "We're having problems with our servers, please try later."
+                "ERROR_500": "We're having problems with our servers, please try later.",
+                "OK": "OK"
             }
         },
         "SOURCE":{
