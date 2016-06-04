@@ -1,39 +1,112 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
+import {LocalStorage, Storage} from 'ionic-angular';
 import 'rxjs/add/operator/map';
 
-/*
-  Generated class for the Settings provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class Settings {
-  data: any = null;
+  public localStorage: LocalStorage;
+  public settings: any;
 
-  constructor(public http: Http) {}
+  constructor() {
+    this.localStorage = new Storage(LocalStorage);
+    this.settings = {};
 
-  load() {
-    if (this.data) {
-      // already loaded data
-      return Promise.resolve(this.data);
-    }
-
-    // don't have the data yet
-    return new Promise(resolve => {
-      // We're using Angular Http provider to request the data,
-      // then on the response it'll map the JSON data to a parsed JS object.
-      // Next we process the data and resolve the promise with the new data.
-      this.http.get('path/to/data.json')
-        .map(res => res.json())
-        .subscribe(data => {
-          // we've got back the raw data, now generate the core schedule data
-          // and save the data for later reference
-          this.data = data;
-          resolve(this.data);
-        });
+    this.localStorage.get("setting-advanced").then(res => {
+      if (res == null) {
+        this.settings.advanced = false;
+        this.localStorage.set("setting-advanced", "false");
+      }else {
+        this.settings.advanced = res;
+      }
     });
+    this.localStorage.get("setting-askForOrder").then(res => {
+      if (res == null) {
+        this.settings.askForOrder = true;
+        this.localStorage.set("setting-askForOrder", "true");
+      }else {
+        this.settings.askForOrder = res;
+      }
+    });
+    this.localStorage.get("setting-defaultOrder").then(res => {
+      if (res == null) {
+        this.settings.defaultOrder = "alpha";
+        this.localStorage.set("setting-defaultOrder", "alpha");
+      }else {
+        this.settings.defaultOrder = res;
+      }
+    });
+    this.localStorage.get("setting-scanBoardingDone").then(res => {
+      if (res == null) {
+        this.settings.scanBoardingDone = false;
+        this.localStorage.set("setting-scanBoardingDone", "false");
+      }else {
+        this.settings.scanBoardingDone = res;
+      }
+    });
+    this.localStorage.get("setting-firstname").then(res => {
+      if (res == null) {
+        this.settings.firstname = "";
+        this.localStorage.set("setting-firstname", "");
+      }else {
+        this.settings.firstname = res;
+      }
+    });
+    this.localStorage.get("setting-lastname").then(res => {
+      if (res == null) {
+        this.settings.lastname = "";
+        this.localStorage.set("setting-lastname", "");
+      }else {
+        this.settings.lastname = res;
+      }
+    });
+    this.localStorage.get("setting-overideLang").then(res => {
+      if (res == null) {
+        this.settings.overideLang = "";
+        this.localStorage.set("setting-overideLang", "");
+      }else {
+        this.settings.overideLang = res;
+      }
+    });
+    this.localStorage.get("setting-lastLang").then(res => {
+      if (res == null) {
+        this.settings.lastLang = "";
+        this.localStorage.set("setting-lastLang", "");
+      }else {
+        this.settings.lastLang = res;
+      }
+    });
+    this.localStorage.get("setting-firstRun").then(res => {
+      if (res == null) {
+        this.settings.firstRun = true;
+        this.localStorage.set("setting-firstRun", "true");
+      }else {
+        this.settings.firstRun = res;
+      }
+    });
+
+    setTimeout(() => {
+      for (var key in this.settings) {
+        if (this.settings.hasOwnProperty(key)) {
+          if (this.settings[key] == "true") {
+            this.settings[key] = true;
+          }else if (this.settings[key] == "false") {
+            this.settings[key] = false;
+          }
+        }
+      }
+    }, 50);
+  }
+
+  get(key: string): any {
+    return this.settings[key];
+  }
+
+  set(key: string, set: any): void {
+    this.settings[key] = set;
+    this.localStorage.set("setting-" + key, set);
+  }
+
+  getAll(): any {
+    return this.settings;
   }
 }
-
