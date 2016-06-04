@@ -36,5 +36,6 @@ ionicBootstrap(MyApp, [
     AppStorage,
     Parse,
     Fetch,
-    Settings
+    Settings,
+    UserReport
   ], {});

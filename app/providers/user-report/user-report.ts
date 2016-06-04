@@ -1,12 +1,15 @@
 import {Injectable} from '@angular/core';
-import {Alert, NavController} from 'ionic-angular';
+import {Alert, App, NavController} from 'ionic-angular';
 import {EmailComposer, Device} from 'ionic-native';
 import {TranslateService} from 'ng2-translate/ng2-translate';
 
 @Injectable()
 export class UserReport {
+  public nav: NavController;
 
-  constructor(public translate: TranslateService, public nav: NavController) {}
+  constructor(public translate: TranslateService, public app: App) {
+    this.nav = this.app.getActiveNav();
+  }
 
   report(err: any) {
     if (typeof err != String) {
