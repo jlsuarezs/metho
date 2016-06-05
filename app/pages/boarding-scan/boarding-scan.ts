@@ -1,14 +1,31 @@
-import {Page, NavController} from 'ionic-angular';
+import {Page, NavController, ViewController, Slides} from 'ionic-angular';
+import {ViewChild} from '@angular/core';
+import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
-/*
-  Generated class for the BoardingScanPage page.
+import {Settings} from '../../providers/settings/settings';
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Page({
   templateUrl: 'build/pages/boarding-scan/boarding-scan.html',
+  pipes: [TranslatePipe]
 })
 export class BoardingScanPage {
-  constructor(public nav: NavController) {}
+  @ViewChild('slider') slider: Slides;
+  public currentIndex: number = 0;
+  public swiperOptions: any;
+
+  constructor(public viewCtrl: ViewController, public settings: Settings) {
+    this.swiperOptions = {
+      parallax: true,
+      keyboardControl: true
+    }
+  }
+
+  dismiss() {
+    this.settings.set('scanBoardingDone', true);
+    this.viewCtrl.dismiss();
+  }
+
+  onSlideChange() {
+    this.currentIndex = this.slider.getActiveIndex();
+  }
 }
