@@ -2,38 +2,162 @@ import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 
-/*
-  Generated class for the Fetch provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class Fetch {
-  data: any = null;
+  public cacheByISBN: any;
+  public cacheByName: any;
+  public cacheByNameWithAuthors: any;
+  public API_keys: Array<string>;
 
-  constructor(public http: Http) {}
+  constructor(public http: Http) {
+    this.cacheByISBN = {};
+    this.cacheByName = {};
+    this.cacheByNameWithAuthors = {};
+    this.API_keys = [
+      "S07CWYQY",
+      "YVFT6RLV"
+    ];
+  }
 
-  load() {
-    if (this.data) {
-      // already loaded data
-      return Promise.resolve(this.data);
+  fromISBN(isbn: string) {
+    if (this.cacheByISBN[isbn]) {
+      return Promise.resolve(this.cacheByISBN[isbn]);
     }
 
-    // don't have the data yet
-    return new Promise(resolve => {
-      // We're using Angular Http provider to request the data,
-      // then on the response it'll map the JSON data to a parsed JS object.
-      // Next we process the data and resolve the promise with the new data.
-      this.http.get('path/to/data.json')
+    return new Promise((resolve, reject) => {
+      this.http.get('http://isbndb.com/api/v2/json/' + this.pickISBNdbApiKey() + "/book/" + isbn)
         .map(res => res.json())
-        .subscribe(data => {
-          // we've got back the raw data, now generate the core schedule data
-          // and save the data for later reference
-          this.data = data;
-          resolve(this.data);
+        .subscribe(response => {
+          if (!!response.error) {
+            reject(404);
+          }else {
+            let parsed = this.parseFromISBNdb(response.data[0]);
+            this.cacheByISBN[isbn] = parsed;
+            resolve(parsed);
+          }
+        }, error => {
+          reject(error);
         });
     });
   }
-}
 
+  fromName(name: string, includeAuthors: boolean) {
+    if (includeAuthors) {
+      if (this.cacheByNameWithAuthors[name]) {
+        return Promise.resolve(this.cacheByNameWithAuthors[name]);
+      }
+    }else {
+      if (this.cacheByName[name]) {
+        return Promise.resolve(this.cacheByName[name]);
+      }
+    }
+
+    return new Promise((resolve, reject) => {
+      if (includeAuthors) {
+        this.http.get('http://isbndb.com/api/v2/json/' + this.pickISBNdbApiKey() + "/books?q=" + name + "&i=combined")
+        .map(res => res.json())
+        .subscribe(response => {
+          if (!!response.data.error) {
+            reject(404);
+          }else {
+            let books = [];
+            for (var i = 0; i < response.data.length; i++) {
+              books.push(this.parseFromISBNdb(response.data[i]));
+            }
+            this.cacheByNameWithAuthors[name] = books;
+            resolve(books);
+          }
+        }, error => {
+          reject(error);
+        });
+      }else {
+        this.http.get('http://isbndb.com/api/v2/json/' + this.pickISBNdbApiKey() + "/books?q=" + name)
+        .map(res => res.json())
+        .subscribe(response => {
+          if (!!response.error) {
+            reject(404);
+          }else {
+            let books = [];
+            for (var i = 0; i < response.data.length; i++) {
+              books.push(this.parseFromISBNdb(response.data[i]));
+            }
+            this.cacheByName[name] = books;
+            resolve(books);
+          }
+        }, error => {
+          reject(error);
+        });
+      }
+    });
+  }
+
+  parseFromISBNdb(response: any): any {
+    var newobj: any = {};
+    // Titre
+    if (response.title.toUpperCase() == response.title) {
+      newobj.title = this.capitalizeEveryFirstLetter(response.title.replace(/\ufffd/g, "é").trim().toLowerCase());
+    }else if (response.title.toLowerCase() == response.title) {
+      newobj.title = this.capitalizeEveryFirstLetter(response.title.replace(/\ufffd/g, "é").trim());
+    }else {
+      newobj.title = response.title.replace(/\ufffd/g, "é").trim();
+    }
+    // Publisher/Editor
+    newobj.editor = this.capitalizeEveryFirstLetter(response.publisher_name.replace(/\ufffd/g, "é").trim().toLowerCase());
+    // Date de publication
+    if (!!response.edition_info && response.edition_info.match(/[0-9]{4}/)) {
+      newobj.publicationDate = response.edition_info.match(/[0-9]{4}/)[0].trim();
+    } else if (!!response.publisher_text && response.publisher_text.match(/[0-9]{4}/)) {
+      newobj.publicationDate = response.publisher_text.match(/[0-9]{4}/)[0].trim();
+    } else {
+      newobj.publicationDate = "";
+    }
+
+    // Lieu de publication
+    if (response.publisher_text != "") {
+      newobj.publicationLocation = this.capitalizeEveryFirstLetter(response.publisher_text.replace(/\ufffd/g, "é").replace(response.publisher_name, "").replace(newobj.publicationDate, "").replace(/[^a-zA-z\s]/g, "").trim().toLowerCase());
+    }
+    // Nombre de pages
+    if (response.physical_description_text != "") {
+      var arr_pages = response.physical_description_text.split(" ");
+      if (arr_pages.indexOf("p.") != -1) {
+        newobj.pageNumber = arr_pages[arr_pages.indexOf("p.") - 1];
+      } else if (arr_pages.indexOf("pages") != -1) {
+        newobj.pageNumber = arr_pages[arr_pages.indexOf("pages") - 1];
+      }
+    }
+    // Auteur
+    if (response.author_data.length) {
+      for (var i = 0; i < response.author_data.length; i++) {
+        if (response.author_data[i].name.split(",")[0] == response.author_data[i].name) {
+          newobj["author" + String(i + 1) + "firstname"] = this.capitalizeFirstLetter(response.author_data[i].name.split(" ")[0].replace(/\ufffd/g, "é").trim());
+          newobj["author" + String(i + 1) + "lastname"] = this.capitalizeFirstLetter(response.author_data[i].name.split(" ")[1].replace(/\ufffd/g, "é").trim());
+        } else {
+          newobj["author" + String(i + 1) + "lastname"] = this.capitalizeFirstLetter(response.author_data[i].name.split(",")[0].replace(/\ufffd/g, "é").trim());
+          newobj["author" + String(i + 1) + "firstname"] = this.capitalizeFirstLetter(response.author_data[i].name.split(",")[1].replace(/\ufffd/g, "é").trim());
+        }
+      }
+      if (response.author_data.length >= 1 && response.author_data.length <= 3) {
+        newobj.hasAuthors = "13";
+      } else if (response.author_data.length > 3) {
+        newobj.hasAuthors = "more3";
+      }else {
+        newobj.hasAuthors = "13";
+      }
+    }
+
+    return newobj;
+  }
+
+  pickISBNdbApiKey(): string {
+    let index = Math.floor(Math.random()*(this.API_keys.length-1-0+1)+0);
+    return this.API_keys[index];
+  }
+
+  capitalizeFirstLetter(str: string) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  capitalizeEveryFirstLetter(str: string) {
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  }
+}
