@@ -16,7 +16,7 @@
   <ion-list *ngIf="sources.length">
     <ion-item-sliding *ngFor="let source of sources">
       <button ion-item (click)="openSourcePage(source)">
-        <h2>{{ source.title ? source.title : source.parsedSource }}</h2>
+        <h2 [innerHtml]="source.title ? source.title : source.parsedSource"></h2>
         <p>{{ source.parsedType }}</p>
         <div *ngIf="source.warnings.length" item-right>
           <span>{{ source.warnings.length }}</span>
