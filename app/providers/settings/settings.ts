@@ -101,9 +101,9 @@ export class Settings {
     return this.settings[key];
   }
 
-  set(key: string, set: any): void {
+  set(key: string, set: boolean|string): void {
     this.settings[key] = set;
-    this.localStorage.set("setting-" + key, set);
+    this.localStorage.set("setting-" + key, set.toString());
   }
 
   getAll(): any {
