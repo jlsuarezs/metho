@@ -1,9 +1,7 @@
 <ion-navbar *navbar>
   <ion-title>
-    <div class="titles">
-      <div class="page-title"> {{project.name}} </div>
-      <div class="page-sub-title"> {{project.matter ? project.matter : ('PROJECT.TAB.UNKNOWN_MATTER' | translate)}} </div>
-    </div>
+    <div class="page-title"> {{project.name}} </div>
+    <div class="page-sub-title"> {{project.matter ? project.matter : ('PROJECT.TAB.UNKNOWN_MATTER' | translate)}} </div>
   </ion-title>
   <ion-buttons end>
     <button (click)="share()">
