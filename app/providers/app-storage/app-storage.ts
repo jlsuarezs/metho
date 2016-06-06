@@ -195,7 +195,7 @@ export class AppStorage {
     }
   }
 
-  getSourcesFromId(id: string) {
+  getSourceFromId(id: string) {
     if(this.loadingSources){
       return new Promise(resolve => {
         this.sourcesEvents.subscribe(event => {
