@@ -1,13 +1,29 @@
-<!--
-  Generated template for the SourcePage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-navbar *navbar>
-  <ion-title>source</ion-title>
+  <ion-title>
+    <div class="page-title" *ngIf="source.title">{{source.title}}</div>
+    <div class="page-title" *ngIf="!source.title" [innerHtml]="source.parsedSource"></div>
+    <div class="page-sub-title">{{source.parsedType}}</div>
+  </ion-title>
+  <ion-buttons end>
+    <button (click)="edit()">{{'PROJECT.SOURCE.EDIT' | translate}}</button>
+  </ion-buttons>
 </ion-navbar>
 
-<ion-content padding class="source">
-  
+<ion-content class="source">
+  <p class="center padding" [innerHtml]="source.parsedSource"></p>
+
+  <ion-list>
+    <button ion-item *ngFor="let error of source.errors" (click)="solveError(error)">
+      <ion-icon name="alert" item-left class="red"></ion-icon>
+      <h2>{{error.errorTitle}}</h2>
+    </button>
+    <button ion-item *ngFor="let warning of source.warnings" (click)="solveWarning(warning)">
+      <ion-icon name="warning" item-left class="yellow"></ion-icon>
+      <h2>{{warning.errorTitle}}</h2>
+    </button>
+  </ion-list>
+
+  <p class="no-errors" *ngIf="!source.warnings.length && !source.errors.length">
+    {{'PROJECT.SOURCE.NO_ERROR' | translate}}
+  </p>
 </ion-content>
