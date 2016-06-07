@@ -334,7 +334,7 @@ export class AppStorage {
         this.loadingPendings = false;
         this.pendingsEvents.emit("pendingLoadingEnded");
         resolve(response);
-      }).catch(function(err) {
+      }).catch((err) => {
         this.loadingPendings = false;
         this.pendingsEvents.emit("pendingLoadingEnded");
         this.report.report(err);
