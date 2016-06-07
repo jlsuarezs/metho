@@ -185,8 +185,20 @@ export class Parse {
         } else {
             this.sourceToParse.parsedSource += "?. ";
             this.addComplexError("AUTHOR_NUMBER", "hasAuthors", {
-                template:"<p class='center'><select id='authortype' ng-model='errors.result'><option value='13'>{{PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_1TO3}}</option><option value='more3'>{{PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_MORE_3}}</option><option value='collective'>{{PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_COLLECTIVE}}</option></select></p>",
-                id:"authortype",
+                options: [
+                  {
+                    text: 'PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_1TO3',
+                    value: '13'
+                  },
+                  {
+                    text: 'PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_MORE_3',
+                    value: 'more3'
+                  },
+                  {
+                    text: 'PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_COLLECTIVE',
+                    value: 'collective'
+                  }
+                ],
                 type:"select"
             });
         }
@@ -540,11 +552,6 @@ export class Parse {
             this.sourceToParse.parsedSource += "(" + new Date(this.sourceToParse.consultationDate).toLocaleDateString("", {timeZone:"UTC"}) + ").";
         } else {
             this.sourceToParse.parsedSource += "(?).";
-            this.addComplexError("CONSULTATION_DATE", "consultationDate", {
-                template: "<p class='center'><input type='date' id='consultationDate' ng-model='errors.result'></p>",
-                type: "input",
-                id: "consultationDate"
-            });
         }
     } else if (this.sourceToParse.type == "cd") {
         if (this.sourceToParse.hasAuthors) {
@@ -732,9 +739,21 @@ export class Parse {
         }else {
             this.sourceToParse.parsedSource += "[?], ";
             this.addComplexError("SUPPORT", "support", {
-                id:"supporttype",
                 type:"select",
-                template: "<p class='center'><select id='supporttype' ng-model='errors.result'><option value='dvd'>{{PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_DVD}}</option><option value='cd'>{{PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_CD}}</option><option value='internet'>{{PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_INTERNET}}</option></select></p>"
+                options: [
+                  {
+                    text: "PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_DVD",
+                    value: "dvd"
+                  },
+                  {
+                    text: "PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_CD",
+                    value: "cd"
+                  },
+                  {
+                    text: "PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_INTERNET",
+                    value: "internet"
+                  }
+                ]
             });
         }
 
@@ -742,11 +761,6 @@ export class Parse {
         if (this.sourceToParse.consultationDate) {
             this.sourceToParse.parsedSource += "(" + new Date(this.sourceToParse.consultationDate).toLocaleDateString("", {timeZone:"UTC"}) + ").";
         } else {
-            this.addComplexError("VIEWING_DATE", "consultationDate", {
-                template: "<p class='center'><input type='date' id='consultationDate' ng-model='errors.result'></p>",
-                type: "input",
-                id: "consultationDate"
-            });
             this.sourceToParse.parsedSource += "(?).";
         }
     } else if (this.sourceToParse.type == "interview") {
@@ -786,9 +800,21 @@ export class Parse {
                 break;
             default:
                 this.addComplexError("CIVILITY_TITLE", "civility", {
-                    id: "civilityId",
                     type: "select",
-                    template: "<p class='center'><select id='civilityId' ng-model='errors.result'><option value='mister'>{{PROJECT.DETAIL.INTERVIEW.CIVILITY_MISTER}}</option><option value='miss'>{{PROJECT.DETAIL.INTERVIEW.CIVILITY_MISS}}</option><option value='miss_young'>{{PROJECT.DETAIL.INTERVIEW.CIVILITY_MISS_YOUNG}}</option></select></p>"
+                    options: [
+                      {
+                        text: "PROJECT.DETAIL.INTERVIEW.CIVILITY_MISTER",
+                        value: "mister"
+                      },
+                      {
+                        text: "PROJECT.DETAIL.INTERVIEW.CIVILITY_MISS",
+                        value: "miss"
+                      },
+                      {
+                        text: "PROJECT.DETAIL.INTERVIEW.CIVILITY_MISS_YOUNG",
+                        value: "miss_young"
+                      }
+                    ]
                 });
                 this.sourceToParse.parsedSource += "? ";
         }
@@ -838,11 +864,6 @@ export class Parse {
         if (this.sourceToParse.consultationDate) {
             this.sourceToParse.parsedSource += "le " + new Date(this.sourceToParse.consultationDate).toLocaleDateString("", {timeZone:"UTC"}) + ".";
         } else {
-            this.addComplexError("CONSULTATION_DATE", "consultationDate", {
-                template: "<p class='center'><input type='date' id='consultationDate' ng-model='errors.result'></p>",
-                type: "input",
-                id: "consultationDate"
-            });
             this.sourceToParse.parsedSource += "le ?.";
         }
     } else {
@@ -862,23 +883,18 @@ export class Parse {
   }
 
   private addComplexError(errorId: string, variable: string, complex: any) {
-    let arr_parsed = complex.template.split("{{");
-    for (let i = 0; i < arr_parsed.length; i++) {
-      let id = arr_parsed[i].split("}}")[0];
-      if (id) {
-        complex.template = complex.template.replace("{{" + id + "}}", this.translate.instant(id));
-      }
+    for (var i = 0; i < complex.options.length; i++) {
+      complex.options[i].text = this.translate.instant(complex.options[i].text);
     }
     this.sourceToParse.errors.push({
       errorTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".DESC"),
       promptTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".TITLE"),
       promptText: this.translate.instant("PROJECT.PARSE." + errorId + ".TEXT"),
       var: variable,
-      template: complex.template,
       complex: true,
-      id: complex.id,
       type: complex.type,
-      key: errorId
+      key: errorId,
+      options: complex.options ? complex.options : []
     });
   }
 
