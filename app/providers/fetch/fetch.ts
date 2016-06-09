@@ -41,6 +41,14 @@ export class Fetch {
     });
   }
 
+  isISBNCached(isbn: string) {
+    if (this.cacheByISBN[isbn]) {
+      return true;
+    }else {
+      return false;
+    }
+  }
+
   fromName(name: string, includeAuthors: boolean) {
     if (includeAuthors) {
       if (this.cacheByNameWithAuthors[name]) {
