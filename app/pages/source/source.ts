@@ -99,7 +99,8 @@ export class SourcePage {
   edit() {
     let modal = Modal.create(SourceModalPage, {
       type: this.source.type,
-      edit: this.source,
+      data: this.source,
+      editing: true,
       project_id: this.source.project_id
     });
 
