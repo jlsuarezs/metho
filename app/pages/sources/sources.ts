@@ -62,7 +62,7 @@ export class SourcesPage {
             text: translations['PROJECT.TYPES.BOOK'],
             handler: () => {
               this.currentTransition = action.dismiss();
-              this.openModal('book', null);
+              this.openModal('book');
               return false;
             }
           },
@@ -70,7 +70,7 @@ export class SourcesPage {
             text: translations['PROJECT.TYPES.ARTICLE'],
             handler: () => {
               this.currentTransition = action.dismiss();
-              this.openModal('article', null);
+              this.openModal('article');
               return false;
             }
           },
@@ -78,7 +78,7 @@ export class SourcesPage {
             text: translations['PROJECT.TYPES.INTERNET'],
             handler: () => {
               this.currentTransition = action.dismiss();
-              this.openModal('internet', null);
+              this.openModal('internet');
               return false;
             }
           },
@@ -86,7 +86,7 @@ export class SourcesPage {
             text: translations['PROJECT.TYPES.CD'],
             handler: () => {
               this.currentTransition = action.dismiss();
-              this.openModal('cd', null);
+              this.openModal('cd');
               return false;
             }
           },
@@ -94,7 +94,7 @@ export class SourcesPage {
             text: translations['PROJECT.TYPES.MOVIE'],
             handler: () => {
               this.currentTransition = action.dismiss();
-              this.openModal('movie', null);
+              this.openModal('movie');
               return false;
             }
           },
@@ -102,7 +102,7 @@ export class SourcesPage {
             text: translations['PROJECT.TYPES.INTERVIEW'],
             handler: () => {
               this.currentTransition = action.dismiss();
-              this.openModal('interview', null);
+              this.openModal('interview');
               return false;
             }
           },
@@ -117,7 +117,7 @@ export class SourcesPage {
     });
   }
 
-  openModal(type: string, existing: any) {
+  openModal(type: string) {
     let modal = Modal.create(SourceModalPage, {
       type: type,
       project_id: this.projectId
