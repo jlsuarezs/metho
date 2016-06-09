@@ -51,6 +51,7 @@
                 "TITLE": "Nueva fuente",
                 "ADD": "Añadir",
                 "SCAN": "Escáner el código de barras",
+                "BROWSER": "Navegador de Internet",
                 "BOOK": {
                     "FIRSTNAME": "Nombre",
                     "LASTNAME": "Apellido",

@@ -51,6 +51,7 @@
                 "TITLE": "Nouvelle source",
                 "ADD": "Créer",
                 "SCAN": "Balayer le code",
+                "BROWSER": "Navigateur web",
                 "BOOK": {
                     "FIRSTNAME": "Prénom",
                     "LASTNAME": "Nom",

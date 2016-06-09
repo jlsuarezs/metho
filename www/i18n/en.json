@@ -51,6 +51,7 @@
                 "TITLE": "New source",
                 "ADD": "@:PROJECT.TAB.MODAL.ADD",
                 "SCAN": "Scan barcode",
+                "BROWSER": "Web browser",
                 "BOOK": {
                     "FIRSTNAME": "Firstname",
                     "LASTNAME": "Lastname",
