@@ -3,7 +3,7 @@ import {Storage, LocalStorage} from 'ionic-angular';
 import {Parse} from '../parse/parse';
 import {UserReport} from '../user-report/user-report';
 
-var PouchDB = require("pouchdb");
+import * as PouchDB from 'pouchdb';
 
 @Injectable()
 export class AppStorage {
