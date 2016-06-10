@@ -21,8 +21,13 @@ export class SourcesPage {
 
   constructor(public nav: NavController, public params: NavParams, public translate: TranslateService, public storage: AppStorage) {
     this.projectId = params.get('id');
-    this.loadSources();
     this.loadProjectInfo();
+    this.loadSources();
+    this.loadPendingNumber();
+  }
+
+  ionViewWillEnter() {
+    this.loadSources();
     this.loadPendingNumber();
   }
 
