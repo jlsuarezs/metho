@@ -55,6 +55,7 @@
                 "BOOK": {
                     "FIRSTNAME": "Nombre",
                     "LASTNAME": "Apellido",
+                    "AUTHOR_NUMBER": "Número de autores",
                     "AUTHOR_1TO3": "La fuente tiene de 1 hasta 3 autores",
                     "AUTHOR_MORE_3": "La fuente tiene más de 3 autores",
                     "AUTHOR_COLLLECTIVE": "La fuente es un colectivo",
