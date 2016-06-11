@@ -1,13 +1,27 @@
-<!--
-  Generated template for the PendingsPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-navbar *navbar>
-  <ion-title>pendings</ion-title>
+  <ion-title>{{'PROJECT.PENDING.TITLE' | translate}}</ion-title>
 </ion-navbar>
 
-<ion-content padding class="pendings">
-  
+<ion-content class="pendings">
+  <ion-list>
+    <ion-item-sliding *ngFor="let pending of pendings">
+      <button ion-item *ngIf="!pending.not_available" (click)="solvePending(pending)">
+        <h2>{{pending.isbn}}</h2>
+        <p>{{pending.datestring}}</p>
+        <ion-icon name="cloud-download-outline" item-right></ion-icon>
+      </button>
+
+      <button ion-item *ngIf="pending.not_available" (click)="openModalWithBrowser(pending)">
+        <h2>{{pending.isbn}}</h2>
+        <p>{{pending.datestring}}</p>
+        <ion-icon name="alert" item-right></ion-icon>
+      </button>
+
+      <ion-item-options>
+        <button danger (click)="deletePending(pending)">
+          {{'PROJECT.PENDING.DELETE_ITEM' | translate}}
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
