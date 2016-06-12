@@ -789,34 +789,34 @@ export class Parse {
         this.sourceToParse.parsedSource += "Entrevue avec ";
         // Titre de civilité
         switch (this.sourceToParse.civility) {
-            case "mister":
-                this.sourceToParse.parsedSource += "M. ";
-                break;
-            case "miss":
-                this.sourceToParse.parsedSource += "M<sup>me</sup> ";
-                break;
-            case "miss_young":
-                this.sourceToParse.parsedSource += "M<sup>lle</sup> ";
-                break;
-            default:
-                this.addComplexError("CIVILITY_TITLE", "civility", {
-                    type: "select",
-                    options: [
-                      {
-                        text: "PROJECT.DETAIL.INTERVIEW.CIVILITY_MISTER",
-                        value: "mister"
-                      },
-                      {
-                        text: "PROJECT.DETAIL.INTERVIEW.CIVILITY_MISS",
-                        value: "miss"
-                      },
-                      {
-                        text: "PROJECT.DETAIL.INTERVIEW.CIVILITY_MISS_YOUNG",
-                        value: "miss_young"
-                      }
-                    ]
-                });
-                this.sourceToParse.parsedSource += "? ";
+          case "mister":
+            this.sourceToParse.parsedSource += "M. ";
+            break;
+          case "miss":
+            this.sourceToParse.parsedSource += "M<sup>me</sup> ";
+            break;
+          case "miss_young":
+            this.sourceToParse.parsedSource += "M<sup>lle</sup> ";
+            break;
+          default:
+            this.addComplexError("CIVILITY_TITLE", "civility", {
+                options: [
+                  {
+                    text: 'PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISTER',
+                    value: '13'
+                  },
+                  {
+                    text: 'PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS',
+                    value: 'more3'
+                  },
+                  {
+                    text: 'PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS_YOUNG',
+                    value: 'collective'
+                  }
+                ],
+                type:"select"
+            });
+            this.sourceToParse.parsedSource += "? ";
         }
         // Personne rencontrée
         if (this.sourceToParse.interviewed1lastname || this.sourceToParse.interviewed1firstname) {
