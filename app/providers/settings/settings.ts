@@ -5,96 +5,65 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class Settings {
   public localStorage: LocalStorage;
-  public settings: any;
+  public settings: any = {};
+  public defaults: any;
+  public loaded: boolean = false;
 
   constructor() {
     this.localStorage = new Storage(LocalStorage);
-    this.settings = {};
 
-    this.localStorage.get("setting-advanced").then(res => {
-      if (res == null) {
-        this.settings.advanced = false;
-        this.localStorage.set("setting-advanced", "false");
-      }else {
-        this.settings.advanced = res;
-      }
-    });
-    this.localStorage.get("setting-askForOrder").then(res => {
-      if (res == null) {
-        this.settings.askForOrder = true;
-        this.localStorage.set("setting-askForOrder", "true");
-      }else {
-        this.settings.askForOrder = res;
-      }
-    });
-    this.localStorage.get("setting-defaultOrder").then(res => {
-      if (res == null) {
-        this.settings.defaultOrder = "alpha";
-        this.localStorage.set("setting-defaultOrder", "alpha");
-      }else {
-        this.settings.defaultOrder = res;
-      }
-    });
-    this.localStorage.get("setting-scanBoardingDone").then(res => {
-      if (res == null) {
-        this.settings.scanBoardingDone = false;
-        this.localStorage.set("setting-scanBoardingDone", "false");
-      }else {
-        this.settings.scanBoardingDone = res;
-      }
-    });
-    this.localStorage.get("setting-firstname").then(res => {
-      if (res == null) {
-        this.settings.firstname = "";
-        this.localStorage.set("setting-firstname", "");
-      }else {
-        this.settings.firstname = res;
-      }
-    });
-    this.localStorage.get("setting-lastname").then(res => {
-      if (res == null) {
-        this.settings.lastname = "";
-        this.localStorage.set("setting-lastname", "");
-      }else {
-        this.settings.lastname = res;
-      }
-    });
-    this.localStorage.get("setting-overideLang").then(res => {
-      if (res == null) {
-        this.settings.overideLang = "";
-        this.localStorage.set("setting-overideLang", "");
-      }else {
-        this.settings.overideLang = res;
-      }
-    });
-    this.localStorage.get("setting-lastLang").then(res => {
-      if (res == null) {
-        this.settings.lastLang = "";
-        this.localStorage.set("setting-lastLang", "");
-      }else {
-        this.settings.lastLang = res;
-      }
-    });
-    this.localStorage.get("setting-firstRun").then(res => {
-      if (res == null) {
-        this.settings.firstRun = true;
-        this.localStorage.set("setting-firstRun", "true");
-      }else {
-        this.settings.firstRun = res;
-      }
-    });
+    this.defaults = {
+      advanced: false,
+      askForOrder: true,
+      defaultOrder: "alpha",
+      scanBoardingDone: false,
+      firstname: "",
+      lastname: "",
+      overideLang: "",
+      lastLang: "",
+      firstRun: true
+    };
 
-    setTimeout(() => {
-      for (var key in this.settings) {
-        if (this.settings.hasOwnProperty(key)) {
-          if (this.settings[key] == "true") {
-            this.settings[key] = true;
-          }else if (this.settings[key] == "false") {
-            this.settings[key] = false;
+    this.load();
+  }
+
+  load() {
+    for (var index in this.defaults) {
+      if (this.defaults.hasOwnProperty(index) && index != "firstRun") {
+        let currentIndex = index;
+        this.localStorage.get("setting-" + index).then(res => {
+          if (res == null) {
+            this.settings[currentIndex] = this.defaults[currentIndex];
+            this.localStorage.set("setting-" + currentIndex, this.defaults[currentIndex]);
+          }else {
+            if (res == "true") {
+              this.settings[currentIndex] = true;
+            }else if (res == "false") {
+              this.settings[currentIndex] = false;
+            }else {
+              this.settings[currentIndex] = res;
+            }
           }
-        }
+        });
+      }else if (index == "firstRun") {
+        let currentIndex = index;
+        this.localStorage.get("setting-" + index.toString()).then(res => {
+          if (res == null) {
+            this.settings[currentIndex] = this.defaults[currentIndex];
+            this.localStorage.set("setting-" + currentIndex, this.defaults[currentIndex]);
+          }else {
+            if (res == "true") {
+              this.settings[currentIndex] = true;
+            }else if (res == "false") {
+              this.settings[currentIndex] = false;
+            }else {
+              this.settings[currentIndex] = res;
+            }
+          }
+          this.loaded = true;
+        });
       }
-    }, 50);
+    }
   }
 
   get(key: string): any {

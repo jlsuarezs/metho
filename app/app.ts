@@ -17,7 +17,7 @@ import {UserReport} from './providers/user-report/user-report.ts';
 export class MyApp {
   rootPage: any = TabsPage;
 
-  constructor(platform: Platform, translate: TranslateService, private storage: AppStorage) {
+  constructor(platform: Platform, translate: TranslateService, private storage: AppStorage, public settings: Settings) {
     platform.ready().then(() => {
       this.storage.init();
       translate.setDefaultLang('en');
