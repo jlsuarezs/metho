@@ -225,3 +225,18 @@ ionic-gulp-scripts-copy	/Users/francis/Documents/IonicProjects/metho/package.jso
 run-sequence	/Users/francis/Documents/IonicProjects/metho/package.json	/^    "run-sequence": "1.1.5"$/;"	function	line:54
 cordovaPlugins	/Users/francis/Documents/IonicProjects/metho/package.json	/^  "cordovaPlugins": [$/;"	function	line:56
 cordovaPlatforms	/Users/francis/Documents/IonicProjects/metho/package.json	/^  "cordovaPlatforms": [$/;"	function	line:73
+.references	/Users/francis/Documents/IonicProjects/metho/app/pages/references/references.scss	/^.references {$/;"	function	line:1
+p	/Users/francis/Documents/IonicProjects/metho/app/pages/references/references.scss	/^    p {$/;"	function	line:2
+ion	/Users/francis/Documents/IonicProjects/metho/app/pages/references/references.html	/^<ion-navbar *navbar>$/;"	function	line:1
+ion	/Users/francis/Documents/IonicProjects/metho/app/pages/references/references.html	/^  <ion-title>{{'REFERENCES.TAB_TITLE' | translate}}<\/ion-title>$/;"	function	line:2
+ion	/Users/francis/Documents/IonicProjects/metho/app/pages/references/references.html	/^<ion-content class="references">$/;"	function	line:5
+ion	/Users/francis/Documents/IonicProjects/metho/app/pages/references/references.html	/^  <ion-list>$/;"	function	line:6
+button	/Users/francis/Documents/IonicProjects/metho/app/pages/references/references.html	/^    <button ion-item *ngFor="let reference of references" (click)="goToReferenceDetailPage(reference.id)">$/;"	function	line:7
+ion	/Users/francis/Documents/IonicProjects/metho/app/pages/references/references.html	/^      <ion-thumbnail item-left>$/;"	function	line:8
+img	/Users/francis/Documents/IonicProjects/metho/app/pages/references/references.html	/^        <img [src]="reference.icon">$/;"	function	line:9
+h	/Users/francis/Documents/IonicProjects/metho/app/pages/references/references.html	/^      <h2>{{ reference.name }}<\/h2>$/;"	function	line:11
+p	/Users/francis/Documents/IonicProjects/metho/app/pages/references/references.html	/^      <p>{{ reference.description }}<\/p>$/;"	function	line:12
+ion	/Users/francis/Documents/IonicProjects/metho/app/pages/tabs/tabs.html	/^<ion-tabs>$/;"	function	line:1
+ion	/Users/francis/Documents/IonicProjects/metho/app/pages/tabs/tabs.html	/^  <ion-tab [root]="tab1Root" tabTitle="{{'TAB_PROJECT' | translate}}" tabIcon="copy"><\/ion-tab>$/;"	function	line:2
+ion	/Users/francis/Documents/IonicProjects/metho/app/pages/tabs/tabs.html	/^  <ion-tab [root]="tab2Root" tabTitle="{{'TAB_REFERENCES' | translate}}" tabIcon="paper"><\/ion-tab>$/;"	function	line:3
+ion	/Users/francis/Documents/IonicProjects/metho/app/pages/tabs/tabs.html	/^  <ion-tab [root]="tab3Root" tabTitle="{{'TAB_SETTINGS' | translate}}" tabIcon="cog"><\/ion-tab>$/;"	function	line:4
