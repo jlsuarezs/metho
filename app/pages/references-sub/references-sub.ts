@@ -1,14 +1,22 @@
-import {Page, NavController} from 'ionic-angular';
+import {Page, NavController, NavParams} from 'ionic-angular';
+import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
-/*
-  Generated class for the ReferencesSubPage page.
+import {References} from '../../providers/references/references';
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Page({
   templateUrl: 'build/pages/references-sub/references-sub.html',
+  pipes: [TranslatePipe]
 })
 export class ReferencesSubPage {
-  constructor(public nav: NavController) {}
+  public name: string = '';
+  public text: string = '';
+
+  constructor(public nav: NavController, public params: NavParams) {
+    let index = this.params.get('id');
+    let subIndex = this.params.get('subId');
+    let reference = References.getReferences()[index].subPages[subIndex];
+
+    this.name = reference.name;
+    this.text = reference.text;
+  }
 }

@@ -1,14 +1,28 @@
 import {Page, NavController} from 'ionic-angular';
+import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
-/*
-  Generated class for the ReferencesPage page.
+import {References} from '../../providers/references/references';
+import {Settings} from '../../providers/settings/settings';
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+import {ReferencesDetailPage} from '../references-detail/references-detail';
+
+
 @Page({
   templateUrl: 'build/pages/references/references.html',
+  pipes: [TranslatePipe]
 })
 export class ReferencesPage {
-  constructor(public nav: NavController) {}
+  public references: any[];
+  public advanced: boolean;
+
+  constructor(public nav: NavController, public settings: Settings) {
+    this.references = References.getReferences();
+    this.advanced = this.settings.get('advanced');
+  }
+
+  goToReferenceDetailPage(id: number) {
+    this.nav.push(ReferencesDetailPage, {
+      id: id
+    })
+  }
 }
