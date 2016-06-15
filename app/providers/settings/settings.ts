@@ -18,7 +18,7 @@ export class Settings {
       scanBoardingDone: false,
       firstname: "",
       lastname: "",
-      overideLang: "none",
+      overideLang: "",
       lastLang: "",
       firstRun: true
     };
