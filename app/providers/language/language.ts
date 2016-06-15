@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {TranslateService} from 'ng2-translate/ng2-translate';
 import * as moment from 'moment';
 import 'moment/locale/fr';
-import 'moment/locale/en';
+import 'moment/locale/en-ca';
 import 'moment/locale/es';
 var numeral = require('numeral');
 import 'numeral/min/languages.min';
