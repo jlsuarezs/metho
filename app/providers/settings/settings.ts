@@ -14,12 +14,11 @@ export class Settings {
 
     this.defaults = {
       advanced: false,
-      askForOrder: true,
       defaultOrder: "alpha",
       scanBoardingDone: false,
       firstname: "",
       lastname: "",
-      overideLang: "",
+      overideLang: "none",
       lastLang: "",
       firstRun: true
     };
