@@ -19,11 +19,10 @@ import {Language} from './providers/language/language';
 export class MyApp {
   rootPage: any = TabsPage;
 
-  constructor(platform: Platform, translate: TranslateService, private storage: AppStorage, public settings: Settings) {
+  constructor(platform: Platform, translate: TranslateService, private storage: AppStorage, public settings: Settings, public language: Language) {
     platform.ready().then(() => {
       this.storage.init();
-      translate.setDefaultLang('en');
-      translate.use('fr');
+      this.language.init();
       StatusBar.styleDefault();
     });
   }

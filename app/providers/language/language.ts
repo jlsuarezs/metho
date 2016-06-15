@@ -17,6 +17,7 @@ export class Language {
   constructor(public settings: Settings, public translate: TranslateService) {}
 
   init() {
+    this.translate.setDefaultLang('en');
     if (this.settings.get('overideLang') == "") {
       Globalization.getPreferredLanguage().then(lang => {
         this.translate.use(lang.value);
