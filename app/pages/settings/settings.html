@@ -1,13 +1,56 @@
-<!--
-  Generated template for the SettingsPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-navbar *navbar>
-  <ion-title>settings</ion-title>
+  <ion-title>{{'SETTINGS.TAB_TITLE' | translate}}</ion-title>
 </ion-navbar>
 
-<ion-content padding class="settings">
-  
+<ion-content class="settings">
+  <ion-list class="no-margin-bottom">
+    <ion-list-header>
+      {{'SETTINGS.ORDER_BY' | translate}}
+    </ion-list-header>
+    <ion-list radio-group [(ngModel)]="settings.defaultOrder" class="no-margin-bottom" (ionChange)="changeOrder()">
+      <ion-item>
+        <ion-label>{{'SETTINGS.ALPHABETICAL' | translate}}</ion-label>
+        <ion-radio value="alpha"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{'SETTINGS.TYPE' | translate}}</ion-label>
+        <ion-radio value="type"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <ion-item>
+      <ion-label>
+        {{'SETTINGS.ADVANCED_MODE_LABEL' | translate}}&nbsp;<a [navPush]="advancedPage" class="nowrap"><div class="link-beautiful">{{ 'SETTINGS.LEARN_MORE' | translate }}</div></a>
+      </ion-label>
+      <ion-toggle [(ngModel)]="settings.advanced" (ionChange)="toggleAdvanced()"></ion-toggle>
+    </ion-item>
+    <ion-item-sliding *ngIf="settings.firstname || settings.lastname">
+      <ion-item>
+        <ion-label>{{'SETTINGS.YOUR_NAME' | translate}}</ion-label>
+        <ion-note item-right>{{ settings.firstname + ' ' + settings.lastname }}</ion-note>
+      </ion-item>
+
+      <ion-item-options>
+        <button (click)="editName()">{{'SETTINGS.EDIT' | translate}}</button>
+        <button danger (click)="forgetName()">{{'SETTINGS.FORGET' | translate}}</button>
+      </ion-item-options>
+    </ion-item-sliding>
+    <ion-item>
+      <ion-label>{{'SETTINGS.LANGUAGE' | translate}}</ion-label>
+      <ion-select [(ngModel)]="settings.overideLang" okText="{{'PROJECT.DETAIL.POPUP.OK' | translate}}" cancelText="{{'PROJECT.DETAIL.POPUP.CANCEL' | translate}}" (ionChange)="changeLanguage()">
+        <ion-option value="">{{'SETTINGS.DEFAULT' | translate}}</ion-option>
+        <ion-option value="fr">{{'SETTINGS.FRENCH' | translate}}</ion-option>
+        <ion-option value="en">{{'SETTINGS.ENGLISH' | translate}}</ion-option>
+        <ion-option value="es">{{'SETTINGS.SPANISH' | translate}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <button ion-item [navPush]="attributionsPage">
+      <h2>{{'SETTINGS.ATTRIBUTION_TAB' | translate}}</h2>
+    </button>
+    <button ion-item [navPush]="feedbackPage">
+      <h2>{{'SETTINGS.BUG_COMMENT' | translate}}</h2>
+      <p>{{'SETTINGS.BUG_COMMENT_LONG' | translate}}</p>
+    </button>
+  </ion-list>
+  <p text-center innerHtml="{{'SETTINGS.ATTRIBUTIONS' | translate}}"></p>
+  <p text-center class="dimmed-50">&copy; 2016 Francis Clavette</p>
 </ion-content>
