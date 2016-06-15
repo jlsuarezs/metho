@@ -1,39 +1,45 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
-import 'rxjs/add/operator/map';
+import {TranslateService} from 'ng2-translate/ng2-translate';
+import * as moment from 'moment';
+import 'moment/locale/fr';
+import 'moment/locale/en';
+import 'moment/locale/es';
+var numeral = require('numeral');
+import 'numeral/min/languages.min';
 
-/*
-  Generated class for the Language provider.
+import {Settings} from '../settings/settings';
 
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
+import {Globalization} from 'ionic-native';
+
 @Injectable()
 export class Language {
-  data: any = null;
 
-  constructor(public http: Http) {}
+  constructor(public settings: Settings, public translate: TranslateService) {}
 
-  load() {
-    if (this.data) {
-      // already loaded data
-      return Promise.resolve(this.data);
+  init() {
+    if (this.settings.get('overideLang') == "") {
+      Globalization.getPreferredLanguage().then(lang => {
+        this.translate.use(lang.value);
+        moment.locale(lang.value);
+        numeral.language(lang.value);
+      });
+    }else {
+      this.translate.use(this.settings.get('overideLang'));
+      moment.locale(this.settings.get('overideLang'));
+      numeral.language(this.settings.get('overideLang'));
     }
+  }
 
-    // don't have the data yet
-    return new Promise(resolve => {
-      // We're using Angular Http provider to request the data,
-      // then on the response it'll map the JSON data to a parsed JS object.
-      // Next we process the data and resolve the promise with the new data.
-      this.http.get('path/to/data.json')
-        .map(res => res.json())
-        .subscribe(data => {
-          // we've got back the raw data, now generate the core schedule data
-          // and save the data for later reference
-          this.data = data;
-          resolve(this.data);
-        });
-    });
+  getMoment() {
+    return moment;
+  }
+
+  getNumeral() {
+    return numeral;
+  }
+
+  change(lang: string) {
+    this.settings.set('overideLang', lang);
+    this.init();
   }
 }
-
