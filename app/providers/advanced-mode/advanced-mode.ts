@@ -11,6 +11,7 @@ export class AdvancedMode {
 
   enable() {
     this.settings.set('advanced', true);
+    return true;
   }
 
   disable() {
