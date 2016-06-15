@@ -9,6 +9,8 @@ import {Parse} from './providers/parse/parse.ts';
 import {Fetch} from './providers/fetch/fetch.ts';
 import {Settings} from './providers/settings/settings.ts';
 import {UserReport} from './providers/user-report/user-report.ts';
+import {AdvancedMode} from './providers/advanced-mode/advanced-mode';
+import {Language} from './providers/language/language';
 
 
 @Component({
@@ -37,5 +39,7 @@ ionicBootstrap(MyApp, [
     Parse,
     Fetch,
     Settings,
-    UserReport
+    UserReport,
+    AdvancedMode,
+    Language
   ], {});
