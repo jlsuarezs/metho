@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {TranslateService} from 'ng2-translate/ng2-translate';
+import {Language} from '../language/language';
 import 'rxjs/add/operator/map';
 
 var numeral = require('numeral');
@@ -8,7 +9,7 @@ var numeral = require('numeral');
 export class Parse {
   private sourceToParse: any;
 
-  constructor(public translate: TranslateService) {}
+  constructor(public translate: TranslateService, public language: Language) {}
 
   parse(source: any) {
     this.sourceToParse = source;
@@ -549,7 +550,7 @@ export class Parse {
 
         // Date de consultation
         if (this.sourceToParse.consultationDate) {
-            this.sourceToParse.parsedSource += "(" + new Date(this.sourceToParse.consultationDate).toLocaleDateString("", {timeZone:"UTC"}) + ").";
+            this.sourceToParse.parsedSource += "(" + new Date(this.sourceToParse.consultationDate).toLocaleDateString(this.language.current(), {timeZone:"UTC"}) + ").";
         } else {
             this.sourceToParse.parsedSource += "(?).";
         }
@@ -759,7 +760,7 @@ export class Parse {
 
         // Date de visionnement
         if (this.sourceToParse.consultationDate) {
-            this.sourceToParse.parsedSource += "(" + new Date(this.sourceToParse.consultationDate).toLocaleDateString("", {timeZone:"UTC"}) + ").";
+            this.sourceToParse.parsedSource += "(" + new Date(this.sourceToParse.consultationDate).toLocaleDateString(this.language.current(), {timeZone:"UTC"}) + ").";
         } else {
             this.sourceToParse.parsedSource += "(?).";
         }
@@ -862,7 +863,7 @@ export class Parse {
 
         // Date de l'entrevue
         if (this.sourceToParse.consultationDate) {
-            this.sourceToParse.parsedSource += "le " + new Date(this.sourceToParse.consultationDate).toLocaleDateString("", {timeZone:"UTC"}) + ".";
+            this.sourceToParse.parsedSource += "le " + new Date(this.sourceToParse.consultationDate).toLocaleDateString(this.language.current(), {timeZone:"UTC"}) + ".";
         } else {
             this.sourceToParse.parsedSource += "le ?.";
         }
