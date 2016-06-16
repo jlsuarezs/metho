@@ -98,8 +98,7 @@ export class SourceModalPage {
       // SafariViewController.mayLaunchUrl(this.url);
     }
 
-    // this.isAdvanced = this.settings.get("advanced");
-    this.isAdvanced = true;
+    this.isAdvanced = this.settings.get("advanced");
 
     // moment.locale(this.language.current());
     moment.locale("fr");
