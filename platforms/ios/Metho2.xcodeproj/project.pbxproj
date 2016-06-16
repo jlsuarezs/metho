@@ -43,6 +43,7 @@
 		46727B6DA30C46ADACE4BA89 /* SQLitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB478BF79354E72A64A7597 /* SQLitePlugin.m */; };
 		C3D3E546ACC24F8D852E40B2 /* CDVInAppBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D95E98560484F12A41692B5 /* CDVInAppBrowser.m */; };
 		251C904CF59F403B8DC98F84 /* CDVStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F6F6DA0AEE4EADA3FB6C72 /* CDVStatusBar.m */; };
+		61D763EA3F124399A9278AAD /* CDVLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 975CE8A11DC341A7BD97C8E2 /* CDVLogger.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +137,8 @@
 		3C8795AA75CF40D48953C0BA /* CDVInAppBrowser.h */ = {isa = PBXFileReference; name = "CDVInAppBrowser.h"; path = "cordova-plugin-inappbrowser/CDVInAppBrowser.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 		65F6F6DA0AEE4EADA3FB6C72 /* CDVStatusBar.m */ = {isa = PBXFileReference; name = "CDVStatusBar.m"; path = "cordova-plugin-statusbar/CDVStatusBar.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 		9735F50EE57F4A72B6437119 /* CDVStatusBar.h */ = {isa = PBXFileReference; name = "CDVStatusBar.h"; path = "cordova-plugin-statusbar/CDVStatusBar.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		975CE8A11DC341A7BD97C8E2 /* CDVLogger.m */ = {isa = PBXFileReference; name = "CDVLogger.m"; path = "cordova-plugin-console/CDVLogger.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		7D55A8AD575E4C46A7221CC3 /* CDVLogger.h */ = {isa = PBXFileReference; name = "CDVLogger.h"; path = "cordova-plugin-console/CDVLogger.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -291,6 +294,8 @@
 				3C8795AA75CF40D48953C0BA /* CDVInAppBrowser.h */,
 				65F6F6DA0AEE4EADA3FB6C72 /* CDVStatusBar.m */,
 				9735F50EE57F4A72B6437119 /* CDVStatusBar.h */,
+				975CE8A11DC341A7BD97C8E2 /* CDVLogger.m */,
+				7D55A8AD575E4C46A7221CC3 /* CDVLogger.h */,
 			);
 			name = Plugins;
 			path = Metho2/Plugins;
@@ -443,6 +448,7 @@
 				46727B6DA30C46ADACE4BA89 /* SQLitePlugin.m in Sources */,
 				C3D3E546ACC24F8D852E40B2 /* CDVInAppBrowser.m in Sources */,
 				251C904CF59F403B8DC98F84 /* CDVStatusBar.m in Sources */,
+				61D763EA3F124399A9278AAD /* CDVLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
