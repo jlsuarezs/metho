@@ -25,6 +25,12 @@ export class SourcesPage {
     this.loadProjectInfo();
     this.loadSources();
     this.loadPendingNumber();
+
+    if (params.get('createNew') == true) {
+      this.createSource();
+    }else if (params.get('createNewWithScan') == true) {
+      this.openModal('book', true);
+    }
   }
 
   ionViewWillEnter() {
@@ -123,10 +129,11 @@ export class SourcesPage {
     });
   }
 
-  openModal(type: string) {
+  openModal(type: string, openScan: boolean = false) {
     let modal = Modal.create(SourceModalPage, {
       type: type,
-      project_id: this.projectId
+      project_id: this.projectId,
+      scan: openScan
     });
 
     modal.onDismiss(() => {

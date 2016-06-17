@@ -98,6 +98,12 @@ export class SourceModalPage {
       // SafariViewController.mayLaunchUrl(this.url);
     }
 
+    if (this.params.get('scan') == true) {
+      this.viewCtrl.didEnter.subscribe(() => {
+        this.scan();
+      });
+    }
+
     this.isAdvanced = this.settings.get("advanced");
 
     // moment.locale(this.language.current());
