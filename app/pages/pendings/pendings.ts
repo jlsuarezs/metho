@@ -15,7 +15,7 @@ import 'moment/locale/fr';
 })
 export class PendingsPage {
   public projectId: string;
-  public pendings: Array<any>;
+  public pendings: Array<any> = [];
   public currentTransition = null;
 
   constructor(public nav: NavController, public params: NavParams, public translate: TranslateService, public storage: AppStorage, public fetch: Fetch) {
