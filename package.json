@@ -21,7 +21,7 @@
     "gulp-minify-css": "^0.3.0",
     "gulp-rename": "^1.2.0",
     "gulp-sass": "^2.0.4",
-    "ionic-angular": "2.0.0-beta.8",
+    "ionic-angular": "2.0.0-beta.9",
     "ionic-native": "^1.2.4",
     "ionicons": "3.0.0",
     "moment": "^2.13.0",
