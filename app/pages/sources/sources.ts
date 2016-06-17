@@ -1,6 +1,7 @@
 import {Page, NavController, NavParams, ActionSheet, Modal, Alert, List} from 'ionic-angular';
 import {ViewChild} from '@angular/core';
 import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
+import {EmailComposer} from 'ionic-native';
 
 import {SourcePage} from '../source/source';
 import {SourceModalPage} from '../source-modal/source-modal';
@@ -170,7 +171,49 @@ export class SourcesPage {
   }
 
   share() {
+    this.translate.get("PROJECT.DETAIL.SHARE_TEXT").subscribe(text => {
+      let textToShare = text;
+      let errNum = 0;
+      let arr_sources = JSON.parse(JSON.stringify(this.sources)).sort(function(a, b) {
+        return a.parsedSource.localeCompare(b.parsedSource);
+      });
+      for (let i = 0; i < arr_sources.length; i++) {
+        textToShare += arr_sources[i].parsedSource + "<br><br>";
+        errNum += arr_sources[i].errors.length;
+      }
 
+      if (errNum > 0) {
+        this.translate.get(["PROJECT.DETAIL.POPUP.ERRORS_SOURCES", "PROJECT.DETAIL.POPUP.SHARE_TEXT", "PROJECT.DETAIL.POPUP.SHARE", "PROJECT.DETAIL.POPUP.CANCEL"], { errNum:errNum }).subscribe((translations) => {
+          let alert = Alert.create({
+            title: translations["PROJECT.DETAIL.POPUP.SHARE_TEXT"],
+            message: translations["PROJECT.DETAIL.POPUP.ERRORS_SOURCES"],
+            buttons: [
+              {
+                text: translations["PROJECT.DETAIL.POPUP.CANCEL"]
+              },
+              {
+                text: translations["PROJECT.DETAIL.POPUP.SHARE"],
+                handler: () => {
+                  EmailComposer.open({
+                    subject: this.project.name,
+                    body: textToShare,
+                    isHtml: true
+                  });
+                }
+              }
+            ]
+          });
+
+          this.nav.present(alert);
+        });
+      } else {
+        EmailComposer.open({
+          subject: this.project.name,
+          body: textToShare,
+          isHtml: true
+        });
+      }
+    });
   }
 
   openSourcePage(source: any) {
