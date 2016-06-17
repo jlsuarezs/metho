@@ -15,7 +15,7 @@ export class SourcesPage {
   public projectId: string;
   public sources: Array<any> = [];
   public project: any;
-  public pendingNumber: number;
+  public pendingNumber: number = 0;
   private currentTransition: any;
   @ViewChild(List) list: List;
 
