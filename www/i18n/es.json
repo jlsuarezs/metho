@@ -597,7 +597,9 @@
         "NEW_SOURCE": "Nueva fuente",
         "NEW_SOURCE_DESC": "Añadir una nueva fuente",
         "SCAN": "Escáner",
-        "SCAN_DESC": "Escáner un código de barras"
+        "SCAN_DESC": "Escáner un código de barras",
+        "NO_PROJECT_TITLE": "Ningun proyecto",
+        "NO_PROJECT_MESSAGE": "Tiene que añadir un proyecto antes de añadir un fuente. Quiere añadir un proyecto ?"
     },
     "REPORT": {
         "ERROR": "Error",

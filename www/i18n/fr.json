@@ -597,7 +597,9 @@
         "NEW_SOURCE": "Nouvelle source",
         "NEW_SOURCE_DESC": "Créer une nouvelle source",
         "SCAN": "Balayage",
-        "SCAN_DESC": "Balayer un code-barre"
+        "SCAN_DESC": "Balayer un code-barre",
+        "NO_PROJECT_TITLE": "Aucun projet",
+        "NO_PROJECT_MESSAGE": "Vous devez créer un project avant d'ajouter des sources. Voulez-vous en créer un maintenant ?"
     },
     "REPORT": {
         "ERROR": "Erreur",
