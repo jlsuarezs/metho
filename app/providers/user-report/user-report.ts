@@ -12,7 +12,7 @@ export class UserReport {
   }
 
   report(err: any) {
-    if (typeof err != String) {
+    if (typeof err != 'string') {
       err = JSON.parse(err);
     }
     this.translate.get(["YES", "NO", "REPORT.ERROR", "REPORT.UNKNOWN", "REPORT.REPORT_?","REPORT.DO_NOT_EDIT", "REPORT.TITLE"]).subscribe(translations => {
