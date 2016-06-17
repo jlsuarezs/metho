@@ -7,7 +7,7 @@ import * as PouchDB from 'pouchdb';
 
 @Injectable()
 export class AppStorage {
-  private theresProjects: Boolean = false;
+  private theresProjects: boolean = false;
   private projectDB: any = null;
   private sourceDB: any = null;
   private pendingDB: any = null;
@@ -18,14 +18,13 @@ export class AppStorage {
   private pendings: Object = {};
   private pendingsByProject: Object = {};
 
-  private loadingProjects: Boolean = true;
-  private loadingSources: Boolean = true;
-  private loadingPendings: Boolean = true;
+  private loadingProjects: boolean = true;
+  private loadingSources: boolean = true;
+  private loadingPendings: boolean = true;
 
-  private projectEvents = new EventEmitter();
-  private sourcesEvents = new EventEmitter();
-  private pendingsEvents = new EventEmitter();
-
+  private projectEvents;
+  private sourcesEvents;
+  private pendingsEvents;
 
   constructor(public parse: Parse, public report: UserReport) {
     this.local = new Storage(LocalStorage);
@@ -33,6 +32,10 @@ export class AppStorage {
       this.local.set("theresProjects", false);
     }
     this.theresProjects = this.local.get("theresProjects");
+
+    this.projectEvents = new EventEmitter();
+    this.sourcesEvents = new EventEmitter();
+    this.pendingsEvents = new EventEmitter();
   }
 
   init() {
