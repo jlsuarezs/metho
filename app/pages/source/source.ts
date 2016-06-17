@@ -10,7 +10,10 @@ import {SourceModalPage} from '../source-modal/source-modal';
   pipes: [TranslatePipe]
 })
 export class SourcePage {
-  public source: any = {};
+  public source: any = {
+    warnings: [],
+    errors: []
+  };
   public id: string;
 
   constructor(public nav: NavController, public params: NavParams, public storage: AppStorage, public parse: Parse, public translate: TranslateService) {
