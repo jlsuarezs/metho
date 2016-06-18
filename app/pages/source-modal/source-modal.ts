@@ -8,9 +8,7 @@ import {Parse} from '../../providers/parse/parse.ts';
 import {Fetch} from '../../providers/fetch/fetch.ts';
 import {BoardingScanPage} from '../boarding-scan/boarding-scan';
 import {Settings} from '../../providers/settings/settings';
-
-import * as moment from 'moment';
-import 'moment/locale/fr';
+import {Language} from '../../providers/language/language';
 
 @Page({
   templateUrl: 'build/pages/source-modal/source-modal.html',
@@ -56,7 +54,7 @@ export class SourceModalPage {
   public interviewForm: ControlGroup;
   public civilityOpts: any = {};
 
-  constructor(public viewCtrl: ViewController, public translate: TranslateService, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public nav: NavController, public fetch: Fetch, public settings: Settings) {
+  constructor(public viewCtrl: ViewController, public translate: TranslateService, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public nav: NavController, public fetch: Fetch, public settings: Settings, public language: Language) {
     if(this.params.get('editing') == true) {
       this.isNew = false;
     }else {
@@ -107,9 +105,7 @@ export class SourceModalPage {
 
     this.isAdvanced = this.settings.get("advanced");
 
-    // moment.locale(this.language.current());
-    moment.locale("fr");
-
+    let moment = this.language.getMoment();
     if (this.type == "book") {
       this.bookForm = fb.group({
         hasAuthors: [this.noData ? '' : this.previous.hasAuthors],
@@ -155,10 +151,7 @@ export class SourceModalPage {
         url: [this.noData ? '' : this.previous.url],
         consultationDate: [this.noData ? moment().toISOString() : this.previous.consultationDate]
       });
-      this.monthList = moment.months().join(",");
-      this.monthShortList = moment.monthsShort().join(",");
-      this.weekdayList = moment.weekdays().join(",");
-      this.weekdayShortList = moment.weekdaysShort().join(",");
+      this.generateLabels();
     }else if (this.type == "cd") {
       this.cdForm = fb.group({
         hasAuthors: [this.noData ? false : this.previous.hasAuthors],
@@ -186,10 +179,7 @@ export class SourceModalPage {
         support: [this.noData ? '' : this.previous.support],
         consultationDate: [this.noData ? moment().toISOString() : this.previous.consultationDate],
       });
-      this.monthList = moment.months().join(",");
-      this.monthShortList = moment.monthsShort().join(",");
-      this.weekdayList = moment.weekdays().join(",");
-      this.weekdayShortList = moment.weekdaysShort().join(",");
+      this.generateLabels();
     }else if (this.type == "interview") {
       this.interviewForm = fb.group({
         author1firstname: [this.noData ? this.settings.get('firstname') : this.previous.author1firstname],
@@ -201,10 +191,7 @@ export class SourceModalPage {
         publicationLocation: [this.noData ? '' : this.previous.publicationLocation],
         consultationDate: [this.noData ? moment().toISOString() : this.previous.consultationDate],
       });
-      this.monthList = moment.months().join(",");
-      this.monthShortList = moment.monthsShort().join(",");
-      this.weekdayList = moment.weekdays().join(",");
-      this.weekdayShortList = moment.weekdaysShort().join(",");
+      this.generateLabels();
       // Use async once issue is resolved
       this.civilityOpts = {
         title: this.translate.instant("PROJECT.PARSE.CIVILITY_TITLE.TITLE")
@@ -214,6 +201,13 @@ export class SourceModalPage {
     if (this.url) {
       this.browser();
     }
+  }
+
+  generateLabels() {
+    this.monthList = this.language.getMoment().months().join(",");
+    this.monthShortList = this.language.getMoment().monthsShort().join(",");
+    this.weekdayList = this.language.getMoment().weekdays().join(",");
+    this.weekdayShortList = this.language.getMoment().weekdaysShort().join(",");
   }
 
   dismiss() {
