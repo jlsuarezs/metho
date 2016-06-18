@@ -7,7 +7,7 @@
     "NO": "No",
     "PROJECT":{
         "TAB":{
-            "TAB_TITLE": "@:TAB_PROJECT",
+            "TAB_TITLE": "Proyectos",
             "EMPTY_TAB": "¿ No proyecto ? Va a venir...",
             "EDIT_ITEM": "Editar",
             "DELETE_ITEM": "Eliminar",
@@ -22,20 +22,20 @@
                 "MATTER_PLACEHOLDER": "Geografía"
             },
             "MODAL_EDIT":{
-                "CANCEL": "@:PROJECT.TAB.MODAL.CANCEL",
+                "CANCEL": "Cancelar",
                 "TITLE": "Modificar el proyecto",
                 "CONFIRM": "Modificar",
-                "PROJECT_NAME_LABEL": "@:PROJECT.TAB.MODAL.PROJECT_NAME_LABEL",
-                "PROJECT_NAME_PLACEHOLDER": "@:PROJECT.TAB.MODAL.PROJECT_NAME_PLACEHOLDER",
-                "MATTER_LABEL": "@:PROJECT.TAB.MODAL.MATTER_LABEL",
-                "MATTER_PLACEHOLDER": "@:PROJECT.TAB.MODAL.MATTER_PLACEHOLDER"
+                "PROJECT_NAME_LABEL": "Nombre del proyecto",
+                "PROJECT_NAME_PLACEHOLDER": "Ensayo sobre los medios de comunicación",
+                "MATTER_LABEL": "Materia",
+                "MATTER_PLACEHOLDER": "Geografía"
             },
             "POPUP": {
                 "ERROR_TEXT": "Error",
                 "NO_PROJECT_NAME": "Introduzca el nombre del proyecto",
                 "DELETE_PROJECT_TITLE": "¿ Eliminar el proyecto ?",
                 "DELETE_PROJECT": "La eliminación de este proyecto arrastrará la pérdida de todas las fuentes en eso. La eliminación es irreversible.",
-                "CANCEL": "@:PROJECT.TAB.MODAL.CANCEL",
+                "CANCEL": "Cancelar",
                 "DELETE": "Eliminar",
                 "MUST_HAVE_TYPE": "El proyecto debe tener un nombre"
             }
@@ -47,7 +47,7 @@
             "CHOOSE_TYPE": "Elegir un typo de fuente",
             "SHARE_TEXT": "Aquí está las fuentes del proyecto « {{project_title}} » : <br><br><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center'>BIBLIOGRAPHIE</td></tr></table><br>",
             "MODAL":{
-                "CANCEL": "@:PROJECT.TAB.MODAL.CANCEL",
+                "CANCEL": "Cancelar",
                 "TITLE": "Nueva fuente",
                 "ADD": "Añadir",
                 "SCAN": "Escáner el código de barras",
@@ -83,8 +83,8 @@
                     "TRANSLATOR_NAME": "Nombre del/de los traductores"
                 },
                 "ARTICLE": {
-                    "FIRSTNAME": "@:PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME",
-                    "LASTNAME": "@:PROJECT.DETAIL.MODAL.BOOK.LASTNAME",
+                    "FIRSTNAME": "Nombre",
+                    "LASTNAME": "Apellido",
                     "AUTHOR_NAME": "Autor",
                     "TITLE_LABEL": "Titule del artículo",
                     "TITLE_PLACEHOLDER": "El enigma Colón",
@@ -99,8 +99,8 @@
                     "INDICATION_END_PLACEHOLDER": "Fin"
                 },
                 "INTERNET": {
-                    "FIRSTNAME":"@:PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME",
-                    "LASTNAME": "@:PROJECT.DETAIL.MODAL.BOOK.LASTNAME",
+                    "FIRSTNAME":"Nombre",
+                    "LASTNAME": "Apellido",
                     "HAS_AUTHORS": "La fuente tiene un autor",
                     "WEBPAGE_NAME": "Titulo del articulo",
                     "WEBPAGE_NAME_PLACHOLDER": "Isaac Newton",
@@ -112,8 +112,8 @@
                     "CONSULTATION_DATE_PLACEHOLDER": "21 mars 2009"
                 },
                 "CD": {
-                    "FIRSTNAME": "@:PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME",
-                    "LASTNAME": "@:PROJECT.DETAIL.MODAL.BOOK.LASTNAME",
+                    "FIRSTNAME": "Nombre",
+                    "LASTNAME": "Apellido",
                     "HAS_AUTHORS": "La fuente tiene un autor",
                     "DOC_TITLE": "Titulo del documento",
                     "DOC_TITLE_PLACEHOLDER": "Lleno de vida",
@@ -125,8 +125,8 @@
                     "PUBLICATION_DATE_PLACEHOLDER": "2001"
                 },
                 "MOVIE": {
-                    "FIRSTNAME": "@:PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME",
-                    "LASTNAME": "@:PROJECT.DETAIL.MODAL.BOOK.LASTNAME",
+                    "FIRSTNAME": "Nombre",
+                    "LASTNAME": "Apellido",
                     "HAS_MORE_THAN_ONE": "La fuente tiene más de un autor/director",
                     "HAS_MORE_THAN_ONE_TRUE": "Tiene que introducir el nombre del primero autor, la mención «et al.» será añadida para significar que hay más de un author/director.",
                     "PRINCIPAL_AUTHOR": "Autor principal",
@@ -152,8 +152,8 @@
                     "CONSULTATION_DATE_PLACEHOLDER": "29 de marzo de 1991"
                 },
                 "INTERVIEW": {
-                    "FIRSTNAME": "@:PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME",
-                    "LASTNAME": "@:PROJECT.DETAIL.MODAL.BOOK.LASTNAME",
+                    "FIRSTNAME": "Nombre",
+                    "LASTNAME": "Apellido",
                     "INTERVIEWER_NAME": "Nombre del entrevistador",
                     "INTERVIEWED_NAME": "Nombre de la persona encontrada",
                     "CIVILITY_MISTER": "Sr.",
