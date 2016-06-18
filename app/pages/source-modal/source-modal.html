@@ -329,7 +329,7 @@
           {{'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWED_NAME' | translate}}
         </ion-list-header>
         <ion-item class="flex-sub padding">
-          <ion-select ngControl="civility">
+          <ion-select ngControl="civility" [alertOptions]="civilityOpts" cancelText="{{'PROJECT.DETAIL.MODAL.CANCEL' | translate}}">
             <ion-option value="mister">{{'PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISTER' | translate}}</ion-option>
             <ion-option value="miss">{{'PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS' | translate}}</ion-option>
             <ion-option value="miss_young">{{'PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS_YOUNG' | translate}}</ion-option>

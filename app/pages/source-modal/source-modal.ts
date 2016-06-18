@@ -54,6 +54,7 @@ export class SourceModalPage {
   public cdForm: ControlGroup;
   public movieForm: ControlGroup;
   public interviewForm: ControlGroup;
+  public civilityOpts: any = {};
 
   constructor(public viewCtrl: ViewController, public translate: TranslateService, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public nav: NavController, public fetch: Fetch, public settings: Settings) {
     if(this.params.get('editing') == true) {
@@ -204,6 +205,10 @@ export class SourceModalPage {
       this.monthShortList = moment.monthsShort().join(",");
       this.weekdayList = moment.weekdays().join(",");
       this.weekdayShortList = moment.weekdaysShort().join(",");
+      // Use async once issue is resolved
+      this.civilityOpts = {
+        title: this.translate.instant("PROJECT.PARSE.CIVILITY_TITLE.TITLE")
+      };
     }
 
     if (this.url) {
