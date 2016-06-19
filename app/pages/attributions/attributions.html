@@ -1,13 +1,99 @@
-<!--
-  Generated template for the AttributionsPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-navbar *navbar>
-  <ion-title>attributions</ion-title>
+  <ion-title>{{'SETTINGS.ATTRIBUTION_TAB' | translate}}</ion-title>
 </ion-navbar>
 
-<ion-content padding class="attributions">
-  
+<ion-content class="attributions">
+  <ion-list>
+    <ion-item>
+      <ion-thumbnail item-left>
+          <img src="img/ionic.png">
+      </ion-thumbnail>
+
+      <h2>Ionic Framework</h2>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail item-left>
+          <img src="img/angular.png">
+      </ion-thumbnail>
+
+      <h2>Angular 2</h2>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail item-left>
+          <img src="img/cordova.png">
+      </ion-thumbnail>
+
+      <h2>Cordova</h2>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail item-left>
+          <img src="img/pouchdb.png">
+      </ion-thumbnail>
+
+      <h2>PouchDB</h2>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail item-left>
+          <img src="img/momentjs.png">
+      </ion-thumbnail>
+
+      <h2>MomentJS</h2>
+    </ion-item>
+    <ion-item>
+      <h2>Angular Translate</h2>
+    </ion-item>
+    <ion-item>
+      <h2>NumeralJS</h2>
+    </ion-item>
+    <ion-item>
+      <h2>cordova-plugin-splashscreen</h2>
+    </ion-item>
+    <ion-item>
+      <h2>cordova-plugin-console</h2>
+    </ion-item>
+    <ion-item>
+      <h2>cordova-plugin-device</h2>
+    </ion-item>
+    <ion-item>
+      <h2>cordova-plugin-statusbar</h2>
+    </ion-item>
+    <ion-item>
+      <h2>cordova-plugin-whitelist</h2>
+    </ion-item>
+    <ion-item>
+      <h2>cordova-plugin-sqlite-2</h2>
+    </ion-item>
+    <ion-item>
+      <h2>cordova-plugin-globalization</h2>
+    </ion-item>
+    <ion-item>
+      <h2>cordova-plugin-safariviewcontroller</h2>
+    </ion-item>
+    <ion-item>
+      <h2>cordova-plugin-x-socialsharing</h2>
+    </ion-item>
+    <ion-item>
+      <h2>cordova-plugin-3dtouch</h2>
+    </ion-item>
+    <ion-item>
+      <h2>phonegap-plugin-barcodescanner</h2>
+    </ion-item>
+    <ion-item>
+      <h2>ionic-plugin-keyboard</h2>
+    </ion-item>
+    <ion-item>
+      <h3 text-center>
+        {{ 'SETTINGS.ATTRIBUTION_ICONBY' | translate}} Sonal Panchal
+      </h3>
+    </ion-item>
+    <button ion-item [navPush]="licensePage" navParams="{ type: 'mit' }">
+      {{ 'SETTINGS.MIT_LICENSE' | translate }}
+    </button>
+    <button ion-item [navPush]="licensePage" navParams="{ type: 'bsd' }">
+      {{ 'SETTINGS.BSD_LICENSE' | translate }}
+    </button>
+    <button ion-item [navPush]="licensePage" navParams="{ type: 'apache' }">
+      {{ 'SETTINGS.APACHE_LICENSE' | translate }}
+    </button>
+  </ion-list>
 </ion-content>

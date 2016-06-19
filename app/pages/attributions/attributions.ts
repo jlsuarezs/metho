@@ -1,14 +1,17 @@
 import {Page, NavController} from 'ionic-angular';
 
-/*
-  Generated class for the AttributionsPage page.
+import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+import {LicensePage} from '../license/license';
+
 @Page({
   templateUrl: 'build/pages/attributions/attributions.html',
+  pipes: [TranslatePipe]
 })
 export class AttributionsPage {
-  constructor(public nav: NavController) {}
+  public licensePage: any;
+
+  constructor(public nav: NavController) {
+    this.licensePage = LicensePage;
+  }
 }
