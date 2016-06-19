@@ -1,13 +1,34 @@
-<!--
-  Generated template for the AdvancedModePage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-navbar *navbar>
-  <ion-title>advanced-mode</ion-title>
+  <ion-title>{{'SETTINGS.ADVANCED_MODE.TITLE' | translate}}</ion-title>
 </ion-navbar>
 
-<ion-content padding class="advanced-mode">
-  
+<ion-content class="advanced-mode">
+  <button full light class="button-dollar" (click)="enable()" [disabled]="isAdvanced">1,29<span class="dollar">$</span></button>
+  <p text-center>{{'SETTINGS.ADVANCED_MODE.WAITING_FOR' | translate}}</p>
+  <ion-list>
+    <ion-item>
+      <ion-thumbnail item-left>
+        <img src="img/barcode.png">
+      </ion-thumbnail>
+
+      <h2>{{'SETTINGS.ADVANCED_MODE.SCANNING' | translate}}</h2>
+      <p class="wrap">{{'SETTINGS.ADVANCED_MODE.SCAN_DESC' | translate}}</p>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail item-left>
+        <img src="img/rename.png">
+      </ion-thumbnail>
+
+      <h2>{{'SETTINGS.ADVANCED_MODE.INSTANT_SEARCH' | translate}}</h2>
+      <p class="wrap">{{'SETTINGS.ADVANCED_MODE.INSTANT_SEARCH_DESC' | translate}}</p>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail item-left>
+        <img src="img/models.png">
+      </ion-thumbnail>
+
+      <h2>{{'SETTINGS.ADVANCED_MODE.MODELS' | translate}}</h2>
+      <p class="wrap">{{'SETTINGS.ADVANCED_MODE.MODELS_DESC' | translate}}</p>
+    </ion-item>
+  </ion-list>
 </ion-content>

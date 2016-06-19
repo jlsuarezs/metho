@@ -1,14 +1,25 @@
 import {Page, NavController} from 'ionic-angular';
 
-/*
-  Generated class for the AdvancedModePage page.
+import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+import {AdvancedMode} from '../../providers/advanced-mode/advanced-mode';
+
 @Page({
   templateUrl: 'build/pages/advanced-mode/advanced-mode.html',
+  pipes: [TranslatePipe]
 })
 export class AdvancedModePage {
-  constructor(public nav: NavController) {}
+  public isAdvanced: boolean = false;
+
+  constructor(public nav: NavController, public advanced: AdvancedMode, public translate: TranslateService) {
+    this.isAdvanced = this.advanced.isEnabled();
+  }
+
+  enable() {
+    this.advanced.enable().then(() => {
+      this.nav.pop();
+    }).catch(err => {
+
+    });
+  }
 }
