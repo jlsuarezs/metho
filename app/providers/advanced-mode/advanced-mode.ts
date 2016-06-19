@@ -9,12 +9,16 @@ export class AdvancedMode {
 
   constructor(public translate: TranslateService, public settings: Settings) {}
 
-  enable() {
+  enable(): Promise<void> {
     this.settings.set('advanced', true);
-    return true;
+    return Promise.resolve();
   }
 
   disable() {
     this.settings.set('advanced', false);
+  }
+
+  isEnabled() {
+    return this.settings.get('advanced');
   }
 }
