@@ -39,9 +39,11 @@ export class SettingsPage {
 
   toggleAdvanced() {
     if (this.settings.advanced == true) {
-      if (!this.advanced.enable()) {
+      this.advanced.enable().then(() => {
+        
+      }).catch(err => {
         this.settings.advanced = false;
-      }
+      });
     }else {
       this.advanced.disable();
     }
