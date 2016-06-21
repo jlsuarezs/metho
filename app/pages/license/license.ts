@@ -1,14 +1,15 @@
-import {Page, NavController} from 'ionic-angular';
+import {Page, NavController, NavParams} from 'ionic-angular';
 
-/*
-  Generated class for the LicensePage page.
+import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Page({
   templateUrl: 'build/pages/license/license.html',
+  pipes: [TranslatePipe],
 })
 export class LicensePage {
-  constructor(public nav: NavController) {}
+  public type: string = "";
+
+  constructor(public nav: NavController, public params: NavParams) {
+    this.type = this.params.get('type');
+  }
 }
