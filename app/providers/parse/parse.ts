@@ -9,7 +9,7 @@ var numeral = require('numeral');
 export class Parse {
   private sourceToParse: any;
 
-  constructor(public translate: TranslateService, public language: Language) {}
+  constructor(public translate: TranslateService) {}
 
   parse(source: any) {
     this.sourceToParse = source;
@@ -550,7 +550,7 @@ export class Parse {
 
         // Date de consultation
         if (this.sourceToParse.consultationDate) {
-            this.sourceToParse.parsedSource += "(" + new Date(this.sourceToParse.consultationDate).toLocaleDateString(this.language.current(), {timeZone:"UTC"}) + ").";
+            this.sourceToParse.parsedSource += "(" + new Date(this.sourceToParse.consultationDate).toLocaleDateString('fr', {timeZone:"UTC"}) + ").";
         } else {
             this.sourceToParse.parsedSource += "(?).";
         }
@@ -760,7 +760,7 @@ export class Parse {
 
         // Date de visionnement
         if (this.sourceToParse.consultationDate) {
-            this.sourceToParse.parsedSource += "(" + new Date(this.sourceToParse.consultationDate).toLocaleDateString(this.language.current(), {timeZone:"UTC"}) + ").";
+            this.sourceToParse.parsedSource += "(" + new Date(this.sourceToParse.consultationDate).toLocaleDateString('fr', {timeZone:"UTC"}) + ").";
         } else {
             this.sourceToParse.parsedSource += "(?).";
         }
@@ -863,7 +863,7 @@ export class Parse {
 
         // Date de l'entrevue
         if (this.sourceToParse.consultationDate) {
-            this.sourceToParse.parsedSource += "le " + new Date(this.sourceToParse.consultationDate).toLocaleDateString(this.language.current(), {timeZone:"UTC"}) + ".";
+            this.sourceToParse.parsedSource += "le " + new Date(this.sourceToParse.consultationDate).toLocaleDateString('fr', {timeZone:"UTC"}) + ".";
         } else {
             this.sourceToParse.parsedSource += "le ?.";
         }
