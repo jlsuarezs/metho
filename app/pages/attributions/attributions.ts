@@ -1,10 +1,11 @@
-import {Page, NavController} from 'ionic-angular';
+import {NavController} from 'ionic-angular';
+import {Component} from '@angular/core';
 
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 import {LicensePage} from '../license/license';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/attributions/attributions.html',
   pipes: [TranslatePipe]
 })

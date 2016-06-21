@@ -1,5 +1,6 @@
-import {Page, ViewController, NavParams, Modal, NavController, Alert, Loading} from 'ionic-angular';
+import {ViewController, NavParams, Modal, NavController, Alert, Loading} from 'ionic-angular';
 import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
+import {Component} from '@angular/core';
 import {FormBuilder, Validators, ControlGroup} from '@angular/common';
 import {BarcodeScanner, SafariViewController} from 'ionic-native';
 
@@ -10,7 +11,7 @@ import {BoardingScanPage} from '../boarding-scan/boarding-scan';
 import {Settings} from '../../providers/settings/settings';
 import {Language} from '../../providers/language/language';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/source-modal/source-modal.html',
   pipes: [TranslatePipe]
 })

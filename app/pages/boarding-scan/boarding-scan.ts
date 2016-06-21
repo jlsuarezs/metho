@@ -1,10 +1,10 @@
-import {Page, NavController, ViewController, Slides} from 'ionic-angular';
-import {ViewChild} from '@angular/core';
+import {NavController, ViewController, Slides} from 'ionic-angular';
+import {ViewChild, Component} from '@angular/core';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 import {Settings} from '../../providers/settings/settings';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/boarding-scan/boarding-scan.html',
   pipes: [TranslatePipe]
 })

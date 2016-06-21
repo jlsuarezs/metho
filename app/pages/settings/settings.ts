@@ -1,5 +1,5 @@
-import {Page, NavController, Alert, List} from 'ionic-angular';
-import {ViewChild} from '@angular/core';
+import {NavController, Alert, List} from 'ionic-angular';
+import {ViewChild, Component} from '@angular/core';
 import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
 
 import {AdvancedModePage} from '../advanced-mode/advanced-mode';
@@ -10,7 +10,7 @@ import {Settings} from '../../providers/settings/settings';
 import {Language} from '../../providers/language/language';
 import {AdvancedMode} from '../../providers/advanced-mode/advanced-mode';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/settings/settings.html',
   pipes: [TranslatePipe]
 })
@@ -40,7 +40,7 @@ export class SettingsPage {
   toggleAdvanced() {
     if (this.settings.advanced == true) {
       this.advanced.enable().then(() => {
-        
+
       }).catch(err => {
         this.settings.advanced = false;
       });

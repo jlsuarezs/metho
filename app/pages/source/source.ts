@@ -1,11 +1,13 @@
-import {Page, NavController, NavParams, Modal, Alert} from 'ionic-angular';
+import {NavController, NavParams, Modal, Alert} from 'ionic-angular';
+import {Component} from '@angular/core';
+
 import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
 
 import {AppStorage} from '../../providers/app-storage/app-storage';
 import {Parse} from '../../providers/parse/parse';
 import {SourceModalPage} from '../source-modal/source-modal';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/source/source.html',
   pipes: [TranslatePipe]
 })

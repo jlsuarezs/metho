@@ -1,10 +1,11 @@
-import {Page, NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
+import {Component} from '@angular/core';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 import {References} from '../../providers/references/references';
 import {ReferencesSubPage} from '../references-sub/references-sub';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/references-detail/references-detail.html',
   pipes: [TranslatePipe]
 })

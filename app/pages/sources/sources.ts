@@ -1,5 +1,5 @@
-import {Page, NavController, NavParams, ActionSheet, Modal, Alert, List} from 'ionic-angular';
-import {ViewChild} from '@angular/core';
+import {NavController, NavParams, ActionSheet, Modal, Alert, List} from 'ionic-angular';
+import {ViewChild, Component} from '@angular/core';
 import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
 import {SocialSharing} from 'ionic-native';
 
@@ -8,7 +8,7 @@ import {SourceModalPage} from '../source-modal/source-modal';
 import {PendingsPage} from '../pendings/pendings';
 import {AppStorage} from '../../providers/app-storage/app-storage';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/sources/sources.html',
   pipes: [TranslatePipe]
 })

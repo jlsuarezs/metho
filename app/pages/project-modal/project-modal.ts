@@ -1,10 +1,11 @@
-import {Page, NavController, ViewController, NavParams} from 'ionic-angular';
+import {NavController, ViewController, NavParams} from 'ionic-angular';
+import {Component} from '@angular/core';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 import {FormBuilder, Validators, ControlGroup} from '@angular/common';
 
 import {AppStorage} from '../../providers/app-storage/app-storage.ts';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/project-modal/project-modal.html',
   pipes: [TranslatePipe]
 })

@@ -1,4 +1,4 @@
-import {Page} from 'ionic-angular';
+import {Component} from '@angular/core';
 import {ProjectsPage} from '../projects/projects';
 import {ReferencesPage} from '../references/references';
 import {SettingsPage} from '../settings/settings';
@@ -6,7 +6,7 @@ import {SettingsPage} from '../settings/settings';
 import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
 
 
-@Page({
+@Component({
   templateUrl: 'build/pages/tabs/tabs.html',
   pipes: [TranslatePipe]
 })

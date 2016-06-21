@@ -1,10 +1,11 @@
-import {Page, NavController} from 'ionic-angular';
+import {NavController} from 'ionic-angular';
+import {Component} from '@angular/core';
 
 import {SocialSharing, Device} from 'ionic-native';
 
 import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/feedback/feedback.html',
   pipes: [TranslatePipe]
 })

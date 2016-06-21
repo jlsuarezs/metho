@@ -1,4 +1,6 @@
-import {Page, NavController, NavParams, Modal, Alert, Loading} from 'ionic-angular';
+import {NavController, NavParams, Modal, Alert, Loading} from 'ionic-angular';
+import {Component} from '@angular/core';
+
 import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
 
 import {AppStorage} from '../../providers/app-storage/app-storage';
@@ -9,7 +11,7 @@ import {SourceModalPage} from '../source-modal/source-modal';
 import * as moment from 'moment';
 import 'moment/locale/fr';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/pendings/pendings.html',
   pipes: [TranslatePipe]
 })

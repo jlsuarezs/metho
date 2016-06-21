@@ -1,10 +1,11 @@
-import {Page, NavController} from 'ionic-angular';
+import {NavController} from 'ionic-angular';
+import {Component} from '@angular/core';
 
 import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
 
 import {AdvancedMode} from '../../providers/advanced-mode/advanced-mode';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/advanced-mode/advanced-mode.html',
   pipes: [TranslatePipe]
 })
