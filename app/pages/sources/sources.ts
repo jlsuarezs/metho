@@ -1,7 +1,7 @@
 import {Page, NavController, NavParams, ActionSheet, Modal, Alert, List} from 'ionic-angular';
 import {ViewChild} from '@angular/core';
 import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
-import {EmailComposer} from 'ionic-native';
+import {SocialSharing} from 'ionic-native';
 
 import {SourcePage} from '../source/source';
 import {SourceModalPage} from '../source-modal/source-modal';
@@ -178,7 +178,7 @@ export class SourcesPage {
   }
 
   share() {
-    this.translate.get("PROJECT.DETAIL.SHARE_TEXT").subscribe(text => {
+    this.translate.get("PROJECT.DETAIL.SHARE_TEXT", { project_title: this.project.name }).subscribe(text => {
       let textToShare = text;
       let errNum = 0;
       let arr_sources = JSON.parse(JSON.stringify(this.sources)).sort(function(a, b) {
@@ -201,11 +201,14 @@ export class SourcesPage {
               {
                 text: translations["PROJECT.DETAIL.POPUP.SHARE"],
                 handler: () => {
-                  EmailComposer.open({
-                    subject: this.project.name,
-                    body: textToShare,
-                    isHtml: true
-                  });
+                  SocialSharing.shareViaEmail(
+                    textToShare,
+                    this.project.name,
+                    [],
+                    [],
+                    [],
+                    []
+                  );
                 }
               }
             ]
@@ -214,11 +217,14 @@ export class SourcesPage {
           this.nav.present(alert);
         });
       } else {
-        EmailComposer.open({
-          subject: this.project.name,
-          body: textToShare,
-          isHtml: true
-        });
+        SocialSharing.shareViaEmail(
+          textToShare,
+          this.project.name,
+          [],
+          [],
+          [],
+          []
+        );
       }
     });
   }
