@@ -214,6 +214,12 @@ export class SourceModalPage {
     this.viewCtrl.dismiss();
   }
 
+  submitIfEnter(event) {
+    if (event.keyCode == 13) {
+      this.confirm();
+    }
+  }
+
   confirm() {
     var dismiss = true;
     if (this.type == 'book') {

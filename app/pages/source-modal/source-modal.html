@@ -10,7 +10,7 @@
 
 <ion-content class="source-modal">
   <div *ngIf="type == 'book'">
-    <form [ngFormModel]="bookForm">
+    <form [ngFormModel]="bookForm" (keypress)="submitIfEnter($event)">
       <ion-list radio-group ngControl="hasAuthors" class="no-margin-bottom">
         <ion-list-header>
           {{'PROJECT.DETAIL.MODAL.BOOK.AUTHOR_NUMBER' | translate}}
@@ -156,7 +156,7 @@
     </form>
   </div>
   <div *ngIf="type == 'article'">
-    <form [ngFormModel]="articleForm">
+    <form [ngFormModel]="articleForm" (keypress)="submitIfEnter($event)">
       <ion-list>
         <ion-list-header>
           {{'PROJECT.DETAIL.MODAL.ARTICLE.AUTHOR_NAME' | translate}}
@@ -194,7 +194,7 @@
     </form>
   </div>
   <div *ngIf="type == 'internet'">
-    <form [ngFormModel]="internetForm">
+    <form [ngFormModel]="internetForm" (keypress)="submitIfEnter($event)">
       <ion-list>
         <ion-item>
           <ion-label>{{'PROJECT.DETAIL.MODAL.INTERNET.HAS_AUTHORS' | translate}}</ion-label>
@@ -224,7 +224,7 @@
     </form>
   </div>
   <div *ngIf="type == 'cd'">
-    <form [ngFormModel]="cdForm">
+    <form [ngFormModel]="cdForm" (keypress)="submitIfEnter($event)">
       <ion-list>
         <ion-item>
           <ion-label>{{'PROJECT.DETAIL.MODAL.CD.HAS_AUTHORS' | translate}}</ion-label>
@@ -258,7 +258,7 @@
     </form>
   </div>
   <div *ngIf="type == 'movie'">
-    <form [ngFormModel]="movieForm">
+    <form [ngFormModel]="movieForm" (keypress)="submitIfEnter($event)">
       <ion-list>
         <ion-item>
           <ion-label>{{'PROJECT.DETAIL.MODAL.MOVIE.HAS_MORE_THAN_ONE' | translate}}</ion-label>
@@ -314,7 +314,7 @@
     </form>
   </div>
   <div *ngIf="type == 'interview'">
-    <form [ngFormModel]="interviewForm">
+    <form [ngFormModel]="interviewForm" (keypress)="submitIfEnter($event)">
       <ion-list>
         <ion-list-header>
           {{'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWER_NAME' | translate}}
