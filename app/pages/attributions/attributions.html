@@ -86,13 +86,13 @@
         {{ 'SETTINGS.ATTRIBUTION_ICONBY' | translate}} Sonal Panchal
       </h3>
     </ion-item>
-    <button ion-item [navPush]="licensePage" navParams="{ type: 'mit' }">
+    <button ion-item (click)="showLicense('mit')">
       {{ 'SETTINGS.MIT_LICENSE' | translate }}
     </button>
-    <button ion-item [navPush]="licensePage" navParams="{ type: 'bsd' }">
+    <button ion-item (click)="showLicense('bsd')">
       {{ 'SETTINGS.BSD_LICENSE' | translate }}
     </button>
-    <button ion-item [navPush]="licensePage" navParams="{ type: 'apache' }">
+    <button ion-item (click)="showLicense('apache')">
       {{ 'SETTINGS.APACHE_LICENSE' | translate }}
     </button>
   </ion-list>

@@ -9,9 +9,9 @@ import {LicensePage} from '../license/license';
   pipes: [TranslatePipe]
 })
 export class AttributionsPage {
-  public licensePage: any;
+  constructor(public nav: NavController) {}
 
-  constructor(public nav: NavController) {
-    this.licensePage = LicensePage;
+  showLicense(type: string) {
+    this.nav.push(LicensePage, { type: type });
   }
 }
