@@ -106,7 +106,7 @@ export class SourcePage {
       type: this.source.type,
       data: this.source,
       editing: true,
-      project_id: this.source.project_id
+      projectId: this.source.project_id
     });
 
     modal.onDismiss(() => {

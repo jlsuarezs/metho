@@ -132,7 +132,7 @@ export class SourcesPage {
   openModal(type: string, openScan: boolean = false) {
     let modal = Modal.create(SourceModalPage, {
       type: type,
-      project_id: this.projectId,
+      projectId: this.projectId,
       scan: openScan
     });
 

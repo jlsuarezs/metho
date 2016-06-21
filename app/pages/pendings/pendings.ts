@@ -54,8 +54,8 @@ export class PendingsPage {
       let modal = Modal.create(SourceModalPage, {
         type: 'book',
         data: data,
-        project_id: this.projectId,
-        pending_id: pending._id,
+        projectId: this.projectId,
+        pendingId: pending._id,
         hideScan: true
       });
 
@@ -140,9 +140,8 @@ export class PendingsPage {
   openModalWithBrowser(pending) {
     let modal = Modal.create(SourceModalPage, {
       type: 'book',
-      project_id: this.projectId,
-      pending_id: pending._id,
-      browser: true,
+      projectId: this.projectId,
+      pendingId: pending._id,
       url: "http://google.ca/search?q=isbn+" + pending.isbn
     });
 

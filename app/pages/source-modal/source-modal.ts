@@ -71,17 +71,11 @@ export class SourceModalPage {
 
     this.type = this.params.get('type');
 
-    this.pId = this.params.get('project_id');
+    this.pId = this.params.get('projectId');
 
     this.firstname = this.params.get('firstname');
 
     this.lastname = this.params.get('lastname');
-
-    if (this.params.get('browser') == true) {
-      this.showBrowser = true;
-    }else {
-      this.showBrowser = false;
-    }
 
     if (this.params.get('hideScan') == true) {
       this.hideScan = true;
@@ -89,13 +83,19 @@ export class SourceModalPage {
       this.hideScan = false;
     }
 
-    if (typeof this.params.get('pending_id') !== "undefined") {
-      this.pendingId = this.params.get('pending_id');
+    if (typeof this.params.get('pendingId') !== "undefined") {
+      this.pendingId = this.params.get('pendingId');
     }
 
     if (typeof this.params.get('url') !== "undefined") {
       this.url = this.params.get('url');
+      this.showBrowser = true;
       // SafariViewController.mayLaunchUrl(this.url);
+      this.viewCtrl.didEnter.subscribe(() => {
+        this.browser();
+      });
+    }else {
+      this.showBrowser = false;
     }
 
     if (this.params.get('scan') == true) {
@@ -197,10 +197,6 @@ export class SourceModalPage {
       this.civilityOpts = {
         title: this.translate.instant("PROJECT.PARSE.CIVILITY_TITLE.TITLE")
       };
-    }
-
-    if (this.url) {
-      this.browser();
     }
   }
 
