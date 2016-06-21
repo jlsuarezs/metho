@@ -1,4 +1,4 @@
-import {Injectable, Inject} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {TranslateService} from 'ng2-translate/ng2-translate';
 
 import {Config} from 'ionic-angular';
@@ -37,7 +37,7 @@ export class Language {
         moment.locale(code);
         this.currentLang = code;
         if (code != this.settings.get('lastLang')) {
-          // this.storage.parseSources();
+          this.storage.parseSources();
         }
         this.settings.set('lastLang', code);
         // numeral.language(code);
@@ -72,7 +72,9 @@ export class Language {
   change(lang: string) {
     this.settings.set('overideLang', lang);
     this.init();
-    // this.storage.parseSources();
+    this.translate.onLangChange.subscribe(() => {
+      this.storage.parseSources();
+    });
   }
 
   current(): string {
