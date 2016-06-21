@@ -4,6 +4,7 @@ import {TranslateService} from 'ng2-translate/ng2-translate';
 import {Config} from 'ionic-angular';
 
 import {AppStorage} from '../app-storage/app-storage';
+import {ThreeDeeTouchProvider} from '../3d-touch/3d-touch';
 import {Settings} from '../settings/settings';
 
 import {Globalization} from 'ionic-native';
@@ -22,7 +23,7 @@ import 'moment/locale/es';
 export class Language {
   public currentLang: string;
 
-  constructor(public settings: Settings, public translate: TranslateService, public config: Config, public storage: AppStorage) {}
+  constructor(public settings: Settings, public translate: TranslateService, public config: Config, public storage: AppStorage, public threeDee: ThreeDeeTouchProvider) {}
 
   init() {
     this.translate.setDefaultLang('en');
@@ -74,6 +75,7 @@ export class Language {
     this.init();
     this.translate.onLangChange.subscribe(() => {
       this.storage.parseSources();
+      this.threeDee.update();
     });
   }
 
