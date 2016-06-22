@@ -389,10 +389,6 @@ export class AppStorage {
   }
 
   fromObject(obj: Object): Array<any> {
-    var ar: Array<any> = [];
-    for(var item in obj){
-        ar.push(obj[item]);
-    }
-    return ar;
+    return Object.keys(obj).map(x => obj[x]);
   }
 }
