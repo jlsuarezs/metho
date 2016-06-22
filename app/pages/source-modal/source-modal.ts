@@ -525,7 +525,7 @@ export class SourceModalPage {
   addPending(isbn: string) {
     var creating = {
       isbn: isbn,
-      date: moment().toObject(),
+      date: this.language.getMoment()().toObject(),
       project_id: this.pId
     };
 
