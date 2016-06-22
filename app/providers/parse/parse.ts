@@ -342,11 +342,12 @@ export class Parse {
             } else if (this.sourceToParse.pageNumber <= 0) {
                 this.addWarning("PAGE_NUMBER_TOO_LOW", "pageNumber");
             }
+            this.sourceToParse.pageNumber = Number(this.sourceToParse.pageNumber);
         } else {
             this.sourceToParse.parsedSource += "? p.";
+            this.sourceToParse.pageNumber = '';
             this.addError("PAGE_NUMBER", "pageNumber");
         }
-        this.sourceToParse.pageNumber = Number(this.sourceToParse.pageNumber);
     } else if (this.sourceToParse.type == "article") {
         // Auteur
         if (this.sourceToParse.author1lastname || this.sourceToParse.author1firstname) {
