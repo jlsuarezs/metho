@@ -1,0 +1,24 @@
+<ion-navbar *navbar>
+  <ion-buttons start>
+    <button clear default (click)="dismiss()">{{'PROJECT.TAB.MODAL_EDIT.CANCEL' | translate}}</button>
+  </ion-buttons>
+  <ion-title>{{(isNew ? 'PROJECT.TAB.MODAL.TITLE' : 'PROJECT.TAB.MODAL_EDIT.TITLE') | translate}}</ion-title>
+  <ion-buttons end>
+    <button clear default (click)="confirm()">{{(isNew ? 'PROJECT.TAB.MODAL.ADD' : 'PROJECT.TAB.MODAL_EDIT.CONFIRM') | translate}}</button>
+  </ion-buttons>
+</ion-navbar>
+
+<ion-content class="project-modal">
+  <form [ngFormModel]="projectForm" (submit)="confirm()">
+    <ion-list>
+      <ion-item>
+        <ion-label stacked>{{'PROJECT.TAB.MODAL.PROJECT_NAME_LABEL' | translate}}</ion-label>
+        <ion-input ngControl="name" type="text" placeholder="{{'PROJECT.TAB.MODAL.PROJECT_NAME_PLACEHOLDER' | translate }}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>{{'PROJECT.TAB.MODAL.MATTER_LABEL' | translate}}</ion-label>
+        <ion-input ngControl="matter" type="text" placeholder="{{'PROJECT.TAB.MODAL.MATTER_PLACEHOLDER' | translate}}"></ion-input>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>

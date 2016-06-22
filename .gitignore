@@ -13,3 +13,4 @@ www/**/tags
 www/.tags
 www/.tags1
 www/build/
+.tags

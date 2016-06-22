@@ -1,0 +1,13 @@
+<ion-navbar *navbar>
+  <ion-title>{{ name }}</ion-title>
+</ion-navbar>
+
+<ion-content class="references-detail">
+  <div padding *ngIf="text != ''" [innerHtml]="text"></div>
+
+  <ion-list>
+    <button ion-item *ngFor="let entry of entries" (click)="goToReferenceSubPage(entry.id)">
+      <h2>{{ entry.name }}</h2>
+    </button>
+  </ion-list>
+</ion-content>

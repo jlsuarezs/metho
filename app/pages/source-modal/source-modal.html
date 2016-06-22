@@ -1,0 +1,366 @@
+<ion-navbar *navbar>
+  <ion-buttons start>
+    <button clear default (click)="dismiss()">{{'PROJECT.SOURCE.MODAL.CANCEL' | translate}}</button>
+  </ion-buttons>
+  <ion-title>{{(isNew ? 'PROJECT.DETAIL.MODAL.TITLE' : 'PROJECT.SOURCE.MODAL.TITLE') | translate}}</ion-title>
+  <ion-buttons end>
+    <button clear default (click)="confirm()">{{(isNew ? 'PROJECT.DETAIL.MODAL.ADD' : 'PROJECT.SOURCE.MODAL.CONFIRM') | translate}}</button>
+  </ion-buttons>
+</ion-navbar>
+
+<ion-content class="source-modal">
+  <div *ngIf="type == 'book'">
+    <form [ngFormModel]="bookForm" (keypress)="submitIfEnter($event)">
+      <ion-list radio-group ngControl="hasAuthors" class="no-margin-bottom">
+        <ion-list-header>
+          {{'PROJECT.DETAIL.MODAL.BOOK.AUTHOR_NUMBER' | translate}}
+        </ion-list-header>
+        <ion-item>
+          <ion-label>{{'PROJECT.DETAIL.MODAL.BOOK.AUTHOR_1TO3' | translate}}</ion-label>
+          <ion-radio value="13"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{'PROJECT.DETAIL.MODAL.BOOK.AUTHOR_MORE_3' | translate}}</ion-label>
+          <ion-radio value="more3"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{'PROJECT.DETAIL.MODAL.BOOK.AUTHOR_COLLLECTIVE' | translate}}</ion-label>
+          <ion-radio value="collective"></ion-radio>
+        </ion-item>
+      </ion-list>
+      <!-- La source a de 1 à 3 auteurs -->
+      <ion-list *ngIf="bookForm.find('hasAuthors').value == '13'" class="no-margin" no-lines>
+        <ion-item class="flex-sub padding">
+          <ion-input type="text" ngControl="author1firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME' | translate }}"></ion-input>
+          <ion-input type="text" ngControl="author1lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.LASTNAME' | translate }}"></ion-input>
+        </ion-item>
+        <ion-item class="flex-sub padding" *ngIf="bookForm.find('author1firstname').value != '' || bookForm.find('author1lastname').value != ''">
+          <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME' | translate }}" ngControl="author2firstname"></ion-input>
+          <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.LASTNAME' | translate }}" ngControl="author2lastname"></ion-input>
+        </ion-item>
+        <ion-item class="flex-sub padding" *ngIf="bookForm.find('author2firstname').value != '' || bookForm.find('author2lastname').value != ''">
+          <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME' | translate }}" ngControl="author3firstname"></ion-input>
+          <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.LASTNAME' | translate }}" ngControl="author3lastname"></ion-input>
+        </ion-item>
+      </ion-list>
+      <!-- La source a plus de 3 auteurs -->
+      <ion-list *ngIf="bookForm.find('hasAuthors').value == 'more3'" class="no-margin-with-header" no-lines>
+        <ion-list-header>
+          {{'PROJECT.DETAIL.MODAL.BOOK.FIRST_2_AUTHOR_NAME' | translate}}
+        </ion-list-header>
+        <ion-item class="flex-sub padding">
+          <ion-input type="text" ngControl="author1firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME' | translate }}"></ion-input>
+          <ion-input type="text" ngControl="author1lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.LASTNAME' | translate }}"></ion-input>
+        </ion-item>
+        <ion-item class="flex-sub padding" *ngIf="bookForm.find('author1firstname').value != '' || bookForm.find('author1lastname').value != ''">
+          <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME' | translate }}" ngControl="author2firstname"></ion-input>
+          <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.LASTNAME' | translate }}" ngControl="author2lastname"></ion-input>
+        </ion-item>
+      </ion-list>
+      <!-- La source est un collectif -->
+      <ion-list *ngIf="bookForm.find('hasAuthors').value == 'collective'" class="no-margin-with-header" no-lines>
+        <ion-list-header>
+          {{'PROJECT.DETAIL.MODAL.BOOK.DIRECTOR_NAMES' | translate}}
+        </ion-list-header>
+        <ion-item class="flex-sub padding">
+          <ion-input type="text" ngControl="author1firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME' | translate }}"></ion-input>
+          <ion-input type="text" ngControl="author1lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.LASTNAME' | translate }}"></ion-input>
+        </ion-item>
+        <ion-item class="flex-sub padding" *ngIf="bookForm.find('author1firstname').value != '' || bookForm.find('author1lastname').value != ''">
+          <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME' | translate }}" ngControl="author2firstname"></ion-input>
+          <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.LASTNAME' | translate }}" ngControl="author2lastname"></ion-input>
+        </ion-item>
+      </ion-list>
+
+      <!-- Autres champs -->
+      <ion-list class="no-margin">
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.BOOK.TITLE_LABEL' | translate}}</ion-label>
+          <ion-input ngControl="title" placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.TITLE_PLACEHOLDER' | translate}}" (input)="search()"></ion-input>
+          <ion-spinner *ngIf="instantStatus.loading" name="ios-small" class="spinner-suggestions" item-right></ion-spinner>
+          <button type="button" *ngIf="instantStatus.ok" (click)="toggleInstantSearch()" [class.rotate-90]="instantStatus.shown" class="will-90" dark clear item-right>
+            <ion-icon name="arrow-forward"></ion-icon>
+          </button>
+          <button type="button" *ngIf="instantStatus.none" (click)="openExplaining()" dark clear item-right>
+            <ion-icon name="close-circle"></ion-icon>
+          </button>
+          <button type="button" *ngIf="instantStatus.err500" (click)="openExplaining()" clear dark item-right>
+            <ion-icon name="alert"></ion-icon>
+          </button>
+        </ion-item>
+        <ion-item *ngIf="instantStatus.shown">
+          <ion-scroll scrollY="true" [class.height-one]="instantList.length == 1" [class.height-one-and-half]="instantList.length == 2" [class.height-two-and-half]="instantList.length > 2">
+            <ion-list class="no-margin">
+              <button ion-item *ngFor="let suggestion of instantList" (click)="updateValues(suggestion); this.instantStatus.shown = false">
+                <ion-icon name="bookmarks-outline" item-left></ion-icon>
+                {{ suggestion.title }}
+                <span *ngIf="suggestion.author1lastname && suggestion.author1firstname">(<em>{{suggestion.author1firstname}} {{suggestion.author1lastname}}</em>)</span>
+              </button>
+            </ion-list>
+          </ion-scroll>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.BOOK.EDITOR_LABEL' | translate}}</ion-label>
+          <ion-input ngControl="editor" placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.EDITOR_PLACEHOLDER' | translate}}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.BOOK.PUBLICATION_DATE_LABEL' | translate}}</ion-label>
+          <ion-input ngControl="publicationDate" placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.PUBLICATION_DATE_PLACEHOLDER' | translate}}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.BOOK.PUBLICATION_LOCATION_LABEL' | translate}}</ion-label>
+          <ion-input ngControl="publicationLocation" placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.PUBLICATION_LOCATION_PLACEHOLDER' | translate}}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.BOOK.PAGE_NUMBER_LABEL' | translate}}</ion-label>
+          <ion-input ngControl="pageNumber" placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.PAGE_NUMBER_PLACEHOLDER' | translate}}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.BOOK.EDITION_NUMBER_LABEL' | translate}}</ion-label>
+          <ion-input ngControl="editionNumber" placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.EDITION_NUMBER_PLACEHOLDER' | translate}}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.BOOK.VOLUME_NUMBER_LABEL' | translate}}</ion-label>
+          <ion-input ngControl="volumeNumber" placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.VOLUME_NUMBER_PLACEHOLDER' | translate}}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.BOOK.COLLECTION_LABEL' | translate}}</ion-label>
+          <ion-input ngControl="collection" placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.COLLECTION_PLACEHOLDER' | translate}}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{'PROJECT.DETAIL.MODAL.BOOK.HAS_BEEN_TRANSLATED' | translate}}</ion-label>
+          <ion-checkbox ngControl="hasBeenTranslated"></ion-checkbox>
+        </ion-item>
+        <ion-list *ngIf="bookForm.find('hasBeenTranslated').value == true" class="no-margin">
+            <ion-item>
+              <ion-label stacked>{{'PROJECT.DETAIL.MODAL.BOOK.ORIGIN_LANGUAGE_LABEL' | translate}}</ion-label>
+              <ion-input ngControl="translatedFrom" placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.ORIGIN_LANGUAGE_PLACEHOLDER' | translate}}"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-list class="no-margin-with-header" no-lines>
+                <ion-list-header>
+                  {{'PROJECT.DETAIL.MODAL.BOOK.TRANSLATOR_NAME' | translate}}
+                </ion-list-header>
+                <ion-item class="flex-sub padding">
+                  <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME' | translate }}" ngControl="translator1firstname"></ion-input>
+                  <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.LASTNAME' | translate }}" ngControl="translator1lastname"></ion-input>
+                </ion-item>
+                <ion-item class="flex-sub padding" *ngIf="bookForm.find('translator1firstname').value != '' || bookForm.find('translator1lastname').value != ''">
+                  <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME' | translate }}" ngControl="translator2firstname"></ion-input>
+                  <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.LASTNAME' | translate }}" ngControl="translator2lastname"></ion-input>
+                </ion-item>
+              </ion-list>
+            </ion-item>
+        </ion-list>
+      </ion-list>
+    </form>
+  </div>
+  <div *ngIf="type == 'article'">
+    <form [ngFormModel]="articleForm" (keypress)="submitIfEnter($event)">
+      <ion-list>
+        <ion-list-header>
+          {{'PROJECT.DETAIL.MODAL.ARTICLE.AUTHOR_NAME' | translate}}
+        </ion-list-header>
+        <ion-item class="flex-sub padding">
+          <ion-input type="text" ngControl="author1firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME' | translate }}"></ion-input>
+          <ion-input type="text" ngControl="author1lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.LASTNAME' | translate }}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.ARTICLE.TITLE_LABEL' | translate}}</ion-label>
+          <ion-input ngControl="title" placeholder="{{'PROJECT.DETAIL.MODAL.ARTICLE.TITLE_PLACEHOLDER' | translate}}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.ARTICLE.PERIODIC_LABEL' | translate}}</ion-label>
+          <ion-input ngControl="editor" placeholder="{{'PROJECT.DETAIL.MODAL.ARTICLE.PERIODIC_PLACEHOLDER' | translate}}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.ARTICLE.EDITION_NUMBER_LABEL' | translate}}</ion-label>
+          <ion-input ngControl="editionNumber" placeholder="{{'PROJECT.DETAIL.MODAL.ARTICLE.EDITION_NUMBER_PLACEHOLDER' | translate}}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.ARTICLE.PUBLICATION_DATE_LABEL' | translate}}</ion-label>
+          <ion-input ngControl="publicationDate" placeholder="{{'PROJECT.DETAIL.MODAL.ARTICLE.PUBLICATION_DATE_PLACEHOLDER' | translate}}"></ion-input>
+        </ion-item>
+        <ion-list class="no-margin">
+          <ion-list-header>
+            {{'PROJECT.DETAIL.MODAL.ARTICLE.INDICATION_START_END_LABEL' | translate}}
+          </ion-list-header>
+          <ion-item class="flex-sub padding">
+            <ion-input type="text" ngControl="startPage" placeholder="{{ 'PROJECT.DETAIL.MODAL.ARTICLE.INDICATION_START_PLACEHOLDER' | translate }}"></ion-input>
+            <ion-input type="text" ngControl="endPage" placeholder="{{ 'PROJECT.DETAIL.MODAL.ARTICLE.INDICATION_END_PLACEHOLDER' | translate }}"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-list>
+    </form>
+  </div>
+  <div *ngIf="type == 'internet'">
+    <form [ngFormModel]="internetForm" (keypress)="submitIfEnter($event)">
+      <ion-list>
+        <ion-item>
+          <ion-label>{{'PROJECT.DETAIL.MODAL.INTERNET.HAS_AUTHORS' | translate}}</ion-label>
+          <ion-checkbox ngControl="hasAuthors"></ion-checkbox>
+        </ion-item>
+        <ion-item class="flex-sub padding" *ngIf="internetForm.find('hasAuthors').value == true">
+          <ion-input type="text" ngControl="author1firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERNET.FIRSTNAME' | translate }}"></ion-input>
+          <ion-input type="text" ngControl="author1lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERNET.LASTNAME' | translate }}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.INTERNET.WEBPAGE_NAME' | translate}}</ion-label>
+          <ion-input ngControl="title" placeholder="{{'PROJECT.DETAIL.MODAL.INTERNET.WEBPAGE_NAME_PLACHOLDER' | translate}}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.INTERNET.WEBSITE_NAME' | translate}}</ion-label>
+          <ion-input ngControl="editor" placeholder="{{'PROJECT.DETAIL.MODAL.INTERNET.WEBSITE_NAME_PLACEHOLDER' | translate}}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.INTERNET.URL' | translate}}</ion-label>
+          <ion-input ngControl="url" placeholder="{{'PROJECT.DETAIL.MODAL.INTERNET.URL_PLACEHOLDER' | translate}}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{'PROJECT.DETAIL.MODAL.INTERNET.CONSULTATION_DATE' | translate}}</ion-label>
+          <ion-datetime ngControl="consultationDate" [monthNames]="monthList" [monthShortNames]="monthShortList" [dayNames]="weekdayList" [dayShortNames]="weekdayShortList" cancelText="{{'PROJECT.DETAIL.MODAL.CANCEL' | translate}}" doneText="{{'PROJECT.DETAIL.POPUP.OK' | translate}}" pickerFormat="DD-MMM-YYYY" displayFormat="D MMMM YYYY"></ion-datetime>
+        </ion-item>
+      </ion-list>
+    </form>
+  </div>
+  <div *ngIf="type == 'cd'">
+    <form [ngFormModel]="cdForm" (keypress)="submitIfEnter($event)">
+      <ion-list>
+        <ion-item>
+          <ion-label>{{'PROJECT.DETAIL.MODAL.CD.HAS_AUTHORS' | translate}}</ion-label>
+          <ion-checkbox ngControl="hasAuthors"></ion-checkbox>
+        </ion-item>
+        <ion-item class="flex-sub padding" *ngIf="cdForm.find('hasAuthors').value == true">
+          <ion-input type="text" ngControl="author1firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.CD.FIRSTNAME' | translate }}"></ion-input>
+          <ion-input type="text" ngControl="author1lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.CD.LASTNAME' | translate }}"></ion-input>
+        </ion-item>
+        <ion-item class="flex-sub padding" *ngIf="cdForm.find('author1firstname').value || cdForm.find('author1lastname').value">
+          <ion-input type="text" ngControl="author2firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.CD.FIRSTNAME' | translate }}"></ion-input>
+          <ion-input type="text" ngControl="author2lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.CD.LASTNAME' | translate }}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.CD.DOC_TITLE' | translate}}</ion-label>
+          <ion-input ngControl="title" placeholder="{{'PROJECT.DETAIL.MODAL.CD.DOC_TITLE_PLACEHOLDER' | translate}}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.CD.EDITOR' | translate}}</ion-label>
+          <ion-input ngControl="editor" placeholder="{{'PROJECT.DETAIL.MODAL.CD.EDITOR_PLACEHOLDER' | translate}}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.CD.PUBLICATION_LOCATION' | translate}}</ion-label>
+          <ion-input ngControl="publicationLocation" placeholder="{{'PROJECT.DETAIL.MODAL.CD.PUBLICATION_LOCATION_PLACEHOLDER' | translate}}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.CD.PUBLICATION_DATE' | translate}}</ion-label>
+          <ion-input ngControl="publicationDate" placeholder="{{'PROJECT.DETAIL.MODAL.CD.PUBLICATION_DATE_PLACEHOLDER' | translate}}"></ion-input>
+        </ion-item>
+      </ion-list>
+    </form>
+  </div>
+  <div *ngIf="type == 'movie'">
+    <form [ngFormModel]="movieForm" (keypress)="submitIfEnter($event)">
+      <ion-list>
+        <ion-item>
+          <ion-label>{{'PROJECT.DETAIL.MODAL.MOVIE.HAS_MORE_THAN_ONE' | translate}}</ion-label>
+          <ion-checkbox ngControl="hasAuthors"></ion-checkbox>
+        </ion-item>
+        <ion-item-divider *ngIf="movieForm.find('hasAuthors').value == true">{{'PROJECT.DETAIL.MODAL.MOVIE.HAS_MORE_THAN_ONE_TRUE' | translate}}</ion-item-divider>
+        <ion-item class="flex-sub padding">
+          <ion-input type="text" ngControl="author1firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.MOVIE.FIRSTNAME' | translate }}"></ion-input>
+          <ion-input type="text" ngControl="author1lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.MOVIE.LASTNAME' | translate }}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.MOVIE.DOC_NAME' | translate}}</ion-label>
+          <ion-input ngControl="title" placeholder="{{'PROJECT.DETAIL.MODAL.MOVIE.DOC_NAME_PLACEHOLDER' | translate}}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.MOVIE.EPISODE_NAME' | translate}}</ion-label>
+          <ion-input ngControl="episodeTitle" placeholder="{{'PROJECT.DETAIL.MODAL.MOVIE.EPISODE_PLACEHOLDER' | translate}}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.MOVIE.PUBLICATION_LOCATION' | translate}}</ion-label>
+          <ion-input ngControl="productionLocation" placeholder="{{'PROJECT.DETAIL.MODAL.MOVIE.PUBLICATION_LOCATION_PLACEHOLDER' | translate}}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.MOVIE.PRODUCTOR' | translate}}</ion-label>
+          <ion-input ngControl="productor" placeholder="{{'PROJECT.DETAIL.MODAL.MOVIE.PRODUCTOR_PLACEHOLDER' | translate}}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.MOVIE.BROADCASTER' | translate}}</ion-label>
+          <ion-input ngControl="broadcaster" placeholder="{{'PROJECT.DETAIL.MODAL.MOVIE.BROADCASTER_PLACEHOLDER' | translate}}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.MOVIE.LENGTH' | translate}}</ion-label>
+          <ion-range ngControl="duration" pin="true" min="0" max="1000"></ion-range>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.MOVIE.PUBLICATION_DATE' | translate}}</ion-label>
+          <ion-input ngControl="publicationDate" placeholder="{{'PROJECT.DETAIL.MODAL.MOVIE.PUBLICATION_DATE_PLACEHOLDER' | translate}}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{'PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_TYPE' | translate}}</ion-label>
+          <ion-select ngControl="support">
+            <ion-option value="cd">{{'PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_CD' | translate}}</ion-option>
+            <ion-option value="dvd">{{'PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_DVD' | translate}}</ion-option>
+            <ion-option value="internet">{{'PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_INTERNET' | translate}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{'PROJECT.DETAIL.MODAL.MOVIE.CONSULTATION_DATE' | translate}}</ion-label>
+          <ion-datetime
+          ngControl="consultationDate" [monthNames]="monthList" [monthShortNames]="monthShortList" [dayNames]="weekdayList" [dayShortNames]="weekdayShortList" cancelText="{{'PROJECT.DETAIL.MODAL.CANCEL' | translate}}" doneText="{{'PROJECT.DETAIL.POPUP.OK' | translate}}" pickerFormat="DD-MMM-YYYY" displayFormat="D MMMM YYYY"></ion-datetime>
+        </ion-item>
+      </ion-list>
+    </form>
+  </div>
+  <div *ngIf="type == 'interview'">
+    <form [ngFormModel]="interviewForm" (keypress)="submitIfEnter($event)">
+      <ion-list>
+        <ion-list-header>
+          {{'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWER_NAME' | translate}}
+        </ion-list-header>
+        <ion-item class="flex-sub padding">
+          <ion-input type="text" ngControl="author1firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERVIEW.FIRSTNAME' | translate }}"></ion-input>
+          <ion-input type="text" ngControl="author1lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERVIEW.LASTNAME' | translate }}"></ion-input>
+        </ion-item>
+      </ion-list>
+      <ion-list class="no-margin-with-header">
+        <ion-list-header>
+          {{'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWED_NAME' | translate}}
+        </ion-list-header>
+        <ion-item class="flex-sub padding">
+          <ion-select ngControl="civility" [alertOptions]="civilityOpts" cancelText="{{'PROJECT.DETAIL.MODAL.CANCEL' | translate}}">
+            <ion-option value="mister">{{'PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISTER' | translate}}</ion-option>
+            <ion-option value="miss">{{'PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS' | translate}}</ion-option>
+            <ion-option value="miss_young">{{'PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS_YOUNG' | translate}}</ion-option>
+          </ion-select>
+          <ion-input type="text" ngControl="interviewed1firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERVIEW.FIRSTNAME' | translate }}"></ion-input>
+          <ion-input type="text" ngControl="interviewed1lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERVIEW.LASTNAME' | translate }}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWED_TITLE' | translate}}</ion-label>
+          <ion-input type="text" ngControl="interviewedTitle" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWED_TITLE_PLACEHOLDER' | translate }}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEW_LOCATION' | translate}}</ion-label>
+          <ion-input type="text" ngControl="publicationLocation" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEW_LOCATION_PLACEHOLDER' | translate }}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEW_DATE' | translate}}</ion-label>
+          <ion-datetime ngControl="consultationDate" [monthNames]="monthList" [monthShortNames]="monthShortList" [dayNames]="weekdayList" [dayShortNames]="weekdayShortList" cancelText="{{'PROJECT.DETAIL.MODAL.CANCEL' | translate}}" doneText="{{'PROJECT.DETAIL.POPUP.OK' | translate}}" pickerFormat="DD-MMM-YYYY" displayFormat="D MMMM YYYY"></ion-datetime>
+        </ion-item>
+      </ion-list>
+    </form>
+  </div>
+</ion-content>
+
+<ion-toolbar position="bottom" default *ngIf="(isAdvanced && type == 'book' && !hideScan) || showBrowser" class="no-padding source-modal">
+  <button (click)="scan()" full *ngIf="!hideScan && !showBrowser">
+    <ion-icon name="qr-scanner" class="left-aligned"></ion-icon>
+    {{'PROJECT.DETAIL.MODAL.SCAN' | translate}}
+  </button>
+  <button (click)="browser()" full *ngIf="showBrowser">
+    <ion-icon name="browsers" class="left-aligned"></ion-icon>
+    {{'PROJECT.DETAIL.MODAL.BROWSER' | translate}}
+  </button>
+</ion-toolbar>

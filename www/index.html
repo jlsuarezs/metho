@@ -1,71 +1,29 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>Ionic</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
 
-    <link href="lib/ionic/css/ionic.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+  <link ios-href="build/css/app.ios.css" rel="stylesheet">
+  <link md-href="build/css/app.md.css" rel="stylesheet">
+  <link wp-href="build/css/app.wp.css" rel="stylesheet">  
+</head>
+<body>
 
-    <!-- ionic/angularjs js -->
-    <script src="lib/ionic/js/ionic.bundle.min.js"></script>
+  <!-- this Ionic's root component and where the app will load -->
+  <ion-app></ion-app>
 
-    <!-- angularjs plugins -->
-    <script src="lib/angular-local-storage/dist/angular-local-storage.min.js"></script>
-
-    <script src="lib/ng-slide-down/dist/ng-slide-down.min.js"></script>
-
-    <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
-
-    <script src="lib/angular-translate/angular-translate.min.js"></script>
-    <script src="lib/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
-
-    <script src="lib/pouchdb/dist/pouchdb.min.js"></script>
-
-    <script src="lib/numeral/min/numeral.min.js"></script>
-    <script src="lib/numeral/min/languages.min.js"></script>
-
-    <script src="lib/moment/min/moment-with-locales.min.js"></script>
-
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
-
-    <!-- app's js -->
-    <script src="js/app.js"></script>
-    <!-- controllers -->
-    <script src="js/projects/tab.projects.controller.js"></script>
-    <script src="js/projects/detail.projects.controller.js"></script>
-    <script src="js/projects/source.projects.controller.js"></script>
-    <script src="js/projects/pending.projects.controller.js"></script>
-
-    <script src="js/references/references.controllers.js"></script>
-
-    <script src="js/settings/advanced.settings.controller.js"></script>
-    <script src="js/settings/feedback.settings.controller.js"></script>
-    <script src="js/settings/tab.settings.controller.js"></script>
-    <script src="js/settings/attributions.settings.controller.js" charset="utf-8"></script>
-    <!-- services -->
-    <script src="js/projects/parse.projects.service.js"></script>
-    <script src="js/projects/fetch.projects.service.js"></script>
-    <script src="js/projects/autocomplete.projects.service.js"></script>
-    <script src="js/storage.service.js"></script>
-
-    <script src="js/references/references.services.js"></script>
-
-    <script src="js/settings/settings.service.js"></script>
-    <!-- directives -->
-    <script src="js/directives/autofocus.js"></script>
-    <!-- others -->
-    <script src="js/user_report.service.js"></script>
-    <script src="js/utils.js"></script>
-  </head>
-  <body ng-app="metho">
-    <ion-nav-bar class="bar-stable">
-        <ion-nav-back-button class="button-positive">
-        </ion-nav-back-button>
-    </ion-nav-bar>
-
-    <ion-nav-view></ion-nav-view>
-  </body>
+  <!-- cordova.js required for cordova apps -->
+  <script src="cordova.js"></script>
+  <!-- Polyfill needed for platforms without Promise and Collection support -->
+  <script src="build/js/es6-shim.min.js"></script>
+  <!-- Zone.js and Reflect-metadata  -->
+  <script src="build/js/Reflect.js"></script>
+  <script src="build/js/zone.js"></script>
+  <!-- the bundle which is built from the app's source code -->
+  <script src="build/js/app.bundle.js"></script>
+</body>
 </html>

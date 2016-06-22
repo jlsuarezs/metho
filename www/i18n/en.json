@@ -1,0 +1,610 @@
+{
+    "TAB_PROJECT": "Projects",
+    "TAB_REFERENCES": "Reference",
+    "TAB_SETTINGS": "Settings",
+    "BACK_BUTTON": "Back",
+    "YES": "Yes",
+    "NO": "No",
+    "PROJECT":{
+        "TAB":{
+            "TAB_TITLE": "Projects",
+            "EMPTY_TAB": "No projects? It'll come...",
+            "EDIT_ITEM": "Edit",
+            "DELETE_ITEM": "Delete",
+            "UNKNOWN_MATTER": "Unknown subject",
+            "MODAL":{
+                "CANCEL": "Cancel",
+                "TITLE": "New project",
+                "ADD": "Create",
+                "PROJECT_NAME_LABEL": "Project name",
+                "PROJECT_NAME_PLACEHOLDER": "Essay on communication methods",
+                "MATTER_LABEL": "Subject",
+                "MATTER_PLACEHOLDER": "Geography"
+            },
+            "MODAL_EDIT":{
+                "CANCEL": "Cancel",
+                "TITLE": "Edit project",
+                "CONFIRM": "Edit",
+                "PROJECT_NAME_LABEL": "Project name",
+                "PROJECT_NAME_PLACEHOLDER": "Essay on communication methods",
+                "MATTER_LABEL": "Subject",
+                "MATTER_PLACEHOLDER": "Geography"
+            },
+            "POPUP": {
+                "ERROR_TEXT": "Error",
+                "NO_PROJECT_NAME": "Enter a project name",
+                "DELETE_PROJECT_TITLE": "Do you want to delete this project ?",
+                "DELETE_PROJECT": "Deleting this project will cause the loss of every source in it. This action cannot be cancelled.",
+                "CANCEL": "Cancel",
+                "DELETE": "Delete",
+                "MUST_HAVE_TYPE": "The project must have a name"
+            }
+        },
+        "DETAIL":{
+            "EMPTY_TAB": "What's a project without sources ?",
+            "DELETE_ITEM": "Delete",
+            "PENDING_ELEMENTS": "Pending items({{number}})",
+            "CHOOSE_TYPE": "Choose source type",
+            "SHARE_TEXT": "Here are the sources for project « {{project_title}} » : <br><br><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center'>BIBLIOGRAPHIE</td></tr></table><br>",
+            "MODAL":{
+                "CANCEL": "Cancel",
+                "TITLE": "New source",
+                "ADD": "Create",
+                "SCAN": "Scan barcode",
+                "BROWSER": "Web browser",
+                "BOOK": {
+                    "FIRSTNAME": "Firstname",
+                    "LASTNAME": "Lastname",
+                    "AUTHOR_NUMBER": "Number of authors",
+                    "AUTHOR_1TO3": "Source has 1 to 3 authors",
+                    "AUTHOR_MORE_3": "Source has more than 3 authors",
+                    "AUTHOR_COLLLECTIVE": "Source is a collective",
+                    "FIRST_2_AUTHOR_NAME": "First two authors' name",
+                    "DIRECTOR_NAMES": "Director(s) name(s)",
+                    "TITLE_LABEL": "Book title",
+                    "TITLE_PLACEHOLDER": "Cherub's revenge",
+                    "EDITOR_LABEL": "Publisher",
+                    "EDITOR_PLACEHOLDER": "McGraw-Hill",
+                    "PUBLICATION_DATE_LABEL": "Publication date",
+                    "PUBLICATION_DATE_PLACEHOLDER": "2010",
+                    "PUBLICATION_LOCATION_LABEL": "Publication location",
+                    "PUBLICATION_LOCATION_PLACEHOLDER": "Montreal",
+                    "PAGE_NUMBER_LABEL": "Number of pages",
+                    "PAGE_NUMBER_PLACEHOLDER": "341",
+                    "EDITION_NUMBER_LABEL": "Edition number",
+                    "EDITION_NUMBER_PLACEHOLDER": "3",
+                    "VOLUME_NUMBER_LABEL": "Volume number",
+                    "VOLUME_NUMBER_PLACEHOLDER": "2",
+                    "COLLECTION_LABEL": "Collection",
+                    "COLLECTION_PLACEHOLDER": "Presses HEC",
+                    "HAS_BEEN_TRANSLATED": "Book is translated",
+                    "ORIGIN_LANGUAGE_LABEL": "Origin language",
+                    "ORIGIN_LANGUAGE_PLACEHOLDER": "French",
+                    "TRANSLATOR_NAME": "Translator(s) name(s)"
+                },
+                "ARTICLE": {
+                    "FIRSTNAME": "Firstname",
+                    "LASTNAME": "Lastname",
+                    "AUTHOR_NAME": "Author",
+                    "TITLE_LABEL": "Title of the article",
+                    "TITLE_PLACEHOLDER": "Haiti tunes in to tourism potential",
+                    "PERIODIC_LABEL": "Periodical's name",
+                    "PERIODIC_PLACEHOLDER": "The Toronto Star",
+                    "EDITION_NUMBER_LABEL": "Edition, volume or periodical number",
+                    "EDITION_NUMBER_PLACEHOLDER": "vol. 36, No. 5",
+                    "PUBLICATION_DATE_LABEL": "Edition date",
+                    "PUBLICATION_DATE_PLACEHOLDER": "2009",
+                    "INDICATION_START_END_LABEL": "Article's page range",
+                    "INDICATION_START_PLACEHOLDER": "Start",
+                    "INDICATION_END_PLACEHOLDER": "End"
+                },
+                "INTERNET": {
+                    "FIRSTNAME":"Firstname",
+                    "LASTNAME": "Lastname",
+                    "HAS_AUTHORS": "Source has an author",
+                    "WEBPAGE_NAME": "Webpage's title",
+                    "WEBPAGE_NAME_PLACHOLDER": "Isaac Newton",
+                    "WEBSITE_NAME": "Website's title",
+                    "WEBSITE_NAME_PLACEHOLDER": "Wikipedia, the free encyclopedia",
+                    "URL": "Web address",
+                    "URL_PLACEHOLDER": "http://www.en.wikipedia.org",
+                    "CONSULTATION_DATE": "Date of access",
+                    "CONSULTATION_DATE_PLACEHOLDER": "March 21st 2009"
+                },
+                "CD": {
+                    "FIRSTNAME": "Firstname",
+                    "LASTNAME": "Lastname",
+                    "HAS_AUTHORS": "Source has an author",
+                    "DOC_TITLE": "Document's title",
+                    "DOC_TITLE_PLACEHOLDER": "Mozart Requiem",
+                    "EDITOR": "Publisher",
+                    "EDITOR_PLACEHOLDER": "McGraw-Hill",
+                    "PUBLICATION_LOCATION": "Publication location",
+                    "PUBLICATION_LOCATION_PLACEHOLDER": "Montreal",
+                    "PUBLICATION_DATE": "Publication date",
+                    "PUBLICATION_DATE_PLACEHOLDER": "2001"
+                },
+                "MOVIE": {
+                    "FIRSTNAME": "Firstname",
+                    "LASTNAME": "Lastname",
+                    "HAS_MORE_THAN_ONE": "Source has more than one author/director",
+                    "HAS_MORE_THAN_ONE_TRUE": "Enter main author/director's name, \"et al.\" mention will be added after meaning there's more than one author/director.",
+                    "PRINCIPAL_AUTHOR": "Main author",
+                    "DOC_NAME": "Document/TV show's name",
+                    "DOC_NAME_PLACEHOLDER": "Revenge",
+                    "EPISODE_NAME": "Episode title",
+                    "EPISODE_PLACEHOLDER": "The revenge",
+                    "PUBLICATION_LOCATION": "Publication location",
+                    "PUBLICATION_LOCATION_PLACEHOLDER": "Montreal",
+                    "PRODUCTOR": "Producer",
+                    "PRODUCTOR_PLACEHOLDER": "J. J. Abrams",
+                    "BROADCASTER": "Broadcaster",
+                    "BROADCASTER_PLACEHOLDER": "CBC",
+                    "LENGTH": "Length (minutes)",
+                    "LENGTH_PLACEHOLDER": "55",
+                    "PUBLICATION_DATE": "Publication date",
+                    "PUBLICATION_DATE_PLACEHOLDER": "2002",
+                    "SUPPORT_TYPE": "Medium",
+                    "SUPPORT_CD": "CD",
+                    "SUPPORT_DVD": "DVD",
+                    "SUPPORT_INTERNET": "Internet video",
+                    "CONSULTATION_DATE": "Date of access",
+                    "CONSULTATION_DATE_PLACEHOLDER": "March 29th 1991"
+                },
+                "INTERVIEW": {
+                    "FIRSTNAME": "Firstname",
+                    "LASTNAME": "Lastname",
+                    "INTERVIEWER_NAME": "Interviewer's name",
+                    "INTERVIEWED_NAME": "Interviewed person's name",
+                    "CIVILITY_MISTER": "Mr.",
+                    "CIVILITY_MISS": "Ms.",
+                    "CIVILITY_MISS_YOUNG": "Mrs.",
+                    "INTERVIEWED_TITLE": "Interviewed person's title",
+                    "INTERVIEWED_TITLE_PLACEHOLDER": "retired soldier from Second World War",
+                    "INTERVIEW_LOCATION": "Interview location",
+                    "INTERVIEW_LOCATION_PLACEHOLDER": "Carignan",
+                    "INTERVIEW_DATE": "Interview date",
+                    "INTERVIEW_DATE_PLACEHOLDER": "March 9th 2016"
+                }
+            },
+            "BOARDING": {
+                "SKIP": "Skip",
+                "NEXT": "Next",
+                "PREVIOUS": "Previous",
+                "TITLE": "Scan",
+                "CLOSE": "Close",
+                "OF_BOOK_RECOGNIZED": "of books recognized by the app",
+                "TEXT_RECOGNIZED": "According to a study on books of McMasterville's library, 75 % of the books you will scan will be recognized by the app. You will be invited to enter the informations manually for the book not recognized.",
+                "SCAN_TEXT": "Scan the barcode below the ISBN label. Make sure to be in a correctly lit environnement.",
+                "SCAN_FIRST": "Scan my first barcode"
+            },
+            "POPUP": {
+                "ORDER_TITLE": "Sorting",
+                "ORDER_SUB": "Sort by",
+                "ALPHA": "Alphabetical",
+                "TYPE": "Type",
+                "ERRORS_SOURCES": "The sources you're trying to share contain <strong>{{errNum}}</strong> error(s). Do you want to share them ?",
+                "ERROR_TEXT": "Error",
+                "SHARE_TEXT": "Sharing",
+                "CANCEL": "Cancel",
+                "SHARE": "Share",
+                "MUST_HAVE_TYPE": "Source must have a type",
+                "NEW_SOURCE": "New source",
+                "DELETE_TITLE": "Deletion",
+                "DELETE_TEXT": "Deleting this source will destroy all data related to it, the deletion won't affect other sources. This action cannot be cancelled.",
+                "DELETE": "Delete",
+                "BOOK_UNAVAILABLE_TITLE": "Book unavailable",
+                "BOOK_UNAVAILABLE_TEXT": "Barcode has been scanned, but this book isn't in our database.",
+                "TIMEOUT_TITLE": "Timeout",
+                "TIMEOUT_TEXT": "Timeout reached. You're probably on a slow network. Do you want to add this barcode to the pending elements to try again later ?",
+                "ADD": "Add",
+                "RETRY": "Retry",
+                "NO_CONNECTION": "No connection",
+                "ADD_TO_PENDINGS": "Do you want to add this barcode to the pending elements ?",
+                "NOT_RIGHT_BARCODE_TYPE": "Barcode has been scanned, but this barcode type is not a book barcode. The right barcode normally has ISBN label above it. If two barcodes are side by side, the wrong one might have been scanned. You may retry.",
+                "UNABLE_TO_SCAN": "Unable to scan",
+                "UNABLE_TO_SCAN_TEXT": "You may try going into Settings > Privacy and turning on camera access for this app.",
+                "SAVE_INTERVIEWER_NAME": "Do you want to save interviewer's name for future usage ?",
+                "NO_SUGGESTIONS": "No suggestion",
+                "NO_SUGGESTIONS_DESC": "There are no suggestion available",
+                "AUTO_FILL_TITLE": "Autofill",
+                "AUTO_FILL_DESC": "Source is not empty. Previous data could be overwritten. Do you want to continue ?",
+                "OVERWRITE": "Overwrite",
+                "ERROR": "Error",
+                "ERROR_500": "We're having problems with our servers, please try later.",
+                "OK": "OK"
+            }
+        },
+        "SOURCE":{
+            "EDIT": "Edit",
+            "NO_ERROR": "Zero error",
+            "CONFIRM": "Confirm",
+            "CANCEL": "Cancel",
+            "MODAL": {
+                "CANCEL": "Cancel",
+                "TITLE": "Edit source",
+                "CONFIRM": "Edit"
+            }
+        },
+        "PENDING":{
+            "TITLE": "Pending elements",
+            "DELETE_ITEM": "Delete",
+            "SCAN_TO_ADD": "You can add a pending element by scaning a barcode when offline",
+            "EMPTY_TAB": "No pending element!",
+            "NEED_ADVANCED": "Advanced mode is required to use scan feature",
+            "MODAL": {
+                "CANCEL": "Cancel",
+                "TITLE": "New source",
+                "ADD": "Create"
+            },
+            "POPUP": {
+                "NEW_SOURCE": "New source",
+                "MUST_HAVE_TYPE": "Source must have a type",
+                "BOOK_UNAVAILABLE_TITLE": "Book unavailable",
+                "BOOK_UNAVAILABLE_TEXT": "Barcode has been scanned, but this book isn't in our database. Do you want to search the Internet ?",
+                "SEARCH": "Search",
+                "LATER": "Later",
+                "RETRY": "Retry",
+                "TIMEOUT_TITLE": "Timeout",
+                "TIMEOUT_TEXT": "Timeout reached. You're probably on a slow network. Do you want to try again ?",
+                "NO_CONNECTION": "No connection",
+                "RETRY_?": "Do you want to try again ?",
+                "CANCEL": "Cancel"
+            }
+        },
+        "TYPES":{
+            "BOOK": "Book",
+            "CD": "CD",
+            "CD_PARSE": "CD",
+            "INTERNET": "Website",
+            "ARTICLE": "Article",
+            "MOVIE": "Media document",
+            "INTERVIEW": "Interview"
+        },
+        "PARSE":{
+            "FIRST_AUTHOR_FIRSTNAME": {
+                "TITLE": "Author",
+                "TEXT": "Enter the firstname of the first author",
+                "DESC": "First author's firstname missing"
+            },
+            "FIRST_AUTHOR_LASTNAME": {
+                "TITLE": "Author",
+                "TEXT": "Enter the lastname of the first author",
+                "DESC": "First author's lastname missing"
+            },
+            "SECOND_AUTHOR_FIRSTNAME": {
+                "TITLE": "Author",
+                "TEXT": "Enter the firstname of the second author",
+                "DESC": "Second author's firstname missing"
+            },
+            "SECOND_AUTHOR_LASTNAME": {
+                "TITLE": "Author",
+                "TEXT": "Enter the lastname of the second author",
+                "DESC": "Second author's lastname missing"
+            },
+            "THIRD_AUTHOR_FIRSTNAME": {
+                "TITLE": "Author",
+                "TEXT": "Enter the firstname of the third author",
+                "DESC": "Third author's firstname missing"
+            },
+            "THIRD_AUTHOR_LASTNAME": {
+                "TITLE": "Author",
+                "TEXT": "Enter the lastname of the third author",
+                "DESC": "Third author's lastname missing"
+            },
+            "AUTHOR_NUMBER": {
+                "TITLE": "Number of authors",
+                "TEXT": "Select the number of authors",
+                "DESC": "Number of authors missing",
+                "AUTHOR_1TO3": "1 to 3 authors",
+                "AUTHOR_MORE_3": "More than 3 authors",
+                "AUTHOR_COLLECTIVE": "Collective"
+            },
+            "BOOK_TITLE": {
+                "TITLE": "Title",
+                "TEXT": "Enter the title",
+                "DESC": "Title missing"
+            },
+            "TRANSLATION_LANGUAGE": {
+                "TITLE": "Translation language",
+                "TEXT": "Enter translation's origin language",
+                "DESC": "Translation's origin language missing"
+            },
+            "FIRST_TRANSLATOR_FIRSTNAME": {
+                "TITLE": "Translator",
+                "TEXT": "Enter the firstname of the first translator",
+                "DESC": "First translator's firstname missing"
+            },
+            "FIRST_TRANSLATOR_LASTNAME": {
+                "TITLE": "Translator",
+                "TEXT": "Enter the lastname of the first translator",
+                "DESC": "First translator's lastname missing"
+            },
+            "SECOND_TRANSLATOR_FIRSTNAME": {
+                "TITLE": "Translator",
+                "TEXT": "Enter the firstname of the second translator",
+                "DESC": "Second translator's firstname missing"
+            },
+            "SECOND_TRANSLATOR_LASTNAME": {
+                "TITLE": "Translator",
+                "TEXT": "Enter the lastname of the second translator",
+                "DESC": "Second translator's lastname missing"
+            },
+            "EDITION_LOCATION": {
+                "TITLE": "Published location",
+                "TEXT": "Enter publication location",
+                "DESC": "Publication location missing"
+            },
+            "EDITOR": {
+                "TITLE": "Publisher",
+                "TEXT": "Enter publisher's name",
+                "DESC": "Publisher name missing"
+            },
+            "EDITION_DATE_TOO_HIGH": {
+                "TITLE": "Publication date",
+                "TEXT": "Enter publication date",
+                "DESC": "Publication date higher than current date"
+            },
+            "EDITION_DATE": {
+                "TITLE": "Publication date",
+                "TEXT": "Enter publication date",
+                "DESC": "Publication date missing"
+            },
+            "PAGE_NUMBER": {
+                "TITLE": "Number of pages",
+                "TEXT": "Enter the number of pages",
+                "DESC": "Number of pages missing"
+            },
+            "PAGE_NUMBER_TOO_HIGH": {
+                "TITLE": "Number of pages",
+                "TEXT": "Enter the number of pages",
+                "DESC": "Number of pages too high"
+            },
+            "PAGE_NUMBER_TOO_LOW": {
+                "TITLE": "Number of pages",
+                "TEXT": "Enter the number of pages",
+                "DESC": "Number of pages too low"
+            },
+            "AUTHOR_ARTICLE_FIRSTNAME": {
+                "TITLE": "Author",
+                "TEXT": "Enter author's firstname",
+                "DESC": "Author's firstname missing"
+            },
+            "AUTHOR_ARTICLE_LASTNAME": {
+                "TITLE": "Author",
+                "TEXT": "Enter author's lastname",
+                "DESC": "Author's lastname missing"
+            },
+            "ARTICLE_TITLE": {
+                "TITLE": "Article's title",
+                "TEXT": "Enter article's title",
+                "DESC": "Article's title missing"
+            },
+            "PERIODIC_NAME": {
+                "TITLE": "Periodical's name",
+                "TEXT": "Enter periodical's name",
+                "DESC": "Periodical's name missing"
+            },
+            "PERIODIC_NUMBER": {
+                "TITLE": "Volume number",
+                "TEXT": "Enter the volume number",
+                "DESC": "Volume or periodical number missing"
+            },
+            "START_PAGE": {
+                "TITLE": "Start page",
+                "TEXT": "Enter the start page",
+                "DESC": "Start page missing"
+            },
+            "END_PAGE": {
+                "TITLE": "End page",
+                "TEXT": "Enter the end page",
+                "DESC": "End page missing"
+            },
+            "HOMEPAGE_TITLE": {
+                "TITLE": "Website's title",
+                "TEXT": "Enter website's title",
+                "DESC": "Website's title missing"
+            },
+            "PAGE_TITLE": {
+                "TITLE": "Webpage's title",
+                "TEXT": "Enter webpage's title",
+                "DESC": "Webpage's title missing"
+            },
+            "INVALID_URL": {
+                "TITLE": "Web address",
+                "TEXT": "Enter the web address",
+                "DESC": "Invalid web address"
+            },
+            "URL": {
+                "TITLE": "Web address",
+                "TEXT": "Enter the web address",
+                "DESC": "Web address missing"
+            },
+            "CONSULTATION_DATE": {
+                "TITLE": "Access date",
+                "TEXT": "Enter access date",
+                "DESC": "Access date missing"
+            },
+            "DOCUMENT_TITLE": {
+                "TITLE": "Document title",
+                "TEXT": "Enter document title",
+                "DESC": "Document title missing"
+            },
+            "PUBLICATION_LOCATION": {
+                "TITLE": "Publication location",
+                "TEXT": "Enter the publication location",
+                "DESC": "Publication location missing"
+            },
+            "PUBLICATION_DATE": {
+                "TITLE": "Publication date",
+                "TEXT": "Enter the publication date",
+                "DESC": "Publication date missing"
+            },
+            "DIRECTOR_LASTNAME": {
+                "TITLE": "Main author/director",
+                "TEXT": "Enter main author/director's lastname",
+                "DESC": "Main author/director's lastname missing"
+            },
+            "DIRECTOR_FIRSTNAME": {
+                "TITLE": "Main author/director",
+                "TEXT": "Enter main author/director's firstname",
+                "DESC": "Main author/director's firstname missing"
+            },
+            "EMISSION_TITLE": {
+                "TITLE": "Document/TV show's name",
+                "TEXT": "Enter document/TV show's name",
+                "DESC": "Document/TV show's name missing"
+            },
+            "PRODUCTION_LOCATION": {
+                "TITLE": "Production location",
+                "TEXT": "Enter production location",
+                "DESC": "Production location missing"
+            },
+            "PRODUCTOR": {
+                "TITLE": "Producer",
+                "TEXT": "Enter producer's name",
+                "DESC": "Producer's name missing"
+            },
+            "BROADCASTER": {
+                "TITLE": "Broadcaster",
+                "TEXT": "Enter broadcaster's name",
+                "DESC": "Broadcaster's name missing"
+            },
+            "LENGTH": {
+                "TITLE": "Length",
+                "TEXT": "Enter the length (minutes)",
+                "DESC": "Length (minutes) missing"
+            },
+            "SUPPORT": {
+                "TITLE": "Medium",
+                "TEXT": "Select the medium",
+                "DESC": "Medium missing"
+            },
+            "VIEWING_DATE": {
+                "TITLE": "Access date",
+                "TEXT": "Enter access date",
+                "DESC": "Access date missing"
+            },
+            "INTERVIEWER_LASTNAME": {
+                "TITLE": "Interviewer",
+                "TEXT": "Enter interviewer's lastname",
+                "DESC": "Interviewer's lastname missing"
+            },
+            "INTERVIEWER_FIRSTNAME": {
+                "TITLE": "Interviewer",
+                "TEXT": "Enter interviewer's firstname",
+                "DESC": "Interviewer's firstname missing"
+            },
+            "CIVILITY_TITLE": {
+                "TITLE": "Civility title",
+                "TEXT": "Select interviewed person's civility title",
+                "DESC": "Civility title missing"
+            },
+            "INTERVIEWED_FIRSTNAME": {
+                "TITLE": "Interviewed person",
+                "TEXT": "Enter interviewed person's firstname",
+                "DESC": "Interviewed person's firstname missing"
+            },
+            "INTERVIEWED_LASTNAME": {
+                "TITLE": "Interviewed person",
+                "TEXT": "Enter interviewed person's lastname",
+                "DESC": "Interviewed person's lastname missing"
+            },
+            "INTERVIEWED_TITLE": {
+                "TITLE": "Interviewed person",
+                "TEXT": "Enter interviewed person's title",
+                "DESC": "Interviewed person's title missing"
+            },
+            "INTERVIEW_LOCATION": {
+                "TITLE": "Interview location",
+                "TEXT": "Enter interview location",
+                "DESC": "Interview location missing"
+            }
+        }
+    },
+    "REFERENCES":{
+        "TAB_TITLE": "Reference"
+    },
+    "SETTINGS":{
+        "TAB_TITLE": "Settings",
+        "ORDER_BY": "Sort bibliography by",
+        "ALPHABETICAL": "Alphabetical order",
+        "TYPE": "Type",
+        "ASK_FOR_ORDER": "Show sorting options on share",
+        "YOUR_NAME": "Your name",
+        "EDIT": "Edit",
+        "EDIT_NAME": "Edit name",
+        "DELETE": "Delete",
+        "FORGET": "Forget",
+        "CANCEL": "Cancel",
+        "ADVANCED_MODE_LABEL": "Advanced mode",
+        "LEARN_MORE": "Learn more...",
+        "BUG_COMMENT": "Bug/Comment",
+        "BUG_COMMENT_LONG": "Report a bug or send a comment",
+        "ATTRIBUTION_TAB": "Attributions",
+        "ATTRIBUTION_ICONBY": "Icon by",
+        "MIT_LICENSE": "MIT licence",
+        "BSD_LICENSE": "BSD licence",
+        "APACHE_LICENSE": "Apache licence",
+        "LANGUAGE":"Language",
+        "FRENCH": "French",
+        "ENGLISH": "English",
+        "SPANISH": "Spanish",
+        "DEFAULT": "Default",
+        "ATTRIBUTIONS": "Adapted from the <em>Guide de Méthodologie</em> of the École d'éducation internationale de McMasterville written by Raymond Bédard.",
+        "ADVANCED_MODE": {
+            "TITLE": "Advanced mode",
+            "WAITING_FOR": "What are you waiting for ? Try advanced mode ! Here's what's included : ",
+            "SCANNING": "Scan",
+            "SCAN_DESC": "Scan a book's ISBN barcode to see its source created automatically (some books are not supported)",
+            "MODELS": "Templates",
+            "MODELS_DESC": "Use templates in DOCX format in your assignments to ease your life",
+            "SHARING": "Advanced sharing",
+            "SHARING_DESC": "Share a link from a supported website (e.g. Wikipedia) to create its source automatically",
+            "INSTANT_SEARCH": "Instant search",
+            "INSTANT_SEARCH_DESC": "Enter a book's name in \"Title\" text field to launch a search on this title and autofill the informations (some books are not supported)",
+            "POPUP": {
+                "ALREADY_TEXT": "Advanced mode is already activated"
+            }
+        },
+        "FEEDBACK": {
+            "TITLE": "Bug/Comment",
+            "TAB_PROJECT": "Projects Tab",
+            "TAB_PROJECT_DESC": "Bug in Projects Tab",
+            "TAB_REFERENCE": "Reference Tab",
+            "TAB_REFERENCE_DESC": "Bug in Reference Tab",
+            "SETTINGS": "Settings",
+            "SETTINGS_DESC": "Bug related to settings",
+            "COMMENT": "Comment",
+            "COMMENT_DESC": "Send a comment",
+            "FEATURE": "Feature",
+            "FEATURE_DESC": "Request a new feature",
+            "EMAIL": {
+                "PROJECT": "<p>Thanks for reporting a bug. I'll try to answer you quickly. Please provide answers to the questions below to help me reproduce this bug. Long answers are not required, a few words are often enough.</p><br><strong>Where is this bug located (inside Projects Tab)?</strong><br><br><br><strong>Outline the bug.</strong><br><br><br><strong>Describe how to reproduce this bug (steps).</strong><br><br><br><strong>Outline bug's consequences (app crashes, unable to add a source, etc.)</strong><br><br><br><p>Thanks for helping improve this app. I'll contact you if I need further informations.</p><h5>Do not edit this sections</h5><p>",
+                "PROJECT_TITLE": "Project Tab bug",
+                "REFERENCE": "<p>Thanks for reporting a bug. I'll try to answer you quickly. Please provide answers to the questions below to help me reproduce this bug. Long answers are not required, a few words are often enough.</p><br><strong>Which section are concerned by the bug (all?)?</strong><br><br><br><strong>Outline the bug.</strong><br><br><br><strong>Describe how to reproduce this bug (steps).</strong><br><br><br><strong>Outline bug's consequences (app crashes, spelling error, etc.)</strong><br><br><br><p>Thanks for helping improve this app. I'll contact you if I need further informations.</p><h5>Do not edit this sections</h5><p>",
+                "REFERENCE_TITLE": "Reference Tab bug",
+                "SETTINGS": "<p>Thanks for reporting a bug. I'll try to answer you quickly. Please provide answers to the questions below to help me reproduce this bug. Long answers are not required, a few words are often enough.</p><br><strong>Which settings are concerned by the bug (all?)?</strong><br><br><br><strong>Outline the bug.</strong><br><br><br><strong>Describe how to reproduce this bug (steps).</strong><br><br><br><strong>Outline bug's consequences (app crashes, settings has no effect on behavior, etc.)</strong><br><br><br><p>Thanks for helping improve this app. I'll contact you if I need further informations.</p><h5>Do not edit this sections</h5><p>",
+                "SETTINGS_TITLE": "Settings related bug",
+                "COMMENT": "<p>Thanks for sending a comment. I'll try to reply quickly.</p><strong>Comment</strong><br><br><br>",
+                "COMMENT_TITLE": "Comment",
+                "FEATURE": "<p>Thanks for this feature request. I'll try to reply quickly. Please provide answers to the questions below to help me understand your idea. Long answers are not required, a few words are often enough.</p><br><strong>Which part of the app is concerned?</strong><br><br><br><strong>Outline the feature.</strong><br><br><p>Thanks for helping improve this app. I'll contact you if I need further informations.</p>",
+                "FEATURE_TITLE": "Feature request"
+            }
+        }
+    },
+    "3D_TOUCH": {
+        "NEW_SOURCE": "New source",
+        "NEW_SOURCE_DESC": "Create a new source",
+        "SCAN": "Scanning",
+        "SCAN_DESC": "Scan a barcode",
+        "NO_PROJECT_TITLE": "No project",
+        "NO_PROJECT_MESSAGE": "You must create a project before creating sources. Do you want to create one now ?"
+    },
+    "REPORT": {
+        "ERROR": "Error",
+        "UNKNOWN": "An unknown error happened",
+        "REPORT_?": "Do you want to report this error to the developer ?",
+        "DO_NOT_EDIT": "Do not edit this section"
+    }
+}

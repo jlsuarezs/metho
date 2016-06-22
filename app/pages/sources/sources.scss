@@ -1,0 +1,57 @@
+.toolbar-title {
+    .page-title {
+        color: black;
+        overflow: hidden;
+        text-overflow: ellipsis !important;
+    }
+
+    .page-sub-title {
+        color: rgba(0, 0, 0, 0.6) !important;
+        font-size: 0.75em !important;
+        font-weight: normal;
+        overflow: hidden;
+        text-overflow: ellipsis !important;
+    }
+}
+
+.sources {
+    .flex {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        flex-direction: column;
+    }
+
+    div[item-right] {
+        display: table;
+
+        span, ion-icon {
+            display: table-cell;
+            text-align: center;
+            vertical-align: middle;
+            padding-right: 3px;
+        }
+
+        span {
+            font-size: 0.85em;
+        }
+    }
+
+    .red {
+        color: #db183d;
+    }
+
+    .yellow {
+        color: #e8ac18;
+    }
+
+    ion-title {
+        padding: 0 45px 1px;
+    }
+
+    h2 {
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+}

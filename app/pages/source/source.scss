@@ -1,0 +1,25 @@
+.source {
+    .padding {
+        padding: 10px;
+    }
+
+    ion-list h2 {
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .red {
+        color: #db183d;
+    }
+
+    .yellow {
+        color: #e8ac18;
+    }
+
+    .no-errors {
+        text-align: center;
+        color: #979797;
+        padding-top: 40px;
+        font-size: 36px;
+    }
+}

@@ -1,0 +1,15 @@
+<ion-navbar *navbar>
+  <ion-title>{{'REFERENCES.TAB_TITLE' | translate}}</ion-title>
+</ion-navbar>
+
+<ion-content class="references">
+  <ion-list>
+    <button ion-item *ngFor="let reference of references" (click)="goToReferenceDetailPage(reference.id)">
+      <ion-thumbnail item-left>
+        <img [src]="reference.icon">
+      </ion-thumbnail>
+      <h2>{{ reference.name }}</h2>
+      <p>{{ reference.description }}</p>
+    </button>
+  </ion-list>
+</ion-content>

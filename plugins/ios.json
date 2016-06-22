@@ -7,9 +7,6 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.ionicframework.starter"
-        },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.ionicframework.starter"
         },
@@ -45,6 +42,12 @@
         },
         "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "com.ionicframework.metho"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.test.francis"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.test.francis"
         }
     },
     "dependent_plugins": {}

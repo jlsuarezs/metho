@@ -1,0 +1,38 @@
+<ion-navbar *navbar>
+  <ion-title>{{'PROJECT.PENDING.TITLE' | translate}}</ion-title>
+</ion-navbar>
+
+<ion-content class="pendings">
+  <div *ngIf="!pendings.length" class="flex">
+    <p class="center">
+      {{ 'PROJECT.PENDING.SCAN_TO_ADD' | translate }}
+    </p>
+    <h3 class="center">
+      {{ 'PROJECT.PENDING.EMPTY_TAB' | translate }}
+    </h3>
+    <p class="center">
+      {{ 'PROJECT.PENDING.NEED_ADVANCED' | translate }}
+    </p>
+  </div>
+  <ion-list *ngIf="pendings.length">
+    <ion-item-sliding *ngFor="let pending of pendings">
+      <button ion-item *ngIf="!pending.not_available" (click)="solvePending(pending)">
+        <h2>{{pending.isbn}}</h2>
+        <p>{{pending.datestring}}</p>
+        <ion-icon name="cloud-download-outline" item-right></ion-icon>
+      </button>
+
+      <button ion-item *ngIf="pending.not_available" (click)="openModalWithBrowser(pending)">
+        <h2>{{pending.isbn}}</h2>
+        <p>{{pending.datestring}}</p>
+        <ion-icon name="alert" item-right></ion-icon>
+      </button>
+
+      <ion-item-options>
+        <button danger (click)="deletePending(pending)">
+          {{'PROJECT.PENDING.DELETE_ITEM' | translate}}
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,37 @@
+<ion-navbar *navbar>
+  <ion-title>{{'TAB_PROJECT' | translate}}</ion-title>
+  <ion-buttons end>
+    <button (click)="createProject()">
+      <ion-icon name="add" primary></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-navbar>
+
+<ion-content class="projects">
+  <!-- When there is no elements -->
+  <div class="padding flex" *ngIf="!projects.length && !loading">
+    <button outline class="centered" (click)="createProject()">
+      <ion-icon name="add" primary></ion-icon>
+    </button><br>
+    <p class="center dimmed-50">{{'PROJECT.TAB.EMPTY_TAB' | translate}}</p>
+  </div>
+  <!-- When there is -->
+  <ion-list *ngIf="projects.length">
+    <ion-item-sliding *ngFor="let project of projects">
+      <button ion-item (click)="openProjectDetail(project)">
+        <h2>{{ project.name }}</h2>
+        <p>{{ project.matter ? project.matter : ('PROJECT.TAB.UNKNOWN_MATTER' | translate) }}</p>
+      </button>
+
+      <ion-item-options>
+        <button default (click)="editProject(project)">{{'PROJECT.TAB.EDIT_ITEM' | translate}}</button>
+        <button danger (click)="deleteProject(project)">{{'PROJECT.TAB.DELETE_ITEM' | translate}}</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <!-- Loading -->
+  <div class="flex spinner" *ngIf="loading">
+    <ion-spinner></ion-spinner>
+  </div>
+</ion-content>
