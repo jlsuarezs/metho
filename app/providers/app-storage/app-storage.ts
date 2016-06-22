@@ -214,6 +214,7 @@ export class AppStorage {
     return new Promise(resolve => {
       this.sourceDB.put(set, id, this.sources[id]._rev).then(response => {
         set._rev = response.rev;
+        set._id = response.id;
         this.sources[id] = set;
         resolve(response);
       }).catch(err => {
