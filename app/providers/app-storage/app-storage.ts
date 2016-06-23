@@ -315,7 +315,7 @@ export class AppStorage {
     }
   }
 
-  getPendingsFromProjectId(id: string) {
+  getPendingsFromProjectId(id: string): Promise<Array<any>> {
     if(this.loadingPendings){
       return new Promise(resolve => {
         this.pendingsEvents.subscribe(event => {
