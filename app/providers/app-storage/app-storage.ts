@@ -93,7 +93,7 @@ export class AppStorage {
     });
   }
 
-  getProjects() {
+  getProjects(): Promise<Array<any>> {
     if(this.loadingProjects){
       return new Promise(resolve => {
         this.projectEvents.subscribe(event => {
