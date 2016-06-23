@@ -541,9 +541,9 @@ export class SourceModalPage {
   }
 
   isEmpty(includeTitle: boolean) {
-    if (!this.bookForm.controls.author1firstname.value && !this.bookForm.controls.author1lastname.value && !this.bookForm.controls.author2firstname.value && !this.bookForm.controls.author2lastname.value && !this.bookForm.controls.author3firstname.value && !this.bookForm.controls.author3lastname.value && !this.bookForm.controls.editor.value && !this.bookForm.controls.hasAuthors.value && !this.bookForm.controls.pageNumber.value && !this.bookForm.controls.publicationDate.value && !this.bookForm.controls.publicationLocation.value) {
+    if (!this.bookForm.find('author1firstname').value && !this.bookForm.find('author1lastname').value && !this.bookForm.find('author2firstname').value && !this.bookForm.find('author2lastname').value && !this.bookForm.find('author3firstname').value && !this.bookForm.find('author3lastname').value && !this.bookForm.find('editor').value && !this.bookForm.find('hasAuthors').value && !this.bookForm.find('pageNumber').value && !this.bookForm.find('publicationDate').value && !this.bookForm.find('publicationLocation').value) {
       if (includeTitle) {
-        if (!this.bookForm.controls.title.value) {
+        if (!this.bookForm.find('title').value) {
           return true;
         }else {
           return false;
