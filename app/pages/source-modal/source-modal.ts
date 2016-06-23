@@ -363,6 +363,35 @@ export class SourceModalPage {
     }
   }
 
+  fillInfos(suggestion: any) {
+    if (this.isEmpty(false)) {
+      this.updateValues(suggestion);
+      this.instantStatus.shown = false;
+      this.insertingFromScan = true;
+    }else {
+      this.translate.get(["PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE", "PROJECT.DETAIL.POPUP.AUTO_FILL_DESC", "PROJECT.DETAIL.POPUP.OVERWRITE", "PROJECT.DETAIL.POPUP.CANCEL"]).subscribe((translations) => {
+        let alert = Alert.create({
+          title: translations["PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE"],
+          message: translations["PROJECT.DETAIL.POPUP.AUTO_FILL_DESC"],
+          buttons: [
+            {
+              text: translations["PROJECT.DETAIL.POPUP.OVERWRITE"],
+              handler: () => {
+                this.updateValues(suggestion);
+                this.instantStatus.shown = false;
+                this.insertingFromScan = true;
+              }
+            },
+            {
+              text: translations["PROJECT.DETAIL.POPUP.CANCEL"]
+            }
+          ]
+        });
+        this.nav.present(alert);
+      });
+    }
+  }
+
   // Scan
   scan() {
     if (!this.settings.get("scanBoardingDone")) {

@@ -91,7 +91,7 @@
         <ion-item *ngIf="instantStatus.shown">
           <ion-scroll scrollY="true" [class.height-one]="instantList.length == 1" [class.height-one-and-half]="instantList.length == 2" [class.height-two-and-half]="instantList.length > 2">
             <ion-list class="no-margin">
-              <button ion-item *ngFor="let suggestion of instantList" (click)="updateValues(suggestion); this.instantStatus.shown = false">
+              <button ion-item *ngFor="let suggestion of instantList" (click)="fillInfos(suggestion)">
                 <ion-icon name="bookmarks-outline" item-left></ion-icon>
                 {{ suggestion.title }}
                 <span *ngIf="suggestion.author1lastname && suggestion.author1firstname">(<em>{{suggestion.author1firstname}} {{suggestion.author1lastname}}</em>)</span>
