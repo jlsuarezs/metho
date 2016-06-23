@@ -456,6 +456,7 @@ export class SourceModalPage {
                   text: translations["PROJECT.DETAIL.POPUP.OVERWRITE"],
                   handler: () => {
                     this.updateValues(response);
+                    this.insertingFromScan = true;
                   }
                 },
                 {
