@@ -137,6 +137,8 @@ export class ThreeDeeTouchProvider {
   update() {
     ThreeDeeTouch.isAvailable().then(avail => {
       this.configure();
+    }).catch(err => {
+      console.log(err);
     });
   }
 }
