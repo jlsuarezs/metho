@@ -5,11 +5,9 @@ import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
 
 import {AppStorage} from '../../providers/app-storage/app-storage';
 import {Fetch} from '../../providers/fetch/fetch';
+import {Language} from '../../providers/language/language';
 
 import {SourceModalPage} from '../source-modal/source-modal';
-
-import * as moment from 'moment';
-import 'moment/locale/fr';
 
 @Component({
   templateUrl: 'build/pages/pendings/pendings.html',
@@ -20,14 +18,13 @@ export class PendingsPage {
   public pendings: Array<any> = [];
   public currentTransition = null;
 
-  constructor(public nav: NavController, public params: NavParams, public translate: TranslateService, public storage: AppStorage, public fetch: Fetch) {
-    // moment.locale(this.lang.current());
-    moment.locale('fr');
+  constructor(public nav: NavController, public params: NavParams, public translate: TranslateService, public storage: AppStorage, public fetch: Fetch, public language: Language) {
     this.projectId = params.get('pId');
     this.loadPendings();
   }
 
   loadPendings(dismissOnEmpty?: boolean) {
+    let moment = this.language.getMoment();
     this.storage.getPendingsFromProjectId(this.projectId).then(pendings => {
       this.pendings = pendings;
       for (var i = 0; i < this.pendings.length; i++) {
@@ -162,5 +159,9 @@ export class PendingsPage {
     this.storage.deletePending(pending._id).then(() => {
       this.loadPendings();
     });
+  }
+
+  ionViewWillEnter() {
+    this.loadPendings();
   }
 }
