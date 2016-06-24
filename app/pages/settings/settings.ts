@@ -26,7 +26,6 @@ export class SettingsPage {
     this.attributionsPage = AttributionsPage;
     this.feedbackPage = FeedbackPage;
     this.loadSettings();
-    console.log(this.settings);
   }
 
   loadSettings() {
