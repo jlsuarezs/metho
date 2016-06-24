@@ -1,9 +1,6 @@
 import {Injectable} from '@angular/core';
 import {TranslateService} from 'ng2-translate/ng2-translate';
 import {Language} from '../language/language';
-import 'rxjs/add/operator/map';
-
-var numeral = require('numeral');
 
 @Injectable()
 export class Parse {
@@ -332,7 +329,7 @@ export class Parse {
         // Nombre de pages
         if (this.sourceToParse.pageNumber && !isNaN(this.sourceToParse.pageNumber)) {
             if (this.sourceToParse.pageNumber >= 1000) {
-                this.sourceToParse.parsedSource += numeral(this.sourceToParse.pageNumber).format() + " p.";
+                this.sourceToParse.parsedSource += this.format(this.sourceToParse.pageNumber) + " p.";
             }else {
                 this.sourceToParse.parsedSource += this.sourceToParse.pageNumber + " p.";
             }
@@ -911,5 +908,20 @@ export class Parse {
 
   private capitalizeFirstLetter(input: string) {
     return input.charAt(0).toUpperCase() + input.slice(1);
+  }
+
+  private format(num) {
+		let numString = num.toString();
+		let after = "";
+		let count = 0;
+		for (var i = numString.length-1; i >= 0; i--) {
+			if (count != 0 && count % 3 == 0) {
+        after = numString[i] + ' ' + after;
+      } else {
+        after = numString[i] + after;
+      }
+			count++;
+		}
+		return after;
   }
 }
