@@ -1,16 +1,10 @@
 # Specifies intentionally untracked files to ignore when using Git
 # http://git-scm.com/docs/gitignore
 
-node_modules/
-platforms/ios/www/*
-platforms/ios/Metho/config.xml
-platforms/ios/Metho/Metho-Info.plist
 .DS_Store
-.bowerrc
+node_modules/
+platforms/
+plugins/
 .editorconfig
-www/.tern-project
-www/**/tags
-www/.tags
-www/.tags1
 www/build/
 .tags
