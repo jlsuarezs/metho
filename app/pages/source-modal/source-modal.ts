@@ -30,6 +30,7 @@ export class SourceModalPage {
   public firstname: string;
   public lastname: string;
   public currentTransition: any;
+  public hasConfirmed: boolean = false;
 
   public bookForm: ControlGroup;
   public _timeout: any;
@@ -212,8 +213,9 @@ export class SourceModalPage {
   }
 
   submitIfEnter(event) {
-    if (event.keyCode == 13) {
+    if (event.keyCode == 13 && !this.hasConfirmed) {
       this.confirm();
+      this.hasConfirmed = true;
     }
   }
 
