@@ -390,6 +390,10 @@ export class AppStorage {
   }
 
   fromObject(obj: Object): Array<any> {
-    return Object.keys(obj).map(x => obj[x]);
+    if (obj) {
+      return Object.keys(obj).map(x => obj[x]);
+    }else {
+      return [];
+    }
   }
 }
