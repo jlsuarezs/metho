@@ -3,6 +3,8 @@
         color: black;
         overflow: hidden;
         text-overflow: ellipsis !important;
+        padding-left: 25px;
+        padding-right: 25px;
     }
 
     .page-sub-title {
@@ -16,6 +18,14 @@
 
 .sources {
     .flex {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: calc(100% - 44px);
+        flex-direction: column;
+    }
+
+    .flex-full {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -53,5 +63,13 @@
     h2 {
         text-overflow: ellipsis;
         overflow: hidden;
+    }
+
+    ion-list {
+        margin-bottom: 0;
+    }
+
+    .big::before {
+        font-size: 54px;
     }
 }

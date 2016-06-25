@@ -18,6 +18,8 @@ export class SourcesPage {
   public project: any;
   public pendingNumber: number = 0;
   private currentTransition: any;
+  public searchQuery: string = "";
+  public filteredSources: Array<any> = [];
   @ViewChild(List) list: List;
 
   constructor(public nav: NavController, public params: NavParams, public translate: TranslateService, public storage: AppStorage) {
@@ -50,6 +52,7 @@ export class SourcesPage {
           return a.parsedSource.localeCompare(b.title);
         }
       });
+      this.updateSearch();
     });
   }
 
@@ -226,6 +229,35 @@ export class SourcesPage {
           []
         );
       }
+    });
+  }
+
+  updateSearch() {
+    this.filteredSources = this.sources;
+
+    let q = this.searchQuery;
+
+    if (q.trim() == '') {
+      return;
+    }
+
+    let qa = q.trim().split(' ');
+
+    this.filteredSources = this.filteredSources.filter((v) => {
+      if (qa.length > 1) {
+        for (var i = 0; i < qa.length; i++) {
+          if (v.parsedSource.toLowerCase().indexOf(qa[i].toLowerCase()) > -1 || v.parsedType.toLowerCase().indexOf(qa[i].toLowerCase()) > -1) {
+          }else {
+            return false;
+          }
+        }
+        return true;
+      }else {
+        if (v.parsedSource.toLowerCase().indexOf(qa[0].toLowerCase()) > -1 || v.parsedType.toLowerCase().indexOf(qa[0].toLowerCase()) > -1) {
+          return true;
+        }
+      }
+      return false;
     });
   }
 

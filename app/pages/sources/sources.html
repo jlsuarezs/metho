@@ -11,8 +11,9 @@
 </ion-navbar>
 
 <ion-content class="sources">
+  <ion-searchbar *ngIf="sources.length" [(ngModel)]="searchQuery" (ionInput)="updateSearch($event)" (ionCancel)="updateSearch($event)" cancelButtonText="{{'PROJECT.DETAIL.MODAL.CANCEL' | translate}}" showCancelButton="true" placeholder="{{'PROJECT.DETAIL.SEARCH' | translate}}"></ion-searchbar>
   <ion-list *ngIf="sources.length">
-    <ion-item-sliding *ngFor="let source of sources">
+    <ion-item-sliding *ngFor="let source of filteredSources">
       <button ion-item (click)="openSourcePage(source)">
         <h2 [innerHtml]="source.title ? source.title : source.parsedSource"></h2>
         <p>{{ source.parsedType }}</p>
@@ -34,12 +35,19 @@
     </ion-item-sliding>
   </ion-list>
 
-  <div class="flex" *ngIf="!sources.length">
+  <div class="flex-full" *ngIf="!sources.length">
     <button outline (click)="createSource()">
       <ion-icon name="add"></ion-icon>
     </button><br>
     <p class="center dimmed-50">
       {{'PROJECT.DETAIL.EMPTY_TAB' | translate}}
+    </p>
+  </div>
+
+  <div class="flex" padding *ngIf="sources.length && !filteredSources.length">
+    <ion-icon name="close-circle" isActive="false" class="big"></ion-icon>
+    <p class="center dimmed-50">
+      {{'PROJECT.DETAIL.EMPTY_SEARCH' | translate}}
     </p>
   </div>
 

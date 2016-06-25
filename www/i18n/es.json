@@ -43,6 +43,8 @@
         "DETAIL":{
             "EMPTY_TAB": "¿ Qué es un proyecto sin fuentes ?",
             "DELETE_ITEM": "Eliminar",
+            "SEARCH": "Buscar",
+            "EMPTY_SEARCH": "Ningún resultado, puede buscar entre todas las informaciones de la fuente como el autor, el titulo o el type",
             "PENDING_ELEMENTS": "Elementos pendientes({{number}})",
             "CHOOSE_TYPE": "Elegir un typo de fuente",
             "SHARE_TEXT": "Aquí está las fuentes del proyecto « {{project_title}} » : <br><br><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center'>BIBLIOGRAPHIE</td></tr></table><br>",

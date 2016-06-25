@@ -43,6 +43,8 @@
         "DETAIL":{
             "EMPTY_TAB": "What's a project without sources ?",
             "DELETE_ITEM": "Delete",
+            "SEARCH": "Search",
+            "EMPTY_SEARCH": "No result, you can search across all properties of the source like the author, title or type",
             "PENDING_ELEMENTS": "Pending items({{number}})",
             "CHOOSE_TYPE": "Choose source type",
             "SHARE_TEXT": "Here are the sources for project « {{project_title}} » : <br><br><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center'>BIBLIOGRAPHIE</td></tr></table><br>",
