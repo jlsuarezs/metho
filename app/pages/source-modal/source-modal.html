@@ -113,7 +113,7 @@
         </ion-item>
         <ion-item>
           <ion-label stacked>{{'PROJECT.DETAIL.MODAL.BOOK.PAGE_NUMBER_LABEL' | translate}}</ion-label>
-          <ion-input ngControl="pageNumber" placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.PAGE_NUMBER_PLACEHOLDER' | translate}}"></ion-input>
+          <ion-input type="number" ngControl="pageNumber" placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.PAGE_NUMBER_PLACEHOLDER' | translate}}"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label stacked>{{'PROJECT.DETAIL.MODAL.BOOK.EDITION_NUMBER_LABEL' | translate}}</ion-label>
@@ -291,7 +291,7 @@
         </ion-item>
         <ion-item>
           <ion-label stacked>{{'PROJECT.DETAIL.MODAL.MOVIE.LENGTH' | translate}}</ion-label>
-          <ion-range ngControl="duration" pin="true" min="0" max="1000"></ion-range>
+          <ion-input type="number" ngControl="duration" placeholder="{{'PROJECT.DETAIL.MODAL.MOVIE.LENGTH_PLACEHOLDER' | translate}}"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label stacked>{{'PROJECT.DETAIL.MODAL.MOVIE.PUBLICATION_DATE' | translate}}</ion-label>
