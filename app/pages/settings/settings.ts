@@ -48,6 +48,10 @@ export class SettingsPage {
     }
   }
 
+  toggleIgnoreErrors() {
+    this.settingService.set('ignoreErrors', this.settings.ignoreErrors);
+  }
+
   changeOrder() {
     this.settingService.set('defaultOrder', this.settings.defaultOrder);
   }

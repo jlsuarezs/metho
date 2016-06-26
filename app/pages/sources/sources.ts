@@ -7,6 +7,7 @@ import {SourcePage} from '../source/source';
 import {SourceModalPage} from '../source-modal/source-modal';
 import {PendingsPage} from '../pendings/pendings';
 import {AppStorage} from '../../providers/app-storage/app-storage';
+import {Settings} from '../../providers/settings/settings';
 
 @Component({
   templateUrl: 'build/pages/sources/sources.html',
@@ -22,7 +23,7 @@ export class SourcesPage {
   public filteredSources: Array<any> = [];
   @ViewChild(List) list: List;
 
-  constructor(public nav: NavController, public params: NavParams, public translate: TranslateService, public storage: AppStorage) {
+  constructor(public nav: NavController, public params: NavParams, public translate: TranslateService, public storage: AppStorage, public settings: Settings) {
     this.projectId = params.get('id');
     this.loadProjectInfo();
     this.loadSources();
@@ -192,7 +193,7 @@ export class SourcesPage {
         errNum += arr_sources[i].errors.length;
       }
 
-      if (errNum > 0) {
+      if (errNum > 0 && !this.settings.get('ignoreErrors')) {
         this.translate.get(["PROJECT.DETAIL.POPUP.ERRORS_SOURCES", "PROJECT.DETAIL.POPUP.SHARE_TEXT", "PROJECT.DETAIL.POPUP.SHARE", "PROJECT.DETAIL.POPUP.CANCEL"], { errNum:errNum }).subscribe((translations) => {
           let alert = Alert.create({
             title: translations["PROJECT.DETAIL.POPUP.SHARE_TEXT"],

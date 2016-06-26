@@ -20,7 +20,8 @@ export class Settings {
       lastname: "",
       overideLang: "",
       lastLang: "",
-      firstRun: true
+      firstRun: true,
+      ignoreErrors: false
     };
 
     this.load();

@@ -533,6 +533,7 @@
         "ALPHABETICAL": "Ordre alphabétique",
         "TYPE": "Type d'ouvrage",
         "ASK_FOR_ORDER": "Demander l'ordre lors du partage",
+        "IGNORE_ERRORS": "Ignorer les erreurs",
         "YOUR_NAME": "Votre nom",
         "EDIT": "Modifier",
         "EDIT_NAME": "Modifier le nom",
