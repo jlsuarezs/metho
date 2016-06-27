@@ -26,8 +26,6 @@ export class SourcesPage {
   constructor(public nav: NavController, public params: NavParams, public translate: TranslateService, public storage: AppStorage, public settings: Settings) {
     this.projectId = params.get('id');
     this.loadProjectInfo();
-    this.loadSources();
-    this.loadPendingNumber();
 
     if (params.get('createNew') == true) {
       this.createSource();
@@ -67,6 +65,8 @@ export class SourcesPage {
     this.storage.getPendingNumber(this.projectId).then(num => {
       this.pendingNumber = num;
     });
+
+    this.storage.loadPendingsFromProjectId(this.projectId);
   }
 
   createSource() {

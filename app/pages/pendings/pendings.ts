@@ -48,24 +48,16 @@ export class PendingsPage {
       if (isLoading) {
         var loadingTransition = loading.dismiss();
       }
-      let modal = Modal.create(SourceModalPage, {
-        type: 'book',
-        data: data,
-        projectId: this.projectId,
-        pendingId: pending._id,
-        hideScan: true
-      });
-
-      modal.onDismiss(() => {
-        this.loadPendings(true);
-      });
-
+      pending.data = data;
+      pending.isLoaded = true;
+      this.storage.setPendingFromId(pending._id, pending);
+      
       if (isLoading) {
         loadingTransition.then(() => {
-          this.nav.present(modal);
+          this.openAfterLoad(data, pending._id);
         });
       }else {
-        this.nav.present(modal);
+        this.openAfterLoad(data, pending._id);
       }
     }).catch(err => {
       loading.dismiss();
@@ -132,6 +124,22 @@ export class PendingsPage {
         });
       }
     });
+  }
+
+  openAfterLoad(data: any, id: string) {
+    let modal = Modal.create(SourceModalPage, {
+      type: 'book',
+      data: data,
+      projectId: this.projectId,
+      pendingId: id,
+      hideScan: true
+    });
+
+    modal.onDismiss(() => {
+      this.loadPendings(true);
+    });
+
+    this.nav.present(modal);
   }
 
   openModalWithBrowser(pending) {

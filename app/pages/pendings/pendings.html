@@ -16,16 +16,23 @@
   </div>
   <ion-list *ngIf="pendings.length">
     <ion-item-sliding *ngFor="let pending of pendings">
-      <button ion-item *ngIf="!pending.not_available" (click)="solvePending(pending)">
+      <button ion-item *ngIf="!pending.not_available && !pending.isLoaded" (click)="solvePending(pending)">
         <h2>{{pending.isbn}}</h2>
         <p>{{pending.datestring}}</p>
         <ion-icon name="cloud-download-outline" item-right></ion-icon>
       </button>
 
+      <button ion-item *ngIf="pending.isLoaded && !pending.not_available" (click)="openAfterLoad(pending.data, pending._id)">
+        <h2>{{pending.data.title}}</h2>
+        <h4>{{pending.isbn}}</h4>
+        <p>{{pending.datestring}}</p>
+        <ion-icon name="checkmark-circle-outline" item-right class="green"></ion-icon>
+      </button>
+
       <button ion-item *ngIf="pending.not_available" (click)="openModalWithBrowser(pending)">
         <h2>{{pending.isbn}}</h2>
         <p>{{pending.datestring}}</p>
-        <ion-icon name="alert" item-right></ion-icon>
+        <ion-icon name="alert-outline" item-right class="red"></ion-icon>
       </button>
 
       <ion-item-options>
