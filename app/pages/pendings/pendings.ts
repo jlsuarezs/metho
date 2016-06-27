@@ -48,10 +48,10 @@ export class PendingsPage {
       if (isLoading) {
         var loadingTransition = loading.dismiss();
       }
-      pending.data = data;
-      pending.isLoaded = true;
-      this.storage.setPendingFromId(pending._id, pending);
-      
+      let i = this.pendings.indexOf(pending);
+      this.pendings[i].isLoaded = true;
+      this.pendings[i].data = data;
+      this.storage.setPendingFromId(this.pendings[i]._id, this.pendings[i]);
       if (isLoading) {
         loadingTransition.then(() => {
           this.openAfterLoad(data, pending._id);
