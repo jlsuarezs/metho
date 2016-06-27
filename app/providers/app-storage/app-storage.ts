@@ -335,7 +335,7 @@ export class AppStorage {
         pending._id = response.id;
         pending._rev = response.rev;
         pending.isLoaded = false;
-        pending.not_available = false;
+        pending.notAvailable = false;
         pending.data = {};
         this.pendings[response.id] = pending;
         this.pendingsByProject[pending.project_id][response.id] = pending;
@@ -398,7 +398,7 @@ export class AppStorage {
                 });
               }).catch(err => {
                 if (err == 404) {
-                  arrPendings[index].not_available = true;
+                  arrPendings[index].notAvailable = true;
                   arrPendings[index].isLoaded = true;
                   this.pendingDB.put(arrPendings[index]).then(response => {
                     arrPendings[index]._rev = response.rev;
@@ -426,7 +426,7 @@ export class AppStorage {
               });
             }).catch(err => {
               if (err == 404) {
-                arrPendings[index].not_available = true;
+                arrPendings[index].notAvailable = true;
                 arrPendings[index].isLoaded = true;
                 this.pendingDB.put(arrPendings[index]).then(response => {
                   arrPendings[index]._rev = response.rev;

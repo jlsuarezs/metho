@@ -71,7 +71,7 @@ export class PendingsPage {
                 text: translations["PROJECT.PENDING.POPUP.SEARCH"],
                 handler: () => {
                   let i = this.pendings.indexOf(pending);
-                  this.pendings[i].not_available = true;
+                  this.pendings[i].notAvailable = true;
                   this.storage.setPendingFromId(this.pendings[i]._id, this.pendings[i]);
                   this.currentTransition = alert.dismiss();
                   this.openModalWithBrowser(this.pendings[i]);
@@ -82,7 +82,7 @@ export class PendingsPage {
                 text: translations["PROJECT.PENDING.POPUP.LATER"],
                 handler: () => {
                   let i = this.pendings.indexOf(pending);
-                  this.pendings[i].not_available = true;
+                  this.pendings[i].notAvailable = true;
                   this.storage.setPendingFromId(this.pendings[i]._id, this.pendings[i]);
                 }
               }
