@@ -1,6 +1,7 @@
 import {Injectable, EventEmitter} from '@angular/core';
 import {Storage, LocalStorage} from 'ionic-angular';
 import {Parse} from '../parse/parse';
+import {Fetch} from '../fetch/fetch';
 import {UserReport} from '../user-report/user-report';
 
 import * as PouchDB from 'pouchdb';
@@ -26,7 +27,7 @@ export class AppStorage {
   private sourcesEvents;
   private pendingsEvents;
 
-  constructor(public parse: Parse, public report: UserReport) {
+  constructor(public parse: Parse, public report: UserReport, public fetch: Fetch) {
     this.local = new Storage(LocalStorage);
     if(this.local.get("theresProjects") == null) {
       this.local.set("theresProjects", false);
@@ -333,6 +334,9 @@ export class AppStorage {
       this.pendingDB.post(pending).then(response => {
         pending._id = response.id;
         pending._rev = response.rev;
+        pending.isLoaded = false;
+        pending.not_available = false;
+        pending.data = {};
         this.pendings[response.id] = pending;
         this.pendingsByProject[pending.project_id][response.id] = pending;
         this.loadingPendings = false;
@@ -373,6 +377,68 @@ export class AppStorage {
         resolve(err);
       });
     });
+  }
+
+  loadPendingsFromProjectId(id: string): void {
+    if (navigator.onLine) {
+      if(this.loadingPendings) {
+        this.pendingsEvents.subscribe(() => {
+          let arrPendings: Array<any> = this.fromObject(this.pendingsByProject[id]);
+          for (var i = 0; i < arrPendings.length; i++) {
+            if (!arrPendings[i].isLoaded) {
+              let index = i;
+              console.log(arrPendings[index]);
+              this.fetch.fromISBN(arrPendings[i].isbn).then(data => {
+                arrPendings[index].data = data;
+                arrPendings[index].isLoaded = true;
+                this.pendingDB.put(arrPendings[index]).then(response => {
+                  arrPendings[index]._rev = response.rev;
+                  this.pendings[response.id] = arrPendings[index];
+                  this.pendingsByProject[arrPendings[index].project_id][response.id] = arrPendings[index];
+                });
+              }).catch(err => {
+                if (err == 404) {
+                  arrPendings[index].not_available = true;
+                  arrPendings[index].isLoaded = true;
+                  this.pendingDB.put(arrPendings[index]).then(response => {
+                    arrPendings[index]._rev = response.rev;
+                    this.pendings[response.id] = arrPendings[index];
+                    this.pendingsByProject[arrPendings[index].project_id][response.id] = arrPendings[index];
+                  });
+                }
+              });
+            }
+          }
+        });
+      }else {
+        let arrPendings: Array<any> = this.fromObject(this.pendingsByProject[id]);
+        for (var i = 0; i < arrPendings.length; i++) {
+          if (!arrPendings[i].isLoaded) {
+            let index = i;
+            console.log(arrPendings[index]);
+            this.fetch.fromISBN(arrPendings[i].isbn).then(data => {
+              arrPendings[index].data = data;
+              arrPendings[index].isLoaded = true;
+              this.pendingDB.put(arrPendings[index]).then(response => {
+                arrPendings[index]._rev = response.rev;
+                this.pendings[response.id] = arrPendings[index];
+                this.pendingsByProject[arrPendings[index].project_id][response.id] = arrPendings[index];
+              });
+            }).catch(err => {
+              if (err == 404) {
+                arrPendings[index].not_available = true;
+                arrPendings[index].isLoaded = true;
+                this.pendingDB.put(arrPendings[index]).then(response => {
+                  arrPendings[index]._rev = response.rev;
+                  this.pendings[response.id] = arrPendings[index];
+                  this.pendingsByProject[arrPendings[index].project_id][response.id] = arrPendings[index];
+                });
+              }
+            });
+          }
+        }
+      }
+    }
   }
 
   getPendingNumber(id: string): Promise<number> {
