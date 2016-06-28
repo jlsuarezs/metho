@@ -70,4 +70,17 @@
     .big::before {
         font-size: 54px;
     }
+
+    .biggest::before {
+        font-size: 72px;
+    }
+
+    button[fab] {
+        box-shadow: 0 4px 10px #6b6b6b;
+    }
+
+    .fixed-div {
+        bottom: 0;
+        right: 0;
+    }
 }

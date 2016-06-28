@@ -12,6 +12,10 @@
 
 <ion-content class="sources">
   <ion-searchbar *ngIf="sources.length" [(ngModel)]="searchQuery" (ionInput)="updateSearch($event)" (ionCancel)="updateSearch($event)" cancelButtonText="{{'PROJECT.DETAIL.MODAL.CANCEL' | translate}}" showCancelButton="true" placeholder="{{'PROJECT.DETAIL.SEARCH' | translate}}"></ion-searchbar>
+  <button ion-item light (click)="openPendingPage()" class="center" *ngIf="pendingNumber > 0 && searchQuery == ''">
+    {{'PROJECT.DETAIL.PENDING_ELEMENTS' | translate}}
+    <ion-badge item-right>{{ pendingNumber }}</ion-badge>
+  </button>
   <ion-list *ngIf="sources.length">
     <ion-item-sliding *ngFor="let source of filteredSources">
       <button ion-item (click)="openSourcePage(source)">
@@ -36,9 +40,7 @@
   </ion-list>
 
   <div class="flex-full" *ngIf="!sources.length">
-    <button outline (click)="createSource()">
-      <ion-icon name="add"></ion-icon>
-    </button><br>
+    <ion-icon name="filing" isActive="false" class="biggest"></ion-icon>
     <p class="center dimmed-50">
       {{'PROJECT.DETAIL.EMPTY_TAB' | translate}}
     </p>
@@ -51,14 +53,9 @@
     </p>
   </div>
 
-</ion-content>
-<ion-toolbar position="bottom" class="sources">
-  <button clear default (click)="createSource()">
-    <ion-icon name="add"></ion-icon>
-  </button>
-  <ion-title>
-    <button (click)="openPendingPage()" clear dark full>
-      {{'PROJECT.DETAIL.PENDING_ELEMENTS' | translate:'{number:'+ pendingNumber + '}'}}
+  <ion-fixed class="fixed-div">
+    <button fab fab-right fab-bottom (click)="createSource()">
+      <ion-icon name="add"></ion-icon>
     </button>
-  </ion-title>
-</ion-toolbar>
+  </ion-fixed>
+</ion-content>

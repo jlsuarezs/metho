@@ -1,4 +1,4 @@
-import {NavController, NavParams, ActionSheet, Modal, Alert, List} from 'ionic-angular';
+import {NavController, NavParams, ActionSheet, Modal, Alert, List, Content} from 'ionic-angular';
 import {ViewChild, Component} from '@angular/core';
 import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
 import {SocialSharing} from 'ionic-native';
@@ -22,6 +22,7 @@ export class SourcesPage {
   public searchQuery: string = "";
   public filteredSources: Array<any> = [];
   @ViewChild(List) list: List;
+  @ViewChild(Content) content: Content;
 
   constructor(public nav: NavController, public params: NavParams, public translate: TranslateService, public storage: AppStorage, public settings: Settings) {
     this.projectId = params.get('id');
@@ -37,6 +38,12 @@ export class SourcesPage {
   ionViewWillEnter() {
     this.loadSources();
     this.loadPendingNumber();
+  }
+
+  ionViewDidEnter() {
+    if (this.sources.length == 0) {
+      this.content.scrollToBottom(250);
+    }
   }
 
   loadSources() {

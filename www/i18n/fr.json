@@ -45,7 +45,7 @@
             "DELETE_ITEM": "Supprimer",
             "SEARCH": "Rechercher",
             "EMPTY_SEARCH": "Aucun résultat, vous pouvez rechercher parmi toutes les informations de la source dont l'auteur, le titre ou encore le type",
-            "PENDING_ELEMENTS": "Éléments en attente({{number}})",
+            "PENDING_ELEMENTS": "Éléments en attente",
             "CHOOSE_TYPE": "Choisir le type de source",
             "SHARE_TEXT": "Voici les sources du projet « {{project_title}} » : <br><br><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center'>BIBLIOGRAPHIE</td></tr></table><br>",
             "MODAL":{
