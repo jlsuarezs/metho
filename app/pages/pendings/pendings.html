@@ -3,17 +3,6 @@
 </ion-navbar>
 
 <ion-content class="pendings">
-  <div *ngIf="!pendings.length" class="flex">
-    <p class="center">
-      {{ 'PROJECT.PENDING.SCAN_TO_ADD' | translate }}
-    </p>
-    <h3 class="center">
-      {{ 'PROJECT.PENDING.EMPTY_TAB' | translate }}
-    </h3>
-    <p class="center">
-      {{ 'PROJECT.PENDING.NEED_ADVANCED' | translate }}
-    </p>
-  </div>
   <ion-list *ngIf="pendings.length">
     <ion-item-sliding *ngFor="let pending of pendings">
       <button ion-item *ngIf="!pending.notAvailable && !pending.isLoaded" (click)="solvePending(pending)">

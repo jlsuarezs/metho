@@ -20,7 +20,6 @@ export class PendingsPage {
 
   constructor(public nav: NavController, public params: NavParams, public translate: TranslateService, public storage: AppStorage, public fetch: Fetch, public language: Language) {
     this.projectId = params.get('pId');
-    this.loadPendings();
   }
 
   loadPendings(dismissOnEmpty?: boolean) {
@@ -165,7 +164,7 @@ export class PendingsPage {
 
   deletePending(pending) {
     this.storage.deletePending(pending._id).then(() => {
-      this.loadPendings();
+      this.loadPendings(true);
     });
   }
 
