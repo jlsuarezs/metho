@@ -337,6 +337,9 @@ export class AppStorage {
         pending.isLoaded = false;
         pending.notAvailable = false;
         pending.data = {};
+        if (!this.pendingsByProject[pending.project_id]) {
+          this.pendingsByProject[pending.project_id] = {};
+        }
         this.pendings[response.id] = pending;
         this.pendingsByProject[pending.project_id][response.id] = pending;
         this.loadingPendings = false;
