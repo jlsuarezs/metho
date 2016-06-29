@@ -7,7 +7,7 @@ import {AppStorage} from '../../providers/app-storage/app-storage';
 import {Fetch} from '../../providers/fetch/fetch';
 import {Language} from '../../providers/language/language';
 
-import {SourceModalPage} from '../source-modal/source-modal';
+import {SourceModalBookPage} from '../source-modal-book/source-modal-book';
 
 @Component({
   templateUrl: 'build/pages/pendings/pendings.html',
@@ -126,8 +126,7 @@ export class PendingsPage {
   }
 
   openAfterLoad(data: any, id: string) {
-    let modal = Modal.create(SourceModalPage, {
-      type: 'book',
+    let modal = Modal.create(SourceModalBookPage, {
       data: data,
       projectId: this.projectId,
       pendingId: id,
@@ -142,8 +141,7 @@ export class PendingsPage {
   }
 
   openModalWithBrowser(pending) {
-    let modal = Modal.create(SourceModalPage, {
-      type: 'book',
+    let modal = Modal.create(SourceModalBookPage, {
       projectId: this.projectId,
       pendingId: pending._id,
       url: "http://google.ca/search?q=isbn+" + pending.isbn

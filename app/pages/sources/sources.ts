@@ -4,7 +4,15 @@ import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
 import {SocialSharing} from 'ionic-native';
 
 import {SourcePage} from '../source/source';
-import {SourceModalPage} from '../source-modal/source-modal';
+
+// Modals
+import {SourceModalBookPage} from '../source-modal-book/source-modal-book';
+import {SourceModalArticlePage} from '../source-modal-article/source-modal-article';
+import {SourceModalInternetPage} from '../source-modal-internet/source-modal-internet';
+import {SourceModalCdPage} from '../source-modal-cd/source-modal-cd';
+import {SourceModalMoviePage} from '../source-modal-movie/source-modal-movie';
+import {SourceModalInterviewPage} from '../source-modal-interview/source-modal-interview';
+
 import {PendingsPage} from '../pendings/pendings';
 import {AppStorage} from '../../providers/app-storage/app-storage';
 import {Settings} from '../../providers/settings/settings';
@@ -141,11 +149,39 @@ export class SourcesPage {
   }
 
   openModal(type: string, openScan: boolean = false) {
-    let modal = Modal.create(SourceModalPage, {
-      type: type,
-      projectId: this.projectId,
-      scan: openScan
-    });
+    switch (type) {
+      case 'book':
+        var modal = Modal.create(SourceModalBookPage, {
+          projectId: this.projectId,
+          scan: openScan
+        });
+        break;
+      case 'article':
+        var modal = Modal.create(SourceModalArticlePage, {
+          projectId: this.projectId
+        });
+        break;
+      case 'internet':
+        var modal = Modal.create(SourceModalInternetPage, {
+          projectId: this.projectId
+        });
+        break;
+      case 'cd':
+        var modal = Modal.create(SourceModalCdPage, {
+          projectId: this.projectId
+        });
+        break;
+      case 'movie':
+        var modal = Modal.create(SourceModalMoviePage, {
+          projectId: this.projectId
+        });
+        break;
+      case 'interview':
+        var modal = Modal.create(SourceModalInterviewPage, {
+          projectId: this.projectId
+        });
+        break;
+    }
 
     modal.onDismiss(() => {
       this.loadSources();
@@ -155,9 +191,11 @@ export class SourcesPage {
     if(this.currentTransition) {
       this.currentTransition.then(() => {
         this.currentTransition = null;
+        console.log(Date.now());
         this.nav.present(modal);
       });
     }else {
+      console.log(Date.now());
       this.nav.present(modal);
     }
   }

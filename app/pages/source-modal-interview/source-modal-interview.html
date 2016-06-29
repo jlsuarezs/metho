@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button clear default (click)="dismiss()">{{'PROJECT.SOURCE.MODAL.CANCEL' | translate}}</button>
+    </ion-buttons>
+    <ion-title>{{(isNew ? 'PROJECT.DETAIL.MODAL.TITLE' : 'PROJECT.SOURCE.MODAL.TITLE') | translate}}</ion-title>
+    <ion-buttons end>
+      <button clear default (click)="confirm()">{{(isNew ? 'PROJECT.DETAIL.MODAL.ADD' : 'PROJECT.SOURCE.MODAL.CONFIRM') | translate}}</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="source-modal-interview">
+  <form [ngFormModel]="form" (keypress)="submitIfEnter($event)">
+    <ion-list>
+      <ion-list-header>
+        {{'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWER_NAME' | translate}}
+      </ion-list-header>
+      <ion-item class="flex-sub padding">
+        <ion-input type="text" ngControl="author1firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERVIEW.FIRSTNAME' | translate }}"></ion-input>
+        <ion-input type="text" ngControl="author1lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERVIEW.LASTNAME' | translate }}"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list class="no-margin-with-header">
+      <ion-list-header>
+        {{'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWED_NAME' | translate}}
+      </ion-list-header>
+      <ion-item class="flex-sub padding">
+        <ion-select ngControl="civility" [alertOptions]="civilityOpts" cancelText="{{'PROJECT.DETAIL.MODAL.CANCEL' | translate}}">
+          <ion-option value="mister">{{'PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISTER' | translate}}</ion-option>
+          <ion-option value="miss">{{'PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS' | translate}}</ion-option>
+          <ion-option value="miss_young">{{'PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS_YOUNG' | translate}}</ion-option>
+        </ion-select>
+        <ion-input type="text" ngControl="interviewed1firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERVIEW.FIRSTNAME' | translate }}"></ion-input>
+        <ion-input type="text" ngControl="interviewed1lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERVIEW.LASTNAME' | translate }}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>{{'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWED_TITLE' | translate}}</ion-label>
+        <ion-input type="text" ngControl="interviewedTitle" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWED_TITLE_PLACEHOLDER' | translate }}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>{{'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEW_LOCATION' | translate}}</ion-label>
+        <ion-input type="text" ngControl="publicationLocation" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEW_LOCATION_PLACEHOLDER' | translate }}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEW_DATE' | translate}}</ion-label>
+        <ion-datetime ngControl="consultationDate" [monthNames]="monthList" [monthShortNames]="monthShortList" [dayNames]="weekdayList" [dayShortNames]="weekdayShortList" cancelText="{{'PROJECT.DETAIL.MODAL.CANCEL' | translate}}" doneText="{{'PROJECT.DETAIL.POPUP.OK' | translate}}" pickerFormat="DD-MMM-YYYY" displayFormat="D MMMM YYYY"></ion-datetime>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>

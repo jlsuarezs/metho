@@ -12,16 +12,15 @@ import {Settings} from '../../providers/settings/settings';
 import {Language} from '../../providers/language/language';
 
 @Component({
-  templateUrl: 'build/pages/source-modal/source-modal.html',
+  templateUrl: 'build/pages/source-modal-book/source-modal-book.html',
   pipes: [TranslatePipe]
 })
-export class SourceModalPage {
+export class SourceModalBookPage {
   public isNew: boolean;
   public noData: boolean;
   public previous: any;
   public url: string;
   public pendingId: string;
-  public type: string;
   public pId: string;
   public hideScan: boolean;
   public showBrowser: boolean;
@@ -32,7 +31,7 @@ export class SourceModalPage {
   public currentTransition: any;
   public hasConfirmed: boolean = false;
 
-  public bookForm: ControlGroup;
+  public form: ControlGroup;
   public _timeout: any;
   public instantList: Array<any>;
   public instantStatus: any = {
@@ -43,18 +42,6 @@ export class SourceModalPage {
     ok: false,
     shown: false
   };
-
-  public articleForm: ControlGroup;
-  public internetForm: ControlGroup;
-  public monthList: string;
-  public monthShortList: string;
-  public weekdayList: string;
-  public weekdayShortList: string;
-
-  public cdForm: ControlGroup;
-  public movieForm: ControlGroup;
-  public interviewForm: ControlGroup;
-  public civilityOpts: any = {};
 
   constructor(public viewCtrl: ViewController, public translate: TranslateService, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public nav: NavController, public fetch: Fetch, public settings: Settings, public language: Language) {
     if(this.params.get('editing') == true) {
@@ -70,13 +57,7 @@ export class SourceModalPage {
       this.noData = true;
     }
 
-    this.type = this.params.get('type');
-
     this.pId = this.params.get('projectId');
-
-    this.firstname = this.params.get('firstname');
-
-    this.lastname = this.params.get('lastname');
 
     if (this.params.get('hideScan') == true) {
       this.hideScan = true;
@@ -108,104 +89,34 @@ export class SourceModalPage {
     this.isAdvanced = this.settings.get("advanced");
 
     let moment = this.language.getMoment();
-    if (this.type == "book") {
-      this.bookForm = fb.group({
-        hasAuthors: [this.noData ? '' : this.previous.hasAuthors],
-        author1lastname: [this.noData ? '' : this.previous.author1lastname],
-        author1firstname: [this.noData ? '' : this.previous.author1firstname],
-        author2lastname: [this.noData ? '' : this.previous.author2lastname],
-        author2firstname: [this.noData ? '' : this.previous.author2firstname],
-        author3lastname: [this.noData ? '' : this.previous.author3lastname],
-        author3firstname: [this.noData ? '' : this.previous.author3firstname],
-        title: [this.noData ? '' : this.previous.title],
-        editor: [this.noData ? '' : this.previous.editor],
-        publicationDate: [this.noData ? '' : this.previous.publicationDate],
-        publicationLocation: [this.noData ? '' : this.previous.publicationLocation],
-        pageNumber: [this.noData ? '' : this.previous.pageNumber],
-        editionNumber: [this.noData ? '' : this.previous.editionNumber],
-        volumeNumber: [this.noData ? '' : this.previous.volumeNumber],
-        collection: [this.noData ? '' : this.previous.collection],
-        hasBeenTranslated: [this.noData ? false : this.previous.hasBeenTranslated],
-        translatedFrom: [this.noData ? '' : this.previous.translatedFrom],
-        translator1firstname: [this.noData ? '' : this.previous.translator1firstname],
-        translator1lastname: [this.noData ? '' : this.previous.translator1lastname],
-        translator2firstname: [this.noData ? '' : this.previous.translator2firstname],
-        translator2lastname: [this.noData ? '' : this.previous.translator2lastname]
-      });
-    }else if (this.type == "article") {
-      this.articleForm = fb.group({
-        author1firstname: [this.noData ? '' : this.previous.author1firstname],
-        author1lastname: [this.noData ? '' : this.previous.author1lastname],
-        title: [this.noData ? '' : this.previous.title],
-        editor: [this.noData ? '' : this.previous.editor],
-        editionNumber: [this.noData ? '' : this.previous.editionNumber],
-        publicationDate: [this.noData ? '' : this.previous.publicationDate],
-        startPage: [this.noData ? '' : this.previous.startPage],
-        endPage: [this.noData ? '' : this.previous.endPage]
-      });
-    }else if (this.type == "internet") {
-      this.internetForm = fb.group({
-        hasAuthors: [this.noData ? false : this.previous.hasAuthors],
-        author1firstname: [this.noData ? '' : this.previous.author1firstname],
-        author1lastname: [this.noData ? '' : this.previous.author1lastname],
-        title: [this.noData ? '' : this.previous.title],
-        editor: [this.noData ? '' : this.previous.editor],
-        url: [this.noData ? '' : this.previous.url],
-        consultationDate: [this.noData ? moment().toISOString() : this.previous.consultationDate]
-      });
-      this.generateLabels();
-    }else if (this.type == "cd") {
-      this.cdForm = fb.group({
-        hasAuthors: [this.noData ? false : this.previous.hasAuthors],
-        author1firstname: [this.noData ? '' : this.previous.author1firstname],
-        author1lastname: [this.noData ? '' : this.previous.author1lastname],
-        author2firstname: [this.noData ? '' : this.previous.author2firstname],
-        author2lastname: [this.noData ? '' : this.previous.author2firstname],
-        title: [this.noData ? '' : this.previous.title],
-        editor: [this.noData ? '' : this.previous.editor],
-        publicationLocation: [this.noData ? '' : this.previous.publicationLocation],
-        publicationDate: [this.noData ? '' : this.previous.publicationDate]
-      });
-    }else if (this.type == "movie") {
-      this.movieForm = fb.group({
-        hasAuthors: [this.noData ? false : this.previous.hasAuthors],
-        author1firstname: [this.noData ? '' : this.previous.author1firstname],
-        author1lastname: [this.noData ? '' : this.previous.author1lastname],
-        title: [this.noData ? '' : this.previous.title],
-        episodeTitle: [this.noData ? '' : this.previous.episodeTitle],
-        productionLocation: [this.noData ? '' : this.previous.productionLocation],
-        productor: [this.noData ? '' : this.previous.productor],
-        broadcaster: [this.noData ? '' : this.previous.broadcaster],
-        duration: [this.noData ? '' : this.previous.duration],
-        publicationDate: [this.noData ? '' : this.previous.publicationDate],
-        support: [this.noData ? '' : this.previous.support],
-        consultationDate: [this.noData ? moment().toISOString() : this.previous.consultationDate],
-      });
-      this.generateLabels();
-    }else if (this.type == "interview") {
-      this.interviewForm = fb.group({
-        author1firstname: [this.noData ? this.settings.get('firstname') : this.previous.author1firstname],
-        author1lastname: [this.noData ? this.settings.get('lastname') : this.previous.author1lastname],
-        civility: [this.noData ? '' : this.previous.civility],
-        interviewed1firstname: [this.noData ? '' : this.previous.interviewed1firstname],
-        interviewed1lastname: [this.noData ? '' : this.previous.interviewed1lastname],
-        interviewedTitle: [this.noData ? '' : this.previous.interviewedTitle],
-        publicationLocation: [this.noData ? '' : this.previous.publicationLocation],
-        consultationDate: [this.noData ? moment().toISOString() : this.previous.consultationDate],
-      });
-      this.generateLabels();
-      // Use async once issue is resolved
-      this.civilityOpts = {
-        title: this.translate.instant("PROJECT.PARSE.CIVILITY_TITLE.TITLE")
-      };
-    }
+
+    this.form = fb.group({
+      hasAuthors: [this.noData ? '' : this.previous.hasAuthors],
+      author1lastname: [this.noData ? '' : this.previous.author1lastname],
+      author1firstname: [this.noData ? '' : this.previous.author1firstname],
+      author2lastname: [this.noData ? '' : this.previous.author2lastname],
+      author2firstname: [this.noData ? '' : this.previous.author2firstname],
+      author3lastname: [this.noData ? '' : this.previous.author3lastname],
+      author3firstname: [this.noData ? '' : this.previous.author3firstname],
+      title: [this.noData ? '' : this.previous.title],
+      editor: [this.noData ? '' : this.previous.editor],
+      publicationDate: [this.noData ? '' : this.previous.publicationDate],
+      publicationLocation: [this.noData ? '' : this.previous.publicationLocation],
+      pageNumber: [this.noData ? '' : this.previous.pageNumber],
+      editionNumber: [this.noData ? '' : this.previous.editionNumber],
+      volumeNumber: [this.noData ? '' : this.previous.volumeNumber],
+      collection: [this.noData ? '' : this.previous.collection],
+      hasBeenTranslated: [this.noData ? false : this.previous.hasBeenTranslated],
+      translatedFrom: [this.noData ? '' : this.previous.translatedFrom],
+      translator1firstname: [this.noData ? '' : this.previous.translator1firstname],
+      translator1lastname: [this.noData ? '' : this.previous.translator1lastname],
+      translator2firstname: [this.noData ? '' : this.previous.translator2firstname],
+      translator2lastname: [this.noData ? '' : this.previous.translator2lastname]
+    });
   }
 
-  generateLabels() {
-    this.monthList = this.language.getMoment().months().join(",");
-    this.monthShortList = this.language.getMoment().monthsShort().join(",");
-    this.weekdayList = this.language.getMoment().weekdays().join(",");
-    this.weekdayShortList = this.language.getMoment().weekdaysShort().join(",");
+  ionViewDidEnter() {
+    console.log(Date.now());
   }
 
   dismiss() {
@@ -220,59 +131,11 @@ export class SourceModalPage {
   }
 
   confirm() {
-    var dismiss = true;
-    if (this.type == 'book') {
-      var values = this.bookForm.value;
-      values.type = 'book';
-    }else if (this.type == 'article') {
-      var values = this.articleForm.value;
-      values.type = 'article';
-    }else if (this.type == 'internet') {
-      var values = this.internetForm.value;
-      values.type = 'internet';
-    }else if (this.type == 'cd') {
-      var values = this.cdForm.value;
-      values.type = 'cd';
-    }else if (this.type == 'movie') {
-      var values = this.movieForm.value;
-      values.type = 'movie';
-    }else if (this.type == 'interview') {
-      var values = this.interviewForm.value;
-      values.type = 'interview';
-      if ((values.author1firstname && values.author1lastname) && (this.settings.get('firstname') == "" && this.settings.get('lastname') == "")) {
-        dismiss = false;
-        this.translate.get(["PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWER_NAME", "PROJECT.DETAIL.POPUP.SAVE_INTERVIEWER_NAME", "YES", "NO"]).subscribe(translations => {
-          let alert = Alert.create({
-            title: translations["PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWER_NAME"],
-            message: translations["PROJECT.DETAIL.POPUP.SAVE_INTERVIEWER_NAME"],
-            buttons: [
-              {
-                text: translations["NO"],
-                handler: () => {
-                  this.viewCtrl.dismiss();
-                }
-              },
-              {
-                text: translations["YES"],
-                handler: () => {
-                  let transition = alert.dismiss();
-                  this.settings.set('firstname', values.author1firstname);
-                  this.settings.set('lastname', values.author1lastname);
-
-                  transition.then(() => {
-                    this.viewCtrl.dismiss();
-                  });
-                  return false;
-                }
-              }
-            ]
-          });
-          this.nav.present(alert);
-        });
-      }
-    }
+    let values = this.form.value;
+    values.type = 'book';
     let parsed = this.parse.parse(values);
     parsed.project_id = this.pId;
+
     if (this.isNew) {
       this.storage.createSource(parsed);
       if (this.pendingId) {
@@ -282,9 +145,7 @@ export class SourceModalPage {
       this.storage.setSourceFromId(this.previous._id, parsed);
     }
 
-    if (dismiss) {
-      this.viewCtrl.dismiss();
-    }
+    this.viewCtrl.dismiss();
   }
 
   // Instant Search
@@ -298,15 +159,15 @@ export class SourceModalPage {
       this.instantStatus.none = false;
       this.instantStatus.err500 = false;
       this.instantStatus.shown = false;
-      if (this.bookForm.value.title) {
+      if (this.form.value.title) {
         this.instantStatus.loading = true;
         let query: string = "";
         let includeAuthors: boolean;
-        if (this.bookForm.value.author1lastname || this.bookForm.value.author1firstname) {
-          query = this.bookForm.value.title + " " + this.bookForm.value.author1lastname + " " + this.bookForm.value.author1firstname;
+        if (this.form.value.author1lastname || this.form.value.author1firstname) {
+          query = this.form.value.title + " " + this.form.value.author1lastname + " " + this.form.value.author1firstname;
           includeAuthors = true;
         }else {
-          query = this.bookForm.value.title;
+          query = this.form.value.title;
           includeAuthors = false;
         }
         this.fetch.fromName(query, includeAuthors).then(list => {
@@ -551,7 +412,7 @@ export class SourceModalPage {
   }
 
   updateValues(response: any) {
-    this.bookForm = this.fb.group(this.mergeObjects(this.bookForm.value, response));
+    this.form = this.fb.group(this.mergeObjects(this.form.value, response));
   }
 
   addPending(isbn: string) {
@@ -573,9 +434,9 @@ export class SourceModalPage {
   }
 
   isEmpty(includeTitle: boolean) {
-    if (!this.bookForm.find('author1firstname').value && !this.bookForm.find('author1lastname').value && !this.bookForm.find('author2firstname').value && !this.bookForm.find('author2lastname').value && !this.bookForm.find('author3firstname').value && !this.bookForm.find('author3lastname').value && !this.bookForm.find('editor').value && !this.bookForm.find('hasAuthors').value && !this.bookForm.find('pageNumber').value && !this.bookForm.find('publicationDate').value && !this.bookForm.find('publicationLocation').value) {
+    if (!this.form.find('author1firstname').value && !this.form.find('author1lastname').value && !this.form.find('author2firstname').value && !this.form.find('author2lastname').value && !this.form.find('author3firstname').value && !this.form.find('author3lastname').value && !this.form.find('editor').value && !this.form.find('hasAuthors').value && !this.form.find('pageNumber').value && !this.form.find('publicationDate').value && !this.form.find('publicationLocation').value) {
       if (includeTitle) {
-        if (!this.bookForm.find('title').value) {
+        if (!this.form.find('title').value) {
           return true;
         }else {
           return false;
