@@ -1,8 +1,10 @@
-<ion-navbar *navbar>
-  <ion-title *ngIf="type == 'bsd'">{{'SETTINGS.BSD_LICENSE' | translate}}</ion-title>
-  <ion-title *ngIf="type == 'apache'">{{'SETTINGS.APACHE_LICENSE' | translate}}</ion-title>
-  <ion-title *ngIf="type == 'mit'">{{'SETTINGS.MIT_LICENSE' | translate}}</ion-title>
-</ion-navbar>
+<ion-header>
+  <ion-navbar>
+    <ion-title *ngIf="type == 'bsd'">{{'SETTINGS.BSD_LICENSE' | translate}}</ion-title>
+    <ion-title *ngIf="type == 'apache'">{{'SETTINGS.APACHE_LICENSE' | translate}}</ion-title>
+    <ion-title *ngIf="type == 'mit'">{{'SETTINGS.MIT_LICENSE' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
 
 <ion-content padding class="license">
   <div *ngIf="type == 'bsd'">

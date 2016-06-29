@@ -1,6 +1,8 @@
-<ion-navbar *navbar>
-  <ion-title>{{'SETTINGS.ADVANCED_MODE.TITLE' | translate}}</ion-title>
-</ion-navbar>
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{'SETTINGS.ADVANCED_MODE.TITLE' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
 
 <ion-content class="advanced-mode">
   <button full light class="button-dollar" (click)="enable()" [disabled]="isAdvanced">1,29<span class="dollar">$</span></button>

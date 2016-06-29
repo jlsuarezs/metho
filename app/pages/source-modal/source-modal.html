@@ -1,12 +1,14 @@
-<ion-navbar *navbar>
-  <ion-buttons start>
-    <button clear default (click)="dismiss()">{{'PROJECT.SOURCE.MODAL.CANCEL' | translate}}</button>
-  </ion-buttons>
-  <ion-title>{{(isNew ? 'PROJECT.DETAIL.MODAL.TITLE' : 'PROJECT.SOURCE.MODAL.TITLE') | translate}}</ion-title>
-  <ion-buttons end>
-    <button clear default (click)="confirm()">{{(isNew ? 'PROJECT.DETAIL.MODAL.ADD' : 'PROJECT.SOURCE.MODAL.CONFIRM') | translate}}</button>
-  </ion-buttons>
-</ion-navbar>
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button clear default (click)="dismiss()">{{'PROJECT.SOURCE.MODAL.CANCEL' | translate}}</button>
+    </ion-buttons>
+    <ion-title>{{(isNew ? 'PROJECT.DETAIL.MODAL.TITLE' : 'PROJECT.SOURCE.MODAL.TITLE') | translate}}</ion-title>
+    <ion-buttons end>
+      <button clear default (click)="confirm()">{{(isNew ? 'PROJECT.DETAIL.MODAL.ADD' : 'PROJECT.SOURCE.MODAL.CONFIRM') | translate}}</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
 
 <ion-content class="source-modal">
   <div *ngIf="type == 'book'">
@@ -354,13 +356,15 @@
   </div>
 </ion-content>
 
-<ion-toolbar position="bottom" default *ngIf="(isAdvanced && type == 'book' && !hideScan) || showBrowser" class="no-padding source-modal">
-  <button (click)="scan()" full *ngIf="!hideScan && !showBrowser">
-    <ion-icon name="qr-scanner" class="left-aligned"></ion-icon>
-    {{'PROJECT.DETAIL.MODAL.SCAN' | translate}}
-  </button>
-  <button (click)="browser()" full *ngIf="showBrowser">
-    <ion-icon name="browsers" class="left-aligned"></ion-icon>
-    {{'PROJECT.DETAIL.MODAL.BROWSER' | translate}}
-  </button>
-</ion-toolbar>
+<ion-footer>
+  <ion-toolbar position="bottom" default *ngIf="(isAdvanced && type == 'book' && !hideScan) || showBrowser" class="no-padding source-modal">
+    <button (click)="scan()" full *ngIf="!hideScan && !showBrowser">
+      <ion-icon name="qr-scanner" class="left-aligned"></ion-icon>
+      {{'PROJECT.DETAIL.MODAL.SCAN' | translate}}
+    </button>
+    <button (click)="browser()" full *ngIf="showBrowser">
+      <ion-icon name="browsers" class="left-aligned"></ion-icon>
+      {{'PROJECT.DETAIL.MODAL.BROWSER' | translate}}
+    </button>
+  </ion-toolbar>
+</ion-footer>

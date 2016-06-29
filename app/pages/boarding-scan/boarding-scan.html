@@ -1,14 +1,16 @@
-<ion-navbar *navbar>
-  <ion-buttons start>
-    <button clear default (click)="dismiss()" *ngIf="currentIndex == 0">{{'PROJECT.DETAIL.BOARDING.SKIP' | translate}}</button>
-    <button clear default (click)="slider.slidePrev()" *ngIf="currentIndex > 0">{{'PROJECT.DETAIL.BOARDING.PREVIOUS' | translate}}</button>
-  </ion-buttons>
-  <ion-title>{{'PROJECT.DETAIL.BOARDING.TITLE' | translate}}</ion-title>
-  <ion-buttons end>
-    <button clear default (click)="slider.slideNext()" *ngIf="currentIndex < 2">{{'PROJECT.DETAIL.BOARDING.NEXT' | translate}}</button>
-    <button clear default (click)="dismiss()" *ngIf="currentIndex == 2">{{'PROJECT.DETAIL.BOARDING.CLOSE' | translate}}</button>
-  </ion-buttons>
-</ion-navbar>
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button clear default (click)="dismiss()" *ngIf="currentIndex == 0">{{'PROJECT.DETAIL.BOARDING.SKIP' | translate}}</button>
+      <button clear default (click)="slider.slidePrev()" *ngIf="currentIndex > 0">{{'PROJECT.DETAIL.BOARDING.PREVIOUS' | translate}}</button>
+    </ion-buttons>
+    <ion-title>{{'PROJECT.DETAIL.BOARDING.TITLE' | translate}}</ion-title>
+    <ion-buttons end>
+      <button clear default (click)="slider.slideNext()" *ngIf="currentIndex < 2">{{'PROJECT.DETAIL.BOARDING.NEXT' | translate}}</button>
+      <button clear default (click)="dismiss()" *ngIf="currentIndex == 2">{{'PROJECT.DETAIL.BOARDING.CLOSE' | translate}}</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
 
 <ion-content class="boarding-scan">
   <ion-slides pager #slider (ionDidChange)="onSlideChange()" [options]="swiperOptions">

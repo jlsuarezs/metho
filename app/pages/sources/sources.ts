@@ -16,7 +16,7 @@ import {Settings} from '../../providers/settings/settings';
 export class SourcesPage {
   public projectId: string;
   public sources: Array<any> = [];
-  public project: any;
+  public project: any = {};
   public pendingNumber: number = 0;
   private currentTransition: any;
   public searchQuery: string = "";

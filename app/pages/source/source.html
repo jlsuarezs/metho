@@ -1,13 +1,15 @@
-<ion-navbar *navbar>
-  <ion-title>
-    <div class="page-title" *ngIf="source.title">{{source.title}}</div>
-    <div class="page-title" *ngIf="!source.title" [innerHtml]="source.parsedSource"></div>
-    <div class="page-sub-title">{{source.parsedType}}</div>
-  </ion-title>
-  <ion-buttons end>
-    <button (click)="edit()">{{'PROJECT.SOURCE.EDIT' | translate}}</button>
-  </ion-buttons>
-</ion-navbar>
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <div class="page-title" *ngIf="source.title">{{source.title}}</div>
+      <div class="page-title" *ngIf="!source.title" [innerHtml]="source.parsedSource"></div>
+      <div class="page-sub-title">{{source.parsedType}}</div>
+    </ion-title>
+    <ion-buttons end>
+      <button (click)="edit()">{{'PROJECT.SOURCE.EDIT' | translate}}</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
 
 <ion-content class="source">
   <p class="center padding" [innerHtml]="source.parsedSource"></p>

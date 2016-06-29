@@ -80,7 +80,11 @@
     }
 
     .fixed-div {
-        bottom: 0;
+        bottom: 40px;
         right: 0;
+
+        button {
+            position: relative;
+        }
     }
 }

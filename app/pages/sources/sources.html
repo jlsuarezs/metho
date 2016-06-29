@@ -1,14 +1,16 @@
-<ion-navbar *navbar>
-  <ion-title>
-    <div class="page-title"> {{project.name}} </div>
-    <div class="page-sub-title"> {{project.matter ? project.matter : ('PROJECT.TAB.UNKNOWN_MATTER' | translate)}} </div>
-  </ion-title>
-  <ion-buttons end>
-    <button (click)="share()">
-      <ion-icon name="share" isActive="false"></ion-icon>
-    </button>
-  </ion-buttons>
-</ion-navbar>
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <div class="page-title"> {{project.name}} </div>
+      <div class="page-sub-title"> {{project.matter ? project.matter : ('PROJECT.TAB.UNKNOWN_MATTER' | translate)}} </div>
+    </ion-title>
+    <ion-buttons end>
+      <button (click)="share()">
+        <ion-icon name="share" isActive="false"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
 
 <ion-content class="sources">
   <ion-searchbar *ngIf="sources.length" [(ngModel)]="searchQuery" (ionInput)="updateSearch($event)" (ionCancel)="updateSearch($event)" cancelButtonText="{{'PROJECT.DETAIL.MODAL.CANCEL' | translate}}" showCancelButton="true" placeholder="{{'PROJECT.DETAIL.SEARCH' | translate}}"></ion-searchbar>
