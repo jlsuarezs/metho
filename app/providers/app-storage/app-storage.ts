@@ -137,7 +137,10 @@ export class AppStorage {
 
   setProjectFromId(id: string, set: any) {
     return new Promise(resolve => {
-      this.projectDB.put(set, id, this.projects[id]._rev).then(response => {
+      let values = set;
+      values._rev = this.projects[id]._rev;
+      values._id = id;
+      this.projectDB.put(values).then(response => {
         set._rev = response.rev;
         this.projects[id] = set;
         resolve(response);
@@ -213,7 +216,10 @@ export class AppStorage {
 
   setSourceFromId(id: string, set: any) {
     return new Promise(resolve => {
-      this.sourceDB.put(set, id, this.sources[id]._rev).then(response => {
+      let values = set;
+      values._rev = this.sources[id]._rev;
+      values._id = id;
+      this.sourceDB.put(values).then(response => {
         set._rev = response.rev;
         set._id = response.id;
         this.sources[id] = set;
@@ -371,7 +377,10 @@ export class AppStorage {
 
   setPendingFromId(id: string, set: any) {
     return new Promise(resolve => {
-      this.pendingDB.put(set, id, this.pendings[id]._rev).then(response => {
+      let values = set;
+      values._rev = this.pendings[id]._rev;
+      values._id = id;
+      this.pendingDB.put(values).then(response => {
         set._rev = response.rev;
         this.pendings[id] = set;
         resolve(response);
