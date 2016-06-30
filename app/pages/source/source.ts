@@ -28,6 +28,13 @@ export class SourcePage {
 
   constructor(public nav: NavController, public params: NavParams, public storage: AppStorage, public parse: Parse, public translate: TranslateService) {
     this.id = this.params.get('id');
+  }
+
+  ionViewWillEnter() {
+    this.loadSource();
+  }
+
+  loadSource() {
     this.storage.getSourceFromId(this.id).then(source => {
       this.source = source;
     });
@@ -162,9 +169,7 @@ export class SourcePage {
     }
 
     modal.onDismiss(() => {
-      this.storage.getSourceFromId(this.id).then(source => {
-        this.source = source;
-      })
+      this.loadSource();
     });
 
     this.nav.present(modal);
