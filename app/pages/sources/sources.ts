@@ -191,11 +191,9 @@ export class SourcesPage {
     if(this.currentTransition) {
       this.currentTransition.then(() => {
         this.currentTransition = null;
-        console.log(Date.now());
         this.nav.present(modal);
       });
     }else {
-      console.log(Date.now());
       this.nav.present(modal);
     }
   }

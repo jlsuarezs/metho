@@ -64,10 +64,6 @@ export class SourceModalMoviePage {
     this.generateLabels();
   }
 
-  ionViewDidEnter() {
-    console.log(Date.now());
-  }
-
   generateLabels() {
     this.monthList = this.language.getMoment().months().join(",");
     this.monthShortList = this.language.getMoment().monthsShort().join(",");

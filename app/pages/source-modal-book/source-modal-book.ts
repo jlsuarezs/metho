@@ -115,10 +115,6 @@ export class SourceModalBookPage {
     });
   }
 
-  ionViewDidEnter() {
-    console.log(Date.now());
-  }
-
   dismiss() {
     this.viewCtrl.dismiss();
   }

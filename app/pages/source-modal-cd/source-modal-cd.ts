@@ -55,10 +55,6 @@ export class SourceModalCdPage {
     });
   }
 
-  ionViewDidEnter() {
-    console.log(Date.now());
-  }
-
   dismiss() {
     this.viewCtrl.dismiss();
   }

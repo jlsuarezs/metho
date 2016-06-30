@@ -53,10 +53,6 @@ export class SourceModalArticlePage {
     });
   }
 
-  ionViewDidEnter() {
-    console.log(Date.now());
-  }
-
   dismiss() {
     this.viewCtrl.dismiss();
   }
