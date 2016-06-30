@@ -17,7 +17,7 @@ export class SourceModalMoviePage {
   public noData: boolean;
   public previous: any;
   public pendingId: string;
-  public pId: string;
+  public projectId: string;
   public currentTransition: any;
   public hasConfirmed: boolean = false;
   public monthList: string;
@@ -40,7 +40,7 @@ export class SourceModalMoviePage {
       this.noData = true;
     }
 
-    this.pId = this.params.get('projectId');
+    this.projectId = this.params.get('projectId');
 
     if (typeof this.params.get('pendingId') !== "undefined") {
       this.pendingId = this.params.get('pendingId');
@@ -90,7 +90,7 @@ export class SourceModalMoviePage {
     var values = this.form.value;
     values.type = 'movie';
     let parsed = this.parse.parse(values);
-    parsed.project_id = this.pId;
+    parsed.project_id = this.projectId;
     if (this.isNew) {
       this.storage.createSource(parsed);
       if (this.pendingId) {

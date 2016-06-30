@@ -18,7 +18,7 @@ export class SourceModalInterviewPage {
   public noData: boolean;
   public previous: any;
   public pendingId: string;
-  public pId: string;
+  public projectId: string;
   public firstname: string;
   public lastname: string;
   public currentTransition: any;
@@ -45,7 +45,7 @@ export class SourceModalInterviewPage {
       this.noData = true;
     }
 
-    this.pId = this.params.get('projectId');
+    this.projectId = this.params.get('projectId');
 
     this.firstname = this.params.get('firstname');
 
@@ -99,7 +99,7 @@ export class SourceModalInterviewPage {
     var values = this.form.value;
     values.type = 'interview';
     let parsed = this.parse.parse(values);
-    parsed.project_id = this.pId;
+    parsed.project_id = this.projectId;
     if (this.isNew) {
       this.storage.createSource(parsed);
       if (this.pendingId) {

@@ -17,7 +17,7 @@ export class SourceModalInternetPage {
   public noData: boolean;
   public previous: any;
   public pendingId: string;
-  public pId: string;
+  public projectId: string;
   public isAdvanced: boolean;
   public currentTransition: any;
   public hasConfirmed: boolean = false;
@@ -42,7 +42,7 @@ export class SourceModalInternetPage {
       this.noData = true;
     }
 
-    this.pId = this.params.get('projectId');
+    this.projectId = this.params.get('projectId');
 
     if (typeof this.params.get('pendingId') !== "undefined") {
       this.pendingId = this.params.get('pendingId');
@@ -89,7 +89,7 @@ export class SourceModalInternetPage {
     let values = this.form.value;
     values.type = 'internet';
     let parsed = this.parse.parse(values);
-    parsed.project_id = this.pId;
+    parsed.project_id = this.projectId;
     if (this.isNew) {
       this.storage.createSource(parsed);
       if (this.pendingId) {

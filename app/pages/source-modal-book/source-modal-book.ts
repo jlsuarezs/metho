@@ -21,7 +21,7 @@ export class SourceModalBookPage {
   public previous: any;
   public url: string;
   public pendingId: string;
-  public pId: string;
+  public projectId: string;
   public hideScan: boolean;
   public showBrowser: boolean;
   public isAdvanced: boolean;
@@ -57,7 +57,7 @@ export class SourceModalBookPage {
       this.noData = true;
     }
 
-    this.pId = this.params.get('projectId');
+    this.projectId = this.params.get('projectId');
 
     if (this.params.get('hideScan') == true) {
       this.hideScan = true;
@@ -134,7 +134,7 @@ export class SourceModalBookPage {
     let values = this.form.value;
     values.type = 'book';
     let parsed = this.parse.parse(values);
-    parsed.project_id = this.pId;
+    parsed.project_id = this.projectId;
 
     if (this.isNew) {
       this.storage.createSource(parsed);
@@ -419,7 +419,7 @@ export class SourceModalBookPage {
     var creating = {
       isbn: isbn,
       date: this.language.getMoment()().toObject(),
-      project_id: this.pId
+      project_id: this.projectId
     };
 
     this.storage.createPending(creating);
