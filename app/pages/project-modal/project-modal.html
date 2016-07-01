@@ -11,7 +11,7 @@
 </ion-header>
 
 <ion-content class="project-modal">
-  <form [ngFormModel]="projectForm" (submit)="confirm()">
+  <form [ngFormModel]="projectForm" (keypress)="submitIfEnter($event)">
     <ion-list>
       <ion-item>
         <ion-label stacked>{{'PROJECT.TAB.MODAL.PROJECT_NAME_LABEL' | translate}}</ion-label>

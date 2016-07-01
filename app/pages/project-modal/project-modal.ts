@@ -12,6 +12,7 @@ import {AppStorage} from '../../providers/app-storage/app-storage.ts';
 export class ProjectModalPage {
   public isNew: Boolean;
   public previous: any;
+  public hasConfirmed: boolean = false;
   public projectForm: ControlGroup;
 
   constructor(public viewCtrl: ViewController, public navParams: NavParams, fb: FormBuilder, public storage: AppStorage) {
@@ -35,6 +36,13 @@ export class ProjectModalPage {
     this.viewCtrl.dismiss();
   }
 
+  submitIfEnter(event) {
+    if (event.keyCode == 13 && !this.hasConfirmed) {
+      this.hasConfirmed = true;
+      this.confirm();
+    }
+  }
+
   confirm() {
     if(this.projectForm.valid) {
       if(this.isNew) {
@@ -46,6 +54,8 @@ export class ProjectModalPage {
           this.viewCtrl.dismiss();
         });
       }
+    }else {
+      this.hasConfirmed = false;
     }
   }
 }
