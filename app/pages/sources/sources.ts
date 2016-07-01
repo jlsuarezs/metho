@@ -35,12 +35,6 @@ export class SourcesPage {
   constructor(public nav: NavController, public params: NavParams, public translate: TranslateService, public storage: AppStorage, public settings: Settings) {
     this.projectId = params.get('id');
     this.loadProjectInfo();
-
-    if (params.get('createNew') == true) {
-      this.createSource();
-    }else if (params.get('createNewWithScan') == true) {
-      this.openModal('book', true);
-    }
   }
 
   ionViewWillEnter() {

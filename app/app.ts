@@ -11,7 +11,6 @@ import {Settings} from './providers/settings/settings.ts';
 import {UserReport} from './providers/user-report/user-report.ts';
 import {AdvancedMode} from './providers/advanced-mode/advanced-mode';
 import {Language} from './providers/language/language';
-import {ThreeDeeTouchProvider} from './providers/3d-touch/3d-touch';
 
 
 @Component({
@@ -20,11 +19,10 @@ import {ThreeDeeTouchProvider} from './providers/3d-touch/3d-touch';
 export class MyApp {
   rootPage: any = TabsPage;
 
-  constructor(platform: Platform, translate: TranslateService, private storage: AppStorage, public settings: Settings, public language: Language, public threeDee: ThreeDeeTouchProvider) {
+  constructor(platform: Platform, translate: TranslateService, private storage: AppStorage, public settings: Settings, public language: Language) {
     platform.ready().then(() => {
       this.storage.init();
       this.language.init();
-      this.threeDee.init();
       StatusBar.styleDefault();
     });
   }
@@ -43,5 +41,4 @@ ionicBootstrap(MyApp, [
     UserReport,
     AdvancedMode,
     Language,
-    ThreeDeeTouchProvider
   ], {});
