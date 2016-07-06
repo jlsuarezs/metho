@@ -1,4 +1,4 @@
-import {ViewController, NavParams, Modal, NavController, Alert, Loading} from 'ionic-angular';
+import {ViewController, NavParams, ModalController, NavController, AlertController, LoadingController} from 'ionic-angular';
 import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
 import {Component} from '@angular/core';
 import {FormBuilder, Validators, ControlGroup} from '@angular/common';
@@ -43,7 +43,7 @@ export class SourceModalBookPage {
     shown: false
   };
 
-  constructor(public viewCtrl: ViewController, public translate: TranslateService, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public nav: NavController, public fetch: Fetch, public settings: Settings, public language: Language) {
+  constructor(public viewCtrl: ViewController, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public modalCtrl: ModalController, public translate: TranslateService, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public nav: NavController, public fetch: Fetch, public settings: Settings, public language: Language) {
     if(this.params.get('editing') == true) {
       this.isNew = false;
     }else {
@@ -193,7 +193,7 @@ export class SourceModalBookPage {
   openExplaining() {
     if (this.instantStatus.none) {
       this.translate.get(["PROJECT.DETAIL.POPUP.NO_SUGGESTIONS", "PROJECT.DETAIL.POPUP.NO_SUGGESTIONS_DESC", "PROJECT.DETAIL.POPUP.OK"]).subscribe((translations) => {
-        let alert = Alert.create({
+        let alert = this.alertCtrl.create({
           title: translations["PROJECT.DETAIL.POPUP.NO_SUGGESTIONS"],
           message: translations["PROJECT.DETAIL.POPUP.NO_SUGGESTIONS_DESC"],
           buttons: [
@@ -203,11 +203,11 @@ export class SourceModalBookPage {
           ]
         });
 
-        this.nav.present(alert);
+        alert.present();
       });
     }else if (this.instantStatus.err500) {
       this.translate.get(["PROJECT.DETAIL.POPUP.ERROR", "PROJECT.DETAIL.POPUP.ERROR_500", "PROJECT.DETAIL.POPUP.OK"]).subscribe((translations) => {
-        let alert = Alert.create({
+        let alert = this.alertCtrl.create({
           title: translations["PROJECT.DETAIL.POPUP.ERROR"],
           message: translations["PROJECT.DETAIL.POPUP.ERROR_500"],
           buttons: [
@@ -217,7 +217,7 @@ export class SourceModalBookPage {
           ]
         });
 
-        this.nav.present(alert);
+        alert.present();
       });
     }
   }
@@ -229,7 +229,7 @@ export class SourceModalBookPage {
       this.insertingFromScan = true;
     }else {
       this.translate.get(["PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE", "PROJECT.DETAIL.POPUP.AUTO_FILL_DESC", "PROJECT.DETAIL.POPUP.OVERWRITE", "PROJECT.DETAIL.POPUP.CANCEL"]).subscribe((translations) => {
-        let alert = Alert.create({
+        let alert = this.alertCtrl.create({
           title: translations["PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE"],
           message: translations["PROJECT.DETAIL.POPUP.AUTO_FILL_DESC"],
           buttons: [
@@ -246,7 +246,8 @@ export class SourceModalBookPage {
             }
           ]
         });
-        this.nav.present(alert);
+
+        alert.present();
       });
     }
   }
@@ -254,11 +255,11 @@ export class SourceModalBookPage {
   // Scan
   scan() {
     if (!this.settings.get("scanBoardingDone")) {
-      let modal = Modal.create(BoardingScanPage);
+      let modal = this.modalCtrl.create(BoardingScanPage);
       modal.onDismiss(() => {
         this.scan();
       });
-      this.nav.present(modal);
+      modal.present();
     }else {
       BarcodeScanner.scan().then((data) => {
         if (!data.cancelled) {
@@ -266,7 +267,7 @@ export class SourceModalBookPage {
             this.fetchFromISBN(data.text);
           }else {
             this.translate.get(["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE", "PROJECT.DETAIL.POPUP.NOT_RIGHT_BARCODE_TYPE", "PROJECT.DETAIL.POPUP.OK"]).subscribe((translations) => {
-              let alert = Alert.create({
+              let alert = this.alertCtrl.create({
                 title: translations["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE"],
                 message: translations["PROJECT.DETAIL.POPUP.NOT_RIGHT_BARCODE_TYPE"],
                 buttons: [
@@ -275,13 +276,13 @@ export class SourceModalBookPage {
                   }
                 ]
               });
-              this.nav.present(alert);
+              alert.present();
             });
           }
         }
       }, (err) => {
         this.translate.get(["PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN", "PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN_TEXT", "PROJECT.DETAIL.POPUP.OK"]).subscribe((translations) => {
-          let alert = Alert.create({
+          let alert = this.alertCtrl.create({
             title: translations["PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN"],
             message: translations["PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN_TEXT"],
             buttons: [
@@ -290,7 +291,7 @@ export class SourceModalBookPage {
               }
             ]
           });
-          this.nav.present(alert);
+          alert.present();
         });
       });
     }
@@ -298,8 +299,8 @@ export class SourceModalBookPage {
 
   fetchFromISBN(isbn: string) {
     if (navigator.onLine) {
-      let loading = Loading.create();
-      this.nav.present(loading);
+      let loading = this.loadingCtrl.create();
+      loading.present();
       this.fetch.fromISBN(isbn).then((response) => {
         loading.dismiss();
         if (this.isEmpty(true)) {
@@ -307,7 +308,7 @@ export class SourceModalBookPage {
           this.insertingFromScan = true;
         }else {
           this.translate.get(["PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE", "PROJECT.DETAIL.POPUP.AUTO_FILL_DESC", "PROJECT.DETAIL.POPUP.OVERWRITE", "PROJECT.DETAIL.POPUP.CANCEL"]).subscribe((translations) => {
-            let alert = Alert.create({
+            let alert = this.alertCtrl.create({
               title: translations["PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE"],
               message: translations["PROJECT.DETAIL.POPUP.AUTO_FILL_DESC"],
               buttons: [
@@ -323,14 +324,14 @@ export class SourceModalBookPage {
                 }
               ]
             });
-            this.nav.present(alert);
+            alert.present();
           });
         }
       }).catch((response) => {
         loading.dismiss();
         if (response == 404) {
           this.translate.get(["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE", "PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TEXT", "PROJECT.DETAIL.POPUP.OK"]).subscribe((translations) => {
-            let alert = Alert.create({
+            let alert = this.alertCtrl.create({
               title: translations["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE"],
               message: translations["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TEXT"],
               buttons: [
@@ -339,11 +340,11 @@ export class SourceModalBookPage {
                 }
               ]
             });
-            this.nav.present(alert);
+            alert.present();
           });
         }else if (response == 408) {
           this.translate.get(["PROJECT.DETAIL.POPUP.TIMEOUT_TITLE", "PROJECT.DETAIL.POPUP.TIMEOUT_TEXT", "PROJECT.DETAIL.POPUP.ADD", "PROJECT.DETAIL.POPUP.RETRY"]).subscribe((translations) => {
-            let alert = Alert.create({
+            let alert = this.alertCtrl.create({
               title: translations["PROJECT.DETAIL.POPUP.TIMEOUT_TITLE"],
               message: translations["PROJECT.DETAIL.POPUP.TIMEOUT_TEXT"],
               buttons: [
@@ -361,11 +362,11 @@ export class SourceModalBookPage {
                 }
               ]
             });
-            this.nav.present(alert);
+            alert.present();
           });
         }else if (response >= 500 && response <= 599) {
           this.translate.get(["PROJECT.DETAIL.POPUP.ERROR", "PROJECT.DETAIL.POPUP.ERROR_500", "PROJECT.DETAIL.POPUP.OK"]).subscribe((translations) => {
-            let alert = Alert.create({
+            let alert = this.alertCtrl.create({
               title: translations["PROJECT.DETAIL.POPUP.ERROR"],
               message: translations["PROJECT.DETAIL.POPUP.ERROR_500"],
               buttons: [
@@ -374,7 +375,7 @@ export class SourceModalBookPage {
                 }
               ]
             });
-            this.nav.present(alert);
+            alert.present();
           });
         }else {
           // ReportUser.report(response);
@@ -382,7 +383,7 @@ export class SourceModalBookPage {
       });
     }else {
       this.translate.get(["PROJECT.DETAIL.POPUP.NO_CONNECTION", "PROJECT.DETAIL.POPUP.ADD_TO_PENDINGS", "PROJECT.DETAIL.POPUP.RETRY", "PROJECT.DETAIL.POPUP.ADD"]).subscribe((translations) => {
-        let alert = Alert.create({
+        let alert = this.alertCtrl.create({
           title: translations["PROJECT.DETAIL.POPUP.NO_CONNECTION"],
           message: translations["PROJECT.DETAIL.POPUP.ADD_TO_PENDINGS"],
           buttons: [
@@ -402,7 +403,7 @@ export class SourceModalBookPage {
             }
           ]
         });
-        this.nav.present(alert);
+        alert.present();
       });
     }
   }

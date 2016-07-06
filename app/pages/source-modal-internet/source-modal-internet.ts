@@ -1,4 +1,4 @@
-import {ViewController, NavParams, Modal, NavController, Alert, Loading} from 'ionic-angular';
+import {ViewController, NavParams} from 'ionic-angular';
 import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
 import {Component} from '@angular/core';
 import {FormBuilder, Validators, ControlGroup} from '@angular/common';

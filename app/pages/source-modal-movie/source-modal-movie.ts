@@ -1,5 +1,5 @@
-import {ViewController, NavParams, Modal, NavController, Alert, Loading} from 'ionic-angular';
-import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
+import {ViewController, NavParams} from 'ionic-angular';
+import {TranslatePipe} from 'ng2-translate/ng2-translate';
 import {Component} from '@angular/core';
 import {FormBuilder, Validators, ControlGroup} from '@angular/common';
 import {BarcodeScanner, SafariViewController} from 'ionic-native';
@@ -26,7 +26,7 @@ export class SourceModalMoviePage {
   public weekdayShortList: string;
   public form: ControlGroup;
 
-  constructor(public viewCtrl: ViewController, public translate: TranslateService, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public language: Language) {
+  constructor(public viewCtrl: ViewController, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public language: Language) {
     if(this.params.get('editing') == true) {
       this.isNew = false;
     }else {

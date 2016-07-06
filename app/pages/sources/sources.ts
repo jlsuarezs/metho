@@ -1,4 +1,4 @@
-import {NavController, NavParams, ActionSheet, Modal, Alert, List, Content} from 'ionic-angular';
+import {NavController, NavParams, ActionSheetController, ModalController, AlertController, List, Content} from 'ionic-angular';
 import {ViewChild, Component} from '@angular/core';
 import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
 import {SocialSharing} from 'ionic-native';
@@ -32,7 +32,7 @@ export class SourcesPage {
   @ViewChild(List) list: List;
   @ViewChild(Content) content: Content;
 
-  constructor(public nav: NavController, public params: NavParams, public translate: TranslateService, public storage: AppStorage, public settings: Settings) {
+  constructor(public nav: NavController, public alertCtrl: AlertController, public modalCtrl: ModalController, public actionSheetCtrl: ActionSheetController, public params: NavParams, public translate: TranslateService, public storage: AppStorage, public settings: Settings) {
     this.projectId = params.get('id');
     this.loadProjectInfo();
   }
@@ -80,7 +80,7 @@ export class SourcesPage {
 
   createSource() {
     this.translate.get(["PROJECT.TYPES.BOOK", "PROJECT.TYPES.ARTICLE", "PROJECT.TYPES.INTERNET", "PROJECT.TYPES.CD", "PROJECT.TYPES.MOVIE", "PROJECT.TYPES.INTERVIEW", "PROJECT.DETAIL.CHOOSE_TYPE", "PROJECT.DETAIL.POPUP.CANCEL"]).subscribe(translations => {
-      let action = ActionSheet.create({
+      let action = this.actionSheetCtrl.create({
         title: translations['PROJECT.DETAIL.CHOOSE_TYPE'],
         buttons: [
           {
@@ -138,40 +138,40 @@ export class SourcesPage {
         ]
       });
 
-      this.nav.present(action);
+      action.present();
     });
   }
 
   openModal(type: string, openScan: boolean = false) {
     switch (type) {
       case 'book':
-        var modal = Modal.create(SourceModalBookPage, {
+        var modal = this.modalCtrl.create(SourceModalBookPage, {
           projectId: this.projectId,
           scan: openScan
         });
         break;
       case 'article':
-        var modal = Modal.create(SourceModalArticlePage, {
+        var modal = this.modalCtrl.create(SourceModalArticlePage, {
           projectId: this.projectId
         });
         break;
       case 'internet':
-        var modal = Modal.create(SourceModalInternetPage, {
+        var modal = this.modalCtrl.create(SourceModalInternetPage, {
           projectId: this.projectId
         });
         break;
       case 'cd':
-        var modal = Modal.create(SourceModalCdPage, {
+        var modal = this.modalCtrl.create(SourceModalCdPage, {
           projectId: this.projectId
         });
         break;
       case 'movie':
-        var modal = Modal.create(SourceModalMoviePage, {
+        var modal = this.modalCtrl.create(SourceModalMoviePage, {
           projectId: this.projectId
         });
         break;
       case 'interview':
-        var modal = Modal.create(SourceModalInterviewPage, {
+        var modal = this.modalCtrl.create(SourceModalInterviewPage, {
           projectId: this.projectId
         });
         break;
@@ -185,16 +185,16 @@ export class SourcesPage {
     if(this.currentTransition) {
       this.currentTransition.then(() => {
         this.currentTransition = null;
-        this.nav.present(modal);
+        modal.present();
       });
     }else {
-      this.nav.present(modal);
+      modal.present();
     }
   }
 
   deleteSource(source: any) {
     this.translate.get(["PROJECT.DETAIL.POPUP.DELETE_TITLE", "PROJECT.DETAIL.POPUP.DELETE_TEXT", "PROJECT.DETAIL.POPUP.DELETE", "PROJECT.DETAIL.POPUP.CANCEL"]).subscribe(translations => {
-      let alert = Alert.create({
+      let alert = this.alertCtrl.create({
         title: translations["PROJECT.DETAIL.POPUP.DELETE_TITLE"],
         message: translations["PROJECT.DETAIL.POPUP.DELETE_TEXT"],
         buttons: [
@@ -214,7 +214,7 @@ export class SourcesPage {
         ]
       });
 
-      this.nav.present(alert);
+      alert.present();
     });
   }
 
@@ -232,7 +232,7 @@ export class SourcesPage {
 
       if (errNum > 0 && !this.settings.get('ignoreErrors')) {
         this.translate.get(["PROJECT.DETAIL.POPUP.ERRORS_SOURCES", "PROJECT.DETAIL.POPUP.SHARE_TEXT", "PROJECT.DETAIL.POPUP.SHARE", "PROJECT.DETAIL.POPUP.CANCEL"], { errNum:errNum }).subscribe((translations) => {
-          let alert = Alert.create({
+          let alert = this.alertCtrl.create({
             title: translations["PROJECT.DETAIL.POPUP.SHARE_TEXT"],
             message: translations["PROJECT.DETAIL.POPUP.ERRORS_SOURCES"],
             buttons: [
@@ -255,7 +255,7 @@ export class SourcesPage {
             ]
           });
 
-          this.nav.present(alert);
+          alert.present();
         });
       } else {
         SocialSharing.shareViaEmail(

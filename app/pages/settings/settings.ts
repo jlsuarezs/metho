@@ -1,4 +1,4 @@
-import {NavController, Alert, List} from 'ionic-angular';
+import {NavController, AlertController, List} from 'ionic-angular';
 import {ViewChild, Component} from '@angular/core';
 import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
 
@@ -21,7 +21,7 @@ export class SettingsPage {
   public feedbackPage: any;
   @ViewChild(List) list: List;
 
-  constructor(public nav: NavController, public translate: TranslateService,  public settingService: Settings, public advanced: AdvancedMode, public language: Language) {
+  constructor(public nav: NavController, public alertCtrl: AlertController, public translate: TranslateService,  public settingService: Settings, public advanced: AdvancedMode, public language: Language) {
     this.advancedPage = AdvancedModePage;
     this.attributionsPage = AttributionsPage;
     this.feedbackPage = FeedbackPage;
@@ -58,7 +58,7 @@ export class SettingsPage {
 
   editName() {
     this.translate.get(["SETTINGS.EDIT_NAME", "SETTINGS.CANCEL", "SETTINGS.EDIT"]).subscribe(translations => {
-      let alert = Alert.create({
+      let alert = this.alertCtrl.create({
         title: translations["SETTINGS.EDIT_NAME"],
         inputs: [
           {
@@ -91,7 +91,7 @@ export class SettingsPage {
         ]
       });
 
-      this.nav.present(alert);
+      alert.present();
     });
   }
 

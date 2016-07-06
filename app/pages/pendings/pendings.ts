@@ -1,4 +1,4 @@
-import {NavController, NavParams, Modal, Alert, Loading} from 'ionic-angular';
+import {NavController, NavParams, ModalController, AlertController, LoadingController} from 'ionic-angular';
 import {Component} from '@angular/core';
 
 import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
@@ -18,7 +18,7 @@ export class PendingsPage {
   public pendings: Array<any> = [];
   public currentTransition = null;
 
-  constructor(public nav: NavController, public params: NavParams, public translate: TranslateService, public storage: AppStorage, public fetch: Fetch, public language: Language) {
+  constructor(public nav: NavController, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public modalCtrl: ModalController, public params: NavParams, public translate: TranslateService, public storage: AppStorage, public fetch: Fetch, public language: Language) {
     this.projectId = params.get('pId');
   }
 
@@ -37,9 +37,9 @@ export class PendingsPage {
 
   solvePending(pending: any) {
     if (!this.fetch.isISBNCached(pending.isbn)) {
-      var loading = Loading.create();
+      var loading = this.loadingCtrl.create();
       var isLoading = true;
-      this.nav.present(loading);
+      loading.present();
     }else {
       var isLoading = false;
     }
@@ -62,7 +62,7 @@ export class PendingsPage {
       loading.dismiss();
       if (err == 404) {
         this.translate.get(["PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TITLE", "PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TEXT", "PROJECT.PENDING.POPUP.SEARCH", "PROJECT.PENDING.POPUP.LATER"]).subscribe(translations => {
-          let alert = Alert.create({
+          let alert = this.alertCtrl.create({
             title: translations["PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TITLE"],
             message: translations["PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TEXT"],
             buttons: [
@@ -88,11 +88,11 @@ export class PendingsPage {
             ]
           });
 
-          this.nav.present(alert);
+          alert.present();
         });
       }else if (err == 408) {
         this.translate.get(["PROJECT.PENDING.POPUP.TIMEOUT_TITLE", "PROJECT.PENDING.POPUP.TIMEOUT_TEXT", "PROJECT.PENDING.POPUP.CANCEL", "PROJECT.PENDING.POPUP.RETRY"]).subscribe((translations) => {
-          let alert = Alert.create({
+          let alert = this.alertCtrl.create({
             title: translations["PROJECT.PENDING.POPUP.TIMEOUT_TITLE"],
             message: translations["PROJECT.PENDING.POPUP.TIMEOUT_TEXT"],
             buttons: [
@@ -107,11 +107,11 @@ export class PendingsPage {
               }
             ]
           });
-          this.nav.present(alert);
+          alert.present();
         });
       }else if (err >= 500 && err <= 599) {
         this.translate.get(["PROJECT.DETAIL.POPUP.ERROR", "PROJECT.DETAIL.POPUP.ERROR_500", "PROJECT.DETAIL.POPUP.OK"]).subscribe(translations => {
-          let alert = Alert.create({
+          let alert = this.alertCtrl.create({
             title: translations["PROJECT.DETAIL.POPUP.ERROR"],
             message: translations["PROJECT.DETAIL.POPUP.ERROR_500"],
             buttons: [
@@ -120,13 +120,15 @@ export class PendingsPage {
               }
             ]
           });
+
+          alert.present();
         });
       }
     });
   }
 
   openAfterLoad(data: any, id: string) {
-    let modal = Modal.create(SourceModalBookPage, {
+    let modal = this.modalCtrl.create(SourceModalBookPage, {
       data: data,
       projectId: this.projectId,
       pendingId: id,
@@ -137,11 +139,11 @@ export class PendingsPage {
       this.loadPendings(true);
     });
 
-    this.nav.present(modal);
+    modal.present();
   }
 
   openModalWithBrowser(pending) {
-    let modal = Modal.create(SourceModalBookPage, {
+    let modal = this.modalCtrl.create(SourceModalBookPage, {
       projectId: this.projectId,
       pendingId: pending._id,
       url: "http://google.ca/search?q=isbn+" + pending.isbn
@@ -153,10 +155,10 @@ export class PendingsPage {
 
     if (this.currentTransition) {
       this.currentTransition.then(() => {
-        this.nav.present(modal);
+        modal.present();
       });
     }else {
-      this.nav.present(modal);
+      modal.present();
     }
   }
 

@@ -1,4 +1,4 @@
-import {NavController, Modal, Alert, List} from 'ionic-angular';
+import {NavController, ModalController, AlertController, List} from 'ionic-angular';
 import {ViewChild, Component} from '@angular/core';
 import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
 import {AppStorage} from '../../providers/app-storage/app-storage.ts';
@@ -15,9 +15,7 @@ export class ProjectsPage {
   public loading: Boolean = true;
   @ViewChild(List) list: List;
 
-  constructor(public nav: NavController, public translate: TranslateService, public storage: AppStorage) {
-    this.translate = translate;
-    this.nav = nav;
+  constructor(public nav: NavController, public alertCtrl: AlertController, public modalCtrl: ModalController, public translate: TranslateService, public storage: AppStorage) {
     this.loadProjects();
   }
 
@@ -38,7 +36,7 @@ export class ProjectsPage {
   }
 
   createProject() {
-    let modal = Modal.create(ProjectModalPage, {
+    let modal = this.modalCtrl.create(ProjectModalPage, {
       previous: null
     });
 
@@ -46,11 +44,11 @@ export class ProjectsPage {
       this.loadProjects();
     });
 
-    this.nav.present(modal);
+    modal.present();
   }
 
   editProject(project: any) {
-    let modal = Modal.create(ProjectModalPage, {
+    let modal = this.modalCtrl.create(ProjectModalPage, {
       previous: project
     });
 
@@ -59,12 +57,12 @@ export class ProjectsPage {
       this.loadProjects();
     });
 
-    this.nav.present(modal);
+    modal.present();
   }
 
   deleteProject(project: any) {
     this.translate.get(['PROJECT.TAB.POPUP.DELETE_PROJECT_TITLE', 'PROJECT.TAB.POPUP.DELETE_PROJECT', 'PROJECT.TAB.POPUP.CANCEL', 'PROJECT.TAB.POPUP.DELETE']).subscribe(translations => {
-      let confirm = Alert.create({
+      let confirm = this.alertCtrl.create({
         title: translations['PROJECT.TAB.POPUP.DELETE_PROJECT_TITLE'],
         message: translations['PROJECT.TAB.POPUP.DELETE_PROJECT'],
         buttons: [
@@ -86,7 +84,7 @@ export class ProjectsPage {
           }
         ]
       });
-      this.nav.present(confirm);
+      confirm.present();
     });
   }
 

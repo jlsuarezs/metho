@@ -1,4 +1,4 @@
-import {NavController, NavParams, Modal, Alert} from 'ionic-angular';
+import {NavController, NavParams, ModalController, AlertController} from 'ionic-angular';
 import {Component} from '@angular/core';
 
 import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
@@ -26,7 +26,7 @@ export class SourcePage {
   };
   public id: string;
 
-  constructor(public nav: NavController, public params: NavParams, public storage: AppStorage, public parse: Parse, public translate: TranslateService) {
+  constructor(public nav: NavController, public alertCtrl: AlertController, public modalCtrl: ModalController, public params: NavParams, public storage: AppStorage, public parse: Parse, public translate: TranslateService) {
     this.id = this.params.get('id');
   }
 
@@ -42,7 +42,7 @@ export class SourcePage {
 
   solveError(error: any) {
     this.translate.get(["PROJECT.SOURCE.CONFIRM", "PROJECT.SOURCE.CANCEL"]).subscribe(translations => {
-      let alert = Alert.create({
+      let alert = this.alertCtrl.create({
         title: error.promptTitle,
         message: error.promptText,
         buttons: [
@@ -83,13 +83,13 @@ export class SourcePage {
         });
       }
 
-      this.nav.present(alert);
+      alert.present();
     });
   }
 
   solveWarning(warning: any) {
     this.translate.get(["PROJECT.SOURCE.CONFIRM", "PROJECT.SOURCE.CANCEL"]).subscribe(translations => {
-      let alert = Alert.create({
+      let alert = this.alertCtrl.create({
         title: warning.promptTitle,
         message: warning.promptText,
         buttons: [
@@ -112,14 +112,14 @@ export class SourcePage {
         name: 'input'
       });
 
-      this.nav.present(alert);
+      alert.present();
     });
   }
 
   edit() {
     switch (this.source.type) {
       case 'book':
-        var modal = Modal.create(SourceModalBookPage, {
+        var modal = this.modalCtrl.create(SourceModalBookPage, {
           type: this.source.type,
           data: this.source,
           editing: true,
@@ -127,7 +127,7 @@ export class SourcePage {
         });
         break;
       case 'article':
-        var modal = Modal.create(SourceModalArticlePage, {
+        var modal = this.modalCtrl.create(SourceModalArticlePage, {
           type: this.source.type,
           data: this.source,
           editing: true,
@@ -135,7 +135,7 @@ export class SourcePage {
         });
         break;
       case 'internet':
-        var modal = Modal.create(SourceModalInternetPage, {
+        var modal = this.modalCtrl.create(SourceModalInternetPage, {
           type: this.source.type,
           data: this.source,
           editing: true,
@@ -143,7 +143,7 @@ export class SourcePage {
         });
         break;
       case 'cd':
-        var modal = Modal.create(SourceModalCdPage, {
+        var modal = this.modalCtrl.create(SourceModalCdPage, {
           type: this.source.type,
           data: this.source,
           editing: true,
@@ -151,7 +151,7 @@ export class SourcePage {
         });
         break;
       case 'movie':
-        var modal = Modal.create(SourceModalMoviePage, {
+        var modal = this.modalCtrl.create(SourceModalMoviePage, {
           type: this.source.type,
           data: this.source,
           editing: true,
@@ -159,7 +159,7 @@ export class SourcePage {
         });
         break;
       case 'interview':
-        var modal = Modal.create(SourceModalInterviewPage, {
+        var modal = this.modalCtrl.create(SourceModalInterviewPage, {
           type: this.source.type,
           data: this.source,
           editing: true,
@@ -172,6 +172,6 @@ export class SourcePage {
       this.loadSource();
     });
 
-    this.nav.present(modal);
+    modal.present();
   }
 }

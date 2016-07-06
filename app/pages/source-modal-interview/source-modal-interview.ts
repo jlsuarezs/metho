@@ -1,4 +1,4 @@
-import {ViewController, NavParams, Modal, NavController, Alert, Loading} from 'ionic-angular';
+import {ViewController, NavParams, NavController, AlertController} from 'ionic-angular';
 import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
 import {Component} from '@angular/core';
 import {FormBuilder, Validators, ControlGroup} from '@angular/common';
@@ -31,7 +31,7 @@ export class SourceModalInterviewPage {
   public weekdayShortList: string;
   public civilityOpts: any = {};
 
-  constructor(public viewCtrl: ViewController, public translate: TranslateService, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public nav: NavController, public language: Language, public settings: Settings) {
+  constructor(public viewCtrl: ViewController, public translate: TranslateService, public alertCtrl: AlertController, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public nav: NavController, public language: Language, public settings: Settings) {
     if(this.params.get('editing') == true) {
       this.isNew = false;
     }else {
@@ -107,7 +107,7 @@ export class SourceModalInterviewPage {
 
     if ((values.author1firstname && values.author1lastname) && (this.settings.get('firstname') == "" && this.settings.get('lastname') == "")) {
       this.translate.get(["PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWER_NAME", "PROJECT.DETAIL.POPUP.SAVE_INTERVIEWER_NAME", "YES", "NO"]).subscribe(translations => {
-        let alert = Alert.create({
+        let alert = this.alertCtrl.create({
           title: translations["PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWER_NAME"],
           message: translations["PROJECT.DETAIL.POPUP.SAVE_INTERVIEWER_NAME"],
           buttons: [
@@ -132,7 +132,7 @@ export class SourceModalInterviewPage {
             }
           ]
         });
-        this.nav.present(alert);
+        alert.present();
       });
     }else {
       this.viewCtrl.dismiss();
