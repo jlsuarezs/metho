@@ -1,6 +1,7 @@
 import {Platform, ionicBootstrap} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {provide, Component} from '@angular/core';
+import {disableDeprecatedForms, provideForms} from '@angular/forms';
 import {Http} from '@angular/http';
 import {TabsPage} from './pages/tabs/tabs';
 import {TranslateLoader, TranslateStaticLoader, TranslateService} from 'ng2-translate/ng2-translate';
@@ -33,6 +34,8 @@ ionicBootstrap(MyApp, [
       useFactory: (http: Http) => new TranslateStaticLoader(http, 'i18n/', '.json'),
       deps: [Http]
     }),
+    disableDeprecatedForms(),
+    provideForms(),
     TranslateService,
     AppStorage,
     Parse,

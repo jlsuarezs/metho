@@ -11,31 +11,31 @@
 </ion-header>
 
 <ion-content class="source-modal-internet">
-  <form [ngFormModel]="form" (keypress)="submitIfEnter($event)">
+  <form [formGroup]="form" (keypress)="submitIfEnter($event)">
     <ion-list>
       <ion-item>
         <ion-label>{{'PROJECT.DETAIL.MODAL.INTERNET.HAS_AUTHORS' | translate}}</ion-label>
-        <ion-checkbox ngControl="hasAuthors"></ion-checkbox>
+        <ion-checkbox formControlName="hasAuthors"></ion-checkbox>
       </ion-item>
       <ion-item class="flex-sub padding" *ngIf="form.find('hasAuthors').value == true">
-        <ion-input type="text" ngControl="author1firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERNET.FIRSTNAME' | translate }}"></ion-input>
-        <ion-input type="text" ngControl="author1lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERNET.LASTNAME' | translate }}"></ion-input>
+        <ion-input type="text" formControlName="author1firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERNET.FIRSTNAME' | translate }}"></ion-input>
+        <ion-input type="text" formControlName="author1lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERNET.LASTNAME' | translate }}"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label stacked>{{'PROJECT.DETAIL.MODAL.INTERNET.WEBPAGE_NAME' | translate}}</ion-label>
-        <ion-input ngControl="title" placeholder="{{'PROJECT.DETAIL.MODAL.INTERNET.WEBPAGE_NAME_PLACHOLDER' | translate}}"></ion-input>
+        <ion-input formControlName="title" placeholder="{{'PROJECT.DETAIL.MODAL.INTERNET.WEBPAGE_NAME_PLACHOLDER' | translate}}"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label stacked>{{'PROJECT.DETAIL.MODAL.INTERNET.WEBSITE_NAME' | translate}}</ion-label>
-        <ion-input ngControl="editor" placeholder="{{'PROJECT.DETAIL.MODAL.INTERNET.WEBSITE_NAME_PLACEHOLDER' | translate}}"></ion-input>
+        <ion-input formControlName="editor" placeholder="{{'PROJECT.DETAIL.MODAL.INTERNET.WEBSITE_NAME_PLACEHOLDER' | translate}}"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label stacked>{{'PROJECT.DETAIL.MODAL.INTERNET.URL' | translate}}</ion-label>
-        <ion-input ngControl="url" placeholder="{{'PROJECT.DETAIL.MODAL.INTERNET.URL_PLACEHOLDER' | translate}}"></ion-input>
+        <ion-input formControlName="url" placeholder="{{'PROJECT.DETAIL.MODAL.INTERNET.URL_PLACEHOLDER' | translate}}"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>{{'PROJECT.DETAIL.MODAL.INTERNET.CONSULTATION_DATE' | translate}}</ion-label>
-        <ion-datetime ngControl="consultationDate" [monthNames]="monthList" [monthShortNames]="monthShortList" [dayNames]="weekdayList" [dayShortNames]="weekdayShortList" cancelText="{{'PROJECT.DETAIL.MODAL.CANCEL' | translate}}" doneText="{{'PROJECT.DETAIL.POPUP.OK' | translate}}" pickerFormat="DD-MMM-YYYY" displayFormat="D MMMM YYYY"></ion-datetime>
+        <ion-datetime formControlName="consultationDate" [monthNames]="monthList" [monthShortNames]="monthShortList" [dayNames]="weekdayList" [dayShortNames]="weekdayShortList" cancelText="{{'PROJECT.DETAIL.MODAL.CANCEL' | translate}}" doneText="{{'PROJECT.DETAIL.POPUP.OK' | translate}}" pickerFormat="DD-MMM-YYYY" displayFormat="D MMMM YYYY"></ion-datetime>
       </ion-item>
     </ion-list>
   </form>

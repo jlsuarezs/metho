@@ -11,38 +11,38 @@
 </ion-header>
 
 <ion-content class="source-modal-article">
-  <form [ngFormModel]="form" (keypress)="submitIfEnter($event)">
+  <form [formGroup]="form" (keypress)="submitIfEnter($event)">
     <ion-list>
       <ion-list-header>
         {{'PROJECT.DETAIL.MODAL.ARTICLE.AUTHOR_NAME' | translate}}
       </ion-list-header>
       <ion-item class="flex-sub padding">
-        <ion-input type="text" ngControl="author1firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME' | translate }}"></ion-input>
-        <ion-input type="text" ngControl="author1lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.LASTNAME' | translate }}"></ion-input>
+        <ion-input type="text" formControlName="author1firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME' | translate }}"></ion-input>
+        <ion-input type="text" formControlName="author1lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.LASTNAME' | translate }}"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label stacked>{{'PROJECT.DETAIL.MODAL.ARTICLE.TITLE_LABEL' | translate}}</ion-label>
-        <ion-input ngControl="title" placeholder="{{'PROJECT.DETAIL.MODAL.ARTICLE.TITLE_PLACEHOLDER' | translate}}"></ion-input>
+        <ion-input formControlName="title" placeholder="{{'PROJECT.DETAIL.MODAL.ARTICLE.TITLE_PLACEHOLDER' | translate}}"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label stacked>{{'PROJECT.DETAIL.MODAL.ARTICLE.PERIODIC_LABEL' | translate}}</ion-label>
-        <ion-input ngControl="editor" placeholder="{{'PROJECT.DETAIL.MODAL.ARTICLE.PERIODIC_PLACEHOLDER' | translate}}"></ion-input>
+        <ion-input formControlName="editor" placeholder="{{'PROJECT.DETAIL.MODAL.ARTICLE.PERIODIC_PLACEHOLDER' | translate}}"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label stacked>{{'PROJECT.DETAIL.MODAL.ARTICLE.EDITION_NUMBER_LABEL' | translate}}</ion-label>
-        <ion-input ngControl="editionNumber" placeholder="{{'PROJECT.DETAIL.MODAL.ARTICLE.EDITION_NUMBER_PLACEHOLDER' | translate}}"></ion-input>
+        <ion-input formControlName="editionNumber" placeholder="{{'PROJECT.DETAIL.MODAL.ARTICLE.EDITION_NUMBER_PLACEHOLDER' | translate}}"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label stacked>{{'PROJECT.DETAIL.MODAL.ARTICLE.PUBLICATION_DATE_LABEL' | translate}}</ion-label>
-        <ion-input ngControl="publicationDate" placeholder="{{'PROJECT.DETAIL.MODAL.ARTICLE.PUBLICATION_DATE_PLACEHOLDER' | translate}}"></ion-input>
+        <ion-input formControlName="publicationDate" placeholder="{{'PROJECT.DETAIL.MODAL.ARTICLE.PUBLICATION_DATE_PLACEHOLDER' | translate}}"></ion-input>
       </ion-item>
       <ion-list class="no-margin">
         <ion-list-header>
           {{'PROJECT.DETAIL.MODAL.ARTICLE.INDICATION_START_END_LABEL' | translate}}
         </ion-list-header>
         <ion-item class="flex-sub padding">
-          <ion-input type="text" ngControl="startPage" placeholder="{{ 'PROJECT.DETAIL.MODAL.ARTICLE.INDICATION_START_PLACEHOLDER' | translate }}"></ion-input>
-          <ion-input type="text" ngControl="endPage" placeholder="{{ 'PROJECT.DETAIL.MODAL.ARTICLE.INDICATION_END_PLACEHOLDER' | translate }}"></ion-input>
+          <ion-input type="text" formControlName="startPage" placeholder="{{ 'PROJECT.DETAIL.MODAL.ARTICLE.INDICATION_START_PLACEHOLDER' | translate }}"></ion-input>
+          <ion-input type="text" formControlName="endPage" placeholder="{{ 'PROJECT.DETAIL.MODAL.ARTICLE.INDICATION_END_PLACEHOLDER' | translate }}"></ion-input>
         </ion-item>
       </ion-list>
     </ion-list>
