@@ -1,7 +1,7 @@
 import {NavController, ViewController, NavParams} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
-import {FormBuilder, Validators, ControlGroup} from '@angular/common';
+import {FormBuilder, Validators, FormGroup} from '@angular/forms';
 
 import {AppStorage} from '../../providers/app-storage/app-storage.ts';
 
@@ -13,7 +13,7 @@ export class ProjectModalPage {
   public isNew: Boolean;
   public previous: any;
   public hasConfirmed: boolean = false;
-  public projectForm: ControlGroup;
+  public projectForm: FormGroup;
 
   constructor(public viewCtrl: ViewController, public navParams: NavParams, fb: FormBuilder, public storage: AppStorage) {
     if(this.navParams.get('previous')) {

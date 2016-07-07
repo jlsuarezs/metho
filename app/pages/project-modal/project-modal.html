@@ -11,15 +11,15 @@
 </ion-header>
 
 <ion-content class="project-modal">
-  <form [ngFormModel]="projectForm" (keypress)="submitIfEnter($event)">
+  <form [formGroup]="projectForm" (keypress)="submitIfEnter($event)">
     <ion-list>
       <ion-item>
         <ion-label stacked>{{'PROJECT.TAB.MODAL.PROJECT_NAME_LABEL' | translate}}</ion-label>
-        <ion-input ngControl="name" type="text" placeholder="{{'PROJECT.TAB.MODAL.PROJECT_NAME_PLACEHOLDER' | translate }}"></ion-input>
+        <ion-input formControlName="name" type="text" placeholder="{{'PROJECT.TAB.MODAL.PROJECT_NAME_PLACEHOLDER' | translate }}"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label stacked>{{'PROJECT.TAB.MODAL.MATTER_LABEL' | translate}}</ion-label>
-        <ion-input ngControl="matter" type="text" placeholder="{{'PROJECT.TAB.MODAL.MATTER_PLACEHOLDER' | translate}}"></ion-input>
+        <ion-input formControlName="matter" type="text" placeholder="{{'PROJECT.TAB.MODAL.MATTER_PLACEHOLDER' | translate}}"></ion-input>
       </ion-item>
     </ion-list>
   </form>
