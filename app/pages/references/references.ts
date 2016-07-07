@@ -13,17 +13,18 @@ import {ReferencesDetailPage} from '../references-detail/references-detail';
   pipes: [TranslatePipe]
 })
 export class ReferencesPage {
-  public references: any[];
+  public referenceData: any[] = [];
   public advanced: boolean;
 
-  constructor(public nav: NavController, public settings: Settings) {
-    this.references = References.getReferences();
-    this.advanced = this.settings.get('advanced');
+  constructor(public nav: NavController, public references: References) {
+    this.references.load().then(data => {
+      this.referenceData = data;
+    });
   }
 
   goToReferenceDetailPage(id: number) {
     this.nav.push(ReferencesDetailPage, {
       id: id
-    })
+    });
   }
 }

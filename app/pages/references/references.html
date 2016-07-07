@@ -6,7 +6,7 @@
 
 <ion-content class="references">
   <ion-list>
-    <button ion-item *ngFor="let reference of references" (click)="goToReferenceDetailPage(reference.id)">
+    <button ion-item *ngFor="let reference of referenceData" (click)="goToReferenceDetailPage(reference.id)">
       <ion-thumbnail item-left>
         <img [src]="reference.icon">
       </ion-thumbnail>

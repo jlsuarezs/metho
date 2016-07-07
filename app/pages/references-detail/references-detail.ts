@@ -15,13 +15,13 @@ export class ReferencesDetailPage {
   public entries: any[] = [];
   public id: string;
 
-  constructor(public nav: NavController, public params: NavParams) {
-    let object = References.getReferences();
+  constructor(public nav: NavController, public params: NavParams, public references: References) {
     this.id = this.params.get('id');
-
-    this.text = object[this.id].text;
-    this.entries = object[this.id].subPages;
-    this.name = object[this.id].name
+    this.references.load().then(data => {
+      this.text = data[this.id].text;
+      this.entries = data[this.id].subPages;
+      this.name = data[this.id].name;
+    });
   }
 
   goToReferenceSubPage(id: number) {
