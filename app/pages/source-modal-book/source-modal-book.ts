@@ -10,6 +10,7 @@ import {Fetch} from '../../providers/fetch/fetch.ts';
 import {BoardingScanPage} from '../boarding-scan/boarding-scan';
 import {Settings} from '../../providers/settings/settings';
 import {Language} from '../../providers/language/language';
+import {UserReport} from '../../providers/user-report/user-report';
 
 @Component({
   templateUrl: 'build/pages/source-modal-book/source-modal-book.html',
@@ -43,7 +44,7 @@ export class SourceModalBookPage {
     shown: false
   };
 
-  constructor(public viewCtrl: ViewController, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public modalCtrl: ModalController, public translate: TranslateService, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public nav: NavController, public fetch: Fetch, public settings: Settings, public language: Language) {
+  constructor(public viewCtrl: ViewController, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public modalCtrl: ModalController, public translate: TranslateService, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public nav: NavController, public fetch: Fetch, public settings: Settings, public language: Language, public report: UserReport) {
     if(this.params.get('editing') == true) {
       this.isNew = false;
     }else {
@@ -378,7 +379,7 @@ export class SourceModalBookPage {
             alert.present();
           });
         }else {
-          // ReportUser.report(response);
+          this.report.report(response);
         }
       });
     }else {
