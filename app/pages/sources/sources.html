@@ -5,7 +5,7 @@
       <div class="page-sub-title"> {{project.matter ? project.matter : ('PROJECT.TAB.UNKNOWN_MATTER' | translate)}} </div>
     </ion-title>
     <ion-buttons end>
-      <button (click)="share()">
+      <button (click)="share()" [disabled]="!sources.length">
         <ion-icon name="share" isActive="false"></ion-icon>
       </button>
     </ion-buttons>
