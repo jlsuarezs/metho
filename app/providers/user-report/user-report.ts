@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Alert, App, NavController} from 'ionic-angular';
+import {AlertController, App, NavController} from 'ionic-angular';
 import {SocialSharing, Device} from 'ionic-native';
 import {TranslateService} from 'ng2-translate/ng2-translate';
 
@@ -7,7 +7,7 @@ import {TranslateService} from 'ng2-translate/ng2-translate';
 export class UserReport {
   public nav: NavController;
 
-  constructor(public translate: TranslateService, public app: App) {}
+  constructor(public translate: TranslateService, public alertCtrl: AlertController) {}
 
   report(err: any) {
     console.log(err);
@@ -26,7 +26,7 @@ export class UserReport {
       }
     }
     this.translate.get(["YES", "NO", "REPORT.UNKNOWN", "REPORT.REPORT_?","REPORT.DO_NOT_EDIT", "REPORT.ERROR"]).subscribe(translations => {
-      let alert = Alert.create({
+      let alert = this.alertCtrl.create({
         title: translations["REPORT.UNKNOWN"],
         message: translations["REPORT.REPORT_?"],
         buttons: [
@@ -55,7 +55,7 @@ export class UserReport {
         ]
       });
 
-      this.app.getActiveNav().present(alert);
+      alert.present();
     });
   }
 }
