@@ -168,7 +168,7 @@ export class SourcePage {
         break;
     }
 
-    modal.onDismiss(() => {
+    modal.onWillDismiss(() => {
       this.loadSource();
     });
 

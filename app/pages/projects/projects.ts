@@ -40,7 +40,7 @@ export class ProjectsPage {
       previous: null
     });
 
-    modal.onDismiss(data => {
+    modal.onWillDismiss(data => {
       this.loadProjects();
     });
 
@@ -52,7 +52,7 @@ export class ProjectsPage {
       previous: project
     });
 
-    modal.onDismiss(data => {
+    modal.onWillDismiss(data => {
       this.list.closeSlidingItems();
       this.loadProjects();
     });

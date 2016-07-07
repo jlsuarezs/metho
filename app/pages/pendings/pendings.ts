@@ -135,7 +135,7 @@ export class PendingsPage {
       hideScan: true
     });
 
-    modal.onDismiss(() => {
+    modal.onWillDismiss(() => {
       this.loadPendings(true);
     });
 
@@ -149,7 +149,7 @@ export class PendingsPage {
       url: "http://google.ca/search?q=isbn+" + pending.isbn
     });
 
-    modal.onDismiss(() => {
+    modal.onWillDismiss(() => {
       this.loadPendings(true);
     });
 

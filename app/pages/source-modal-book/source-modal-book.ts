@@ -257,7 +257,7 @@ export class SourceModalBookPage {
   scan() {
     if (!this.settings.get("scanBoardingDone")) {
       let modal = this.modalCtrl.create(BoardingScanPage);
-      modal.onDismiss(() => {
+      modal.onDidDismiss(() => {
         this.scan();
       });
       modal.present();

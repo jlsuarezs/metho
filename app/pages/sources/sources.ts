@@ -177,7 +177,7 @@ export class SourcesPage {
         break;
     }
 
-    modal.onDismiss(() => {
+    modal.onWillDismiss(() => {
       this.loadSources();
       this.loadPendingNumber();
     });
