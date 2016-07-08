@@ -300,10 +300,17 @@ export class SourceModalBookPage {
 
   fetchFromISBN(isbn: string) {
     if (navigator.onLine) {
-      let loading = this.loadingCtrl.create();
-      loading.present();
+      if (!this.fetch.isISBNCached(isbn)) {
+        var loading = this.loadingCtrl.create();
+        var isLoading = true;
+        loading.present();
+      }else {
+        var isLoading = false;
+      }
       this.fetch.fromISBN(isbn).then((response) => {
-        loading.dismiss();
+        if (isLoading) {
+          var loadingTransition = loading.dismiss();
+        }
         if (this.isEmpty(true)) {
           this.updateValues(response);
           this.insertingFromScan = true;
