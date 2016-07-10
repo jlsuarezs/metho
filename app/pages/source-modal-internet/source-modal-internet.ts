@@ -58,7 +58,7 @@ export class SourceModalInternetPage {
       title: [this.noData ? '' : this.previous.title],
       editor: [this.noData ? '' : this.previous.editor],
       url: [this.noData ? '' : this.previous.url],
-      consultationDate: [this.noData ? moment().toISOString() : this.previous.consultationDate]
+      consultationDate: [this.noData ? moment().utcOffset(0).subtract(-moment().utcOffset(), 'minutes').toISOString() : this.previous.consultationDate]
     });
     this.generateLabels();
   }

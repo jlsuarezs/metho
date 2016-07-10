@@ -64,7 +64,7 @@ export class SourceModalInterviewPage {
       interviewed1lastname: [this.noData ? '' : this.previous.interviewed1lastname],
       interviewedTitle: [this.noData ? '' : this.previous.interviewedTitle],
       publicationLocation: [this.noData ? '' : this.previous.publicationLocation],
-      consultationDate: [this.noData ? moment().toISOString() : this.previous.consultationDate],
+      consultationDate: [this.noData ? moment().utcOffset(0).subtract(-moment().utcOffset(), 'minutes').toISOString() : this.previous.consultationDate],
     });
     this.generateLabels();
     // Use async once issue is resolved
