@@ -73,7 +73,7 @@ export class SourceModalBookPage {
     if (typeof this.params.get('url') !== "undefined") {
       this.url = this.params.get('url');
       this.showBrowser = true;
-      // SafariViewController.mayLaunchUrl(this.url);
+      SafariViewController.mayLaunchUrl(this.url);
       this.viewCtrl.didEnter.subscribe(() => {
         this.browser();
       });
@@ -468,12 +468,12 @@ export class SourceModalBookPage {
   }
 
   browser() {
-    // SafariViewController.isAvailable().then(avail => {
-    //   if (avail) {
-    //     SafariViewController.show({
-    //       url: this.url
-    //     });
-    //   }
-    // });
+    SafariViewController.isAvailable().then(avail => {
+      if (avail) {
+        SafariViewController.show({
+          url: this.url 
+        });
+      }
+    });
   }
 }
