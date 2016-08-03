@@ -565,7 +565,7 @@
             "SHARING": "Partage avancé",
             "SHARING_DESC": "Partagez un lien à partir d'un site supporté (Wikipédia) vers Metho pour créer une source automatiquement",
             "INSTANT_SEARCH": "Recherche instantanée",
-            "INSTANT_SEARCH_DESC": "Entrez un nom de livre dans la champ «Titre» lors de la création d'une source pour lancer une recherche sur ce titre et ainsi pouvoir utiliser le remplissage automatique (certains livres ne sont pas supportés)",
+            "INSTANT_SEARCH_DESC": "Entrez un nom de livre dans le champ «Titre» lors de la création d'une source pour lancer une recherche sur ce titre et ainsi pouvoir utiliser le remplissage automatique (certains livres ne sont pas supportés)",
             "POPUP": {
                 "ALREADY_TEXT": "Le mode avancé est déjà activé"
             }
