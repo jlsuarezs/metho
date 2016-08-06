@@ -149,31 +149,43 @@ export class SourcesPage {
         var modal = this.modalCtrl.create(SourceModalBookPage, {
           projectId: this.projectId,
           scan: openScan
+        }, {
+          enableBackdropDismiss: false
         });
         break;
       case 'article':
         var modal = this.modalCtrl.create(SourceModalArticlePage, {
           projectId: this.projectId
+        }, {
+          enableBackdropDismiss: false
         });
         break;
       case 'internet':
         var modal = this.modalCtrl.create(SourceModalInternetPage, {
           projectId: this.projectId
+        }, {
+          enableBackdropDismiss: false
         });
         break;
       case 'cd':
         var modal = this.modalCtrl.create(SourceModalCdPage, {
           projectId: this.projectId
+        }, {
+          enableBackdropDismiss: false
         });
         break;
       case 'movie':
         var modal = this.modalCtrl.create(SourceModalMoviePage, {
           projectId: this.projectId
+        }, {
+          enableBackdropDismiss: false
         });
         break;
       case 'interview':
         var modal = this.modalCtrl.create(SourceModalInterviewPage, {
           projectId: this.projectId
+        }, {
+          enableBackdropDismiss: false
         });
         break;
     }

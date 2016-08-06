@@ -38,6 +38,8 @@ export class ProjectsPage {
   createProject() {
     let modal = this.modalCtrl.create(ProjectModalPage, {
       previous: null
+    }, {
+      enableBackdropDismiss: false
     });
 
     modal.onWillDismiss(data => {
@@ -50,6 +52,8 @@ export class ProjectsPage {
   editProject(project: any) {
     let modal = this.modalCtrl.create(ProjectModalPage, {
       previous: project
+    }, {
+      enableBackdropDismiss: false
     });
 
     modal.onWillDismiss(data => {

@@ -124,6 +124,8 @@ export class SourcePage {
           data: this.source,
           editing: true,
           projectId: this.source.project_id
+        }, {
+          enableBackdropDismiss: false
         });
         break;
       case 'article':
@@ -132,6 +134,8 @@ export class SourcePage {
           data: this.source,
           editing: true,
           projectId: this.source.project_id
+        }, {
+          enableBackdropDismiss: false
         });
         break;
       case 'internet':
@@ -140,6 +144,8 @@ export class SourcePage {
           data: this.source,
           editing: true,
           projectId: this.source.project_id
+        }, {
+          enableBackdropDismiss: false
         });
         break;
       case 'cd':
@@ -148,6 +154,8 @@ export class SourcePage {
           data: this.source,
           editing: true,
           projectId: this.source.project_id
+        }, {
+          enableBackdropDismiss: false
         });
         break;
       case 'movie':
@@ -156,6 +164,8 @@ export class SourcePage {
           data: this.source,
           editing: true,
           projectId: this.source.project_id
+        }, {
+          enableBackdropDismiss: false
         });
         break;
       case 'interview':
@@ -164,6 +174,8 @@ export class SourcePage {
           data: this.source,
           editing: true,
           projectId: this.source.project_id
+        }, {
+          enableBackdropDismiss: false
         });
         break;
     }
