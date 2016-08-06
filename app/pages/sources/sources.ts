@@ -51,6 +51,7 @@ export class SourcesPage {
   loadSources() {
     this.storage.getSourcesFromProjectId(this.projectId).then(sources => {
       this.sources = sources;
+      this.filteredSources = sources;
       this.sources.sort(function(a, b) {
         if (a.title && b.title) {
           return a.title.localeCompare(b.title);
