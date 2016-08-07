@@ -18,8 +18,10 @@
         <ion-checkbox formControlName="hasAuthors"></ion-checkbox>
       </ion-item>
       <ion-item-divider *ngIf="form.find('hasAuthors').value == true">{{'PROJECT.DETAIL.MODAL.MOVIE.HAS_MORE_THAN_ONE_TRUE' | translate}}</ion-item-divider>
-      <ion-item class="flex-sub padding">
+      <ion-item>
         <ion-input type="text" formControlName="author1firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.MOVIE.FIRSTNAME' | translate }}"></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-input type="text" formControlName="author1lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.MOVIE.LASTNAME' | translate }}"></ion-input>
       </ion-item>
       <ion-item>

@@ -17,10 +17,14 @@
         <ion-label>{{'PROJECT.DETAIL.MODAL.INTERNET.HAS_AUTHORS' | translate}}</ion-label>
         <ion-checkbox formControlName="hasAuthors"></ion-checkbox>
       </ion-item>
-      <ion-item class="flex-sub padding" *ngIf="form.find('hasAuthors').value == true">
-        <ion-input type="text" formControlName="author1firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERNET.FIRSTNAME' | translate }}"></ion-input>
-        <ion-input type="text" formControlName="author1lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERNET.LASTNAME' | translate }}"></ion-input>
-      </ion-item>
+      <div *ngIf="form.find('hasAuthors').value == true" class="authors">
+        <ion-item>
+          <ion-input type="text" formControlName="author1firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERNET.FIRSTNAME' | translate }}"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input type="text" formControlName="author1lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERNET.LASTNAME' | translate }}"></ion-input>
+        </ion-item>
+      </div>
       <ion-item>
         <ion-label stacked>{{'PROJECT.DETAIL.MODAL.INTERNET.WEBPAGE_NAME' | translate}}</ion-label>
         <ion-input formControlName="title" placeholder="{{'PROJECT.DETAIL.MODAL.INTERNET.WEBPAGE_NAME_PLACHOLDER' | translate}}"></ion-input>

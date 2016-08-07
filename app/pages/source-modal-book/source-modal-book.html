@@ -30,47 +30,69 @@
       </ion-item>
     </ion-list>
     <!-- La source a de 1 à 3 auteurs -->
-    <ion-list *ngIf="form.find('hasAuthors').value == '13'" class="no-margin" no-lines>
-      <ion-item class="flex-sub padding">
+    <ion-list *ngIf="form.find('hasAuthors').value == '13'" class="no-margin authors" no-lines>
+      <ion-item>
         <ion-input type="text" formControlName="author1firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME' | translate }}"></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-input type="text" formControlName="author1lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.LASTNAME' | translate }}"></ion-input>
       </ion-item>
-      <ion-item class="flex-sub padding" *ngIf="form.find('author1firstname').value != '' || form.find('author1lastname').value != ''">
-        <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME' | translate }}" formControlName="author2firstname"></ion-input>
-        <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.LASTNAME' | translate }}" formControlName="author2lastname"></ion-input>
-      </ion-item>
-      <ion-item class="flex-sub padding" *ngIf="form.find('author2firstname').value != '' || form.find('author2lastname').value != ''">
-        <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME' | translate }}" formControlName="author3firstname"></ion-input>
-        <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.LASTNAME' | translate }}" formControlName="author3lastname"></ion-input>
-      </ion-item>
+      <div *ngIf="form.find('author1firstname').value != '' || form.find('author1lastname').value != ''" class="inputs">
+        <ion-item>
+          <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME' | translate }}" formControlName="author2firstname"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.LASTNAME' | translate }}" formControlName="author2lastname"></ion-input>
+        </ion-item>
+      </div>
+      <div *ngIf="form.find('author2firstname').value != '' || form.find('author2lastname').value != ''" class="inputs">
+        <ion-item>
+          <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME' | translate }}" formControlName="author3firstname"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.LASTNAME' | translate }}" formControlName="author3lastname"></ion-input>
+        </ion-item>
+      </div>
     </ion-list>
     <!-- La source a plus de 3 auteurs -->
-    <ion-list *ngIf="form.find('hasAuthors').value == 'more3'" class="no-margin-with-header" no-lines>
+    <ion-list *ngIf="form.find('hasAuthors').value == 'more3'" class="no-margin-with-header authors" no-lines>
       <ion-list-header>
         {{'PROJECT.DETAIL.MODAL.BOOK.FIRST_2_AUTHOR_NAME' | translate}}
       </ion-list-header>
-      <ion-item class="flex-sub padding">
+      <ion-item>
         <ion-input type="text" formControlName="author1firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME' | translate }}"></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-input type="text" formControlName="author1lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.LASTNAME' | translate }}"></ion-input>
       </ion-item>
-      <ion-item class="flex-sub padding" *ngIf="form.find('author1firstname').value != '' || form.find('author1lastname').value != ''">
-        <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME' | translate }}" formControlName="author2firstname"></ion-input>
-        <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.LASTNAME' | translate }}" formControlName="author2lastname"></ion-input>
-      </ion-item>
+      <div *ngIf="form.find('author1firstname').value != '' || form.find('author1lastname').value != ''" class="inputs">
+        <ion-item>
+          <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME' | translate }}" formControlName="author2firstname"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.LASTNAME' | translate }}" formControlName="author2lastname"></ion-input>
+        </ion-item>
+      </div>
     </ion-list>
     <!-- La source est un collectif -->
-    <ion-list *ngIf="form.find('hasAuthors').value == 'collective'" class="no-margin-with-header" no-lines>
+    <ion-list *ngIf="form.find('hasAuthors').value == 'collective'" class="no-margin-with-header authors" no-lines>
       <ion-list-header>
         {{'PROJECT.DETAIL.MODAL.BOOK.DIRECTOR_NAMES' | translate}}
       </ion-list-header>
-      <ion-item class="flex-sub padding">
+      <ion-item>
         <ion-input type="text" formControlName="author1firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME' | translate }}"></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-input type="text" formControlName="author1lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.LASTNAME' | translate }}"></ion-input>
       </ion-item>
-      <ion-item class="flex-sub padding" *ngIf="form.find('author1firstname').value != '' || form.find('author1lastname').value != ''">
-        <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME' | translate }}" formControlName="author2firstname"></ion-input>
-        <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.LASTNAME' | translate }}" formControlName="author2lastname"></ion-input>
-      </ion-item>
+      <div *ngIf="form.find('author1firstname').value != '' || form.find('author1lastname').value != ''" class="inputs">
+        <ion-item>
+          <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME' | translate }}" formControlName="author2firstname"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.LASTNAME' | translate }}" formControlName="author2lastname"></ion-input>
+        </ion-item>
+      </div>
     </ion-list>
 
     <!-- Autres champs -->

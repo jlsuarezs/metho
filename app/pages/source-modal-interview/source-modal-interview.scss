@@ -1,19 +1,4 @@
 .source-modal-interview {
-    .flex-sub {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .flex-sub > * {
-        width: 100%;
-        flex-grow: 1;
-    }
-
-    .flex-sub input {
-        text-align: center;
-    }
-
     .no-margin-bottom {
         margin-bottom: 0;
     }
@@ -74,5 +59,15 @@
     }
     .item-range ion-label, .item-datetime ion-label {
         color: #7f7f7f;
+    }
+
+    .authors {
+        border-bottom: 1px;
+        border-bottom-color: #c8c7cc;
+        border-bottom-style: solid;
+
+        & > .item-inner {
+            border-width: 0 !important;
+        }
     }
 }
