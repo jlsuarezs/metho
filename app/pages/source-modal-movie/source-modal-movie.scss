@@ -60,4 +60,8 @@
     .item-range ion-label, .item-datetime ion-label {
         color: #7f7f7f;
     }
+
+    ion-item-divider ion-label {
+        white-space: normal;
+    }
 }
