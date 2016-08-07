@@ -10,6 +10,8 @@ import {Settings} from '../../providers/settings/settings';
 import {Language} from '../../providers/language/language';
 import {AdvancedMode} from '../../providers/advanced-mode/advanced-mode';
 
+import * as deepcopy from 'deepcopy';
+
 @Component({
   templateUrl: 'build/pages/settings/settings.html',
   pipes: [TranslatePipe]
@@ -29,7 +31,7 @@ export class SettingsPage {
   }
 
   loadSettings() {
-    this.settings = this.settingService.getAll();
+    this.settings = deepcopy(this.settingService.getAll());
   }
 
   ionViewWillEnter() {
@@ -37,7 +39,7 @@ export class SettingsPage {
   }
 
   toggleAdvanced() {
-    if (this.settings.advanced == true) {
+    if (this.settings.advanced) {
       this.advanced.enable().then(() => {
 
       }).catch(err => {

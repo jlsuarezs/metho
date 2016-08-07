@@ -568,7 +568,10 @@
             "INSTANT_SEARCH": "Búsqueda instantánea",
             "INSTANT_SEARCH_DESC": "Introduzca el nombre de un libro en el campo \"Titulo\" para lanzar la búsqueda y poder llenar las informaciónes automaticamente (ciertos libros no son compatibles)",
             "POPUP": {
-                "ALREADY_TEXT": "El modo avanzado es ya activado"
+                "ALREADY_TEXT": "El modo avanzado es ya activado",
+                "WILL_RESTORE": "Si elige de continuar, sus compras anteriores serán restorados (contraseña necesita). Si ningún fue encontrados, puede comprar el compra in-app.",
+                "ERR_NETWORK_TITLE": "Desconectado",
+                "ERR_NETWORK": "No puede comprar el modo avanzado mientras de ser desconectado."
             }
         },
         "FEEDBACK": {

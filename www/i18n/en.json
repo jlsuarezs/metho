@@ -568,7 +568,10 @@
             "INSTANT_SEARCH": "Instant search",
             "INSTANT_SEARCH_DESC": "Enter a book's name in \"Title\" text field to launch a search on this title and autofill the informations (some books are not supported)",
             "POPUP": {
-                "ALREADY_TEXT": "Advanced mode is already activated"
+                "ALREADY_TEXT": "Advanced mode is already activated",
+                "WILL_RESTORE": "If you choose to continue, purchases made from other devices will be restored (your password will be asked). If none is found, you will have the choice to buy the in-app purchase or not.",
+                "ERR_NETWORK_TITLE": "Offline",
+                "ERR_NETWORK": "You cannot buy advanced mode while offline."
             }
         },
         "FEEDBACK": {
