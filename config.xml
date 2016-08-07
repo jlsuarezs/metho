@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.fclavette.metho" version="0.11.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.fclavette.metho" version="0.11.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Metho</name>
     <description>
         Easy bibliography
@@ -43,7 +43,7 @@
             </array>
         </config-file>
         <config-file parent="ITSAppUsesNonExemptEncryption" platform="ios" target="*-Info.plist">
-            <false/>
+            <false />
         </config-file>
         <config-file parent="CFBundleDevelopmentRegion" platform="ios" target="*-Info.plist">
             <string>fr_CA</string>
