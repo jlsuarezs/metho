@@ -36,7 +36,7 @@ export class AdvancedMode {
   }
 
   enable(): Promise<any> {
-    if (!this.settings.get("advanced")) {
+    if (!this.settings.get("advanced") && !!window.cordova) {
       return new Promise((resolve, reject) => {
         if (navigator.onLine && this.hasLoaded) {
           inAppPurchase.buy(this.productId).then((data) => {
@@ -65,6 +65,7 @@ export class AdvancedMode {
         }
       });
     }else {
+      this.settings.set('advanced', true);
       return Promise.resolve();
     }
   }
