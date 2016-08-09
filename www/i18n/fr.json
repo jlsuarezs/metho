@@ -567,11 +567,13 @@
             "SHARING_DESC": "Partagez un lien à partir d'un site supporté (Wikipédia) vers Metho pour créer une source automatiquement",
             "INSTANT_SEARCH": "Recherche instantanée",
             "INSTANT_SEARCH_DESC": "Entrez un nom de livre dans le champ «Titre» lors de la création d'une source pour lancer une recherche sur ce titre et ainsi pouvoir utiliser le remplissage automatique (certains livres ne sont pas supportés)",
+            "RESTORE": "Restaurer",
             "POPUP": {
                 "ALREADY_TEXT": "Le mode avancé est déjà activé",
-                "WILL_RESTORE": "Si vous continuez, les achats faits sur d'autres appareils seront restaurés (votre mot de passe sera demandé). Si aucun achat antérieur n'est trouvé, vous aurez le choix d'acheter ou non l'achat intégré (mot de passe requis).",
                 "ERR_NETWORK_TITLE": "Hors-ligne",
-                "ERR_NETWORK": "Vous ne pouvez pas acheter le mode avancé lorsqu'hors-ligne."
+                "ERR_NETWORK": "Vous ne pouvez pas acheter ou restaurer le mode avancé lorsqu'hors-ligne.",
+                "RESTORE": "Restaurer",
+                "RESTORE_NO_FOUND": "Aucun item précédemment acheté n'a été trouvé."
             }
         },
         "FEEDBACK": {

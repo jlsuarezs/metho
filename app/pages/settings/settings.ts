@@ -18,6 +18,7 @@ import * as deepcopy from 'deepcopy';
 })
 export class SettingsPage {
   public settings: any = {};
+  public enableAdvanced: boolean = false;
   public advancedPage: any;
   public attributionsPage: any;
   public feedbackPage: any;
@@ -28,6 +29,13 @@ export class SettingsPage {
     this.attributionsPage = AttributionsPage;
     this.feedbackPage = FeedbackPage;
     this.loadSettings();
+    if (this.advanced.hasLoaded) {
+      this.enableAdvanced = true;
+    }else {
+      this.advanced.loadEvents.subscribe(() => {
+        this.enableAdvanced = true;
+      });
+    }
   }
 
   loadSettings() {

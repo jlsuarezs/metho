@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, EventEmitter} from '@angular/core';
 import {AlertController} from 'ionic-angular';
 
 import {Settings} from '../settings/settings';
@@ -10,7 +10,9 @@ declare var inAppPurchase: any;
 
 @Injectable()
 export class AdvancedMode {
-  public price: number = null;
+  public price: string = "";
+  public hasLoaded: boolean = false;
+  public loadEvents: EventEmitter<any> = new EventEmitter();
   private productId: string = "";
 
   constructor(public translate: TranslateService, public settings: Settings, public alertCtrl: AlertController, public report: UserReport) {
@@ -19,53 +21,81 @@ export class AdvancedMode {
         let product = products[0];
         this.price = product.price;
         this.productId = product.productId;
+        this.hasLoaded = true;
+        this.loadEvents.emit(true);
       }).catch(err => {
         this.report.report(err);
       });
+    }else {
+      this.price = "1,39$";
+      setTimeout(() => {
+        this.hasLoaded = true;
+        this.loadEvents.emit(true);
+      }, 2000);
     }
   }
 
   enable(): Promise<any> {
     if (!this.settings.get("advanced")) {
       return new Promise((resolve, reject) => {
-        if (navigator.onLine) {
-          this.translate.get(["SETTINGS.ADVANCED_MODE.TITLE", "SETTINGS.ADVANCED_MODE.POPUP.WILL_RESTORE", "PROJECT.TAB.MODAL.CANCEL", "PROJECT.DETAIL.POPUP.OK"]).subscribe(translations => {
-            let alertPopup = this.alertCtrl.create({
-              title: translations["SETTINGS.ADVANCED_MODE.TITLE"],
-              message: translations["SETTINGS.ADVANCED_MODE.POPUP.WILL_RESTORE"],
+        if (navigator.onLine && this.hasLoaded) {
+          inAppPurchase.buy(this.productId).then((data) => {
+            this.settings.set('advanced', true);
+            resolve();
+          }).catch(err => {
+            this.report.report("catch-buy" + err);
+            reject();
+          });
+        }else {
+          this.translate.get(["PROJECT.DETAIL.POPUP.OK", "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE", "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK"]).subscribe(translations => {
+            let alert = this.alertCtrl.create({
+              title: translations["SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE"],
+              message: translations["SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK"],
               buttons: [
-                {
-                  text: translations["PROJECT.TAB.MODAL.CANCEL"],
-                  handler: () => {
-                    reject();
-                  }
-                },
                 {
                   text: translations["PROJECT.DETAIL.POPUP.OK"],
                   handler: () => {
-                    inAppPurchase.restorePurchases().then((data) => {
-                      if (data.length && data[0].productId == this.productId) {
-                        this.settings.set('advanced', true);
-                        resolve();
-                      }else {
-                        inAppPurchase.buy(this.productId).then((data) => {
-                          this.settings.set('advanced', true);
-                          resolve();
-                        }).catch(err => {
-                          this.report.report("catch-buy" + err);
-                          reject();
-                        });
-                      }
-                    }).catch(err => {
-                      this.report.report("catch-restore" + err);
-                      reject();
-                    });
+                    reject();
                   }
                 }
               ]
             });
 
-            alertPopup.present();
+            alert.present();
+          });
+        }
+      });
+    }else {
+      return Promise.resolve();
+    }
+  }
+
+  restore(): Promise<any> {
+    if (!this.settings.get("advanced")) {
+      return new Promise((resolve, reject) => {
+        if (navigator.onLine) {
+          inAppPurchase.restorePurchases().then((data) => {
+            if (data.length && data[0].productId == this.productId) {
+              this.settings.set('advanced', true);
+              resolve();
+            }else {
+              this.translate.get(["SETTINGS.ADVANCED_MODE.POPUP.RESTORE", "SETTINGS.ADVANCED_MODE.POPUP.RESTORE_NO_FOUND", "PROJECT.DETAIL.POPUP.OK"]).subscribe((translations) => {
+                let alert = this.alertCtrl.create({
+                  title: translations["SETTINGS.ADVANCED_MODE.POPUP.RESTORE"],
+                  message: translations["SETTINGS.ADVANCED_MODE.POPUP.RESTORE_NO_FOUND"],
+                  buttons: [
+                    {
+                      text: translations["PROJECT.DETAIL.POPUP.OK"]
+                    }
+                  ]
+                });
+
+                alert.present();
+              });
+            }
+          }).catch(err => {
+            this.report.report("catch-restore" + err);
+            reject();
           });
         }else {
           this.translate.get(["PROJECT.DETAIL.POPUP.OK", "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE", "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK"]).subscribe(translations => {

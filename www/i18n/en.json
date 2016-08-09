@@ -567,11 +567,13 @@
             "SHARING_DESC": "Share a link from a supported website (e.g. Wikipedia) to create its source automatically",
             "INSTANT_SEARCH": "Instant search",
             "INSTANT_SEARCH_DESC": "Enter a book's name in \"Title\" text field to launch a search on this title and autofill the informations (some books are not supported)",
+            "RESTORE": "Restore",
             "POPUP": {
                 "ALREADY_TEXT": "Advanced mode is already activated",
-                "WILL_RESTORE": "If you choose to continue, purchases made from other devices will be restored (your password will be asked). If none is found, you will have the choice to buy the in-app purchase or not.",
                 "ERR_NETWORK_TITLE": "Offline",
-                "ERR_NETWORK": "You cannot buy advanced mode while offline."
+                "ERR_NETWORK": "You cannot buy or restore advanced mode while offline.",
+                "RESTORE": "Restore",
+                "RESTORE_NO_FOUND": "No previously bought item was found."
             }
         },
         "FEEDBACK": {

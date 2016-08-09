@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content class="advanced-mode">
-  <button full light class="button-dollar" (click)="enable()" [disabled]="isAdvanced">1,29<span class="dollar">$</span></button>
+  <button full light class="button-dollar" (click)="enable()" [disabled]="isAdvanced">{{ price }}</button>
   <p text-center>{{'SETTINGS.ADVANCED_MODE.WAITING_FOR' | translate}}</p>
   <ion-list>
     <ion-item>
@@ -25,4 +25,5 @@
       <p class="wrap">{{'SETTINGS.ADVANCED_MODE.INSTANT_SEARCH_DESC' | translate}}</p>
     </ion-item>
   </ion-list>
+  <button full secondary (click)="restore()" [disabled]="isAdvanced">{{ 'SETTINGS.ADVANCED_MODE.RESTORE' | translate }}</button>
 </ion-content>
