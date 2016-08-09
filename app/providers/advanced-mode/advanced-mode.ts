@@ -43,7 +43,6 @@ export class AdvancedMode {
             this.settings.set('advanced', true);
             resolve();
           }).catch(err => {
-            this.report.report("catch-buy" + err);
             reject();
           });
         }else {
