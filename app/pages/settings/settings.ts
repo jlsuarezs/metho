@@ -28,7 +28,6 @@ export class SettingsPage {
     this.advancedPage = AdvancedModePage;
     this.attributionsPage = AttributionsPage;
     this.feedbackPage = FeedbackPage;
-    this.loadSettings();
     if (this.advanced.hasLoaded) {
       this.enableAdvanced = true;
     }else {
