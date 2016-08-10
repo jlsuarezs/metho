@@ -1,68 +1,84 @@
-import {Injectable} from '@angular/core';
+import {Injectable, EventEmitter} from '@angular/core';
 import {LocalStorage, Storage} from 'ionic-angular';
 import 'rxjs/add/operator/map';
+
+import {AppStorage} from '../app-storage/app-storage';
 
 @Injectable()
 export class Settings {
   public localStorage: LocalStorage;
   public settings: any = {};
-  public defaults: any;
-  public loaded: boolean = false;
+  public defaults: any = {
+    advanced: false,
+    defaultOrder: "alpha",
+    scanBoardingDone: false,
+    firstname: "",
+    lastname: "",
+    overideLang: "",
+    lastLang: "",
+    ignoreErrors: false
+  };
 
-  constructor() {
+  public loadEvents: EventEmitter<any> = new EventEmitter();
+  public isLoaded: boolean = false;
+
+  constructor(public storage: AppStorage) {
     this.localStorage = new Storage(LocalStorage);
-
-    this.defaults = {
-      advanced: false,
-      defaultOrder: "alpha",
-      scanBoardingDone: false,
-      firstname: "",
-      lastname: "",
-      overideLang: "",
-      lastLang: "",
-      firstRun: true,
-      ignoreErrors: false
-    };
 
     this.load();
   }
 
   load() {
-    for (var index in this.defaults) {
-      if (this.defaults.hasOwnProperty(index) && index != "firstRun") {
-        let currentIndex = index;
-        this.localStorage.get("setting-" + index).then(res => {
-          if (res == null) {
-            this.settings[currentIndex] = this.defaults[currentIndex];
-            this.localStorage.set("setting-" + currentIndex, this.defaults[currentIndex]);
-          }else {
-            if (res == "true") {
-              this.settings[currentIndex] = true;
-            }else if (res == "false") {
-              this.settings[currentIndex] = false;
-            }else {
-              this.settings[currentIndex] = res;
-            }
+    var settings = {};
+    Object.keys(this.defaults).map((value, index) => {
+      this.localStorage.get("setting-" + value).then(res => {
+        if (res != (null || undefined)) {
+          settings[value] = this.transformIfBool(res);
+        }
+
+        if (index == 7) {
+          if (this.isEmpty(settings)) { // LocalStorage may have been cleared by iOS or it's 1st boot
+            this.storage.getSettings().then(backup => {
+              if (this.isEmpty(backup)) { // Make defaults (1st boot)
+                Object.keys(this.defaults).map((value, index) => {
+                  this.set(value, this.defaults[value]);
+
+                  if (index == 7) {
+                    this.isLoaded = true;
+                    this.loadEvents.emit(true);
+                  }
+                });
+              }else { // LocalStorage has been cleared by iOS but backup is there
+                Object.keys(backup).map((value, index) => {
+                  this.set(value, backup[value]);
+
+                  if (index == (Object.keys(backup).length - 1)) {
+                    this.isLoaded = true;
+                    this.loadEvents.emit(true);
+                  }
+                });
+              }
+            }).catch(err => console.log(err));
+          }else { // Everything is normal after 1st boot
+            this.settings = settings;
+            this.isLoaded = true;
+            this.loadEvents.emit(true);
+            console.log(this.settings);
           }
-        });
-      }else if (index == "firstRun") {
-        let currentIndex = index;
-        this.localStorage.get("setting-" + index.toString()).then(res => {
-          if (res == null) {
-            this.settings[currentIndex] = this.defaults[currentIndex];
-            this.localStorage.set("setting-" + currentIndex, this.defaults[currentIndex]);
-          }else {
-            if (res == "true") {
-              this.settings[currentIndex] = true;
-            }else if (res == "false") {
-              this.settings[currentIndex] = false;
-            }else {
-              this.settings[currentIndex] = res;
-            }
-          }
-          this.loaded = true;
-        });
-      }
+        }
+      });
+    });
+  }
+
+  getAsync(key: string): any {
+    if (this.isLoaded) {
+      return Promise.resolve(this.settings[key]);
+    }else {
+      return new Promise(resolve => {
+        this.loadEvents.subscribe(() => {
+          resolve(this.settings[key]);
+        })
+      });
     }
   }
 
@@ -70,12 +86,27 @@ export class Settings {
     return this.settings[key];
   }
 
-  set(key: string, set: boolean|string): void {
-    this.settings[key] = set;
+  set(key: string, set: any): void {
+    this.settings[key] = this.transformIfBool(set);
     this.localStorage.set("setting-" + key, set.toString());
+    this.storage.setSetting(key, set);
   }
 
   getAll(): any {
     return this.settings;
+  }
+
+  transformIfBool(input: string): boolean|string {
+    if (input == "true") {
+      return true;
+    }else if (input == "false") {
+      return false;
+    }else {
+      return input;
+    }
+  }
+
+  isEmpty(obj) {
+    return Object.keys(obj).length === 0 && obj.constructor === Object;
   }
 }

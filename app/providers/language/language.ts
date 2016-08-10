@@ -26,39 +26,41 @@ export class Language {
 
   init() {
     this.translate.setDefaultLang('en');
-    if (this.settings.get('overideLang') == "") {
-      Globalization.getPreferredLanguage().then(lang => {
-        let code = lang.value.split("-")[0];
+    this.settings.getAsync('overideLang').then(overideLang => {
+      if (overideLang == "") {
+        Globalization.getPreferredLanguage().then(lang => {
+          let code = lang.value.split("-")[0];
 
-        this.translate.use(code);
+          this.translate.use(code);
+          this.translate.get("BACK_BUTTON").subscribe(back => {
+            this.config.set('ios', 'backButtonText', back);
+          });
+          moment.locale(code);
+          this.currentLang = code;
+          if (code != this.settings.get('lastLang')) {
+            this.storage.parseSources();
+          }
+          this.settings.set('lastLang', code);
+          // numeral.language(code);
+        }).catch(err => {
+          this.translate.use("fr");
+          this.translate.get("BACK_BUTTON").subscribe(back => {
+            this.config.set('ios', 'backButtonText', back);
+          });
+          moment.locale("fr");
+          this.currentLang = "fr";
+          // numeral.language("fr");
+        });
+      }else {
+        this.translate.use(overideLang);
         this.translate.get("BACK_BUTTON").subscribe(back => {
           this.config.set('ios', 'backButtonText', back);
         });
-        moment.locale(code);
-        this.currentLang = code;
-        if (code != this.settings.get('lastLang')) {
-          this.storage.parseSources();
-        }
-        this.settings.set('lastLang', code);
-        // numeral.language(code);
-      }).catch(err => {
-        this.translate.use("fr");
-        this.translate.get("BACK_BUTTON").subscribe(back => {
-          this.config.set('ios', 'backButtonText', back);
-        });
-        moment.locale("fr");
-        this.currentLang = "fr";
-        // numeral.language("fr");
-      });
-    }else {
-      this.translate.use(this.settings.get('overideLang'));
-      this.translate.get("BACK_BUTTON").subscribe(back => {
-        this.config.set('ios', 'backButtonText', back);
-      });
-      moment.locale(this.settings.get('overideLang'));
-      this.currentLang = this.settings.get('overideLang');
-      // numeral.language(this.settings.get('overideLang'));
-    }
+        moment.locale(overideLang);
+        this.currentLang = overideLang;
+        // numeral.language(overideLang);
+      }
+    });
   }
 
   getMoment() {

@@ -46,23 +46,29 @@ export class SettingsPage {
   }
 
   toggleAdvanced() {
-    if (this.settings.advanced) {
-      this.advanced.enable().then(() => {
+    if (this.settings.advanced != this.settingService.getAll().advanced) {
+      if (this.settings.advanced) {
+        this.advanced.enable().then(() => {
 
-      }).catch(err => {
-        this.settings.advanced = false;
-      });
-    }else {
-      this.advanced.disable();
+        }).catch(err => {
+          this.settings.advanced = false;
+        });
+      }else {
+        this.advanced.disable();
+      }
     }
   }
 
   toggleIgnoreErrors() {
-    this.settingService.set('ignoreErrors', this.settings.ignoreErrors);
+    if (this.settings.ignoreErrors != this.settingService.getAll().ignoreErrors) {
+      this.settingService.set('ignoreErrors', this.settings.ignoreErrors);
+    }
   }
 
   changeOrder() {
-    this.settingService.set('defaultOrder', this.settings.defaultOrder);
+    if (this.settings.defaultOrder != this.settingService.getAll().defaultOrder) {
+      this.settingService.set('defaultOrder', this.settings.defaultOrder);
+    }
   }
 
   editName() {
@@ -111,6 +117,8 @@ export class SettingsPage {
   }
 
   changeLanguage() {
-    this.language.change(this.settings.overideLang);
+    if (this.settings.overideLang != this.settingService.getAll().overideLang) {
+      this.language.change(this.settings.overideLang);
+    }
   }
 }

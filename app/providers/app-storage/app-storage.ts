@@ -12,20 +12,24 @@ export class AppStorage {
   private projectDB: any = null;
   private sourceDB: any = null;
   private pendingDB: any = null;
+  private settingsDB: any = null;
   private local: any;
   private projects: Object = {};
   private sources: Object = {};
   private sourcesByProject: Object = {};
   private pendings: Object = {};
   private pendingsByProject: Object = {};
+  private settings: any = {};
 
   private loadingProjects: boolean = true;
   private loadingSources: boolean = true;
   private loadingPendings: boolean = true;
+  private loadingSettings: boolean = true;
 
   private projectEvents;
   private sourcesEvents;
   private pendingsEvents;
+  private settingsEvents;
 
   constructor(public parse: Parse, public report: UserReport, public fetch: Fetch) {
     this.local = new Storage(LocalStorage);
@@ -37,12 +41,14 @@ export class AppStorage {
     this.projectEvents = new EventEmitter();
     this.sourcesEvents = new EventEmitter();
     this.pendingsEvents = new EventEmitter();
+    this.settingsEvents = new EventEmitter();
   }
 
   init() {
     this.projectDB = new PouchDB("projects");
     this.sourceDB = new PouchDB("sources");
     this.pendingDB = new PouchDB("pendings");
+    this.settingsDB = new PouchDB("settings");
 
     if (this.theresProjects) {
       this.projectDB.allDocs({include_docs: true}).then(docs => {
@@ -90,6 +96,18 @@ export class AppStorage {
     }).catch(err => {
       this.loadingPendings = false;
       this.pendingsEvents.emit("pendingLoadingEnded");
+      this.report.report(err);
+    });
+
+    this.settingsDB.allDocs({include_docs: true}).then(docs => {
+      for (var i = 0; i < docs.rows.length; i++) {
+        this.settings[docs.rows[i].doc._id] = docs.rows[i].doc.value;
+      }
+      this.loadingSettings = false;
+      this.settingsEvents.emit("settingsLoadingEnded");
+    }).catch(err => {
+      this.loadingSettings = false;
+      this.settingsEvents.emit("settingsLoadingEnded");
       this.report.report(err);
     });
   }
@@ -465,6 +483,29 @@ export class AppStorage {
       let arr_pendings = this.fromObject(this.pendingsByProject[id]);
       return Promise.resolve(arr_pendings.length ? arr_pendings.length : 0);
     }
+  }
+
+  getSettings(): Promise<any> {
+    if (this.loadingSettings) {
+      return new Promise(resolve => {
+        this.settingsEvents.subscribe(event => {
+          resolve(this.settings);
+        });
+      });
+    }else {
+      return Promise.resolve(this.settings);
+    }
+  }
+
+  setSetting(key: string, value: any): void {
+    this.settingsDB.get(key, {conflicts: true}).then(doc => {
+      console.log(doc);
+      doc.value = value;
+      this.settingsDB.put(doc);
+    }).catch(err => {
+      this.settingsDB.put({ value: value, _id: key });
+      console.log(err);
+    });
   }
 
   fromObject(obj: Object): Array<any> {
