@@ -45,10 +45,10 @@ export class AppStorage {
   }
 
   init() {
-    this.projectDB = new PouchDB("projects");
-    this.sourceDB = new PouchDB("sources");
-    this.pendingDB = new PouchDB("pendings");
-    this.settingsDB = new PouchDB("settings");
+    this.projectDB = new PouchDB("projects", { adapter: "websql" });
+    this.sourceDB = new PouchDB("sources", { adapter: "websql" });
+    this.pendingDB = new PouchDB("pendings", { adapter: "websql" });
+    this.settingsDB = new PouchDB("settings", { adapter: "websql" });
 
     if (this.theresProjects) {
       this.projectDB.allDocs({include_docs: true}).then(docs => {
