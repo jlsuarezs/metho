@@ -32,8 +32,12 @@ export class Settings {
     var settings = {};
     Object.keys(this.defaults).map((value, index) => {
       this.localStorage.get("setting-" + value).then(res => {
-        if (res != (null || undefined)) {
+        if (res != null) {
           settings[value] = this.transformIfBool(res);
+        }else {
+          if (value == "overideLang" && !this.isEmpty(settings)) {
+            settings[value] = "";
+          }
         }
 
         if (index == 7) {
