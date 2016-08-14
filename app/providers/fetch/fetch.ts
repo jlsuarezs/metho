@@ -144,9 +144,7 @@ export class Fetch {
           newobj["author" + String(i + 1) + "firstname"] = this.capitalizeFirstLetter(response.author_data[i].name.split(",")[1].replace(/\ufffd/g, "é").trim());
         }
       }
-      if (response.author_data.length >= 1 && response.author_data.length <= 3) {
-        newobj.hasAuthors = "13";
-      } else if (response.author_data.length > 3) {
+      if (response.author_data.length > 3) {
         newobj.hasAuthors = "more3";
       }else {
         newobj.hasAuthors = "13";
