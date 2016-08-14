@@ -52,12 +52,12 @@ export class AppStorage {
 
     if (this.theresProjects) {
       this.projectDB.allDocs({include_docs: true}).then(docs => {
-        for (var i = 0; i < docs.rows.length; i++) {
-          this.projects[docs.rows[i].doc._id] = docs.rows[i].doc;
-          if (this.sourcesByProject[docs.rows[i].doc._id] == null) {
-            this.sourcesByProject[docs.rows[i].doc._id] = {};
+        docs.rows.forEach((value) => {
+          this.projects[value.doc._id] = value.doc;
+          if (this.sourcesByProject[value.doc._id] == null) {
+            this.sourcesByProject[value.doc._id] = {};
           }
-        }
+        });
         this.loadingProjects = false;
         this.projectEvents.emit("projectLoadingEnded");
       }).catch(err => {
@@ -68,13 +68,13 @@ export class AppStorage {
     }
 
     this.sourceDB.allDocs({include_docs: true}).then(docs => {
-      for (var i = 0; i < docs.rows.length; i++) {
-        this.sources[docs.rows[i].doc._id] = docs.rows[i].doc;
-        if (this.sourcesByProject[docs.rows[i].doc.project_id] == null) {
-          this.sourcesByProject[docs.rows[i].doc.project_id] = {};
+      docs.rows.forEach(value => {
+        this.sources[value.doc._id] = value.doc;
+        if (this.sourcesByProject[value.doc.project_id] == null) {
+          this.sourcesByProject[value.doc.project_id] = {};
         }
-        this.sourcesByProject[docs.rows[i].doc.project_id][docs.rows[i].doc._id] = docs.rows[i].doc;
-      }
+        this.sourcesByProject[value.doc.project_id][value.doc._id] = value.doc;
+      });
       this.loadingSources = false;
       this.sourcesEvents.emit("sourceLoadingEnded");
     }).catch(err => {
@@ -84,13 +84,13 @@ export class AppStorage {
     });
 
     this.pendingDB.allDocs({include_docs: true}).then(docs => {
-      for (var i = 0; i < docs.rows.length; i++) {
-        this.pendings[docs.rows[i].doc._id] = docs.rows[i].doc;
-        if (this.pendingsByProject[docs.rows[i].doc.project_id] == null) {
-          this.pendingsByProject[docs.rows[i].doc.project_id] = {};
+      docs.rows.forEach(value => {
+        this.pendings[value.doc._id] = value.doc;
+        if (this.pendingsByProject[value.doc.project_id] == null) {
+          this.pendingsByProject[value.doc.project_id] = {};
         }
-        this.pendingsByProject[docs.rows[i].doc.project_id][docs.rows[i].doc._id] = docs.rows[i].doc;
-      }
+        this.pendingsByProject[value.doc.project_id][value.doc._id] = value.doc;
+      });
       this.loadingPendings = false;
       this.pendingsEvents.emit("pendingLoadingEnded");
     }).catch(err => {
@@ -100,9 +100,9 @@ export class AppStorage {
     });
 
     this.settingsDB.allDocs({include_docs: true}).then(docs => {
-      for (var i = 0; i < docs.rows.length; i++) {
-        this.settings[docs.rows[i].doc._id] = docs.rows[i].doc.value;
-      }
+      docs.rows.forEach(value => {
+        this.settings[value.doc._id] = value.doc.value;
+      });
       this.loadingSettings = false;
       this.settingsEvents.emit("settingsLoadingEnded");
     }).catch(err => {
@@ -127,17 +127,15 @@ export class AppStorage {
   deleteProject(id: string) {
     var doc = this.projects[id];
     delete this.projects[id];
-    var arr_sourcesToDelete: any = [];
+    let deletePromises = [];
+    // Remove the sources
     for (var i = 0; i < this.sourcesByProject[id].length; i++) {
-      delete this.sources[this.sourcesByProject[id][i]._id];
-      arr_sourcesToDelete.push(this.sourcesByProject[id][i]);
+      deletePromises.push(this.deleteSource(this.sourcesByProject[id][i]._id));
     }
-    delete this.sourcesByProject[id];
-
-
-    for (var i = 0; i < arr_sourcesToDelete.length; i++) {
-      this.sourceDB.remove(arr_sourcesToDelete[i]);
-    }
+    // Delete this.sourcesByProject object for the deleted project
+    Promise.all(deletePromises).then(value => {
+      delete this.sourcesByProject[id];
+    });
 
     if (this.fromObject(this.projects).length == 0) {
       this.local.set("theresProjects", false);
@@ -414,59 +412,57 @@ export class AppStorage {
       if(this.loadingPendings) {
         this.pendingsEvents.subscribe(() => {
           let arrPendings: Array<any> = this.fromObject(this.pendingsByProject[id]);
-          for (var i = 0; i < arrPendings.length; i++) {
-            if (!arrPendings[i].isLoaded) {
-              let index = i;
-              console.log(arrPendings[index]);
-              this.fetch.fromISBN(arrPendings[i].isbn).then(data => {
-                arrPendings[index].data = data;
-                arrPendings[index].isLoaded = true;
-                this.pendingDB.put(arrPendings[index]).then(response => {
-                  arrPendings[index]._rev = response.rev;
-                  this.pendings[response.id] = arrPendings[index];
-                  this.pendingsByProject[arrPendings[index].project_id][response.id] = arrPendings[index];
+          arrPendings.forEach((value) => {
+            if (!value.isLoaded) {
+              console.log(value);
+              this.fetch.fromISBN(value.isbn).then(data => {
+                value.data = data;
+                value.isLoaded = true;
+                this.pendingDB.put(value).then(response => {
+                  value._rev = response.rev;
+                  this.pendings[response.id] = value;
+                  this.pendingsByProject[value.project_id][response.id] = value;
                 });
               }).catch(err => {
                 if (err == 404) {
-                  arrPendings[index].notAvailable = true;
-                  arrPendings[index].isLoaded = true;
-                  this.pendingDB.put(arrPendings[index]).then(response => {
-                    arrPendings[index]._rev = response.rev;
-                    this.pendings[response.id] = arrPendings[index];
-                    this.pendingsByProject[arrPendings[index].project_id][response.id] = arrPendings[index];
+                  value.notAvailable = true;
+                  value.isLoaded = true;
+                  this.pendingDB.put(value).then(response => {
+                    value._rev = response.rev;
+                    this.pendings[response.id] = value;
+                    this.pendingsByProject[value.project_id][response.id] = value;
                   });
                 }
               });
             }
-          }
+          });
         });
       }else {
         let arrPendings: Array<any> = this.fromObject(this.pendingsByProject[id]);
-        for (var i = 0; i < arrPendings.length; i++) {
-          if (!arrPendings[i].isLoaded) {
-            let index = i;
-            console.log(arrPendings[index]);
-            this.fetch.fromISBN(arrPendings[i].isbn).then(data => {
-              arrPendings[index].data = data;
-              arrPendings[index].isLoaded = true;
-              this.pendingDB.put(arrPendings[index]).then(response => {
-                arrPendings[index]._rev = response.rev;
-                this.pendings[response.id] = arrPendings[index];
-                this.pendingsByProject[arrPendings[index].project_id][response.id] = arrPendings[index];
+        arrPendings.forEach((value) => {
+          if (!value.isLoaded) {
+            console.log(value);
+            this.fetch.fromISBN(value.isbn).then(data => {
+              value.data = data;
+              value.isLoaded = true;
+              this.pendingDB.put(value).then(response => {
+                value._rev = response.rev;
+                this.pendings[response.id] = value;
+                this.pendingsByProject[value.project_id][response.id] = value;
               });
             }).catch(err => {
               if (err == 404) {
-                arrPendings[index].notAvailable = true;
-                arrPendings[index].isLoaded = true;
-                this.pendingDB.put(arrPendings[index]).then(response => {
-                  arrPendings[index]._rev = response.rev;
-                  this.pendings[response.id] = arrPendings[index];
-                  this.pendingsByProject[arrPendings[index].project_id][response.id] = arrPendings[index];
+                value.notAvailable = true;
+                value.isLoaded = true;
+                this.pendingDB.put(value).then(response => {
+                  value._rev = response.rev;
+                  this.pendings[response.id] = value;
+                  this.pendingsByProject[value.project_id][response.id] = value;
                 });
               }
             });
           }
-        }
+        });
       }
     }
   }

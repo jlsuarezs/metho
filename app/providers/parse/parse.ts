@@ -882,9 +882,10 @@ export class Parse {
   }
 
   private addComplexError(errorId: string, variable: string, complex: any) {
-    for (var i = 0; i < complex.options.length; i++) {
-      complex.options[i].text = this.translate.instant(complex.options[i].text);
-    }
+    complex.options = complex.options.map((option) => {
+      option.text = this.translate.instant(option.text);
+      return option;
+    });
     this.sourceToParse.errors.push({
       errorTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".DESC"),
       promptTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".TITLE"),

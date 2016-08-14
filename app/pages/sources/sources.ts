@@ -235,13 +235,13 @@ export class SourcesPage {
     this.translate.get("PROJECT.DETAIL.SHARE_TEXT", { project_title: this.project.name }).subscribe(text => {
       let textToShare = text;
       let errNum = 0;
-      let arr_sources = JSON.parse(JSON.stringify(this.sources)).sort(function(a, b) {
+      let arr_sources = JSON.parse(JSON.stringify(this.sources)).sort((a, b) => {
         return a.parsedSource.localeCompare(b.parsedSource);
       });
-      for (let i = 0; i < arr_sources.length; i++) {
-        textToShare += arr_sources[i].parsedSource + "<br><br>";
-        errNum += arr_sources[i].errors.length;
-      }
+      arr_sources.forEach(value => {
+        textToShare += value.parsedSource + "<br><br>";
+        errNum += value.errors.length;
+      });
 
       if (errNum > 0 && !this.settings.get('ignoreErrors')) {
         this.translate.get(["PROJECT.DETAIL.POPUP.ERRORS_SOURCES", "PROJECT.DETAIL.POPUP.SHARE_TEXT", "PROJECT.DETAIL.POPUP.SHARE", "PROJECT.DETAIL.POPUP.CANCEL"], { errNum:errNum }).subscribe((translations) => {

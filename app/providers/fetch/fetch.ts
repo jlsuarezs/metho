@@ -69,9 +69,9 @@ export class Fetch {
             reject(404);
           }else {
             let books = [];
-            for (var i = 0; i < response.data.length; i++) {
-              books.push(this.parseFromISBNdb(response.data[i]));
-            }
+            response.data.forEach(book => {
+              books.push(this.parseFromISBNdb(book));
+            });
             this.cacheByNameWithAuthors[name] = books;
             resolve(books);
           }
@@ -86,9 +86,9 @@ export class Fetch {
             reject(404);
           }else {
             let books = [];
-            for (var i = 0; i < response.data.length; i++) {
-              books.push(this.parseFromISBNdb(response.data[i]));
-            }
+            response.data.forEach(book => {
+              books.push(this.parseFromISBNdb(book));
+            });
             this.cacheByName[name] = books;
             resolve(books);
           }

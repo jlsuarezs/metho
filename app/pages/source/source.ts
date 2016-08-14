@@ -68,14 +68,14 @@ export class SourcePage {
 
       if (error.complex) {
         if (error.type == 'select') {
-          for (var i = 0; i < error.options.length; i++) {
+          error.options.forEach(option => {
             alert.addInput({
               type: 'radio',
-              label: error.options[i].text,
-              value: error.options[i].value,
+              label: option.text,
+              value: option.value,
               checked: false
             });
-          }
+          });
         }
       }else {
         alert.addInput({

@@ -25,10 +25,10 @@ export class PendingsPage {
   loadPendings(dismissOnEmpty?: boolean) {
     let moment = this.language.getMoment();
     this.storage.getPendingsFromProjectId(this.projectId).then(pendings => {
-      this.pendings = pendings;
-      for (var i = 0; i < this.pendings.length; i++) {
-        this.pendings[i].datestring = moment(this.pendings[i].date).format("LL");
-      }
+      this.pendings = pendings.map(pending => {
+        pending.datestring = moment(pending.date).format("LL");
+        return pending;
+      });
       if (dismissOnEmpty && this.pendings.length == 0) {
         this.nav.pop();
       }
