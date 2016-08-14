@@ -412,26 +412,26 @@ export class AppStorage {
     if (navigator.onLine) {
       if(this.loadingPendings) {
         this.pendingsEvents.subscribe(() => {
-          let arrPendings: Array<any> = this.fromObject(this.pendingsByProject[id]);
-          arrPendings.forEach((value) => {
-            if (!value.isLoaded) {
-              console.log(value);
-              this.fetch.fromISBN(value.isbn).then(data => {
-                value.data = data;
-                value.isLoaded = true;
-                this.pendingDB.put(value).then(response => {
-                  value._rev = response.rev;
-                  this.pendings[response.id] = value;
-                  this.pendingsByProject[value.project_id][response.id] = value;
+          let pendings: Array<any> = this.fromObject(this.pendingsByProject[id]);
+          pendings.forEach((pending) => {
+            if (!pending.isLoaded) {
+              console.log(pending);
+              this.fetch.fromISBN(pending.isbn).then(data => {
+                pending.data = data;
+                pending.isLoaded = true;
+                this.pendingDB.put(pending).then(response => {
+                  pending._rev = response.rev;
+                  this.pendings[response.id] = pending;
+                  this.pendingsByProject[pending.project_id][response.id] = pending;
                 });
               }).catch(err => {
                 if (err == 404) {
-                  value.notAvailable = true;
-                  value.isLoaded = true;
-                  this.pendingDB.put(value).then(response => {
-                    value._rev = response.rev;
-                    this.pendings[response.id] = value;
-                    this.pendingsByProject[value.project_id][response.id] = value;
+                  pending.notAvailable = true;
+                  pending.isLoaded = true;
+                  this.pendingDB.put(pending).then(response => {
+                    pending._rev = response.rev;
+                    this.pendings[response.id] = pending;
+                    this.pendingsByProject[pending.project_id][response.id] = pending;
                   });
                 }
               });
@@ -439,26 +439,26 @@ export class AppStorage {
           });
         });
       }else {
-        let arrPendings: Array<any> = this.fromObject(this.pendingsByProject[id]);
-        arrPendings.forEach((value) => {
-          if (!value.isLoaded) {
-            console.log(value);
-            this.fetch.fromISBN(value.isbn).then(data => {
-              value.data = data;
-              value.isLoaded = true;
-              this.pendingDB.put(value).then(response => {
-                value._rev = response.rev;
-                this.pendings[response.id] = value;
-                this.pendingsByProject[value.project_id][response.id] = value;
+        let pendings: Array<any> = this.fromObject(this.pendingsByProject[id]);
+        pendings.forEach((pending) => {
+          if (!pending.isLoaded) {
+            console.log(pending);
+            this.fetch.fromISBN(pending.isbn).then(data => {
+              pending.data = data;
+              pending.isLoaded = true;
+              this.pendingDB.put(pending).then(response => {
+                pending._rev = response.rev;
+                this.pendings[response.id] = pending;
+                this.pendingsByProject[pending.project_id][response.id] = pending;
               });
             }).catch(err => {
               if (err == 404) {
-                value.notAvailable = true;
-                value.isLoaded = true;
-                this.pendingDB.put(value).then(response => {
-                  value._rev = response.rev;
-                  this.pendings[response.id] = value;
-                  this.pendingsByProject[value.project_id][response.id] = value;
+                pending.notAvailable = true;
+                pending.isLoaded = true;
+                this.pendingDB.put(pending).then(response => {
+                  pending._rev = response.rev;
+                  this.pendings[response.id] = pending;
+                  this.pendingsByProject[pending.project_id][response.id] = pending;
                 });
               }
             });
@@ -472,13 +472,13 @@ export class AppStorage {
     if (this.loadingPendings) {
       return new Promise(resolve => {
         this.pendingsEvents.subscribe(event => {
-          let arr_pendings = this.fromObject(this.pendingsByProject[id]);
-          resolve(arr_pendings.length ? arr_pendings.length : 0);
+          let pendingArray = this.fromObject(this.pendingsByProject[id]);
+          resolve(pendingArray.length ? pendingArray.length : 0);
         });
       });
     }else {
-      let arr_pendings = this.fromObject(this.pendingsByProject[id]);
-      return Promise.resolve(arr_pendings.length ? arr_pendings.length : 0);
+      let pendingArray = this.fromObject(this.pendingsByProject[id]);
+      return Promise.resolve(pendingArray.length ? pendingArray.length : 0);
     }
   }
 
