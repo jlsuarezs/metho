@@ -285,7 +285,8 @@ export class AppStorage {
   parseSources() {
     if(this.loadingSources) {
       return new Promise(resolve => {
-        this.sourcesEvents.subscribe(() => {
+        let subscription = this.sourcesEvents.subscribe(() => {
+          subscription.unsubscribe();
           this.loadingSources = true;
           let arrSources: Array<any> = this.fromObject(this.sources);
           let source: any = {};
