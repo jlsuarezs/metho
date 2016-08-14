@@ -35,12 +35,15 @@ export class Language {
           this.translate.get("BACK_BUTTON").subscribe(back => {
             this.config.set('ios', 'backButtonText', back);
           });
+
+          this.translate.onLangChange.subscribe(() => {
+            if (code != this.settings.get('lastLang')) {
+              this.storage.parseSources();
+            }
+            this.settings.set('lastLang', code);
+          });
           moment.locale(code);
           this.currentLang = code;
-          if (code != this.settings.get('lastLang')) {
-            this.storage.parseSources();
-          }
-          this.settings.set('lastLang', code);
           // numeral.language(code);
         }).catch(err => {
           this.translate.use("fr");
