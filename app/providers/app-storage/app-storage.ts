@@ -288,53 +288,51 @@ export class AppStorage {
         let subscription = this.sourcesEvents.subscribe(() => {
           subscription.unsubscribe();
           this.loadingSources = true;
-          let arrSources: Array<any> = this.fromObject(this.sources);
-          let source: any = {};
-          for (var i = 0; i < arrSources.length; i++) {
-            source[arrSources[i]._id] = this.parse.parse(arrSources[i]);
-            if(i == arrSources.length - 1) {
-              this.sourceDB.put(source[arrSources[i]._id]).then(response => {
-                source[response.id]._rev = response.rev;
-                this.sources[response.id] = source[response.id];
-                this.sourcesByProject[source[response.id].project_id][response.id] = source[response.id];
+          let sources: Array<any> = this.fromObject(this.sources);
+          sources.forEach((source, i) => {
+            let parsedSource = this.parse.parse(source);
+            if(i == sources.length - 1) {
+              this.sourceDB.put(parsedSource).then(response => {
+                parsedSource._rev = response.rev;
+                this.sources[response.id] = parsedSource;
+                this.sourcesByProject[parsedSource.project_id][response.id] = parsedSource;
                 this.loadingSources = false;
                 this.sourcesEvents.emit("sourceLoadingEnded");
                 resolve(true);
               });
             }else {
-              this.sourceDB.put(source[arrSources[i]._id]).then(response => {
-                source[response.id]._rev = response.rev;
-                this.sources[response.id] = source[response.id];
-                this.sourcesByProject[source[response.id].project_id][response.id] = source[response.id];
+              this.sourceDB.put(parsedSource).then(response => {
+                parsedSource._rev = response.rev;
+                this.sources[response.id] = parsedSource;
+                this.sourcesByProject[parsedSource.project_id][response.id] = parsedSource;
               });
             }
-          }
+          });
         });
       });
     }else {
       return new Promise(resolve => {
         this.loadingSources = true;
-        let arrSources: Array<any> = this.fromObject(this.sources);
-        let source = {};
-        for (var i = 0; i < arrSources.length; i++) {
-          source[arrSources[i]._id] = this.parse.parse(arrSources[i]);
-          if(i == arrSources.length - 1) {
-            this.sourceDB.put(source[arrSources[i]._id]).then(response => {
-              source[response.id]._rev = response.rev;
-              this.sources[response.id] = source[response.id];
-              this.sourcesByProject[source[response.id].project_id][response.id] = source[response.id];
+        let sources: Array<any> = this.fromObject(this.sources);
+        sources.forEach((source, i) => {
+          let parsedSource = this.parse.parse(source);
+          if(i == sources.length - 1) {
+            this.sourceDB.put(parsedSource).then(response => {
+              parsedSource._rev = response.rev;
+              this.sources[response.id] = parsedSource;
+              this.sourcesByProject[parsedSource.project_id][response.id] = parsedSource;
               this.loadingSources = false;
               this.sourcesEvents.emit("sourceLoadingEnded");
               resolve(true);
             });
           }else {
-            this.sourceDB.put(source[arrSources[i]._id]).then(response => {
-              source[response.id]._rev = response.rev;
-              this.sources[response.id] = source[response.id];
-              this.sourcesByProject[source[response.id].project_id][response.id] = source[response.id];
+            this.sourceDB.put(parsedSource).then(response => {
+              parsedSource._rev = response.rev;
+              this.sources[response.id] = parsedSource;
+              this.sourcesByProject[parsedSource.project_id][response.id] = parsedSource;
             });
           }
-        }
+        });
       });
     }
   }
