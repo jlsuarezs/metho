@@ -283,58 +283,38 @@ export class AppStorage {
   }
 
   parseSources() {
-    if(this.loadingSources) {
-      return new Promise(resolve => {
+    return new Promise(resolve => {
+      if(this.loadingSources) {
         let subscription = this.sourcesEvents.subscribe(() => {
           subscription.unsubscribe();
           this.loadingSources = true;
           let sources: Array<any> = this.fromObject(this.sources);
+          let promises: Promise<any>[] = [];
           sources.forEach((source, i) => {
             let parsedSource = this.parse.parse(source);
-            if(i == sources.length - 1) {
-              this.sourceDB.put(parsedSource).then(response => {
-                parsedSource._rev = response.rev;
-                this.sources[response.id] = parsedSource;
-                this.sourcesByProject[parsedSource.project_id][response.id] = parsedSource;
-                this.loadingSources = false;
-                this.sourcesEvents.emit("sourceLoadingEnded");
-                resolve(true);
-              });
-            }else {
-              this.sourceDB.put(parsedSource).then(response => {
-                parsedSource._rev = response.rev;
-                this.sources[response.id] = parsedSource;
-                this.sourcesByProject[parsedSource.project_id][response.id] = parsedSource;
-              });
-            }
+            promises.push(this.setSourceFromId(parsedSource._id, parsedSource));
+          });
+          Promise.all(promises).then(() => {
+            this.loadingSources = false;
+            this.sourcesEvents.emit("sourceLoadingEnded");
+            resolve(true);
           });
         });
-      });
-    }else {
-      return new Promise(resolve => {
+      }else {
         this.loadingSources = true;
         let sources: Array<any> = this.fromObject(this.sources);
+        let promises: Promise<any>[] = [];
         sources.forEach((source, i) => {
           let parsedSource = this.parse.parse(source);
-          if(i == sources.length - 1) {
-            this.sourceDB.put(parsedSource).then(response => {
-              parsedSource._rev = response.rev;
-              this.sources[response.id] = parsedSource;
-              this.sourcesByProject[parsedSource.project_id][response.id] = parsedSource;
-              this.loadingSources = false;
-              this.sourcesEvents.emit("sourceLoadingEnded");
-              resolve(true);
-            });
-          }else {
-            this.sourceDB.put(parsedSource).then(response => {
-              parsedSource._rev = response.rev;
-              this.sources[response.id] = parsedSource;
-              this.sourcesByProject[parsedSource.project_id][response.id] = parsedSource;
-            });
-          }
+          promises.push(this.setSourceFromId(parsedSource._id, parsedSource));
         });
-      });
-    }
+        Promise.all(promises).then(() => {
+          this.loadingSources = false;
+          this.sourcesEvents.emit("sourceLoadingEnded");
+          resolve(true);
+        });
+      }
+    });
   }
 
   getPendingsFromProjectId(id: string): Promise<Array<any>> {
