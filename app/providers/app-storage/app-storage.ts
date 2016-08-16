@@ -391,26 +391,17 @@ export class AppStorage {
       if(this.loadingPendings) {
         this.pendingsEvents.subscribe(() => {
           let pendings: Array<any> = this.fromObject(this.pendingsByProject[id]);
-          pendings.forEach((pending) => {
+          pendings.forEach(pending => {
             if (!pending.isLoaded) {
-              console.log(pending);
               this.fetch.fromISBN(pending.isbn).then(data => {
                 pending.data = data;
                 pending.isLoaded = true;
-                this.pendingDB.put(pending).then(response => {
-                  pending._rev = response.rev;
-                  this.pendings[response.id] = pending;
-                  this.pendingsByProject[pending.project_id][response.id] = pending;
-                });
+                this.setPendingFromId(pending._id, pending);
               }).catch(err => {
                 if (err == 404) {
                   pending.notAvailable = true;
                   pending.isLoaded = true;
-                  this.pendingDB.put(pending).then(response => {
-                    pending._rev = response.rev;
-                    this.pendings[response.id] = pending;
-                    this.pendingsByProject[pending.project_id][response.id] = pending;
-                  });
+                  this.setPendingFromId(pending._id, pending);
                 }
               });
             }
@@ -418,26 +409,18 @@ export class AppStorage {
         });
       }else {
         let pendings: Array<any> = this.fromObject(this.pendingsByProject[id]);
-        pendings.forEach((pending) => {
+        pendings.forEach(pending => {
           if (!pending.isLoaded) {
-            console.log(pending);
             this.fetch.fromISBN(pending.isbn).then(data => {
+              console.log(data);
               pending.data = data;
               pending.isLoaded = true;
-              this.pendingDB.put(pending).then(response => {
-                pending._rev = response.rev;
-                this.pendings[response.id] = pending;
-                this.pendingsByProject[pending.project_id][response.id] = pending;
-              });
+              this.setPendingFromId(pending._id, pending);
             }).catch(err => {
               if (err == 404) {
                 pending.notAvailable = true;
                 pending.isLoaded = true;
-                this.pendingDB.put(pending).then(response => {
-                  pending._rev = response.rev;
-                  this.pendings[response.id] = pending;
-                  this.pendingsByProject[pending.project_id][response.id] = pending;
-                });
+                this.setPendingFromId(pending._id, pending);
               }
             });
           }
