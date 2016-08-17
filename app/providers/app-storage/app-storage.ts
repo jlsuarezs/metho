@@ -57,6 +57,9 @@ export class AppStorage {
           if (this.sourcesByProject[value.doc._id] == null) {
             this.sourcesByProject[value.doc._id] = {};
           }
+          if (this.pendingsByProject[value.doc.project_id] == null) {
+            this.pendingsByProject[value.doc.project_id] = {};
+          }
         });
         this.loadingProjects = false;
         this.projectEvents.emit("projectLoadingEnded");
