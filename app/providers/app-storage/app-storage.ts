@@ -197,7 +197,7 @@ export class AppStorage {
         this.sourcesEvents.emit("sourceLoadingEnded");
         this.local.set("theresProjects", true);
         resolve(response);
-      }).catch(function(err) {
+      }).catch((err) => {
         this.loadingProjects = false;
         this.loadingSources = false;
         this.projectEvents.emit("projectLoadingEnded");
