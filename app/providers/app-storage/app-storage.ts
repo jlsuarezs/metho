@@ -404,6 +404,7 @@ export class AppStorage {
       this.pendingDB.put(values).then(response => {
         set._rev = response.rev;
         this.pendings[id] = set;
+        this.pendingsByProject[values.project_id][id] = set;
         this.loadingPendings = false;
         this.pendingsEvents.emit("pendingLoadingEnded");
         resolve(response);
