@@ -128,6 +128,7 @@ export class AppStorage {
   }
 
   deleteProject(id: string) {
+    this.loadingProjects = true;
     var doc = this.projects[id];
     delete this.projects[id];
     let deletePromises = [];
@@ -138,6 +139,8 @@ export class AppStorage {
     // Delete this.sourcesByProject object for the deleted project
     Promise.all(deletePromises).then(value => {
       delete this.sourcesByProject[id];
+      this.loadingProjects = true;
+      this.projectEvents.emit("projectLoadingEnded");
     });
 
     if (this.fromObject(this.projects).length == 0) {
@@ -155,6 +158,7 @@ export class AppStorage {
   }
 
   setProjectFromId(id: string, set: any) {
+    this.loadingProjects = true;
     return new Promise(resolve => {
       let values = set;
       values._rev = this.projects[id]._rev;
@@ -162,8 +166,12 @@ export class AppStorage {
       this.projectDB.put(values).then(response => {
         set._rev = response.rev;
         this.projects[id] = set;
+        this.loadingProjects = false;
+        this.projectEvents.emit("projectLoadingEnded");
         resolve(response);
       }).catch(err =>{
+        this.loadingProjects = false;
+        this.projectEvents.emit("projectLoadingEnded");
         this.report.report(err);
         resolve(err);
       });
@@ -234,6 +242,7 @@ export class AppStorage {
   }
 
   setSourceFromId(id: string, set: any) {
+    this.loadingSources = true;
     return new Promise(resolve => {
       let values = set;
       values._rev = this.sources[id]._rev;
@@ -243,6 +252,8 @@ export class AppStorage {
         set._id = response.id;
         this.sources[id] = set;
         this.sourcesByProject[values.project_id][id] = set;
+        this.loadingSources = false;
+        this.sourcesEvents.emit("sourceLoadingEnded");
         resolve(response);
       }).catch(err => {
         this.report.report(err);
@@ -272,15 +283,20 @@ export class AppStorage {
   }
 
   deleteSource(id: string) {
+    this.loadingSources = true;
     let doc = this.sources[id];
     delete this.sources[id];
     delete this.sourcesByProject[doc.project_id][id];
 
     return new Promise(resolve => {
       this.sourceDB.remove(doc).then(result => {
+        this.loadingSources = false;
+        this.sourcesEvents.emit("sourceLoadingEnded");
         resolve(result);
       }).catch(err => {
         this.report.report(err);
+        this.loadingSources = false;
+        this.sourcesEvents.emit("sourceLoadingEnded");
         resolve(err);
       });
     });
@@ -360,14 +376,19 @@ export class AppStorage {
   }
 
   deletePending(id: string) {
+    this.loadingPendings = true;
     let doc = this.pendings[id];
     delete this.pendings[id];
     delete this.pendingsByProject[doc.project_id][id];
 
     return new Promise(resolve => {
       this.pendingDB.remove(doc).then(result => {
+        this.loadingPendings = false;
+        this.pendingsEvents.emit("pendingLoadingEnded");
         resolve(result);
       }).catch(err => {
+        this.loadingPendings = false;
+        this.pendingsEvents.emit("pendingLoadingEnded");
         this.report.report(err);
         resolve(err);
       });
@@ -375,6 +396,7 @@ export class AppStorage {
   }
 
   setPendingFromId(id: string, set: any) {
+    this.loadingPendings = true;
     return new Promise(resolve => {
       let values = set;
       values._rev = this.pendings[id]._rev;
@@ -382,9 +404,13 @@ export class AppStorage {
       this.pendingDB.put(values).then(response => {
         set._rev = response.rev;
         this.pendings[id] = set;
+        this.loadingPendings = false;
+        this.pendingsEvents.emit("pendingLoadingEnded");
         resolve(response);
       }).catch(err => {
         this.report.report(err);
+        this.loadingPendings = false;
+        this.pendingsEvents.emit("pendingLoadingEnded");
         resolve(err);
       });
     });
@@ -460,12 +486,17 @@ export class AppStorage {
   }
 
   setSetting(key: string, value: any): void {
+    this.loadingSettings = true;
     this.settingsDB.get(key, {conflicts: true}).then(doc => {
       console.log(doc);
       doc.value = value;
       this.settingsDB.put(doc);
+      this.loadingSettings = false;
+      this.settingsEvents.emit("settingsLoadingEnded");
     }).catch(err => {
       this.settingsDB.put({ value: value, _id: key });
+      this.loadingSettings = false;
+      this.settingsEvents.emit("settingsLoadingEnded");
       console.log(err);
     });
   }
