@@ -242,6 +242,7 @@ export class AppStorage {
         set._rev = response.rev;
         set._id = response.id;
         this.sources[id] = set;
+        this.sourcesByProject[values.project_id][id] = set;
         resolve(response);
       }).catch(err => {
         this.report.report(err);
