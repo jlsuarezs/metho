@@ -258,7 +258,7 @@ export class AppStorage {
         this.loadingSources = false;
         this.sourcesEvents.emit("sourceLoadingEnded");
         resolve(response);
-      }).catch(function(err) {
+      }).catch(err => {
         this.loadingSources = false;
         this.sourcesEvents.emit("sourceLoadingEnded");
         this.report.report(err);
