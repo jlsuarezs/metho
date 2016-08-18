@@ -43,7 +43,7 @@ export class SourcesPage {
   }
 
   ionViewDidEnter() {
-    if (this.sources.length == 0) {
+    if (this.sources.length == 0 && this.pendingNumber != 0) {
       this.content.scrollToBottom(250);
     }
   }
