@@ -29,3 +29,8 @@
 // App Material Design Only Sass
 // --------------------------------------------------
 // CSS that should only apply to the Material Design app
+
+// Fix positioning of FAB for adding sources
+.sources .fixed-div {
+    bottom: 60px;
+}
