@@ -282,7 +282,6 @@ export class SourceModalBookPage {
           }
         }
       }).catch((err) => {
-        alert("called");
         this.translate.get(["PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN", "PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN_TEXT", "PROJECT.DETAIL.POPUP.OK"]).subscribe((translations) => {
           let alert = this.alertCtrl.create({
             title: translations["PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN"],
