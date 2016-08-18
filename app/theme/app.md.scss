@@ -34,3 +34,16 @@
 .sources .fixed-div {
     bottom: 60px;
 }
+
+// Fix positioning of button for scanning
+.source-modal-book.toolbar > .toolbar-content {
+    height: 56px;
+
+    button {
+        height: 56px;
+
+        .left-aligned {
+            top: 21px;
+        }
+    }
+}
