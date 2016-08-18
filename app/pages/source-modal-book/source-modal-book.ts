@@ -177,7 +177,7 @@ export class SourceModalBookPage {
             this.instantStatus.none = true;
           }
         }, err => {
-          if (err >= 500 && err < 599) {
+          if (err.status >= 500 && err.status < 599) {
             this.instantStatus.err500 = true;
             this.instantStatus.loading = false;
           }
