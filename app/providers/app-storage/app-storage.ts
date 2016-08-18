@@ -481,17 +481,19 @@ export class AppStorage {
 
   setSetting(key: string, value: any): void {
     this.loadingSettings = true;
-    this.settingsDB.get(key, {conflicts: true}).then(doc => {
-      console.log(doc);
+    this.settingsDB.get(key).then(doc => {
       doc.value = value;
       this.settingsDB.put(doc);
       this.loadingSettings = false;
       this.settingsEvents.emit("settingsLoadingEnded");
     }).catch(err => {
-      this.settingsDB.put({ value: value, _id: key });
+      if (err.status == 404) {
+        this.settingsDB.put({ value: value, _id: key });
+      }else {
+        this.report.report(err);
+      }
       this.loadingSettings = false;
       this.settingsEvents.emit("settingsLoadingEnded");
-      console.log(err);
     });
   }
 }
