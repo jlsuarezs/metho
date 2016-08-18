@@ -52,7 +52,7 @@ export class SourcesPage {
     this.storage.getSourcesFromProjectId(this.projectId).then(sources => {
       this.sources = sources;
       this.filteredSources = sources;
-      this.sources.sort(function(a, b) {
+      this.sources.sort((a, b) => {
         if (a.title && b.title) {
           return a.title.localeCompare(b.title);
         } else if (a.title) {
