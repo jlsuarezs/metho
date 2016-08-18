@@ -94,6 +94,8 @@ export class SourceModalInternetPage {
     }else {
       this.storage.setSourceFromId(this.previous._id, parsed);
     }
+
+    this.viewCtrl.dismiss();
   }
 
   updateValues(response: any) {
