@@ -14,11 +14,11 @@ export class AppStorage {
   private pendingDB: any = null;
   private settingsDB: any = null;
   private local: any;
-  private projects: Object = {};
-  private sources: Object = {};
-  private sourcesByProject: Object = {};
-  private pendings: Object = {};
-  private pendingsByProject: Object = {};
+  private projects: Map<string, any> = <Map<string, any>>new Map();
+  private sources: Map<string, any> = <Map<string, any>>new Map();
+  private sourcesByProject: Map<string, any> = <Map<string, Map<string, any>>>new Map();
+  private pendings: Map<string, any> = <Map<string, any>>new Map();
+  private pendingsByProject: Map<string, any> = <Map<string, Map<string, any>>>new Map();
   private settings: any = {};
 
   private loadingProjects: boolean = true;
@@ -53,12 +53,13 @@ export class AppStorage {
     if (this.theresProjects) {
       this.projectDB.allDocs({include_docs: true}).then(docs => {
         docs.rows.forEach((value) => {
-          this.projects[value.doc._id] = value.doc;
-          if (this.sourcesByProject[value.doc._id] == null) {
-            this.sourcesByProject[value.doc._id] = {};
+          this.projects.set(value.doc._id, value.doc);
+          if (!this.sourcesByProject.has(value.doc._id)) {
+            this.sourcesByProject.set(value.doc._id, new Map());
           }
-          if (this.pendingsByProject[value.doc.project_id] == null) {
-            this.pendingsByProject[value.doc.project_id] = {};
+
+          if (!this.pendingsByProject.has(value.doc._id)) {
+            this.pendingsByProject.set(value.doc._id, new Map());
           }
         });
         this.loadingProjects = false;
@@ -72,11 +73,11 @@ export class AppStorage {
 
     this.sourceDB.allDocs({include_docs: true}).then(docs => {
       docs.rows.forEach(value => {
-        this.sources[value.doc._id] = value.doc;
-        if (this.sourcesByProject[value.doc.project_id] == null) {
-          this.sourcesByProject[value.doc.project_id] = {};
+        this.sources.set(value.doc._id, value.doc);
+        if (!this.sourcesByProject.has(value.doc.project_id)) {
+          this.sourcesByProject.set(value.doc.project_id, new Map());
         }
-        this.sourcesByProject[value.doc.project_id][value.doc._id] = value.doc;
+        this.sourcesByProject.set(value.doc.project_id, this.sourcesByProject.get(value.doc.project_id).set(value.doc._id, value.doc));
       });
       this.loadingSources = false;
       this.sourcesEvents.emit("sourceLoadingEnded");
@@ -88,11 +89,11 @@ export class AppStorage {
 
     this.pendingDB.allDocs({include_docs: true}).then(docs => {
       docs.rows.forEach(value => {
-        this.pendings[value.doc._id] = value.doc;
-        if (this.pendingsByProject[value.doc.project_id] == null) {
-          this.pendingsByProject[value.doc.project_id] = {};
+        this.pendings.set(value.doc._id, value.doc);
+        if (!this.pendingsByProject.has(value.doc.project_id)) {
+          this.pendingsByProject.set(value.doc.project_id, new Map());
         }
-        this.pendingsByProject[value.doc.project_id][value.doc._id] = value.doc;
+        this.pendingsByProject.set(value.doc.project_id, this.pendingsByProject.get(value.doc.project_id).set(value.doc._id, value.doc));
       });
       this.loadingPendings = false;
       this.pendingsEvents.emit("pendingLoadingEnded");
@@ -119,31 +120,31 @@ export class AppStorage {
     if(this.loadingProjects){
       return new Promise(resolve => {
         this.projectEvents.subscribe(event => {
-          resolve(this.fromObject(this.projects));
+          resolve(Array.from(this.projects.values()));
         });
       });
     }else {
-      return Promise.resolve(this.fromObject(this.projects));
+      return Promise.resolve(Array.from(this.projects.values()));
     }
   }
 
   deleteProject(id: string) {
     this.loadingProjects = true;
-    var doc = this.projects[id];
-    delete this.projects[id];
+    var doc = this.projects.get(id);
+    this.projects.delete(id);
     let deletePromises = [];
     // Remove the sources
-    for (var i = 0; i < this.sourcesByProject[id].length; i++) {
-      deletePromises.push(this.deleteSource(this.sourcesByProject[id][i]._id));
-    }
+    this.sourcesByProject.get(id).forEach(source => {
+      deletePromises.push(this.deleteSource(source._id));
+    });
     // Delete this.sourcesByProject object for the deleted project
     Promise.all(deletePromises).then(value => {
-      delete this.sourcesByProject[id];
+      this.sourcesByProject.delete(id);
       this.loadingProjects = true;
       this.projectEvents.emit("projectLoadingEnded");
     });
 
-    if (this.fromObject(this.projects).length == 0) {
+    if (this.projects.size == 0) {
       this.local.set("theresProjects", false);
     }
 
@@ -161,11 +162,11 @@ export class AppStorage {
     this.loadingProjects = true;
     return new Promise(resolve => {
       let values = set;
-      values._rev = this.projects[id]._rev;
+      values._rev = this.projects.get(id)._rev;
       values._id = id;
       this.projectDB.put(values).then(response => {
         set._rev = response.rev;
-        this.projects[id] = set;
+        this.projects.set(id, set);
         this.loadingProjects = false;
         this.projectEvents.emit("projectLoadingEnded");
         resolve(response);
@@ -182,11 +183,11 @@ export class AppStorage {
     if(this.loadingProjects){
       return new Promise(resolve => {
         this.projectEvents.subscribe(event => {
-          resolve(this.projects[id]);
+          resolve(this.projects.get(id));
         });
       });
     }else {
-      return Promise.resolve(this.projects[id]);
+      return Promise.resolve(this.projects.get(id));
     }
   }
 
@@ -195,10 +196,11 @@ export class AppStorage {
     this.loadingSources = true;
     return new Promise(resolve => {
       this.projectDB.post(project).then(response => {
-        this.sourcesByProject[response.id] = {};
+        this.sourcesByProject.set(response.id, new Map());
+        this.pendingsByProject.set(response.id, new Map());
         project._id = response.id;
         project._rev = response.rev;
-        this.projects[response.id] = project;
+        this.projects.set(response.id, project);
         this.loadingProjects = false;
         this.loadingSources = false;
         this.projectEvents.emit("projectLoadingEnded");
@@ -221,11 +223,11 @@ export class AppStorage {
     if(this.loadingSources){
       return new Promise(resolve => {
         this.sourcesEvents.subscribe(event => {
-          resolve(this.fromObject(this.sourcesByProject[id]));
+          resolve(Array.from(this.sourcesByProject.get(id).values()));
         });
       });
     }else {
-      return Promise.resolve(this.fromObject(this.sourcesByProject[id]));
+      return Promise.resolve(Array.from(this.sourcesByProject.get(id).values()));
     }
   }
 
@@ -233,11 +235,11 @@ export class AppStorage {
     if(this.loadingSources){
       return new Promise(resolve => {
         this.sourcesEvents.subscribe(event => {
-          resolve(this.sources[id]);
+          resolve(this.sources.get(id));
         });
       });
     }else {
-      return Promise.resolve(this.sources[id]);
+      return Promise.resolve(this.sources.get(id));
     }
   }
 
@@ -245,18 +247,20 @@ export class AppStorage {
     this.loadingSources = true;
     return new Promise(resolve => {
       let values = set;
-      values._rev = this.sources[id]._rev;
+      values._rev = this.sources.get(id)._rev;
       values._id = id;
       this.sourceDB.put(values).then(response => {
         set._rev = response.rev;
         set._id = response.id;
-        this.sources[id] = set;
-        this.sourcesByProject[values.project_id][id] = set;
+        this.sources.set(id, set);
+        this.sourcesByProject.get(values.project_id).set(values._id, set);
         this.loadingSources = false;
         this.sourcesEvents.emit("sourceLoadingEnded");
         resolve(response);
       }).catch(err => {
         this.report.report(err);
+        this.loadingSources = false;
+        this.sourcesEvents.emit("sourceLoadingEnded");
         resolve(err);
       });
     });
@@ -268,8 +272,7 @@ export class AppStorage {
       this.sourceDB.post(source).then(response => {
         source._id = response.id;
         source._rev = response.rev;
-        this.sources[response.id] = source;
-        this.sourcesByProject[source.project_id][response.id] = source;
+        this.sources.set(response.id, source); this.sourcesByProject.get(source.project_id).set(response.id, source);
         this.loadingSources = false;
         this.sourcesEvents.emit("sourceLoadingEnded");
         resolve(response);
@@ -284,9 +287,9 @@ export class AppStorage {
 
   deleteSource(id: string) {
     this.loadingSources = true;
-    let doc = this.sources[id];
-    delete this.sources[id];
-    delete this.sourcesByProject[doc.project_id][id];
+    let doc = this.sources.get(id);
+    this.sources.delete(id);
+    this.sourcesByProject.get(doc.project_id).delete(id);
 
     return new Promise(resolve => {
       this.sourceDB.remove(doc).then(result => {
@@ -308,9 +311,8 @@ export class AppStorage {
         let subscription = this.sourcesEvents.subscribe(() => {
           subscription.unsubscribe();
           this.loadingSources = true;
-          let sources: Array<any> = this.fromObject(this.sources);
           let promises: Promise<any>[] = [];
-          sources.forEach((source, i) => {
+          this.sources.forEach((source) => {
             let parsedSource = this.parse.parse(source);
             promises.push(this.setSourceFromId(parsedSource._id, parsedSource));
           });
@@ -322,9 +324,8 @@ export class AppStorage {
         });
       }else {
         this.loadingSources = true;
-        let sources: Array<any> = this.fromObject(this.sources);
         let promises: Promise<any>[] = [];
-        sources.forEach((source, i) => {
+        this.sources.forEach((source) => {
           let parsedSource = this.parse.parse(source);
           promises.push(this.setSourceFromId(parsedSource._id, parsedSource));
         });
@@ -341,11 +342,11 @@ export class AppStorage {
     if(this.loadingPendings){
       return new Promise(resolve => {
         this.pendingsEvents.subscribe(event => {
-          resolve(this.fromObject(this.pendingsByProject[id]));
+          resolve(Array.from(this.pendingsByProject.get(id).values()));
         });
       });
     }else {
-      return Promise.resolve(this.fromObject(this.pendingsByProject[id]));
+      return Promise.resolve(Array.from(this.pendingsByProject.get(id).values()));
     }
   }
 
@@ -358,11 +359,7 @@ export class AppStorage {
         pending.isLoaded = false;
         pending.notAvailable = false;
         pending.data = {};
-        if (!this.pendingsByProject[pending.project_id]) {
-          this.pendingsByProject[pending.project_id] = {};
-        }
-        this.pendings[response.id] = pending;
-        this.pendingsByProject[pending.project_id][response.id] = pending;
+        this.pendings.set(response.id, pending); this.sourcesByProject.get(pending.project_id).set(pending._id, pending);
         this.loadingPendings = false;
         this.pendingsEvents.emit("pendingLoadingEnded");
         resolve(response);
@@ -377,9 +374,9 @@ export class AppStorage {
 
   deletePending(id: string) {
     this.loadingPendings = true;
-    let doc = this.pendings[id];
-    delete this.pendings[id];
-    delete this.pendingsByProject[doc.project_id][id];
+    let doc = this.pendings.get(id);
+    this.pendings.delete(id);
+    this.pendingsByProject.get(doc.project_id).delete(doc._id);
 
     return new Promise(resolve => {
       this.pendingDB.remove(doc).then(result => {
@@ -399,12 +396,12 @@ export class AppStorage {
     this.loadingPendings = true;
     return new Promise(resolve => {
       let values = set;
-      values._rev = this.pendings[id]._rev;
+      values._rev = this.pendings.get(id)._rev;
       values._id = id;
       this.pendingDB.put(values).then(response => {
         set._rev = response.rev;
-        this.pendings[id] = set;
-        this.pendingsByProject[values.project_id][id] = set;
+        this.pendings.set(id, set);
+        this.pendingsByProject.get(set.project_id).set(set._id, set);
         this.loadingPendings = false;
         this.pendingsEvents.emit("pendingLoadingEnded");
         resolve(response);
@@ -421,8 +418,7 @@ export class AppStorage {
     if (navigator.onLine) {
       if(this.loadingPendings) {
         this.pendingsEvents.subscribe(() => {
-          let pendings: Array<any> = this.fromObject(this.pendingsByProject[id]);
-          pendings.forEach(pending => {
+          this.pendings.forEach(pending => {
             if (!pending.isLoaded) {
               this.fetch.fromISBN(pending.isbn).then(data => {
                 pending.data = data;
@@ -439,8 +435,7 @@ export class AppStorage {
           });
         });
       }else {
-        let pendings: Array<any> = this.fromObject(this.pendingsByProject[id]);
-        pendings.forEach(pending => {
+        this.pendings.forEach(pending => {
           if (!pending.isLoaded) {
             this.fetch.fromISBN(pending.isbn).then(data => {
               console.log(data);
@@ -464,13 +459,11 @@ export class AppStorage {
     if (this.loadingPendings) {
       return new Promise(resolve => {
         this.pendingsEvents.subscribe(event => {
-          let pendingArray = this.fromObject(this.pendingsByProject[id]);
-          resolve(pendingArray.length ? pendingArray.length : 0);
+          resolve(this.pendingsByProject.get(id).size);
         });
       });
     }else {
-      let pendingArray = this.fromObject(this.pendingsByProject[id]);
-      return Promise.resolve(pendingArray.length ? pendingArray.length : 0);
+      return Promise.resolve(this.pendingsByProject.get(id).size);
     }
   }
 
@@ -500,13 +493,5 @@ export class AppStorage {
       this.settingsEvents.emit("settingsLoadingEnded");
       console.log(err);
     });
-  }
-
-  fromObject(obj: Object): Array<any> {
-    if (obj) {
-      return Object.keys(obj).map(x => obj[x]);
-    }else {
-      return [];
-    }
   }
 }
