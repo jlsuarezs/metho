@@ -536,9 +536,9 @@ export class Parse {
                     this.sourceToParse.url = "http://" + this.sourceToParse.url;
                 }
 
-                this.sourceToParse.parsedSource += "[" + this.sourceToParse.url + "]";
+                this.sourceToParse.parsedSource += "[" + this.sourceToParse.url + "] ";
             }else {
-                this.sourceToParse.parsedSource += "[" + this.sourceToParse.url + "]";
+                this.sourceToParse.parsedSource += "[" + this.sourceToParse.url + "] ";
                 this.addWarning("INVALID_URL", "url");
             }
         } else {
@@ -548,9 +548,9 @@ export class Parse {
 
         // Date de consultation
         if (this.sourceToParse.consultationDate) {
-            this.sourceToParse.parsedSource += "(" + new Date(this.sourceToParse.consultationDate).toLocaleDateString('fr', {timeZone:"UTC"}) + ").";
+            this.sourceToParse.parsedSource += "(" + new Date(this.sourceToParse.consultationDate).toLocaleDateString('fr', {timeZone:"UTC"}) + ")";
         } else {
-            this.sourceToParse.parsedSource += "(?).";
+            this.sourceToParse.parsedSource += "(?)";
         }
     } else if (this.sourceToParse.type == "cd") {
         if (this.sourceToParse.hasAuthors) {
