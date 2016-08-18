@@ -119,7 +119,8 @@ export class AppStorage {
   getProjects(): Promise<Array<any>> {
     if(this.loadingProjects){
       return new Promise(resolve => {
-        this.projectEvents.subscribe(event => {
+        let subscription = this.projectEvents.subscribe(event => {
+          subscription.unsubscribe();
           resolve(Array.from(this.projects.values()));
         });
       });
@@ -182,7 +183,8 @@ export class AppStorage {
   getProjectFromId(id: string) {
     if(this.loadingProjects){
       return new Promise(resolve => {
-        this.projectEvents.subscribe(event => {
+        let subscription = this.projectEvents.subscribe(event => {
+          subscription.unsubscribe();
           resolve(this.projects.get(id));
         });
       });
@@ -222,7 +224,8 @@ export class AppStorage {
   getSourcesFromProjectId(id: string): Promise<Array<any>> {
     if(this.loadingSources){
       return new Promise(resolve => {
-        this.sourcesEvents.subscribe(event => {
+        let subscription = this.sourcesEvents.subscribe(event => {
+          subscription.unsubscribe();
           resolve(Array.from(this.sourcesByProject.get(id).values()));
         });
       });
@@ -234,7 +237,8 @@ export class AppStorage {
   getSourceFromId(id: string) {
     if(this.loadingSources){
       return new Promise(resolve => {
-        this.sourcesEvents.subscribe(event => {
+        let subscription = this.sourcesEvents.subscribe(event => {
+          subscription.unsubscribe();
           resolve(this.sources.get(id));
         });
       });
@@ -341,7 +345,8 @@ export class AppStorage {
   getPendingsFromProjectId(id: string): Promise<Array<any>> {
     if(this.loadingPendings){
       return new Promise(resolve => {
-        this.pendingsEvents.subscribe(event => {
+        let subscription = this.pendingsEvents.subscribe(event => {
+          subscription.unsubscribe();
           resolve(Array.from(this.pendingsByProject.get(id).values()));
         });
       });
@@ -417,7 +422,8 @@ export class AppStorage {
   loadPendingsFromProjectId(id: string): void {
     if (navigator.onLine) {
       if(this.loadingPendings) {
-        this.pendingsEvents.subscribe(() => {
+        let subscription = this.pendingsEvents.subscribe(() => {
+          subscription.unsubscribe();
           this.pendings.forEach(pending => {
             if (!pending.isLoaded) {
               this.fetch.fromISBN(pending.isbn).then(data => {
@@ -458,7 +464,8 @@ export class AppStorage {
   getPendingNumber(id: string): Promise<number> {
     if (this.loadingPendings) {
       return new Promise(resolve => {
-        this.pendingsEvents.subscribe(event => {
+        let subscription = this.pendingsEvents.subscribe(event => {
+          subscription.unsubscribe();
           resolve(this.pendingsByProject.get(id).size);
         });
       });
@@ -470,7 +477,8 @@ export class AppStorage {
   getSettings(): Promise<any> {
     if (this.loadingSettings) {
       return new Promise(resolve => {
-        this.settingsEvents.subscribe(event => {
+        let subscription = this.settingsEvents.subscribe(event => {
+          subscription.unsubscribe();
           resolve(this.settings);
         });
       });
