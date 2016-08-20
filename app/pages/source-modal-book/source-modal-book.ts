@@ -235,15 +235,15 @@ export class SourceModalBookPage {
           message: translations["PROJECT.DETAIL.POPUP.AUTO_FILL_DESC"],
           buttons: [
             {
+              text: translations["PROJECT.DETAIL.POPUP.CANCEL"]
+            },
+            {
               text: translations["PROJECT.DETAIL.POPUP.OVERWRITE"],
               handler: () => {
                 this.updateValues(suggestion);
                 this.instantStatus.shown = false;
                 this.insertingFromScan = true;
               }
-            },
-            {
-              text: translations["PROJECT.DETAIL.POPUP.CANCEL"]
             }
           ]
         });
