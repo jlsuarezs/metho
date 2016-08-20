@@ -138,7 +138,9 @@ export class Fetch {
       for (var i = 0; i < response.author_data.length; i++) {
         if (response.author_data[i].name.split(",")[0] == response.author_data[i].name) {
           newobj["author" + String(i + 1) + "firstname"] = this.capitalizeFirstLetter(response.author_data[i].name.split(" ")[0].replace(/\ufffd/g, "é").trim());
-          newobj["author" + String(i + 1) + "lastname"] = this.capitalizeFirstLetter(response.author_data[i].name.split(" ")[1].replace(/\ufffd/g, "é").trim());
+          if (response.author_data[i].name.split(" ").length > 1) {
+            newobj["author" + String(i + 1) + "lastname"] = this.capitalizeFirstLetter(response.author_data[i].name.split(" ")[1].replace(/\ufffd/g, "é").trim());
+          }
         } else {
           newobj["author" + String(i + 1) + "lastname"] = this.capitalizeFirstLetter(response.author_data[i].name.split(",")[0].replace(/\ufffd/g, "é").trim());
           newobj["author" + String(i + 1) + "firstname"] = this.capitalizeFirstLetter(response.author_data[i].name.split(",")[1].replace(/\ufffd/g, "é").trim());
