@@ -10,7 +10,9 @@ import {Settings} from '../../providers/settings/settings';
 import {Language} from '../../providers/language/language';
 import {AdvancedMode} from '../../providers/advanced-mode/advanced-mode';
 
-import * as deepcopy from 'deepcopy';
+declare const require: any;
+
+const deepcopy = require('deepcopy');
 
 @Component({
   templateUrl: 'build/pages/settings/settings.html',

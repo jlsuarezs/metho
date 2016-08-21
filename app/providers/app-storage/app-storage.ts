@@ -4,7 +4,9 @@ import {Parse} from '../parse/parse';
 import {Fetch} from '../fetch/fetch';
 import {UserReport} from '../user-report/user-report';
 
-import * as PouchDB from 'pouchdb';
+declare const require: any;
+
+const PouchDB = require('pouchdb');
 
 @Injectable()
 export class AppStorage {
