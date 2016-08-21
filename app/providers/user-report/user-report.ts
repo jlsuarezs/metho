@@ -25,7 +25,7 @@ export class UserReport {
         stacktrace = "";
       }
     }
-    this.translate.get(["YES", "NO", "REPORT.UNKNOWN", "REPORT.REPORT_?","REPORT.DO_NOT_EDIT", "REPORT.ERROR"]).subscribe(translations => {
+    this.translate.get(["YES", "NO", "REPORT.UNKNOWN", "REPORT.REPORT_?", "REPORT.DESC","REPORT.DO_NOT_EDIT", "REPORT.ERROR"]).subscribe(translations => {
       let alert = this.alertCtrl.create({
         title: translations["REPORT.UNKNOWN"],
         message: translations["REPORT.REPORT_?"],
@@ -37,7 +37,8 @@ export class UserReport {
             text: translations["YES"],
             handler: () => {
               SocialSharing.shareViaEmail(
-                `${translations['REPORT.DO_NOT_EDIT']}
+                `<b>${translations['REPORT.DESC']}</b><br><br><br>
+                <b>${translations['REPORT.DO_NOT_EDIT']}</b><br>
                 ${Device.device.platform} ${Device.device.version}<br>
                 ${Device.device.manufacturer} ${Device.device.model}<br>
                 ${window.screen.width * window.devicePixelRatio}x${window.screen.height * window.devicePixelRatio}<br>

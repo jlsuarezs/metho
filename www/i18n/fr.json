@@ -614,6 +614,7 @@
         "ERROR": "Erreur",
         "UNKNOWN": "Une erreur inconnue s'est produite",
         "REPORT_?": "Voulez-vous rapporter cette erreur au développeur ?",
+        "DESC": "S'il-vous-plait décrire ce que vous étiez en train de faire.",
         "DO_NOT_EDIT": "Ne pas modifier cette section"
     }
 }
