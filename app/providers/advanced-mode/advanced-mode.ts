@@ -7,6 +7,11 @@ import {UserReport} from '../user-report/user-report';
 import {TranslateService} from 'ng2-translate/ng2-translate';
 
 declare var inAppPurchase: any;
+interface MyWindow extends Window {
+  cordova: void;
+}
+
+declare var window: MyWindow;
 
 @Injectable()
 export class AdvancedMode {
