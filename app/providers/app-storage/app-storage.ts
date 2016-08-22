@@ -2,7 +2,7 @@ import {Injectable, EventEmitter} from '@angular/core';
 import {Storage, LocalStorage} from 'ionic-angular';
 import {Parse} from '../parse/parse';
 import {Fetch} from '../fetch/fetch';
-import {UserReport} from '../user-report/user-report';
+import {Report} from '../report/report';
 
 declare const require: any;
 
@@ -33,7 +33,7 @@ export class AppStorage {
   private pendingsEvents;
   private settingsEvents;
 
-  constructor(public parse: Parse, public report: UserReport, public fetch: Fetch) {
+  constructor(public parse: Parse, public report: Report, public fetch: Fetch) {
     this.local = new Storage(LocalStorage);
     if(this.local.get("theresProjects") == null) {
       this.local.set("theresProjects", false);

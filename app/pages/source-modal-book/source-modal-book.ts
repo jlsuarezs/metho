@@ -10,7 +10,7 @@ import {Fetch} from '../../providers/fetch/fetch.ts';
 import {BoardingScanPage} from '../boarding-scan/boarding-scan';
 import {Settings} from '../../providers/settings/settings';
 import {Language} from '../../providers/language/language';
-import {UserReport} from '../../providers/user-report/user-report';
+import {Report} from '../../providers/report/report';
 
 @Component({
   templateUrl: 'build/pages/source-modal-book/source-modal-book.html',
@@ -44,7 +44,7 @@ export class SourceModalBookPage {
     shown: false
   };
 
-  constructor(public viewCtrl: ViewController, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public modalCtrl: ModalController, public translate: TranslateService, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public nav: NavController, public fetch: Fetch, public settings: Settings, public language: Language, public report: UserReport) {
+  constructor(public viewCtrl: ViewController, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public modalCtrl: ModalController, public translate: TranslateService, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public nav: NavController, public fetch: Fetch, public settings: Settings, public language: Language, public report: Report) {
     if(this.params.get('editing') == true) {
       this.isNew = false;
     }else {

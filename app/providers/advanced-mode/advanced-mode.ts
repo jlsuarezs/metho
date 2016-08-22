@@ -2,7 +2,7 @@ import {Injectable, EventEmitter} from '@angular/core';
 import {AlertController} from 'ionic-angular';
 
 import {Settings} from '../settings/settings';
-import {UserReport} from '../user-report/user-report';
+import {Report} from '../report/report';
 
 import {TranslateService} from 'ng2-translate/ng2-translate';
 
@@ -20,7 +20,7 @@ export class AdvancedMode {
   public loadEvents: EventEmitter<any> = new EventEmitter();
   private productId: string = "";
 
-  constructor(public translate: TranslateService, public settings: Settings, public alertCtrl: AlertController, public report: UserReport) {
+  constructor(public translate: TranslateService, public settings: Settings, public alertCtrl: AlertController, public report: Report) {
     if (!!window.cordova) {
       inAppPurchase.getProducts(["com.fclavette.metho.advanced"]).then(products => {
         let product = products[0];

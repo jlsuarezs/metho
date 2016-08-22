@@ -5,14 +5,14 @@ import {SocialSharing} from 'ionic-native';
 
 import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
 
-import {UserReport} from '../../providers/user-report/user-report';
+import {Report} from '../../providers/report/report';
 
 @Component({
   templateUrl: 'build/pages/feedback/feedback.html',
   pipes: [TranslatePipe]
 })
 export class FeedbackPage {
-  constructor(public nav: NavController, public translate: TranslateService, public report: UserReport) {}
+  constructor(public nav: NavController, public translate: TranslateService, public report: Report) {}
 
   open(type: string) {
     switch (type) {

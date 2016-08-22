@@ -4,7 +4,7 @@ import {SocialSharing, Device, AppVersion} from 'ionic-native';
 import {TranslateService} from 'ng2-translate/ng2-translate';
 
 @Injectable()
-export class UserReport {
+export class Report {
   public nav: NavController;
 
   constructor(public translate: TranslateService, public alertCtrl: AlertController) {}

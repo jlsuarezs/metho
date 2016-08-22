@@ -10,7 +10,7 @@ import {Parse} from './providers/parse/parse.ts';
 import {Fetch} from './providers/fetch/fetch.ts';
 import {References} from './providers/references/references';
 import {Settings} from './providers/settings/settings.ts';
-import {UserReport} from './providers/user-report/user-report.ts';
+import {Report} from './providers/report/report';
 import {AdvancedMode} from './providers/advanced-mode/advanced-mode';
 import {Language} from './providers/language/language';
 
@@ -43,7 +43,7 @@ ionicBootstrap(MyApp, [
     Fetch,
     References,
     Settings,
-    UserReport,
+    Report,
     AdvancedMode,
     Language,
   ], {});
