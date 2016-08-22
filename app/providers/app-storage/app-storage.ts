@@ -337,36 +337,22 @@ export class AppStorage {
   }
 
   parseSources() {
-    return new Promise(resolve => {
-      if(this.loadingSources) {
-        let subscription = this.sourcesEvents.subscribe(() => {
-          subscription.unsubscribe();
-          this.loadingSources = true;
-          let promises: Promise<any>[] = [];
-          this.sources.forEach((source) => {
-            let parsedSource = this.parse.parse(source);
-            promises.push(this.setSourceFromId(parsedSource._id, parsedSource));
-          });
-          Promise.all(promises).then(() => {
-            this.loadingSources = false;
-            this.sourcesEvents.emit("sourceLoadingEnded");
-            resolve(true);
-          });
-        });
-      }else {
-        this.loadingSources = true;
-        let promises: Promise<any>[] = [];
+    if(this.loadingSources) {
+      let subscription = this.sourcesEvents.subscribe(() => {
+        subscription.unsubscribe();
+        let sources: Map<string, any> = <Map<string, any>>new Map();
         this.sources.forEach((source) => {
-          let parsedSource = this.parse.parse(source);
-          promises.push(this.setSourceFromId(parsedSource._id, parsedSource));
+          sources.set(source._id, this.parse.parse(source));
         });
-        Promise.all(promises).then(() => {
-          this.loadingSources = false;
-          this.sourcesEvents.emit("sourceLoadingEnded");
-          resolve(true);
-        });
-      }
-    });
+        this.bulkSetSources(sources);
+      });
+    }else {
+      let sources: Map<string, any> = <Map<string, any>>new Map();
+      this.sources.forEach((source) => {
+        sources.set(source._id, this.parse.parse(source));
+      });
+      this.bulkSetSources(sources);
+    }
   }
 
   getPendingsFromProjectId(id: string): Promise<Array<any>> {
