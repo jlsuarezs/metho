@@ -802,15 +802,15 @@ export class Parse {
                 options: [
                   {
                     text: 'PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISTER',
-                    value: '13'
+                    value: 'mister'
                   },
                   {
                     text: 'PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS',
-                    value: 'more3'
+                    value: 'miss'
                   },
                   {
                     text: 'PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS_YOUNG',
-                    value: 'collective'
+                    value: 'miss_young'
                   }
                 ],
                 type:"select"
