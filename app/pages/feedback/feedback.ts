@@ -18,47 +18,53 @@ export class FeedbackPage {
     switch (type) {
       case "projects":
         this.translate.get(['SETTINGS.FEEDBACK.EMAIL.PROJECT', 'SETTINGS.FEEDBACK.EMAIL.PROJECT_TITLE']).subscribe(translations => {
-          SocialSharing.shareViaEmail(
-            `${translations["SETTINGS.FEEDBACK.EMAIL.PROJECT"]}
-            ${this.report.diagnostics()}
-            </p>
-            `,
-            translations["SETTINGS.FEEDBACK.EMAIL.PROJECT_TITLE"],
-            ['methoappeei@gmail.com'],
-            [],
-            [],
-            null
-          );
+          this.report.diagnostics().then(diags => {
+            SocialSharing.shareViaEmail(
+              `${translations["SETTINGS.FEEDBACK.EMAIL.PROJECT"]}
+              ${diags}
+              </p>
+              `,
+              translations["SETTINGS.FEEDBACK.EMAIL.PROJECT_TITLE"],
+              ['methoappeei@gmail.com'],
+              [],
+              [],
+              null
+            );
+          });
         });
         break;
       case "reference":
         this.translate.get(['SETTINGS.FEEDBACK.EMAIL.REFERENCE', 'SETTINGS.FEEDBACK.EMAIL.REFERENCE_TITLE']).subscribe(translations => {
-          SocialSharing.shareViaEmail(
-            `${translations['SETTINGS.FEEDBACK.EMAIL.REFERENCE']}
-            ${this.report.diagnostics()}
-            </p>
-            `,
-            translations["SETTINGS.FEEDBACK.EMAIL.REFERENCE_TITLE"],
-            ['methoappeei@gmail.com'],
-            [],
-            [],
-            null
-          );
+          this.report.diagnostics().then(diags => {
+            SocialSharing.shareViaEmail(
+              `${translations['SETTINGS.FEEDBACK.EMAIL.REFERENCE']}
+              ${diags}
+              </p>
+              `,
+              translations["SETTINGS.FEEDBACK.EMAIL.REFERENCE_TITLE"],
+              ['methoappeei@gmail.com'],
+              [],
+              [],
+              null
+            );
+          });
         });
         break;
       case "settings":
         this.translate.get(['SETTINGS.FEEDBACK.EMAIL.SETTINGS', 'SETTINGS.FEEDBACK.EMAIL.SETTINGS_TITLE']).subscribe(translations => {
-          SocialSharing.shareViaEmail(
-            `${translations["SETTINGS.FEEDBACK.EMAIL.SETTINGS"]}
-            ${this.report.diagnostics()}
-            </p>
-            `,
-            translations["SETTINGS.FEEDBACK.EMAIL.SETTINGS_TITLE"],
-            ['methoappeei@gmail.com'],
-            [],
-            [],
-            null
-          );
+          this.report.diagnostics().then(diags => {
+            SocialSharing.shareViaEmail(
+              `${translations["SETTINGS.FEEDBACK.EMAIL.SETTINGS"]}
+              ${diags}
+              </p>
+              `,
+              translations["SETTINGS.FEEDBACK.EMAIL.SETTINGS_TITLE"],
+              ['methoappeei@gmail.com'],
+              [],
+              [],
+              null
+            );
+          });
         });
         break;
       case "comment":

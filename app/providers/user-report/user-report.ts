@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AlertController, App, NavController} from 'ionic-angular';
-import {SocialSharing, Device} from 'ionic-native';
+import {SocialSharing, Device, AppVersion} from 'ionic-native';
 import {TranslateService} from 'ng2-translate/ng2-translate';
 
 @Injectable()
@@ -26,41 +26,53 @@ export class UserReport {
       }
     }
     this.translate.get(["YES", "NO", "REPORT.UNKNOWN", "REPORT.REPORT_?", "REPORT.DESC","REPORT.DO_NOT_EDIT", "REPORT.ERROR"]).subscribe(translations => {
-      let alert = this.alertCtrl.create({
-        title: translations["REPORT.UNKNOWN"],
-        message: translations["REPORT.REPORT_?"],
-        buttons: [
-          {
-            text: translations["NO"]
-          },
-          {
-            text: translations["YES"],
-            handler: () => {
-              SocialSharing.shareViaEmail(
-                `<b>${translations['REPORT.DESC']}</b><br><br><br>
-                <b>${translations['REPORT.DO_NOT_EDIT']}</b><br>
-                ${this.diagnostics()}</p><br>
-                ${errStr}<br>
-                ${stacktrace}`,
-                translations['REPORT.ERROR'],
-                ['methoappeei@gmail.com'],
-                [],
-                [],
-                []
-              );
+      this.diagnostics().then(diags => {
+        let alert = this.alertCtrl.create({
+          title: translations["REPORT.UNKNOWN"],
+          message: translations["REPORT.REPORT_?"],
+          buttons: [
+            {
+              text: translations["NO"]
+            },
+            {
+              text: translations["YES"],
+              handler: () => {
+                SocialSharing.shareViaEmail(
+                  `<b>${translations['REPORT.DESC']}</b><br><br><br>
+                  <b>${translations['REPORT.DO_NOT_EDIT']}</b><br>
+                  ${diags}</p><br>
+                  ${errStr}<br>
+                  ${stacktrace}`,
+                  translations['REPORT.ERROR'],
+                  ['methoappeei@gmail.com'],
+                  [],
+                  [],
+                  []
+                );
+              }
             }
-          }
-        ]
-      });
+          ]
+        });
 
-      alert.present();
+        alert.present();
+      });
     });
   }
 
-  diagnostics(): string {
-    return `${Device.device.platform} ${Device.device.version}<br>
-            ${Device.device.manufacturer} ${Device.device.model}<br>
-            ${window.screen.width * window.devicePixelRatio}x${window.screen.height * window.devicePixelRatio}<br>
-            Cordova ${Device.device.cordova}`;
+  diagnostics(): Promise<string> {
+    return new Promise(resolve => {
+      Promise.all([AppVersion.getVersionNumber(), AppVersion.getVersionCode()]).then(result => {
+        resolve(`${Device.device.platform} ${Device.device.version}<br>
+          ${Device.device.manufacturer} ${Device.device.model}<br>
+          ${window.screen.width * window.devicePixelRatio}x${window.screen.height * window.devicePixelRatio}<br>
+          Cordova ${Device.device.cordova}<br>
+          Metho v${result[0]}(${result[1]})`);
+      }).catch(err => {
+        resolve(`${Device.device.platform} ${Device.device.version}<br>
+          ${Device.device.manufacturer} ${Device.device.model}<br>
+          ${window.screen.width * window.devicePixelRatio}x${window.screen.height * window.devicePixelRatio}<br>
+          Cordova ${Device.device.cordova}`);
+      });
+    });
   }
 }
