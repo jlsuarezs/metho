@@ -271,6 +271,32 @@ export class AppStorage {
     });
   }
 
+  bulkSetSources(sources: Map<string, any>) {
+    this.loadingSources = true;
+    return new Promise(resolve => {
+      this.sourceDB.bulkDocs(Array.from(sources.values())).then(result => {
+        result.forEach(source => {
+          if (source.ok) {
+            let old = sources.get(source.id);
+            old._rev = source.rev;
+            this.sources.set(source.id, old);
+            this.sourcesByProject.get(old.project_id).set(source.id, old);
+          }else {
+            this.report.report(source);
+          }
+        });
+        this.loadingSources = false;
+        this.sourcesEvents.emit("sourceLoadingEnded");
+        resolve(true);
+      }).catch(err => {
+        this.report.report(err);
+        this.loadingSources = false;
+        this.sourcesEvents.emit("sourceLoadingEnded");
+        resolve(true);
+      });
+    });
+  }
+
   createSource(source: any) {
     this.loadingSources = true;
     return new Promise(resolve => {
