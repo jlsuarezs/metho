@@ -252,14 +252,13 @@ export class AppStorage {
   setSourceFromId(id: string, set: any) {
     this.loadingSources = true;
     return new Promise(resolve => {
-      let values = set;
-      values._rev = this.sources.get(id)._rev;
-      values._id = id;
-      this.sourceDB.put(values).then(response => {
+      set._rev = this.sources.get(id)._rev;
+      set._id = id;
+      this.sourceDB.put(set).then(response => {
         set._rev = response.rev;
         set._id = response.id;
         this.sources.set(id, set);
-        this.sourcesByProject.get(values.project_id).set(values._id, set);
+        this.sourcesByProject.get(set.project_id).set(id, set);
         this.loadingSources = false;
         this.sourcesEvents.emit("sourceLoadingEnded");
         resolve(response);
