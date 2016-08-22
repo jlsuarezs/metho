@@ -39,10 +39,7 @@ export class UserReport {
               SocialSharing.shareViaEmail(
                 `<b>${translations['REPORT.DESC']}</b><br><br><br>
                 <b>${translations['REPORT.DO_NOT_EDIT']}</b><br>
-                ${Device.device.platform} ${Device.device.version}<br>
-                ${Device.device.manufacturer} ${Device.device.model}<br>
-                ${window.screen.width * window.devicePixelRatio}x${window.screen.height * window.devicePixelRatio}<br>
-                Cordova ${Device.device.cordova}</p><br>
+                ${this.diagnostics()}</p><br>
                 ${errStr}<br>
                 ${stacktrace}`,
                 translations['REPORT.ERROR'],
@@ -58,5 +55,12 @@ export class UserReport {
 
       alert.present();
     });
+  }
+
+  diagnostics(): string {
+    return `${Device.device.platform} ${Device.device.version}<br>
+            ${Device.device.manufacturer} ${Device.device.model}<br>
+            ${window.screen.width * window.devicePixelRatio}x${window.screen.height * window.devicePixelRatio}<br>
+            Cordova ${Device.device.cordova}`;
   }
 }
