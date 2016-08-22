@@ -36,7 +36,8 @@ export class Language {
             this.config.set('ios', 'backButtonText', back);
           });
 
-          this.translate.onLangChange.subscribe(() => {
+          let subscription = this.translate.onLangChange.subscribe(() => {
+            subscription.unsubscribe();
             if (code != this.settings.get('lastLang')) {
               this.storage.parseSources();
             }
@@ -77,7 +78,8 @@ export class Language {
   change(lang: string) {
     this.settings.set('overideLang', lang);
     this.init();
-    this.translate.onLangChange.subscribe(() => {
+    let subscription = this.translate.onLangChange.subscribe(() => {
+      subscription.unsubscribe();
       this.storage.parseSources();
     });
   }
