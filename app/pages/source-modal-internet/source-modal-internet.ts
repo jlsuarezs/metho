@@ -1,5 +1,5 @@
 import {ViewController, NavParams} from 'ionic-angular';
-import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
+import {TranslateService} from 'ng2-translate/ng2-translate';
 import {Component} from '@angular/core';
 import {FormBuilder, Validators, ControlGroup} from '@angular/common';
 
@@ -9,8 +9,7 @@ import {Settings} from '../../providers/settings/settings';
 import {Language} from '../../providers/language/language';
 
 @Component({
-  templateUrl: 'build/pages/source-modal-internet/source-modal-internet.html',
-  pipes: [TranslatePipe]
+  templateUrl: 'build/pages/source-modal-internet/source-modal-internet.html'
 })
 export class SourceModalInternetPage {
   public isNew: boolean;

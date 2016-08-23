@@ -1,5 +1,5 @@
 import {ViewController, NavParams, NavController, AlertController} from 'ionic-angular';
-import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
+import {TranslateService} from 'ng2-translate/ng2-translate';
 import {Component} from '@angular/core';
 import {FormBuilder, Validators, ControlGroup} from '@angular/common';
 import {BarcodeScanner, SafariViewController} from 'ionic-native';
@@ -10,8 +10,7 @@ import {Settings} from '../../providers/settings/settings';
 import {Language} from '../../providers/language/language';
 
 @Component({
-  templateUrl: 'build/pages/source-modal-interview/source-modal-interview.html',
-  pipes: [TranslatePipe]
+  templateUrl: 'build/pages/source-modal-interview/source-modal-interview.html'
 })
 export class SourceModalInterviewPage {
   public isNew: boolean;

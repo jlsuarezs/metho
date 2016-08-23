@@ -1,5 +1,5 @@
 import {ViewController, NavParams, ModalController, NavController, AlertController, LoadingController} from 'ionic-angular';
-import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
+import {TranslateService} from 'ng2-translate/ng2-translate';
 import {Component} from '@angular/core';
 import {FormBuilder, Validators, ControlGroup} from '@angular/common';
 import {BarcodeScanner, SafariViewController} from 'ionic-native';
@@ -13,8 +13,7 @@ import {Language} from '../../providers/language/language';
 import {Report} from '../../providers/report/report';
 
 @Component({
-  templateUrl: 'build/pages/source-modal-book/source-modal-book.html',
-  pipes: [TranslatePipe]
+  templateUrl: 'build/pages/source-modal-book/source-modal-book.html'
 })
 export class SourceModalBookPage {
   public isNew: boolean;
@@ -471,7 +470,7 @@ export class SourceModalBookPage {
     SafariViewController.isAvailable().then(avail => {
       if (avail) {
         SafariViewController.show({
-          url: this.url 
+          url: this.url
         });
       }
     });

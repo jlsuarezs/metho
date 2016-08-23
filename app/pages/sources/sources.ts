@@ -1,6 +1,6 @@
 import {NavController, NavParams, ActionSheetController, ModalController, AlertController, List, Content} from 'ionic-angular';
 import {ViewChild, Component} from '@angular/core';
-import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
+import {TranslateService} from 'ng2-translate/ng2-translate';
 import {SocialSharing} from 'ionic-native';
 
 import {SourcePage} from '../source/source';
@@ -18,8 +18,7 @@ import {AppStorage} from '../../providers/app-storage/app-storage';
 import {Settings} from '../../providers/settings/settings';
 
 @Component({
-  templateUrl: 'build/pages/sources/sources.html',
-  pipes: [TranslatePipe]
+  templateUrl: 'build/pages/sources/sources.html'
 })
 export class SourcesPage {
   public projectId: string;

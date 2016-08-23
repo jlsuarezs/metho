@@ -1,5 +1,4 @@
 import {ViewController, NavParams} from 'ionic-angular';
-import {TranslatePipe} from 'ng2-translate/ng2-translate';
 import {Component} from '@angular/core';
 import {FormBuilder, Validators, ControlGroup} from '@angular/common';
 import {BarcodeScanner, SafariViewController} from 'ionic-native';
@@ -9,8 +8,7 @@ import {Parse} from '../../providers/parse/parse.ts';
 import {Language} from '../../providers/language/language';
 
 @Component({
-  templateUrl: 'build/pages/source-modal-movie/source-modal-movie.html',
-  pipes: [TranslatePipe]
+  templateUrl: 'build/pages/source-modal-movie/source-modal-movie.html'
 })
 export class SourceModalMoviePage {
   public isNew: boolean;

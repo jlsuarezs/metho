@@ -3,12 +3,11 @@ import {ProjectsPage} from '../projects/projects';
 import {ReferencesPage} from '../references/references';
 import {SettingsPage} from '../settings/settings';
 
-import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
+import {TranslateService} from 'ng2-translate/ng2-translate';
 
 
 @Component({
-  templateUrl: 'build/pages/tabs/tabs.html',
-  pipes: [TranslatePipe]
+  templateUrl: 'build/pages/tabs/tabs.html'
 })
 export class TabsPage {
   // this tells the tabs component which Pages

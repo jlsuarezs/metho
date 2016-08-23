@@ -1,5 +1,4 @@
 import {ViewController, NavParams} from 'ionic-angular';
-import {TranslatePipe} from 'ng2-translate/ng2-translate';
 import {Component} from '@angular/core';
 import {FormBuilder, Validators, ControlGroup} from '@angular/common';
 import {BarcodeScanner, SafariViewController} from 'ionic-native';
@@ -8,8 +7,7 @@ import {AppStorage} from '../../providers/app-storage/app-storage.ts';
 import {Parse} from '../../providers/parse/parse.ts';
 
 @Component({
-  templateUrl: 'build/pages/source-modal-cd/source-modal-cd.html',
-  pipes: [TranslatePipe]
+  templateUrl: 'build/pages/source-modal-cd/source-modal-cd.html'
 })
 export class SourceModalCdPage {
   public isNew: boolean;

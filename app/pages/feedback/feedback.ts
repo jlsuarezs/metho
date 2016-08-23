@@ -3,13 +3,12 @@ import {Component} from '@angular/core';
 
 import {SocialSharing} from 'ionic-native';
 
-import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
+import {TranslateService} from 'ng2-translate/ng2-translate';
 
 import {Report} from '../../providers/report/report';
 
 @Component({
-  templateUrl: 'build/pages/feedback/feedback.html',
-  pipes: [TranslatePipe]
+  templateUrl: 'build/pages/feedback/feedback.html'
 })
 export class FeedbackPage {
   constructor(public nav: NavController, public translate: TranslateService, public report: Report) {}

@@ -1,6 +1,6 @@
 import {NavController, AlertController, List} from 'ionic-angular';
 import {ViewChild, Component} from '@angular/core';
-import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
+import {TranslateService} from 'ng2-translate/ng2-translate';
 
 import {AdvancedModePage} from '../advanced-mode/advanced-mode';
 import {AttributionsPage} from '../attributions/attributions';
@@ -15,8 +15,7 @@ declare const require: any;
 const deepcopy = require('deepcopy');
 
 @Component({
-  templateUrl: 'build/pages/settings/settings.html',
-  pipes: [TranslatePipe]
+  templateUrl: 'build/pages/settings/settings.html'
 })
 export class SettingsPage {
   public settings: any = {};

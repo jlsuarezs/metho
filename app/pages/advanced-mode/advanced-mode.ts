@@ -1,13 +1,12 @@
 import {NavController} from 'ionic-angular';
 import {Component} from '@angular/core';
 
-import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
+import {TranslateService} from 'ng2-translate/ng2-translate';
 
 import {AdvancedMode} from '../../providers/advanced-mode/advanced-mode';
 
 @Component({
-  templateUrl: 'build/pages/advanced-mode/advanced-mode.html',
-  pipes: [TranslatePipe]
+  templateUrl: 'build/pages/advanced-mode/advanced-mode.html'
 })
 export class AdvancedModePage {
   public isAdvanced: boolean = false;

@@ -1,10 +1,10 @@
 import {Platform, ionicBootstrap} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
-import {provide, Component} from '@angular/core';
+import {provide, Component, PLATFORM_PIPES} from '@angular/core';
 import {disableDeprecatedForms, provideForms} from '@angular/forms';
 import {Http} from '@angular/http';
 import {TabsPage} from './pages/tabs/tabs';
-import {TranslateLoader, TranslateStaticLoader, TranslateService} from 'ng2-translate/ng2-translate';
+import {TranslateLoader, TranslateStaticLoader, TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
 import {AppStorage} from './providers/app-storage/app-storage.ts';
 import {Parse} from './providers/parse/parse.ts';
 import {Fetch} from './providers/fetch/fetch.ts';
@@ -46,4 +46,10 @@ ionicBootstrap(MyApp, [
     Report,
     AdvancedMode,
     Language,
+    provide(PLATFORM_PIPES, {
+      useValue: [
+        TranslatePipe
+      ],
+      multi: true
+    }),
   ], {});

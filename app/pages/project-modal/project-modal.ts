@@ -1,13 +1,11 @@
 import {NavController, ViewController, NavParams} from 'ionic-angular';
 import {Component} from '@angular/core';
-import {TranslatePipe} from 'ng2-translate/ng2-translate';
 import {FormBuilder, Validators, FormGroup} from '@angular/forms';
 
 import {AppStorage} from '../../providers/app-storage/app-storage.ts';
 
 @Component({
-  templateUrl: 'build/pages/project-modal/project-modal.html',
-  pipes: [TranslatePipe]
+  templateUrl: 'build/pages/project-modal/project-modal.html'
 })
 export class ProjectModalPage {
   public isNew: Boolean;

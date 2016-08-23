@@ -1,7 +1,7 @@
 import {NavController, NavParams, ModalController, AlertController, LoadingController} from 'ionic-angular';
 import {Component} from '@angular/core';
 
-import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
+import {TranslateService} from 'ng2-translate/ng2-translate';
 
 import {AppStorage} from '../../providers/app-storage/app-storage';
 import {Fetch} from '../../providers/fetch/fetch';
@@ -10,8 +10,7 @@ import {Language} from '../../providers/language/language';
 import {SourceModalBookPage} from '../source-modal-book/source-modal-book';
 
 @Component({
-  templateUrl: 'build/pages/pendings/pendings.html',
-  pipes: [TranslatePipe]
+  templateUrl: 'build/pages/pendings/pendings.html'
 })
 export class PendingsPage {
   public projectId: string;

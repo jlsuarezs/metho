@@ -1,12 +1,10 @@
 import {NavController, ViewController, Slides} from 'ionic-angular';
 import {ViewChild, Component} from '@angular/core';
-import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 import {Settings} from '../../providers/settings/settings';
 
 @Component({
-  templateUrl: 'build/pages/boarding-scan/boarding-scan.html',
-  pipes: [TranslatePipe]
+  templateUrl: 'build/pages/boarding-scan/boarding-scan.html'
 })
 export class BoardingScanPage {
   @ViewChild('slider') slider: Slides;

@@ -1,11 +1,8 @@
 import {NavController, NavParams} from 'ionic-angular';
 import {Component} from '@angular/core';
 
-import {TranslatePipe} from 'ng2-translate/ng2-translate';
-
 @Component({
-  templateUrl: 'build/pages/license/license.html',
-  pipes: [TranslatePipe],
+  templateUrl: 'build/pages/license/license.html'
 })
 export class LicensePage {
   public type: string = "";

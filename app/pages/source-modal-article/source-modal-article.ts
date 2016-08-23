@@ -1,5 +1,4 @@
 import {ViewController, NavParams} from 'ionic-angular';
-import {TranslatePipe} from 'ng2-translate/ng2-translate';
 import {Component} from '@angular/core';
 import {FormBuilder, Validators, ControlGroup} from '@angular/common';
 
@@ -8,8 +7,7 @@ import {Parse} from '../../providers/parse/parse.ts';
 import {Language} from '../../providers/language/language';
 
 @Component({
-  templateUrl: 'build/pages/source-modal-article/source-modal-article.html',
-  pipes: [TranslatePipe]
+  templateUrl: 'build/pages/source-modal-article/source-modal-article.html'
 })
 export class SourceModalArticlePage {
   public isNew: boolean;

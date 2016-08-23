@@ -1,14 +1,13 @@
 import {NavController, ModalController, AlertController, List} from 'ionic-angular';
 import {ViewChild, Component} from '@angular/core';
-import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
+import {TranslateService} from 'ng2-translate/ng2-translate';
 import {AppStorage} from '../../providers/app-storage/app-storage.ts';
 
 import {SourcesPage} from '../sources/sources';
 import {ProjectModalPage} from '../project-modal/project-modal';
 
 @Component({
-  templateUrl: 'build/pages/projects/projects.html',
-  pipes: [TranslatePipe]
+  templateUrl: 'build/pages/projects/projects.html'
 })
 export class ProjectsPage {
   public projects: Array<any> = [];

@@ -1,7 +1,7 @@
 import {NavController, NavParams, ModalController, AlertController} from 'ionic-angular';
 import {Component} from '@angular/core';
 
-import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
+import {TranslateService} from 'ng2-translate/ng2-translate';
 
 import {AppStorage} from '../../providers/app-storage/app-storage';
 import {Parse} from '../../providers/parse/parse';
@@ -15,8 +15,7 @@ import {SourceModalMoviePage} from '../source-modal-movie/source-modal-movie';
 import {SourceModalInterviewPage} from '../source-modal-interview/source-modal-interview';
 
 @Component({
-  templateUrl: 'build/pages/source/source.html',
-  pipes: [TranslatePipe]
+  templateUrl: 'build/pages/source/source.html'
 })
 export class SourcePage {
   public source: any = {
