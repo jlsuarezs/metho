@@ -143,7 +143,7 @@ export class AppStorage {
     // Delete this.sourcesByProject object for the deleted project
     Promise.all(deletePromises).then(value => {
       this.sourcesByProject.delete(id);
-      this.loadingProjects = true;
+      this.loadingProjects = false;
       this.projectEvents.emit("projectLoadingEnded");
     });
 
