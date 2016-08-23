@@ -10,7 +10,7 @@ import {ProjectModalPage} from '../project-modal/project-modal';
   templateUrl: 'build/pages/projects/projects.html'
 })
 export class ProjectsPage {
-  public projects: Array<any> = [];
+  public projects: Project[] = [];
   public loading: Boolean = true;
   @ViewChild(List) list: List;
 
@@ -21,14 +21,8 @@ export class ProjectsPage {
   loadProjects() {
     this.storage.getProjects().then(projects => {
       this.projects = projects;
-      this.projects.sort(function(a, b) {
-        if (a.title && b.title) {
-          return a.title.localeCompare(b.title);
-        } else if (a.title) {
-          return a.title.localeCompare(b.parsedSource);
-        } else if (b.title) {
-          return a.parsedSource.localeCompare(b.title);
-        }
+      this.projects.sort((a, b) => {
+        return a.name.localeCompare(b.name);
       });
       this.loading = false;
     });
