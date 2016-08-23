@@ -10,7 +10,6 @@ export class Settings {
   public settings: any = {};
   public defaults: any = {
     advanced: false,
-    defaultOrder: "alpha",
     scanBoardingDone: false,
     firstname: "",
     lastname: "",
@@ -40,7 +39,7 @@ export class Settings {
           }
         }
 
-        if (index == 7) {
+        if (index == 6) {
           if (this.isEmpty(settings)) { // LocalStorage may have been cleared by iOS or it's 1st boot
             this.storage.getSettings().then(backup => {
               if (this.isEmpty(backup)) { // Make defaults (1st boot)

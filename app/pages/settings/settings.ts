@@ -66,12 +66,6 @@ export class SettingsPage {
     }
   }
 
-  changeOrder() {
-    if (this.settings.defaultOrder != this.settingService.getAll().defaultOrder) {
-      this.settingService.set('defaultOrder', this.settings.defaultOrder);
-    }
-  }
-
   editName() {
     this.translate.get(["SETTINGS.EDIT_NAME", "SETTINGS.CANCEL", "SETTINGS.EDIT"]).subscribe(translations => {
       let alert = this.alertCtrl.create({

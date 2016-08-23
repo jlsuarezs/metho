@@ -182,10 +182,6 @@
                 "SCAN_FIRST": "Balayer mon premier code"
             },
             "POPUP": {
-                "ORDER_TITLE": "Triage",
-                "ORDER_SUB": "Ordre de triage",
-                "ALPHA": "Alphabétique",
-                "TYPE": "Type",
                 "ERRORS_SOURCES": "Les source que vous essayez de partager contiennent <strong>{{errNum}}</strong> erreur(s). Voulez-vous les partager quand même ?",
                 "ERROR_TEXT": "Erreur",
                 "SHARE_TEXT": "Partage",
@@ -530,10 +526,6 @@
     },
     "SETTINGS":{
         "TAB_TITLE": "Paramètres",
-        "ORDER_BY": "Trier la bibliographie par",
-        "ALPHABETICAL": "Ordre alphabétique",
-        "TYPE": "Type d'ouvrage",
-        "ASK_FOR_ORDER": "Demander l'ordre lors du partage",
         "IGNORE_ERRORS": "Ignorer les erreurs",
         "YOUR_NAME": "Votre nom",
         "EDIT": "Modifier",

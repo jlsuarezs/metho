@@ -6,19 +6,6 @@
 
 <ion-content class="settings">
   <ion-list class="no-margin-bottom">
-    <ion-list-header>
-      {{'SETTINGS.ORDER_BY' | translate}}
-    </ion-list-header>
-    <ion-list radio-group [(ngModel)]="settings.defaultOrder" class="no-margin-bottom" (ionChange)="changeOrder()">
-      <ion-item>
-        <ion-label>{{'SETTINGS.ALPHABETICAL' | translate}}</ion-label>
-        <ion-radio value="alpha"></ion-radio>
-      </ion-item>
-      <ion-item>
-        <ion-label>{{'SETTINGS.TYPE' | translate}}</ion-label>
-        <ion-radio value="type"></ion-radio>
-      </ion-item>
-    </ion-list>
     <ion-item>
       <ion-label>{{ 'SETTINGS.IGNORE_ERRORS' | translate }}</ion-label>
       <ion-toggle [(ngModel)]="settings.ignoreErrors" (ionChange)="toggleIgnoreErrors()"></ion-toggle>

@@ -182,10 +182,6 @@
                 "SCAN_FIRST": "Scan my first barcode"
             },
             "POPUP": {
-                "ORDER_TITLE": "Sorting",
-                "ORDER_SUB": "Sort by",
-                "ALPHA": "Alphabetical",
-                "TYPE": "Type",
                 "ERRORS_SOURCES": "The sources you're trying to share contain <strong>{{errNum}}</strong> error(s). Do you want to share them ?",
                 "ERROR_TEXT": "Error",
                 "SHARE_TEXT": "Sharing",
@@ -530,10 +526,6 @@
     },
     "SETTINGS":{
         "TAB_TITLE": "Settings",
-        "ORDER_BY": "Sort bibliography by",
-        "ALPHABETICAL": "Alphabetical order",
-        "TYPE": "Type",
-        "ASK_FOR_ORDER": "Show sorting options on share",
         "IGNORE_ERRORS": "Ignore errors",
         "YOUR_NAME": "Your name",
         "EDIT": "Edit",

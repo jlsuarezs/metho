@@ -182,10 +182,6 @@
                 "SCAN_FIRST": "Escáner mi primero codigo"
             },
             "POPUP": {
-                "ORDER_TITLE": "Clasificación",
-                "ORDER_SUB": "Orden de clasificación",
-                "ALPHA": "Alphabetica",
-                "TYPE": "Typo",
                 "ERRORS_SOURCES": "Las fuentes que trata de compartir contienen <strong>{{errNum}}</strong> error(es). ¿ Quiere compartirlas ?",
                 "ERROR_TEXT": "Error",
                 "SHARE_TEXT": "Compartición",
@@ -530,10 +526,6 @@
     },
     "SETTINGS":{
         "TAB_TITLE": "Ajustes",
-        "ORDER_BY": "Ordenar la bibliographia según",
-        "ALPHABETICAL": "Orden alfabético",
-        "TYPE": "Typo de obra",
-        "ASK_FOR_ORDER": "Preguntar la orden",
         "IGNORE_ERRORS": "Ignorar los errores",
         "YOUR_NAME": "Usted nombre",
         "EDIT": "Modificar",
