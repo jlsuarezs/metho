@@ -16,7 +16,6 @@ export class SourceModalMoviePage {
   public previous: any;
   public pendingId: string;
   public projectId: string;
-  public currentTransition: any;
   public hasConfirmed: boolean = false;
   public monthList: string;
   public monthShortList: string;

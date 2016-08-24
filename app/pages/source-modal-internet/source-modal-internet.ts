@@ -18,7 +18,6 @@ export class SourceModalInternetPage {
   public pendingId: string;
   public projectId: string;
   public isAdvanced: boolean;
-  public currentTransition: any;
   public hasConfirmed: boolean = false;
 
   public form: ControlGroup;

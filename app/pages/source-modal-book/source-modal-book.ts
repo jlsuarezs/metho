@@ -28,7 +28,6 @@ export class SourceModalBookPage {
   public insertingFromScan: boolean;
   public firstname: string;
   public lastname: string;
-  public currentTransition: any;
   public hasConfirmed: boolean = false;
 
   public form: ControlGroup;
@@ -403,8 +402,7 @@ export class SourceModalBookPage {
             {
               text: translations["PROJECT.DETAIL.POPUP.ADD"],
               handler: () => {
-                this.currentTransition = alert.dismiss();
-                this.addPending(isbn);
+                this.addPending(isbn, alert.dismiss());
                 return false;
               }
             }
@@ -419,7 +417,7 @@ export class SourceModalBookPage {
     this.form = this.fb.group(this.mergeObjects(this.form.value, response));
   }
 
-  addPending(isbn: string) {
+  addPending(isbn: string, transition=Promise.resolve()) {
     var creating = {
       isbn: isbn,
       date: this.language.getMoment()().toObject(),
@@ -427,14 +425,9 @@ export class SourceModalBookPage {
     };
 
     this.storage.createPending(creating);
-    if (this.currentTransition) {
-      this.currentTransition.then(() => {
-        this.currentTransition = null;
-        this.viewCtrl.dismiss();
-      })
-    }else {
+    transition.then(() => {
       this.viewCtrl.dismiss();
-    }
+    });
   }
 
   isEmpty(includeTitle: boolean) {
