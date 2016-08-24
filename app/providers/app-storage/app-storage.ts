@@ -201,7 +201,7 @@ export class AppStorage {
     return new Promise(resolve => {
       this.projectDB.post(project).then(response => {
         this.sourcesByProject.set(response.id, <Map<string, Source>>new Map());
-        this.pendingsByProject.set(response.id, new Map());
+        this.pendingsByProject.set(response.id, <Map<string, Pending>>new Map());
         project._id = response.id;
         project._rev = response.rev;
         this.projects.set(response.id, project);
@@ -377,7 +377,8 @@ export class AppStorage {
         pending.isLoaded = false;
         pending.notAvailable = false;
         pending.data = {};
-        this.pendings.set(response.id, pending); this.sourcesByProject.get(pending.project_id).set(pending._id, pending);
+        this.pendings.set(response.id, pending);
+        this.pendingsByProject.get(pending.project_id).set(pending._id, pending);
         this.loadingPendings = false;
         this.pendingsEvents.emit("pendingLoadingEnded");
         resolve(response);
