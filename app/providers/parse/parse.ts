@@ -358,7 +358,7 @@ export class Parse {
             if (this.sourceToParse.author1firstname) {
                 this.sourceToParse.parsedSource += this.sourceToParse.author1firstname.toUpperCase() + ". ";
             } else {
-                this.sourceToParse.parseSource += "?. ";
+                this.sourceToParse.parsedSource += "?. ";
                 this.addError("AUTHOR_ARTICLE_FIRSTNAME", "author1firstname");
             }
         } else {
