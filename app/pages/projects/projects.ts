@@ -10,7 +10,7 @@ import {ProjectModalPage} from '../project-modal/project-modal';
   templateUrl: 'build/pages/projects/projects.html'
 })
 export class ProjectsPage {
-  public projects: Project[] = [];
+  public projects: any[] = [];
   public loading: Boolean = true;
   @ViewChild(List) list: List;
 
