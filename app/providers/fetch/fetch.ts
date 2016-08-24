@@ -99,7 +99,7 @@ export class Fetch {
     });
   }
 
-  parseFromISBNdb(response: any): any {
+  parseFromISBNdb(response: any): Source {
     var newobj: any = {};
     // Titre
     if (response.title.toUpperCase() == response.title) {

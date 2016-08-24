@@ -22,12 +22,12 @@ import {Settings} from '../../providers/settings/settings';
 })
 export class SourcesPage {
   public projectId: string;
-  public sources: Array<any> = [];
-  public project: any = {};
+  public sources: Source[] = [];
+  public project: Project = {name: "", matter: ""};
   public pendingNumber: number = 0;
   private currentTransition: any;
   public searchQuery: string = "";
-  public filteredSources: Array<any> = [];
+  public filteredSources: Source[] = [];
   @ViewChild(List) list: List;
   @ViewChild(Content) content: Content;
 
@@ -204,7 +204,7 @@ export class SourcesPage {
     }
   }
 
-  deleteSource(source: any) {
+  deleteSource(source: Source) {
     this.translate.get(["PROJECT.DETAIL.POPUP.DELETE_TITLE", "PROJECT.DETAIL.POPUP.DELETE_TEXT", "PROJECT.DETAIL.POPUP.DELETE", "PROJECT.DETAIL.POPUP.CANCEL"]).subscribe(translations => {
       let alert = this.alertCtrl.create({
         title: translations["PROJECT.DETAIL.POPUP.DELETE_TITLE"],
@@ -311,7 +311,7 @@ export class SourcesPage {
     });
   }
 
-  openSourcePage(source: any) {
+  openSourcePage(source: Source) {
     this.nav.push(SourcePage, {
       pId: this.projectId,
       id: source._id

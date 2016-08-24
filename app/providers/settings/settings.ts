@@ -7,8 +7,8 @@ import {AppStorage} from '../app-storage/app-storage';
 @Injectable()
 export class Settings {
   public localStorage: LocalStorage;
-  public settings: any = {};
-  public defaults: any = {
+  public settings: SettingsList = {};
+  public defaults: SettingsList = {
     advanced: false,
     scanBoardingDone: false,
     firstname: "",
@@ -95,7 +95,7 @@ export class Settings {
     this.storage.setSetting(key, set);
   }
 
-  getAll(): any {
+  getAll(): SettingsList {
     return this.settings;
   }
 

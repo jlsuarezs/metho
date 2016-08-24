@@ -18,7 +18,7 @@ const deepcopy = require('deepcopy');
   templateUrl: 'build/pages/settings/settings.html'
 })
 export class SettingsPage {
-  public settings: any = {};
+  public settings: SettingsList = {};
   public enableAdvanced: boolean = false;
   public advancedPage: any;
   public attributionsPage: any;

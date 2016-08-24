@@ -12,7 +12,7 @@ import {Parse} from '../../providers/parse/parse.ts';
 export class SourceModalCdPage {
   public isNew: boolean;
   public noData: boolean;
-  public previous: any;
+  public previous: Source;
   public pendingId: string;
   public projectId: string;
   public currentTransition: any;

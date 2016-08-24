@@ -16,11 +16,11 @@ export class AppStorage {
   private pendingDB: any = null;
   private settingsDB: any = null;
   private local: any;
-  private projects: Map<string, any> = <Map<string, any>>new Map();
-  private sources: Map<string, any> = <Map<string, any>>new Map();
-  private sourcesByProject: Map<string, any> = <Map<string, Map<string, any>>>new Map();
-  private pendings: Map<string, any> = <Map<string, any>>new Map();
-  private pendingsByProject: Map<string, any> = <Map<string, Map<string, any>>>new Map();
+  private projects: Map<string, Project> = <Map<string, Project>>new Map();
+  private sources: Map<string, Source> = <Map<string, Source>>new Map();
+  private sourcesByProject: Map<string, Map<string, Source>> = <Map<string, Map<string, Source>>>new Map();
+  private pendings: Map<string, Pending> = <Map<string, Pending>>new Map();
+  private pendingsByProject: Map<string, Map<string, Pending>> = <Map<string, Map<string, Pending>>>new Map();
   private settings: any = {};
 
   private loadingProjects: boolean = true;
@@ -57,11 +57,11 @@ export class AppStorage {
         docs.rows.forEach((value) => {
           this.projects.set(value.doc._id, value.doc);
           if (!this.sourcesByProject.has(value.doc._id)) {
-            this.sourcesByProject.set(value.doc._id, new Map());
+            this.sourcesByProject.set(value.doc._id, <Map<string, Source>>new Map());
           }
 
           if (!this.pendingsByProject.has(value.doc._id)) {
-            this.pendingsByProject.set(value.doc._id, new Map());
+            this.pendingsByProject.set(value.doc._id, <Map<string, Pending>>new Map());
           }
         });
         this.loadingProjects = false;
@@ -77,7 +77,7 @@ export class AppStorage {
       docs.rows.forEach(value => {
         this.sources.set(value.doc._id, value.doc);
         if (!this.sourcesByProject.has(value.doc.project_id)) {
-          this.sourcesByProject.set(value.doc.project_id, new Map());
+          this.sourcesByProject.set(value.doc.project_id, <Map<string, Source>>new Map());
         }
         this.sourcesByProject.set(value.doc.project_id, this.sourcesByProject.get(value.doc.project_id).set(value.doc._id, value.doc));
       });
@@ -93,7 +93,7 @@ export class AppStorage {
       docs.rows.forEach(value => {
         this.pendings.set(value.doc._id, value.doc);
         if (!this.pendingsByProject.has(value.doc.project_id)) {
-          this.pendingsByProject.set(value.doc.project_id, new Map());
+          this.pendingsByProject.set(value.doc.project_id, <Map<string, Pending>>new Map());
         }
         this.pendingsByProject.set(value.doc.project_id, this.pendingsByProject.get(value.doc.project_id).set(value.doc._id, value.doc));
       });
@@ -118,7 +118,7 @@ export class AppStorage {
     });
   }
 
-  getProjects(): Promise<Array<any>> {
+  getProjects(): Promise<Project[]> {
     if(this.loadingProjects){
       return new Promise(resolve => {
         let subscription = this.projectEvents.subscribe(event => {
@@ -127,7 +127,7 @@ export class AppStorage {
         });
       });
     }else {
-      return Promise.resolve(Array.from(this.projects.values()));
+      return Promise.resolve(<Project[]>Array.from(this.projects.values()));
     }
   }
 
@@ -161,7 +161,7 @@ export class AppStorage {
     });
   }
 
-  setProjectFromId(id: string, set: any) {
+  setProjectFromId(id: string, set: Project) {
     this.loadingProjects = true;
     return new Promise(resolve => {
       let values = set;
@@ -182,7 +182,7 @@ export class AppStorage {
     });
   }
 
-  getProjectFromId(id: string) {
+  getProjectFromId(id: string): Promise<Project> {
     if(this.loadingProjects){
       return new Promise(resolve => {
         let subscription = this.projectEvents.subscribe(event => {
@@ -195,12 +195,12 @@ export class AppStorage {
     }
   }
 
-  createProject(project: any) {
+  createProject(project: Project) {
     this.loadingProjects = true;
     this.loadingSources = true;
     return new Promise(resolve => {
       this.projectDB.post(project).then(response => {
-        this.sourcesByProject.set(response.id, new Map());
+        this.sourcesByProject.set(response.id, <Map<string, Source>>new Map());
         this.pendingsByProject.set(response.id, new Map());
         project._id = response.id;
         project._rev = response.rev;
@@ -223,7 +223,7 @@ export class AppStorage {
     });
   }
 
-  getSourcesFromProjectId(id: string): Promise<Array<any>> {
+  getSourcesFromProjectId(id: string): Promise<Source[]> {
     if(this.loadingSources){
       return new Promise(resolve => {
         let subscription = this.sourcesEvents.subscribe(event => {
@@ -236,7 +236,7 @@ export class AppStorage {
     }
   }
 
-  getSourceFromId(id: string) {
+  getSourceFromId(id: string): Promise<Source> {
     if(this.loadingSources){
       return new Promise(resolve => {
         let subscription = this.sourcesEvents.subscribe(event => {
@@ -249,7 +249,7 @@ export class AppStorage {
     }
   }
 
-  setSourceFromId(id: string, set: any) {
+  setSourceFromId(id: string, set: Source) {
     this.loadingSources = true;
     return new Promise(resolve => {
       set._rev = this.sources.get(id)._rev;
@@ -271,7 +271,7 @@ export class AppStorage {
     });
   }
 
-  bulkSetSources(sources: Map<string, any>) {
+  bulkSetSources(sources: Map<string, Source>) {
     this.loadingSources = true;
     return new Promise(resolve => {
       this.sourceDB.bulkDocs(Array.from(sources.values())).then(result => {
@@ -297,7 +297,7 @@ export class AppStorage {
     });
   }
 
-  createSource(source: any) {
+  createSource(source: Source) {
     this.loadingSources = true;
     return new Promise(resolve => {
       this.sourceDB.post(source).then(response => {
@@ -355,7 +355,7 @@ export class AppStorage {
     }
   }
 
-  getPendingsFromProjectId(id: string): Promise<Array<any>> {
+  getPendingsFromProjectId(id: string): Promise<Pending[]> {
     if(this.loadingPendings){
       return new Promise(resolve => {
         let subscription = this.pendingsEvents.subscribe(event => {
@@ -368,7 +368,7 @@ export class AppStorage {
     }
   }
 
-  createPending(pending: any) {
+  createPending(pending: Pending) {
     this.loadingPendings = true;
     return new Promise(resolve => {
       this.pendingDB.post(pending).then(response => {
@@ -410,7 +410,7 @@ export class AppStorage {
     });
   }
 
-  setPendingFromId(id: string, set: any) {
+  setPendingFromId(id: string, set: Pending) {
     this.loadingPendings = true;
     return new Promise(resolve => {
       let values = set;

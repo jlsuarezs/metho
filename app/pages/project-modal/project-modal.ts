@@ -9,7 +9,7 @@ import {AppStorage} from '../../providers/app-storage/app-storage.ts';
 })
 export class ProjectModalPage {
   public isNew: Boolean;
-  public previous: any;
+  public previous: Project;
   public hasConfirmed: boolean = false;
   public projectForm: FormGroup;
 

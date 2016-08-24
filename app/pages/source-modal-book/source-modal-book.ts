@@ -18,7 +18,7 @@ import {Report} from '../../providers/report/report';
 export class SourceModalBookPage {
   public isNew: boolean;
   public noData: boolean;
-  public previous: any;
+  public previous: Source;
   public url: string;
   public pendingId: string;
   public projectId: string;

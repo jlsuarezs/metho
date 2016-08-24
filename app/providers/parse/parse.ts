@@ -4,11 +4,11 @@ import {Language} from '../language/language';
 
 @Injectable()
 export class Parse {
-  private sourceToParse: any;
+  private sourceToParse: Source;
 
   constructor(public translate: TranslateService) {}
 
-  parse(source: any) {
+  parse(source: Source) {
     this.sourceToParse = source;
     this.sourceToParse.parsedSource = "";
     switch (this.sourceToParse.type) {
@@ -903,7 +903,8 @@ export class Parse {
       errorTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".DESC"),
       promptTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".TITLE"),
       promptText: this.translate.instant("PROJECT.PARSE." + errorId + ".TEXT"),
-      var: variable
+      var: variable,
+      key: errorId
     });
   }
 
