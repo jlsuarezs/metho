@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AlertController, App, NavController} from 'ionic-angular';
-import {SocialSharing, Device, AppVersion} from 'ionic-native';
+import {SocialSharing, Device, AppVersion, Splashscreen} from 'ionic-native';
 import {TranslateService} from 'ng2-translate/ng2-translate';
 
 @Injectable()
@@ -32,7 +32,11 @@ export class Report {
           message: translations["REPORT.REPORT_?"],
           buttons: [
             {
-              text: translations["NO"]
+              text: translations["NO"],
+              handler: () => {
+                this.askForRefresh(alert.dismiss());
+                return false;
+              }
             },
             {
               text: translations["YES"],
@@ -48,7 +52,34 @@ export class Report {
                   [],
                   [],
                   []
-                );
+                ).then(() => {
+                  this.askForRefresh();
+                });
+              }
+            }
+          ]
+        });
+
+        alert.present();
+      });
+    });
+  }
+
+  askForRefresh(transition=Promise.resolve()) {
+    transition.then(() => {
+      this.translate.get(["YES", "NO", "REPORT.ERROR", "REPORT.RELOAD?"]).subscribe(translations => {
+        let alert = this.alertCtrl.create({
+          title: translations["REPORT.ERROR"],
+          message: translations["REPORT.RELOAD?"],
+          buttons: [
+            {
+              text: translations["NO"]
+            },
+            {
+              text: translations["YES"],
+              handler: () => {
+                Splashscreen.show();
+                document.location.reload();
               }
             }
           ]

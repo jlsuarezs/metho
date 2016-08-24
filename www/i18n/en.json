@@ -607,6 +607,7 @@
         "UNKNOWN": "An unknown error happened",
         "REPORT_?": "Do you want to report this error to the developer ?",
         "DESC": "Please describe what you were doing.",
-        "DO_NOT_EDIT": "Do not edit this section"
+        "DO_NOT_EDIT": "Do not edit this section",
+        "RELOAD?": "This error can cause other errors in the app if you choose not to restart it, we're sorry about it. Do you want to restart the app ?"
     }
 }
