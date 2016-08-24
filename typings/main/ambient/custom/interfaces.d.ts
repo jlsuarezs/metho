@@ -79,7 +79,7 @@ interface Pending extends PouchDBObject {
   date: any; // moment.MomentDateObject
   isbn: string;
   isLoaded?: boolean;
-  data?: Source;
+  data?: any;
   notAvailable?: boolean;
   datestring?: string; // Localized datestring
 }
