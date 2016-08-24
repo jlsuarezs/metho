@@ -15,7 +15,7 @@ import {Language} from '../../providers/language/language';
 export class SourceModalInterviewPage {
   public isNew: boolean;
   public noData: boolean;
-  public previous: any;
+  public previous: Source;
   public pendingId: string;
   public projectId: string;
   public firstname: string;

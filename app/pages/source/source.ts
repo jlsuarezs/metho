@@ -18,10 +18,11 @@ import {SourceModalInterviewPage} from '../source-modal-interview/source-modal-i
   templateUrl: 'build/pages/source/source.html'
 })
 export class SourcePage {
-  public source: any = {
+  public source: Source = {
     warnings: [],
     errors: [],
-    type: ""
+    type: "",
+    title: ""
   };
   public id: string;
 
@@ -39,7 +40,7 @@ export class SourcePage {
     });
   }
 
-  solveError(error: any) {
+  solveError(error: SourceError) {
     this.translate.get(["PROJECT.SOURCE.CONFIRM", "PROJECT.SOURCE.CANCEL"]).subscribe(translations => {
       let alert = this.alertCtrl.create({
         title: error.promptTitle,
@@ -86,7 +87,7 @@ export class SourcePage {
     });
   }
 
-  solveWarning(warning: any) {
+  solveWarning(warning: SourceError) {
     this.translate.get(["PROJECT.SOURCE.CONFIRM", "PROJECT.SOURCE.CANCEL"]).subscribe(translations => {
       let alert = this.alertCtrl.create({
         title: warning.promptTitle,

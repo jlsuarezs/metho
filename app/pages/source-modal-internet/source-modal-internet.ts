@@ -14,7 +14,7 @@ import {Language} from '../../providers/language/language';
 export class SourceModalInternetPage {
   public isNew: boolean;
   public noData: boolean;
-  public previous: any;
+  public previous: Source;
   public pendingId: string;
   public projectId: string;
   public isAdvanced: boolean;

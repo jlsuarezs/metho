@@ -42,7 +42,7 @@ export class ProjectsPage {
     modal.present();
   }
 
-  editProject(project: any) {
+  editProject(project: Project) {
     let modal = this.modalCtrl.create(ProjectModalPage, {
       previous: project
     }, {
@@ -57,7 +57,7 @@ export class ProjectsPage {
     modal.present();
   }
 
-  deleteProject(project: any) {
+  deleteProject(project: Project) {
     this.translate.get(['PROJECT.TAB.POPUP.DELETE_PROJECT_TITLE', 'PROJECT.TAB.POPUP.DELETE_PROJECT', 'PROJECT.TAB.POPUP.CANCEL', 'PROJECT.TAB.POPUP.DELETE']).subscribe(translations => {
       let confirm = this.alertCtrl.create({
         title: translations['PROJECT.TAB.POPUP.DELETE_PROJECT_TITLE'],
@@ -85,7 +85,7 @@ export class ProjectsPage {
     });
   }
 
-  openProjectDetail(project: any) {
+  openProjectDetail(project: Project) {
     this.nav.push(SourcesPage, {
       id: project._id
     });

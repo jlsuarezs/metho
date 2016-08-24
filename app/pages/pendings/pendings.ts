@@ -14,7 +14,7 @@ import {SourceModalBookPage} from '../source-modal-book/source-modal-book';
 })
 export class PendingsPage {
   public projectId: string;
-  public pendings: Array<any> = [];
+  public pendings: Pending[] = [];
 
   constructor(public nav: NavController, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public modalCtrl: ModalController, public params: NavParams, public translate: TranslateService, public storage: AppStorage, public fetch: Fetch, public language: Language) {
     this.projectId = params.get('pId');
@@ -33,7 +33,7 @@ export class PendingsPage {
     });
   }
 
-  solvePending(pending: any) {
+  solvePending(pending: Pending) {
     if (!this.fetch.isISBNCached(pending.isbn)) {
       var loading = this.loadingCtrl.create();
       var isLoading = true;
@@ -124,7 +124,7 @@ export class PendingsPage {
     });
   }
 
-  openAfterLoad(data: any, id: string) {
+  openAfterLoad(data: Source, id: string) {
     let modal = this.modalCtrl.create(SourceModalBookPage, {
       data: data,
       projectId: this.projectId,
@@ -139,7 +139,7 @@ export class PendingsPage {
     modal.present();
   }
 
-  openModalWithBrowser(pending, transition=Promise.resolve()) {
+  openModalWithBrowser(pending: Pending, transition=Promise.resolve()) {
     let modal = this.modalCtrl.create(SourceModalBookPage, {
       projectId: this.projectId,
       pendingId: pending._id,
@@ -156,7 +156,7 @@ export class PendingsPage {
     });
   }
 
-  deletePending(pending) {
+  deletePending(pending: Pending) {
     this.storage.deletePending(pending._id).then(() => {
       this.loadPendings(true);
     });
