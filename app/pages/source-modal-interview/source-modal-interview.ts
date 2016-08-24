@@ -20,7 +20,6 @@ export class SourceModalInterviewPage {
   public projectId: string;
   public firstname: string;
   public lastname: string;
-  public currentTransition: any;
   public hasConfirmed: boolean = false;
 
   public form: ControlGroup;

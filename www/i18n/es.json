@@ -607,6 +607,7 @@
         "UNKNOWN": "Un error fue",
         "REPORT_?": "Quiere referir la error al desarrollador ?",
         "DESC": "Gracias de describir que estaba haciendo.",
-        "DO_NOT_EDIT": "No modifica esta sección"
+        "DO_NOT_EDIT": "No modifica esta sección",
+        "RELOAD?": "Este problema puede entrenar otras problemas si no reinicializa, lo sentimos. Quire reinicializar?"
     }
 }

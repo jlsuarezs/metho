@@ -15,7 +15,6 @@ export class SourceModalArticlePage {
   public previous: Source;
   public pendingId: string;
   public projectId: string;
-  public currentTransition: any;
   public hasConfirmed: boolean = false;
 
   public form: ControlGroup;

@@ -15,7 +15,6 @@ import {SourceModalBookPage} from '../source-modal-book/source-modal-book';
 export class PendingsPage {
   public projectId: string;
   public pendings: Pending[] = [];
-  public currentTransition = null;
 
   constructor(public nav: NavController, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public modalCtrl: ModalController, public params: NavParams, public translate: TranslateService, public storage: AppStorage, public fetch: Fetch, public language: Language) {
     this.projectId = params.get('pId');
@@ -71,8 +70,7 @@ export class PendingsPage {
                   let i = this.pendings.indexOf(pending);
                   this.pendings[i].notAvailable = true;
                   this.storage.setPendingFromId(this.pendings[i]._id, this.pendings[i]);
-                  this.currentTransition = alert.dismiss();
-                  this.openModalWithBrowser(this.pendings[i]);
+                  this.openModalWithBrowser(this.pendings[i], alert.dismiss());
                   return false;
                 }
               },
@@ -141,7 +139,7 @@ export class PendingsPage {
     modal.present();
   }
 
-  openModalWithBrowser(pending: Pending) {
+  openModalWithBrowser(pending: Pending, transition=Promise.resolve()) {
     let modal = this.modalCtrl.create(SourceModalBookPage, {
       projectId: this.projectId,
       pendingId: pending._id,
@@ -152,13 +150,10 @@ export class PendingsPage {
       this.loadPendings(true);
     });
 
-    if (this.currentTransition) {
-      this.currentTransition.then(() => {
-        modal.present();
-      });
-    }else {
+
+    transition.then(() => {
       modal.present();
-    }
+    });
   }
 
   deletePending(pending: Pending) {
