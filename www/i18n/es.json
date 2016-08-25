@@ -176,10 +176,10 @@
                 "PREVIOUS": "Ultimó",
                 "TITLE": "Escáner",
                 "CLOSE": "Cerrar",
-                "OF_BOOK_RECOGNIZED": "de los libros reconocidos por la aplicación",
-                "TEXT_RECOGNIZED": "Según un testo profundo sobre los libros de la biblioteca de la Escuela de Educación International, 75 % de los libros que va a escáner con este aplicación serán reconocidos y las informaciónes van a ser completados. Serán invitados a introducir la información manualmente si el libro no es reconocido.",
+                "TEXT_RECOGNIZED": "Es el numero de libros soportados por el app. El numero es grande pero hay 129 milliones libros sobre la Tierra.",
                 "SCAN_TEXT": "Escáner el codigo de barras bajo la mención ISBN. Escána el codigo sobre un luz suficiente.",
-                "SCAN_FIRST": "Escáner mi primero codigo"
+                "SCAN_FIRST": "Escáner mi primero codigo",
+                "BOOKS": "libros"
             },
             "POPUP": {
                 "ERRORS_SOURCES": "Las fuentes que trata de compartir contienen <strong>{{errNum}}</strong> error(es). ¿ Quiere compartirlas ?",

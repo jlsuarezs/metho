@@ -176,10 +176,10 @@
                 "PREVIOUS": "Previous",
                 "TITLE": "Scan",
                 "CLOSE": "Close",
-                "OF_BOOK_RECOGNIZED": "of books recognized by the app",
-                "TEXT_RECOGNIZED": "According to a study on books of McMasterville's library, 75 % of the books you will scan will be recognized by the app. You will be invited to enter the informations manually for the book not recognized.",
+                "TEXT_RECOGNIZED": "It's the number of books supported by the app's scanning feature. As big as this number can be, there will always be books unsupported as there's about 129 million books on Earth.",
                 "SCAN_TEXT": "Scan the barcode below the ISBN label. Make sure to be in a correctly lit environnement.",
-                "SCAN_FIRST": "Scan my first barcode"
+                "SCAN_FIRST": "Scan my first barcode",
+                "BOOKS": "books"
             },
             "POPUP": {
                 "ERRORS_SOURCES": "The sources you're trying to share contain <strong>{{errNum}}</strong> error(s). Do you want to share them ?",

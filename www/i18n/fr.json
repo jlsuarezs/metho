@@ -176,10 +176,10 @@
                 "PREVIOUS": "Précédent",
                 "TITLE": "Balayage",
                 "CLOSE": "Fermer",
-                "OF_BOOK_RECOGNIZED": "des livres reconnus par l'application",
-                "TEXT_RECOGNIZED": "Selon un test approfondi mené sur les livres de la bibliothèque de l'École d'Éducation de McMasterville, 75 % des livres que vous balayerez avec cette application seront reconnus et les données sur ces livres seront remplies. Vous serez invité à entrer manuellement les données qui n'aurons pu être récupérées.",
+                "TEXT_RECOGNIZED": "Il s'agit du nombre de livres reconnus par l'application. Vous pourrez balayer le code barre de ces livres et voir la source créée automatiquement. Malgré le nombre élevé de livres supportés, il y en a plusieurs qui ne le sont pas; sur Terre, il y a un total de 129 millions de livres.",
                 "SCAN_TEXT": "Balayez le code sous la mention ISBN. Assurez-vous d'être dans un environnement assez éclairé.",
-                "SCAN_FIRST": "Balayer mon premier code"
+                "SCAN_FIRST": "Balayer mon premier code",
+                "BOOKS": "livres"
             },
             "POPUP": {
                 "ERRORS_SOURCES": "Les source que vous essayez de partager contiennent <strong>{{errNum}}</strong> erreur(s). Voulez-vous les partager quand même ?",
