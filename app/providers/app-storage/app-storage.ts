@@ -111,16 +111,9 @@ export class AppStorage {
   }
 
   getProjects(): Promise<Project[]> {
-    if(this.loadingProjects){
-      return new Promise(resolve => {
-        let subscription = this.projectEvents.subscribe(event => {
-          subscription.unsubscribe();
-          resolve(Array.from(this.projects.values()));
-        });
-      });
-    }else {
-      return Promise.resolve(<Project[]>Array.from(this.projects.values()));
-    }
+    return this.waitForProject(() => {
+      return Array.from(this.projects.values());
+    });
   }
 
   deleteProject(id: string) {
@@ -174,16 +167,9 @@ export class AppStorage {
   }
 
   getProjectFromId(id: string): Promise<Project> {
-    if(this.loadingProjects){
-      return new Promise(resolve => {
-        let subscription = this.projectEvents.subscribe(event => {
-          subscription.unsubscribe();
-          resolve(this.projects.get(id));
-        });
-      });
-    }else {
-      return Promise.resolve(this.projects.get(id));
-    }
+    return this.waitForProject(() => {
+      return this.projects.get(id);
+    });
   }
 
   createProject(project: Project) {
@@ -211,29 +197,15 @@ export class AppStorage {
   }
 
   getSourcesFromProjectId(id: string): Promise<Source[]> {
-    if(this.loadingSources){
-      return new Promise(resolve => {
-        let subscription = this.sourcesEvents.subscribe(event => {
-          subscription.unsubscribe();
-          resolve(Array.from(this.sourcesByProject.get(id).values()));
-        });
-      });
-    }else {
-      return Promise.resolve(Array.from(this.sourcesByProject.get(id).values()));
-    }
+    return this.waitForSource(() => {
+      return Array.from(this.sourcesByProject.get(id).values());
+    });
   }
 
   getSourceFromId(id: string): Promise<Source> {
-    if(this.loadingSources){
-      return new Promise(resolve => {
-        let subscription = this.sourcesEvents.subscribe(event => {
-          subscription.unsubscribe();
-          resolve(this.sources.get(id));
-        });
-      });
-    }else {
-      return Promise.resolve(this.sources.get(id));
-    }
+    return this.waitForSource(() => {
+      return this.sources.get(id);
+    });
   }
 
   setSourceFromId(id: string, set: Source) {
@@ -316,35 +288,19 @@ export class AppStorage {
   }
 
   parseSources() {
-    if(this.loadingSources) {
-      let subscription = this.sourcesEvents.subscribe(() => {
-        subscription.unsubscribe();
-        let sources: Map<string, any> = <Map<string, any>>new Map();
-        this.sources.forEach((source) => {
-          sources.set(source._id, this.parse.parse(source));
-        });
-        this.bulkSetSources(sources);
-      });
-    }else {
+    this.waitForSource(() => {
       let sources: Map<string, any> = <Map<string, any>>new Map();
       this.sources.forEach((source) => {
         sources.set(source._id, this.parse.parse(source));
       });
       this.bulkSetSources(sources);
-    }
+    });
   }
 
   getPendingsFromProjectId(id: string): Promise<Pending[]> {
-    if(this.loadingPendings){
-      return new Promise(resolve => {
-        let subscription = this.pendingsEvents.subscribe(event => {
-          subscription.unsubscribe();
-          resolve(Array.from(this.pendingsByProject.get(id).values()));
-        });
-      });
-    }else {
-      return Promise.resolve(Array.from(this.pendingsByProject.get(id).values()));
-    }
+    return this.waitForPending(() => {
+      return Array.from(this.pendingsByProject.get(id).values());
+    });
   }
 
   createPending(pending: Pending) {
@@ -407,71 +363,35 @@ export class AppStorage {
   }
 
   loadPendingsFromProjectId(id: string): void {
-    if (navigator.onLine) {
-      if(this.loadingPendings) {
-        let subscription = this.pendingsEvents.subscribe(() => {
-          subscription.unsubscribe();
-          this.pendings.forEach(pending => {
-            if (!pending.isLoaded) {
-              this.fetch.fromISBN(pending.isbn).then(data => {
-                pending.data = data;
-                pending.isLoaded = true;
-                this.setPendingFromId(pending._id, pending);
-              }).catch(err => {
-                if (err == 404) {
-                  pending.notAvailable = true;
-                  pending.isLoaded = true;
-                  this.setPendingFromId(pending._id, pending);
-                }
-              });
-            }
-          });
-        });
-      }else {
-        this.pendings.forEach(pending => {
-          if (!pending.isLoaded) {
-            this.fetch.fromISBN(pending.isbn).then(data => {
-              console.log(data);
-              pending.data = data;
+    this.waitForPending(() => {
+      this.pendings.forEach(pending => {
+        if (!pending.isLoaded) {
+          this.fetch.fromISBN(pending.isbn).then(data => {
+            pending.data = data;
+            pending.isLoaded = true;
+            this.setPendingFromId(pending._id, pending);
+          }).catch(err => {
+            if (err == 404) {
+              pending.notAvailable = true;
               pending.isLoaded = true;
               this.setPendingFromId(pending._id, pending);
-            }).catch(err => {
-              if (err == 404) {
-                pending.notAvailable = true;
-                pending.isLoaded = true;
-                this.setPendingFromId(pending._id, pending);
-              }
-            });
-          }
-        });
-      }
-    }
+            }
+          });
+        }
+      });
+    });
   }
 
   getPendingNumber(id: string): Promise<number> {
-    if (this.loadingPendings) {
-      return new Promise(resolve => {
-        let subscription = this.pendingsEvents.subscribe(event => {
-          subscription.unsubscribe();
-          resolve(this.pendingsByProject.get(id).size);
-        });
-      });
-    }else {
-      return Promise.resolve(this.pendingsByProject.get(id).size);
-    }
+    return this.waitForPending(() => {
+      return this.pendingsByProject.get(id).size;
+    });
   }
 
   getSettings(): Promise<any> {
-    if (this.loadingSettings) {
-      return new Promise(resolve => {
-        let subscription = this.settingsEvents.subscribe(event => {
-          subscription.unsubscribe();
-          resolve(this.settings);
-        });
-      });
-    }else {
-      return Promise.resolve(this.settings);
-    }
+    return this.waitForSetting(() => {
+      return this.settings;
+    });
   }
 
   setSetting(key: string, value: any): void {
@@ -499,12 +419,38 @@ export class AppStorage {
     };
   }
 
+  waitForProject<T>(fn: () => T): Promise<T> {
+    if(this.loadingProjects){
+      return new Promise(resolve => {
+        let subscription = this.projectEvents.subscribe(event => {
+          subscription.unsubscribe();
+          resolve(fn());
+        });
+      });
+    }else {
+      return Promise.resolve(fn());
+    }
+  }
+
   lockSources() {
     this.loadingSources = true;
     return () => {
       this.loadingSources = false;
       this.sourcesEvents.emit("sourcesLoadingEnded");
     };
+  }
+
+  waitForSource<T>(fn: () => T): Promise<T> {
+    if(this.loadingSources){
+      return new Promise(resolve => {
+        let subscription = this.sourcesEvents.subscribe(event => {
+          subscription.unsubscribe();
+          resolve(fn());
+        });
+      });
+    }else {
+      return Promise.resolve(fn());
+    }
   }
 
   lockPendings() {
@@ -515,11 +461,37 @@ export class AppStorage {
     };
   }
 
+  waitForPending<T>(fn: () => T): Promise<T> {
+    if(this.loadingPendings){
+      return new Promise(resolve => {
+        let subscription = this.pendingsEvents.subscribe(event => {
+          subscription.unsubscribe();
+          resolve(fn());
+        });
+      });
+    }else {
+      return Promise.resolve(fn());
+    }
+  }
+
   lockSettings() {
     this.loadingSettings = true;
     return () => {
       this.loadingSettings = false;
       this.settingsEvents.emit("settingsLoadingEnded");
     };
+  }
+
+  waitForSetting<T>(fn: () => T): Promise<T> {
+    if(this.loadingSettings){
+      return new Promise(resolve => {
+        let subscription = this.settingsEvents.subscribe(event => {
+          subscription.unsubscribe();
+          resolve(fn());
+        });
+      });
+    }else {
+      return Promise.resolve(fn());
+    }
   }
 }
