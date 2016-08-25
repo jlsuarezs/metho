@@ -64,11 +64,9 @@ export class AppStorage {
             this.pendingsByProject.set(value.doc._id, <Map<string, Pending>>new Map());
           }
         });
-        this.loadingProjects = false;
-        this.projectEvents.emit("projectLoadingEnded");
+        this.lockProjects()();
       }).catch(err => {
-        this.loadingProjects = false;
-        this.projectEvents.emit("projectLoadingEnded");
+        this.lockProjects()();
         this.report.report(err);
       });
     }
@@ -81,11 +79,9 @@ export class AppStorage {
         }
         this.sourcesByProject.set(value.doc.project_id, this.sourcesByProject.get(value.doc.project_id).set(value.doc._id, value.doc));
       });
-      this.loadingSources = false;
-      this.sourcesEvents.emit("sourceLoadingEnded");
+      this.lockSources()();
     }).catch(err => {
-      this.loadingSources = false;
-      this.sourcesEvents.emit("sourceLoadingEnded");
+      this.lockSources()();
       this.report.report(err);
     });
 
@@ -97,11 +93,9 @@ export class AppStorage {
         }
         this.pendingsByProject.set(value.doc.project_id, this.pendingsByProject.get(value.doc.project_id).set(value.doc._id, value.doc));
       });
-      this.loadingPendings = false;
-      this.pendingsEvents.emit("pendingLoadingEnded");
+      this.lockPendings()();
     }).catch(err => {
-      this.loadingPendings = false;
-      this.pendingsEvents.emit("pendingLoadingEnded");
+      this.lockPendings()();
       this.report.report(err);
     });
 
@@ -109,11 +103,9 @@ export class AppStorage {
       docs.rows.forEach(value => {
         this.settings[value.doc._id] = value.doc.value;
       });
-      this.loadingSettings = false;
-      this.settingsEvents.emit("settingsLoadingEnded");
+      this.lockSettings()();
     }).catch(err => {
-      this.loadingSettings = false;
-      this.settingsEvents.emit("settingsLoadingEnded");
+      this.lockSettings()();
       this.report.report(err);
     });
   }
@@ -132,7 +124,7 @@ export class AppStorage {
   }
 
   deleteProject(id: string) {
-    this.loadingProjects = true;
+    let releaseLock = this.lockProjects();
     var doc = this.projects.get(id);
     this.projects.delete(id);
     let deletePromises = [];
@@ -143,8 +135,9 @@ export class AppStorage {
     // Delete this.sourcesByProject object for the deleted project
     Promise.all(deletePromises).then(value => {
       this.sourcesByProject.delete(id);
-      this.loadingProjects = false;
-      this.projectEvents.emit("projectLoadingEnded");
+      releaseLock();
+    }).catch(() => {
+      releaseLock();
     });
 
     if (this.projects.size == 0) {
@@ -162,7 +155,7 @@ export class AppStorage {
   }
 
   setProjectFromId(id: string, set: Project) {
-    this.loadingProjects = true;
+    let releaseLock = this.lockProjects();
     return new Promise(resolve => {
       let values = set;
       values._rev = this.projects.get(id)._rev;
@@ -170,12 +163,10 @@ export class AppStorage {
       this.projectDB.put(values).then(response => {
         set._rev = response.rev;
         this.projects.set(id, set);
-        this.loadingProjects = false;
-        this.projectEvents.emit("projectLoadingEnded");
+        releaseLock();
         resolve(response);
       }).catch(err =>{
-        this.loadingProjects = false;
-        this.projectEvents.emit("projectLoadingEnded");
+        releaseLock();
         this.report.report(err);
         resolve(err);
       });
@@ -196,8 +187,8 @@ export class AppStorage {
   }
 
   createProject(project: Project) {
-    this.loadingProjects = true;
-    this.loadingSources = true;
+    let releaseProjectLock = this.lockProjects();
+    let releaseSourceLock = this.lockSources();
     return new Promise(resolve => {
       this.projectDB.post(project).then(response => {
         this.sourcesByProject.set(response.id, <Map<string, Source>>new Map());
@@ -205,17 +196,13 @@ export class AppStorage {
         project._id = response.id;
         project._rev = response.rev;
         this.projects.set(response.id, project);
-        this.loadingProjects = false;
-        this.loadingSources = false;
-        this.projectEvents.emit("projectLoadingEnded");
-        this.sourcesEvents.emit("sourceLoadingEnded");
+        releaseSourceLock();
+        releaseProjectLock();
         this.local.set("theresProjects", true);
         resolve(response);
       }).catch((err) => {
-        this.loadingProjects = false;
-        this.loadingSources = false;
-        this.projectEvents.emit("projectLoadingEnded");
-        this.sourcesEvents.emit("sourceLoadingEnded");
+        releaseSourceLock();
+        releaseProjectLock();
         this.local.set("theresProjects", true);
         this.report.report(err);
         resolve(err);
@@ -250,7 +237,7 @@ export class AppStorage {
   }
 
   setSourceFromId(id: string, set: Source) {
-    this.loadingSources = true;
+    let releaseLock = this.lockSources();
     return new Promise(resolve => {
       set._rev = this.sources.get(id)._rev;
       set._id = id;
@@ -259,20 +246,18 @@ export class AppStorage {
         set._id = response.id;
         this.sources.set(id, set);
         this.sourcesByProject.get(set.project_id).set(id, set);
-        this.loadingSources = false;
-        this.sourcesEvents.emit("sourceLoadingEnded");
+        releaseLock();
         resolve(response);
       }).catch(err => {
         this.report.report(err);
-        this.loadingSources = false;
-        this.sourcesEvents.emit("sourceLoadingEnded");
+        releaseLock();
         resolve(err);
       });
     });
   }
 
   bulkSetSources(sources: Map<string, Source>) {
-    this.loadingSources = true;
+    let releaseLock = this.lockSources();
     return new Promise(resolve => {
       this.sourceDB.bulkDocs(Array.from(sources.values())).then(result => {
         result.forEach(source => {
@@ -285,31 +270,27 @@ export class AppStorage {
             this.report.report(source);
           }
         });
-        this.loadingSources = false;
-        this.sourcesEvents.emit("sourceLoadingEnded");
+        releaseLock();
         resolve(true);
       }).catch(err => {
         this.report.report(err);
-        this.loadingSources = false;
-        this.sourcesEvents.emit("sourceLoadingEnded");
+        releaseLock();
         resolve(true);
       });
     });
   }
 
   createSource(source: Source) {
-    this.loadingSources = true;
+    let releaseLock = this.lockSources();
     return new Promise(resolve => {
       this.sourceDB.post(source).then(response => {
         source._id = response.id;
         source._rev = response.rev;
         this.sources.set(response.id, source); this.sourcesByProject.get(source.project_id).set(response.id, source);
-        this.loadingSources = false;
-        this.sourcesEvents.emit("sourceLoadingEnded");
+        releaseLock();
         resolve(response);
       }).catch(err => {
-        this.loadingSources = false;
-        this.sourcesEvents.emit("sourceLoadingEnded");
+        releaseLock();
         this.report.report(err);
         resolve(err);
       });
@@ -317,20 +298,18 @@ export class AppStorage {
   }
 
   deleteSource(id: string) {
-    this.loadingSources = true;
+    let releaseLock = this.lockSources();
     let doc = this.sources.get(id);
     this.sources.delete(id);
     this.sourcesByProject.get(doc.project_id).delete(id);
 
     return new Promise(resolve => {
       this.sourceDB.remove(doc).then(result => {
-        this.loadingSources = false;
-        this.sourcesEvents.emit("sourceLoadingEnded");
+        releaseLock();
         resolve(result);
       }).catch(err => {
         this.report.report(err);
-        this.loadingSources = false;
-        this.sourcesEvents.emit("sourceLoadingEnded");
+        releaseLock();
         resolve(err);
       });
     });
@@ -369,7 +348,7 @@ export class AppStorage {
   }
 
   createPending(pending: Pending) {
-    this.loadingPendings = true;
+    let releaseLock = this.lockPendings();
     return new Promise(resolve => {
       this.pendingDB.post(pending).then(response => {
         pending._id = response.id;
@@ -379,12 +358,10 @@ export class AppStorage {
         pending.data = {};
         this.pendings.set(response.id, pending);
         this.pendingsByProject.get(pending.project_id).set(pending._id, pending);
-        this.loadingPendings = false;
-        this.pendingsEvents.emit("pendingLoadingEnded");
+        releaseLock();
         resolve(response);
       }).catch((err) => {
-        this.loadingPendings = false;
-        this.pendingsEvents.emit("pendingLoadingEnded");
+        releaseLock();
         this.report.report(err);
         resolve(err);
       });
@@ -392,19 +369,17 @@ export class AppStorage {
   }
 
   deletePending(id: string) {
-    this.loadingPendings = true;
+    let releaseLock = this.lockPendings();
     let doc = this.pendings.get(id);
     this.pendings.delete(id);
     this.pendingsByProject.get(doc.project_id).delete(doc._id);
 
     return new Promise(resolve => {
       this.pendingDB.remove(doc).then(result => {
-        this.loadingPendings = false;
-        this.pendingsEvents.emit("pendingLoadingEnded");
+        releaseLock();
         resolve(result);
       }).catch(err => {
-        this.loadingPendings = false;
-        this.pendingsEvents.emit("pendingLoadingEnded");
+        releaseLock();
         this.report.report(err);
         resolve(err);
       });
@@ -412,7 +387,7 @@ export class AppStorage {
   }
 
   setPendingFromId(id: string, set: Pending) {
-    this.loadingPendings = true;
+    let releaseLock = this.lockPendings();
     return new Promise(resolve => {
       let values = set;
       values._rev = this.pendings.get(id)._rev;
@@ -421,13 +396,11 @@ export class AppStorage {
         set._rev = response.rev;
         this.pendings.set(id, set);
         this.pendingsByProject.get(set.project_id).set(set._id, set);
-        this.loadingPendings = false;
-        this.pendingsEvents.emit("pendingLoadingEnded");
+        releaseLock();
         resolve(response);
       }).catch(err => {
         this.report.report(err);
-        this.loadingPendings = false;
-        this.pendingsEvents.emit("pendingLoadingEnded");
+        releaseLock();
         resolve(err);
       });
     });
@@ -502,20 +475,51 @@ export class AppStorage {
   }
 
   setSetting(key: string, value: any): void {
-    this.loadingSettings = true;
+    let releaseLock = this.lockSettings();
     this.settingsDB.get(key).then(doc => {
       doc.value = value;
       this.settingsDB.put(doc);
-      this.loadingSettings = false;
-      this.settingsEvents.emit("settingsLoadingEnded");
+      releaseLock();
     }).catch(err => {
       if (err.status == 404) {
         this.settingsDB.put({ value: value, _id: key });
       }else {
         this.report.report(err);
       }
+      releaseLock();
+    });
+  }
+
+  // threadlocks
+  lockProjects() {
+    this.loadingProjects = true;
+    return () => {
+      this.loadingProjects = false;
+      this.projectEvents.emit("projectLoadingEnded");
+    };
+  }
+
+  lockSources() {
+    this.loadingSources = true;
+    return () => {
+      this.loadingSources = false;
+      this.sourcesEvents.emit("sourcesLoadingEnded");
+    };
+  }
+
+  lockPendings() {
+    this.loadingPendings = true;
+    return () => {
+      this.loadingPendings = false;
+      this.pendingsEvents.emit("pendingLoadingEnded");
+    };
+  }
+
+  lockSettings() {
+    this.loadingSettings = true;
+    return () => {
       this.loadingSettings = false;
       this.settingsEvents.emit("settingsLoadingEnded");
-    });
+    };
   }
 }
