@@ -10,8 +10,6 @@ import {TranslateService} from 'ng2-translate/ng2-translate';
   templateUrl: 'build/pages/tabs/tabs.html'
 })
 export class TabsPage {
-  // this tells the tabs component which Pages
-  // should be each tab's root Page
   tab1Root: any = ProjectsPage;
   tab2Root: any = ReferencesPage;
   tab3Root: any = SettingsPage;
