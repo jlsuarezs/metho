@@ -8,3 +8,4 @@ plugins/
 .editorconfig
 www/build/
 .tags
+app/interfaces.d.ts
