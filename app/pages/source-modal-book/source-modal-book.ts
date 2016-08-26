@@ -1,7 +1,7 @@
 import {ViewController, NavParams, ModalController, NavController, AlertController, LoadingController} from 'ionic-angular';
 import {TranslateService} from 'ng2-translate/ng2-translate';
 import {Component} from '@angular/core';
-import {FormBuilder, Validators, ControlGroup} from '@angular/common';
+import {FormBuilder, Validators, FormGroup} from '@angular/forms';
 import {BarcodeScanner, SafariViewController} from 'ionic-native';
 
 import {AppStorage} from '../../providers/app-storage/app-storage.ts';
@@ -30,7 +30,7 @@ export class SourceModalBookPage {
   public lastname: string;
   public hasConfirmed: boolean = false;
 
-  public form: ControlGroup;
+  public form: FormGroup;
   public _timeout: any;
   public instantList: Array<any>;
   public instantStatus: any = {
