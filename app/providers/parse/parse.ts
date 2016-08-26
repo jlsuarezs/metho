@@ -4,185 +4,162 @@ import {Language} from '../language/language';
 
 @Injectable()
 export class Parse {
-  private sourceToParse: Source;
-
   constructor(public translate: TranslateService) {}
 
   parse(source: Source) {
-    this.sourceToParse = source;
-    this.sourceToParse.parsedSource = "";
-    switch (this.sourceToParse.type) {
-      case "book":
-        this.sourceToParse.parsedType = this.translate.instant("PROJECT.TYPES.BOOK");
-        break;
-      case "internet":
-        this.sourceToParse.parsedType = this.translate.instant("PROJECT.TYPES.INTERNET");
-        break;
-      case "article":
-        this.sourceToParse.parsedType = this.translate.instant("PROJECT.TYPES.ARTICLE");
-        break;
-      case "cd":
-        this.sourceToParse.parsedType = this.translate.instant("PROJECT.TYPES.CD_PARSE");
-        break;
-      case "movie":
-        this.sourceToParse.parsedType = this.translate.instant("PROJECT.TYPES.MOVIE");
-        break;
-      case "interview":
-        this.sourceToParse.parsedType = this.translate.instant("PROJECT.TYPES.INTERVIEW");
-        break;
-      default:
-
-    }
-    this.sourceToParse.errors = [];
-    this.sourceToParse.warnings = [];
+    let sourceToParse = source;
+    sourceToParse.parsedSource = "";
+    sourceToParse.parsedType = this.parseType(sourceToParse.type);
+    sourceToParse.errors = [];
+    sourceToParse.warnings = [];
 
     // Solve error with timezones
     var _userOffset = new Date().getTimezoneOffset() * 60000;
-    if (this.sourceToParse.type == "book") {
-      if (this.sourceToParse.hasAuthors == "13") {
+    if (sourceToParse.type == "book") {
+      if (sourceToParse.hasAuthors == "13") {
 
-        if (this.sourceToParse.author1lastname || this.sourceToParse.author1firstname) {
+        if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
           // Author last name
-          if (this.sourceToParse.author1lastname) {
-            this.sourceToParse.parsedSource += this.sourceToParse.author1lastname.toUpperCase().trim() + ", ";
+          if (sourceToParse.author1lastname) {
+            sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
           } else {
-            this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname");
-            this.sourceToParse.parsedSource += "?, ";
+            sourceToParse.errors.push(this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname"));
+            sourceToParse.parsedSource += "?, ";
           }
           // Author first name
-          if (this.sourceToParse.author1firstname) {
-            this.sourceToParse.parsedSource += this.sourceToParse.author1firstname.trim();
+          if (sourceToParse.author1firstname) {
+            sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
           } else {
-            this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname");
-            this.sourceToParse.parsedSource += "?";
+            sourceToParse.errors.push(this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname"));
+            sourceToParse.parsedSource += "?";
           }
         } else {
-          this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname");
-          this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname");
-          this.sourceToParse.parsedSource += "?";
+          sourceToParse.errors.push(this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname"));
+          sourceToParse.errors.push(this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname"));
+          sourceToParse.parsedSource += "?";
         }
 
-        if (this.sourceToParse.author2lastname || this.sourceToParse.author2firstname) {
+        if (sourceToParse.author2lastname || sourceToParse.author2firstname) {
           // Author 2 last name
-          if (this.sourceToParse.author2lastname) {
-            this.sourceToParse.parsedSource += ", " + this.sourceToParse.author2lastname.toUpperCase().trim();
+          if (sourceToParse.author2lastname) {
+            sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
           } else {
-            this.addError("SECOND_AUTHOR_LASTNAME", "author2lastname");
-            this.sourceToParse.parsedSource += "?, ";
+            sourceToParse.errors.push(this.addError("SECOND_AUTHOR_LASTNAME", "author2lastname"));
+            sourceToParse.parsedSource += "?, ";
           }
           // Author 2 first name
-          if (this.sourceToParse.author2firstname) {
-            this.sourceToParse.parsedSource += ", " + this.sourceToParse.author2firstname.trim();
+          if (sourceToParse.author2firstname) {
+            sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
           } else {
-            this.addError("SECOND_AUTHOR_FIRSTNAME", "author2firstname");
-            this.sourceToParse.parsedSource += "?";
+            sourceToParse.errors.push(this.addError("SECOND_AUTHOR_FIRSTNAME", "author2firstname"));
+            sourceToParse.parsedSource += "?";
           }
         }
 
-        if (this.sourceToParse.author3lastname || this.sourceToParse.author3firstname) {
+        if (sourceToParse.author3lastname || sourceToParse.author3firstname) {
           // Author 3 last name
-          if (this.sourceToParse.author3lastname) {
-            this.sourceToParse.parsedSource += " et " + this.sourceToParse.author3lastname.toUpperCase().trim();
+          if (sourceToParse.author3lastname) {
+            sourceToParse.parsedSource += " et " + sourceToParse.author3lastname.toUpperCase().trim();
           } else {
-            this.addError("THIRD_AUTHOR_LASTNAME", "author3lastname");
-            this.sourceToParse.parsedSource += ", ?";
+            sourceToParse.errors.push(this.addError("THIRD_AUTHOR_LASTNAME", "author3lastname"));
+            sourceToParse.parsedSource += ", ?";
           }
           // Author 3 first name
-          if (this.sourceToParse.author3firstname) {
-            this.sourceToParse.parsedSource += ", " + this.sourceToParse.author3firstname.trim() + ". ";
+          if (sourceToParse.author3firstname) {
+            sourceToParse.parsedSource += ", " + sourceToParse.author3firstname.trim() + ". ";
           } else {
-            this.addError("THIRD_AUTHOR_FIRSTNAME", "author3firstname");
-            this.sourceToParse.parsedSource += ", ?.";
+            sourceToParse.errors.push(this.addError("THIRD_AUTHOR_FIRSTNAME", "author3firstname"));
+            sourceToParse.parsedSource += ", ?.";
           }
         } else {
-          this.sourceToParse.parsedSource += ". ";
+          sourceToParse.parsedSource += ". ";
         }
-      } else if (this.sourceToParse.hasAuthors == "more3") {
-          if (this.sourceToParse.author1lastname || this.sourceToParse.author1firstname) {
+      } else if (sourceToParse.hasAuthors == "more3") {
+          if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
               // Author last name
-              if (this.sourceToParse.author1lastname) {
-                  this.sourceToParse.parsedSource += this.sourceToParse.author1lastname.toUpperCase().trim() + ", ";
+              if (sourceToParse.author1lastname) {
+                  sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
               } else {
-                  this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname");
-                  this.sourceToParse.parsedSource += "?, ";
+                  sourceToParse.errors.push(this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname"));
+                  sourceToParse.parsedSource += "?, ";
               }
               // Author first name
-              if (this.sourceToParse.author1firstname) {
-                  this.sourceToParse.parsedSource += this.sourceToParse.author1firstname.trim();
+              if (sourceToParse.author1firstname) {
+                  sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
               } else {
-                  this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname");
-                  this.sourceToParse.parsedSource += "?";
+                  sourceToParse.errors.push(this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname"));
+                  sourceToParse.parsedSource += "?";
               }
           } else {
-              this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname");
-              this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname");
-              this.sourceToParse.parsedSource += "?";
+              sourceToParse.errors.push(this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname"));
+              sourceToParse.errors.push(this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname"));
+              sourceToParse.parsedSource += "?";
           }
 
-          if (this.sourceToParse.author2lastname || this.sourceToParse.author2firstname) {
+          if (sourceToParse.author2lastname || sourceToParse.author2firstname) {
               // Author 2 last name
-              if (this.sourceToParse.author2lastname) {
-                  this.sourceToParse.parsedSource += ", " + this.sourceToParse.author2lastname.toUpperCase().trim();
+              if (sourceToParse.author2lastname) {
+                  sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
               } else {
-                  this.addError("SECOND_AUTHOR_LASTNAME", "author2lastname");
-                  this.sourceToParse.parsedSource += "?, ";
+                  sourceToParse.errors.push(this.addError("SECOND_AUTHOR_LASTNAME", "author2lastname"));
+                  sourceToParse.parsedSource += "?, ";
               }
               // Author 2 first name
-              if (this.sourceToParse.author2firstname) {
-                  this.sourceToParse.parsedSource += ", " + this.sourceToParse.author2firstname.trim();
+              if (sourceToParse.author2firstname) {
+                  sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
               } else {
-                  this.addError("SECOND_AUTHOR_FIRSTNAME", "author2firstname");
-                  this.sourceToParse.parsedSource += "?";
+                  sourceToParse.errors.push(this.addError("SECOND_AUTHOR_FIRSTNAME", "author2firstname"));
+                  sourceToParse.parsedSource += "?";
               }
 
-              this.sourceToParse.parsedSource += " et al. ";
+              sourceToParse.parsedSource += " et al. ";
           } else {
-              this.sourceToParse.parsedSource += " et al. ";
+              sourceToParse.parsedSource += " et al. ";
           }
-        } else if (this.sourceToParse.hasAuthors == "collective") {
-            if (this.sourceToParse.author1lastname || this.sourceToParse.author1firstname) {
+        } else if (sourceToParse.hasAuthors == "collective") {
+            if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
                 // Author last name
-                if (this.sourceToParse.author1lastname) {
-                    this.sourceToParse.parsedSource += this.sourceToParse.author1lastname.toUpperCase().trim() + ", ";
+                if (sourceToParse.author1lastname) {
+                    sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
                 } else {
-                    this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname");
-                    this.sourceToParse.parsedSource += "?, ";
+                    sourceToParse.errors.push(this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname"));
+                    sourceToParse.parsedSource += "?, ";
                 }
                 // Author first name
-                if (this.sourceToParse.author1firstname) {
-                    this.sourceToParse.parsedSource += this.sourceToParse.author1firstname.trim();
+                if (sourceToParse.author1firstname) {
+                    sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
                 } else {
-                    this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname");
-                    this.sourceToParse.parsedSource += "?";
+                    sourceToParse.errors.push(this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname"));
+                    sourceToParse.parsedSource += "?";
                 }
             } else {
-                this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname");
-                this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname");
-                this.sourceToParse.parsedSource += "?";
+                sourceToParse.errors.push(this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname"));
+                sourceToParse.errors.push(this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname"));
+                sourceToParse.parsedSource += "?";
             }
 
-            if (this.sourceToParse.author2lastname || this.sourceToParse.author2firstname) {
+            if (sourceToParse.author2lastname || sourceToParse.author2firstname) {
                 // Author 2 last name
-                if (this.sourceToParse.author2lastname) {
-                    this.sourceToParse.parsedSource += ", " + this.sourceToParse.author2lastname.toUpperCase().trim();
+                if (sourceToParse.author2lastname) {
+                    sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
                 } else {
-                    this.addError("SECOND_AUTHOR_LASTNAME", "author2lastname");
-                    this.sourceToParse.parsedSource += "?, ";
+                    sourceToParse.errors.push(this.addError("SECOND_AUTHOR_LASTNAME", "author2lastname"));
+                    sourceToParse.parsedSource += "?, ";
                 }
                 // Author 2 first name
-                if (this.sourceToParse.author2firstname) {
-                    this.sourceToParse.parsedSource += ", " + this.sourceToParse.author2firstname.trim();
+                if (sourceToParse.author2firstname) {
+                    sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
                 } else {
-                    this.addError("SECOND_AUTHOR_FIRSTNAME", "author2firstname");
-                    this.sourceToParse.parsedSource += "?";
+                    sourceToParse.errors.push(this.addError("SECOND_AUTHOR_FIRSTNAME", "author2firstname"));
+                    sourceToParse.parsedSource += "?";
                 }
-                this.sourceToParse.parsedSource += " (dir). ";
+                sourceToParse.parsedSource += " (dir). ";
             } else {
-                this.sourceToParse.parsedSource += " (dir). ";
+                sourceToParse.parsedSource += " (dir). ";
             }
         } else {
-            this.sourceToParse.parsedSource += "?. ";
-            this.addComplexError("AUTHOR_NUMBER", "hasAuthors", {
+            sourceToParse.parsedSource += "?. ";
+            sourceToParse.errors.push(this.addComplexError("AUTHOR_NUMBER", "hasAuthors", {
                 options: [
                   {
                     text: 'PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_1TO3',
@@ -198,546 +175,546 @@ export class Parse {
                   }
                 ],
                 type:"select"
-            });
+            }));
         }
 
         // Titre
-        if (this.sourceToParse.title) {
-            this.sourceToParse.parsedSource += "<em>" + this.sourceToParse.title.trim() + "</em>, ";
+        if (sourceToParse.title) {
+            sourceToParse.parsedSource += "<em>" + sourceToParse.title.trim() + "</em>, ";
         } else {
-            this.addError("BOOK_TITLE", "title");
-            this.sourceToParse.parsedSource += "<em>?</em>, ";
+            sourceToParse.errors.push(this.addError("BOOK_TITLE", "title"));
+            sourceToParse.parsedSource += "<em>?</em>, ";
         }
 
         // Édition
-        if (this.sourceToParse.editionNumber) {
-            switch (this.sourceToParse.editionNumber) {
+        if (sourceToParse.editionNumber) {
+            switch (sourceToParse.editionNumber) {
                 case 1:
-                    this.sourceToParse.parsedSource += "1<sup>re</sup> ";
+                    sourceToParse.parsedSource += "1<sup>re</sup> ";
                     break;
                 default:
-                    this.sourceToParse.parsedSource += this.sourceToParse.editionNumber + "<sup>e</sup> ";
+                    sourceToParse.parsedSource += sourceToParse.editionNumber + "<sup>e</sup> ";
             }
-            this.sourceToParse.parsedSource += "édition, ";
+            sourceToParse.parsedSource += "édition, ";
         }
 
         // Collection
-        if (this.sourceToParse.collection) {
-            this.sourceToParse.parsedSource += "coll. " + this.sourceToParse.collection.trim() + ", ";
+        if (sourceToParse.collection) {
+            sourceToParse.parsedSource += "coll. " + sourceToParse.collection.trim() + ", ";
         }
 
         // Traduction
-        if (this.sourceToParse.hasBeenTranslated) {
+        if (sourceToParse.hasBeenTranslated) {
             // Langue
-            if (this.sourceToParse.translatedFrom) {
-                if ((/^[aeiou]$/i).test(this.sourceToParse.translatedFrom.substr(0, 1))) {
-                    this.sourceToParse.parsedSource += "trad. de l'" + this.sourceToParse.translatedFrom.toLowerCase().trim() + " ";
-                } else if (this.sourceToParse.translatedFrom.toLowerCase().substr(0, 1) == "h") {
+            if (sourceToParse.translatedFrom) {
+                if ((/^[aeiou]$/i).test(sourceToParse.translatedFrom.substr(0, 1))) {
+                    sourceToParse.parsedSource += "trad. de l'" + sourceToParse.translatedFrom.toLowerCase().trim() + " ";
+                } else if (sourceToParse.translatedFrom.toLowerCase().substr(0, 1) == "h") {
                     var arr_la = ["hawaïen", "hébreu", "hindi"];
                     var arr_du = ["hongrois", "huron"];
-                    if (arr_la.indexOf(this.sourceToParse.translatedFrom.toLowerCase().trim()) != -1) {
-                        this.sourceToParse.parsedSource += "trad. de l'" + this.sourceToParse.translatedFrom.toLowerCase().trim() + " ";
-                    } else if (arr_du.indexOf(this.sourceToParse.translatedFrom.toLowerCase().trim()) != -1) {
-                        this.sourceToParse.parsedSource += "trad. du " + this.sourceToParse.translatedFrom.toLowerCase().trim() + " ";
+                    if (arr_la.indexOf(sourceToParse.translatedFrom.toLowerCase().trim()) != -1) {
+                        sourceToParse.parsedSource += "trad. de l'" + sourceToParse.translatedFrom.toLowerCase().trim() + " ";
+                    } else if (arr_du.indexOf(sourceToParse.translatedFrom.toLowerCase().trim()) != -1) {
+                        sourceToParse.parsedSource += "trad. du " + sourceToParse.translatedFrom.toLowerCase().trim() + " ";
                     } else {
-                        this.sourceToParse.parsedSource += "trad. de l'" + this.sourceToParse.translatedFrom.toLowerCase().trim() + " ";
+                        sourceToParse.parsedSource += "trad. de l'" + sourceToParse.translatedFrom.toLowerCase().trim() + " ";
                     }
                 } else {
-                    this.sourceToParse.parsedSource += "trad. du " + this.sourceToParse.translatedFrom.toLowerCase().trim() + " ";
+                    sourceToParse.parsedSource += "trad. du " + sourceToParse.translatedFrom.toLowerCase().trim() + " ";
                 }
             } else {
-                this.addError("TRANSLATION_LANGUAGE", "translatedFrom");
-                this.sourceToParse.parsedSource += "trad. de ? ";
+                sourceToParse.errors.push(this.addError("TRANSLATION_LANGUAGE", "translatedFrom"));
+                sourceToParse.parsedSource += "trad. de ? ";
             }
 
             // Traducteurs
-            if (this.sourceToParse.translator1lastname || this.sourceToParse.translator1firstname) {
-                this.sourceToParse.parsedSource += "par ";
+            if (sourceToParse.translator1lastname || sourceToParse.translator1firstname) {
+                sourceToParse.parsedSource += "par ";
                 // Translator's first name
-                if (this.sourceToParse.translator1firstname) {
-                    this.sourceToParse.parsedSource += this.sourceToParse.translator1firstname.trim() + " ";
+                if (sourceToParse.translator1firstname) {
+                    sourceToParse.parsedSource += sourceToParse.translator1firstname.trim() + " ";
                 } else {
-                    this.addError("FIRST_TRANSLATOR_FIRSTNAME", "translator1firstname");
-                    this.sourceToParse.parsedSource += "? ";
+                    sourceToParse.errors.push(this.addError("FIRST_TRANSLATOR_FIRSTNAME", "translator1firstname"));
+                    sourceToParse.parsedSource += "? ";
                 }
                 // Translator's last name
-                if (this.sourceToParse.translator1lastname) {
-                    this.sourceToParse.parsedSource += this.sourceToParse.translator1lastname.trim();
+                if (sourceToParse.translator1lastname) {
+                    sourceToParse.parsedSource += sourceToParse.translator1lastname.trim();
                 } else {
-                    this.addError("FIRST_TRANSLATOR_LASTNAME", "translator1lastname");
-                    this.sourceToParse.parsedSource += "? ";
+                    sourceToParse.errors.push(this.addError("FIRST_TRANSLATOR_LASTNAME", "translator1lastname"));
+                    sourceToParse.parsedSource += "? ";
                 }
             } else {
-                this.addError("FIRST_TRANSLATOR_FIRSTNAME", "translator1firstname");
-                this.addError("FIRST_TRANSLATOR_LASTNAME", "translator1lastname");
-                this.sourceToParse.parsedSource += "?";
+                sourceToParse.errors.push(this.addError("FIRST_TRANSLATOR_FIRSTNAME", "translator1firstname"));
+                sourceToParse.errors.push(this.addError("FIRST_TRANSLATOR_LASTNAME", "translator1lastname"));
+                sourceToParse.parsedSource += "?";
             }
 
-            if (this.sourceToParse.translator2lastname || this.sourceToParse.translator2firstname) {
+            if (sourceToParse.translator2lastname || sourceToParse.translator2firstname) {
                 // Translator 2 first name
-                if (this.sourceToParse.translator2firstname) {
-                    this.sourceToParse.parsedSource += ", " + this.sourceToParse.translator2firstname.trim();
+                if (sourceToParse.translator2firstname) {
+                    sourceToParse.parsedSource += ", " + sourceToParse.translator2firstname.trim();
                 } else {
-                    this.addError("SECOND_TRANSLATOR_FIRSTNAME", "translator2firstname");
-                    this.sourceToParse.parsedSource += "?";
+                    sourceToParse.errors.push(this.addError("SECOND_TRANSLATOR_FIRSTNAME", "translator2firstname"));
+                    sourceToParse.parsedSource += "?";
                 }
                 // Translator 2 last name
-                if (this.sourceToParse.translator2lastname) {
-                    this.sourceToParse.parsedSource += " " + this.sourceToParse.translator2lastname.trim() + ", ";
+                if (sourceToParse.translator2lastname) {
+                    sourceToParse.parsedSource += " " + sourceToParse.translator2lastname.trim() + ", ";
                 } else {
-                    this.addError("SECOND_TRANSLATOR_LASTNAME", "translator2lastname");
-                    this.sourceToParse.parsedSource += "?, ";
+                    sourceToParse.errors.push(this.addError("SECOND_TRANSLATOR_LASTNAME", "translator2lastname"));
+                    sourceToParse.parsedSource += "?, ";
                 }
             } else {
-                this.sourceToParse.parsedSource += ", ";
+                sourceToParse.parsedSource += ", ";
             }
         }
 
         // Lieu
-        if (this.sourceToParse.publicationLocation) {
-            this.sourceToParse.parsedSource += this.capitalizeFirstLetter(this.sourceToParse.publicationLocation.trim()) + ", ";
+        if (sourceToParse.publicationLocation) {
+            sourceToParse.parsedSource += this.capitalizeFirstLetter(sourceToParse.publicationLocation.trim()) + ", ";
         } else {
-            this.sourceToParse.parsedSource += "s.l., ";
-            this.addWarning("EDITION_LOCATION", "publicationLocation");
+            sourceToParse.parsedSource += "s.l., ";
+            sourceToParse.warnings.push(this.addError("EDITION_LOCATION", "publicationLocation"))
         }
 
         // Éditeur
-        if (this.sourceToParse.editor) {
-            this.sourceToParse.parsedSource += this.sourceToParse.editor.trim() + ", ";
+        if (sourceToParse.editor) {
+            sourceToParse.parsedSource += sourceToParse.editor.trim() + ", ";
         } else {
-            this.sourceToParse.parsedSource += "?, ";
-            this.addError("EDITOR", "editor");
+            sourceToParse.parsedSource += "?, ";
+            sourceToParse.errors.push(this.addError("EDITOR", "editor"));
         }
 
         // Date
-        if (this.sourceToParse.publicationDate) {
-            this.sourceToParse.parsedSource += this.sourceToParse.publicationDate + ", ";
+        if (sourceToParse.publicationDate) {
+            sourceToParse.parsedSource += sourceToParse.publicationDate + ", ";
             var today = new Date();
-            if (today.getFullYear() < Number(this.sourceToParse.publicationDate)) {
-                this.addWarning("EDITION_DATE_TOO_HIGH", "publicationDate");
+            if (today.getFullYear() < Number(sourceToParse.publicationDate)) {
+                sourceToParse.warnings.push(this.addError("EDITION_DATE_TOO_HIGH", "publicationDate"))
             }
         } else {
-            this.sourceToParse.parsedSource += "s.d., ";
-            this.addWarning("EDITION_DATE", "publicationDate");
+            sourceToParse.parsedSource += "s.d., ";
+            sourceToParse.warnings.push(this.addError("EDITION_DATE", "publicationDate"))
         }
 
         // Volume
-        if (this.sourceToParse.volumeNumber) {
-            this.sourceToParse.parsedSource += "vol. " + this.sourceToParse.volumeNumber + ", ";
+        if (sourceToParse.volumeNumber) {
+            sourceToParse.parsedSource += "vol. " + sourceToParse.volumeNumber + ", ";
         }
 
         // Nombre de pages
-        if (this.sourceToParse.pageNumber && !isNaN(this.sourceToParse.pageNumber)) {
-            if (this.sourceToParse.pageNumber >= 1000) {
-                this.sourceToParse.parsedSource += this.format(this.sourceToParse.pageNumber) + " p.";
+        if (sourceToParse.pageNumber && !isNaN(sourceToParse.pageNumber)) {
+            if (sourceToParse.pageNumber >= 1000) {
+                sourceToParse.parsedSource += this.format(sourceToParse.pageNumber) + " p.";
             }else {
-                this.sourceToParse.parsedSource += this.sourceToParse.pageNumber + " p.";
+                sourceToParse.parsedSource += sourceToParse.pageNumber + " p.";
             }
 
-            if (this.sourceToParse.pageNumber > 15000) {
-                this.addWarning("PAGE_NUMBER_TOO_HIGH", "pageNumber");
-            } else if (this.sourceToParse.pageNumber <= 0) {
-                this.addWarning("PAGE_NUMBER_TOO_LOW", "pageNumber");
+            if (sourceToParse.pageNumber > 15000) {
+                sourceToParse.warnings.push(this.addError("PAGE_NUMBER_TOO_HIGH", "pageNumber"))
+            } else if (sourceToParse.pageNumber <= 0) {
+                sourceToParse.warnings.push(this.addError("PAGE_NUMBER_TOO_LOW", "pageNumber"))
             }
-            this.sourceToParse.pageNumber = Number(this.sourceToParse.pageNumber);
+            sourceToParse.pageNumber = Number(sourceToParse.pageNumber);
         } else {
-            this.sourceToParse.parsedSource += "? p.";
-            this.sourceToParse.pageNumber = '';
-            this.addError("PAGE_NUMBER", "pageNumber");
+            sourceToParse.parsedSource += "? p.";
+            sourceToParse.pageNumber = '';
+            sourceToParse.errors.push(this.addError("PAGE_NUMBER", "pageNumber"));
         }
-    } else if (this.sourceToParse.type == "article") {
+    } else if (sourceToParse.type == "article") {
         // Auteur
-        if (this.sourceToParse.author1lastname || this.sourceToParse.author1firstname) {
-            if (this.sourceToParse.author1lastname) {
-                this.sourceToParse.parsedSource += this.sourceToParse.author1lastname.toUpperCase() + ", ";
+        if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
+            if (sourceToParse.author1lastname) {
+                sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase() + ", ";
             } else {
-                this.sourceToParse.parsedSource += "?, ";
-                this.addError("AUTHOR_ARTICLE_LASTNAME", "author1lastname");
+                sourceToParse.parsedSource += "?, ";
+                sourceToParse.errors.push(this.addError("AUTHOR_ARTICLE_LASTNAME", "author1lastname"));
             }
 
-            if (this.sourceToParse.author1firstname) {
-                this.sourceToParse.parsedSource += this.sourceToParse.author1firstname.toUpperCase() + ". ";
+            if (sourceToParse.author1firstname) {
+                sourceToParse.parsedSource += sourceToParse.author1firstname.toUpperCase() + ". ";
             } else {
-                this.sourceToParse.parsedSource += "?. ";
-                this.addError("AUTHOR_ARTICLE_FIRSTNAME", "author1firstname");
+                sourceToParse.parsedSource += "?. ";
+                sourceToParse.errors.push(this.addError("AUTHOR_ARTICLE_FIRSTNAME", "author1firstname"));
             }
         } else {
-            this.sourceToParse.parsedSource += "?. ";
-            this.addError("AUTHOR_ARTICLE_FIRSTNAME", "author1firstname");
-            this.addError("AUTHOR_ARTICLE_LASTNAME", "author1lastname");
+            sourceToParse.parsedSource += "?. ";
+            sourceToParse.errors.push(this.addError("AUTHOR_ARTICLE_FIRSTNAME", "author1firstname"));
+            sourceToParse.errors.push(this.addError("AUTHOR_ARTICLE_LASTNAME", "author1lastname"));
         }
 
         // Titre de l'Article
-        if (this.sourceToParse.title) {
-            this.sourceToParse.parsedSource += "«" + this.sourceToParse.title + "», ";
+        if (sourceToParse.title) {
+            sourceToParse.parsedSource += "«" + sourceToParse.title + "», ";
         } else {
-            this.sourceToParse.parsedSource += "«?», ";
-            this.addError("ARTICLE_TITLE", "title");
+            sourceToParse.parsedSource += "«?», ";
+            sourceToParse.errors.push(this.addError("ARTICLE_TITLE", "title"));
         }
 
         // Nom du périodique
-        if (this.sourceToParse.editor) {
-            this.sourceToParse.parsedSource += "<em>" + this.sourceToParse.editor + "</em>, ";
+        if (sourceToParse.editor) {
+            sourceToParse.parsedSource += "<em>" + sourceToParse.editor + "</em>, ";
         } else {
-            this.sourceToParse.parsedSource += "<em>?</em>, ";
-            this.addError("PERIODIC_NAME", "editor");
+            sourceToParse.parsedSource += "<em>?</em>, ";
+            sourceToParse.errors.push(this.addError("PERIODIC_NAME", "editor"));
         }
 
         // Numéro du périodique
-        if (this.sourceToParse.editionNumber) {
-            this.sourceToParse.parsedSource += this.sourceToParse.editionNumber + ", ";
+        if (sourceToParse.editionNumber) {
+            sourceToParse.parsedSource += sourceToParse.editionNumber + ", ";
         } else {
-            this.sourceToParse.parsedSource += "?, ";
-            this.addError("PERIODIC_NUMBER", "editionNumber");
+            sourceToParse.parsedSource += "?, ";
+            sourceToParse.errors.push(this.addError("PERIODIC_NUMBER", "editionNumber"));
         }
 
         // Date de publication
-        if (this.sourceToParse.publicationDate) {
-            this.sourceToParse.parsedSource += this.sourceToParse.publicationDate + ", ";
+        if (sourceToParse.publicationDate) {
+            sourceToParse.parsedSource += sourceToParse.publicationDate + ", ";
         } else {
-            this.sourceToParse.parsedSource += "?, ";
-            this.addError("EDITION_DATE", "publicationDate");
+            sourceToParse.parsedSource += "?, ";
+            sourceToParse.errors.push(this.addError("EDITION_DATE", "publicationDate"));
         }
 
         // Indication des pages
-        if (this.sourceToParse.endPage || this.sourceToParse.startPage) {
-            if (this.sourceToParse.startPage) {
-                this.sourceToParse.parsedSource += "p. " + this.sourceToParse.startPage;
+        if (sourceToParse.endPage || sourceToParse.startPage) {
+            if (sourceToParse.startPage) {
+                sourceToParse.parsedSource += "p. " + sourceToParse.startPage;
             } else {
-                this.sourceToParse.parsedSource += "p. ?";
-                this.addError("START_PAGE", "startPage");
+                sourceToParse.parsedSource += "p. ?";
+                sourceToParse.errors.push(this.addError("START_PAGE", "startPage"));
             }
-            this.sourceToParse.parsedSource += "-";
+            sourceToParse.parsedSource += "-";
 
-            if (this.sourceToParse.endPage) {
-                this.sourceToParse.parsedSource += this.sourceToParse.endPage;
+            if (sourceToParse.endPage) {
+                sourceToParse.parsedSource += sourceToParse.endPage;
             } else {
-                this.sourceToParse.parsedSource += "?";
-                this.addError("END_PAGE", "endPage");
+                sourceToParse.parsedSource += "?";
+                sourceToParse.errors.push(this.addError("END_PAGE", "endPage"));
             }
-            this.sourceToParse.parsedSource += ".";
+            sourceToParse.parsedSource += ".";
         } else {
-            this.sourceToParse.parsedSource += "p. ?-?.";
-            this.addError("START_PAGE", "startPage");
-            this.addError("END_PAGE", "endPage");
+            sourceToParse.parsedSource += "p. ?-?.";
+            sourceToParse.errors.push(this.addError("START_PAGE", "startPage"));
+            sourceToParse.errors.push(this.addError("END_PAGE", "endPage"));
         }
-    } else if (this.sourceToParse.type == "internet") {
-        if (this.sourceToParse.hasAuthors) {
-            if (this.sourceToParse.author1lastname || this.sourceToParse.author1firstname) {
+    } else if (sourceToParse.type == "internet") {
+        if (sourceToParse.hasAuthors) {
+            if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
                 // Author last name
-                if (this.sourceToParse.author1lastname) {
-                    this.sourceToParse.parsedSource += this.sourceToParse.author1lastname.toUpperCase().trim() + ", ";
+                if (sourceToParse.author1lastname) {
+                    sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
                 } else {
-                    this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname");
-                    this.sourceToParse.parsedSource += "?, ";
+                    sourceToParse.errors.push(this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname"));
+                    sourceToParse.parsedSource += "?, ";
                 }
                 // Author first name
-                if (this.sourceToParse.author1firstname) {
-                    this.sourceToParse.parsedSource += this.sourceToParse.author1firstname.trim();
+                if (sourceToParse.author1firstname) {
+                    sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
                 } else {
-                    this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname");
-                    this.sourceToParse.parsedSource += "?";
+                    sourceToParse.errors.push(this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname"));
+                    sourceToParse.parsedSource += "?";
                 }
             } else {
-                this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname");
-                this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname");
-                this.sourceToParse.parsedSource += "?";
+                sourceToParse.errors.push(this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname"));
+                sourceToParse.errors.push(this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname"));
+                sourceToParse.parsedSource += "?";
             }
 
-            if (this.sourceToParse.author2lastname || this.sourceToParse.author2firstname) {
+            if (sourceToParse.author2lastname || sourceToParse.author2firstname) {
                 // Author 2 last name
-                if (this.sourceToParse.author2lastname) {
-                    this.sourceToParse.parsedSource += ", " + this.sourceToParse.author2lastname.toUpperCase().trim();
+                if (sourceToParse.author2lastname) {
+                    sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
                 } else {
-                    this.addError("SECOND_AUTHOR_LASTNAME", "author2lastname");
-                    this.sourceToParse.parsedSource += "?, ";
+                    sourceToParse.errors.push(this.addError("SECOND_AUTHOR_LASTNAME", "author2lastname"));
+                    sourceToParse.parsedSource += "?, ";
                 }
                 // Author 2 first name
-                if (this.sourceToParse.author2firstname) {
-                    this.sourceToParse.parsedSource += ", " + this.sourceToParse.author2firstname.trim();
+                if (sourceToParse.author2firstname) {
+                    sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
                 } else {
-                    this.addError("SECOND_AUTHOR_FIRSTNAME", "author2firstname");
-                    this.sourceToParse.parsedSource += "?";
+                    sourceToParse.errors.push(this.addError("SECOND_AUTHOR_FIRSTNAME", "author2firstname"));
+                    sourceToParse.parsedSource += "?";
                 }
             }
 
-            if (this.sourceToParse.author3lastname || this.sourceToParse.author3firstname) {
+            if (sourceToParse.author3lastname || sourceToParse.author3firstname) {
                 // Author 3 last name
-                if (this.sourceToParse.author3lastname) {
-                    this.sourceToParse.parsedSource += " et " + this.sourceToParse.author3lastname.toUpperCase().trim();
+                if (sourceToParse.author3lastname) {
+                    sourceToParse.parsedSource += " et " + sourceToParse.author3lastname.toUpperCase().trim();
                 } else {
-                    this.addError("THIRD_AUTHOR_LASTNAME", "author3lastname");
-                    this.sourceToParse.parsedSource += ", ?";
+                    sourceToParse.errors.push(this.addError("THIRD_AUTHOR_LASTNAME", "author3lastname"));
+                    sourceToParse.parsedSource += ", ?";
                 }
                 // Author 3 first name
-                if (this.sourceToParse.author3firstname) {
-                    this.sourceToParse.parsedSource += ", " + this.sourceToParse.author3firstname.trim() + ". ";
+                if (sourceToParse.author3firstname) {
+                    sourceToParse.parsedSource += ", " + sourceToParse.author3firstname.trim() + ". ";
                 } else {
-                    this.addError("THIRD_AUTHOR_FIRSTNAME", "author3firstname");
-                    this.sourceToParse.parsedSource += ", ?.";
+                    sourceToParse.errors.push(this.addError("THIRD_AUTHOR_FIRSTNAME", "author3firstname"));
+                    sourceToParse.parsedSource += ", ?.";
                 }
             } else {
-                this.sourceToParse.parsedSource += ". ";
+                sourceToParse.parsedSource += ". ";
             }
         } else {
-            if (this.sourceToParse.editor) {
-                this.sourceToParse.parsedSource += this.sourceToParse.editor + ", ";
+            if (sourceToParse.editor) {
+                sourceToParse.parsedSource += sourceToParse.editor + ", ";
             } else {
-                this.sourceToParse.parsedSource += "?, ";
-                this.addError("HOMEPAGE_TITLE", "editor");
+                sourceToParse.parsedSource += "?, ";
+                sourceToParse.errors.push(this.addError("HOMEPAGE_TITLE", "editor"));
             }
         }
 
         // Titre de l'article
-        if (this.sourceToParse.title) {
-            this.sourceToParse.parsedSource += "«" + this.sourceToParse.title + "», ";
+        if (sourceToParse.title) {
+            sourceToParse.parsedSource += "«" + sourceToParse.title + "», ";
         } else {
-            this.sourceToParse.parsedSource += "«?», ";
-            this.addError("PAGE_TITLE", "title");
+            sourceToParse.parsedSource += "«?», ";
+            sourceToParse.errors.push(this.addError("PAGE_TITLE", "title"));
         }
 
         // Titre de la page d'accueil (si il y a des auteurs)
-        if (this.sourceToParse.hasAuthors) {
-            if (this.sourceToParse.editor) {
-                this.sourceToParse.parsedSource += "<em>" + this.sourceToParse.editor + "</em>, ";
+        if (sourceToParse.hasAuthors) {
+            if (sourceToParse.editor) {
+                sourceToParse.parsedSource += "<em>" + sourceToParse.editor + "</em>, ";
             } else {
-                this.sourceToParse.parsedSource += "<em>?</em>, ";
-                this.addError("HOMEPAGE_TITLE", "editor");
+                sourceToParse.parsedSource += "<em>?</em>, ";
+                sourceToParse.errors.push(this.addError("HOMEPAGE_TITLE", "editor"));
             }
         }
 
         // Type de support
-        this.sourceToParse.parsedSource += "[en ligne]. ";
+        sourceToParse.parsedSource += "[en ligne]. ";
 
         // URL
-        if (this.sourceToParse.url) {
-            if (this.sourceToParse.url.search(/^((http|https):\/\/){1}(www\.){1}[^\/._]{2,}\.{1}[a-z]{2,}$/) != -1) {
-                this.sourceToParse.parsedSource += "[" + this.sourceToParse.url + "] ";
+        if (sourceToParse.url) {
+            if (sourceToParse.url.search(/^((http|https):\/\/){1}(www\.){1}[^\/._]{2,}\.{1}[a-z]{2,}$/) != -1) {
+                sourceToParse.parsedSource += "[" + sourceToParse.url + "] ";
                 // console.log("normal");
-            }else if (this.sourceToParse.url.search(/^((http|https):\/\/)?(www\.)?[^\/_]{2,}\.{1}[a-z]{2,}(\/.*)?$/i) != -1) {
-                var http = this.sourceToParse.url.search(/^(http:\/\/){1}/);
-                var https = this.sourceToParse.url.search(/^(https:\/\/){1}/);
-                this.sourceToParse.url = this.sourceToParse.url.replace(/www.|http:\/\/|https:\/\//gi, "");
-                let slashIndex = this.sourceToParse.url.search(/\/.*$/);
-                // console.log(this.sourceToParse.url);
+            }else if (sourceToParse.url.search(/^((http|https):\/\/)?(www\.)?[^\/_]{2,}\.{1}[a-z]{2,}(\/.*)?$/i) != -1) {
+                var http = sourceToParse.url.search(/^(http:\/\/){1}/);
+                var https = sourceToParse.url.search(/^(https:\/\/){1}/);
+                sourceToParse.url = sourceToParse.url.replace(/www.|http:\/\/|https:\/\//gi, "");
+                let slashIndex = sourceToParse.url.search(/\/.*$/);
+                // console.log(sourceToParse.url);
                 if (slashIndex != -1) {
-                    let afterSlash = slashIndex - this.sourceToParse.url.length;
-                    this.sourceToParse.url = this.sourceToParse.url.slice(0, afterSlash);
-                    console.log(this.sourceToParse.url);
+                    let afterSlash = slashIndex - sourceToParse.url.length;
+                    sourceToParse.url = sourceToParse.url.slice(0, afterSlash);
+                    console.log(sourceToParse.url);
                 }
 
-                this.sourceToParse.url = "www." + this.sourceToParse.url;
+                sourceToParse.url = "www." + sourceToParse.url;
 
                 if (http != -1) {
-                    this.sourceToParse.url = "http://" + this.sourceToParse.url;
+                    sourceToParse.url = "http://" + sourceToParse.url;
                 }else if (https != -1) {
-                    this.sourceToParse.url = "https://" + this.sourceToParse.url;
+                    sourceToParse.url = "https://" + sourceToParse.url;
                 }else {
-                    this.sourceToParse.url = "http://" + this.sourceToParse.url;
+                    sourceToParse.url = "http://" + sourceToParse.url;
                 }
 
-                this.sourceToParse.parsedSource += "[" + this.sourceToParse.url + "] ";
+                sourceToParse.parsedSource += "[" + sourceToParse.url + "] ";
             }else {
-                this.sourceToParse.parsedSource += "[" + this.sourceToParse.url + "] ";
-                this.addWarning("INVALID_URL", "url");
+                sourceToParse.parsedSource += "[" + sourceToParse.url + "] ";
+                sourceToParse.warnings.push(this.addError("INVALID_URL", "url"))
             }
         } else {
-            this.sourceToParse.parsedSource += "[?] ";
-            this.addError("URL", "url");
+            sourceToParse.parsedSource += "[?] ";
+            sourceToParse.errors.push(this.addError("URL", "url"));
         }
 
         // Date de consultation
-        if (this.sourceToParse.consultationDate) {
-            this.sourceToParse.parsedSource += "(" + new Date(this.sourceToParse.consultationDate).toLocaleDateString('fr', {timeZone:"UTC"}) + ")";
+        if (sourceToParse.consultationDate) {
+            sourceToParse.parsedSource += "(" + new Date(sourceToParse.consultationDate).toLocaleDateString('fr', {timeZone:"UTC"}) + ")";
         } else {
-            this.sourceToParse.parsedSource += "(?)";
+            sourceToParse.parsedSource += "(?)";
         }
-    } else if (this.sourceToParse.type == "cd") {
-        if (this.sourceToParse.hasAuthors) {
-            if (this.sourceToParse.author1lastname || this.sourceToParse.author1firstname) {
+    } else if (sourceToParse.type == "cd") {
+        if (sourceToParse.hasAuthors) {
+            if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
                 // Author last name
-                if (this.sourceToParse.author1lastname) {
-                    this.sourceToParse.parsedSource += this.sourceToParse.author1lastname.toUpperCase().trim() + ", ";
+                if (sourceToParse.author1lastname) {
+                    sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
                 } else {
-                    this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname");
-                    this.sourceToParse.parsedSource += "?, ";
+                    sourceToParse.errors.push(this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname"));
+                    sourceToParse.parsedSource += "?, ";
                 }
                 // Author first name
-                if (this.sourceToParse.author1firstname) {
-                    this.sourceToParse.parsedSource += this.sourceToParse.author1firstname.trim();
+                if (sourceToParse.author1firstname) {
+                    sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
                 } else {
-                    this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname");
-                    this.sourceToParse.parsedSource += "?";
+                    sourceToParse.errors.push(this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname"));
+                    sourceToParse.parsedSource += "?";
                 }
             } else {
-                this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname");
-                this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname");
-                this.sourceToParse.parsedSource += "?";
+                sourceToParse.errors.push(this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname"));
+                sourceToParse.errors.push(this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname"));
+                sourceToParse.parsedSource += "?";
             }
 
-            if (this.sourceToParse.author2lastname || this.sourceToParse.author2firstname) {
+            if (sourceToParse.author2lastname || sourceToParse.author2firstname) {
                 // Author 2 last name
-                if (this.sourceToParse.author2lastname) {
-                    this.sourceToParse.parsedSource += ", " + this.sourceToParse.author2lastname.toUpperCase().trim();
+                if (sourceToParse.author2lastname) {
+                    sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
                 } else {
-                    this.addError("SECOND_AUTHOR_LASTNAME", "author2lastname");
-                    this.sourceToParse.parsedSource += "?, ";
+                    sourceToParse.errors.push(this.addError("SECOND_AUTHOR_LASTNAME", "author2lastname"));
+                    sourceToParse.parsedSource += "?, ";
                 }
                 // Author 2 first name
-                if (this.sourceToParse.author2firstname) {
-                    this.sourceToParse.parsedSource += ", " + this.sourceToParse.author2firstname.trim();
+                if (sourceToParse.author2firstname) {
+                    sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
                 } else {
-                    this.addError("SECOND_AUTHOR_FIRSTNAME", "author2firstname");
-                    this.sourceToParse.parsedSource += "?";
+                    sourceToParse.errors.push(this.addError("SECOND_AUTHOR_FIRSTNAME", "author2firstname"));
+                    sourceToParse.parsedSource += "?";
                 }
             }
 
-            if (this.sourceToParse.author3lastname || this.sourceToParse.author3firstname) {
+            if (sourceToParse.author3lastname || sourceToParse.author3firstname) {
                 // Author 3 last name
-                if (this.sourceToParse.author3lastname) {
-                    this.sourceToParse.parsedSource += " et " + this.sourceToParse.author3lastname.toUpperCase().trim();
+                if (sourceToParse.author3lastname) {
+                    sourceToParse.parsedSource += " et " + sourceToParse.author3lastname.toUpperCase().trim();
                 } else {
-                    this.addError("THIRD_AUTHOR_LASTNAME", "author3lastname");
-                    this.sourceToParse.parsedSource += ", ?";
+                    sourceToParse.errors.push(this.addError("THIRD_AUTHOR_LASTNAME", "author3lastname"));
+                    sourceToParse.parsedSource += ", ?";
                 }
                 // Author 3 first name
-                if (this.sourceToParse.author3firstname) {
-                    this.sourceToParse.parsedSource += ", " + this.sourceToParse.author3firstname.trim() + ". ";
+                if (sourceToParse.author3firstname) {
+                    sourceToParse.parsedSource += ", " + sourceToParse.author3firstname.trim() + ". ";
                 } else {
-                    this.addError("THIRD_AUTHOR_LASTNAME", "author3firstname");
-                    this.sourceToParse.parsedSource += ", ?.";
+                    sourceToParse.errors.push(this.addError("THIRD_AUTHOR_LASTNAME", "author3firstname"));
+                    sourceToParse.parsedSource += ", ?.";
                 }
             } else {
-                this.sourceToParse.parsedSource += ". ";
+                sourceToParse.parsedSource += ". ";
             }
         }
 
         // Titre de l'article
-        if (this.sourceToParse.title) {
-            this.sourceToParse.parsedSource += "<em>" + this.sourceToParse.title + "</em>, ";
+        if (sourceToParse.title) {
+            sourceToParse.parsedSource += "<em>" + sourceToParse.title + "</em>, ";
         } else {
-            this.sourceToParse.parsedSource += "<em>?</em>, ";
-            this.addError("DOCUMENT_TITLE", "title");
+            sourceToParse.parsedSource += "<em>?</em>, ";
+            sourceToParse.errors.push(this.addError("DOCUMENT_TITLE", "title"));
         }
 
         // Type de support
-        this.sourceToParse.parsedSource += "[cédérom], ";
+        sourceToParse.parsedSource += "[cédérom], ";
 
         // Lieu de publication
-        if (this.sourceToParse.publicationLocation) {
-            this.sourceToParse.parsedSource += this.sourceToParse.publicationLocation + ", ";
+        if (sourceToParse.publicationLocation) {
+            sourceToParse.parsedSource += sourceToParse.publicationLocation + ", ";
         } else {
-            this.sourceToParse.parsedSource += "s.l., ";
-            this.addWarning("PUBLICATION_LOCATION", "publicationLocation");
+            sourceToParse.parsedSource += "s.l., ";
+            sourceToParse.warnings.push(this.addError("PUBLICATION_LOCATION", "publicationLocation"))
         }
 
         // Éditeur
-        if (this.sourceToParse.editor) {
-            this.sourceToParse.parsedSource += this.sourceToParse.editor + ", ";
+        if (sourceToParse.editor) {
+            sourceToParse.parsedSource += sourceToParse.editor + ", ";
         } else {
-            this.sourceToParse.parsedSource += "?, ";
-            this.addError("EDITOR", "editor");
+            sourceToParse.parsedSource += "?, ";
+            sourceToParse.errors.push(this.addError("EDITOR", "editor"));
         }
 
         // Date de publication
-        if (this.sourceToParse.publicationDate) {
-            this.sourceToParse.parsedSource += this.sourceToParse.publicationDate + ".";
+        if (sourceToParse.publicationDate) {
+            sourceToParse.parsedSource += sourceToParse.publicationDate + ".";
         } else {
-            this.sourceToParse.parsedSource += "s.d.";
-            this.addWarning("PUBLICATION_DATE", "publicationDate");
+            sourceToParse.parsedSource += "s.d.";
+            sourceToParse.warnings.push(this.addError("PUBLICATION_DATE", "publicationDate"))
         }
-    } else if (this.sourceToParse.type == "movie") {
-        if (this.sourceToParse.author1lastname || this.sourceToParse.author1firstname) {
+    } else if (sourceToParse.type == "movie") {
+        if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
             // Author last name
-            if (this.sourceToParse.author1lastname  && this.sourceToParse.author1lastname != null) {
-                this.sourceToParse.parsedSource += this.sourceToParse.author1lastname.toUpperCase().trim() + ", ";
+            if (sourceToParse.author1lastname  && sourceToParse.author1lastname != null) {
+                sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
             } else {
-                this.addError("DIRECTOR_LASTNAME", "author1lastname");
-                this.sourceToParse.parsedSource += "?, ";
+                sourceToParse.errors.push(this.addError("DIRECTOR_LASTNAME", "author1lastname"));
+                sourceToParse.parsedSource += "?, ";
             }
             // Author first name
-            if (this.sourceToParse.author1firstname  && this.sourceToParse.author1firstname != null) {
-                this.sourceToParse.parsedSource += this.sourceToParse.author1firstname.trim();
+            if (sourceToParse.author1firstname  && sourceToParse.author1firstname != null) {
+                sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
             } else {
-                this.addError("DIRECTOR_FIRSTNAME", "author1firstname");
-                this.sourceToParse.parsedSource += "?";
+                sourceToParse.errors.push(this.addError("DIRECTOR_FIRSTNAME", "author1firstname"));
+                sourceToParse.parsedSource += "?";
             }
         } else {
-            this.addError("DIRECTOR_FIRSTNAME", "author1firstname");
-            this.addError("DIRECTOR_LASTNAME", "author1lastname");
-            this.sourceToParse.parsedSource += "?";
+            sourceToParse.errors.push(this.addError("DIRECTOR_FIRSTNAME", "author1firstname"));
+            sourceToParse.errors.push(this.addError("DIRECTOR_LASTNAME", "author1lastname"));
+            sourceToParse.parsedSource += "?";
         }
 
-        if (this.sourceToParse.hasAuthors) {
-            this.sourceToParse.parsedSource += "et al., ";
+        if (sourceToParse.hasAuthors) {
+            sourceToParse.parsedSource += "et al., ";
         } else {
-            this.sourceToParse.parsedSource += ". ";
+            sourceToParse.parsedSource += ". ";
         }
 
         // Titre de l'épisode
-        if (this.sourceToParse.episodeTitle) {
-            this.sourceToParse.parsedSource += "«" + this.sourceToParse.episodeTitle + "», ";
+        if (sourceToParse.episodeTitle) {
+            sourceToParse.parsedSource += "«" + sourceToParse.episodeTitle + "», ";
         }
 
         // Nom de l'émission ou du document
-        if (this.sourceToParse.title) {
-            this.sourceToParse.parsedSource += "<em>" + this.sourceToParse.title + "</em>, ";
+        if (sourceToParse.title) {
+            sourceToParse.parsedSource += "<em>" + sourceToParse.title + "</em>, ";
         } else {
-            this.sourceToParse.parsedSource += "<em>?</em>, ";
-            this.addError("EMISSION_TITLE", "title");
+            sourceToParse.parsedSource += "<em>?</em>, ";
+            sourceToParse.errors.push(this.addError("EMISSION_TITLE", "title"));
         }
 
         // Lieu de production
-        if (this.sourceToParse.productionLocation) {
-            this.sourceToParse.parsedSource += this.sourceToParse.productionLocation + ", ";
+        if (sourceToParse.productionLocation) {
+            sourceToParse.parsedSource += sourceToParse.productionLocation + ", ";
         } else {
-            this.sourceToParse.parsedSource += "s.l., ";
-            this.addWarning("PRODUCTION_LOCATION", "productionLocation");
+            sourceToParse.parsedSource += "s.l., ";
+            sourceToParse.warnings.push(this.addError("PRODUCTION_LOCATION", "productionLocation"))
         }
 
         // Producteur
-        if (this.sourceToParse.productor) {
-            this.sourceToParse.parsedSource += this.sourceToParse.productor + ", ";
+        if (sourceToParse.productor) {
+            sourceToParse.parsedSource += sourceToParse.productor + ", ";
         } else {
-            this.sourceToParse.parsedSource += "?, ";
-            this.addError("PRODUCTOR", "productor");
+            sourceToParse.parsedSource += "?, ";
+            sourceToParse.errors.push(this.addError("PRODUCTOR", "productor"));
         }
 
         // Diffuseur
-        if (this.sourceToParse.broadcaster) {
-            this.sourceToParse.parsedSource += this.sourceToParse.broadcaster + ", ";
+        if (sourceToParse.broadcaster) {
+            sourceToParse.parsedSource += sourceToParse.broadcaster + ", ";
         } else {
-            this.addWarning("BROADCASTER", "broadcaster");
+            sourceToParse.warnings.push(this.addError("BROADCASTER", "broadcaster"))
         }
 
         // Durée
-        if (this.sourceToParse.duration) {
-            this.sourceToParse.parsedSource += this.sourceToParse.duration + " min., ";
+        if (sourceToParse.duration) {
+            sourceToParse.parsedSource += sourceToParse.duration + " min., ";
         } else {
-            this.sourceToParse.parsedSource += "?, ";
-            this.addError("LENGTH", "duration");
+            sourceToParse.parsedSource += "?, ";
+            sourceToParse.errors.push(this.addError("LENGTH", "duration"));
         }
 
         // Date de publication
-        if (this.sourceToParse.publicationDate) {
-            this.sourceToParse.parsedSource += this.sourceToParse.publicationDate + ", ";
+        if (sourceToParse.publicationDate) {
+            sourceToParse.parsedSource += sourceToParse.publicationDate + ", ";
         } else {
-            this.addWarning("PUBLICATION_DATE", "publicationDate");
-            this.sourceToParse.parsedSource += "s.d., ";
+            sourceToParse.warnings.push(this.addError("PUBLICATION_DATE", "publicationDate"))
+            sourceToParse.parsedSource += "s.d., ";
         }
 
         // Support
-        if (this.sourceToParse.support) {
-            if (this.sourceToParse.support == "dvd") {
-                this.sourceToParse.parsedSource += "[DVD], ";
-            } else if (this.sourceToParse.support == "cd") {
-                this.sourceToParse.parsedSource += "[cédérom], ";
-            } else if (this.sourceToParse.support == "internet") {
-                this.sourceToParse.parsedSource += "[en ligne], ";
+        if (sourceToParse.support) {
+            if (sourceToParse.support == "dvd") {
+                sourceToParse.parsedSource += "[DVD], ";
+            } else if (sourceToParse.support == "cd") {
+                sourceToParse.parsedSource += "[cédérom], ";
+            } else if (sourceToParse.support == "internet") {
+                sourceToParse.parsedSource += "[en ligne], ";
             }
         }else {
-            this.sourceToParse.parsedSource += "[?], ";
-            this.addComplexError("SUPPORT", "support", {
+            sourceToParse.parsedSource += "[?], ";
+            sourceToParse.errors.push(this.addComplexError("SUPPORT", "support", {
                 type:"select",
                 options: [
                   {
@@ -753,52 +730,52 @@ export class Parse {
                     value: "internet"
                   }
                 ]
-            });
+            }));
         }
 
         // Date de visionnement
-        if (this.sourceToParse.consultationDate) {
-            this.sourceToParse.parsedSource += "(" + new Date(this.sourceToParse.consultationDate).toLocaleDateString('fr', {timeZone:"UTC"}) + ").";
+        if (sourceToParse.consultationDate) {
+            sourceToParse.parsedSource += "(" + new Date(sourceToParse.consultationDate).toLocaleDateString('fr', {timeZone:"UTC"}) + ").";
         } else {
-            this.sourceToParse.parsedSource += "(?).";
+            sourceToParse.parsedSource += "(?).";
         }
-    } else if (this.sourceToParse.type == "interview") {
-        this.sourceToParse.title = "";
-        if (this.sourceToParse.author1lastname || this.sourceToParse.author1firstname) {
+    } else if (sourceToParse.type == "interview") {
+        sourceToParse.title = "";
+        if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
             // Author last name
-            if (this.sourceToParse.author1lastname) {
-                this.sourceToParse.parsedSource += this.sourceToParse.author1lastname.toUpperCase().trim() + ", ";
+            if (sourceToParse.author1lastname) {
+                sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
             } else {
-                this.addError("INTERVIEWER_LASTNAME", "author1lastname");
-                this.sourceToParse.parsedSource += "?, ";
+                sourceToParse.errors.push(this.addError("INTERVIEWER_LASTNAME", "author1lastname"));
+                sourceToParse.parsedSource += "?, ";
             }
             // Author first name
-            if (this.sourceToParse.author1firstname) {
-                this.sourceToParse.parsedSource += this.sourceToParse.author1firstname.trim() + ". ";
+            if (sourceToParse.author1firstname) {
+                sourceToParse.parsedSource += sourceToParse.author1firstname.trim() + ". ";
             } else {
-                this.addError("INTERVIEWER_FIRSTNAME", "author1firstname");
-                this.sourceToParse.parsedSource += "?. ";
+                sourceToParse.errors.push(this.addError("INTERVIEWER_FIRSTNAME", "author1firstname"));
+                sourceToParse.parsedSource += "?. ";
             }
         } else {
-            this.addError("INTERVIEWER_FIRSTNAME", "author1firstname");
-            this.addError("INTERVIEWER_LASTNAME", "author1lastname");
-            this.sourceToParse.parsedSource += "?. ";
+            sourceToParse.errors.push(this.addError("INTERVIEWER_FIRSTNAME", "author1firstname"));
+            sourceToParse.errors.push(this.addError("INTERVIEWER_LASTNAME", "author1lastname"));
+            sourceToParse.parsedSource += "?. ";
         }
         // Texte
-        this.sourceToParse.parsedSource += "Entrevue avec ";
+        sourceToParse.parsedSource += "Entrevue avec ";
         // Titre de civilité
-        switch (this.sourceToParse.civility) {
+        switch (sourceToParse.civility) {
           case "mister":
-            this.sourceToParse.parsedSource += "M. ";
+            sourceToParse.parsedSource += "M. ";
             break;
           case "miss":
-            this.sourceToParse.parsedSource += "M<sup>me</sup> ";
+            sourceToParse.parsedSource += "M<sup>me</sup> ";
             break;
           case "miss_young":
-            this.sourceToParse.parsedSource += "M<sup>lle</sup> ";
+            sourceToParse.parsedSource += "M<sup>lle</sup> ";
             break;
           default:
-            this.addComplexError("CIVILITY_TITLE", "civility", {
+            sourceToParse.errors.push(this.addComplexError("CIVILITY_TITLE", "civility", {
                 options: [
                   {
                     text: 'PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISTER',
@@ -814,79 +791,79 @@ export class Parse {
                   }
                 ],
                 type:"select"
-            });
-            this.sourceToParse.parsedSource += "? ";
+            }));
+            sourceToParse.parsedSource += "? ";
         }
         // Personne rencontrée
-        if (this.sourceToParse.interviewed1lastname || this.sourceToParse.interviewed1firstname) {
+        if (sourceToParse.interviewed1lastname || sourceToParse.interviewed1firstname) {
             // interviewed first name
-            if (this.sourceToParse.interviewed1firstname) {
-                this.sourceToParse.parsedSource += this.sourceToParse.interviewed1firstname.trim() + " ";
-                this.sourceToParse.title += this.sourceToParse.interviewed1firstname.trim() + " ";
+            if (sourceToParse.interviewed1firstname) {
+                sourceToParse.parsedSource += sourceToParse.interviewed1firstname.trim() + " ";
+                sourceToParse.title += sourceToParse.interviewed1firstname.trim() + " ";
             } else {
-                this.addError("INTERVIEWED_FIRSTNAME", "interviewed1firstname");
-                this.sourceToParse.parsedSource += "? ";
-                this.sourceToParse.title += "? ";
+                sourceToParse.errors.push(this.addError("INTERVIEWED_FIRSTNAME", "interviewed1firstname"));
+                sourceToParse.parsedSource += "? ";
+                sourceToParse.title += "? ";
             }
             // interviewed last name
-            if (this.sourceToParse.interviewed1lastname) {
-                this.sourceToParse.parsedSource += this.sourceToParse.interviewed1lastname.trim() + ", ";
-                this.sourceToParse.title += this.sourceToParse.interviewed1lastname.trim();
+            if (sourceToParse.interviewed1lastname) {
+                sourceToParse.parsedSource += sourceToParse.interviewed1lastname.trim() + ", ";
+                sourceToParse.title += sourceToParse.interviewed1lastname.trim();
             } else {
-                this.addError("INTERVIEWED_LASTNAME", "interviewed1lastname");
-                this.sourceToParse.parsedSource += "?, ";
-                this.sourceToParse.title += "?";
+                sourceToParse.errors.push(this.addError("INTERVIEWED_LASTNAME", "interviewed1lastname"));
+                sourceToParse.parsedSource += "?, ";
+                sourceToParse.title += "?";
             }
         } else {
-            this.addError("INTERVIEWED_FIRSTNAME", "interviewed1firstname");
-            this.addError("INTERVIEWED_LASTNAME", "interviewed1lastname");
-            this.sourceToParse.parsedSource += "?, ";
+            sourceToParse.errors.push(this.addError("INTERVIEWED_FIRSTNAME", "interviewed1firstname"));
+            sourceToParse.errors.push(this.addError("INTERVIEWED_LASTNAME", "interviewed1lastname"));
+            sourceToParse.parsedSource += "?, ";
         }
 
         // Titre de la personne
-        if (this.sourceToParse.interviewedTitle) {
-            this.sourceToParse.parsedSource += this.sourceToParse.interviewedTitle + ", ";
+        if (sourceToParse.interviewedTitle) {
+            sourceToParse.parsedSource += sourceToParse.interviewedTitle + ", ";
         } else {
-            this.sourceToParse.parsedSource += "?, ";
-            this.addError("INTERVIEWED_TITLE", "interviewedTitle");
+            sourceToParse.parsedSource += "?, ";
+            sourceToParse.errors.push(this.addError("INTERVIEWED_TITLE", "interviewedTitle"));
         }
 
         // Location
-        if (this.sourceToParse.publicationLocation) {
-            this.sourceToParse.parsedSource += this.sourceToParse.publicationLocation + ", ";
+        if (sourceToParse.publicationLocation) {
+            sourceToParse.parsedSource += sourceToParse.publicationLocation + ", ";
         } else {
-            this.sourceToParse.parsedSource += "?, ";
-            this.addError("INTERVIEW_LOCATION", "publicationLocation");
+            sourceToParse.parsedSource += "?, ";
+            sourceToParse.errors.push(this.addError("INTERVIEW_LOCATION", "publicationLocation"));
         }
 
         // Date de l'entrevue
-        if (this.sourceToParse.consultationDate) {
-            this.sourceToParse.parsedSource += "le " + new Date(this.sourceToParse.consultationDate).toLocaleDateString('fr', {timeZone:"UTC"}) + ".";
+        if (sourceToParse.consultationDate) {
+            sourceToParse.parsedSource += "le " + new Date(sourceToParse.consultationDate).toLocaleDateString('fr', {timeZone:"UTC"}) + ".";
         } else {
-            this.sourceToParse.parsedSource += "le ?.";
+            sourceToParse.parsedSource += "le ?.";
         }
     } else {
         return null;
     }
-    return this.sourceToParse;
+    return sourceToParse;
   }
 
   private addError(errorId: string, variable: string) {
-    this.sourceToParse.errors.push({
+    return {
       errorTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".DESC"),
       promptTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".TITLE"),
       promptText: this.translate.instant("PROJECT.PARSE." + errorId + ".TEXT"),
       var: variable,
       key: errorId
-    });
+    };
   }
 
-  private addComplexError(errorId: string, variable: string, complex: any) {
+  private addComplexError(errorId: string, variable: string, complex: any): SourceError {
     complex.options = complex.options.map((option) => {
       option.text = this.translate.instant(option.text);
       return option;
     });
-    this.sourceToParse.errors.push({
+    return {
       errorTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".DESC"),
       promptTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".TITLE"),
       promptText: this.translate.instant("PROJECT.PARSE." + errorId + ".TEXT"),
@@ -895,17 +872,24 @@ export class Parse {
       type: complex.type,
       key: errorId,
       options: complex.options ? complex.options : []
-    });
+    };
   }
 
-  private addWarning(errorId: string, variable: string) {
-    this.sourceToParse.warnings.push({
-      errorTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".DESC"),
-      promptTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".TITLE"),
-      promptText: this.translate.instant("PROJECT.PARSE." + errorId + ".TEXT"),
-      var: variable,
-      key: errorId
-    });
+  parseType(type: string): string {
+    switch (type) {
+      case "book":
+        return this.translate.instant("PROJECT.TYPES.BOOK");
+      case "internet":
+        return this.translate.instant("PROJECT.TYPES.INTERNET");
+      case "article":
+        return this.translate.instant("PROJECT.TYPES.ARTICLE");
+      case "cd":
+        return this.translate.instant("PROJECT.TYPES.CD_PARSE");
+      case "movie":
+        return this.translate.instant("PROJECT.TYPES.MOVIE");
+      case "interview":
+        return this.translate.instant("PROJECT.TYPES.INTERVIEW");
+    }
   }
 
   private capitalizeFirstLetter(input: string) {
