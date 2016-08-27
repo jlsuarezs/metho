@@ -25,7 +25,6 @@ export class SourcesPage {
   public sources: Source[] = [];
   public project: Project = {name: "", matter: ""};
   public pendingNumber: number = 0;
-  private currentTransition: any;
   public searchQuery: string = "";
   public filteredSources: Source[] = [];
   @ViewChild(List) list: List;
@@ -86,48 +85,42 @@ export class SourcesPage {
           {
             text: translations['PROJECT.TYPES.BOOK'],
             handler: () => {
-              this.currentTransition = action.dismiss();
-              this.openModal('book');
+              this.openModal('book', action.dismiss());
               return false;
             }
           },
           {
             text: translations['PROJECT.TYPES.ARTICLE'],
             handler: () => {
-              this.currentTransition = action.dismiss();
-              this.openModal('article');
+              this.openModal('article', action.dismiss());
               return false;
             }
           },
           {
             text: translations['PROJECT.TYPES.INTERNET'],
             handler: () => {
-              this.currentTransition = action.dismiss();
-              this.openModal('internet');
+              this.openModal('internet', action.dismiss());
               return false;
             }
           },
           {
             text: translations['PROJECT.TYPES.CD'],
             handler: () => {
-              this.currentTransition = action.dismiss();
-              this.openModal('cd');
+              this.openModal('cd', action.dismiss());
               return false;
             }
           },
           {
             text: translations['PROJECT.TYPES.MOVIE'],
             handler: () => {
-              this.currentTransition = action.dismiss();
-              this.openModal('movie');
+              this.openModal('movie', action.dismiss());
               return false;
             }
           },
           {
             text: translations['PROJECT.TYPES.INTERVIEW'],
             handler: () => {
-              this.currentTransition = action.dismiss();
-              this.openModal('interview');
+              this.openModal('interview', action.dismiss());
               return false;
             }
           },
@@ -142,7 +135,7 @@ export class SourcesPage {
     });
   }
 
-  openModal(type: string, openScan: boolean = false, editing: boolean = false, source: Source = undefined) {
+  openModal(type: string, transition: Promise<any> = Promise.resolve(), openScan: boolean = false, editing: boolean = false, source: Source = undefined) {
     switch (type) {
       case 'book':
         var modal = this.modalCtrl.create(SourceModalBookPage, {
@@ -206,18 +199,13 @@ export class SourcesPage {
       this.loadPendingNumber();
     });
 
-    if(this.currentTransition) {
-      this.currentTransition.then(() => {
-        this.currentTransition = null;
-        modal.present();
-      });
-    }else {
+    transition.then(() => {
       modal.present();
-    }
+    });
   }
 
   editSource(source: Source) {
-    this.openModal(source.type, false, true, source);
+    this.openModal(source.type, undefined, false, true, source);
   }
 
   deleteSource(source: Source) {
