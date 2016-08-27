@@ -159,21 +159,25 @@
             <ion-label stacked>{{'PROJECT.DETAIL.MODAL.BOOK.ORIGIN_LANGUAGE_LABEL' | translate}}</ion-label>
             <ion-input formControlName="translatedFrom" placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.ORIGIN_LANGUAGE_PLACEHOLDER' | translate}}"></ion-input>
           </ion-item>
-          <ion-item>
-            <ion-list class="no-margin-with-header" no-lines>
-              <ion-list-header>
-                {{'PROJECT.DETAIL.MODAL.BOOK.TRANSLATOR_NAME' | translate}}
-              </ion-list-header>
-              <ion-item class="flex-sub padding">
-                <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME' | translate }}" formControlName="translator1firstname"></ion-input>
-                <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.LASTNAME' | translate }}" formControlName="translator1lastname"></ion-input>
-              </ion-item>
-              <ion-item class="flex-sub padding" *ngIf="form.find('translator1firstname').value != '' || form.find('translator1lastname').value != ''">
+          <ion-list class="no-margin-with-header" no-lines>
+            <ion-list-header>
+              {{'PROJECT.DETAIL.MODAL.BOOK.TRANSLATOR_NAME' | translate}}
+            </ion-list-header>
+            <ion-item>
+              <ion-input type="text" formControlName="translator1firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME' | translate }}"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="text" formControlName="translator1lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.LASTNAME' | translate }}"></ion-input>
+            </ion-item>
+            <div *ngIf="form.find('translator1firstname').value != '' || form.find('translator1lastname').value != ''" class="inputs">
+              <ion-item>
                 <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.FIRSTNAME' | translate }}" formControlName="translator2firstname"></ion-input>
+              </ion-item>
+              <ion-item>
                 <ion-input type="text" placeholder="{{ 'PROJECT.DETAIL.MODAL.BOOK.LASTNAME' | translate }}" formControlName="translator2lastname"></ion-input>
               </ion-item>
-            </ion-list>
-          </ion-item>
+            </div>
+          </ion-list>
       </ion-list>
     </ion-list>
   </form>
