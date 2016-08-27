@@ -520,34 +520,17 @@ export class Parse {
                     sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
                 } else {
                     sourceToParse.errors.push(this.addError("SECOND_AUTHOR_LASTNAME", "author2lastname"));
-                    sourceToParse.parsedSource += "?, ";
+                    sourceToParse.parsedSource += ", ?";
                 }
                 // Author 2 first name
                 if (sourceToParse.author2firstname) {
-                    sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
+                    sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim() + ". ";
                 } else {
                     sourceToParse.errors.push(this.addError("SECOND_AUTHOR_FIRSTNAME", "author2firstname"));
-                    sourceToParse.parsedSource += "?";
+                    sourceToParse.parsedSource += ", ?. ";
                 }
-            }
-
-            if (sourceToParse.author3lastname || sourceToParse.author3firstname) {
-                // Author 3 last name
-                if (sourceToParse.author3lastname) {
-                    sourceToParse.parsedSource += " et " + sourceToParse.author3lastname.toUpperCase().trim();
-                } else {
-                    sourceToParse.errors.push(this.addError("THIRD_AUTHOR_LASTNAME", "author3lastname"));
-                    sourceToParse.parsedSource += ", ?";
-                }
-                // Author 3 first name
-                if (sourceToParse.author3firstname) {
-                    sourceToParse.parsedSource += ", " + sourceToParse.author3firstname.trim() + ". ";
-                } else {
-                    sourceToParse.errors.push(this.addError("THIRD_AUTHOR_LASTNAME", "author3firstname"));
-                    sourceToParse.parsedSource += ", ?.";
-                }
-            } else {
-                sourceToParse.parsedSource += ". ";
+            }else {
+              sourceToParse.parsedSource += ". ";
             }
         }
 
