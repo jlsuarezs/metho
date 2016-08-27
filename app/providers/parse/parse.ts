@@ -410,51 +410,15 @@ export class Parse {
                 }
                 // Author first name
                 if (sourceToParse.author1firstname) {
-                    sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
+                    sourceToParse.parsedSource += sourceToParse.author1firstname.trim() + ". ";
                 } else {
                     sourceToParse.errors.push(this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname"));
-                    sourceToParse.parsedSource += "?";
+                    sourceToParse.parsedSource += "?. ";
                 }
             } else {
                 sourceToParse.errors.push(this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname"));
                 sourceToParse.errors.push(this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname"));
-                sourceToParse.parsedSource += "?";
-            }
-
-            if (sourceToParse.author2lastname || sourceToParse.author2firstname) {
-                // Author 2 last name
-                if (sourceToParse.author2lastname) {
-                    sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
-                } else {
-                    sourceToParse.errors.push(this.addError("SECOND_AUTHOR_LASTNAME", "author2lastname"));
-                    sourceToParse.parsedSource += "?, ";
-                }
-                // Author 2 first name
-                if (sourceToParse.author2firstname) {
-                    sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
-                } else {
-                    sourceToParse.errors.push(this.addError("SECOND_AUTHOR_FIRSTNAME", "author2firstname"));
-                    sourceToParse.parsedSource += "?";
-                }
-            }
-
-            if (sourceToParse.author3lastname || sourceToParse.author3firstname) {
-                // Author 3 last name
-                if (sourceToParse.author3lastname) {
-                    sourceToParse.parsedSource += " et " + sourceToParse.author3lastname.toUpperCase().trim();
-                } else {
-                    sourceToParse.errors.push(this.addError("THIRD_AUTHOR_LASTNAME", "author3lastname"));
-                    sourceToParse.parsedSource += ", ?";
-                }
-                // Author 3 first name
-                if (sourceToParse.author3firstname) {
-                    sourceToParse.parsedSource += ", " + sourceToParse.author3firstname.trim() + ". ";
-                } else {
-                    sourceToParse.errors.push(this.addError("THIRD_AUTHOR_FIRSTNAME", "author3firstname"));
-                    sourceToParse.parsedSource += ", ?.";
-                }
-            } else {
-                sourceToParse.parsedSource += ". ";
+                sourceToParse.parsedSource += "?. ";
             }
         } else {
             if (sourceToParse.editor) {
@@ -490,13 +454,11 @@ export class Parse {
         if (sourceToParse.url) {
             if (sourceToParse.url.search(/^((http|https):\/\/){1}(www\.){1}[^\/._]{2,}\.{1}[a-z]{2,}$/) != -1) {
                 sourceToParse.parsedSource += "[" + sourceToParse.url + "] ";
-                // console.log("normal");
             }else if (sourceToParse.url.search(/^((http|https):\/\/)?(www\.)?[^\/_]{2,}\.{1}[a-z]{2,}(\/.*)?$/i) != -1) {
                 var http = sourceToParse.url.search(/^(http:\/\/){1}/);
                 var https = sourceToParse.url.search(/^(https:\/\/){1}/);
                 sourceToParse.url = sourceToParse.url.replace(/www.|http:\/\/|https:\/\//gi, "");
                 let slashIndex = sourceToParse.url.search(/\/.*$/);
-                // console.log(sourceToParse.url);
                 if (slashIndex != -1) {
                     let afterSlash = slashIndex - sourceToParse.url.length;
                     sourceToParse.url = sourceToParse.url.slice(0, afterSlash);
