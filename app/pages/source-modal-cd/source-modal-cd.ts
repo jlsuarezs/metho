@@ -44,7 +44,7 @@ export class SourceModalCdPage {
       author1firstname: [this.noData ? '' : this.previous.author1firstname],
       author1lastname: [this.noData ? '' : this.previous.author1lastname],
       author2firstname: [this.noData ? '' : this.previous.author2firstname],
-      author2lastname: [this.noData ? '' : this.previous.author2firstname],
+      author2lastname: [this.noData ? '' : this.previous.author2lastname],
       title: [this.noData ? '' : this.previous.title],
       editor: [this.noData ? '' : this.previous.editor],
       publicationLocation: [this.noData ? '' : this.previous.publicationLocation],
