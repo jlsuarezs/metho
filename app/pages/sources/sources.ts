@@ -142,11 +142,13 @@ export class SourcesPage {
     });
   }
 
-  openModal(type: string, openScan: boolean = false) {
+  openModal(type: string, openScan: boolean = false, editing: boolean = false, source: Source = undefined) {
     switch (type) {
       case 'book':
         var modal = this.modalCtrl.create(SourceModalBookPage, {
           projectId: this.projectId,
+          data: source,
+          editing: editing,
           scan: openScan
         }, {
           enableBackdropDismiss: false
@@ -154,35 +156,45 @@ export class SourcesPage {
         break;
       case 'article':
         var modal = this.modalCtrl.create(SourceModalArticlePage, {
-          projectId: this.projectId
+          projectId: this.projectId,
+          data: source,
+          editing: editing,
         }, {
           enableBackdropDismiss: false
         });
         break;
       case 'internet':
         var modal = this.modalCtrl.create(SourceModalInternetPage, {
-          projectId: this.projectId
+          projectId: this.projectId,
+          data: source,
+          editing: editing,
         }, {
           enableBackdropDismiss: false
         });
         break;
       case 'cd':
         var modal = this.modalCtrl.create(SourceModalCdPage, {
-          projectId: this.projectId
+          projectId: this.projectId,
+          data: source,
+          editing: editing,
         }, {
           enableBackdropDismiss: false
         });
         break;
       case 'movie':
         var modal = this.modalCtrl.create(SourceModalMoviePage, {
-          projectId: this.projectId
+          projectId: this.projectId,
+          data: source,
+          editing: editing,
         }, {
           enableBackdropDismiss: false
         });
         break;
       case 'interview':
         var modal = this.modalCtrl.create(SourceModalInterviewPage, {
-          projectId: this.projectId
+          projectId: this.projectId,
+          data: source,
+          editing: editing,
         }, {
           enableBackdropDismiss: false
         });
@@ -202,6 +214,10 @@ export class SourcesPage {
     }else {
       modal.present();
     }
+  }
+
+  editSource(source: Source) {
+    this.openModal(source.type, false, true, source);
   }
 
   deleteSource(source: Source) {
