@@ -66,7 +66,7 @@ export class Parse {
           }
           // Author 3 last name
           if (sourceToParse.author3lastname) {
-            sourceToParse.parsedSource += " " + sourceToParse.author3lastname.trim() + ". ";
+            sourceToParse.parsedSource += " " + sourceToParse.author3lastname.toUpperCase().trim() + ". ";
           } else {
             sourceToParse.errors.push(this.addError("THIRD_AUTHOR_LASTNAME", "author3lastname"));
             sourceToParse.parsedSource += " ?. ";
