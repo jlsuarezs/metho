@@ -120,7 +120,6 @@ export class SourcePage {
     switch (this.source.type) {
       case 'book':
         var modal = this.modalCtrl.create(SourceModalBookPage, {
-          type: this.source.type,
           data: this.source,
           editing: true,
           projectId: this.source.project_id
@@ -130,7 +129,6 @@ export class SourcePage {
         break;
       case 'article':
         var modal = this.modalCtrl.create(SourceModalArticlePage, {
-          type: this.source.type,
           data: this.source,
           editing: true,
           projectId: this.source.project_id
@@ -140,7 +138,6 @@ export class SourcePage {
         break;
       case 'internet':
         var modal = this.modalCtrl.create(SourceModalInternetPage, {
-          type: this.source.type,
           data: this.source,
           editing: true,
           projectId: this.source.project_id
@@ -150,7 +147,6 @@ export class SourcePage {
         break;
       case 'cd':
         var modal = this.modalCtrl.create(SourceModalCdPage, {
-          type: this.source.type,
           data: this.source,
           editing: true,
           projectId: this.source.project_id
@@ -160,7 +156,6 @@ export class SourcePage {
         break;
       case 'movie':
         var modal = this.modalCtrl.create(SourceModalMoviePage, {
-          type: this.source.type,
           data: this.source,
           editing: true,
           projectId: this.source.project_id
@@ -170,7 +165,6 @@ export class SourcePage {
         break;
       case 'interview':
         var modal = this.modalCtrl.create(SourceModalInterviewPage, {
-          type: this.source.type,
           data: this.source,
           editing: true,
           projectId: this.source.project_id
