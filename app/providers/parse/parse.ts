@@ -13,8 +13,6 @@ export class Parse {
     sourceToParse.errors = [];
     sourceToParse.warnings = [];
 
-    // Solve error with timezones
-    var _userOffset = new Date().getTimezoneOffset() * 60000;
     if (sourceToParse.type == "book") {
       if (sourceToParse.hasAuthors == "13") {
 
@@ -487,7 +485,7 @@ export class Parse {
 
         // Date de consultation
         if (sourceToParse.consultationDate) {
-            sourceToParse.parsedSource += "(" + new Date(sourceToParse.consultationDate).toLocaleDateString('fr', {timeZone:"UTC"}) + ")";
+            sourceToParse.parsedSource += "(" + this.formatDateLocale(sourceToParse.consultationDate) + ")";
         } else {
             sourceToParse.parsedSource += "(?)";
         }
@@ -680,7 +678,7 @@ export class Parse {
 
         // Date de visionnement
         if (sourceToParse.consultationDate) {
-            sourceToParse.parsedSource += "(" + new Date(sourceToParse.consultationDate).toLocaleDateString('fr', {timeZone:"UTC"}) + ").";
+            sourceToParse.parsedSource += "(" + this.formatDateLocale(sourceToParse.consultationDate) + ").";
         } else {
             sourceToParse.parsedSource += "(?).";
         }
@@ -783,7 +781,7 @@ export class Parse {
 
         // Date de l'entrevue
         if (sourceToParse.consultationDate) {
-            sourceToParse.parsedSource += "le " + new Date(sourceToParse.consultationDate).toLocaleDateString('fr', {timeZone:"UTC"}) + ".";
+            sourceToParse.parsedSource += "le " + this.formatDateLocale(sourceToParse.consultationDate) + ".";
         } else {
             sourceToParse.parsedSource += "le ?.";
         }
@@ -839,6 +837,11 @@ export class Parse {
 
   private capitalizeFirstLetter(input: string) {
     return input.charAt(0).toUpperCase() + input.slice(1);
+  }
+
+  private formatDateLocale(string: string): string {
+    let datestring = string.replace(/-/g, '\/').replace(/T.+/, ''); // Outputs : "YYYY/MM/DD" to prevent timezone alteration
+    return new Date(datestring).toLocaleDateString('fr');
   }
 
   private format(num) {
