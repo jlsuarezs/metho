@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {TranslateService} from 'ng2-translate/ng2-translate';
-import {Language} from '../language/language';
 
 @Injectable()
 export class Parse {
