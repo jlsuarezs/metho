@@ -4,9 +4,9 @@ import {Component} from '@angular/core';
 import {FormBuilder, Validators, FormGroup} from '@angular/forms';
 import {BarcodeScanner, SafariViewController} from 'ionic-native';
 
-import {AppStorage} from '../../providers/app-storage/app-storage.ts';
-import {Parse} from '../../providers/parse/parse.ts';
-import {Fetch} from '../../providers/fetch/fetch.ts';
+import {AppStorage} from '../../providers/app-storage/app-storage';
+import {Parse} from '../../providers/parse/parse';
+import {Fetch} from '../../providers/fetch/fetch';
 import {BoardingScanPage} from '../boarding-scan/boarding-scan';
 import {Settings} from '../../providers/settings/settings';
 import {Language} from '../../providers/language/language';

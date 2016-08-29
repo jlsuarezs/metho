@@ -2,8 +2,8 @@ import {ViewController, NavParams} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {FormBuilder, Validators, ControlGroup} from '@angular/common';
 
-import {AppStorage} from '../../providers/app-storage/app-storage.ts';
-import {Parse} from '../../providers/parse/parse.ts';
+import {AppStorage} from '../../providers/app-storage/app-storage';
+import {Parse} from '../../providers/parse/parse';
 import {Language} from '../../providers/language/language';
 
 @Component({

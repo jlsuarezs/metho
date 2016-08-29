@@ -4,8 +4,8 @@ import {TranslateService} from 'ng2-translate/ng2-translate';
 import {FormBuilder, Validators, ControlGroup} from '@angular/common';
 import {BarcodeScanner, SafariViewController} from 'ionic-native';
 
-import {AppStorage} from '../../providers/app-storage/app-storage.ts';
-import {Parse} from '../../providers/parse/parse.ts';
+import {AppStorage} from '../../providers/app-storage/app-storage';
+import {Parse} from '../../providers/parse/parse';
 import {Settings} from '../../providers/settings/settings';
 
 @Component({

@@ -3,8 +3,8 @@ import {TranslateService} from 'ng2-translate/ng2-translate';
 import {Component} from '@angular/core';
 import {FormBuilder, Validators, ControlGroup} from '@angular/common';
 
-import {AppStorage} from '../../providers/app-storage/app-storage.ts';
-import {Parse} from '../../providers/parse/parse.ts';
+import {AppStorage} from '../../providers/app-storage/app-storage';
+import {Parse} from '../../providers/parse/parse';
 import {Settings} from '../../providers/settings/settings';
 import {Language} from '../../providers/language/language';
 

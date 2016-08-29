@@ -2,7 +2,7 @@ import {NavController, ViewController, NavParams} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {FormBuilder, Validators, FormGroup} from '@angular/forms';
 
-import {AppStorage} from '../../providers/app-storage/app-storage.ts';
+import {AppStorage} from '../../providers/app-storage/app-storage';
 
 @Component({
   templateUrl: 'build/pages/project-modal/project-modal.html'
