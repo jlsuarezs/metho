@@ -568,14 +568,14 @@ export class Parse {
     } else if (sourceToParse.type == "movie") {
         if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
             // Author last name
-            if (sourceToParse.author1lastname  && sourceToParse.author1lastname != null) {
+            if (sourceToParse.author1lastname) {
                 sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
             } else {
                 sourceToParse.errors.push(this.addError("DIRECTOR_LASTNAME", "author1lastname"));
                 sourceToParse.parsedSource += "?, ";
             }
             // Author first name
-            if (sourceToParse.author1firstname  && sourceToParse.author1firstname != null) {
+            if (sourceToParse.author1firstname) {
                 sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
             } else {
                 sourceToParse.errors.push(this.addError("DIRECTOR_FIRSTNAME", "author1firstname"));
@@ -588,7 +588,7 @@ export class Parse {
         }
 
         if (sourceToParse.hasAuthors) {
-            sourceToParse.parsedSource += "et al., ";
+            sourceToParse.parsedSource += " et al. ";
         } else {
             sourceToParse.parsedSource += ". ";
         }
@@ -639,24 +639,23 @@ export class Parse {
 
         // Date de publication
         if (sourceToParse.publicationDate) {
-            sourceToParse.parsedSource += sourceToParse.publicationDate + ", ";
+            sourceToParse.parsedSource += sourceToParse.publicationDate;
         } else {
             sourceToParse.warnings.push(this.addError("PUBLICATION_DATE", "publicationDate"))
-            sourceToParse.parsedSource += "s.d., ";
+            sourceToParse.parsedSource += "s.d.";
         }
 
         // Support
         if (sourceToParse.support) {
             if (sourceToParse.support == "dvd") {
-                sourceToParse.parsedSource += "[DVD], ";
+                sourceToParse.parsedSource += ", [DVD]";
             } else if (sourceToParse.support == "cd") {
-                sourceToParse.parsedSource += "[cédérom], ";
+                sourceToParse.parsedSource += ", [CD]";
             } else if (sourceToParse.support == "internet") {
-                sourceToParse.parsedSource += "[en ligne], ";
+                sourceToParse.parsedSource += ", [en ligne]";
             }
         }else {
-            sourceToParse.parsedSource += "[?], ";
-            sourceToParse.errors.push(this.addComplexError("SUPPORT", "support", {
+            sourceToParse.warnings.push(this.addComplexError("SUPPORT", "support", {
                 type:"select",
                 options: [
                   {
@@ -677,10 +676,10 @@ export class Parse {
 
         // Date de visionnement
         if (sourceToParse.consultationDate) {
-            sourceToParse.parsedSource += "(" + this.formatDateLocale(sourceToParse.consultationDate) + ").";
-        } else {
-            sourceToParse.parsedSource += "(?).";
+            sourceToParse.parsedSource += ", (" + this.formatDateLocale(sourceToParse.consultationDate) + ")";
         }
+
+        sourceToParse.parsedSource += sourceToParse.parsedSource.endsWith(".") ? "" : ".";
     } else if (sourceToParse.type == "interview") {
         sourceToParse.title = "";
         if (sourceToParse.author1lastname || sourceToParse.author1firstname) {

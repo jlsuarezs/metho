@@ -56,7 +56,7 @@ export class SourceModalMoviePage {
       duration: [this.noData ? '' : this.previous.duration],
       publicationDate: [this.noData ? '' : this.previous.publicationDate],
       support: [this.noData ? '' : this.previous.support],
-      consultationDate: [this.noData ? moment().utcOffset(0).subtract(-moment().utcOffset(), 'minutes').toISOString() : this.previous.consultationDate],
+      consultationDate: [this.noData ? '' : this.previous.consultationDate],
     });
     this.generateLabels();
   }
