@@ -8,8 +8,13 @@
   <div padding *ngIf="text != ''" [innerHtml]="text"></div>
 
   <ion-list>
-    <button ion-item *ngFor="let entry of entries" (click)="goToReferenceSubPage(entry.id)">
-      <h2>{{ entry.name }}</h2>
-    </button>
+    <div *ngFor="let entry of entries">
+      <button ion-item *ngIf="entry.text" (click)="goToReferenceSubPage(entry.id)">
+        <h2>{{ entry.name }}</h2>
+      </button>
+      <ion-item *ngIf="!entry.text">
+        <h2>{{ entry.name }}</h2>
+      </ion-item>
+    </div>
   </ion-list>
 </ion-content>
