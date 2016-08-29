@@ -211,7 +211,9 @@
                 "OVERWRITE": "Sobreescribir",
                 "ERROR": "Error",
                 "ERROR_500": "Tenemos problemos con nuestros servidores, reintenta más tarde.",
-                "OK": "OK"
+                "OK": "OK",
+                "CAUTION": "Ojo",
+                "USE_CD_FOR_INFORMATION": "Puede utilizar el typo CD solo par los CD de informacion, par la musica, utilisa el typo documento audiovisual."
             }
         },
         "SOURCE":{

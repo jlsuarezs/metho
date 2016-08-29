@@ -11,6 +11,7 @@ export class Settings {
   public defaults: SettingsList = {
     advanced: false,
     scanBoardingDone: false,
+    cdAlertShown: false,
     firstname: "",
     lastname: "",
     overideLang: "",

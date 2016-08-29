@@ -1,10 +1,12 @@
-import {ViewController, NavParams} from 'ionic-angular';
+import {ViewController, NavParams, AlertController} from 'ionic-angular';
 import {Component} from '@angular/core';
+import {TranslateService} from 'ng2-translate/ng2-translate';
 import {FormBuilder, Validators, ControlGroup} from '@angular/common';
 import {BarcodeScanner, SafariViewController} from 'ionic-native';
 
 import {AppStorage} from '../../providers/app-storage/app-storage.ts';
 import {Parse} from '../../providers/parse/parse.ts';
+import {Settings} from '../../providers/settings/settings';
 
 @Component({
   templateUrl: 'build/pages/source-modal-cd/source-modal-cd.html'
@@ -19,7 +21,7 @@ export class SourceModalCdPage {
 
   public form: ControlGroup;
 
-  constructor(public viewCtrl: ViewController, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder) {
+  constructor(public translate: TranslateService, public viewCtrl: ViewController, public alertCtrl: AlertController, public params: NavParams, public parse: Parse, public storage: AppStorage, public settings: Settings, public fb: FormBuilder) {
     if(this.params.get('editing') == true) {
       this.isNew = false;
     }else {
@@ -50,6 +52,25 @@ export class SourceModalCdPage {
       publicationLocation: [this.noData ? '' : this.previous.publicationLocation],
       publicationDate: [this.noData ? '' : this.previous.publicationDate]
     });
+  }
+
+  ionViewDidEnter() {
+    if (!this.settings.get('cdAlertShown')) {
+      this.translate.get(["PROJECT.DETAIL.POPUP.OK", "PROJECT.DETAIL.POPUP.USE_CD_FOR_INFORMATION", "PROJECT.DETAIL.POPUP.CAUTION"]).subscribe(translations => {
+        let alert = this.alertCtrl.create({
+          title: translations["PROJECT.DETAIL.POPUP.CAUTION"],
+          message: translations["PROJECT.DETAIL.POPUP.USE_CD_FOR_INFORMATION"],
+          buttons: [
+            {
+              text: translations["PROJECT.DETAIL.POPUP.OK"]
+            }
+          ]
+        });
+
+        alert.present();
+        this.settings.set('cdAlertShown', true);
+      });
+    }
   }
 
   dismiss() {

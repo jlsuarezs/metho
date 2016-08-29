@@ -211,7 +211,9 @@
                 "OVERWRITE": "Écraser",
                 "ERROR": "Erreur",
                 "ERROR_500": "Nous éprouvons des problèmes avec nos serveurs, veuillez réessayer plus tard.",
-                "OK": "OK"
+                "OK": "OK",
+                "CAUTION": "Attention",
+                "USE_CD_FOR_INFORMATION": "Vous devez utiliser le type CD uniquement pour les cédéroms d'information, pour la musique ou autres, utilisez le type document audiovisuel."
             }
         },
         "SOURCE":{
