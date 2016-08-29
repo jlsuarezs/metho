@@ -99,7 +99,13 @@ export class SourcePage {
           {
             text: translations["PROJECT.SOURCE.CONFIRM"],
             handler: data => {
-              this.source[warning.var] = data.input;
+              if (warning.complex) {
+                if (warning.type == 'select') {
+                  this.source[warning.var] = data;
+                }
+              }else {
+                this.source[warning.var] = data.input;
+              }
               this.source = this.parse.parse(this.source);
               this.storage.setSourceFromId(this.id, this.source);
             }
@@ -107,10 +113,22 @@ export class SourcePage {
         ]
       });
 
-
-      alert.addInput({
-        name: 'input'
-      });
+      if (warning.complex) {
+        if (warning.type == 'select') {
+          warning.options.forEach(option => {
+            alert.addInput({
+              type: 'radio',
+              label: option.text,
+              value: option.value,
+              checked: false
+            });
+          });
+        }
+      }else {
+        alert.addInput({
+          name: 'input'
+        });
+      }
 
       alert.present();
     });
