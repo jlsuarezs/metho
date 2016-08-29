@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content class="references-detail">
-  <div padding *ngIf="text != ''" [innerHtml]="text"></div>
+  <div padding *ngIf="text" [innerHtml]="text"></div>
 
   <ion-list>
     <div *ngFor="let entry of entries">
