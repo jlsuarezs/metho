@@ -129,10 +129,6 @@ export class Parse {
                     sourceToParse.errors.push(this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname"));
                     sourceToParse.parsedSource += "?";
                 }
-            } else {
-                sourceToParse.errors.push(this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname"));
-                sourceToParse.errors.push(this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname"));
-                sourceToParse.parsedSource += "?";
             }
 
             if (sourceToParse.author2lastname || sourceToParse.author2firstname) {
@@ -152,7 +148,9 @@ export class Parse {
                 }
                 sourceToParse.parsedSource += " (dir.). ";
             } else {
+              if (sourceToParse.parsedSource) {
                 sourceToParse.parsedSource += " (dir.). ";
+              }
             }
         } else {
             sourceToParse.parsedSource += "?. ";
