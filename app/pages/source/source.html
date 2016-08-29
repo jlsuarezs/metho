@@ -15,11 +15,11 @@
   <p class="center padding" [innerHtml]="source.parsedSource"></p>
 
   <ion-list>
-    <button ion-item *ngFor="let error of source.errors" (click)="solveError(error)">
+    <button ion-item *ngFor="let error of source.errors" (click)="solve(error)">
       <ion-icon name="alert" item-left class="red"></ion-icon>
       <h2>{{error.errorTitle}}</h2>
     </button>
-    <button ion-item *ngFor="let warning of source.warnings" (click)="solveWarning(warning)">
+    <button ion-item *ngFor="let warning of source.warnings" (click)="solve(warning)">
       <ion-icon name="warning" item-left class="yellow"></ion-icon>
       <h2>{{warning.errorTitle}}</h2>
     </button>

@@ -40,7 +40,7 @@ export class SourcePage {
     });
   }
 
-  solveError(error: SourceError) {
+  solve(error: SourceError) {
     this.translate.get(["PROJECT.SOURCE.CONFIRM", "PROJECT.SOURCE.CANCEL"]).subscribe(translations => {
       let alert = this.alertCtrl.create({
         title: error.promptTitle,
@@ -69,53 +69,6 @@ export class SourcePage {
       if (error.complex) {
         if (error.type == 'select') {
           error.options.forEach(option => {
-            alert.addInput({
-              type: 'radio',
-              label: option.text,
-              value: option.value,
-              checked: false
-            });
-          });
-        }
-      }else {
-        alert.addInput({
-          name: 'input'
-        });
-      }
-
-      alert.present();
-    });
-  }
-
-  solveWarning(warning: SourceError) {
-    this.translate.get(["PROJECT.SOURCE.CONFIRM", "PROJECT.SOURCE.CANCEL"]).subscribe(translations => {
-      let alert = this.alertCtrl.create({
-        title: warning.promptTitle,
-        message: warning.promptText,
-        buttons: [
-          {
-            text: translations["PROJECT.SOURCE.CANCEL"]
-          },
-          {
-            text: translations["PROJECT.SOURCE.CONFIRM"],
-            handler: data => {
-              if (warning.complex) {
-                if (warning.type == 'select') {
-                  this.source[warning.var] = data;
-                }
-              }else {
-                this.source[warning.var] = data.input;
-              }
-              this.source = this.parse.parse(this.source);
-              this.storage.setSourceFromId(this.id, this.source);
-            }
-          }
-        ]
-      });
-
-      if (warning.complex) {
-        if (warning.type == 'select') {
-          warning.options.forEach(option => {
             alert.addInput({
               type: 'radio',
               label: option.text,
