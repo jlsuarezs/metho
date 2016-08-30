@@ -2,7 +2,6 @@ import {ViewController, NavParams, AlertController} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {TranslateService} from 'ng2-translate/ng2-translate';
 import {FormBuilder, Validators, ControlGroup} from '@angular/common';
-import {BarcodeScanner, SafariViewController} from 'ionic-native';
 
 import {AppStorage} from '../../providers/app-storage/app-storage';
 import {Parse} from '../../providers/parse/parse';
