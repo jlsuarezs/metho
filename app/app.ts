@@ -13,6 +13,7 @@ import {Settings} from './providers/settings/settings';
 import {Report} from './providers/report/report';
 import {AdvancedMode} from './providers/advanced-mode/advanced-mode';
 import {Language} from './providers/language/language';
+import {Scan} from './providers/scan/scan';
 
 
 @Component({
@@ -46,6 +47,7 @@ ionicBootstrap(MyApp, [
     Report,
     AdvancedMode,
     Language,
+    Scan,
     provide(PLATFORM_PIPES, {
       useValue: [
         TranslatePipe
