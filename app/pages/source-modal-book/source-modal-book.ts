@@ -1,16 +1,15 @@
-import {ViewController, NavParams, ModalController, NavController, AlertController, LoadingController} from 'ionic-angular';
+import {ViewController, NavParams, AlertController} from 'ionic-angular';
 import {TranslateService} from 'ng2-translate/ng2-translate';
 import {Component} from '@angular/core';
 import {FormBuilder, Validators, FormGroup} from '@angular/forms';
-import {BarcodeScanner, SafariViewController} from 'ionic-native';
+import {SafariViewController} from 'ionic-native';
 
 import {AppStorage} from '../../providers/app-storage/app-storage';
 import {Parse} from '../../providers/parse/parse';
 import {Fetch} from '../../providers/fetch/fetch';
-import {BoardingScanPage} from '../boarding-scan/boarding-scan';
 import {Settings} from '../../providers/settings/settings';
 import {Language} from '../../providers/language/language';
-import {Report} from '../../providers/report/report';
+import {Scan} from '../../providers/scan/scan';
 
 @Component({
   templateUrl: 'build/pages/source-modal-book/source-modal-book.html'
@@ -42,7 +41,7 @@ export class SourceModalBookPage {
     shown: false
   };
 
-  constructor(public viewCtrl: ViewController, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public modalCtrl: ModalController, public translate: TranslateService, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public nav: NavController, public fetch: Fetch, public settings: Settings, public language: Language, public report: Report) {
+  constructor(public viewCtrl: ViewController, public alertCtrl: AlertController, public translate: TranslateService, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public fetch: Fetch, public settings: Settings, public language: Language, public scanProvider: Scan) {
     if(this.params.get('editing') == true) {
       this.isNew = false;
     }else {
@@ -186,7 +185,7 @@ export class SourceModalBookPage {
   }
 
   toggleInstantSearch() {
-    this.instantStatus.shown = this.instantStatus.shown ? false : true;
+    this.instantStatus.shown = !this.instantStatus.shown;
   }
 
   openExplaining() {
@@ -253,164 +252,38 @@ export class SourceModalBookPage {
 
   // Scan
   scan() {
-    if (!this.settings.get("scanBoardingDone")) {
-      let modal = this.modalCtrl.create(BoardingScanPage);
-      modal.onDidDismiss(() => {
-        this.scan();
-      });
-      modal.present();
-    }else {
-      BarcodeScanner.scan().then((data) => {
-        if (!data.cancelled) {
-          if (data.format == "EAN_13") {
-            this.fetchFromISBN(data.text);
-          }else {
-            this.translate.get(["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE", "PROJECT.DETAIL.POPUP.NOT_RIGHT_BARCODE_TYPE", "PROJECT.DETAIL.POPUP.OK"]).subscribe((translations) => {
+    this.scanProvider.scan().then((response) => {
+      if (response.data) {
+        if (this.isEmpty(true)) {
+          this.updateValues(response.data);
+          this.insertingFromScan = true;
+        }else {
+          response.transition.then(() => {
+            this.translate.get(["PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE", "PROJECT.DETAIL.POPUP.AUTO_FILL_DESC", "PROJECT.DETAIL.POPUP.OVERWRITE", "PROJECT.DETAIL.POPUP.CANCEL"]).subscribe((translations) => {
               let alert = this.alertCtrl.create({
-                title: translations["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE"],
-                message: translations["PROJECT.DETAIL.POPUP.NOT_RIGHT_BARCODE_TYPE"],
+                title: translations["PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE"],
+                message: translations["PROJECT.DETAIL.POPUP.AUTO_FILL_DESC"],
                 buttons: [
                   {
-                    text: translations['PROJECT.DETAIL.POPUP.OK']
+                    text: translations["PROJECT.DETAIL.POPUP.CANCEL"]
+                  },
+                  {
+                    text: translations["PROJECT.DETAIL.POPUP.OVERWRITE"],
+                    handler: () => {
+                      this.updateValues(response.data);
+                      this.insertingFromScan = true;
+                    }
                   }
                 ]
               });
               alert.present();
             });
-          }
-        }
-      }).catch((err) => {
-        this.translate.get(["PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN", "PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN_TEXT", "PROJECT.DETAIL.POPUP.OK"]).subscribe((translations) => {
-          let alert = this.alertCtrl.create({
-            title: translations["PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN"],
-            message: translations["PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN_TEXT"],
-            buttons: [
-              {
-                text: translations['PROJECT.DETAIL.POPUP.OK']
-              }
-            ]
           });
-          alert.present();
-        });
-      });
-    }
-  }
-
-  fetchFromISBN(isbn: string) {
-    if (navigator.onLine) {
-      if (!this.fetch.isISBNCached(isbn)) {
-        var loading = this.loadingCtrl.create();
-        var isLoading = true;
-        loading.present();
-      }else {
-        var isLoading = false;
+        }
+      }else if (response.addPending) {
+        this.addPending(response.isbn, response.transition);
       }
-      this.fetch.fromISBN(isbn).then((response) => {
-        if (isLoading) {
-          var loadingTransition = loading.dismiss();
-        }
-        if (this.isEmpty(true)) {
-          this.updateValues(response);
-          this.insertingFromScan = true;
-        }else {
-          this.translate.get(["PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE", "PROJECT.DETAIL.POPUP.AUTO_FILL_DESC", "PROJECT.DETAIL.POPUP.OVERWRITE", "PROJECT.DETAIL.POPUP.CANCEL"]).subscribe((translations) => {
-            let alert = this.alertCtrl.create({
-              title: translations["PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE"],
-              message: translations["PROJECT.DETAIL.POPUP.AUTO_FILL_DESC"],
-              buttons: [
-                {
-                  text: translations["PROJECT.DETAIL.POPUP.OVERWRITE"],
-                  handler: () => {
-                    this.updateValues(response);
-                    this.insertingFromScan = true;
-                  }
-                },
-                {
-                  text: translations["PROJECT.DETAIL.POPUP.CANCEL"]
-                }
-              ]
-            });
-            alert.present();
-          });
-        }
-      }).catch((response) => {
-        loading.dismiss();
-        if (response == 404) {
-          this.translate.get(["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE", "PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TEXT", "PROJECT.DETAIL.POPUP.OK"]).subscribe((translations) => {
-            let alert = this.alertCtrl.create({
-              title: translations["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE"],
-              message: translations["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TEXT"],
-              buttons: [
-                {
-                  text: translations['PROJECT.DETAIL.POPUP.OK']
-                }
-              ]
-            });
-            alert.present();
-          });
-        }else if (response == 408) {
-          this.translate.get(["PROJECT.DETAIL.POPUP.TIMEOUT_TITLE", "PROJECT.DETAIL.POPUP.TIMEOUT_TEXT", "PROJECT.DETAIL.POPUP.ADD", "PROJECT.DETAIL.POPUP.RETRY"]).subscribe((translations) => {
-            let alert = this.alertCtrl.create({
-              title: translations["PROJECT.DETAIL.POPUP.TIMEOUT_TITLE"],
-              message: translations["PROJECT.DETAIL.POPUP.TIMEOUT_TEXT"],
-              buttons: [
-                {
-                  text: translations["PROJECT.DETAIL.POPUP.RETRY"],
-                  handler: () => {
-                    this.fetchFromISBN(isbn);
-                  }
-                },
-                {
-                  text: translations['PROJECT.DETAIL.POPUP.ADD'],
-                  handler: () => {
-                    this.addPending(isbn);
-                  }
-                }
-              ]
-            });
-            alert.present();
-          });
-        }else if (response >= 500 && response <= 599) {
-          this.translate.get(["PROJECT.DETAIL.POPUP.ERROR", "PROJECT.DETAIL.POPUP.ERROR_500", "PROJECT.DETAIL.POPUP.OK"]).subscribe((translations) => {
-            let alert = this.alertCtrl.create({
-              title: translations["PROJECT.DETAIL.POPUP.ERROR"],
-              message: translations["PROJECT.DETAIL.POPUP.ERROR_500"],
-              buttons: [
-                {
-                  text: translations['PROJECT.DETAIL.POPUP.OK']
-                }
-              ]
-            });
-            alert.present();
-          });
-        }else {
-          this.report.report(response);
-        }
-      });
-    }else {
-      this.translate.get(["PROJECT.DETAIL.POPUP.NO_CONNECTION", "PROJECT.DETAIL.POPUP.ADD_TO_PENDINGS", "PROJECT.DETAIL.POPUP.RETRY", "PROJECT.DETAIL.POPUP.ADD"]).subscribe((translations) => {
-        let alert = this.alertCtrl.create({
-          title: translations["PROJECT.DETAIL.POPUP.NO_CONNECTION"],
-          message: translations["PROJECT.DETAIL.POPUP.ADD_TO_PENDINGS"],
-          buttons: [
-            {
-              text: translations["PROJECT.DETAIL.POPUP.RETRY"],
-              handler: () => {
-                this.fetchFromISBN(isbn);
-              }
-            },
-            {
-              text: translations["PROJECT.DETAIL.POPUP.ADD"],
-              handler: () => {
-                this.addPending(isbn, alert.dismiss());
-                return false;
-              }
-            }
-          ]
-        });
-        alert.present();
-      });
-    }
+    });
   }
 
   updateValues(response: any) {
