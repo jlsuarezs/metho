@@ -92,4 +92,5 @@ interface SettingsList {
   overideLang?: string;
   lastLang?: string;
   ignoreErrors?: boolean;
+  cdAlertShown?: boolean;
 }
