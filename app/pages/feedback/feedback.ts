@@ -1,11 +1,11 @@
-import {NavController} from 'ionic-angular';
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
-import {SocialSharing} from 'ionic-native';
+import { NavController } from 'ionic-angular';
+import { SocialSharing } from 'ionic-native';
+import { TranslateService } from 'ng2-translate/ng2-translate';
 
-import {TranslateService} from 'ng2-translate/ng2-translate';
+import { Report } from '../../providers/report/report';
 
-import {Report} from '../../providers/report/report';
 
 @Component({
   templateUrl: 'build/pages/feedback/feedback.html'

@@ -1,10 +1,11 @@
-import {Injectable, EventEmitter} from '@angular/core';
-import {AlertController} from 'ionic-angular';
+import { Injectable, EventEmitter } from '@angular/core';
 
-import {Settings} from '../settings/settings';
-import {Report} from '../report/report';
+import { AlertController } from 'ionic-angular';
+import { TranslateService } from 'ng2-translate/ng2-translate';
 
-import {TranslateService} from 'ng2-translate/ng2-translate';
+import { Report } from '../report/report';
+import { Settings } from '../settings/settings';
+
 
 declare var inAppPurchase: any;
 interface MyWindow extends Window {

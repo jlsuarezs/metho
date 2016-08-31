@@ -1,21 +1,21 @@
-import {NavController, NavParams, ActionSheetController, ModalController, AlertController, List, Content} from 'ionic-angular';
-import {ViewChild, Component} from '@angular/core';
-import {TranslateService} from 'ng2-translate/ng2-translate';
-import {SocialSharing} from 'ionic-native';
+import { ViewChild, Component } from '@angular/core';
 
-import {SourcePage} from '../source/source';
+import { NavController, NavParams, ActionSheetController, ModalController, AlertController, List, Content } from 'ionic-angular';
+import { SocialSharing } from 'ionic-native';
+import { TranslateService } from 'ng2-translate/ng2-translate';
 
-// Modals
-import {SourceModalBookPage} from '../source-modal-book/source-modal-book';
-import {SourceModalArticlePage} from '../source-modal-article/source-modal-article';
-import {SourceModalInternetPage} from '../source-modal-internet/source-modal-internet';
-import {SourceModalCdPage} from '../source-modal-cd/source-modal-cd';
-import {SourceModalMoviePage} from '../source-modal-movie/source-modal-movie';
-import {SourceModalInterviewPage} from '../source-modal-interview/source-modal-interview';
+import { SourceModalBookPage } from '../source-modal-book/source-modal-book';
+import { SourceModalArticlePage } from '../source-modal-article/source-modal-article';
+import { SourceModalInternetPage } from '../source-modal-internet/source-modal-internet';
+import { SourceModalCdPage } from '../source-modal-cd/source-modal-cd';
+import { SourceModalMoviePage } from '../source-modal-movie/source-modal-movie';
+import { SourceModalInterviewPage } from '../source-modal-interview/source-modal-interview';
+import { SourcePage } from '../source/source';
+import { PendingsPage } from '../pendings/pendings';
 
-import {PendingsPage} from '../pendings/pendings';
-import {AppStorage} from '../../providers/app-storage/app-storage';
-import {Settings} from '../../providers/settings/settings';
+import { AppStorage } from '../../providers/app-storage/app-storage';
+import { Settings } from '../../providers/settings/settings';
+
 
 @Component({
   templateUrl: 'build/pages/sources/sources.html'

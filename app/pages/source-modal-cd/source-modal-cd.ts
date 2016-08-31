@@ -1,11 +1,13 @@
-import {ViewController, NavParams, AlertController} from 'ionic-angular';
-import {Component} from '@angular/core';
-import {TranslateService} from 'ng2-translate/ng2-translate';
-import {FormBuilder, Validators, ControlGroup} from '@angular/common';
+import { Component } from '@angular/core';
+import { FormBuilder, Validators, ControlGroup } from '@angular/common';
 
-import {AppStorage} from '../../providers/app-storage/app-storage';
-import {Parse} from '../../providers/parse/parse';
-import {Settings} from '../../providers/settings/settings';
+import { ViewController, NavParams, AlertController } from 'ionic-angular';
+import { TranslateService } from 'ng2-translate/ng2-translate';
+
+import { AppStorage } from '../../providers/app-storage/app-storage';
+import { Parse } from '../../providers/parse/parse';
+import { Settings } from '../../providers/settings/settings';
+
 
 @Component({
   templateUrl: 'build/pages/source-modal-cd/source-modal-cd.html'

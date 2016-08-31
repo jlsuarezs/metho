@@ -1,13 +1,14 @@
-import {NavController, NavParams, ModalController, AlertController, LoadingController} from 'ionic-angular';
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
-import {TranslateService} from 'ng2-translate/ng2-translate';
+import { NavController, NavParams, ModalController, AlertController, LoadingController } from 'ionic-angular';
+import { TranslateService } from 'ng2-translate/ng2-translate';
 
-import {AppStorage} from '../../providers/app-storage/app-storage';
-import {Fetch} from '../../providers/fetch/fetch';
-import {Language} from '../../providers/language/language';
+import { SourceModalBookPage } from '../source-modal-book/source-modal-book';
 
-import {SourceModalBookPage} from '../source-modal-book/source-modal-book';
+import { AppStorage } from '../../providers/app-storage/app-storage';
+import { Fetch } from '../../providers/fetch/fetch';
+import { Language } from '../../providers/language/language';
+
 
 @Component({
   templateUrl: 'build/pages/pendings/pendings.html'

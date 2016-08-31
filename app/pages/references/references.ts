@@ -1,10 +1,11 @@
-import {NavController} from 'ionic-angular';
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
-import {References} from '../../providers/references/references';
-import {Settings} from '../../providers/settings/settings';
+import { NavController } from 'ionic-angular';
 
-import {ReferencesDetailPage} from '../references-detail/references-detail';
+import { ReferencesDetailPage } from '../references-detail/references-detail';
+
+import { References } from '../../providers/references/references';
+import { Settings } from '../../providers/settings/settings';
 
 
 @Component({

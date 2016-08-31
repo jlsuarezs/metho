@@ -1,12 +1,11 @@
-import {Injectable} from '@angular/core';
-import {TranslateService} from 'ng2-translate/ng2-translate';
+import { Injectable } from '@angular/core';
 
-import {Config} from 'ionic-angular';
+import { Config } from 'ionic-angular';
+import { Globalization } from 'ionic-native';
+import { TranslateService } from 'ng2-translate/ng2-translate';
 
-import {AppStorage} from '../app-storage/app-storage';
-import {Settings} from '../settings/settings';
-
-import {Globalization} from 'ionic-native';
+import { AppStorage } from '../app-storage/app-storage';
+import { Settings } from '../settings/settings';
 
 import * as moment from 'moment';
 import 'moment/locale/fr';

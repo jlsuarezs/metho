@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
+
 import { ModalController, AlertController, LoadingController } from 'ionic-angular';
+import { BarcodeScanner } from 'ionic-native';
 import { TranslateService } from 'ng2-translate/ng2-translate';
 
-import {BarcodeScanner} from 'ionic-native';
+import { BoardingScanPage } from '../../pages/boarding-scan/boarding-scan';
 
-import {Fetch} from '../fetch/fetch';
-import {Settings} from '../settings/settings';
-import {Report} from '../report/report';
+import { Fetch } from '../fetch/fetch';
+import { Report } from '../report/report';
+import { Settings } from '../settings/settings';
 
-import {BoardingScanPage} from '../../pages/boarding-scan/boarding-scan';
 
 @Injectable()
 export class Scan {

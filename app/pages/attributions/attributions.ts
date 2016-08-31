@@ -1,8 +1,10 @@
-import {NavController} from 'ionic-angular';
-import {Component} from '@angular/core';
-import {SafariViewController} from 'ionic-native';
+import { Component } from '@angular/core';
 
-import {LicensePage} from '../license/license';
+import { NavController } from 'ionic-angular';
+import { SafariViewController } from 'ionic-native';
+
+import { LicensePage } from '../license/license';
+
 
 @Component({
   templateUrl: 'build/pages/attributions/attributions.html'

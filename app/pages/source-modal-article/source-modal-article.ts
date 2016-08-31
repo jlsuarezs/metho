@@ -1,10 +1,12 @@
-import {ViewController, NavParams} from 'ionic-angular';
-import {Component} from '@angular/core';
-import {FormBuilder, Validators, ControlGroup} from '@angular/common';
+import { Component } from '@angular/core';
+import { FormBuilder, Validators, ControlGroup } from '@angular/common';
 
-import {AppStorage} from '../../providers/app-storage/app-storage';
-import {Parse} from '../../providers/parse/parse';
-import {Language} from '../../providers/language/language';
+import { ViewController, NavParams } from 'ionic-angular';
+
+import { AppStorage } from '../../providers/app-storage/app-storage';
+import { Language } from '../../providers/language/language';
+import { Parse } from '../../providers/parse/parse';
+
 
 @Component({
   templateUrl: 'build/pages/source-modal-article/source-modal-article.html'

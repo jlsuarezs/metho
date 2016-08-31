@@ -1,18 +1,18 @@
-import {NavController, NavParams, ModalController, AlertController} from 'ionic-angular';
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
-import {TranslateService} from 'ng2-translate/ng2-translate';
+import { NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
+import { TranslateService } from 'ng2-translate/ng2-translate';
 
-import {AppStorage} from '../../providers/app-storage/app-storage';
-import {Parse} from '../../providers/parse/parse';
+import { SourceModalBookPage } from '../source-modal-book/source-modal-book';
+import { SourceModalArticlePage } from '../source-modal-article/source-modal-article';
+import { SourceModalInternetPage } from '../source-modal-internet/source-modal-internet';
+import { SourceModalCdPage } from '../source-modal-cd/source-modal-cd';
+import { SourceModalMoviePage } from '../source-modal-movie/source-modal-movie';
+import { SourceModalInterviewPage } from '../source-modal-interview/source-modal-interview';
 
-// Modals
-import {SourceModalBookPage} from '../source-modal-book/source-modal-book';
-import {SourceModalArticlePage} from '../source-modal-article/source-modal-article';
-import {SourceModalInternetPage} from '../source-modal-internet/source-modal-internet';
-import {SourceModalCdPage} from '../source-modal-cd/source-modal-cd';
-import {SourceModalMoviePage} from '../source-modal-movie/source-modal-movie';
-import {SourceModalInterviewPage} from '../source-modal-interview/source-modal-interview';
+import { AppStorage } from '../../providers/app-storage/app-storage';
+import { Parse } from '../../providers/parse/parse';
+
 
 @Component({
   templateUrl: 'build/pages/source/source.html'

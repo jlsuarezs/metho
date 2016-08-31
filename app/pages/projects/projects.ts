@@ -1,10 +1,13 @@
-import {NavController, ModalController, AlertController, List} from 'ionic-angular';
-import {ViewChild, Component} from '@angular/core';
-import {TranslateService} from 'ng2-translate/ng2-translate';
-import {AppStorage} from '../../providers/app-storage/app-storage';
+import { ViewChild, Component } from '@angular/core';
 
-import {SourcesPage} from '../sources/sources';
-import {ProjectModalPage} from '../project-modal/project-modal';
+import { NavController, ModalController, AlertController, List } from 'ionic-angular';
+import { TranslateService } from 'ng2-translate/ng2-translate';
+
+import { ProjectModalPage } from '../project-modal/project-modal';
+import { SourcesPage } from '../sources/sources';
+
+import { AppStorage } from '../../providers/app-storage/app-storage';
+
 
 @Component({
   templateUrl: 'build/pages/projects/projects.html'

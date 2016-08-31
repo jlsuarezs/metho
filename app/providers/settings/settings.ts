@@ -1,8 +1,9 @@
-import {Injectable, EventEmitter} from '@angular/core';
-import {LocalStorage, Storage} from 'ionic-angular';
-import 'rxjs/add/operator/map';
+import { Injectable, EventEmitter } from '@angular/core';
 
-import {AppStorage} from '../app-storage/app-storage';
+import { LocalStorage, Storage } from 'ionic-angular';
+
+import { AppStorage } from '../app-storage/app-storage';
+
 
 @Injectable()
 export class Settings {

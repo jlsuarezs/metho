@@ -1,5 +1,7 @@
-import {NavController, NavParams} from 'ionic-angular';
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
+
+import { NavController, NavParams } from 'ionic-angular';
+
 
 @Component({
   templateUrl: 'build/pages/license/license.html'

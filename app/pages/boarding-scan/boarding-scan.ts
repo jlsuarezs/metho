@@ -1,7 +1,8 @@
-import {NavController, ViewController, Slides} from 'ionic-angular';
-import {ViewChild, Component} from '@angular/core';
+import { ViewChild, Component } from '@angular/core';
 
-import {Settings} from '../../providers/settings/settings';
+import { NavController, ViewController, Slides } from 'ionic-angular';
+
+import { Settings } from '../../providers/settings/settings';
 
 @Component({
   templateUrl: 'build/pages/boarding-scan/boarding-scan.html'

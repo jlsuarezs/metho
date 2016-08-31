@@ -1,8 +1,11 @@
-import {Injectable, EventEmitter} from '@angular/core';
-import {Storage, LocalStorage} from 'ionic-angular';
-import {Parse} from '../parse/parse';
-import {Fetch} from '../fetch/fetch';
-import {Report} from '../report/report';
+import { Injectable, EventEmitter } from '@angular/core';
+
+import { Storage, LocalStorage } from 'ionic-angular';
+
+import { Fetch } from '../fetch/fetch';
+import { Parse } from '../parse/parse';
+import { Report } from '../report/report';
+
 
 declare const require: any;
 

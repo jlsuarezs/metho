@@ -1,12 +1,14 @@
-import {ViewController, NavParams, NavController, AlertController} from 'ionic-angular';
-import {TranslateService} from 'ng2-translate/ng2-translate';
-import {Component} from '@angular/core';
-import {FormBuilder, Validators, ControlGroup} from '@angular/common';
+import { Component } from '@angular/core';
+import { FormBuilder, Validators, ControlGroup } from '@angular/common';
 
-import {AppStorage} from '../../providers/app-storage/app-storage';
-import {Parse} from '../../providers/parse/parse';
-import {Settings} from '../../providers/settings/settings';
-import {Language} from '../../providers/language/language';
+import { ViewController, NavParams, NavController, AlertController } from 'ionic-angular';
+import { TranslateService } from 'ng2-translate/ng2-translate';
+
+import { AppStorage } from '../../providers/app-storage/app-storage';
+import { Language } from '../../providers/language/language';
+import { Parse } from '../../providers/parse/parse';
+import { Settings } from '../../providers/settings/settings';
+
 
 @Component({
   templateUrl: 'build/pages/source-modal-interview/source-modal-interview.html'

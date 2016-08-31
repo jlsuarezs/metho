@@ -1,7 +1,9 @@
-import {NavController, NavParams} from 'ionic-angular';
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
-import {References} from '../../providers/references/references';
+import { NavController, NavParams } from 'ionic-angular';
+
+import { References } from '../../providers/references/references';
+
 
 @Component({
   templateUrl: 'build/pages/references-sub/references-sub.html'

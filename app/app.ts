@@ -1,19 +1,22 @@
-import {Platform, ionicBootstrap} from 'ionic-angular';
-import {StatusBar} from 'ionic-native';
-import {provide, Component, PLATFORM_PIPES} from '@angular/core';
-import {disableDeprecatedForms, provideForms} from '@angular/forms';
-import {Http} from '@angular/http';
-import {TabsPage} from './pages/tabs/tabs';
-import {TranslateLoader, TranslateStaticLoader, TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
-import {AppStorage} from './providers/app-storage/app-storage';
-import {Parse} from './providers/parse/parse';
-import {Fetch} from './providers/fetch/fetch';
-import {References} from './providers/references/references';
-import {Settings} from './providers/settings/settings';
-import {Report} from './providers/report/report';
-import {AdvancedMode} from './providers/advanced-mode/advanced-mode';
-import {Language} from './providers/language/language';
-import {Scan} from './providers/scan/scan';
+import { provide, Component, PLATFORM_PIPES } from '@angular/core';
+import { Http } from '@angular/http';
+import { disableDeprecatedForms, provideForms } from '@angular/forms';
+
+import { Platform, ionicBootstrap } from 'ionic-angular';
+import { StatusBar } from 'ionic-native';
+import { TranslateLoader, TranslateStaticLoader, TranslateService, TranslatePipe } from 'ng2-translate/ng2-translate';
+
+import { TabsPage } from './pages/tabs/tabs';
+
+import { AdvancedMode } from './providers/advanced-mode/advanced-mode';
+import { AppStorage } from './providers/app-storage/app-storage';
+import { Fetch } from './providers/fetch/fetch';
+import { Language } from './providers/language/language';
+import { Parse } from './providers/parse/parse';
+import { References } from './providers/references/references';
+import { Report } from './providers/report/report';
+import { Scan } from './providers/scan/scan';
+import { Settings } from './providers/settings/settings';
 
 
 @Component({

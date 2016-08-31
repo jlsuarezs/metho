@@ -1,14 +1,15 @@
-import {NavController, AlertController, List} from 'ionic-angular';
-import {ViewChild, Component} from '@angular/core';
-import {TranslateService} from 'ng2-translate/ng2-translate';
+import { ViewChild, Component } from '@angular/core';
 
-import {AdvancedModePage} from '../advanced-mode/advanced-mode';
-import {AttributionsPage} from '../attributions/attributions';
-import {FeedbackPage} from '../feedback/feedback';
+import { NavController, AlertController, List } from 'ionic-angular';
+import { TranslateService } from 'ng2-translate/ng2-translate';
 
-import {Settings} from '../../providers/settings/settings';
-import {Language} from '../../providers/language/language';
-import {AdvancedMode} from '../../providers/advanced-mode/advanced-mode';
+import { AdvancedModePage } from '../advanced-mode/advanced-mode';
+import { AttributionsPage } from '../attributions/attributions';
+import { FeedbackPage } from '../feedback/feedback';
+
+import { AdvancedMode } from '../../providers/advanced-mode/advanced-mode';
+import { Language } from '../../providers/language/language';
+import { Settings } from '../../providers/settings/settings';
 
 declare const require: any;
 

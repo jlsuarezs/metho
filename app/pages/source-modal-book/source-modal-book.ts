@@ -1,15 +1,17 @@
-import {ViewController, NavParams, AlertController} from 'ionic-angular';
-import {TranslateService} from 'ng2-translate/ng2-translate';
-import {Component} from '@angular/core';
-import {FormBuilder, Validators, FormGroup} from '@angular/forms';
-import {SafariViewController} from 'ionic-native';
+import { Component } from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
-import {AppStorage} from '../../providers/app-storage/app-storage';
-import {Parse} from '../../providers/parse/parse';
-import {Fetch} from '../../providers/fetch/fetch';
-import {Settings} from '../../providers/settings/settings';
-import {Language} from '../../providers/language/language';
-import {Scan} from '../../providers/scan/scan';
+import { ViewController, NavParams, AlertController } from 'ionic-angular';
+import { SafariViewController } from 'ionic-native';
+import { TranslateService } from 'ng2-translate/ng2-translate';
+
+import { AppStorage } from '../../providers/app-storage/app-storage';
+import { Fetch } from '../../providers/fetch/fetch';
+import { Language } from '../../providers/language/language';
+import { Parse } from '../../providers/parse/parse';
+import { Scan } from '../../providers/scan/scan';
+import { Settings } from '../../providers/settings/settings';
+
 
 @Component({
   templateUrl: 'build/pages/source-modal-book/source-modal-book.html'
