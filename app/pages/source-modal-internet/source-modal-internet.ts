@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators, ControlGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 import { ViewController, NavParams } from 'ionic-angular';
 import { TranslateService } from 'ng2-translate/ng2-translate';
@@ -22,7 +22,7 @@ export class SourceModalInternetPage {
   public isAdvanced: boolean;
   public hasConfirmed: boolean = false;
 
-  public form: ControlGroup;
+  public form: FormGroup;
   public monthList: string;
   public monthShortList: string;
   public weekdayList: string;

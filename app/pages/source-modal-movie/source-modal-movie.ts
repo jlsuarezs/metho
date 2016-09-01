@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators, ControlGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 import { ViewController, NavParams } from 'ionic-angular';
 
@@ -22,7 +22,7 @@ export class SourceModalMoviePage {
   public monthShortList: string;
   public weekdayList: string;
   public weekdayShortList: string;
-  public form: ControlGroup;
+  public form: FormGroup;
 
   constructor(public viewCtrl: ViewController, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public language: Language) {
     if(this.params.get('editing') == true) {

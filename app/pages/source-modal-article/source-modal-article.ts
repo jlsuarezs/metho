@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators, ControlGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 import { ViewController, NavParams } from 'ionic-angular';
 
@@ -19,7 +19,7 @@ export class SourceModalArticlePage {
   public projectId: string;
   public hasConfirmed: boolean = false;
 
-  public form: ControlGroup;
+  public form: FormGroup;
 
   constructor(public viewCtrl: ViewController, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder) {
     if(this.params.get('editing') == true) {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators, ControlGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 import { ViewController, NavParams, NavController, AlertController } from 'ionic-angular';
 import { TranslateService } from 'ng2-translate/ng2-translate';
@@ -23,7 +23,7 @@ export class SourceModalInterviewPage {
   public lastname: string;
   public hasConfirmed: boolean = false;
 
-  public form: ControlGroup;
+  public form: FormGroup;
   public monthList: string;
   public monthShortList: string;
   public weekdayList: string;

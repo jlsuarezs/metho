@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators, ControlGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 import { ViewController, NavParams, AlertController } from 'ionic-angular';
 import { TranslateService } from 'ng2-translate/ng2-translate';
@@ -20,7 +20,7 @@ export class SourceModalCdPage {
   public projectId: string;
   public hasConfirmed: boolean = false;
 
-  public form: ControlGroup;
+  public form: FormGroup;
 
   constructor(public translate: TranslateService, public viewCtrl: ViewController, public alertCtrl: AlertController, public params: NavParams, public parse: Parse, public storage: AppStorage, public settings: Settings, public fb: FormBuilder) {
     if(this.params.get('editing') == true) {
