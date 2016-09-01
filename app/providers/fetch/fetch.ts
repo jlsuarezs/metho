@@ -149,6 +149,8 @@ export class Fetch {
       }
       if (response.author_data.length > 3) {
         newobj.hasAuthors = "more3";
+      }else if (response.author_data.length == 0) {
+        newobj.hasAuthors = "collective";
       }else {
         newobj.hasAuthors = "13";
       }
