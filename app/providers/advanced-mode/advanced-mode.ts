@@ -1,18 +1,12 @@
 import { Injectable, EventEmitter } from '@angular/core';
 
 import { AlertController } from 'ionic-angular';
+import { InAppPurchase } from 'ionic-native';
 import { TranslateService } from 'ng2-translate/ng2-translate';
 
 import { Report } from '../report/report';
 import { Settings } from '../settings/settings';
 
-
-declare var inAppPurchase: any;
-interface MyWindow extends Window {
-  cordova: void;
-}
-
-declare var window: MyWindow;
 
 @Injectable()
 export class AdvancedMode {
@@ -22,30 +16,24 @@ export class AdvancedMode {
   private productId: string = "";
 
   constructor(public translate: TranslateService, public settings: Settings, public alertCtrl: AlertController, public report: Report) {
-    if (!!window.cordova) {
-      inAppPurchase.getProducts(["com.fclavette.metho.advanced"]).then(products => {
-        let product = products[0];
-        this.price = product.price;
-        this.productId = product.productId;
-        this.hasLoaded = true;
-        this.loadEvents.emit(true);
-      }).catch(err => {
-        this.report.report(err);
-      });
-    }else {
+    InAppPurchase.getProducts(["com.fclavette.metho.advanced"]).then(products => {
+      let product = products[0];
+      this.price = product.price;
+      this.productId = product.productId;
+      this.hasLoaded = true;
+      this.loadEvents.emit(true);
+    }).catch(err => {
+      this.report.report(err);
       this.price = "1,39$";
-      setTimeout(() => {
-        this.hasLoaded = true;
-        this.loadEvents.emit(true);
-      }, 2000);
-    }
+      this.hasLoaded = true;
+    });
   }
 
   enable(): Promise<any> {
-    if (!this.settings.get("advanced") && !!window.cordova) {
+    if (!this.settings.get("advanced")) {
       return new Promise((resolve, reject) => {
         if (navigator.onLine && this.hasLoaded) {
-          inAppPurchase.buy(this.productId).then((data) => {
+          InAppPurchase.buy(this.productId).then((data) => {
             this.settings.set('advanced', true);
             resolve();
           }).catch(err => {
@@ -80,7 +68,7 @@ export class AdvancedMode {
     if (!this.settings.get("advanced")) {
       return new Promise((resolve, reject) => {
         if (navigator.onLine) {
-          inAppPurchase.restorePurchases().then((data) => {
+          InAppPurchase.restorePurchases().then((data) => {
             if (data.length && data[0].productId == this.productId) {
               this.settings.set('advanced', true);
               resolve();
