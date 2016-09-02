@@ -45,7 +45,7 @@
             "DELETE_ITEM": "Delete",
             "SEARCH": "Search",
             "EMPTY_SEARCH": "No result, you can search across all properties of the source like the author, title or type",
-            "PENDING_ELEMENTS": "Pending items",
+            "PENDING_ELEMENTS": "Pending",
             "CHOOSE_TYPE": "Choose source type",
             "SHARE_TEXT": "Here are the sources for project « {{project_title}} » : <br><br><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center'>BIBLIOGRAPHIE</td></tr></table><br>",
             "MODAL":{
@@ -195,11 +195,11 @@
                 "BOOK_UNAVAILABLE_TITLE": "Book unavailable",
                 "BOOK_UNAVAILABLE_TEXT": "Barcode has been scanned, but this book isn't in our database.",
                 "TIMEOUT_TITLE": "Timeout",
-                "TIMEOUT_TEXT": "Timeout reached. You're probably on a slow network. Do you want to add this barcode to the pending elements to try again later ?",
+                "TIMEOUT_TEXT": "Timeout reached. You're probably on a slow network. Do you want to add this barcode to the pending sources to try again later ?",
                 "ADD": "Add",
                 "RETRY": "Retry",
                 "NO_CONNECTION": "No connection",
-                "ADD_TO_PENDINGS": "Do you want to add this barcode to the pending elements ?",
+                "ADD_TO_PENDINGS": "Do you want to add this barcode to the pending sources ?",
                 "NOT_RIGHT_BARCODE_TYPE": "Barcode has been scanned, but this barcode type is not a book barcode. The right barcode normally has ISBN label above it. If two barcodes are side by side, the wrong one might have been scanned. You may retry.",
                 "UNABLE_TO_SCAN": "Unable to scan",
                 "UNABLE_TO_SCAN_TEXT": "You may try going into Settings > Privacy and turning on camera access for this app.",
@@ -228,7 +228,7 @@
             }
         },
         "PENDING":{
-            "TITLE": "Pending elements",
+            "TITLE": "Pending",
             "DELETE_ITEM": "Delete",
             "SCAN_TO_ADD": "You can add a pending element by scaning a barcode when offline",
             "EMPTY_TAB": "No pending element!",
