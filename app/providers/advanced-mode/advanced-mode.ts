@@ -16,17 +16,27 @@ export class AdvancedMode {
   private productId: string = "";
 
   constructor(public translate: TranslateService, public settings: Settings, public alertCtrl: AlertController, public report: Report) {
-    InAppPurchase.getProducts(["com.fclavette.metho.advanced"]).then(products => {
-      let product = products[0];
-      this.price = product.price;
-      this.productId = product.productId;
-      this.hasLoaded = true;
-      this.loadEvents.emit(true);
-    }).catch(err => {
-      this.report.report(err);
-      this.price = "1,39$";
-      this.hasLoaded = true;
-    });
+    this.init();
+  }
+
+  init() {
+    if (navigator.onLine) {
+      InAppPurchase.getProducts(["com.fclavette.metho.advanced"]).then(products => {
+        let product = products[0];
+        this.price = product.price;
+        this.productId = product.productId;
+        this.hasLoaded = true;
+        this.loadEvents.emit(true);
+      }).catch(err => {
+        this.report.report(err);
+        this.price = "1,39$";
+        this.hasLoaded = true;
+      });
+    }else {
+      setTimeout(() => {
+        this.init();
+      }, 5000);
+    }
   }
 
   enable(): Promise<any> {
