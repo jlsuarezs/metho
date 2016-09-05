@@ -43,10 +43,10 @@
           {{'PROJECT.DETAIL.MODAL.ARTICLE.INDICATION_START_END_LABEL' | translate}}
         </ion-list-header>
         <ion-item>
-          <ion-input type="text" formControlName="startPage" placeholder="{{ 'PROJECT.DETAIL.MODAL.ARTICLE.INDICATION_START_PLACEHOLDER' | translate }}"></ion-input>
+          <ion-input type="text" formControlName="startPage" placeholder="{{ 'PROJECT.DETAIL.MODAL.ARTICLE.INDICATION_START_PLACEHOLDER' | translate }}" pattern="[0-9]*"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input type="text" formControlName="endPage" placeholder="{{ 'PROJECT.DETAIL.MODAL.ARTICLE.INDICATION_END_PLACEHOLDER' | translate }}"></ion-input>
+          <ion-input type="text" formControlName="endPage" placeholder="{{ 'PROJECT.DETAIL.MODAL.ARTICLE.INDICATION_END_PLACEHOLDER' | translate }}" pattern="[0-9]*"></ion-input>
         </ion-item>
       </ion-list>
     </ion-list>
