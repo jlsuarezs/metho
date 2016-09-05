@@ -55,7 +55,7 @@
                 "SCAN": "Scan barcode",
                 "BROWSER": "Web browser",
                 "BOOK": {
-                    "FIRSTNAME": "Firstname",
+                    "FIRSTNAME": "First Name",
                     "LASTNAME": "Lastname",
                     "AUTHOR_NUMBER": "Number of authors",
                     "AUTHOR_1TO3": "Source has 1 to 3 authors",
@@ -85,7 +85,7 @@
                     "TRANSLATOR_NAME": "Translator(s) name(s)"
                 },
                 "ARTICLE": {
-                    "FIRSTNAME": "Firstname",
+                    "FIRSTNAME": "First Name",
                     "LASTNAME": "Lastname",
                     "AUTHOR_NAME": "Author",
                     "TITLE_LABEL": "Title of the article",
@@ -101,7 +101,7 @@
                     "INDICATION_END_PLACEHOLDER": "End"
                 },
                 "INTERNET": {
-                    "FIRSTNAME":"Firstname",
+                    "FIRSTNAME":"First Name",
                     "LASTNAME": "Lastname",
                     "HAS_AUTHORS": "Source has an author",
                     "WEBPAGE_NAME": "Webpage's title",
@@ -114,7 +114,7 @@
                     "CONSULTATION_DATE_PLACEHOLDER": "March 21st 2009"
                 },
                 "CD": {
-                    "FIRSTNAME": "Firstname",
+                    "FIRSTNAME": "First Name",
                     "LASTNAME": "Lastname",
                     "HAS_AUTHORS": "Source has an author",
                     "DOC_TITLE": "Document's title",
@@ -127,7 +127,7 @@
                     "PUBLICATION_DATE_PLACEHOLDER": "2001"
                 },
                 "MOVIE": {
-                    "FIRSTNAME": "Firstname",
+                    "FIRSTNAME": "First Name",
                     "LASTNAME": "Lastname",
                     "HAS_MORE_THAN_ONE": "Source has more than one author/director",
                     "HAS_MORE_THAN_ONE_TRUE": "Enter main author/director's name, \"et al.\" mention will be added after meaning there's more than one author/director.",
@@ -265,8 +265,8 @@
         "PARSE":{
             "FIRST_AUTHOR_FIRSTNAME": {
                 "TITLE": "Author",
-                "TEXT": "Enter the firstname of the first author",
-                "DESC": "First author's firstname missing"
+                "TEXT": "Enter the first name of the first author",
+                "DESC": "First author's first name missing"
             },
             "FIRST_AUTHOR_LASTNAME": {
                 "TITLE": "Author",
@@ -275,8 +275,8 @@
             },
             "SECOND_AUTHOR_FIRSTNAME": {
                 "TITLE": "Author",
-                "TEXT": "Enter the firstname of the second author",
-                "DESC": "Second author's firstname missing"
+                "TEXT": "Enter the first name of the second author",
+                "DESC": "Second author's first name missing"
             },
             "SECOND_AUTHOR_LASTNAME": {
                 "TITLE": "Author",
@@ -285,8 +285,8 @@
             },
             "THIRD_AUTHOR_FIRSTNAME": {
                 "TITLE": "Author",
-                "TEXT": "Enter the firstname of the third author",
-                "DESC": "Third author's firstname missing"
+                "TEXT": "Enter the first name of the third author",
+                "DESC": "Third author's first name missing"
             },
             "THIRD_AUTHOR_LASTNAME": {
                 "TITLE": "Author",
@@ -313,8 +313,8 @@
             },
             "FIRST_TRANSLATOR_FIRSTNAME": {
                 "TITLE": "Translator",
-                "TEXT": "Enter the firstname of the first translator",
-                "DESC": "First translator's firstname missing"
+                "TEXT": "Enter the first name of the first translator",
+                "DESC": "First translator's first name missing"
             },
             "FIRST_TRANSLATOR_LASTNAME": {
                 "TITLE": "Translator",
@@ -323,8 +323,8 @@
             },
             "SECOND_TRANSLATOR_FIRSTNAME": {
                 "TITLE": "Translator",
-                "TEXT": "Enter the firstname of the second translator",
-                "DESC": "Second translator's firstname missing"
+                "TEXT": "Enter the first name of the second translator",
+                "DESC": "Second translator's first name missing"
             },
             "SECOND_TRANSLATOR_LASTNAME": {
                 "TITLE": "Translator",
@@ -368,8 +368,8 @@
             },
             "AUTHOR_ARTICLE_FIRSTNAME": {
                 "TITLE": "Author",
-                "TEXT": "Enter author's firstname",
-                "DESC": "Author's firstname missing"
+                "TEXT": "Enter author's first name",
+                "DESC": "Author's first name missing"
             },
             "AUTHOR_ARTICLE_LASTNAME": {
                 "TITLE": "Author",
@@ -448,8 +448,8 @@
             },
             "DIRECTOR_FIRSTNAME": {
                 "TITLE": "Main author/director",
-                "TEXT": "Enter main author/director's firstname",
-                "DESC": "Main author/director's firstname missing"
+                "TEXT": "Enter main author/director's first name",
+                "DESC": "Main author/director's first name missing"
             },
             "EMISSION_TITLE": {
                 "TITLE": "Document/TV show's name",
@@ -493,8 +493,8 @@
             },
             "INTERVIEWER_FIRSTNAME": {
                 "TITLE": "Interviewer",
-                "TEXT": "Enter interviewer's firstname",
-                "DESC": "Interviewer's firstname missing"
+                "TEXT": "Enter interviewer's first name",
+                "DESC": "Interviewer's first name missing"
             },
             "CIVILITY_TITLE": {
                 "TITLE": "Civility title",
@@ -503,8 +503,8 @@
             },
             "INTERVIEWED_FIRSTNAME": {
                 "TITLE": "Interviewed person",
-                "TEXT": "Enter interviewed person's firstname",
-                "DESC": "Interviewed person's firstname missing"
+                "TEXT": "Enter interviewed person's first name",
+                "DESC": "Interviewed person's first name missing"
             },
             "INTERVIEWED_LASTNAME": {
                 "TITLE": "Interviewed person",
