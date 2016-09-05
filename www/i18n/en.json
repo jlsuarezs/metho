@@ -213,7 +213,7 @@
                 "ERROR_500": "We're having problems with our servers, please try later.",
                 "OK": "OK",
                 "CAUTION": "Caution",
-                "USE_CD_FOR_INFORMATION": "You must use type CD only for information CDs, for music or else, use type media document."
+                "USE_CD_FOR_INFORMATION": "You must use type CD only for information CDs. For everything else, use type media document."
             }
         },
         "SOURCE":{
