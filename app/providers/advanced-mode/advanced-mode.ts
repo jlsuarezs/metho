@@ -28,9 +28,12 @@ export class AdvancedMode {
         this.hasLoaded = true;
         this.loadEvents.emit(true);
       }).catch(err => {
-        this.report.report(err);
+        if (err != "cordova_not_available") {
+          this.report.report(err);
+        }
         this.price = "1,39$";
         this.hasLoaded = true;
+        this.loadEvents.emit(true);
       });
     }else {
       setTimeout(() => {
