@@ -19,17 +19,17 @@
       </ion-item>
       <div *ngIf="form.find('hasAuthors').value" class="authors">
         <ion-item>
-          <ion-input type="text" formControlName="author1firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.CD.FIRSTNAME' | translate }}"></ion-input>
+          <ion-input formControlName="author1firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.CD.FIRSTNAME' | translate }}"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input type="text" formControlName="author1lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.CD.LASTNAME' | translate }}"></ion-input>
+          <ion-input formControlName="author1lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.CD.LASTNAME' | translate }}"></ion-input>
         </ion-item>
         <div *ngIf="form.find('author1firstname').value || form.find('author1lastname').value" class="inputs">
           <ion-item>
-            <ion-input type="text" formControlName="author2firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.CD.FIRSTNAME' | translate }}"></ion-input>
+            <ion-input formControlName="author2firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.CD.FIRSTNAME' | translate }}"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-input type="text" formControlName="author2lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.CD.LASTNAME' | translate }}"></ion-input>
+            <ion-input formControlName="author2lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.CD.LASTNAME' | translate }}"></ion-input>
           </ion-item>
         </div>
       </div>

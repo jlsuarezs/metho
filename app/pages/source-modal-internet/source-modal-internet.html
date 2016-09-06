@@ -19,10 +19,10 @@
       </ion-item>
       <div *ngIf="form.find('hasAuthors').value" class="authors">
         <ion-item>
-          <ion-input type="text" formControlName="author1firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERNET.FIRSTNAME' | translate }}"></ion-input>
+          <ion-input formControlName="author1firstname" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERNET.FIRSTNAME' | translate }}"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input type="text" formControlName="author1lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERNET.LASTNAME' | translate }}"></ion-input>
+          <ion-input formControlName="author1lastname" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERNET.LASTNAME' | translate }}"></ion-input>
         </ion-item>
       </div>
       <ion-item>
