@@ -88,8 +88,6 @@ export class SourceModalBookPage {
 
     this.isAdvanced = this.settings.get("advanced");
 
-    let moment = this.language.getMoment();
-
     this.form = fb.group({
       hasAuthors: [this.noData ? '' : this.previous.hasAuthors],
       author1lastname: [this.noData ? '' : this.previous.author1lastname],

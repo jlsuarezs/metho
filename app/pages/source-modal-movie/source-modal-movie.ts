@@ -44,7 +44,6 @@ export class SourceModalMoviePage {
       this.pendingId = this.params.get('pendingId');
     }
 
-    let moment = this.language.getMoment();
     this.form = fb.group({
       hasAuthors: [this.noData ? false : this.previous.hasAuthors],
       author1firstname: [this.noData ? '' : this.previous.author1firstname],
