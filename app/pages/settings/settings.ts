@@ -26,6 +26,8 @@ export class SettingsPage {
   public feedbackPage: any;
   @ViewChild(List) list: List;
 
+  public showIlluminatiEaster: boolean = false;
+
   constructor(public nav: NavController, public alertCtrl: AlertController, public translate: TranslateService,  public settingService: Settings, public advanced: AdvancedMode, public language: Language) {
     this.advancedPage = AdvancedModePage;
     this.attributionsPage = AttributionsPage;
@@ -116,5 +118,10 @@ export class SettingsPage {
     if (this.settings.overideLang != this.settingService.getAll().overideLang) {
       this.language.change(this.settings.overideLang);
     }
+  }
+
+  illuminatiEasterEgg() {
+    this.showIlluminatiEaster = true;
+    setTimeout(() => this.showIlluminatiEaster = false, 5250);
   }
 }

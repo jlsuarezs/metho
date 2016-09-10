@@ -4,7 +4,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="settings">
+<ion-content class="settings" [class.illuminati]="showIlluminatiEaster">
   <ion-list class="no-margin-bottom">
     <ion-item>
       <ion-label>{{ 'SETTINGS.IGNORE_ERRORS' | translate }}</ion-label>
@@ -45,5 +45,32 @@
     </button>
   </ion-list>
   <p text-center innerHtml="{{'SETTINGS.ATTRIBUTIONS' | translate}}"></p>
-  <p text-center class="dimmed-50">&copy; 2016 Francis Clavette</p>
+  <p text-center class="dimmed-50" (click)="illuminatiEasterEgg()">&copy; 2016 Francis Clavette</p>
+  <div class="backdrop"></div>
+  <div class="illuminati-wrapper">
+    <div class="word-wrapper">
+      <div class="they">
+        <div class="rel-wrapper glitchy" data-text="They">
+          They
+        </div>
+      </div>
+      <div class="are">
+        <div class="rel-wrapper glitchy" data-text="are">
+          are
+        </div>
+      </div>
+      <div class="watching">
+        <div class="rel-wrapper glitchy" data-text="watching">
+          watching
+        </div>
+      </div>
+      <div class="you">
+        <div class="rel-wrapper glitchy" data-text="you!">
+          you!
+        </div>
+      </div>
+    </div>
+
+    <img src="img/illuminati.png" class="img" />
+  </div>
 </ion-content>
