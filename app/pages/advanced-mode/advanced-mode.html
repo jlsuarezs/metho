@@ -6,7 +6,7 @@
 
 <ion-content class="advanced-mode">
   <button full light class="button-dollar" (click)="enable()" [disabled]="isAdvanced">{{ price }}</button>
-  <p text-center>{{'SETTINGS.ADVANCED_MODE.WAITING_FOR' | translate}}</p>
+  <p text-center>{{(isAdvanced ? 'SETTINGS.ADVANCED_MODE.THANKS_PURCHASE' : 'SETTINGS.ADVANCED_MODE.WAITING_FOR') | translate}}</p>
   <ion-list>
     <ion-item>
       <ion-thumbnail item-left>

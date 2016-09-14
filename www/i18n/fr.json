@@ -553,6 +553,7 @@
         "ADVANCED_MODE": {
             "TITLE": "Mode avancé",
             "WAITING_FOR": "Qu'attendez-vous pour essayer le mode avancé? Voici les fonctionalités incluses : ",
+            "THANKS_PURCHASE": "Merci de votre achat, voici les fonctionalités auxquelles vous avez maintenant accès : ",
             "SCANNING": "Balayage",
             "SCAN_DESC": "Balayez l'ISBN d'un livre pour voir sa source se créer automatiquement (certains livres ne sont pas supportés)",
             "MODELS": "Modèles",

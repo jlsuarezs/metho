@@ -553,6 +553,7 @@
         "ADVANCED_MODE": {
             "TITLE": "Modo avanzado",
             "WAITING_FOR": "¿ Qué estàs esperando ? Pruebe el modo avanzado. Estos son las funcionalidades incluidas : ",
+            "THANKS_PURCHASE": "Gracias por su compra, aquí está las foncionalidades que puede utilisar : ",
             "SCANNING": "Escáner",
             "SCAN_DESC": "Escána el ISBN de un libro para hacer su fuente automáticamente (ciertos libros no son compatibles)",
             "MODELS": "Modelos",

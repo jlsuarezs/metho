@@ -552,7 +552,8 @@
         "ATTRIBUTIONS": "Adapted from the <em>Guide de Méthodologie</em> of the École d'éducation internationale de McMasterville written by Raymond Bédard.",
         "ADVANCED_MODE": {
             "TITLE": "Advanced mode",
-            "WAITING_FOR": "What are you waiting for ? Try advanced mode ! Here's what's included : ",
+            "WAITING_FOR": "What are you waiting for ? Try advanced mode ! Here's what's included: ",
+            "THANKS_PURCHASE": "Thanks for your purchase, here are some features you now have access to: ",
             "SCANNING": "Scan",
             "SCAN_DESC": "Scan a book's ISBN barcode to see its source created automatically (some books are not supported)",
             "MODELS": "Templates",
