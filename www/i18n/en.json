@@ -111,7 +111,7 @@
                     "URL": "Web address",
                     "URL_PLACEHOLDER": "http://www.en.wikipedia.org",
                     "CONSULTATION_DATE": "Date of access",
-                    "CONSULTATION_DATE_PLACEHOLDER": "March 21st 2009"
+                    "CONSULTATION_DATE_PLACEHOLDER": "21 mars 2009"
                 },
                 "CD": {
                     "FIRSTNAME": "First Name",
@@ -151,7 +151,7 @@
                     "SUPPORT_DVD": "DVD",
                     "SUPPORT_INTERNET": "Internet video",
                     "CONSULTATION_DATE": "Date of access",
-                    "CONSULTATION_DATE_PLACEHOLDER": "March 29th 1991"
+                    "CONSULTATION_DATE_PLACEHOLDER": "29 mars 1991"
                 },
                 "INTERVIEW": {
                     "FIRSTNAME": "First Name",
@@ -470,7 +470,7 @@
                 "TITLE": "Access date",
                 "TEXT": "Enter access date",
                 "DESC": "Access date",
-                "EXAMPLE": "March 21st 2009"
+                "EXAMPLE": "21 mars 2009"
             },
             "DOCUMENT_TITLE": {
                 "TITLE": "Document title",
