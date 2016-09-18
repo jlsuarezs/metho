@@ -79,7 +79,8 @@ export class SourcePage {
         }
       }else {
         alert.addInput({
-          name: 'input'
+          name: 'input',
+          placeholder: error.example
         });
       }
 

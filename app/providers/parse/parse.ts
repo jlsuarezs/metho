@@ -794,6 +794,7 @@ export class Parse {
       errorTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".DESC"),
       promptTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".TITLE"),
       promptText: this.translate.instant("PROJECT.PARSE." + errorId + ".TEXT"),
+      example: this.translate.instant("PROJECT.PARSE." + errorId + ".EXAMPLE"),
       var: variable,
       key: errorId
     };
@@ -808,6 +809,7 @@ export class Parse {
       errorTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".DESC"),
       promptTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".TITLE"),
       promptText: this.translate.instant("PROJECT.PARSE." + errorId + ".TEXT"),
+      example: this.translate.instant("PROJECT.PARSE." + errorId + ".EXAMPLE"),
       var: variable,
       complex: true,
       type: complex.type,

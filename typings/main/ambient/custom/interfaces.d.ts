@@ -62,6 +62,7 @@ interface SourceError {
   errorTitle: string;
   promptTitle: string;
   promptText: string;
+  example: string;
   var: string;
   complex?: boolean;
   type?: string;

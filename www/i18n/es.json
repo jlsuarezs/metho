@@ -266,32 +266,38 @@
             "FIRST_AUTHOR_FIRSTNAME": {
                 "TITLE": "Autor",
                 "TEXT": "Introduzca el nombre del primer autor",
-                "DESC": "Nombre del primer autor faltante"
+                "DESC": "Nombre del primer autor faltante",
+                "EXAMPLE": "Pedro"
             },
             "FIRST_AUTHOR_LASTNAME": {
                 "TITLE": "Autor",
                 "TEXT": "Introduzca el apellido del primer autor",
-                "DESC": "Apellido del primer autor faltante"
+                "DESC": "Apellido del primer autor faltante",
+                "EXAMPLE": "Rodriguez"
             },
             "SECOND_AUTHOR_FIRSTNAME": {
                 "TITLE": "Autor",
                 "TEXT": "Introduzca el nombre del según autor",
-                "DESC": "Nombre del según autor faltante"
+                "DESC": "Nombre del según autor faltante",
+                "EXAMPLE": "Pedro"
             },
             "SECOND_AUTHOR_LASTNAME": {
                 "TITLE": "Autor",
                 "TEXT": "Introduzca el apellido del según autor",
-                "DESC": "Apellido del según autor faltante"
+                "DESC": "Apellido del según autor faltante",
+                "EXAMPLE": "Rodriguez"
             },
             "THIRD_AUTHOR_FIRSTNAME": {
                 "TITLE": "Autor",
                 "TEXT": "Introduzca el nombre del tercer autor",
-                "DESC": "Nombre del tercer autor faltante"
+                "DESC": "Nombre del tercer autor faltante",
+                "EXAMPLE": "Pedro"
             },
             "THIRD_AUTHOR_LASTNAME": {
                 "TITLE": "Autor",
                 "TEXT": "Introduzca el apellido del tercer autor",
-                "DESC": "Apellido del tercer autor faltante"
+                "DESC": "Apellido del tercer autor faltante",
+                "EXAMPLE": "Rodriguez"
             },
             "AUTHOR_NUMBER": {
                 "TITLE": "Número de autores",
@@ -304,177 +310,212 @@
             "BOOK_TITLE": {
                 "TITLE": "Titulo",
                 "TEXT": "Introduzca el titulo",
-                "DESC": "Titulo faltante"
+                "DESC": "Titulo faltante",
+                "EXAMPLE": "Olvidé decirte quiero"
             },
             "TRANSLATION_LANGUAGE": {
                 "TITLE": "Lengua de traducción",
                 "TEXT": "Introduzca la lengua de origen de la traducción",
-                "DESC": "Lengua de origen de la traducción faltante"
+                "DESC": "Lengua de origen de la traducción faltante",
+                "EXAMPLE": "Inglès"
             },
             "FIRST_TRANSLATOR_FIRSTNAME": {
                 "TITLE": "Traductor",
                 "TEXT": "Introduzca el nombre del primer traductor",
-                "DESC": "Nombre del primer traductor faltante"
+                "DESC": "Nombre del primer traductor faltante",
+                "EXAMPLE": "Pedro"
             },
             "FIRST_TRANSLATOR_LASTNAME": {
                 "TITLE": "Traductor",
                 "TEXT": "Introduzca el apellido del primer traductor",
-                "DESC": "Apellido del primer traductor faltante"
+                "DESC": "Apellido del primer traductor faltante",
+                "EXAMPLE": "Rodriguez"
             },
             "SECOND_TRANSLATOR_FIRSTNAME": {
                 "TITLE": "Traductor",
                 "TEXT": "Introduzca el nombre del según traductor",
-                "DESC": "Nombre del según traductor faltante"
+                "DESC": "Nombre del según traductor faltante",
+                "EXAMPLE": "Pedro"
             },
             "SECOND_TRANSLATOR_LASTNAME": {
                 "TITLE": "Traductor",
                 "TEXT": "Introduzca el apellido del según traductor",
-                "DESC": "Apellido del según traductor faltante"
+                "DESC": "Apellido del según traductor faltante",
+                "EXAMPLE": "Rodriguez"
             },
             "EDITION_LOCATION": {
                 "TITLE": "Lugar de edición",
                 "TEXT": "Introduzca la lugar de edición",
-                "DESC": "Lugar de edición faltante"
+                "DESC": "Lugar de edición faltante",
+                "EXAMPLE": "Montreal"
             },
             "EDITOR": {
                 "TITLE": "Editor",
                 "TEXT": "Introduzca el autor",
-                "DESC": "Editor faltante"
+                "DESC": "Editor faltante",
+                "EXAMPLE": "Planeta de libros"
             },
             "EDITION_DATE_TOO_HIGH": {
                 "TITLE": "Fecha de edición",
                 "TEXT": "Introduzca la fecha de edición",
-                "DESC": "Fecha de edición superior a hoy"
+                "DESC": "Fecha de edición superior a hoy",
+                "EXAMPLE": "2010"
             },
             "EDITION_DATE": {
                 "TITLE": "Fecha de edición",
                 "TEXT": "Introduzca la fecha de edición",
-                "DESC": "Fecha de edición faltante"
+                "DESC": "Fecha de edición faltante",
+                "EXAMPLE": "2010"
             },
             "PAGE_NUMBER": {
                 "TITLE": "Número de páginas",
                 "TEXT": "Introduza el número de páginas",
-                "DESC": "Número de páginas faltante"
+                "DESC": "Número de páginas faltante",
+                "EXAMPLE": "341"
             },
             "PAGE_NUMBER_TOO_HIGH": {
                 "TITLE": "Número de páginas",
                 "TEXT": "Introduza el número de páginas",
-                "DESC": "Número de páginas afilado"
+                "DESC": "Número de páginas afilado",
+                "EXAMPLE": "341"
             },
             "PAGE_NUMBER_TOO_LOW": {
                 "TITLE": "Número de páginas",
                 "TEXT": "Introduza el número de páginas",
-                "DESC": "Número de páginas demasiado bajo"
+                "DESC": "Número de páginas demasiado bajo",
+                "EXAMPLE": "341"
             },
             "AUTHOR_ARTICLE_FIRSTNAME": {
                 "TITLE": "Autor",
                 "TEXT": "Introduzca el nombre del autor",
-                "DESC": "Nombre del autor faltante"
+                "DESC": "Nombre del autor faltante",
+                "EXAMPLE": "Pedro"
             },
             "AUTHOR_ARTICLE_LASTNAME": {
                 "TITLE": "Autor",
                 "TEXT": "Introduzca el apellido del autor",
-                "DESC": "Apellido del autor faltante"
+                "DESC": "Apellido del autor faltante",
+                "EXAMPLE": "Rodriguez"
             },
             "ARTICLE_TITLE": {
                 "TITLE": "Titulo del articulo",
                 "TEXT": "Introduzca el titulo del articulo",
-                "DESC": "Titulo del articulo faltante"
+                "DESC": "Titulo del articulo faltante",
+                "EXAMPLE": "El enigma Colón"
             },
             "PERIODIC_NAME": {
                 "TITLE": "Nombre del periodicó",
                 "TEXT": "Introduzca el nombre del periodicó",
-                "DESC": "Nombre del periodicó faltante"
+                "DESC": "Nombre del periodicó faltante",
+                "EXAMPLE": "El sol"
             },
             "PERIODIC_NUMBER": {
                 "TITLE": "Número del volumen",
                 "TEXT": "Introduzca el número del volumen",
-                "DESC": "Número del volumen o del periodicó faltante"
+                "DESC": "Número del volumen o del periodicó faltante",
+                "EXAMPLE": "vol. 36, no 5"
             },
             "START_PAGE": {
                 "TITLE": "Página de inicio",
                 "TEXT": "Introduzca la página de inicio",
-                "DESC": "Página de inicio faltante"
+                "DESC": "Página de inicio faltante",
+                "EXAMPLE": "12"
             },
             "END_PAGE": {
                 "TITLE": "Página de fin",
                 "TEXT": "Introduzca la página de fin",
-                "DESC": "Página de fin faltante"
+                "DESC": "Página de fin faltante",
+                "EXAMPLE": "16"
             },
             "HOMEPAGE_TITLE": {
                 "TITLE": "Nombre del sitio web",
                 "TEXT": "Introduzca el nombre del sitio web",
-                "DESC": "Nombre del sitio web faltante"
+                "DESC": "Nombre del sitio web faltante",
+                "EXAMPLE": "Wikipedia, la encyclopedia libre"
             },
             "PAGE_TITLE": {
                 "TITLE": "Titulo del articulo",
                 "TEXT": "Introduzca el titulo del articulo",
-                "DESC": "Titulo del articulo faltante"
+                "DESC": "Titulo del articulo faltante",
+                "EXAMPLE": "Isaac Newton"
             },
             "INVALID_URL": {
                 "TITLE": "Dirección web",
                 "TEXT": "Introduzca la dirección web",
-                "DESC": "Dirreción web inválida"
+                "DESC": "Dirreción web inválida",
+                "EXAMPLE": "http://www.es.wikipedia.org"
             },
             "URL": {
                 "TITLE": "Dirección web",
                 "TEXT": "Introduzca la dirección web",
-                "DESC": "Dirección web faltante"
+                "DESC": "Dirección web faltante",
+                "EXAMPLE": "http://www.es.wikipedia.org"
             },
             "CONSULTATION_DATE": {
                 "TITLE": "Fecha de consulta",
                 "TEXT": "Introduzca la fecha de consulta",
-                "DESC": "Fecha de consulta faltante"
+                "DESC": "Fecha de consulta faltante",
+                "EXAMPLE": "21 mars 2009"
             },
             "DOCUMENT_TITLE": {
                 "TITLE": "Titulo del documento",
                 "TEXT": "Introduzca el titulo del documento",
-                "DESC": "Titulo del documento faltante"
+                "DESC": "Titulo del documento faltante",
+                "EXAMPLE": "Lleno de vida"
             },
             "PUBLICATION_LOCATION": {
                 "TITLE": "Lugar de edición",
                 "TEXT": "Introduzca la lugar de edición",
-                "DESC": "Lugar de edición faltante"
+                "DESC": "Lugar de edición faltante",
+                "EXAMPLE": "Montréal"
             },
             "PUBLICATION_DATE": {
                 "TITLE": "Fecha de edición",
                 "TEXT": "Introduzca la fecha de edición",
-                "DESC": "Fecha de edición faltante"
+                "DESC": "Fecha de edición faltante",
+                "EXAMPLE": "2001"
             },
             "DIRECTOR_LASTNAME": {
                 "TITLE": "Realisador/autor principal",
                 "TEXT": "Introduzca el apellido realisador/autor principal",
-                "DESC": "Apellido del realisador/autor principal faltante"
+                "DESC": "Apellido del realisador/autor principal faltante",
+                "EXAMPLE": "Rodriguez"
             },
             "DIRECTOR_FIRSTNAME": {
                 "TITLE": "Realisador/autor principal",
                 "TEXT": "Introduzca el nombre del realisador/autor principal",
-                "DESC": "Nombre del realisador/autor principal faltante"
+                "DESC": "Nombre del realisador/autor principal faltante",
+                "EXAMPLE": "Pedro"
             },
             "EMISSION_TITLE": {
                 "TITLE": "Nombre del programa",
                 "TEXT": "Introduzca el nombre del programa o del documento",
-                "DESC": "Nombre del programa faltante"
+                "DESC": "Nombre del programa faltante",
+                "EXAMPLE": "Águila roja"
             },
             "PRODUCTION_LOCATION": {
                 "TITLE": "Lugar de edición",
                 "TEXT": "Introduzca la lugar de edición",
-                "DESC": "Lugar de edición faltante"
+                "DESC": "Lugar de edición faltante",
+                "EXAMPLE": "El Conde de Queiroz"
             },
             "PRODUCTOR": {
                 "TITLE": "Productor",
                 "TEXT": "Introduzca el nombre del productor",
-                "DESC": "Nombre del productor faltante"
+                "DESC": "Nombre del productor faltante",
+                "EXAMPLE": "César Ruíz de Diego"
             },
             "BROADCASTER": {
                 "TITLE": "Difusor",
                 "TEXT": "Introduzca el nombre del difusor",
-                "DESC": "Nombre del difusor faltante"
+                "DESC": "Nombre del difusor faltante",
+                "EXAMPLE": "La 1"
             },
             "LENGTH": {
                 "TITLE": "Duración",
                 "TEXT": "Introduzca la duración (minutos)",
-                "DESC": "Duración faltante"
+                "DESC": "Duración faltante",
+                "EXAMPLE": "55"
             },
             "SUPPORT": {
                 "TITLE": "Typo de suporte",
@@ -484,17 +525,20 @@
             "VIEWING_DATE": {
                 "TITLE": "Fecha de consulta",
                 "TEXT": "Introduzca la fecha de consulta",
-                "DESC": "Fecha de consulta faltante"
+                "DESC": "Fecha de consulta faltante",
+                "EXAMPLE": "29 mars 1991"
             },
             "INTERVIEWER_LASTNAME": {
                 "TITLE": "Entrevistador",
                 "TEXT": "Introduzca el apellido del entrevistador",
-                "DESC": "Apellido del entrevistador faltante"
+                "DESC": "Apellido del entrevistador faltante",
+                "EXAMPLE": "Rodriguez"
             },
             "INTERVIEWER_FIRSTNAME": {
                 "TITLE": "Entrevistador",
                 "TEXT": "Introduzca el nombre del entrevistador",
-                "DESC": "Nombre del entrevistador faltante"
+                "DESC": "Nombre del entrevistador faltante",
+                "EXAMPLE": "Pedro"
             },
             "CIVILITY_TITLE": {
                 "TITLE": "Estado civil",
@@ -504,22 +548,26 @@
             "INTERVIEWED_FIRSTNAME": {
                 "TITLE": "Persona encontrada",
                 "TEXT": "Introduzca el nombre de la persona encontrada",
-                "DESC": "Nombre de la persona encontrada faltante"
+                "DESC": "Nombre de la persona encontrada faltante",
+                "EXAMPLE": "Pedro"
             },
             "INTERVIEWED_LASTNAME": {
                 "TITLE": "Persona encontrada",
                 "TEXT": "Introduzca el apellido de la persona encontrada",
-                "DESC": "Apellido de la persona encontrada faltante"
+                "DESC": "Apellido de la persona encontrada faltante",
+                "EXAMPLE": "Rodriguez"
             },
             "INTERVIEWED_TITLE": {
                 "TITLE": "Persona encontrada",
                 "TEXT": "Introduzca el título de la persona encontrada",
-                "DESC": "Título de la persona encontrada faltante"
+                "DESC": "Título de la persona encontrada faltante",
+                "EXAMPLE": "combatiente de la Segunda Guerra mundial"
             },
             "INTERVIEW_LOCATION": {
                 "TITLE": "Lugar de la entrevista",
                 "TEXT": "Introduzca la lugar de la entrevista",
-                "DESC": "Lugar de la entrevista faltante"
+                "DESC": "Lugar de la entrevista faltante",
+                "EXAMPLE": "Carignan"
             }
         }
     },
