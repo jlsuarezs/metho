@@ -263,6 +263,11 @@
             "INTERVIEW": "Entrevista"
         },
         "PARSE":{
+            "FIRST_AUTHOR": {
+                "TITLE": "Autor",
+                "TEXT": "Introduzca el nombre y apellido del primer autor",
+                "DESC": "Nombre y apellido del primer autor faltante"
+            },
             "FIRST_AUTHOR_FIRSTNAME": {
                 "TITLE": "Autor",
                 "TEXT": "Introduzca el nombre del primer autor",
@@ -318,6 +323,11 @@
                 "TEXT": "Introduzca la lengua de origen de la traducción",
                 "DESC": "Lengua de origen de la traducción faltante",
                 "EXAMPLE": "Inglès"
+            },
+            "FIRST_TRANSLATOR": {
+                "TITLE": "Traductor",
+                "TEXT": "Introduzca el nombre y apellido del primer traductor",
+                "DESC": "Nombre y apellido del primer traductor faltante"
             },
             "FIRST_TRANSLATOR_FIRSTNAME": {
                 "TITLE": "Traductor",
@@ -415,6 +425,11 @@
                 "DESC": "Número del volumen o del periodicó faltante",
                 "EXAMPLE": "vol. 36, no 5"
             },
+            "START_END_PAGE": {
+                "TITLE": "Páginas",
+                "TEXT": "Introduzca la página de inicio y de fin",
+                "DESC": "Página de inicio y de fin faltante"
+            },
             "START_PAGE": {
                 "TITLE": "Página de inicio",
                 "TEXT": "Introduzca la página de inicio",
@@ -475,6 +490,11 @@
                 "DESC": "Fecha de edición faltante",
                 "EXAMPLE": "2001"
             },
+            "DIRECTOR": {
+                "TITLE": "Realisador/autor principal",
+                "TEXT": "Introduzca el nombre y apellido del realisador/autor principal",
+                "DESC": "Nombre y apellido del realisador/autor principal faltante"
+            },
             "DIRECTOR_LASTNAME": {
                 "TITLE": "Realisador/autor principal",
                 "TEXT": "Introduzca el apellido realisador/autor principal",
@@ -528,6 +548,11 @@
                 "DESC": "Fecha de consulta faltante",
                 "EXAMPLE": "29 mars 1991"
             },
+            "INTERVIEWER": {
+                "TITLE": "Entrevistador",
+                "TEXT": "Introduzca el nombre y apellido del entrevistador",
+                "DESC": "Nombre y apellido del entrevistador faltante"
+            },
             "INTERVIEWER_LASTNAME": {
                 "TITLE": "Entrevistador",
                 "TEXT": "Introduzca el apellido del entrevistador",
@@ -544,6 +569,11 @@
                 "TITLE": "Estado civil",
                 "TEXT": "Selecciona el estado civil de la persona encontrada",
                 "DESC": "Estado civil faltante"
+            },
+            "INTERVIEWED": {
+                "TITLE": "Persona encontrada",
+                "TEXT": "Introduzca el nombre y apellido de la persona encontrada",
+                "DESC": "Nombre y apellido de la persona encontrada faltante"
             },
             "INTERVIEWED_FIRSTNAME": {
                 "TITLE": "Persona encontrada",

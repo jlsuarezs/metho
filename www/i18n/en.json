@@ -263,6 +263,11 @@
             "INTERVIEW": "Interview"
         },
         "PARSE":{
+            "FIRST_AUTHOR": {
+                "TITLE": "Author",
+                "TEXT": "Enter the first name and last name of the first author",
+                "DESC": "First author's first and last name missing"
+            },
             "FIRST_AUTHOR_FIRSTNAME": {
                 "TITLE": "Author",
                 "TEXT": "Enter the first name of the first author",
@@ -318,6 +323,11 @@
                 "TEXT": "Enter translation's origin language",
                 "DESC": "Translation's origin language missing",
                 "EXAMPLE": "French"
+            },
+            "FIRST_TRANSLATOR": {
+                "TITLE": "Translator",
+                "TEXT": "Enter the first and last name of the first translator",
+                "DESC": "First translator's first and last name missing"
             },
             "FIRST_TRANSLATOR_FIRSTNAME": {
                 "TITLE": "Translator",
@@ -415,6 +425,11 @@
                 "DESC": "Volume or periodical number missing",
                 "EXAMPLE": "vol. 36, no 5"
             },
+            "START_END_PAGE": {
+                "TITLE": "Pages",
+                "TEXT": "Enter the start and end page",
+                "DESC": "Start and end page missing"
+            },
             "START_PAGE": {
                 "TITLE": "Start page",
                 "TEXT": "Enter the start page",
@@ -475,6 +490,11 @@
                 "DESC": "Publication date missing",
                 "EXAMPLE": "2001"
             },
+            "DIRECTOR": {
+                "TITLE": "Main author/director",
+                "TEXT": "Enter main author/director's first and last name",
+                "DESC": "Main author/director's first and last name missing"
+            },
             "DIRECTOR_LASTNAME": {
                 "TITLE": "Main author/director",
                 "TEXT": "Enter main author/director's last name",
@@ -528,6 +548,11 @@
                 "DESC": "Access date missing",
                 "EXAMPLE": "March 29th 1991"
             },
+            "INTERVIEWER": {
+                "TITLE": "Interviewer",
+                "TEXT": "Enter interviewer's first and last name",
+                "DESC": "Interviewer's first and last name missing"
+            },
             "INTERVIEWER_LASTNAME": {
                 "TITLE": "Interviewer",
                 "TEXT": "Enter interviewer's last name",
@@ -544,6 +569,11 @@
                 "TITLE": "Civility title",
                 "TEXT": "Select interviewed person's civility title",
                 "DESC": "Civility title missing"
+            },
+            "INTERVIEWED": {
+                "TITLE": "Interviewed person",
+                "TEXT": "Enter interviewed person's first and last name",
+                "DESC": "Interviewed person's first and last name missing"
             },
             "INTERVIEWED_FIRSTNAME": {
                 "TITLE": "Interviewed person",

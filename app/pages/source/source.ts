@@ -57,7 +57,9 @@ export class SourcePage {
                   this.source[error.var] = data;
                 }
               }else {
-                this.source[error.var] = data.input;
+                error.inputs.forEach((value) => {
+                  this.source[value.var] = data[value.var];
+                });
               }
               this.source = this.parse.parse(this.source);
               this.storage.setSourceFromId(this.id, this.source);
@@ -78,9 +80,11 @@ export class SourcePage {
           });
         }
       }else {
-        alert.addInput({
-          name: 'input',
-          placeholder: error.example
+        error.inputs.forEach((value) => {
+          alert.addInput({
+            name: value.var,
+            placeholder: value.example
+          });
         });
       }
 

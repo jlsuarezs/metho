@@ -62,12 +62,16 @@ interface SourceError {
   errorTitle: string;
   promptTitle: string;
   promptText: string;
-  example: string;
-  var: string;
+  inputs?: SourceErrorInputs[];
+  var?: string;
   complex?: boolean;
   type?: string;
-  key: string; // translation key
   options?: SourceErrorOption[];
+}
+
+interface SourceErrorInputs {
+  var: string;
+  example: string;
 }
 
 interface SourceErrorOption {

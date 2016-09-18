@@ -33,8 +33,7 @@ export class Parse {
             sourceToParse.parsedSource += "?";
           }
         } else {
-          sourceToParse.errors.push(this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname"));
-          sourceToParse.errors.push(this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname"));
+          sourceToParse.errors.push(this.addMultiInputError([{errorId:"FIRST_AUTHOR_FIRSTNAME", variable: "author1firstname"}, {errorId:"FIRST_AUTHOR_LASTNAME", variable: "author1lastname"}], "FIRST_AUTHOR"));
           sourceToParse.parsedSource += "?";
         }
 
@@ -90,8 +89,7 @@ export class Parse {
                   sourceToParse.parsedSource += "?";
               }
           } else {
-              sourceToParse.errors.push(this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname"));
-              sourceToParse.errors.push(this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname"));
+              sourceToParse.errors.push(this.addMultiInputError([{errorId:"FIRST_AUTHOR_FIRSTNAME", variable: "author1firstname"}, {errorId:"FIRST_AUTHOR_LASTNAME", variable: "author1lastname"}], "FIRST_AUTHOR"));
               sourceToParse.parsedSource += "?";
           }
 
@@ -242,8 +240,7 @@ export class Parse {
                     sourceToParse.parsedSource += "? ";
                 }
             } else {
-                sourceToParse.errors.push(this.addError("FIRST_TRANSLATOR_FIRSTNAME", "translator1firstname"));
-                sourceToParse.errors.push(this.addError("FIRST_TRANSLATOR_LASTNAME", "translator1lastname"));
+                sourceToParse.errors.push(this.addMultiInputError([{errorId:"FIRST_TRANSLATOR_FIRSTNAME", variable: "translator1firstname"}, {errorId:"FIRST_TRANSLATOR_LASTNAME", variable: "translator1lastname"}], "FIRST_TRANSLATOR"));
                 sourceToParse.parsedSource += "?";
             }
 
@@ -336,9 +333,7 @@ export class Parse {
                 sourceToParse.errors.push(this.addError("AUTHOR_ARTICLE_FIRSTNAME", "author1firstname"));
             }
         } else {
-            sourceToParse.parsedSource += "?. ";
-            sourceToParse.errors.push(this.addError("AUTHOR_ARTICLE_FIRSTNAME", "author1firstname"));
-            sourceToParse.errors.push(this.addError("AUTHOR_ARTICLE_LASTNAME", "author1lastname"));
+            sourceToParse.errors.push(this.addMultiInputError([{errorId:"FIRST_AUTHOR_FIRSTNAME", variable: "author1firstname"}, {errorId:"FIRST_AUTHOR_LASTNAME", variable: "author1lastname"}], "FIRST_AUTHOR"));
         }
 
         // Titre de l'Article
@@ -392,8 +387,7 @@ export class Parse {
             sourceToParse.parsedSource += ".";
         } else {
             sourceToParse.parsedSource += "p. ?-?.";
-            sourceToParse.errors.push(this.addError("START_PAGE", "startPage"));
-            sourceToParse.errors.push(this.addError("END_PAGE", "endPage"));
+            sourceToParse.errors.push(this.addMultiInputError([{errorId:"START_PAGE", variable: "startPage"}, {errorId:"END_PAGE", variable: "endPage"}], "START_END_PAGE"));
         }
     } else if (sourceToParse.type == "internet") {
         if (sourceToParse.hasAuthors) {
@@ -413,8 +407,7 @@ export class Parse {
                     sourceToParse.parsedSource += "?. ";
                 }
             } else {
-                sourceToParse.errors.push(this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname"));
-                sourceToParse.errors.push(this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname"));
+                sourceToParse.errors.push(this.addMultiInputError([{errorId:"FIRST_AUTHOR_FIRSTNAME", variable: "author1firstname"}, {errorId:"FIRST_AUTHOR_LASTNAME", variable: "author1lastname"}], "FIRST_AUTHOR"));
                 sourceToParse.parsedSource += "?. ";
             }
         } else {
@@ -506,8 +499,7 @@ export class Parse {
                     sourceToParse.parsedSource += "?";
                 }
             } else {
-                sourceToParse.errors.push(this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname"));
-                sourceToParse.errors.push(this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname"));
+                sourceToParse.errors.push(this.addMultiInputError([{errorId:"FIRST_AUTHOR_FIRSTNAME", variable: "author1firstname"}, {errorId:"FIRST_AUTHOR_LASTNAME", variable: "author1lastname"}], "FIRST_AUTHOR"));
                 sourceToParse.parsedSource += "?";
             }
 
@@ -582,8 +574,7 @@ export class Parse {
                 sourceToParse.parsedSource += "?";
             }
         } else {
-            sourceToParse.errors.push(this.addError("DIRECTOR_FIRSTNAME", "author1firstname"));
-            sourceToParse.errors.push(this.addError("DIRECTOR_LASTNAME", "author1lastname"));
+            sourceToParse.errors.push(this.addMultiInputError([{errorId:"DIRECTOR_FIRSTNAME", variable: "author1firstname"}, {errorId:"DIRECTOR_LASTNAME", variable: "author1lastname"}], "DIRECTOR"));
             sourceToParse.parsedSource += "?";
         }
 
@@ -698,8 +689,7 @@ export class Parse {
                 sourceToParse.parsedSource += "?. ";
             }
         } else {
-            sourceToParse.errors.push(this.addError("INTERVIEWER_FIRSTNAME", "author1firstname"));
-            sourceToParse.errors.push(this.addError("INTERVIEWER_LASTNAME", "author1lastname"));
+            sourceToParse.errors.push(this.addMultiInputError([{errorId:"INTERVIEWER_FIRSTNAME", variable: "author1firstname"}, {errorId:"INTERVIEWER_LASTNAME", variable: "author1lastname"}], "INTERVIEWER"));
             sourceToParse.parsedSource += "?. ";
         }
         // Texte
@@ -756,8 +746,7 @@ export class Parse {
                 sourceToParse.title += "?";
             }
         } else {
-            sourceToParse.errors.push(this.addError("INTERVIEWED_FIRSTNAME", "interviewed1firstname"));
-            sourceToParse.errors.push(this.addError("INTERVIEWED_LASTNAME", "interviewed1lastname"));
+            sourceToParse.errors.push(this.addMultiInputError([{errorId:"INTERVIEWED_FIRSTNAME", variable: "interviewed1firstname"}, {errorId:"INTERVIEWED_LASTNAME", variable: "interviewed1lastname"}], "INTERVIEWED"));
             sourceToParse.parsedSource += "?, ";
         }
 
@@ -789,14 +778,31 @@ export class Parse {
     return sourceToParse;
   }
 
-  private addError(errorId: string, variable: string) {
+  private addError(errorId: string, variable: string): SourceError {
     return {
       errorTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".DESC"),
       promptTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".TITLE"),
       promptText: this.translate.instant("PROJECT.PARSE." + errorId + ".TEXT"),
-      example: this.translate.instant("PROJECT.PARSE." + errorId + ".EXAMPLE"),
-      var: variable,
-      key: errorId
+      inputs: [
+        {
+          example: this.translate.instant("PROJECT.PARSE." + errorId + ".EXAMPLE"),
+          var: variable
+        }
+      ]
+    };
+  }
+
+  private addMultiInputError(inputs: {errorId:string, variable: string}[], errorId: string): SourceError {
+    return {
+      errorTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".DESC"),
+      promptTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".TITLE"),
+      promptText: this.translate.instant("PROJECT.PARSE." + errorId + ".TEXT"),
+      inputs: inputs.map(value => {
+        return {
+          example: this.translate.instant("PROJECT.PARSE." + value.errorId + ".EXAMPLE"),
+          var: value.variable
+        }
+      })
     };
   }
 
@@ -809,11 +815,9 @@ export class Parse {
       errorTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".DESC"),
       promptTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".TITLE"),
       promptText: this.translate.instant("PROJECT.PARSE." + errorId + ".TEXT"),
-      example: this.translate.instant("PROJECT.PARSE." + errorId + ".EXAMPLE"),
       var: variable,
       complex: true,
       type: complex.type,
-      key: errorId,
       options: complex.options ? complex.options : []
     };
   }

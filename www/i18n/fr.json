@@ -263,6 +263,11 @@
             "INTERVIEW": "Entrevue"
         },
         "PARSE":{
+            "FIRST_AUTHOR": {
+                "TITLE": "Auteur",
+                "TEXT": "Entrez le prénom et le nom du premier auteur",
+                "DESC": "Prénom et nom du premier auteur manquant"
+            },
             "FIRST_AUTHOR_FIRSTNAME": {
                 "TITLE": "Auteur",
                 "TEXT": "Entrez le prénom du premier auteur",
@@ -318,6 +323,11 @@
                 "TEXT": "Entrez la langue d'origine de la traduction",
                 "DESC": "Langue d'origine de la traduction manquante",
                 "EXAMPLE": "Anglais"
+            },
+            "FIRST_TRANSLATOR": {
+                "TITLE": "Traducteur",
+                "TEXT": "Entrez le prénom et le nom du premier traducteur",
+                "DESC": "Prénom et nom du premier tranducteur manquant"
             },
             "FIRST_TRANSLATOR_FIRSTNAME": {
                 "TITLE": "Traducteur",
@@ -415,6 +425,11 @@
                 "DESC": "Numéro de volume ou de périodique manquant",
                 "EXAMPLE": "vol. 36, no 5"
             },
+            "START_END_PAGE": {
+                "TITLE": "Pages",
+                "TEXT": "Entrez la page de début et de fin",
+                "DESC": "Page de début et de fin manquante"
+            },
             "START_PAGE": {
                 "TITLE": "Page de début",
                 "TEXT": "Entrez la page de début",
@@ -475,6 +490,11 @@
                 "DESC": "Date d'édition manquante",
                 "EXAMPLE": "2001"
             },
+            "DIRECTOR": {
+                "TITLE": "Réalisateur/auteur principal",
+                "TEXT": "Entrez le prénom et nom du réalisateur/auteur principal",
+                "DESC": "Prénom et nom du réalisateur/auteur principal manquant"
+            },
             "DIRECTOR_LASTNAME": {
                 "TITLE": "Réalisateur/auteur principal",
                 "TEXT": "Entrez le nom du réalisateur/auteur principal",
@@ -528,6 +548,11 @@
                 "DESC": "Date de visionnement manquante",
                 "EXAMPLE": "21 mars 1991"
             },
+            "INTERVIEWER": {
+                "TITLE": "Intervieweur",
+                "TEXT": "Entrez le nom et le prénom de l'intervieweur",
+                "DESC": "Prénom et nom de l'intervieweur manquant"
+            },
             "INTERVIEWER_LASTNAME": {
                 "TITLE": "Nom de l'intervieweur",
                 "TEXT": "Entrez le nom de l'intervieweur",
@@ -544,6 +569,11 @@
                 "TITLE": "Titre de civilité",
                 "TEXT": "Sélectionnez le titre de civilité de la personne rencontrée",
                 "DESC": "Titre de civilité non spécifié"
+            },
+            "INTERVIEWED": {
+                "TITLE": "Personne rencontrée",
+                "TEXT": "Entrez le prénom et le nom de la personne rencontrée",
+                "DESC": "Prénom et nom de la personne rencontrée manquant"
             },
             "INTERVIEWED_FIRSTNAME": {
                 "TITLE": "Personne rencontrée",
