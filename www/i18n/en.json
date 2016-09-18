@@ -93,7 +93,7 @@
                     "PERIODIC_LABEL": "Periodical's name",
                     "PERIODIC_PLACEHOLDER": "The Toronto Star",
                     "EDITION_NUMBER_LABEL": "Edition, volume or periodical number",
-                    "EDITION_NUMBER_PLACEHOLDER": "vol. 36, No. 5",
+                    "EDITION_NUMBER_PLACEHOLDER": "vol. 36, no 5",
                     "PUBLICATION_DATE_LABEL": "Edition date",
                     "PUBLICATION_DATE_PLACEHOLDER": "2009",
                     "INDICATION_START_END_LABEL": "Article's page range",
