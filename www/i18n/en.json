@@ -266,48 +266,48 @@
             "FIRST_AUTHOR": {
                 "TITLE": "Author",
                 "TEXT": "Enter the first name and last name of the first author",
-                "DESC": "First author's first and last name missing"
+                "DESC": "First author's first and last name"
             },
             "FIRST_AUTHOR_FIRSTNAME": {
                 "TITLE": "Author",
                 "TEXT": "Enter the first name of the first author",
-                "DESC": "First author's first name missing",
+                "DESC": "First author's first name",
                 "EXAMPLE": "John"
             },
             "FIRST_AUTHOR_LASTNAME": {
                 "TITLE": "Author",
                 "TEXT": "Enter the last name of the first author",
-                "DESC": "First author's last name missing",
+                "DESC": "First author's last name",
                 "EXAMPLE": "Smith"
             },
             "SECOND_AUTHOR_FIRSTNAME": {
                 "TITLE": "Author",
                 "TEXT": "Enter the first name of the second author",
-                "DESC": "Second author's first name missing",
+                "DESC": "Second author's first name",
                 "EXAMPLE": "John"
             },
             "SECOND_AUTHOR_LASTNAME": {
                 "TITLE": "Author",
                 "TEXT": "Enter the last name of the second author",
-                "DESC": "Second author's last name missing",
+                "DESC": "Second author's last name",
                 "EXAMPLE": "Smith"
             },
             "THIRD_AUTHOR_FIRSTNAME": {
                 "TITLE": "Author",
                 "TEXT": "Enter the first name of the third author",
-                "DESC": "Third author's first name missing",
+                "DESC": "Third author's first name",
                 "EXAMPLE": "John"
             },
             "THIRD_AUTHOR_LASTNAME": {
                 "TITLE": "Author",
                 "TEXT": "Enter the last name of the third author",
-                "DESC": "Third author's last name missing",
+                "DESC": "Third author's last name",
                 "EXAMPLE": "Smith"
             },
             "AUTHOR_NUMBER": {
                 "TITLE": "Number of authors",
                 "TEXT": "Select the number of authors",
-                "DESC": "Number of authors missing",
+                "DESC": "Number of authors",
                 "AUTHOR_1TO3": "1 to 3 authors",
                 "AUTHOR_MORE_3": "More than 3 authors",
                 "AUTHOR_COLLECTIVE": "Collective"
@@ -315,54 +315,54 @@
             "BOOK_TITLE": {
                 "TITLE": "Title",
                 "TEXT": "Enter the title",
-                "DESC": "Title missing",
+                "DESC": "Title",
                 "EXAMPLE": "Cherub's revenge"
             },
             "TRANSLATION_LANGUAGE": {
                 "TITLE": "Translation language",
                 "TEXT": "Enter translation's origin language",
-                "DESC": "Translation's origin language missing",
+                "DESC": "Translation's origin language",
                 "EXAMPLE": "French"
             },
             "FIRST_TRANSLATOR": {
                 "TITLE": "Translator",
                 "TEXT": "Enter the first and last name of the first translator",
-                "DESC": "First translator's first and last name missing"
+                "DESC": "First translator's first and last name"
             },
             "FIRST_TRANSLATOR_FIRSTNAME": {
                 "TITLE": "Translator",
                 "TEXT": "Enter the first name of the first translator",
-                "DESC": "First translator's first name missing",
+                "DESC": "First translator's first name",
                 "EXAMPLE": "John"
             },
             "FIRST_TRANSLATOR_LASTNAME": {
                 "TITLE": "Translator",
                 "TEXT": "Enter the last name of the first translator",
-                "DESC": "First translator's last name missing",
+                "DESC": "First translator's last name",
                 "EXAMPLE": "Smith"
             },
             "SECOND_TRANSLATOR_FIRSTNAME": {
                 "TITLE": "Translator",
                 "TEXT": "Enter the first name of the second translator",
-                "DESC": "Second translator's first name missing",
+                "DESC": "Second translator's first name",
                 "EXAMPLE": "John"
             },
             "SECOND_TRANSLATOR_LASTNAME": {
                 "TITLE": "Translator",
                 "TEXT": "Enter the last name of the second translator",
-                "DESC": "Second translator's last name missing",
+                "DESC": "Second translator's last name",
                 "EXAMPLE": "Smith"
             },
             "EDITION_LOCATION": {
                 "TITLE": "Published location",
                 "TEXT": "Enter publication location",
-                "DESC": "Publication location missing",
+                "DESC": "Publication location",
                 "EXAMPLE": "Montreal"
             },
             "EDITOR": {
                 "TITLE": "Publisher",
                 "TEXT": "Enter publisher's name",
-                "DESC": "Publisher name missing",
+                "DESC": "Publisher name",
                 "EXAMPLE": "McGraw-Hill"
             },
             "EDITION_DATE_TOO_HIGH": {
@@ -374,13 +374,13 @@
             "EDITION_DATE": {
                 "TITLE": "Publication date",
                 "TEXT": "Enter publication date",
-                "DESC": "Publication date missing",
+                "DESC": "Publication date",
                 "EXAMPLE": "2002"
             },
             "PAGE_NUMBER": {
                 "TITLE": "Number of pages",
                 "TEXT": "Enter the number of pages",
-                "DESC": "Number of pages missing",
+                "DESC": "Number of pages",
                 "EXAMPLE": "435"
             },
             "PAGE_NUMBER_TOO_HIGH": {
@@ -398,60 +398,60 @@
             "AUTHOR_ARTICLE_FIRSTNAME": {
                 "TITLE": "Author",
                 "TEXT": "Enter author's first name",
-                "DESC": "Author's first name missing",
+                "DESC": "Author's first name",
                 "EXAMPLE": "John"
             },
             "AUTHOR_ARTICLE_LASTNAME": {
                 "TITLE": "Author",
                 "TEXT": "Enter author's last name",
-                "DESC": "Author's last name missing",
+                "DESC": "Author's last name",
                 "EXAMPLE": "Smith"
             },
             "ARTICLE_TITLE": {
                 "TITLE": "Article's title",
                 "TEXT": "Enter article's title",
-                "DESC": "Article's title missing",
+                "DESC": "Article's title",
                 "EXAMPLE": "Haiti tunes in to tourism potential"
             },
             "PERIODIC_NAME": {
                 "TITLE": "Periodical's name",
                 "TEXT": "Enter periodical's name",
-                "DESC": "Periodical's name missing",
+                "DESC": "Periodical's name",
                 "EXAMPLE": "The Toronto Star"
             },
             "PERIODIC_NUMBER": {
                 "TITLE": "Volume number",
                 "TEXT": "Enter the volume number",
-                "DESC": "Volume or periodical number missing",
+                "DESC": "Volume or periodical number",
                 "EXAMPLE": "vol. 36, no 5"
             },
             "START_END_PAGE": {
                 "TITLE": "Pages",
                 "TEXT": "Enter the start and end page",
-                "DESC": "Start and end page missing"
+                "DESC": "Start and end page"
             },
             "START_PAGE": {
                 "TITLE": "Start page",
                 "TEXT": "Enter the start page",
-                "DESC": "Start page missing",
+                "DESC": "Start page",
                 "EXAMPLE": "12"
             },
             "END_PAGE": {
                 "TITLE": "End page",
                 "TEXT": "Enter the end page",
-                "DESC": "End page missing",
+                "DESC": "End page",
                 "EXAMPLE": "16"
             },
             "HOMEPAGE_TITLE": {
                 "TITLE": "Website's title",
                 "TEXT": "Enter website's title",
-                "DESC": "Website's title missing",
+                "DESC": "Website's title",
                 "EXAMPLE": "Wikipedia, the free encyclopedia"
             },
             "PAGE_TITLE": {
                 "TITLE": "Webpage's title",
                 "TEXT": "Enter webpage's title",
-                "DESC": "Webpage's title missing",
+                "DESC": "Webpage's title",
                 "EXAMPLE": "Isaac Newton"
             },
             "INVALID_URL": {
@@ -463,140 +463,140 @@
             "URL": {
                 "TITLE": "Web address",
                 "TEXT": "Enter the web address",
-                "DESC": "Web address missing",
+                "DESC": "Web address",
                 "EXAMPLE": "http://www.en.wikipedia.org"
             },
             "CONSULTATION_DATE": {
                 "TITLE": "Access date",
                 "TEXT": "Enter access date",
-                "DESC": "Access date missing",
+                "DESC": "Access date",
                 "EXAMPLE": "March 21st 2009"
             },
             "DOCUMENT_TITLE": {
                 "TITLE": "Document title",
                 "TEXT": "Enter document title",
-                "DESC": "Document title missing",
+                "DESC": "Document title",
                 "EXAMPLE": "Mozart Requiem"
             },
             "PUBLICATION_LOCATION": {
                 "TITLE": "Publication location",
                 "TEXT": "Enter the publication location",
-                "DESC": "Publication location missing",
+                "DESC": "Publication location",
                 "EXAMPLE": "Montreal"
             },
             "PUBLICATION_DATE": {
                 "TITLE": "Publication date",
                 "TEXT": "Enter the publication date",
-                "DESC": "Publication date missing",
+                "DESC": "Publication date",
                 "EXAMPLE": "2001"
             },
             "DIRECTOR": {
                 "TITLE": "Main author/director",
                 "TEXT": "Enter main author/director's first and last name",
-                "DESC": "Main author/director's first and last name missing"
+                "DESC": "Main author/director's first and last name"
             },
             "DIRECTOR_LASTNAME": {
                 "TITLE": "Main author/director",
                 "TEXT": "Enter main author/director's last name",
-                "DESC": "Main author/director's last name missing",
+                "DESC": "Main author/director's last name",
                 "EXAMPLE": "Smith"
             },
             "DIRECTOR_FIRSTNAME": {
                 "TITLE": "Main author/director",
                 "TEXT": "Enter main author/director's first name",
-                "DESC": "Main author/director's first name missing",
+                "DESC": "Main author/director's first name",
                 "EXAMPLE": "John"
             },
             "EMISSION_TITLE": {
                 "TITLE": "Document/TV show's name",
                 "TEXT": "Enter document/TV show's name",
-                "DESC": "Document/TV show's name missing",
+                "DESC": "Document/TV show's name",
                 "EXAMPLE": "Revenge"
             },
             "PRODUCTION_LOCATION": {
                 "TITLE": "Production location",
                 "TEXT": "Enter production location",
-                "DESC": "Production location missing",
+                "DESC": "Production location",
                 "EXAMPLE": "Montreal"
             },
             "PRODUCTOR": {
                 "TITLE": "Producer",
                 "TEXT": "Enter producer's name",
-                "DESC": "Producer's name missing",
+                "DESC": "Producer's name",
                 "EXAMPLE": "J. J. Abrams"
             },
             "BROADCASTER": {
                 "TITLE": "Broadcaster",
                 "TEXT": "Enter broadcaster's name",
-                "DESC": "Broadcaster's name missing",
+                "DESC": "Broadcaster's name",
                 "EXAMPLE": "CBC"
             },
             "LENGTH": {
                 "TITLE": "Length",
                 "TEXT": "Enter the length (minutes)",
-                "DESC": "Length (minutes) missing",
+                "DESC": "Length (minutes)",
                 "EXAMPLE": "55"
             },
             "SUPPORT": {
                 "TITLE": "Medium",
                 "TEXT": "Select the medium",
-                "DESC": "Medium missing"
+                "DESC": "Medium"
             },
             "VIEWING_DATE": {
                 "TITLE": "Access date",
                 "TEXT": "Enter access date",
-                "DESC": "Access date missing",
+                "DESC": "Access date",
                 "EXAMPLE": "March 29th 1991"
             },
             "INTERVIEWER": {
                 "TITLE": "Interviewer",
                 "TEXT": "Enter interviewer's first and last name",
-                "DESC": "Interviewer's first and last name missing"
+                "DESC": "Interviewer's first and last name"
             },
             "INTERVIEWER_LASTNAME": {
                 "TITLE": "Interviewer",
                 "TEXT": "Enter interviewer's last name",
-                "DESC": "Interviewer's last name missing",
+                "DESC": "Interviewer's last name",
                 "EXAMPLE": "Smith"
             },
             "INTERVIEWER_FIRSTNAME": {
                 "TITLE": "Interviewer",
                 "TEXT": "Enter interviewer's first name",
-                "DESC": "Interviewer's first name missing",
+                "DESC": "Interviewer's first name",
                 "EXAMPLE": "John"
             },
             "CIVILITY_TITLE": {
                 "TITLE": "Civility title",
                 "TEXT": "Select interviewed person's civility title",
-                "DESC": "Civility title missing"
+                "DESC": "Civility title"
             },
             "INTERVIEWED": {
                 "TITLE": "Interviewed person",
                 "TEXT": "Enter interviewed person's first and last name",
-                "DESC": "Interviewed person's first and last name missing"
+                "DESC": "Interviewed person's first and last name"
             },
             "INTERVIEWED_FIRSTNAME": {
                 "TITLE": "Interviewed person",
                 "TEXT": "Enter interviewed person's first name",
-                "DESC": "Interviewed person's first name missing",
+                "DESC": "Interviewed person's first name",
                 "EXAMPLE": "John"
             },
             "INTERVIEWED_LASTNAME": {
                 "TITLE": "Interviewed person",
                 "TEXT": "Enter interviewed person's last name",
-                "DESC": "Interviewed person's last name missing",
+                "DESC": "Interviewed person's last name",
                 "EXAMPLE": "Smith"
             },
             "INTERVIEWED_TITLE": {
                 "TITLE": "Interviewed person",
                 "TEXT": "Enter interviewed person's title",
-                "DESC": "Interviewed person's title missing",
+                "DESC": "Interviewed person's title",
                 "EXAMPLE": "retired soldier from Second World War"
             },
             "INTERVIEW_LOCATION": {
                 "TITLE": "Interview location",
                 "TEXT": "Enter interview location",
-                "DESC": "Interview location missing",
+                "DESC": "Interview location",
                 "EXAMPLE": "Carignan"
             }
         }
