@@ -136,7 +136,7 @@
                     "DOC_NAME_PLACEHOLDER": "Águila roja",
                     "EPISODE_NAME": "Titulo del episodio",
                     "EPISODE_PLACEHOLDER": "El Conde de Queiroz",
-                    "PUBLICATION_LOCATION": "Lugar de edición",
+                    "PUBLICATION_LOCATION": "Lugar de production",
                     "PUBLICATION_LOCATION_PLACEHOLDER": "Montréal",
                     "PRODUCTOR": "Productor",
                     "PRODUCTOR_PLACEHOLDER": "César Ruíz de Diego",
@@ -514,9 +514,9 @@
                 "EXAMPLE": "Águila roja"
             },
             "PRODUCTION_LOCATION": {
-                "TITLE": "Lugar de edición",
-                "TEXT": "Introduzca la lugar de edición",
-                "DESC": "Lugar de edición",
+                "TITLE": "Lugar de production",
+                "TEXT": "Introduzca la lugar de production",
+                "DESC": "Lugar de production",
                 "EXAMPLE": "El Conde de Queiroz"
             },
             "PRODUCTOR": {
