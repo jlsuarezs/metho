@@ -566,9 +566,9 @@
                 "EXAMPLE": "Charles"
             },
             "CIVILITY_TITLE": {
-                "TITLE": "Titre de civilité",
-                "TEXT": "Sélectionnez le titre de civilité de la personne rencontrée",
-                "DESC": "Titre de civilité"
+                "TITLE": "Civilité",
+                "TEXT": "Sélectionnez la civilité de la personne rencontrée",
+                "DESC": "Civilité"
             },
             "INTERVIEWED": {
                 "TITLE": "Personne rencontrée",
