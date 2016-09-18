@@ -56,7 +56,7 @@
                 "BROWSER": "Web browser",
                 "BOOK": {
                     "FIRSTNAME": "First Name",
-                    "LASTNAME": "Lastname",
+                    "LASTNAME": "Last Name",
                     "AUTHOR_NUMBER": "Number of authors",
                     "AUTHOR_1TO3": "Source has 1 to 3 authors",
                     "AUTHOR_MORE_3": "Source has more than 3 authors",
@@ -86,7 +86,7 @@
                 },
                 "ARTICLE": {
                     "FIRSTNAME": "First Name",
-                    "LASTNAME": "Lastname",
+                    "LASTNAME": "Last Name",
                     "AUTHOR_NAME": "Author",
                     "TITLE_LABEL": "Title of the article",
                     "TITLE_PLACEHOLDER": "Haiti tunes in to tourism potential",
@@ -102,7 +102,7 @@
                 },
                 "INTERNET": {
                     "FIRSTNAME":"First Name",
-                    "LASTNAME": "Lastname",
+                    "LASTNAME": "Last Name",
                     "HAS_AUTHORS": "Source has an author",
                     "WEBPAGE_NAME": "Webpage's title",
                     "WEBPAGE_NAME_PLACHOLDER": "Isaac Newton",
@@ -115,7 +115,7 @@
                 },
                 "CD": {
                     "FIRSTNAME": "First Name",
-                    "LASTNAME": "Lastname",
+                    "LASTNAME": "Last Name",
                     "HAS_AUTHORS": "Source has an author",
                     "DOC_TITLE": "Document's title",
                     "DOC_TITLE_PLACEHOLDER": "Mozart Requiem",
@@ -128,7 +128,7 @@
                 },
                 "MOVIE": {
                     "FIRSTNAME": "First Name",
-                    "LASTNAME": "Lastname",
+                    "LASTNAME": "Last Name",
                     "HAS_MORE_THAN_ONE": "Source has more than one author/director",
                     "HAS_MORE_THAN_ONE_TRUE": "Enter main author/director's name, \"et al.\" mention will be added after meaning there's more than one author/director.",
                     "PRINCIPAL_AUTHOR": "Main author",
@@ -154,8 +154,8 @@
                     "CONSULTATION_DATE_PLACEHOLDER": "March 29th 1991"
                 },
                 "INTERVIEW": {
-                    "FIRSTNAME": "Firstname",
-                    "LASTNAME": "Lastname",
+                    "FIRSTNAME": "First Name",
+                    "LASTNAME": "Last Name",
                     "INTERVIEWER_NAME": "Interviewer's name",
                     "INTERVIEWED": "Interviewed person",
                     "CIVILITY_TITLE": "Civility",
