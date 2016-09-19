@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import 'rxjs/Rx';
 
 
 @Injectable()
@@ -27,6 +27,7 @@ export class Fetch {
 
     return new Promise((resolve, reject) => {
       this.http.get('http://isbndb.com/api/v2/json/' + this.pickISBNdbApiKey() + "/book/" + isbn)
+        .timeout(2000, 408)
         .map(res => res.json())
         .subscribe(response => {
           if (!!response.error) {
@@ -64,6 +65,7 @@ export class Fetch {
     return new Promise((resolve, reject) => {
       if (includeAuthors) {
         this.http.get('http://isbndb.com/api/v2/json/' + this.pickISBNdbApiKey() + "/books?q=" + name + "&i=combined")
+        .timeout(2000, {status: 408})
         .map(res => res.json())
         .subscribe(response => {
           if (!!response.data.error) {
@@ -81,6 +83,7 @@ export class Fetch {
         });
       }else {
         this.http.get('http://isbndb.com/api/v2/json/' + this.pickISBNdbApiKey() + "/books?q=" + name)
+        .timeout(2000, {status: 408})
         .map(res => res.json())
         .subscribe(response => {
           if (!!response.error) {

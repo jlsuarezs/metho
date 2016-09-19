@@ -74,22 +74,26 @@ export class Scan {
             });
           }).catch((response) => {
             if (isLoading) {
-              loading.dismiss();
+              var transition = loading.dismiss();
+            }else {
+              var transition = <Promise<any>>Promise.resolve();
             }
-            switch (response) {
-              case 404:
+            transition.then(() => {
+              switch (response) {
+                case 404:
                 this.alert404(resolve);
                 break;
-              case 408:
+                case 408:
                 this.alert408(resolve, isbn);
                 break;
-              case 500, 501, 502, 503, 504, 505, 506, 507, 508, 509, 510, 511, 520, 521, 522, 523, 524, 525, 526, 530:
+                case 500, 501, 502, 503, 504, 505, 506, 507, 508, 509, 510, 511, 520, 521, 522, 523, 524, 525, 526, 530:
                 this.alert500(resolve);
                 break;
-              default:
+                default:
                 resolve({});
                 this.report.report(response);
-            }
+              }
+            });
           });
         }else {
           this.alertOffline(resolve, isbn);

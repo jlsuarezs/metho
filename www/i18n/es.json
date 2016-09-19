@@ -196,6 +196,7 @@
                 "BOOK_UNAVAILABLE_TEXT": "El codigo de barras era bien escánado pero este libro no es en nuestra base de datos.",
                 "TIMEOUT_TITLE": "Se acabó el tiempo",
                 "TIMEOUT_TEXT": "Se acabó el tiempo. Es probablemente en un red lento. ¿ Quiere añadir el codigo de barras en la lista de las fuentes pendientes ?",
+                "TIMEOUT_SEARCH": "Se acabó el tiempo. Es probablemente en un red lento. Puede reintentar más tarde",
                 "ADD": "Añadir",
                 "RETRY": "Reintentar",
                 "NO_CONNECTION": "No conexión",

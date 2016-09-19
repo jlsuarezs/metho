@@ -196,6 +196,7 @@
                 "BOOK_UNAVAILABLE_TEXT": "Barcode has been scanned, but this book isn't in our database.",
                 "TIMEOUT_TITLE": "Timeout",
                 "TIMEOUT_TEXT": "Timeout reached. You're probably on a slow network. Do you want to add this barcode to the pending sources to try again later ?",
+                "TIMEOUT_SEARCH": "Timeout reached. You're probably on a slow network. You may want to try again later.",
                 "ADD": "Add",
                 "RETRY": "Retry",
                 "NO_CONNECTION": "No connection",
