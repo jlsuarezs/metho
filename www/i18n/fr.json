@@ -196,6 +196,7 @@
                 "BOOK_UNAVAILABLE_TEXT": "Le code barre a bien été balayé, mais ce livre ne semble pas faire partie de notre base de données.",
                 "TIMEOUT_TITLE": "Temps d'attente écoulé",
                 "TIMEOUT_TEXT": "Le temps d'attente est écoulé. Vous vous trouvez probablement sur un réseau lent. Voulez-vous ajouter ce code-barre dans la liste de sources en attente pour réessayer plus tard ?",
+                "TIMEOUT_SEARCH": "Le temps d'attente est écoulé. Vous vous trouvez probablement sur un réseau lent. Réessayez plus tard.",
                 "ADD": "Ajouter",
                 "RETRY": "Réessayer",
                 "NO_CONNECTION": "Aucune connexion",

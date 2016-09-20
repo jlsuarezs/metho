@@ -845,7 +845,7 @@ export class Parse {
 
   private formatDateLocale(string: string): string {
     let datestring = string.replace(/-/g, '\/').replace(/T.+/, ''); // Outputs : "YYYY/MM/DD" to prevent timezone alteration
-    return new Date(datestring).toLocaleDateString('fr');
+    return new Date(datestring).toLocaleDateString('fr-CA', {year: "numeric", month: "long", day: "numeric"});
   }
 
   private format(num) {

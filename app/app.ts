@@ -57,4 +57,4 @@ ionicBootstrap(MyApp, [
       ],
       multi: true
     }),
-  ], {});
+  ], { prodMode: window.hasOwnProperty("cordova") });

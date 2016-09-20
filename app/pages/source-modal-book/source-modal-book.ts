@@ -40,7 +40,8 @@ export class SourceModalBookPage {
     err500: false,
     noConnection: false,
     ok: false,
-    shown: false
+    shown: false,
+    timeout: false
   };
 
   constructor(public viewCtrl: ViewController, public alertCtrl: AlertController, public translate: TranslateService, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public fetch: Fetch, public settings: Settings, public language: Language, public scanProvider: Scan) {
@@ -153,6 +154,7 @@ export class SourceModalBookPage {
       this.instantStatus.none = false;
       this.instantStatus.err500 = false;
       this.instantStatus.shown = false;
+      this.instantStatus.timeout = false;
       if (this.form.value.title) {
         this.instantStatus.loading = true;
         let query: string = "";
@@ -177,6 +179,10 @@ export class SourceModalBookPage {
           if (err.status >= 500 && err.status < 599) {
             this.instantStatus.err500 = true;
             this.instantStatus.loading = false;
+          }else if (err.status == 408) {
+            this.instantStatus.err500 = true;
+            this.instantStatus.timeout = true;
+            this.instantStatus.loading = false;
           }
         });
       }
@@ -194,6 +200,20 @@ export class SourceModalBookPage {
         let alert = this.alertCtrl.create({
           title: translations["PROJECT.DETAIL.POPUP.NO_SUGGESTIONS"],
           message: translations["PROJECT.DETAIL.POPUP.NO_SUGGESTIONS_DESC"],
+          buttons: [
+            {
+              text: translations["PROJECT.DETAIL.POPUP.OK"]
+            }
+          ]
+        });
+
+        alert.present();
+      });
+    }else if (this.instantStatus.timeout) {
+      this.translate.get(["PROJECT.DETAIL.POPUP.TIMEOUT_TITLE", "PROJECT.DETAIL.POPUP.TIMEOUT_SEARCH", "PROJECT.DETAIL.POPUP.OK"]).subscribe((translations) => {
+        let alert = this.alertCtrl.create({
+          title: translations["PROJECT.DETAIL.POPUP.TIMEOUT_TITLE"],
+          message: translations["PROJECT.DETAIL.POPUP.TIMEOUT_SEARCH"],
           buttons: [
             {
               text: translations["PROJECT.DETAIL.POPUP.OK"]
