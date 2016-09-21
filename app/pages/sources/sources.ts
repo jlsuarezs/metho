@@ -4,6 +4,7 @@ import { NavController, NavParams, ActionSheetController, ModalController, Alert
 import { SocialSharing } from 'ionic-native';
 import { TranslateService } from 'ng2-translate/ng2-translate';
 
+import { AdvancedModePage } from '../advanced-mode/advanced-mode';
 import { SourceModalBookPage } from '../source-modal-book/source-modal-book';
 import { SourceModalArticlePage } from '../source-modal-article/source-modal-article';
 import { SourceModalInternetPage } from '../source-modal-internet/source-modal-internet';
@@ -265,7 +266,9 @@ export class SourcesPage {
                     [],
                     [],
                     []
-                  );
+                  ).then(() => {
+                    this.promptForAdvanced();
+                  }).catch(() => {});
                 }
               }
             ]
@@ -281,9 +284,38 @@ export class SourcesPage {
           [],
           [],
           []
-        );
+        ).then(() => {
+          this.promptForAdvanced();
+        }).catch(() => {});
       }
     });
+  }
+
+  promptForAdvanced() {
+    if (!this.settings.get('advanced')) {
+      this.translate.get(["PROJECT.DETAIL.POPUP.ADVANCED_MODE", "PROJECT.DETAIL.POPUP.ADVANCED_MODE_MESSAGE", "PROJECT.DETAIL.POPUP.DETAILS", "PROJECT.DETAIL.POPUP.NO_THANKS"]).subscribe((translations) => {
+        let alert = this.alertCtrl.create({
+          title: translations["PROJECT.DETAIL.POPUP.ADVANCED_MODE"],
+          message: translations["PROJECT.DETAIL.POPUP.ADVANCED_MODE_MESSAGE"],
+          buttons: [
+            {
+              text: translations["PROJECT.DETAIL.POPUP.NO_THANKS"]
+            },
+            {
+              text: translations["PROJECT.DETAIL.POPUP.DETAILS"],
+              handler: () => {
+                alert.dismiss().then(() => {
+                  this.nav.push(AdvancedModePage);
+                });
+                return false;
+              }
+            }
+          ]
+        });
+
+        alert.present();
+      });
+    }
   }
 
   updateSearch() {

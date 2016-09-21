@@ -214,7 +214,11 @@
                 "ERROR_500": "Tenemos problemos con nuestros servidores, reintenta más tarde.",
                 "OK": "OK",
                 "CAUTION": "Ojo",
-                "USE_CD_FOR_INFORMATION": "Puede utilizar el typo CD solo par los CD de informacion. Para la musica, utilisa el typo Documento audiovisual."
+                "USE_CD_FOR_INFORMATION": "Puede utilizar el typo CD solo par los CD de informacion. Para la musica, utilisa el typo Documento audiovisual.",
+                "DETAILS": "Detalles...",
+                "ADVANCED_MODE": "Modo avanzado",
+                "ADVANCED_MODE_MESSAGE": "Gracias de utilisar Metho, si usted aprecia su experiencia, puede considerar supportar la aplicacion comprando el Modo avanzado. Eso va a procurar a usted foncionalidades para crear fuentes fácilmente y rapidamente.",
+                "NO_THANKS": "No gracias"
             }
         },
         "SOURCE":{

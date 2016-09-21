@@ -214,7 +214,11 @@
                 "ERROR_500": "Nous éprouvons des problèmes avec nos serveurs, veuillez réessayer plus tard.",
                 "OK": "OK",
                 "CAUTION": "Attention",
-                "USE_CD_FOR_INFORMATION": "Vous devez utiliser le type CD uniquement pour les cédéroms d'information. Pour les cédéroms de musique, utilisez le type Document audiovisuel."
+                "USE_CD_FOR_INFORMATION": "Vous devez utiliser le type CD uniquement pour les cédéroms d'information. Pour les cédéroms de musique, utilisez le type Document audiovisuel.",
+                "DETAILS": "Détails...",
+                "ADVANCED_MODE": "Mode avancé",
+                "ADVANCED_MODE_MESSAGE": "Merci d'utiliser Metho, si vous appréciez votre expérience, vous pourriez considérer supporter l'application en achetant le Mode Avancé. Celui-ci vous procurera des fonctionalités afin de rendre la création de sources bibliographiques facile et rapide.",
+                "NO_THANKS": "Non merci"
             }
         },
         "SOURCE":{
