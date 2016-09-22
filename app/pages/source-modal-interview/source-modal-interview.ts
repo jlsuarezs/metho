@@ -104,7 +104,7 @@ export class SourceModalInterviewPage {
       this.storage.setSourceFromId(this.previous._id, parsed);
     }
 
-    if ((values.author1firstname && values.author1lastname) && (this.settings.get('firstname') == "" && this.settings.get('lastname') == "")) {
+    if (values.author1firstname && values.author1lastname && !this.settings.get('firstname') && !this.settings.get('lastname')) {
       this.translate.get(["PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWER_NAME", "PROJECT.DETAIL.POPUP.SAVE_INTERVIEWER_NAME", "YES", "NO"]).subscribe(translations => {
         let alert = this.alertCtrl.create({
           title: translations["PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWER_NAME"],
