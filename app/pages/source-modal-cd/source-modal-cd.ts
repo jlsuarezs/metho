@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
-import { ViewController, NavParams, AlertController } from 'ionic-angular';
+import { ViewController, NavParams, AlertController, ActionSheetController } from 'ionic-angular';
 import { TranslateService } from 'ng2-translate/ng2-translate';
 
 import { AppStorage } from '../../providers/app-storage/app-storage';
@@ -22,7 +22,7 @@ export class SourceModalCdPage {
 
   public form: FormGroup;
 
-  constructor(public translate: TranslateService, public viewCtrl: ViewController, public alertCtrl: AlertController, public params: NavParams, public parse: Parse, public storage: AppStorage, public settings: Settings, public fb: FormBuilder) {
+  constructor(public translate: TranslateService, public viewCtrl: ViewController, public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public params: NavParams, public parse: Parse, public storage: AppStorage, public settings: Settings, public fb: FormBuilder) {
     if(this.params.get('editing') == true) {
       this.isNew = false;
     }else {
@@ -75,7 +75,32 @@ export class SourceModalCdPage {
   }
 
   dismiss() {
-    this.viewCtrl.dismiss();
+    if (!this.isEmpty()) {
+      this.translate.get(["PROJECT.DETAIL.MODAL.CANCEL", "PROJECT.DETAIL.MODAL.DELETE_DRAFT"]).subscribe(translations => {
+        let actionsheet = this.actionSheetCtrl.create({
+          buttons: [
+            {
+              text: translations["PROJECT.DETAIL.MODAL.DELETE_DRAFT"],
+              role: 'destructive',
+              handler: () => {
+                actionsheet.dismiss().then(() => {
+                  this.viewCtrl.dismiss();
+                });
+                return false;
+              }
+            },
+            {
+              text: translations["PROJECT.DETAIL.MODAL.CANCEL"],
+              role: 'cancel'
+            }
+          ]
+        });
+
+        actionsheet.present();
+      });
+    }else {
+      this.viewCtrl.dismiss();
+    }
   }
 
   submitIfEnter(event) {
@@ -100,5 +125,13 @@ export class SourceModalCdPage {
     }
 
     this.viewCtrl.dismiss();
+  }
+
+  isEmpty() {
+    if (!this.form.find('author1firstname').value && !this.form.find('author1lastname').value && !this.form.find('author2firstname').value && !this.form.find('author2lastname').value && !this.form.find('editor').value && !this.form.find('title').value && !this.form.find('hasAuthors').value && !this.form.find('publicationDate').value && !this.form.find('publicationLocation').value) {
+      return true;
+    }else {
+      return false;
+    }
   }
 }

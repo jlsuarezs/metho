@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
-import { ViewController, NavParams, AlertController } from 'ionic-angular';
+import { ViewController, NavParams, AlertController, ActionSheetController } from 'ionic-angular';
 import { SafariViewController } from 'ionic-native';
 import { TranslateService } from 'ng2-translate/ng2-translate';
 
@@ -44,7 +44,7 @@ export class SourceModalBookPage {
     timeout: false
   };
 
-  constructor(public viewCtrl: ViewController, public alertCtrl: AlertController, public translate: TranslateService, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public fetch: Fetch, public settings: Settings, public language: Language, public scanProvider: Scan) {
+  constructor(public viewCtrl: ViewController, public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public translate: TranslateService, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public fetch: Fetch, public settings: Settings, public language: Language, public scanProvider: Scan) {
     if(this.params.get('editing') == true) {
       this.isNew = false;
     }else {
@@ -115,7 +115,32 @@ export class SourceModalBookPage {
   }
 
   dismiss() {
-    this.viewCtrl.dismiss();
+    if (!this.isEmpty(true)) {
+      this.translate.get(["PROJECT.DETAIL.MODAL.CANCEL", "PROJECT.DETAIL.MODAL.DELETE_DRAFT"]).subscribe(translations => {
+        let actionsheet = this.actionSheetCtrl.create({
+          buttons: [
+            {
+              text: translations["PROJECT.DETAIL.MODAL.DELETE_DRAFT"],
+              role: 'destructive',
+              handler: () => {
+                actionsheet.dismiss().then(() => {
+                  this.viewCtrl.dismiss();
+                });
+                return false;
+              }
+            },
+            {
+              text: translations["PROJECT.DETAIL.MODAL.CANCEL"],
+              role: 'cancel'
+            }
+          ]
+        });
+
+        actionsheet.present();
+      });
+    }else {
+      this.viewCtrl.dismiss();
+    }
   }
 
   submitIfEnter(event) {

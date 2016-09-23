@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
-import { ViewController, NavParams, NavController, AlertController } from 'ionic-angular';
+import { ViewController, NavParams, NavController, AlertController, ActionSheetController } from 'ionic-angular';
 import { TranslateService } from 'ng2-translate/ng2-translate';
 
 import { AppStorage } from '../../providers/app-storage/app-storage';
@@ -30,7 +30,7 @@ export class SourceModalInterviewPage {
   public weekdayShortList: string;
   public civilityOpts: any = {};
 
-  constructor(public viewCtrl: ViewController, public translate: TranslateService, public alertCtrl: AlertController, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public nav: NavController, public language: Language, public settings: Settings) {
+  constructor(public viewCtrl: ViewController, public translate: TranslateService, public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public nav: NavController, public language: Language, public settings: Settings) {
     if(this.params.get('editing') == true) {
       this.isNew = false;
     }else {
@@ -80,7 +80,32 @@ export class SourceModalInterviewPage {
   }
 
   dismiss() {
-    this.viewCtrl.dismiss();
+    if (!this.isEmpty()) {
+      this.translate.get(["PROJECT.DETAIL.MODAL.CANCEL", "PROJECT.DETAIL.MODAL.DELETE_DRAFT"]).subscribe(translations => {
+        let actionsheet = this.actionSheetCtrl.create({
+          buttons: [
+            {
+              text: translations["PROJECT.DETAIL.MODAL.DELETE_DRAFT"],
+              role: 'destructive',
+              handler: () => {
+                actionsheet.dismiss().then(() => {
+                  this.viewCtrl.dismiss();
+                });
+                return false;
+              }
+            },
+            {
+              text: translations["PROJECT.DETAIL.MODAL.CANCEL"],
+              role: 'cancel'
+            }
+          ]
+        });
+
+        actionsheet.present();
+      });
+    }else {
+      this.viewCtrl.dismiss();
+    }
   }
 
   submitIfEnter(event) {
@@ -135,6 +160,14 @@ export class SourceModalInterviewPage {
       });
     }else {
       this.viewCtrl.dismiss();
+    }
+  }
+
+  isEmpty() {
+    if (!this.form.find('author1firstname').value && !this.form.find('author1lastname').value && !this.form.find('interviewed1firstname').value && !this.form.find('interviewed1lastname').value && !this.form.find('interviewedTitle').value && !this.form.find('publicationLocation').value && !this.form.find('civility').value && !this.form.find('publicationLocation').value) {
+      return true;
+    }else {
+      return false;
     }
   }
 }

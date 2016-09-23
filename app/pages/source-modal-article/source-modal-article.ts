@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
-import { ViewController, NavParams } from 'ionic-angular';
+import { ViewController, NavParams, ActionSheetController } from 'ionic-angular';
+import { TranslateService } from 'ng2-translate/ng2-translate';
 
 import { AppStorage } from '../../providers/app-storage/app-storage';
 import { Language } from '../../providers/language/language';
@@ -21,7 +22,7 @@ export class SourceModalArticlePage {
 
   public form: FormGroup;
 
-  constructor(public viewCtrl: ViewController, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder) {
+  constructor(public viewCtrl: ViewController, public actionSheetCtrl: ActionSheetController, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public translate: TranslateService) {
     if(this.params.get('editing') == true) {
       this.isNew = false;
     }else {
@@ -53,7 +54,32 @@ export class SourceModalArticlePage {
   }
 
   dismiss() {
-    this.viewCtrl.dismiss();
+    if (!this.isEmpty()) {
+      this.translate.get(["PROJECT.DETAIL.MODAL.CANCEL", "PROJECT.DETAIL.MODAL.DELETE_DRAFT"]).subscribe(translations => {
+        let actionsheet = this.actionSheetCtrl.create({
+          buttons: [
+            {
+              text: translations["PROJECT.DETAIL.MODAL.DELETE_DRAFT"],
+              role: 'destructive',
+              handler: () => {
+                actionsheet.dismiss().then(() => {
+                  this.viewCtrl.dismiss();
+                });
+                return false;
+              }
+            },
+            {
+              text: translations["PROJECT.DETAIL.MODAL.CANCEL"],
+              role: 'cancel'
+            }
+          ]
+        });
+
+        actionsheet.present();
+      });
+    }else {
+      this.viewCtrl.dismiss();
+    }
   }
 
   submitIfEnter(event) {
@@ -79,5 +105,13 @@ export class SourceModalArticlePage {
     }
 
     this.viewCtrl.dismiss();
+  }
+
+  isEmpty() {
+    if (!this.form.find('author1firstname').value && !this.form.find('author1lastname').value && !this.form.find('editor').value && !this.form.find('editionNumber').value && !this.form.find('publicationDate').value && !this.form.find('startPage').value && !this.form.find('endPage').value && !this.form.find('title').value) {
+      return true;
+    }else {
+      return false;
+    }
   }
 }

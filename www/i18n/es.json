@@ -54,6 +54,7 @@
                 "ADD": "Añadir",
                 "SCAN": "Escáner el código de barras",
                 "BROWSER": "Navegador de Internet",
+                "DELETE_DRAFT": "Borrar el borrador",
                 "BOOK": {
                     "FIRSTNAME": "Nombre",
                     "LASTNAME": "Apellido",

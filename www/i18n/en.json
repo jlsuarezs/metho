@@ -54,6 +54,7 @@
                 "ADD": "Create",
                 "SCAN": "Scan barcode",
                 "BROWSER": "Web browser",
+                "DELETE_DRAFT": "Erase draft",
                 "BOOK": {
                     "FIRSTNAME": "First Name",
                     "LASTNAME": "Last Name",

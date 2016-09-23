@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
-import { ViewController, NavParams } from 'ionic-angular';
+import { ViewController, NavParams, ActionSheetController } from 'ionic-angular';
 import { TranslateService } from 'ng2-translate/ng2-translate';
 
 import { AppStorage } from '../../providers/app-storage/app-storage';
@@ -28,7 +28,7 @@ export class SourceModalInternetPage {
   public weekdayList: string;
   public weekdayShortList: string;
 
-  constructor(public viewCtrl: ViewController, public translate: TranslateService, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public settings: Settings, public language: Language) {
+  constructor(public viewCtrl: ViewController, public actionSheetCtrl: ActionSheetController, public translate: TranslateService, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public settings: Settings, public language: Language) {
     if(this.params.get('editing') == true) {
       this.isNew = false;
     }else {
@@ -71,7 +71,32 @@ export class SourceModalInternetPage {
   }
 
   dismiss() {
-    this.viewCtrl.dismiss();
+    if (!this.isEmpty()) {
+      this.translate.get(["PROJECT.DETAIL.MODAL.CANCEL", "PROJECT.DETAIL.MODAL.DELETE_DRAFT"]).subscribe(translations => {
+        let actionsheet = this.actionSheetCtrl.create({
+          buttons: [
+            {
+              text: translations["PROJECT.DETAIL.MODAL.DELETE_DRAFT"],
+              role: 'destructive',
+              handler: () => {
+                actionsheet.dismiss().then(() => {
+                  this.viewCtrl.dismiss();
+                });
+                return false;
+              }
+            },
+            {
+              text: translations["PROJECT.DETAIL.MODAL.CANCEL"],
+              role: 'cancel'
+            }
+          ]
+        });
+
+        actionsheet.present();
+      });
+    }else {
+      this.viewCtrl.dismiss();
+    }
   }
 
   submitIfEnter(event) {
@@ -113,5 +138,13 @@ export class SourceModalInternetPage {
       }
     }
     return obj1;
+  }
+
+  isEmpty() {
+    if (!this.form.find('author1firstname').value && !this.form.find('author1lastname').value && !this.form.find('editor').value && !this.form.find('hasAuthors').value && !this.form.find('url').value) {
+      return true;
+    }else {
+      return false;
+    }
   }
 }

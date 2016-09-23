@@ -54,6 +54,7 @@
                 "ADD": "Créer",
                 "SCAN": "Balayer le code",
                 "BROWSER": "Navigateur web",
+                "DELETE_DRAFT": "Effacer le brouillon",
                 "BOOK": {
                     "FIRSTNAME": "Prénom",
                     "LASTNAME": "Nom",
