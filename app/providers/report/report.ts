@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 
-import { AlertController, App, NavController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 import { SocialSharing, Device, AppVersion, Splashscreen } from 'ionic-native';
 import { TranslateService } from 'ng2-translate/ng2-translate';
 
 @Injectable()
 export class Report {
-  public nav: NavController;
-
   constructor(public translate: TranslateService, public alertCtrl: AlertController) {}
 
   report(err: any) {
