@@ -15,7 +15,12 @@ export class ProjectModalPage {
   public hasConfirmed: boolean = false;
   public projectForm: FormGroup;
 
-  constructor(public viewCtrl: ViewController, public navParams: NavParams, fb: FormBuilder, public storage: AppStorage) {
+  constructor(
+    public viewCtrl: ViewController,
+    public navParams: NavParams,
+    public storage: AppStorage,
+    public fb: FormBuilder,
+  ) {
     if(this.navParams.get('previous')) {
       this.isNew = false;
       this.previous = this.navParams.get('previous');

@@ -31,7 +31,16 @@ export class SourcesPage {
   @ViewChild(List) list: List;
   @ViewChild(Content) content: Content;
 
-  constructor(public nav: NavController, public alertCtrl: AlertController, public modalCtrl: ModalController, public actionSheetCtrl: ActionSheetController, public params: NavParams, public translate: TranslateService, public storage: AppStorage, public settings: Settings) {
+  constructor(
+    public nav: NavController,
+    public params: NavParams,
+    public translate: TranslateService,
+    public actionSheetCtrl: ActionSheetController,
+    public alertCtrl: AlertController,
+    public modalCtrl: ModalController,
+    public storage: AppStorage,
+    public settings: Settings,
+  ) {
     this.projectId = params.get('id');
     this.loadProjectInfo();
   }

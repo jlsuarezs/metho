@@ -6,7 +6,10 @@ import { TranslateService } from 'ng2-translate/ng2-translate';
 
 @Injectable()
 export class Report {
-  constructor(public translate: TranslateService, public alertCtrl: AlertController) {}
+  constructor(
+    public translate: TranslateService,
+    public alertCtrl: AlertController,
+  ) {}
 
   report(err: any) {
     console.log(err);

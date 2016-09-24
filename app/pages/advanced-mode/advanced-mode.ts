@@ -13,7 +13,11 @@ export class AdvancedModePage {
   public isAdvanced: boolean = false;
   public price: string = "1,39$";
 
-  constructor(public nav: NavController, public advanced: AdvancedMode, public translate: TranslateService) {
+  constructor(
+    public nav: NavController,
+    public translate: TranslateService,
+    public advanced: AdvancedMode,
+  ) {
     this.isAdvanced = this.advanced.isEnabled();
     if (this.advanced.hasLoaded) {
       this.price = this.advanced.price;

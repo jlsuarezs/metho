@@ -26,7 +26,15 @@ export class SourcePage {
   };
   public id: string;
 
-  constructor(public nav: NavController, public alertCtrl: AlertController, public modalCtrl: ModalController, public params: NavParams, public storage: AppStorage, public parse: Parse, public translate: TranslateService) {
+  constructor(
+    public nav: NavController,
+    public params: NavParams,
+    public translate: TranslateService,
+    public alertCtrl: AlertController,
+    public modalCtrl: ModalController,
+    public storage: AppStorage,
+    public parse: Parse,
+  ) {
     this.id = this.params.get('id');
   }
 

@@ -11,7 +11,11 @@ import { Report } from '../../providers/report/report';
   templateUrl: 'build/pages/feedback/feedback.html'
 })
 export class FeedbackPage {
-  constructor(public nav: NavController, public translate: TranslateService, public report: Report) {}
+  constructor(
+    public nav: NavController,
+    public translate: TranslateService,
+    public report: Report,
+  ) {}
 
   open(type: string) {
     switch (type) {

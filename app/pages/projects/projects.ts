@@ -17,7 +17,13 @@ export class ProjectsPage {
   public loading: Boolean = true;
   @ViewChild(List) list: List;
 
-  constructor(public nav: NavController, public alertCtrl: AlertController, public modalCtrl: ModalController, public translate: TranslateService, public storage: AppStorage) {
+  constructor(
+    public nav: NavController,
+    public translate: TranslateService,
+    public alertCtrl: AlertController,
+    public modalCtrl: ModalController,
+    public storage: AppStorage,
+  ) {
     this.loadProjects();
   }
 

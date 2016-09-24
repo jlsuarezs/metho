@@ -16,7 +16,11 @@ export class ReferencesDetailPage {
   public entries: any[] = [];
   public id: string;
 
-  constructor(public nav: NavController, public params: NavParams, public references: References) {
+  constructor(
+    public nav: NavController,
+    public params: NavParams,
+    public references: References,
+  ) {
     this.id = this.params.get('id');
     this.references.load().then(data => {
       this.text = data[this.id].text;

@@ -12,7 +12,10 @@ export class BoardingScanPage {
   public currentIndex: number = 0;
   public swiperOptions: any;
 
-  constructor(public viewCtrl: ViewController, public settings: Settings) {
+  constructor(
+    public viewCtrl: ViewController,
+    public settings: Settings,
+  ) {
     this.swiperOptions = {
       parallax: true,
       keyboardControl: true

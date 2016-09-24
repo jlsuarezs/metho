@@ -36,7 +36,11 @@ export class AppStorage {
   private pendingsEvents;
   private settingsEvents;
 
-  constructor(public parse: Parse, public report: Report, public fetch: Fetch) {
+  constructor(
+    public fetch: Fetch,
+    public parse: Parse,
+    public report: Report,
+  ) {
     this.local = new Storage(LocalStorage);
     if(this.local.get("theresProjects") == null) {
       this.local.set("theresProjects", false);

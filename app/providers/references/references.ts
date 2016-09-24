@@ -7,7 +7,9 @@ import 'rxjs/add/operator/map';
 export class References {
   public data: any = null;
 
-  constructor(private http: Http) {
+  constructor(
+    private http: Http,
+  ) {
     this.load();
   }
 

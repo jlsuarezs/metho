@@ -12,7 +12,11 @@ export class ReferencesSubPage {
   public name: string = '';
   public text: string = '';
 
-  constructor(public nav: NavController, public params: NavParams, public references: References) {
+  constructor(
+    public nav: NavController,
+    public params: NavParams,
+    public references: References,
+  ) {
     let index = this.params.get('id');
     let subIndex = this.params.get('subId');
     this.references.load().then(data => {

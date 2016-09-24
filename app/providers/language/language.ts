@@ -21,7 +21,12 @@ import 'moment/locale/es';
 export class Language {
   public currentLang: string;
 
-  constructor(public settings: Settings, public translate: TranslateService, public config: Config, public storage: AppStorage) {}
+  constructor(
+    public config: Config,
+    public translate: TranslateService,
+    public storage: AppStorage,
+    public settings: Settings,
+  ) {}
 
   init() {
     this.translate.setDefaultLang('en');

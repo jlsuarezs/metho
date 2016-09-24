@@ -22,7 +22,17 @@ export class SourceModalCdPage {
 
   public form: FormGroup;
 
-  constructor(public translate: TranslateService, public viewCtrl: ViewController, public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public params: NavParams, public parse: Parse, public storage: AppStorage, public settings: Settings, public fb: FormBuilder) {
+  constructor(
+    public viewCtrl: ViewController,
+    public params: NavParams,
+    public translate: TranslateService,
+    public actionSheetCtrl: ActionSheetController,
+    public alertCtrl: AlertController,
+    public storage: AppStorage,
+    public parse: Parse,
+    public settings: Settings,
+    public fb: FormBuilder,
+  ) {
     if(this.params.get('editing') == true) {
       this.isNew = false;
     }else {

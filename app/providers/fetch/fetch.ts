@@ -10,7 +10,9 @@ export class Fetch {
   public cacheByNameWithAuthors: any;
   public API_keys: Array<string>;
 
-  constructor(public http: Http) {
+  constructor(
+    public http: Http
+  ) {
     this.cacheByISBN = {};
     this.cacheByName = {};
     this.cacheByNameWithAuthors = {};

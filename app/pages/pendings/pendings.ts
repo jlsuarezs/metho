@@ -17,7 +17,17 @@ export class PendingsPage {
   public projectId: string;
   public pendings: Pending[] = [];
 
-  constructor(public nav: NavController, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public modalCtrl: ModalController, public params: NavParams, public translate: TranslateService, public storage: AppStorage, public fetch: Fetch, public language: Language) {
+  constructor(
+    public nav: NavController,
+    public params: NavParams,
+    public translate: TranslateService,
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
+    public modalCtrl: ModalController,
+    public storage: AppStorage,
+    public fetch: Fetch,
+    public language: Language,
+  ) {
     this.projectId = params.get('pId');
   }
 

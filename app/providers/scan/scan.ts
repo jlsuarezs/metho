@@ -14,7 +14,15 @@ import { Settings } from '../settings/settings';
 @Injectable()
 export class Scan {
 
-  constructor(public modalCtrl: ModalController, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public translate: TranslateService, public fetch: Fetch, public settings: Settings, public report: Report) {}
+  constructor(
+    public translate: TranslateService,
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
+    public modalCtrl: ModalController,
+    public fetch: Fetch,
+    public report: Report,
+    public settings: Settings,
+  ) {}
 
   scan(): Promise<any> {
     return new Promise((resolve, reject) => {

@@ -28,7 +28,14 @@ export class SettingsPage {
 
   public showIlluminatiEaster: boolean = false;
 
-  constructor(public nav: NavController, public alertCtrl: AlertController, public translate: TranslateService,  public settingService: Settings, public advanced: AdvancedMode, public language: Language) {
+  constructor(
+    public nav: NavController,
+    public translate: TranslateService,
+    public alertCtrl: AlertController,
+    public advanced: AdvancedMode,
+    public language: Language,
+    public settingService: Settings,
+  ) {
     this.advancedPage = AdvancedModePage;
     this.attributionsPage = AttributionsPage;
     this.feedbackPage = FeedbackPage;

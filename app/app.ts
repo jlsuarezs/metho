@@ -25,8 +25,14 @@ import { Settings } from './providers/settings/settings';
 export class MyApp {
   rootPage: any = TabsPage;
 
-  constructor(platform: Platform, translate: TranslateService, private storage: AppStorage, public settings: Settings, public language: Language) {
-    platform.ready().then(() => {
+  constructor(
+    public platform: Platform,
+    public translate: TranslateService,
+    public storage: AppStorage,
+    public language: Language,
+    public settings: Settings,
+  ) {
+    this.platform.ready().then(() => {
       this.storage.init();
       this.language.init();
       StatusBar.styleDefault();

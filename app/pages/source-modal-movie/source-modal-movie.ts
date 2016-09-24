@@ -25,7 +25,16 @@ export class SourceModalMoviePage {
   public weekdayShortList: string;
   public form: FormGroup;
 
-  constructor(public viewCtrl: ViewController, public actionSheetCtrl: ActionSheetController, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public language: Language, public translate: TranslateService) {
+  constructor(
+    public viewCtrl: ViewController,
+    public params: NavParams,
+    public translate: TranslateService,
+    public actionSheetCtrl: ActionSheetController,
+    public storage: AppStorage,
+    public language: Language,
+    public parse: Parse,
+    public fb: FormBuilder,
+  ) {
     if(this.params.get('editing') == true) {
       this.isNew = false;
     }else {

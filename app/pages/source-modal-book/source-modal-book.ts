@@ -44,7 +44,20 @@ export class SourceModalBookPage {
     timeout: false
   };
 
-  constructor(public viewCtrl: ViewController, public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public translate: TranslateService, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public fetch: Fetch, public settings: Settings, public language: Language, public scanProvider: Scan) {
+  constructor(
+    public viewCtrl: ViewController,
+    public params: NavParams,
+    public translate: TranslateService,
+    public actionSheetCtrl: ActionSheetController,
+    public alertCtrl: AlertController,
+    public storage: AppStorage,
+    public fetch: Fetch,
+    public language: Language,
+    public parse: Parse,
+    public scanProvider: Scan,
+    public settings: Settings,
+    public fb: FormBuilder,
+  ) {
     if(this.params.get('editing') == true) {
       this.isNew = false;
     }else {

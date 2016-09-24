@@ -23,7 +23,9 @@ export class Settings {
   public loadEvents: EventEmitter<any> = new EventEmitter();
   public isLoaded: boolean = false;
 
-  constructor(public storage: AppStorage) {
+  constructor(
+    public storage: AppStorage
+  ) {
     this.localStorage = new Storage(LocalStorage);
 
     this.load();

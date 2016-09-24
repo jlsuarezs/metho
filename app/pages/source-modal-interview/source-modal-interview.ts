@@ -30,7 +30,19 @@ export class SourceModalInterviewPage {
   public weekdayShortList: string;
   public civilityOpts: any = {};
 
-  constructor(public viewCtrl: ViewController, public translate: TranslateService, public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public nav: NavController, public language: Language, public settings: Settings) {
+  constructor(
+    public nav: NavController,
+    public viewCtrl: ViewController,
+    public params: NavParams,
+    public translate: TranslateService,
+    public actionSheetCtrl: ActionSheetController,
+    public alertCtrl: AlertController,
+    public storage: AppStorage,
+    public language: Language,
+    public parse: Parse,
+    public settings: Settings,
+    public fb: FormBuilder,
+  ) {
     if(this.params.get('editing') == true) {
       this.isNew = false;
     }else {

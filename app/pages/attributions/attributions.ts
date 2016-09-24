@@ -10,7 +10,9 @@ import { LicensePage } from '../license/license';
   templateUrl: 'build/pages/attributions/attributions.html'
 })
 export class AttributionsPage {
-  constructor(public nav: NavController) {
+  constructor(
+    public nav: NavController,
+  ) {
     SafariViewController.warmUp();
   }
 

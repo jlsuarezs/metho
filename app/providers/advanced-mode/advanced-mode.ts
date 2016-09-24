@@ -15,7 +15,12 @@ export class AdvancedMode {
   public loadEvents: EventEmitter<any> = new EventEmitter();
   private productId: string = "";
 
-  constructor(public translate: TranslateService, public settings: Settings, public alertCtrl: AlertController, public report: Report) {
+  constructor(
+    public translate: TranslateService,
+    public alertCtrl: AlertController,
+    public report: Report,
+    public settings: Settings,
+  ) {
     this.init();
   }
 

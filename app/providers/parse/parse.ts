@@ -5,7 +5,9 @@ import { TranslateService } from 'ng2-translate/ng2-translate';
 
 @Injectable()
 export class Parse {
-  constructor(public translate: TranslateService) {}
+  constructor(
+    public translate: TranslateService,
+  ) {}
 
   parse(source: Source) {
     let sourceToParse = source;

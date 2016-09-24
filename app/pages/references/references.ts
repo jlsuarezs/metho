@@ -15,7 +15,10 @@ export class ReferencesPage {
   public referenceData: any[] = [];
   public advanced: boolean;
 
-  constructor(public nav: NavController, public references: References) {
+  constructor(
+    public nav: NavController,
+    public references: References,
+  ) {
     this.references.load().then(data => {
       this.referenceData = data;
     });

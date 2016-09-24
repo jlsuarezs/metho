@@ -28,7 +28,17 @@ export class SourceModalInternetPage {
   public weekdayList: string;
   public weekdayShortList: string;
 
-  constructor(public viewCtrl: ViewController, public actionSheetCtrl: ActionSheetController, public translate: TranslateService, public params: NavParams, public parse: Parse, public storage: AppStorage, public fb: FormBuilder, public settings: Settings, public language: Language) {
+  constructor(
+    public viewCtrl: ViewController,
+    public params: NavParams,
+    public translate: TranslateService,
+    public actionSheetCtrl: ActionSheetController,
+    public storage: AppStorage,
+    public language: Language,
+    public parse: Parse,
+    public settings: Settings,
+    public fb: FormBuilder,
+  ) {
     if(this.params.get('editing') == true) {
       this.isNew = false;
     }else {

@@ -9,7 +9,10 @@ import { NavController, NavParams } from 'ionic-angular';
 export class LicensePage {
   public type: string = "";
 
-  constructor(public nav: NavController, public params: NavParams) {
+  constructor(
+    public nav: NavController,
+    public params: NavParams,
+  ) {
     this.type = this.params.get('type');
   }
 }
