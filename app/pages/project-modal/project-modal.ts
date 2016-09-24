@@ -17,13 +17,13 @@ export class ProjectModalPage {
 
   constructor(
     public viewCtrl: ViewController,
-    public navParams: NavParams,
+    public params: NavParams,
     public storage: AppStorage,
     public fb: FormBuilder,
   ) {
-    if(this.navParams.get('previous')) {
+    if(this.params.get('previous')) {
       this.isNew = false;
-      this.previous = this.navParams.get('previous');
+      this.previous = this.params.get('previous');
     }else {
       this.isNew = true;
       this.previous = {
