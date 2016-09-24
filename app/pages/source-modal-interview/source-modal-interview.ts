@@ -31,7 +31,6 @@ export class SourceModalInterviewPage {
   public civilityOpts: any = {};
 
   constructor(
-    public nav: NavController,
     public viewCtrl: ViewController,
     public params: NavParams,
     public translate: TranslateService,

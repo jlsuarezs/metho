@@ -15,7 +15,6 @@ export class AdvancedModePage {
 
   constructor(
     public nav: NavController,
-    public translate: TranslateService,
     public advanced: AdvancedMode,
   ) {
     this.isAdvanced = this.advanced.isEnabled();

@@ -27,10 +27,8 @@ export class MyApp {
 
   constructor(
     public platform: Platform,
-    public translate: TranslateService,
     public storage: AppStorage,
     public language: Language,
-    public settings: Settings,
   ) {
     this.platform.ready().then(() => {
       this.storage.init();
