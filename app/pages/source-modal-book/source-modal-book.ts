@@ -128,7 +128,7 @@ export class SourceModalBookPage {
   }
 
   dismiss() {
-    if (!this.isEmpty(true)) {
+    if (!this.isEmpty(true) && this.isNew) {
       this.translate.get(["PROJECT.DETAIL.MODAL.CANCEL", "PROJECT.DETAIL.MODAL.DELETE_DRAFT"]).subscribe(translations => {
         let actionsheet = this.actionSheetCtrl.create({
           buttons: [

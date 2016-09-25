@@ -62,7 +62,7 @@ export class SourceModalArticlePage {
   }
 
   dismiss() {
-    if (!this.isEmpty()) {
+    if (!this.isEmpty() && this.isNew) {
       this.translate.get(["PROJECT.DETAIL.MODAL.CANCEL", "PROJECT.DETAIL.MODAL.DELETE_DRAFT"]).subscribe(translations => {
         let actionsheet = this.actionSheetCtrl.create({
           buttons: [
