@@ -45,7 +45,7 @@
             "DELETE_ITEM": "Eliminar",
             "SEARCH": "Buscar",
             "EMPTY_SEARCH": "Ningún resultado, puede buscar entre todas las informaciones de la fuente como el autor, el titulo o el type",
-            "PENDING_ELEMENTS": "Pendientes",
+            "PENDING_ELEMENTS": "Borradores",
             "CHOOSE_TYPE": "Elegir un typo de fuente",
             "SHARE_TEXT": "Aquí está las fuentes del proyecto « {{project_title}} » : <br><br><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center'>BIBLIOGRAPHIE</td></tr></table><br>",
             "MODAL":{
@@ -196,12 +196,12 @@
                 "BOOK_UNAVAILABLE_TITLE": "Libro inencontrable",
                 "BOOK_UNAVAILABLE_TEXT": "El codigo de barras era bien escánado pero este libro no es en nuestra base de datos.",
                 "TIMEOUT_TITLE": "Se acabó el tiempo",
-                "TIMEOUT_TEXT": "Se acabó el tiempo. Es probablemente en un red lento. ¿ Quiere añadir el codigo de barras en la lista de las fuentes pendientes ?",
+                "TIMEOUT_TEXT": "Se acabó el tiempo. Es probablemente en un red lento. ¿ Quiere añadir el codigo de barras a los borradores ?",
                 "TIMEOUT_SEARCH": "Se acabó el tiempo. Es probablemente en un red lento. Puede reintentar más tarde",
                 "ADD": "Añadir",
                 "RETRY": "Reintentar",
                 "NO_CONNECTION": "No conexión",
-                "ADD_TO_PENDINGS": "¿ Quiere añadir el codigo de barras en la lista de las fuentes pendientes ?",
+                "ADD_TO_PENDINGS": "¿ Quiere añadir el codigo de barras a los borradores ?",
                 "NOT_RIGHT_BARCODE_TYPE": "El codigo de barras era escánado pero este codigo de barras no es uno de libro. El codigo de barras normalmente tiene una mención ISBN sobre lo. Si hay dos codigos de barras, el incorrecto era tal vez escánado. Puede reintentar.",
                 "UNABLE_TO_SCAN": "Imposible de escáner",
                 "UNABLE_TO_SCAN_TEXT": "Essayez d'activer l'accès à l'appareil photo pour cette application dans l'onglet Confidentialité des Réglages. Pruebe de activar el acceso a la cámara en la pestaña Confidentialidad de los Ajustes",
@@ -234,10 +234,10 @@
             }
         },
         "PENDING":{
-            "TITLE": "Pendientes",
+            "TITLE": "Borradores",
             "DELETE_ITEM": "Eliminar",
-            "SCAN_TO_ADD": "Para añadir un elemento pendiente, tiene que escáner un código de barras cuando es desconectado",
-            "EMPTY_TAB": "Ningún fuente pendiente!",
+            "SCAN_TO_ADD": "Para añadir un borrador, tiene que escáner un código de barras cuando es desconectado",
+            "EMPTY_TAB": "Ningún borrador!",
             "NEED_ADVANCED": "El modo avanzado es necesario para escáner",
             "MODAL": {
                 "CANCEL": "Cancelar",

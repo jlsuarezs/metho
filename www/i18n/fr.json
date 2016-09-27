@@ -45,7 +45,7 @@
             "DELETE_ITEM": "Supprimer",
             "SEARCH": "Rechercher",
             "EMPTY_SEARCH": "Aucun résultat, vous pouvez rechercher parmi toutes les informations de la source dont l'auteur, le titre ou encore le type",
-            "PENDING_ELEMENTS": "En attente",
+            "PENDING_ELEMENTS": "Brouillons",
             "CHOOSE_TYPE": "Choisir le type de source",
             "SHARE_TEXT": "Voici les sources du projet « {{project_title}} » : <br><br><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center'>BIBLIOGRAPHIE</td></tr></table><br>",
             "MODAL":{
@@ -196,12 +196,12 @@
                 "BOOK_UNAVAILABLE_TITLE": "Livre introuvable",
                 "BOOK_UNAVAILABLE_TEXT": "Le code barre a bien été balayé, mais ce livre ne semble pas faire partie de notre base de données.",
                 "TIMEOUT_TITLE": "Temps d'attente écoulé",
-                "TIMEOUT_TEXT": "Le temps d'attente est écoulé. Vous vous trouvez probablement sur un réseau lent. Voulez-vous ajouter ce code-barre dans la liste de sources en attente pour réessayer plus tard ?",
+                "TIMEOUT_TEXT": "Le temps d'attente est écoulé. Vous vous trouvez probablement sur un réseau lent. Voulez-vous ajouter ce code-barre aux brouillons pour réessayer plus tard ?",
                 "TIMEOUT_SEARCH": "Le temps d'attente est écoulé. Vous vous trouvez probablement sur un réseau lent. Réessayez plus tard.",
                 "ADD": "Ajouter",
                 "RETRY": "Réessayer",
                 "NO_CONNECTION": "Aucune connexion",
-                "ADD_TO_PENDINGS": "Voulez-vous ajouter ce code-barre à la liste de sources en attente ?",
+                "ADD_TO_PENDINGS": "Voulez-vous ajouter ce code-barre aux brouillons ?",
                 "NOT_RIGHT_BARCODE_TYPE": "Le code barre a été balayé, mais ce type de code barre n'est pas un code barre de livre. Le bon code barre possède habituellement une inscription ISBN par dessus celui-ci. Si deux code barre sont côte à côte, le mauvais a peut-être été balayé. Vous pouvez réessayer.",
                 "UNABLE_TO_SCAN": "Balayage impossible",
                 "UNABLE_TO_SCAN_TEXT": "Essayez d'activer l'accès à l'appareil photo pour cette application dans l'onglet Confidentialité des Réglages.",
@@ -234,10 +234,10 @@
             }
         },
         "PENDING":{
-            "TITLE": "En attente",
+            "TITLE": "Brouillons",
             "DELETE_ITEM": "Supprimer",
-            "SCAN_TO_ADD": "Pour ajouter un élément en attente, balayez un code-barre lorsqu'hors-ligne",
-            "EMPTY_TAB": "Aucune source en attente",
+            "SCAN_TO_ADD": "Pour ajouter un brouillon, balayez un code-barre lorsqu'hors-ligne",
+            "EMPTY_TAB": "Aucun brouillon",
             "NEED_ADVANCED": "Le mode avancé est requis pour utiliser le balayage",
             "MODAL": {
                 "CANCEL": "Annuler",

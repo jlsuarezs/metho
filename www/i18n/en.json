@@ -45,7 +45,7 @@
             "DELETE_ITEM": "Delete",
             "SEARCH": "Search",
             "EMPTY_SEARCH": "No result, you can search across all properties of the source like the author, title or type",
-            "PENDING_ELEMENTS": "Pending",
+            "PENDING_ELEMENTS": "Drafts",
             "CHOOSE_TYPE": "Choose source type",
             "SHARE_TEXT": "Here are the sources for project « {{project_title}} » : <br><br><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center'>BIBLIOGRAPHIE</td></tr></table><br>",
             "MODAL":{
@@ -196,12 +196,12 @@
                 "BOOK_UNAVAILABLE_TITLE": "Book unavailable",
                 "BOOK_UNAVAILABLE_TEXT": "Barcode has been scanned, but this book isn't in our database.",
                 "TIMEOUT_TITLE": "Timeout",
-                "TIMEOUT_TEXT": "Timeout reached. You're probably on a slow network. Do you want to add this barcode to the pending sources to try again later ?",
+                "TIMEOUT_TEXT": "Timeout reached. You're probably on a slow network. Do you want to add this barcode to the drafts to try again later ?",
                 "TIMEOUT_SEARCH": "Timeout reached. You're probably on a slow network. You may want to try again later.",
                 "ADD": "Add",
                 "RETRY": "Retry",
                 "NO_CONNECTION": "No connection",
-                "ADD_TO_PENDINGS": "Do you want to add this barcode to the pending sources ?",
+                "ADD_TO_PENDINGS": "Do you want to add this barcode to the drafts ?",
                 "NOT_RIGHT_BARCODE_TYPE": "Barcode has been scanned, but this barcode type is not a book barcode. The right barcode normally has ISBN label above it. If two barcodes are side by side, the wrong one might have been scanned. You may retry.",
                 "UNABLE_TO_SCAN": "Unable to scan",
                 "UNABLE_TO_SCAN_TEXT": "You may try going into Settings > Privacy and turning on camera access for this app.",
@@ -234,10 +234,10 @@
             }
         },
         "PENDING":{
-            "TITLE": "Pending",
+            "TITLE": "Drafts",
             "DELETE_ITEM": "Delete",
-            "SCAN_TO_ADD": "You can add a pending element by scaning a barcode when offline",
-            "EMPTY_TAB": "No pending element!",
+            "SCAN_TO_ADD": "You can add a draft by scaning a barcode when offline",
+            "EMPTY_TAB": "No draft!",
             "NEED_ADVANCED": "Advanced mode is required to use scan feature",
             "MODAL": {
                 "CANCEL": "Cancel",
