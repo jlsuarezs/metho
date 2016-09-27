@@ -49,7 +49,7 @@ export class SourcePage {
   }
 
   solve(error: SourceError) {
-    this.translate.get(["PROJECT.SOURCE.CONFIRM", "PROJECT.SOURCE.CANCEL"]).subscribe(translations => {
+    this.translate.get(["PROJECT.DETAIL.POPUP.OK", "PROJECT.SOURCE.CANCEL"]).subscribe(translations => {
       let alert = this.alertCtrl.create({
         title: error.promptTitle,
         message: error.promptText,
@@ -58,7 +58,7 @@ export class SourcePage {
             text: translations["PROJECT.SOURCE.CANCEL"]
           },
           {
-            text: translations["PROJECT.SOURCE.CONFIRM"],
+            text: translations["PROJECT.DETAIL.POPUP.OK"],
             handler: data => {
               if (error.complex) {
                 if (error.type == 'select') {
