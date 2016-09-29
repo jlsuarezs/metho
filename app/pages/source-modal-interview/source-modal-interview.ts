@@ -92,7 +92,7 @@ export class SourceModalInterviewPage {
 
   dismiss() {
     if (!this.isEmpty() && this.isNew) {
-      this.translate.get(["PROJECT.DETAIL.MODAL.CANCEL", "PROJECT.DETAIL.MODAL.DELETE_DRAFT"]).subscribe(translations => {
+      this.translate.get(["COMMON.CANCEL", "PROJECT.DETAIL.MODAL.DELETE_DRAFT"]).subscribe(translations => {
         let actionsheet = this.actionSheetCtrl.create({
           buttons: [
             {
@@ -106,7 +106,7 @@ export class SourceModalInterviewPage {
               }
             },
             {
-              text: translations["PROJECT.DETAIL.MODAL.CANCEL"],
+              text: translations["COMMON.CANCEL"],
               role: 'cancel'
             }
           ]
@@ -141,19 +141,19 @@ export class SourceModalInterviewPage {
     }
 
     if (values.author1firstname && values.author1lastname && !this.settings.get('firstname') && !this.settings.get('lastname')) {
-      this.translate.get(["PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWER_NAME", "PROJECT.DETAIL.POPUP.SAVE_INTERVIEWER_NAME", "YES", "NO"]).subscribe(translations => {
+      this.translate.get(["PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWER_NAME", "PROJECT.DETAIL.POPUP.SAVE_INTERVIEWER_NAME", "COMMON.YES", "COMMON.NO"]).subscribe(translations => {
         let alert = this.alertCtrl.create({
           title: translations["PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWER_NAME"],
           message: translations["PROJECT.DETAIL.POPUP.SAVE_INTERVIEWER_NAME"],
           buttons: [
             {
-              text: translations["NO"],
+              text: translations["COMMON.NO"],
               handler: () => {
                 this.viewCtrl.dismiss();
               }
             },
             {
-              text: translations["YES"],
+              text: translations["COMMON.YES"],
               handler: () => {
                 let transition = alert.dismiss();
                 this.settings.set('firstname', values.author1firstname);

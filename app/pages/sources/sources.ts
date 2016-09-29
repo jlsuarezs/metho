@@ -88,7 +88,7 @@ export class SourcesPage {
   }
 
   createSource() {
-    this.translate.get(["PROJECT.TYPES.BOOK", "PROJECT.TYPES.ARTICLE", "PROJECT.TYPES.INTERNET", "PROJECT.TYPES.CD", "PROJECT.TYPES.MOVIE", "PROJECT.TYPES.INTERVIEW", "PROJECT.DETAIL.CHOOSE_TYPE", "PROJECT.DETAIL.POPUP.CANCEL"]).subscribe(translations => {
+    this.translate.get(["PROJECT.TYPES.BOOK", "PROJECT.TYPES.ARTICLE", "PROJECT.TYPES.INTERNET", "PROJECT.TYPES.CD", "PROJECT.TYPES.MOVIE", "PROJECT.TYPES.INTERVIEW", "PROJECT.DETAIL.CHOOSE_TYPE", "COMMON.CANCEL"]).subscribe(translations => {
       let action = this.actionSheetCtrl.create({
         title: translations['PROJECT.DETAIL.CHOOSE_TYPE'],
         buttons: [
@@ -136,7 +136,7 @@ export class SourcesPage {
           },
           {
             role: 'cancel',
-            text: translations['PROJECT.DETAIL.POPUP.CANCEL']
+            text: translations["COMMON.CANCEL"]
           }
         ]
       });
@@ -219,19 +219,19 @@ export class SourcesPage {
   }
 
   deleteSource(source: Source) {
-    this.translate.get(["PROJECT.DETAIL.POPUP.DELETE_TITLE", "PROJECT.DETAIL.POPUP.DELETE_TEXT", "PROJECT.DETAIL.POPUP.DELETE", "PROJECT.DETAIL.POPUP.CANCEL"]).subscribe(translations => {
+    this.translate.get(["PROJECT.DETAIL.POPUP.DELETE_TITLE", "PROJECT.DETAIL.POPUP.DELETE_TEXT", "COMMON.DELETE", "COMMON.CANCEL"]).subscribe(translations => {
       let alert = this.alertCtrl.create({
         title: translations["PROJECT.DETAIL.POPUP.DELETE_TITLE"],
         message: translations["PROJECT.DETAIL.POPUP.DELETE_TEXT"],
         buttons: [
           {
-            text: translations["PROJECT.DETAIL.POPUP.CANCEL"],
+            text: translations["COMMON.CANCEL"],
             handler: () => {
               this.list.closeSlidingItems();
             }
           },
           {
-            text: translations["PROJECT.DETAIL.POPUP.DELETE"],
+            text: translations["COMMON.DELETE"],
             handler: () => {
               this.storage.deleteSource(source._id);
               this.sources.splice(this.sources.indexOf(source), 1);
@@ -257,13 +257,13 @@ export class SourcesPage {
       });
 
       if (errNum > 0 && !this.settings.get('ignoreErrors')) {
-        this.translate.get(["PROJECT.DETAIL.POPUP.ERRORS_SOURCES", "PROJECT.DETAIL.POPUP.SHARE_TEXT", "PROJECT.DETAIL.POPUP.SHARE", "PROJECT.DETAIL.POPUP.CANCEL"], { errNum:errNum }).subscribe((translations) => {
+        this.translate.get(["PROJECT.DETAIL.POPUP.ERRORS_SOURCES", "PROJECT.DETAIL.POPUP.SHARE_TEXT", "PROJECT.DETAIL.POPUP.SHARE", "COMMON.CANCEL"], { errNum:errNum }).subscribe((translations) => {
           let alert = this.alertCtrl.create({
             title: translations["PROJECT.DETAIL.POPUP.SHARE_TEXT"],
             message: translations["PROJECT.DETAIL.POPUP.ERRORS_SOURCES"],
             buttons: [
               {
-                text: translations["PROJECT.DETAIL.POPUP.CANCEL"]
+                text: translations["COMMON.CANCEL"]
               },
               {
                 text: translations["PROJECT.DETAIL.POPUP.SHARE"],

@@ -58,13 +58,13 @@ export class AdvancedMode {
             reject();
           });
         }else {
-          this.translate.get(["PROJECT.DETAIL.POPUP.OK", "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE", "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK"]).subscribe(translations => {
+          this.translate.get(["COMMON.OK", "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE", "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK"]).subscribe(translations => {
             let alert = this.alertCtrl.create({
               title: translations["SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE"],
               message: translations["SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK"],
               buttons: [
                 {
-                  text: translations["PROJECT.DETAIL.POPUP.OK"],
+                  text: translations["COMMON.OK"],
                   handler: () => {
                     reject();
                   }
@@ -91,13 +91,13 @@ export class AdvancedMode {
               this.settings.set('advanced', true);
               resolve();
             }else {
-              this.translate.get(["SETTINGS.ADVANCED_MODE.POPUP.RESTORE", "SETTINGS.ADVANCED_MODE.POPUP.RESTORE_NO_FOUND", "PROJECT.DETAIL.POPUP.OK"]).subscribe((translations) => {
+              this.translate.get(["SETTINGS.ADVANCED_MODE.POPUP.RESTORE", "SETTINGS.ADVANCED_MODE.POPUP.RESTORE_NO_FOUND", "COMMON.OK"]).subscribe((translations) => {
                 let alert = this.alertCtrl.create({
                   title: translations["SETTINGS.ADVANCED_MODE.POPUP.RESTORE"],
                   message: translations["SETTINGS.ADVANCED_MODE.POPUP.RESTORE_NO_FOUND"],
                   buttons: [
                     {
-                      text: translations["PROJECT.DETAIL.POPUP.OK"]
+                      text: translations["COMMON.OK"]
                     }
                   ]
                 });
@@ -110,13 +110,13 @@ export class AdvancedMode {
             reject();
           });
         }else {
-          this.translate.get(["PROJECT.DETAIL.POPUP.OK", "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE", "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK"]).subscribe(translations => {
+          this.translate.get(["COMMON.OK", "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE", "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK"]).subscribe(translations => {
             let alert = this.alertCtrl.create({
               title: translations["SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE"],
               message: translations["SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK"],
               buttons: [
                 {
-                  text: translations["PROJECT.DETAIL.POPUP.OK"],
+                  text: translations["COMMON.OK"],
                   handler: () => {
                     reject();
                   }

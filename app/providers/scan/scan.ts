@@ -111,13 +111,13 @@ export class Scan {
   }
 
   private alert404(resolve: (any) => any) {
-    this.translate.get(["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE", "PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TEXT", "PROJECT.DETAIL.POPUP.OK"]).subscribe((translations) => {
+    this.translate.get(["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE", "PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TEXT", "COMMON.OK"]).subscribe((translations) => {
       let alert = this.alertCtrl.create({
         title: translations["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE"],
         message: translations["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TEXT"],
         buttons: [
           {
-            text: translations['PROJECT.DETAIL.POPUP.OK'],
+            text: translations["COMMON.OK"],
             handler: () => {
               resolve({});
             }
@@ -161,13 +161,13 @@ export class Scan {
   }
 
   private alert500(resolve: (any) => void) {
-    this.translate.get(["PROJECT.DETAIL.POPUP.ERROR", "PROJECT.DETAIL.POPUP.ERROR_500", "PROJECT.DETAIL.POPUP.OK"]).subscribe((translations) => {
+    this.translate.get(["PROJECT.DETAIL.POPUP.ERROR", "PROJECT.DETAIL.POPUP.ERROR_500", "COMMON.OK"]).subscribe((translations) => {
       let alert = this.alertCtrl.create({
         title: translations["PROJECT.DETAIL.POPUP.ERROR"],
         message: translations["PROJECT.DETAIL.POPUP.ERROR_500"],
         buttons: [
           {
-            text: translations['PROJECT.DETAIL.POPUP.OK'],
+            text: translations["COMMON.OK"],
             handler: () => {
               resolve({});
             }
@@ -211,13 +211,13 @@ export class Scan {
   }
 
   private alertScanUnavailable(resolve: (any) => void) {
-    this.translate.get(["PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN", "PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN_TEXT", "PROJECT.DETAIL.POPUP.OK"]).subscribe((translations) => {
+    this.translate.get(["PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN", "PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN_TEXT", "COMMON.OK"]).subscribe((translations) => {
       let alert = this.alertCtrl.create({
         title: translations["PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN"],
         message: translations["PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN_TEXT"],
         buttons: [
           {
-            text: translations['PROJECT.DETAIL.POPUP.OK'],
+            text: translations["COMMON.OK"],
             handler: () => {
               resolve({});
             }
@@ -229,13 +229,13 @@ export class Scan {
   }
 
   private alertWrongBarcode(resolve: (any) => void) {
-    this.translate.get(["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE", "PROJECT.DETAIL.POPUP.NOT_RIGHT_BARCODE_TYPE", "PROJECT.DETAIL.POPUP.OK"]).subscribe((translations) => {
+    this.translate.get(["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE", "PROJECT.DETAIL.POPUP.NOT_RIGHT_BARCODE_TYPE", "COMMON.OK"]).subscribe((translations) => {
       let alert = this.alertCtrl.create({
         title: translations["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE"],
         message: translations["PROJECT.DETAIL.POPUP.NOT_RIGHT_BARCODE_TYPE"],
         buttons: [
           {
-            text: translations['PROJECT.DETAIL.POPUP.OK'],
+            text: translations["COMMON.OK"],
             handler: () => {
               resolve({});
             }

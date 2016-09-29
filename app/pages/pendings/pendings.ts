@@ -99,13 +99,13 @@ export class PendingsPage {
           alert.present();
         });
       }else if (err == 408) {
-        this.translate.get(["PROJECT.PENDING.POPUP.TIMEOUT_TITLE", "PROJECT.PENDING.POPUP.TIMEOUT_TEXT", "PROJECT.PENDING.POPUP.CANCEL", "PROJECT.PENDING.POPUP.RETRY"]).subscribe((translations) => {
+        this.translate.get(["PROJECT.PENDING.POPUP.TIMEOUT_TITLE", "PROJECT.PENDING.POPUP.TIMEOUT_TEXT", "COMMON.CANCEL", "PROJECT.PENDING.POPUP.RETRY"]).subscribe((translations) => {
           let alert = this.alertCtrl.create({
             title: translations["PROJECT.PENDING.POPUP.TIMEOUT_TITLE"],
             message: translations["PROJECT.PENDING.POPUP.TIMEOUT_TEXT"],
             buttons: [
               {
-                text: translations["PROJECT.PENDING.POPUP.CANCEL"]
+                text: translations["COMMON.CANCEL"]
               },
               {
                 text: translations["PROJECT.PENDING.POPUP.RETRY"],
@@ -118,13 +118,13 @@ export class PendingsPage {
           alert.present();
         });
       }else if (err >= 500 && err <= 599) {
-        this.translate.get(["PROJECT.DETAIL.POPUP.ERROR", "PROJECT.DETAIL.POPUP.ERROR_500", "PROJECT.DETAIL.POPUP.OK"]).subscribe(translations => {
+        this.translate.get(["PROJECT.DETAIL.POPUP.ERROR", "PROJECT.DETAIL.POPUP.ERROR_500", "COMMON.OK"]).subscribe(translations => {
           let alert = this.alertCtrl.create({
             title: translations["PROJECT.DETAIL.POPUP.ERROR"],
             message: translations["PROJECT.DETAIL.POPUP.ERROR_500"],
             buttons: [
               {
-                text: translations["PROJECT.DETAIL.POPUP.OK"]
+                text: translations["COMMON.OK"]
               }
             ]
           });

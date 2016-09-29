@@ -5,6 +5,17 @@
     "BACK_BUTTON": "Back",
     "YES": "Yes",
     "NO": "No",
+    "COMMON": {
+        "YES": "Yes",
+        "NO": "No",
+        "OK": "OK",
+        "LASTNAME": "Last Name",
+        "FIRSTNAME": "First Name",
+        "DELETE": "Delete",
+        "EDIT": "Edit",
+        "CANCEL": "Cancel",
+        "CREATE": "Create"
+    },
     "PROJECT":{
         "TAB":{
             "TAB_TITLE": "Projects",

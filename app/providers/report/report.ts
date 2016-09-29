@@ -27,21 +27,21 @@ export class Report {
         stacktrace = "";
       }
     }
-    this.translate.get(["YES", "NO", "REPORT.UNKNOWN", "REPORT.REPORT_?", "REPORT.DESC","REPORT.DO_NOT_EDIT", "REPORT.ERROR"]).subscribe(translations => {
+    this.translate.get(["COMMON.YES", "COMMON.NO", "REPORT.UNKNOWN", "REPORT.REPORT_?", "REPORT.DESC","REPORT.DO_NOT_EDIT", "REPORT.ERROR"]).subscribe(translations => {
       this.diagnostics().then(diags => {
         let alert = this.alertCtrl.create({
           title: translations["REPORT.UNKNOWN"],
           message: translations["REPORT.REPORT_?"],
           buttons: [
             {
-              text: translations["NO"],
+              text: translations["COMMON.NO"],
               handler: () => {
                 this.askForRefresh(alert.dismiss());
                 return false;
               }
             },
             {
-              text: translations["YES"],
+              text: translations["COMMON.YES"],
               handler: () => {
                 SocialSharing.shareViaEmail(
                   `<b>${translations['REPORT.DESC']}</b><br><br><br>
@@ -69,16 +69,16 @@ export class Report {
 
   askForRefresh(transition=Promise.resolve()) {
     transition.then(() => {
-      this.translate.get(["YES", "NO", "REPORT.ERROR", "REPORT.RELOAD?"]).subscribe(translations => {
+      this.translate.get(["COMMON.YES", "COMMON.NO", "REPORT.ERROR", "REPORT.RELOAD?"]).subscribe(translations => {
         let alert = this.alertCtrl.create({
           title: translations["REPORT.ERROR"],
           message: translations["REPORT.RELOAD?"],
           buttons: [
             {
-              text: translations["NO"]
+              text: translations["COMMON.NO"]
             },
             {
-              text: translations["YES"],
+              text: translations["COMMON.YES"],
               handler: () => {
                 Splashscreen.show();
                 document.location.reload();

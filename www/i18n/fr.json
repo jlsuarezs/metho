@@ -5,6 +5,17 @@
     "BACK_BUTTON": "Retour",
     "YES": "Oui",
     "NO": "Non",
+    "COMMON": {
+        "YES": "Oui",
+        "NO": "Non",
+        "OK": "OK",
+        "LASTNAME": "Nom",
+        "FIRSTNAME": "Prénom",
+        "DELETE": "Supprimer",
+        "EDIT": "Modifier",
+        "CANCEL": "Annuler",
+        "CREATE": "Créer"
+    },
     "PROJECT":{
         "TAB":{
             "TAB_TITLE": "Projets",
