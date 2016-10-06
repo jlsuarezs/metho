@@ -10,6 +10,12 @@ import { Report } from '../report/report';
 declare const require: any;
 
 const PouchDB = require('pouchdb');
+const PouchDB_Adapter_Cordova_SQLite = require('pouchdb-adapter-cordova-sqlite');
+
+interface CordovaWindow extends Window {
+  cordova: any;
+}
+declare var window: CordovaWindow;
 
 @Injectable()
 export class AppStorage {
@@ -54,10 +60,18 @@ export class AppStorage {
   }
 
   init() {
-    this.projectDB = new PouchDB("projects", { adapter: "websql" });
-    this.sourceDB = new PouchDB("sources", { adapter: "websql" });
-    this.pendingDB = new PouchDB("pendings", { adapter: "websql" });
-    this.settingsDB = new PouchDB("settings", { adapter: "websql" });
+    PouchDB.plugin(PouchDB_Adapter_Cordova_SQLite);
+    if (!!window.cordova) {
+      this.projectDB = new PouchDB("projects", { adapter: "cordova-sqlite" });
+      this.sourceDB = new PouchDB("sources", { adapter: "cordova-sqlite" });
+      this.pendingDB = new PouchDB("pendings", { adapter: "cordova-sqlite" });
+      this.settingsDB = new PouchDB("settings", { adapter: "cordova-sqlite" });
+    }else {
+      this.projectDB = new PouchDB("projects", { adapter: "websql" });
+      this.sourceDB = new PouchDB("sources", { adapter: "websql" });
+      this.pendingDB = new PouchDB("pendings", { adapter: "websql" });
+      this.settingsDB = new PouchDB("settings", { adapter: "websql" });
+    }
 
     if (this.theresProjects) {
       this.projectDB.allDocs({include_docs: true}).then(docs => {
