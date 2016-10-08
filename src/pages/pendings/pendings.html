@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{'PROJECT.PENDING.TITLE' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="pendings.length">
+    <ion-item-sliding *ngFor="let pending of pendings">
+      <button ion-item *ngIf="!pending.notAvailable && !pending.isLoaded" (click)="solvePending(pending)" icon-right>
+        <h2>{{pending.isbn}}</h2>
+        <p>{{pending.datestring}}</p>
+        <ion-icon name="cloud-download-outline"></ion-icon>
+      </button>
+
+      <button ion-item *ngIf="pending.isLoaded && !pending.notAvailable" (click)="openAfterLoad(pending.data, pending._id)">
+        <h2>{{pending.data.title}}</h2>
+        <h4>{{pending.isbn}}</h4>
+        <p>{{pending.datestring}}</p>
+        <ion-icon name="checkmark-circle-outline" class="green" item-right></ion-icon>
+      </button>
+
+      <button ion-item *ngIf="pending.notAvailable" (click)="openModalWithBrowser(pending)">
+        <h2>{{pending.isbn}}</h2>
+        <p>{{pending.datestring}}</p>
+        <ion-icon name="alert-outline" class="red" item-right></ion-icon>
+      </button>
+
+      <ion-item-options>
+        <button ion-button color="danger" (click)="deletePending(pending)">
+          {{'COMMON.DELETE' | translate}}
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

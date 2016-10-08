@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <div class="page-title" *ngIf="source.title">{{source.title}}</div>
+      <div class="page-title" *ngIf="!source.title" [innerHtml]="source.parsedSource"></div>
+      <div class="page-sub-title">{{source.parsedType}}</div>
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="edit()">{{'COMMON.EDIT' | translate}}</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <p class="center padding" [innerHtml]="source.parsedSource"></p>
+
+  <ion-list>
+    <button ion-item *ngFor="let error of source.errors" (click)="solve(error)" icon-left>
+      <ion-icon name="alert" item-left class="red"></ion-icon>
+      <h2>{{error.errorTitle}}</h2>
+    </button>
+    <button ion-item *ngFor="let warning of source.warnings" (click)="solve(warning)" icon-left>
+      <ion-icon name="warning" item-left class="yellow"></ion-icon>
+      <h2>{{warning.errorTitle}}</h2>
+    </button>
+  </ion-list>
+
+  <p class="no-errors" *ngIf="!source.warnings.length && !source.errors.length">
+    {{'PROJECT.SOURCE.NO_ERROR' | translate}}
+  </p>
+</ion-content>

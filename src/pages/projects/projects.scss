@@ -1,0 +1,16 @@
+projects {
+    height: 100%;
+
+    .flex {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      flex-direction: column;
+    }
+
+    button h2, button p {
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+}

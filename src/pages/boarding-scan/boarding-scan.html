@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button clear (click)="dismiss()" *ngIf="currentIndex == 0">{{'PROJECT.DETAIL.BOARDING.SKIP' | translate}}</button>
+      <button ion-button clear (click)="slider.slidePrev()" *ngIf="currentIndex > 0">{{'PROJECT.DETAIL.BOARDING.PREVIOUS' | translate}}</button>
+    </ion-buttons>
+    <ion-title>{{'PROJECT.DETAIL.BOARDING.TITLE' | translate}}</ion-title>
+    <ion-buttons end>
+      <button ion-button clear (click)="slider.slideNext()" *ngIf="currentIndex < 2">{{'PROJECT.DETAIL.BOARDING.NEXT' | translate}}</button>
+      <button ion-button clear (click)="dismiss()" *ngIf="currentIndex == 2">{{'PROJECT.DETAIL.BOARDING.CLOSE' | translate}}</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides pager #slider (ionDidChange)="onSlideChange()" [options]="swiperOptions">
+    <ion-slide class="first">
+      <h1 class="big">1 800 000</h1>
+      <p class="smallest">{{'PROJECT.DETAIL.BOARDING.BOOKS' | translate}}</p>
+      <p class="justified">{{'PROJECT.DETAIL.BOARDING.TEXT_RECOGNIZED' | translate}}</p>
+    </ion-slide>
+    <ion-slide class="second">
+      <img src="assets/img/lamp.png" alt="Lamp" />
+      <p class="center">{{'PROJECT.DETAIL.BOARDING.SCAN_TEXT' | translate}}</p>
+    </ion-slide>
+    <ion-slide class="third">
+      <div class="imitateSVG" *ngIf="currentIndex != 2"></div>
+      <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" *ngIf="currentIndex == 2">
+        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+      </svg>
+      <div class="padding">
+        <button ion-button (click)="dismiss()" color="light">
+          {{'PROJECT.DETAIL.BOARDING.SCAN_FIRST' | translate}}
+        </button>
+      </div>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

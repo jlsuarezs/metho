@@ -1,0 +1,50 @@
+.center {
+  text-align: center;
+}
+
+.justified {
+  text-align: justify;
+}
+
+.dimmed-50 {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.dimmed-75 {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+em {
+  font-style: italic;
+}
+
+.toolbar-title {
+  .page-title {
+    color: black;
+    overflow: hidden;
+    text-overflow: ellipsis !important;
+  }
+
+  .page-sub-title {
+    color: rgba(0, 0, 0, 0.6) !important;
+    font-size: 0.75em !important;
+    font-weight: normal;
+    overflow: hidden;
+    text-overflow: ellipsis !important;
+  }
+}
+
+.md {
+  // Fix positioning of button for scanning
+  source-modal-book .toolbar.no-padding > .toolbar-content {
+    height: 56px;
+
+    button {
+      height: 56px;
+
+      .left-aligned {
+        top: 18px;
+      }
+    }
+  }
+}
