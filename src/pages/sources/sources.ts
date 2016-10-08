@@ -95,6 +95,7 @@ export class SourcesPage {
         buttons: [
           {
             text: translations['PROJECT.TYPES.BOOK'],
+            icon: 'book',
             handler: () => {
               this.openModal('book', action.dismiss());
               return false;
@@ -102,6 +103,7 @@ export class SourcesPage {
           },
           {
             text: translations['PROJECT.TYPES.ARTICLE'],
+            icon: 'paper',
             handler: () => {
               this.openModal('article', action.dismiss());
               return false;
@@ -109,6 +111,7 @@ export class SourcesPage {
           },
           {
             text: translations['PROJECT.TYPES.INTERNET'],
+            icon: 'at',
             handler: () => {
               this.openModal('internet', action.dismiss());
               return false;
@@ -116,6 +119,7 @@ export class SourcesPage {
           },
           {
             text: translations['PROJECT.TYPES.CD'],
+            icon: 'disc',
             handler: () => {
               this.openModal('cd', action.dismiss());
               return false;
@@ -123,6 +127,7 @@ export class SourcesPage {
           },
           {
             text: translations['PROJECT.TYPES.MOVIE'],
+            icon: 'film',
             handler: () => {
               this.openModal('movie', action.dismiss());
               return false;
@@ -130,6 +135,7 @@ export class SourcesPage {
           },
           {
             text: translations['PROJECT.TYPES.INTERVIEW'],
+            icon: 'quote',
             handler: () => {
               this.openModal('interview', action.dismiss());
               return false;

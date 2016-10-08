@@ -34,6 +34,18 @@ em {
   }
 }
 
+.ios ion-action-sheet {
+  .action-sheet-button[icon-left] {
+    position: relative;
+
+    ion-icon {
+      position: absolute;
+      left: 10px;
+      top: 15px;
+    }
+  }
+}
+
 .md {
   // Fix positioning of button for scanning
   source-modal-book .toolbar.no-padding > .toolbar-content {
