@@ -11,10 +11,6 @@ import moment from 'moment';
 import 'moment/src/locale/fr';
 import 'moment/src/locale/en-ca';
 import 'moment/src/locale/es';
-// var numeral = require('numeral');
-// import 'numeral/languages/fr';
-// import 'numeral/languages/en-gb';
-// import 'numeral/languages/es';
 
 
 @Injectable()
@@ -49,7 +45,6 @@ export class Language {
           });
           moment.locale(code);
           this.currentLang = code;
-          // numeral.language(code);
         }).catch(err => {
           this.translate.use("fr");
           this.translate.get("BACK_BUTTON").subscribe(back => {
@@ -57,7 +52,6 @@ export class Language {
           });
           moment.locale("fr");
           this.currentLang = "fr";
-          // numeral.language("fr");
         });
       }else {
         this.translate.use(overideLang);
@@ -66,7 +60,6 @@ export class Language {
         });
         moment.locale(overideLang);
         this.currentLang = overideLang;
-        // numeral.language(overideLang);
       }
     });
   }
@@ -74,10 +67,6 @@ export class Language {
   getMoment() {
     return moment;
   }
-
-  // getNumeral() {
-  //   return numeral;
-  // }
 
   change(lang: string) {
     this.settings.set('overideLang', lang);
