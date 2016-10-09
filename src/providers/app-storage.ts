@@ -191,7 +191,6 @@ export class AppStorage {
         this.projects.set(response.id, project);
         releaseSourceLock();
         releaseProjectLock();
-        this.local.set("theresProjects", true);
         resolve(response);
       }).catch((err) => {
         releaseSourceLock();
