@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-buttons start>
-      <button ion-button clear (click)="dismiss()">{{'PROJECT.SOURCE.MODAL.CANCEL' | translate}}</button>
+      <button ion-button clear (click)="dismiss()">{{"COMMON.CANCEL" | translate}}</button>
     </ion-buttons>
     <ion-title>{{(isNew ? 'PROJECT.DETAIL.MODAL.TITLE' : 'PROJECT.SOURCE.MODAL.TITLE') | translate}}</ion-title>
     <ion-buttons end>
@@ -30,7 +30,7 @@
         </ion-list-header>
         <ion-item>
           <ion-label>{{'PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_TITLE' | translate}}</ion-label>
-          <ion-select formControlName="civility" [selectOptions]="civilityOpts" cancelText="{{'PROJECT.DETAIL.MODAL.CANCEL' | translate}}">
+          <ion-select formControlName="civility" [selectOptions]="civilityOpts" cancelText="{{'COMMON.CANCEL' | translate}}">
             <ion-option value="mister">{{'PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISTER' | translate}}</ion-option>
             <ion-option value="miss">{{'PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS' | translate}}</ion-option>
             <ion-option value="miss_young">{{'PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS_YOUNG' | translate}}</ion-option>
@@ -53,7 +53,7 @@
       </ion-item>
       <ion-item>
         <ion-label>{{'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEW_DATE' | translate}}</ion-label>
-        <ion-datetime formControlName="consultationDate" [monthNames]="monthList" [monthShortNames]="monthShortList" [dayNames]="weekdayList" [dayShortNames]="weekdayShortList" cancelText="{{'PROJECT.DETAIL.MODAL.CANCEL' | translate}}" doneText="{{'PROJECT.DETAIL.POPUP.OK' | translate}}" pickerFormat="DD-MMM-YYYY" displayFormat="D MMMM YYYY"></ion-datetime>
+        <ion-datetime formControlName="consultationDate" [monthNames]="monthList" [monthShortNames]="monthShortList" [dayNames]="weekdayList" [dayShortNames]="weekdayShortList" cancelText="{{'COMMON.CANCEL' | translate}}" doneText="{{'COMMON.OK' | translate}}" pickerFormat="DD-MMM-YYYY" displayFormat="D MMMM YYYY"></ion-datetime>
       </ion-item>
     </ion-list>
   </form>

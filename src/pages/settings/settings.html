@@ -23,13 +23,13 @@
       </ion-item>
 
       <ion-item-options>
-        <button ion-button (click)="editName()">{{'SETTINGS.EDIT' | translate}}</button>
+        <button ion-button (click)="editName()">{{'COMMON.EDIT' | translate}}</button>
         <button ion-button color="danger" (click)="forgetName()">{{'SETTINGS.FORGET' | translate}}</button>
       </ion-item-options>
     </ion-item-sliding>
     <ion-item>
       <ion-label>{{'SETTINGS.LANGUAGE' | translate}}</ion-label>
-      <ion-select [(ngModel)]="settings.overideLang" okText="{{'PROJECT.DETAIL.POPUP.OK' | translate}}" cancelText="{{'PROJECT.DETAIL.POPUP.CANCEL' | translate}}" (ionChange)="changeLanguage()">
+      <ion-select [(ngModel)]="settings.overideLang" okText="{{'COMMON.OK' | translate}}" cancelText="{{'COMMON.CANCEL' | translate}}" (ionChange)="changeLanguage()">
         <ion-option value="">{{'SETTINGS.DEFAULT' | translate}}</ion-option>
         <ion-option value="fr">{{'SETTINGS.FRENCH' | translate}}</ion-option>
         <ion-option value="en">{{'SETTINGS.ENGLISH' | translate}}</ion-option>

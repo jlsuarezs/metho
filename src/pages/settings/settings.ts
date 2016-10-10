@@ -76,7 +76,7 @@ export class SettingsPage {
   }
 
   editName() {
-    this.translate.get(["SETTINGS.EDIT_NAME", "SETTINGS.CANCEL", "SETTINGS.EDIT"]).subscribe(translations => {
+    this.translate.get(["SETTINGS.EDIT_NAME", "COMMON.CANCEL", "COMMON.EDIT"]).subscribe(translations => {
       let alert = this.alertCtrl.create({
         title: translations["SETTINGS.EDIT_NAME"],
         inputs: [
@@ -93,13 +93,13 @@ export class SettingsPage {
         ],
         buttons: [
           {
-            text: translations["SETTINGS.CANCEL"],
+            text: translations["COMMON.CANCEL"],
             handler: () => {
               this.list.closeSlidingItems();
             }
           },
           {
-            text: translations["SETTINGS.EDIT"],
+            text: translations["COMMON.EDIT"],
             handler: results => {
               this.settingService.set('firstname', results.firstname);
               this.settingService.set('lastname', results.lastname);

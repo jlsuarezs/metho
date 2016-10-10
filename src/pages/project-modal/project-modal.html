@@ -1,11 +1,11 @@
 <ion-header>
   <ion-navbar>
     <ion-buttons start>
-      <button ion-button clear (click)="dismiss()">{{'PROJECT.TAB.MODAL_EDIT.CANCEL' | translate}}</button>
+      <button ion-button clear (click)="dismiss()">{{'COMMON.CANCEL' | translate}}</button>
     </ion-buttons>
-    <ion-title>{{(isNew ? 'PROJECT.TAB.MODAL.TITLE' : 'PROJECT.TAB.MODAL_EDIT.TITLE') | translate}}</ion-title>
+    <ion-title>{{(isNew ? 'PROJECT.TAB.MODAL.TITLE' : 'PROJECT.TAB.MODAL.TITLE_EDIT') | translate}}</ion-title>
     <ion-buttons end>
-      <button ion-button clear (click)="confirm()">{{(isNew ? 'PROJECT.TAB.MODAL.ADD' : 'PROJECT.TAB.MODAL_EDIT.CONFIRM') | translate}}</button>
+      <button ion-button clear (click)="confirm()">{{(isNew ? 'COMMON.CREATE' : 'COMMON.EDIT') | translate}}</button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
