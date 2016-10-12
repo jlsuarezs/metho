@@ -29,12 +29,10 @@ export class ReactiveHttp {
           reject(err);
         });
       }else {
-        console.log(url);
         this.http.get(url)
           .timeout(2000, 408)
           .map(res => res.json())
           .subscribe(data => {
-            console.log(data);
             resolve(data);
           }, err => {
             reject(err);

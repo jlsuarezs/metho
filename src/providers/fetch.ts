@@ -79,7 +79,6 @@ export class Fetch {
         });
       }else {
         this.http.get('http://isbndb.com/api/v2/json/' + this.pickISBNdbApiKey() + "/books?q=" + name + "&i=combined").then(response => {
-          console.log(response);
           if (!!response.error) {
             reject(404);
           }else {
