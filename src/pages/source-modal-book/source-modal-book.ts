@@ -346,7 +346,7 @@ export class SourceModalBookPage {
   }
 
   updateValues(response: any) {
-    this.form = this.fb.group(this.mergeObjects(this.form.value, response));
+    this.form.patchValue(this.mergeObjects(this.form.value, response));
   }
 
   addPending(isbn: string, transition=Promise.resolve()) {
