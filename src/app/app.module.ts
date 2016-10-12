@@ -34,6 +34,7 @@ import { AppStorage } from '../providers/app-storage';
 import { Fetch } from '../providers/fetch';
 import { Language } from '../providers/language';
 import { Parse } from '../providers/parse';
+import { ReactiveHttp } from '../providers/reactive-http';
 import { References } from '../providers/references';
 import { Report } from '../providers/report';
 import { Scan } from '../providers/scan';
@@ -107,6 +108,7 @@ export function translateDeps (http: Http) {
     Parse,
     Fetch,
     References,
+    ReactiveHttp,
     Settings,
     Report,
     AdvancedMode,
