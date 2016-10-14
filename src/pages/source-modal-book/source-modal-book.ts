@@ -184,49 +184,51 @@ export class SourceModalBookPage {
 
   // Instant Search
   search() {
-    if (this._timeout) {
-      clearTimeout(this._timeout);
-    }
-    this._timeout = setTimeout(() => {
-      this.instantStatus.ok = false;
-      this.instantStatus.loading = false;
-      this.instantStatus.none = false;
-      this.instantStatus.err500 = false;
-      this.instantStatus.shown = false;
-      this.instantStatus.timeout = false;
-      if (this.form.value.title) {
-        this.instantStatus.loading = true;
-        let query: string = "";
-        let includeAuthors: boolean;
-        if (this.form.value.author1lastname || this.form.value.author1firstname) {
-          query = this.form.value.title + " " + this.form.value.author1lastname + " " + this.form.value.author1firstname;
-          includeAuthors = true;
-        }else {
-          query = this.form.value.title;
-          includeAuthors = false;
-        }
-        this.fetch.fromName(query, includeAuthors).then(list => {
-          if (list.length != 0) {
-            this.instantList = list;
-            this.instantStatus.loading = false;
-            this.instantStatus.ok = true;
-          }else {
-            this.instantStatus.loading = false;
-            this.instantStatus.none = true;
-          }
-        }, err => {
-          if (err.status >= 500 && err.status < 599) {
-            this.instantStatus.err500 = true;
-            this.instantStatus.loading = false;
-          }else if (err.status == 408) {
-            this.instantStatus.err500 = true;
-            this.instantStatus.timeout = true;
-            this.instantStatus.loading = false;
-          }
-        });
+    if (this.isAdvanced) {
+      if (this._timeout) {
+        clearTimeout(this._timeout);
       }
-      this._timeout = null;
-    }, 500);
+      this._timeout = setTimeout(() => {
+        this.instantStatus.ok = false;
+        this.instantStatus.loading = false;
+        this.instantStatus.none = false;
+        this.instantStatus.err500 = false;
+        this.instantStatus.shown = false;
+        this.instantStatus.timeout = false;
+        if (this.form.value.title) {
+          this.instantStatus.loading = true;
+          let query: string = "";
+          let includeAuthors: boolean;
+          if (this.form.value.author1lastname || this.form.value.author1firstname) {
+            query = this.form.value.title + " " + this.form.value.author1lastname + " " + this.form.value.author1firstname;
+            includeAuthors = true;
+          }else {
+            query = this.form.value.title;
+            includeAuthors = false;
+          }
+          this.fetch.fromName(query, includeAuthors).then(list => {
+            if (list.length != 0) {
+              this.instantList = list;
+              this.instantStatus.loading = false;
+              this.instantStatus.ok = true;
+            }else {
+              this.instantStatus.loading = false;
+              this.instantStatus.none = true;
+            }
+          }, err => {
+            if (err.status >= 500 && err.status < 599) {
+              this.instantStatus.err500 = true;
+              this.instantStatus.loading = false;
+            }else if (err.status == 408) {
+              this.instantStatus.err500 = true;
+              this.instantStatus.timeout = true;
+              this.instantStatus.loading = false;
+            }
+          });
+        }
+        this._timeout = null;
+      }, 500);
+    }
   }
 
   toggleInstantSearch() {
