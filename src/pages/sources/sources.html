@@ -13,7 +13,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar *ngIf="sources.length" [(ngModel)]="searchQuery" (ionInput)="updateSearch($event)" (ionCancel)="updateSearch($event)" cancelButtonText="{{'COMMON.CANCEL' | translate}}" showCancelButton="true" placeholder="{{'PROJECT.DETAIL.SEARCH' | translate}}"></ion-searchbar>
+  <ion-searchbar *ngIf="sources.length" [(ngModel)]="searchQuery" (ionInput)="updateSearch($event)" (ionCancel)="updateSearch($event)" cancelButtonText="{{'COMMON.CANCEL' | translate}}" showCancelButton="true" placeholder="{{'PROJECT.DETAIL.SEARCH' | translate}}" animated="true"></ion-searchbar>
   <button ion-item color="light" (click)="openPendingPage()" class="pendings" *ngIf="pendingNumber > 0 && searchQuery == ''">
     {{"PROJECT.DETAIL.PENDING_ELEMENTS" | translate}}
     <ion-badge item-right>{{ pendingNumber }}</ion-badge>
