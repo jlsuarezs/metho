@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/Rx';
+import { Injectable } from "@angular/core";
+import { Http } from "@angular/http";
+import "rxjs/Rx";
 
-import { HTTP } from 'ionic-native';
+import { HTTP } from "ionic-native";
 
 interface CordovaWindow extends Window {
   cordova: any;

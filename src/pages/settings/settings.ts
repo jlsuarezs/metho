@@ -1,21 +1,21 @@
-import { ViewChild, Component } from '@angular/core';
+import { ViewChild, Component } from "@angular/core";
 
-import { NavController, AlertController, List } from 'ionic-angular';
-import { TranslateService } from 'ng2-translate/ng2-translate';
+import { NavController, AlertController, List } from "ionic-angular";
+import { TranslateService } from "ng2-translate/ng2-translate";
 
-import { AdvancedModePage } from '../advanced-mode/advanced-mode';
-import { AttributionsPage } from '../attributions/attributions';
-import { FeedbackPage } from '../feedback/feedback';
+import { AdvancedModePage } from "../advanced-mode/advanced-mode";
+import { AttributionsPage } from "../attributions/attributions";
+import { FeedbackPage } from "../feedback/feedback";
 
-import { AdvancedMode } from '../../providers/advanced-mode';
-import { Language } from '../../providers/language';
-import { Settings } from '../../providers/settings';
+import { AdvancedMode } from "../../providers/advanced-mode";
+import { Language } from "../../providers/language";
+import { Settings } from "../../providers/settings";
 
-import deepcopy from 'deepcopy';
+import deepcopy from "deepcopy";
 
 @Component({
-  selector: 'settings',
-  templateUrl: 'settings.html'
+  selector: "settings",
+  templateUrl: "settings.html"
 })
 export class SettingsPage {
   public settings: SettingsList = {};
@@ -71,7 +71,7 @@ export class SettingsPage {
 
   toggleIgnoreErrors() {
     if (this.settings.ignoreErrors != this.settingService.getAll().ignoreErrors) {
-      this.settingService.set('ignoreErrors', this.settings.ignoreErrors);
+      this.settingService.set("ignoreErrors", this.settings.ignoreErrors);
     }
   }
 
@@ -101,8 +101,8 @@ export class SettingsPage {
           {
             text: translations["COMMON.EDIT"],
             handler: results => {
-              this.settingService.set('firstname', results.firstname);
-              this.settingService.set('lastname', results.lastname);
+              this.settingService.set("firstname", results.firstname);
+              this.settingService.set("lastname", results.lastname);
               this.loadSettings();
               this.list.closeSlidingItems();
             }
@@ -115,8 +115,8 @@ export class SettingsPage {
   }
 
   forgetName() {
-    this.settingService.set('firstname', '');
-    this.settingService.set('lastname', '');
+    this.settingService.set("firstname", "");
+    this.settingService.set("lastname", "");
     this.loadSettings();
   }
 

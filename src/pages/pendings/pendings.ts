@@ -1,18 +1,18 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
-import { NavController, NavParams, ModalController, AlertController, LoadingController } from 'ionic-angular';
-import { TranslateService } from 'ng2-translate/ng2-translate';
+import { NavController, NavParams, ModalController, AlertController, LoadingController } from "ionic-angular";
+import { TranslateService } from "ng2-translate/ng2-translate";
 
-import { SourceModalBookPage } from '../source-modal-book/source-modal-book';
+import { SourceModalBookPage } from "../source-modal-book/source-modal-book";
 
-import { AppStorage } from '../../providers/app-storage';
-import { Fetch } from '../../providers/fetch';
-import { Language } from '../../providers/language';
+import { AppStorage } from "../../providers/app-storage";
+import { Fetch } from "../../providers/fetch";
+import { Language } from "../../providers/language";
 
 
 @Component({
-  selector: 'pendings',
-  templateUrl: 'pendings.html'
+  selector: "pendings",
+  templateUrl: "pendings.html"
 })
 export class PendingsPage {
   public projectId: string;
@@ -29,7 +29,7 @@ export class PendingsPage {
     public fetch: Fetch,
     public language: Language,
   ) {
-    this.projectId = params.get('pId');
+    this.projectId = params.get("pId");
   }
 
   loadPendings(dismissOnEmpty?: boolean) {

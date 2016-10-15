@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
-import { AlertController } from 'ionic-angular';
-import { SocialSharing, Device, AppVersion, Splashscreen } from 'ionic-native';
-import { TranslateService } from 'ng2-translate/ng2-translate';
+import { AlertController } from "ionic-angular";
+import { SocialSharing, Device, AppVersion, Splashscreen } from "ionic-native";
+import { TranslateService } from "ng2-translate/ng2-translate";
 
 @Injectable()
 export class Report {
@@ -15,11 +15,11 @@ export class Report {
     console.log(err);
     let errStr: string = err;
     let stacktrace: string = "";
-    if (typeof err != 'string') {
+    if (typeof err != "string") {
       errStr = err.toString();
     }
 
-    if (typeof err == 'object') {
+    if (typeof err == "object") {
       try {
         stacktrace = err.stack;
       } catch (e) {
@@ -44,13 +44,13 @@ export class Report {
               text: translations["COMMON.YES"],
               handler: () => {
                 SocialSharing.shareViaEmail(
-                  `<b>${translations['REPORT.DESC']}</b><br><br><br>
-                  <b>${translations['REPORT.DO_NOT_EDIT']}</b><br>
+                  `<b>${translations["REPORT.DESC"]}</b><br><br><br>
+                  <b>${translations["REPORT.DO_NOT_EDIT"]}</b><br>
                   ${diags}</p><br>
                   ${errStr}<br>
                   ${stacktrace}`,
-                  translations['REPORT.ERROR'],
-                  ['methoappeei@gmail.com'],
+                  translations["REPORT.ERROR"],
+                  ["methoappeei@gmail.com"],
                   [],
                   [],
                   []

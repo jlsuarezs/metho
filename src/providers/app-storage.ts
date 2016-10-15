@@ -1,16 +1,16 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter } from "@angular/core";
 
-import { Fetch } from './fetch';
-import { Parse } from './parse';
-import { Report } from './report';
+import { Fetch } from "./fetch";
+import { Parse } from "./parse";
+import { Report } from "./report";
 
 interface CordovaWindow extends Window {
   cordova: any;
 }
 declare var window: CordovaWindow;
 
-import PouchDB from 'pouchdb';
-import PouchDB_Adapter_Cordova_SQLite from 'pouchdb-adapter-cordova-sqlite';
+import PouchDB from "pouchdb";
+import PouchDB_Adapter_Cordova_SQLite from "pouchdb-adapter-cordova-sqlite";
 
 @Injectable()
 export class AppStorage {

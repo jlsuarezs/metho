@@ -1,21 +1,21 @@
-import { Component } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Component } from "@angular/core";
+import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 
-import { ViewController, NavParams, AlertController, ActionSheetController } from 'ionic-angular';
-import { SafariViewController } from 'ionic-native';
-import { TranslateService } from 'ng2-translate/ng2-translate';
+import { ViewController, NavParams, AlertController, ActionSheetController } from "ionic-angular";
+import { SafariViewController } from "ionic-native";
+import { TranslateService } from "ng2-translate/ng2-translate";
 
-import { AppStorage } from '../../providers/app-storage';
-import { Fetch } from '../../providers/fetch';
-import { Language } from '../../providers/language';
-import { Parse } from '../../providers/parse';
-import { Scan } from '../../providers/scan';
-import { Settings } from '../../providers/settings';
+import { AppStorage } from "../../providers/app-storage";
+import { Fetch } from "../../providers/fetch";
+import { Language } from "../../providers/language";
+import { Parse } from "../../providers/parse";
+import { Scan } from "../../providers/scan";
+import { Settings } from "../../providers/settings";
 
 
 @Component({
-  selector: 'source-modal-book',
-  templateUrl: 'source-modal-book.html'
+  selector: "source-modal-book",
+  templateUrl: "source-modal-book.html"
 })
 export class SourceModalBookPage {
   public isNew: boolean;
@@ -59,33 +59,33 @@ export class SourceModalBookPage {
     public settings: Settings,
     public fb: FormBuilder,
   ) {
-    if(this.params.get('editing') == true) {
+    if(this.params.get("editing") == true) {
       this.isNew = false;
     }else {
       this.isNew = true;
     }
 
-    if (typeof this.params.get('data') !== "undefined") {
+    if (typeof this.params.get("data") !== "undefined") {
       this.noData = false;
-      this.previous = this.params.get('data');
+      this.previous = this.params.get("data");
     }else {
       this.noData = true;
     }
 
-    this.projectId = this.params.get('projectId');
+    this.projectId = this.params.get("projectId");
 
-    if (this.params.get('hideScan') == true) {
+    if (this.params.get("hideScan") == true) {
       this.hideScan = true;
     }else {
       this.hideScan = false;
     }
 
-    if (typeof this.params.get('pendingId') !== "undefined") {
-      this.pendingId = this.params.get('pendingId');
+    if (typeof this.params.get("pendingId") !== "undefined") {
+      this.pendingId = this.params.get("pendingId");
     }
 
-    if (typeof this.params.get('url') !== "undefined") {
-      this.url = this.params.get('url');
+    if (typeof this.params.get("url") !== "undefined") {
+      this.url = this.params.get("url");
       this.showBrowser = true;
       SafariViewController.mayLaunchUrl(this.url);
       this.viewCtrl.didEnter.subscribe(() => {
@@ -95,7 +95,7 @@ export class SourceModalBookPage {
       this.showBrowser = false;
     }
 
-    if (this.params.get('scan') == true) {
+    if (this.params.get("scan") == true) {
       this.viewCtrl.didEnter.subscribe(() => {
         this.scan();
       });
@@ -104,27 +104,27 @@ export class SourceModalBookPage {
     this.isAdvanced = this.settings.get("advanced");
 
     this.form = fb.group({
-      hasAuthors: [this.noData ? '' : this.previous.hasAuthors],
-      author1lastname: [this.noData ? '' : this.previous.author1lastname],
-      author1firstname: [this.noData ? '' : this.previous.author1firstname],
-      author2lastname: [this.noData ? '' : this.previous.author2lastname],
-      author2firstname: [this.noData ? '' : this.previous.author2firstname],
-      author3lastname: [this.noData ? '' : this.previous.author3lastname],
-      author3firstname: [this.noData ? '' : this.previous.author3firstname],
-      title: [this.noData ? '' : this.previous.title],
-      editor: [this.noData ? '' : this.previous.editor],
-      publicationDate: [this.noData ? '' : this.previous.publicationDate],
-      publicationLocation: [this.noData ? '' : this.previous.publicationLocation],
-      pageNumber: [this.noData ? '' : this.previous.pageNumber],
-      editionNumber: [this.noData ? '' : this.previous.editionNumber],
-      volumeNumber: [this.noData ? '' : this.previous.volumeNumber],
-      collection: [this.noData ? '' : this.previous.collection],
+      hasAuthors: [this.noData ? "" : this.previous.hasAuthors],
+      author1lastname: [this.noData ? "" : this.previous.author1lastname],
+      author1firstname: [this.noData ? "" : this.previous.author1firstname],
+      author2lastname: [this.noData ? "" : this.previous.author2lastname],
+      author2firstname: [this.noData ? "" : this.previous.author2firstname],
+      author3lastname: [this.noData ? "" : this.previous.author3lastname],
+      author3firstname: [this.noData ? "" : this.previous.author3firstname],
+      title: [this.noData ? "" : this.previous.title],
+      editor: [this.noData ? "" : this.previous.editor],
+      publicationDate: [this.noData ? "" : this.previous.publicationDate],
+      publicationLocation: [this.noData ? "" : this.previous.publicationLocation],
+      pageNumber: [this.noData ? "" : this.previous.pageNumber],
+      editionNumber: [this.noData ? "" : this.previous.editionNumber],
+      volumeNumber: [this.noData ? "" : this.previous.volumeNumber],
+      collection: [this.noData ? "" : this.previous.collection],
       hasBeenTranslated: [this.noData ? false : this.previous.hasBeenTranslated],
-      translatedFrom: [this.noData ? '' : this.previous.translatedFrom],
-      translator1firstname: [this.noData ? '' : this.previous.translator1firstname],
-      translator1lastname: [this.noData ? '' : this.previous.translator1lastname],
-      translator2firstname: [this.noData ? '' : this.previous.translator2firstname],
-      translator2lastname: [this.noData ? '' : this.previous.translator2lastname]
+      translatedFrom: [this.noData ? "" : this.previous.translatedFrom],
+      translator1firstname: [this.noData ? "" : this.previous.translator1firstname],
+      translator1lastname: [this.noData ? "" : this.previous.translator1lastname],
+      translator2firstname: [this.noData ? "" : this.previous.translator2firstname],
+      translator2lastname: [this.noData ? "" : this.previous.translator2lastname]
     });
   }
 
@@ -135,7 +135,7 @@ export class SourceModalBookPage {
           buttons: [
             {
               text: translations["PROJECT.DETAIL.MODAL.DELETE_DRAFT"],
-              role: 'destructive',
+              role: "destructive",
               handler: () => {
                 actionsheet.dismiss().then(() => {
                   this.viewCtrl.dismiss();
@@ -145,7 +145,7 @@ export class SourceModalBookPage {
             },
             {
               text: translations["COMMON.CANCEL"],
-              role: 'cancel'
+              role: "cancel"
             }
           ]
         });
@@ -166,7 +166,7 @@ export class SourceModalBookPage {
 
   confirm() {
     let values = this.form.value;
-    values.type = 'book';
+    values.type = "book";
     let parsed = this.parse.parse(values);
     parsed.project_id = this.projectId;
 
@@ -383,7 +383,7 @@ export class SourceModalBookPage {
   mergeObjects(obj1: any, obj2: any) {
     for (var variable in obj2) {
       if (obj2.hasOwnProperty(variable)) {
-        if (obj2[variable] != '') {
+        if (obj2[variable] != "") {
           obj1[variable] = [obj2[variable]];
         }else {
           obj1[variable] = [obj1[variable]];

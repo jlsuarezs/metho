@@ -6,7 +6,7 @@
       <div class="page-sub-title">{{source.parsedType}}</div>
     </ion-title>
     <ion-buttons end>
-      <button ion-button (click)="edit()">{{'COMMON.EDIT' | translate}}</button>
+      <button ion-button (click)="edit()">{{"COMMON.EDIT" | translate}}</button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -26,6 +26,6 @@
   </ion-list>
 
   <p class="no-errors" *ngIf="!source.warnings.length && !source.errors.length">
-    {{'PROJECT.SOURCE.NO_ERROR' | translate}}
+    {{"PROJECT.SOURCE.NO_ERROR" | translate}}
   </p>
 </ion-content>

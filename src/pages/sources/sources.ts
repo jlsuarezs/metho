@@ -1,26 +1,26 @@
-import { ViewChild, Component } from '@angular/core';
+import { ViewChild, Component } from "@angular/core";
 
-import { NavController, NavParams, ActionSheetController, ModalController, AlertController, List, Content } from 'ionic-angular';
-import { SocialSharing } from 'ionic-native';
-import { TranslateService } from 'ng2-translate/ng2-translate';
+import { NavController, NavParams, ActionSheetController, ModalController, AlertController, List, Content } from "ionic-angular";
+import { SocialSharing } from "ionic-native";
+import { TranslateService } from "ng2-translate/ng2-translate";
 
-import { AdvancedModePage } from '../advanced-mode/advanced-mode';
-import { SourceModalBookPage } from '../source-modal-book/source-modal-book';
-import { SourceModalArticlePage } from '../source-modal-article/source-modal-article';
-import { SourceModalInternetPage } from '../source-modal-internet/source-modal-internet';
-import { SourceModalCdPage } from '../source-modal-cd/source-modal-cd';
-import { SourceModalMoviePage } from '../source-modal-movie/source-modal-movie';
-import { SourceModalInterviewPage } from '../source-modal-interview/source-modal-interview';
-import { SourcePage } from '../source/source';
-import { PendingsPage } from '../pendings/pendings';
+import { AdvancedModePage } from "../advanced-mode/advanced-mode";
+import { SourceModalBookPage } from "../source-modal-book/source-modal-book";
+import { SourceModalArticlePage } from "../source-modal-article/source-modal-article";
+import { SourceModalInternetPage } from "../source-modal-internet/source-modal-internet";
+import { SourceModalCdPage } from "../source-modal-cd/source-modal-cd";
+import { SourceModalMoviePage } from "../source-modal-movie/source-modal-movie";
+import { SourceModalInterviewPage } from "../source-modal-interview/source-modal-interview";
+import { SourcePage } from "../source/source";
+import { PendingsPage } from "../pendings/pendings";
 
-import { AppStorage } from '../../providers/app-storage';
-import { Settings } from '../../providers/settings';
+import { AppStorage } from "../../providers/app-storage";
+import { Settings } from "../../providers/settings";
 
 
 @Component({
-  selector: 'sources',
-  templateUrl: 'sources.html'
+  selector: "sources",
+  templateUrl: "sources.html"
 })
 export class SourcesPage {
   public projectId: string;
@@ -42,7 +42,7 @@ export class SourcesPage {
     public storage: AppStorage,
     public settings: Settings,
   ) {
-    this.projectId = params.get('id');
+    this.projectId = params.get("id");
     this.loadProjectInfo();
   }
 
@@ -91,58 +91,58 @@ export class SourcesPage {
   createSource() {
     this.translate.get(["PROJECT.TYPES.BOOK", "PROJECT.TYPES.ARTICLE", "PROJECT.TYPES.INTERNET", "PROJECT.TYPES.CD", "PROJECT.TYPES.MOVIE", "PROJECT.TYPES.INTERVIEW", "PROJECT.DETAIL.CHOOSE_TYPE", "COMMON.CANCEL"]).subscribe(translations => {
       let action = this.actionSheetCtrl.create({
-        title: translations['PROJECT.DETAIL.CHOOSE_TYPE'],
+        title: translations["PROJECT.DETAIL.CHOOSE_TYPE"],
         buttons: [
           {
-            text: translations['PROJECT.TYPES.BOOK'],
-            icon: 'book',
+            text: translations["PROJECT.TYPES.BOOK"],
+            icon: "book",
             handler: () => {
-              this.openModal('book', action.dismiss());
+              this.openModal("book", action.dismiss());
               return false;
             }
           },
           {
-            text: translations['PROJECT.TYPES.ARTICLE'],
-            icon: 'paper',
+            text: translations["PROJECT.TYPES.ARTICLE"],
+            icon: "paper",
             handler: () => {
-              this.openModal('article', action.dismiss());
+              this.openModal("article", action.dismiss());
               return false;
             }
           },
           {
-            text: translations['PROJECT.TYPES.INTERNET'],
-            icon: 'at',
+            text: translations["PROJECT.TYPES.INTERNET"],
+            icon: "at",
             handler: () => {
-              this.openModal('internet', action.dismiss());
+              this.openModal("internet", action.dismiss());
               return false;
             }
           },
           {
-            text: translations['PROJECT.TYPES.CD'],
-            icon: 'disc',
+            text: translations["PROJECT.TYPES.CD"],
+            icon: "disc",
             handler: () => {
-              this.openModal('cd', action.dismiss());
+              this.openModal("cd", action.dismiss());
               return false;
             }
           },
           {
-            text: translations['PROJECT.TYPES.MOVIE'],
-            icon: 'film',
+            text: translations["PROJECT.TYPES.MOVIE"],
+            icon: "film",
             handler: () => {
-              this.openModal('movie', action.dismiss());
+              this.openModal("movie", action.dismiss());
               return false;
             }
           },
           {
-            text: translations['PROJECT.TYPES.INTERVIEW'],
-            icon: 'quote',
+            text: translations["PROJECT.TYPES.INTERVIEW"],
+            icon: "quote",
             handler: () => {
-              this.openModal('interview', action.dismiss());
+              this.openModal("interview", action.dismiss());
               return false;
             }
           },
           {
-            role: 'cancel',
+            role: "cancel",
             text: translations["COMMON.CANCEL"]
           }
         ]
@@ -163,22 +163,22 @@ export class SourcesPage {
       enableBackdropDismiss: false
     };
     switch (type) {
-      case 'book':
+      case "book":
         var modal = this.modalCtrl.create(SourceModalBookPage, navParams, modalOpts);
         break;
-      case 'article':
+      case "article":
         var modal = this.modalCtrl.create(SourceModalArticlePage, navParams, modalOpts);
         break;
-      case 'internet':
+      case "internet":
         var modal = this.modalCtrl.create(SourceModalInternetPage, navParams, modalOpts);
         break;
-      case 'cd':
+      case "cd":
         var modal = this.modalCtrl.create(SourceModalCdPage, navParams, modalOpts);
         break;
-      case 'movie':
+      case "movie":
         var modal = this.modalCtrl.create(SourceModalMoviePage, navParams, modalOpts);
         break;
-      case 'interview':
+      case "interview":
         var modal = this.modalCtrl.create(SourceModalInterviewPage, navParams, modalOpts);
         break;
     }
@@ -235,7 +235,7 @@ export class SourcesPage {
         errNum += value.errors.length;
       });
 
-      if (errNum > 0 && !this.settings.get('ignoreErrors')) {
+      if (errNum > 0 && !this.settings.get("ignoreErrors")) {
         this.translate.get(["PROJECT.DETAIL.POPUP.ERRORS_SOURCES", "PROJECT.DETAIL.POPUP.SHARE_TEXT", "PROJECT.DETAIL.POPUP.SHARE", "COMMON.CANCEL"], { errNum:errNum }).subscribe((translations) => {
           let alert = this.alertCtrl.create({
             title: translations["PROJECT.DETAIL.POPUP.SHARE_TEXT"],
@@ -280,7 +280,7 @@ export class SourcesPage {
   }
 
   promptForAdvanced() {
-    if (!this.settings.get('advanced')) {
+    if (!this.settings.get("advanced")) {
       this.translate.get(["PROJECT.DETAIL.POPUP.ADVANCED_MODE", "PROJECT.DETAIL.POPUP.ADVANCED_MODE_MESSAGE", "PROJECT.DETAIL.POPUP.DETAILS", "PROJECT.DETAIL.POPUP.NO_THANKS"]).subscribe((translations) => {
         let alert = this.alertCtrl.create({
           title: translations["PROJECT.DETAIL.POPUP.ADVANCED_MODE"],
@@ -311,11 +311,11 @@ export class SourcesPage {
 
     let q = this.searchQuery;
 
-    if (q.trim() == '') {
+    if (q.trim() == "") {
       return;
     }
 
-    let qa = q.trim().split(' ');
+    let qa = q.trim().split(" ");
 
     this.filteredSources = this.filteredSources.filter((v) => {
       if (qa.length > 1) {

@@ -1,17 +1,17 @@
-import { ViewChild, Component } from '@angular/core';
+import { ViewChild, Component } from "@angular/core";
 
-import { NavController, ModalController, AlertController, List } from 'ionic-angular';
-import { TranslateService } from 'ng2-translate/ng2-translate';
+import { NavController, ModalController, AlertController, List } from "ionic-angular";
+import { TranslateService } from "ng2-translate/ng2-translate";
 
-import { ProjectModalPage } from '../project-modal/project-modal';
-import { SourcesPage } from '../sources/sources';
+import { ProjectModalPage } from "../project-modal/project-modal";
+import { SourcesPage } from "../sources/sources";
 
-import { AppStorage } from '../../providers/app-storage';
+import { AppStorage } from "../../providers/app-storage";
 
 
 @Component({
-  selector: 'projects',
-  templateUrl: 'projects.html'
+  selector: "projects",
+  templateUrl: "projects.html"
 })
 export class ProjectsPage {
   public projects: any[] = [];

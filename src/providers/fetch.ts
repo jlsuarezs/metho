@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
-import { ReactiveHttp } from './reactive-http';
+import { ReactiveHttp } from "./reactive-http";
 
 
 @Injectable()
@@ -28,7 +28,7 @@ export class Fetch {
     }
 
     return new Promise((resolve, reject) => {
-      this.http.get('http://isbndb.com/api/v2/json/' + this.pickISBNdbApiKey() + "/book/" + isbn).then(response => {
+      this.http.get("http://isbndb.com/api/v2/json/" + this.pickISBNdbApiKey() + "/book/" + isbn).then(response => {
         if (!!response.error) {
           reject(404);
         }else {
@@ -63,7 +63,7 @@ export class Fetch {
 
     return new Promise((resolve, reject) => {
       if (includeAuthors) {
-        this.http.get('http://isbndb.com/api/v2/json/' + this.pickISBNdbApiKey() + "/books?q=" + name + "&i=combined").then(response => {
+        this.http.get("http://isbndb.com/api/v2/json/" + this.pickISBNdbApiKey() + "/books?q=" + name + "&i=combined").then(response => {
           if (!!response.data.error) {
             reject(404);
           }else {
@@ -78,7 +78,7 @@ export class Fetch {
           reject(error);
         });
       }else {
-        this.http.get('http://isbndb.com/api/v2/json/' + this.pickISBNdbApiKey() + "/books?q=" + name + "&i=combined").then(response => {
+        this.http.get("http://isbndb.com/api/v2/json/" + this.pickISBNdbApiKey() + "/books?q=" + name + "&i=combined").then(response => {
           if (!!response.error) {
             reject(404);
           }else {

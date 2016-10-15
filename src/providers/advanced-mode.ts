@@ -1,11 +1,11 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter } from "@angular/core";
 
-import { AlertController } from 'ionic-angular';
-import { InAppPurchase } from 'ionic-native';
-import { TranslateService } from 'ng2-translate/ng2-translate';
+import { AlertController } from "ionic-angular";
+import { InAppPurchase } from "ionic-native";
+import { TranslateService } from "ng2-translate/ng2-translate";
 
-import { Report } from './report';
-import { Settings } from './settings';
+import { Report } from "./report";
+import { Settings } from "./settings";
 
 interface CordovaWindow extends Window {
   cordova: any;
@@ -57,7 +57,7 @@ export class AdvancedMode {
       return new Promise((resolve, reject) => {
         if (navigator.onLine && this.hasLoaded) {
           InAppPurchase.buy(this.productId).then((data) => {
-            this.settings.set('advanced', true);
+            this.settings.set("advanced", true);
             resolve();
           }).catch(err => {
             reject();
@@ -82,7 +82,7 @@ export class AdvancedMode {
         }
       });
     }else {
-      this.settings.set('advanced', true);
+      this.settings.set("advanced", true);
       return Promise.resolve();
     }
   }
@@ -93,7 +93,7 @@ export class AdvancedMode {
         if (navigator.onLine) {
           InAppPurchase.restorePurchases().then((data) => {
             if (data.length && data[0].productId == this.productId) {
-              this.settings.set('advanced', true);
+              this.settings.set("advanced", true);
               resolve();
             }else {
               this.translate.get(["SETTINGS.ADVANCED_MODE.POPUP.RESTORE", "SETTINGS.ADVANCED_MODE.POPUP.RESTORE_NO_FOUND", "COMMON.OK"]).subscribe((translations) => {
@@ -139,10 +139,10 @@ export class AdvancedMode {
   }
 
   disable() {
-    this.settings.set('advanced', false);
+    this.settings.set("advanced", false);
   }
 
   isEnabled() {
-    return this.settings.get('advanced');
+    return this.settings.get("advanced");
   }
 }

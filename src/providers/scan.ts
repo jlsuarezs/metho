@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
-import { ModalController, AlertController, LoadingController } from 'ionic-angular';
-import { BarcodeScanner } from 'ionic-native';
-import { TranslateService } from 'ng2-translate/ng2-translate';
+import { ModalController, AlertController, LoadingController } from "ionic-angular";
+import { BarcodeScanner } from "ionic-native";
+import { TranslateService } from "ng2-translate/ng2-translate";
 
-import { BoardingScanPage } from '../pages/boarding-scan/boarding-scan';
+import { BoardingScanPage } from "../pages/boarding-scan/boarding-scan";
 
-import { Fetch } from './fetch';
-import { Report } from './report';
-import { Settings } from './settings';
+import { Fetch } from "./fetch";
+import { Report } from "./report";
+import { Settings } from "./settings";
 
 
 @Injectable()
@@ -26,14 +26,14 @@ export class Scan {
 
   scan(): Promise<any> {
     return new Promise((resolve, reject) => {
-      if (!this.settings.get('scanBoardingDone')) {
+      if (!this.settings.get("scanBoardingDone")) {
         let modal = this.modalCtrl.create(BoardingScanPage);
         modal.onDidDismiss(() => {
           this.openScanner()
           .then((data) => resolve(data))
           .catch(err => reject(err));
         });
-        this.settings.set('scanBoardingDone', true);
+        this.settings.set("scanBoardingDone", true);
         modal.present();
       }else {
         this.openScanner()
@@ -163,7 +163,7 @@ export class Scan {
             }
           },
           {
-            text: translations['PROJECT.DETAIL.POPUP.ADD'],
+            text: translations["PROJECT.DETAIL.POPUP.ADD"],
             handler: () => {
               resolve({
                 isbn: isbn,

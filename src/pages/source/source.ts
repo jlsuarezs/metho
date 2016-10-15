@@ -1,22 +1,22 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
-import { NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
-import { TranslateService } from 'ng2-translate/ng2-translate';
+import { NavController, NavParams, ModalController, AlertController } from "ionic-angular";
+import { TranslateService } from "ng2-translate/ng2-translate";
 
-import { SourceModalBookPage } from '../source-modal-book/source-modal-book';
-import { SourceModalArticlePage } from '../source-modal-article/source-modal-article';
-import { SourceModalInternetPage } from '../source-modal-internet/source-modal-internet';
-import { SourceModalCdPage } from '../source-modal-cd/source-modal-cd';
-import { SourceModalMoviePage } from '../source-modal-movie/source-modal-movie';
-import { SourceModalInterviewPage } from '../source-modal-interview/source-modal-interview';
+import { SourceModalBookPage } from "../source-modal-book/source-modal-book";
+import { SourceModalArticlePage } from "../source-modal-article/source-modal-article";
+import { SourceModalInternetPage } from "../source-modal-internet/source-modal-internet";
+import { SourceModalCdPage } from "../source-modal-cd/source-modal-cd";
+import { SourceModalMoviePage } from "../source-modal-movie/source-modal-movie";
+import { SourceModalInterviewPage } from "../source-modal-interview/source-modal-interview";
 
-import { AppStorage } from '../../providers/app-storage';
-import { Parse } from '../../providers/parse';
+import { AppStorage } from "../../providers/app-storage";
+import { Parse } from "../../providers/parse";
 
 
 @Component({
-  selector: 'source',
-  templateUrl: 'source.html'
+  selector: "source",
+  templateUrl: "source.html"
 })
 export class SourcePage {
   public source: Source = {
@@ -36,7 +36,7 @@ export class SourcePage {
     public storage: AppStorage,
     public parse: Parse,
   ) {
-    this.id = this.params.get('id');
+    this.id = this.params.get("id");
   }
 
   ionViewWillEnter() {
@@ -62,7 +62,7 @@ export class SourcePage {
             text: translations["COMMON.OK"],
             handler: data => {
               if (error.complex) {
-                if (error.type == 'select') {
+                if (error.type == "select") {
                   this.source[error.var] = data;
                 }
               }else {
@@ -78,10 +78,10 @@ export class SourcePage {
       });
 
       if (error.complex) {
-        if (error.type == 'select') {
+        if (error.type == "select") {
           error.options.forEach(option => {
             alert.addInput({
-              type: 'radio',
+              type: "radio",
               label: option.text,
               value: option.value,
               checked: false
@@ -103,7 +103,7 @@ export class SourcePage {
 
   edit() {
     switch (this.source.type) {
-      case 'book':
+      case "book":
         var modal = this.modalCtrl.create(SourceModalBookPage, {
           data: this.source,
           editing: true,
@@ -112,7 +112,7 @@ export class SourcePage {
           enableBackdropDismiss: false
         });
         break;
-      case 'article':
+      case "article":
         var modal = this.modalCtrl.create(SourceModalArticlePage, {
           data: this.source,
           editing: true,
@@ -121,7 +121,7 @@ export class SourcePage {
           enableBackdropDismiss: false
         });
         break;
-      case 'internet':
+      case "internet":
         var modal = this.modalCtrl.create(SourceModalInternetPage, {
           data: this.source,
           editing: true,
@@ -130,7 +130,7 @@ export class SourcePage {
           enableBackdropDismiss: false
         });
         break;
-      case 'cd':
+      case "cd":
         var modal = this.modalCtrl.create(SourceModalCdPage, {
           data: this.source,
           editing: true,
@@ -139,7 +139,7 @@ export class SourcePage {
           enableBackdropDismiss: false
         });
         break;
-      case 'movie':
+      case "movie":
         var modal = this.modalCtrl.create(SourceModalMoviePage, {
           data: this.source,
           editing: true,
@@ -148,7 +148,7 @@ export class SourcePage {
           enableBackdropDismiss: false
         });
         break;
-      case 'interview':
+      case "interview":
         var modal = this.modalCtrl.create(SourceModalInterviewPage, {
           data: this.source,
           editing: true,

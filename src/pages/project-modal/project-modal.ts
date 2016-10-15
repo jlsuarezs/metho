@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Component } from "@angular/core";
+import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 
-import { NavController, ViewController, NavParams } from 'ionic-angular';
+import { NavController, ViewController, NavParams } from "ionic-angular";
 
-import { AppStorage } from '../../providers/app-storage';
+import { AppStorage } from "../../providers/app-storage";
 
 
 @Component({
-  selector: 'project-modal',
-  templateUrl: 'project-modal.html'
+  selector: "project-modal",
+  templateUrl: "project-modal.html"
 })
 export class ProjectModalPage {
   public isNew: Boolean;
@@ -22,9 +22,9 @@ export class ProjectModalPage {
     public storage: AppStorage,
     public fb: FormBuilder,
   ) {
-    if(this.params.get('previous')) {
+    if(this.params.get("previous")) {
       this.isNew = false;
-      this.previous = this.params.get('previous');
+      this.previous = this.params.get("previous");
     }else {
       this.isNew = true;
       this.previous = {
