@@ -1,7 +1,8 @@
 import { Component } from "@angular/core";
 
 import { Platform } from "ionic-angular";
-import { StatusBar } from "ionic-native";
+import { StatusBar, Splashscreen } from "ionic-native";
+import { TranslateService } from "ng2-translate/ng2-translate";
 
 import { TabsPage } from "../pages/tabs/tabs";
 
@@ -19,10 +20,17 @@ export class MyApp {
     public platform: Platform,
     public storage: AppStorage,
     public language: Language,
+    public translate: TranslateService,
   ) {
     this.platform.ready().then(() => {
       this.storage.init();
       this.language.init();
+      let subscription = this.translate.onLangChange.subscribe(() => {
+        subscription.unsubscribe();
+        setTimeout(() => {
+          Splashscreen.hide();
+        }, 100);
+      });
       StatusBar.styleDefault();
     });
   }
