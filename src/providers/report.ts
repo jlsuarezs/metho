@@ -67,7 +67,7 @@ export class Report {
     });
   }
 
-  askForRefresh(transition=Promise.resolve()) {
+  askForRefresh(transition:Promise<any> = Promise.resolve()) {
     transition.then(() => {
       this.translate.get(["COMMON.YES", "COMMON.NO", "REPORT.ERROR", "REPORT.RELOAD?"]).subscribe(translations => {
         let alert = this.alertCtrl.create({
