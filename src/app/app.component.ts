@@ -21,8 +21,8 @@ export class MyApp {
     public language: Language,
   ) {
     this.platform.ready().then(() => {
-      this.language.init();
       this.storage.init();
+      this.language.init();
       StatusBar.styleDefault();
     });
   }
