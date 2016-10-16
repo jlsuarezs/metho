@@ -151,7 +151,7 @@ export class PendingsPage {
     modal.present();
   }
 
-  openModalWithBrowser(pending: Pending, transition=Promise.resolve()) {
+  openModalWithBrowser(pending: Pending, transition: Promise<any> = Promise.resolve()) {
     let modal = this.modalCtrl.create(SourceModalBookPage, {
       projectId: this.projectId,
       pendingId: pending._id,
