@@ -23,8 +23,16 @@ export class References {
         .map(res => res.json())
         .subscribe(data => {
           this.data = data;
+          this.loadImages();
           resolve(this.data);
         });
     });
+  }
+
+  loadImages() {
+    for (var i = 0; i < this.data.length; i++) {
+      let img = new Image();
+      img.src = this.data[i].icon;
+    }
   }
 }

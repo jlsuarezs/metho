@@ -8,6 +8,7 @@ import { TabsPage } from "../pages/tabs/tabs";
 
 import { AppStorage } from "../providers/app-storage";
 import { Language } from "../providers/language";
+import { References } from "../providers/references";
 
 
 @Component({
@@ -20,6 +21,7 @@ export class MyApp {
     public platform: Platform,
     public storage: AppStorage,
     public language: Language,
+    public references: References,
     public translate: TranslateService,
   ) {
     this.platform.ready().then(() => {
@@ -32,6 +34,7 @@ export class MyApp {
         }, 100);
       });
       StatusBar.styleDefault();
+      this.references.load();
     });
   }
 }
