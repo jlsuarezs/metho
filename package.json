@@ -45,9 +45,6 @@
   "devDependencies": {
     "@ionic/app-scripts": "0.0.36",
     "cordova-common": "1.2.0",
-    "rollup-plugin-json": "2.0.2",
-    "rollup-plugin-node-builtins": "2.0.0",
-    "rollup-plugin-node-globals": "1.0.9",
     "typescript": "2.0.3"
   },
   "cordovaPlugins": [
