@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 
 import { ViewController, NavParams, AlertController, ActionSheetController } from "ionic-angular";
-import { SafariViewController } from "ionic-native";
+import { SafariViewController, Keyboard } from "ionic-native";
 import { TranslateService } from "ng2-translate/ng2-translate";
 
 import { AppStorage } from "../../providers/app-storage";
@@ -179,6 +179,7 @@ export class SourceModalBookPage {
       this.storage.setSourceFromId(this.previous._id, parsed);
     }
 
+    Keyboard.close();
     this.viewCtrl.dismiss();
   }
 

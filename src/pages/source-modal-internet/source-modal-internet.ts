@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 
 import { ViewController, NavParams, ActionSheetController } from "ionic-angular";
+import { Keyboard } from "ionic-native";
 import { TranslateService } from "ng2-translate/ng2-translate";
 
 import { AppStorage } from "../../providers/app-storage";
@@ -131,6 +132,7 @@ export class SourceModalInternetPage {
       this.storage.setSourceFromId(this.previous._id, parsed);
     }
 
+    Keyboard.close();
     this.viewCtrl.dismiss();
   }
 

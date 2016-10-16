@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 
 import { NavController, ViewController, NavParams } from "ionic-angular";
+import { Keyboard } from "ionic-native";
 
 import { AppStorage } from "../../providers/app-storage";
 
@@ -53,10 +54,12 @@ export class ProjectModalPage {
     if(this.projectForm.valid) {
       if(this.isNew) {
         this.storage.createProject(this.projectForm.value).then(() => {
+          Keyboard.close();
           this.viewCtrl.dismiss();
         });
       }else {
         this.storage.setProjectFromId(this.previous._id, this.projectForm.value).then(() => {
+          Keyboard.close();
           this.viewCtrl.dismiss();
         });
       }

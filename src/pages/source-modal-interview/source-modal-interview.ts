@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 
 import { ViewController, NavParams, NavController, AlertController, ActionSheetController } from "ionic-angular";
+import { Keyboard } from "ionic-native";
 import { TranslateService } from "ng2-translate/ng2-translate";
 
 import { AppStorage } from "../../providers/app-storage";
@@ -150,6 +151,7 @@ export class SourceModalInterviewPage {
             {
               text: translations["COMMON.NO"],
               handler: () => {
+                Keyboard.close();
                 this.viewCtrl.dismiss();
               }
             },
@@ -161,6 +163,7 @@ export class SourceModalInterviewPage {
                 this.settings.set("lastname", values.author1lastname);
 
                 transition.then(() => {
+                  Keyboard.close();
                   this.viewCtrl.dismiss();
                 });
                 return false;
@@ -171,6 +174,7 @@ export class SourceModalInterviewPage {
         alert.present();
       });
     }else {
+      Keyboard.close();
       this.viewCtrl.dismiss();
     }
   }

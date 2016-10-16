@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 
 import { NavController, NavParams, ModalController, AlertController } from "ionic-angular";
+import { Keyboard } from "ionic-native";
 import { TranslateService } from "ng2-translate/ng2-translate";
 
 import { SourceModalBookPage } from "../source-modal-book/source-modal-book";
@@ -61,6 +62,7 @@ export class SourcePage {
           {
             text: translations["COMMON.OK"],
             handler: data => {
+              Keyboard.close();
               if (error.complex) {
                 if (error.type == "select") {
                   this.source[error.var] = data;
