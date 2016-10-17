@@ -9,9 +9,7 @@ export class References {
 
   constructor(
     private http: Http,
-  ) {
-    this.load();
-  }
+  ) {}
 
   load() {
     if (this.data) {
