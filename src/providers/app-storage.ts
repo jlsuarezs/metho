@@ -18,7 +18,6 @@ export class AppStorage {
   public sourceDB: any = null;
   public pendingDB: any = null;
   public settingsDB: any = null;
-  public local: any;
   public projects: Map<string, Project> = <Map<string, Project>>new Map();
   public sources: Map<string, Source> = <Map<string, Source>>new Map();
   public sourcesByProject: Map<string, Map<string, Source>> = <Map<string, Map<string, Source>>>new Map();
@@ -129,10 +128,6 @@ export class AppStorage {
       releaseLock();
     });
 
-    if (this.projects.size == 0) {
-      this.local.set("theresProjects", false);
-    }
-
     return new Promise(resolve => {
       this.projectDB.remove(doc).then(result => {
         resolve(result);
@@ -184,7 +179,6 @@ export class AppStorage {
       }).catch((err) => {
         releaseSourceLock();
         releaseProjectLock();
-        this.local.set("theresProjects", true);
         this.report.report(err);
         resolve(err);
       });
