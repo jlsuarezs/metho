@@ -31,9 +31,9 @@ export class MyApp {
         subscription.unsubscribe();
         setTimeout(() => {
           Splashscreen.hide();
+          StatusBar.styleDefault();
         }, 100);
       });
-      StatusBar.styleDefault();
       this.references.load();
     });
   }
