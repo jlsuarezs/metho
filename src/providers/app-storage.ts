@@ -49,17 +49,11 @@ export class AppStorage {
 
   init() {
     PouchDB.plugin(PouchDB_Adapter_Cordova_SQLite);
-    if (!!window.cordova) {
-      this.projectDB = new PouchDB("projects", { adapter: "cordova-sqlite" });
-      this.sourceDB = new PouchDB("sources", { adapter: "cordova-sqlite" });
-      this.pendingDB = new PouchDB("pendings", { adapter: "cordova-sqlite" });
-      this.settingsDB = new PouchDB("settings", { adapter: "cordova-sqlite" });
-    }else {
-      this.projectDB = new PouchDB("projects", { adapter: "websql" });
-      this.sourceDB = new PouchDB("sources", { adapter: "websql" });
-      this.pendingDB = new PouchDB("pendings", { adapter: "websql" });
-      this.settingsDB = new PouchDB("settings", { adapter: "websql" });
-    }
+    let adapter = !!window.cordova ? "cordova-sqlite" : "websql";
+    this.projectDB = new PouchDB("projects", { adapter: adapter });
+    this.sourceDB = new PouchDB("sources", { adapter: adapter });
+    this.pendingDB = new PouchDB("pendings", { adapter: adapter });
+    this.settingsDB = new PouchDB("settings", { adapter: adapter });
 
     this.projectDB.allDocs({include_docs: true}).then(docs => {
       docs.rows.forEach((value) => {
