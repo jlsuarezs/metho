@@ -31,21 +31,16 @@ export class AppStorage {
   public loadingPendings: boolean = true;
   public loadingSettings: boolean = true;
 
-  public projectEvents;
-  public sourcesEvents;
-  public pendingsEvents;
-  public settingsEvents;
+  public projectEvents = new EventEmitter();
+  public sourcesEvents = new EventEmitter();
+  public pendingsEvents = new EventEmitter();
+  public settingsEvents = new EventEmitter();
 
   constructor(
     public fetch: Fetch,
     public parse: Parse,
     public report: Report
-  ) {
-    this.projectEvents = new EventEmitter();
-    this.sourcesEvents = new EventEmitter();
-    this.pendingsEvents = new EventEmitter();
-    this.settingsEvents = new EventEmitter();
-  }
+  ) {}
 
   init() {
     PouchDB.plugin(PouchDB_Adapter_Cordova_SQLite);
