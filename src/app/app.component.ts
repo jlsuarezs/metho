@@ -32,9 +32,9 @@ export class MyApp {
         setTimeout(() => {
           Splashscreen.hide();
           StatusBar.styleDefault();
+          this.references.load();
         }, 100);
       });
-      this.references.load();
     });
   }
 }
