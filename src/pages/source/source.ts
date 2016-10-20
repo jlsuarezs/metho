@@ -57,7 +57,10 @@ export class SourcePage {
         message: error.promptText,
         buttons: [
           {
-            text: translations["COMMON.CANCEL"]
+            text: translations["COMMON.CANCEL"],
+            handler: () => {
+              Keyboard.close();
+            }
           },
           {
             text: translations["COMMON.OK"],
