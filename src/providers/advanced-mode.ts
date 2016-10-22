@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from "@angular/core";
 
 import { AlertController } from "ionic-angular";
-import { InAppPurchase } from "ionic-native";
+import { InAppPurchase, Device } from "ionic-native";
 import { TranslateService } from "ng2-translate/ng2-translate";
 
 import { Report } from "./report";
@@ -19,6 +19,21 @@ export class AdvancedMode {
   public hasLoaded: boolean = false;
   public loadEvents: EventEmitter<any> = new EventEmitter();
   public productId: string = "";
+  public prohibited = [
+    // iPod Touch 5
+    "iPod5,1",
+    // iPhone 4S
+    "iPhone4,1",
+    // iPad 2
+    "iPad2,1",
+    "iPad2,2",
+    "iPad2,3",
+    "iPad2,4",
+    // iPad mini original
+    "iPad2,5",
+    "iPad2,6",
+    "iPad2,7"
+  ];
 
   constructor(
     public translate: TranslateService,
@@ -144,5 +159,17 @@ export class AdvancedMode {
 
   isEnabled() {
     return this.settings.get("advanced");
+  }
+
+  isAvailable(): boolean {
+    if (Device.device.platform == "iOS") {
+      if (this.prohibited.indexOf(Device.device.model) > -1) {
+        return false;
+      }else {
+        return true;
+      }
+    }else {
+      return true;
+    }
   }
 }

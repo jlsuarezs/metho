@@ -604,6 +604,8 @@
                 "ALREADY_TEXT": "Le mode avancé est déjà activé",
                 "ERR_NETWORK_TITLE": "Hors-ligne",
                 "ERR_NETWORK": "Vous ne pouvez pas acheter ou restaurer le mode avancé lorsqu'hors-ligne.",
+                "UNSUPPORTED_DEVICE_TITLE": "Appareil non supporté",
+                "UNSUPPORTED_DEVICE": "L'iPhone 4S, iPod Touch 5, iPad 2 et iPad mini 1 ne supportent pas le mode avancé.",
                 "RESTORE": "Restaurer",
                 "RESTORE_NO_FOUND": "Aucun item précédemment acheté n'a été trouvé."
             }

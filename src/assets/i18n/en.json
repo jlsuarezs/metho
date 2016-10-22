@@ -604,6 +604,8 @@
                 "ALREADY_TEXT": "Advanced mode is already activated",
                 "ERR_NETWORK_TITLE": "Offline",
                 "ERR_NETWORK": "You cannot buy or restore advanced mode while offline.",
+                "UNSUPPORTED_DEVICE_TITLE": "Unsupported device",
+                "UNSUPPORTED_DEVICE": "iPhone 4S, iPod Touch 5, iPad 2 and iPad mini 1 are not supported by the advanced mode.",
                 "RESTORE": "Restore",
                 "RESTORE_NO_FOUND": "No previously bought item was found."
             }

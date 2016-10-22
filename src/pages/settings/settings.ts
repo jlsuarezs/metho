@@ -20,6 +20,7 @@ import deepcopy from "deepcopy";
 export class SettingsPage {
   public settings: SettingsList = {};
   public enableAdvanced: boolean = false;
+  public advancedAvailable: boolean = true;
   public advancedPage: any;
   public attributionsPage: any;
   public feedbackPage: any;
@@ -45,6 +46,7 @@ export class SettingsPage {
         this.enableAdvanced = true;
       });
     }
+    this.advancedAvailable = this.advanced.isAvailable();
   }
 
   loadSettings() {
@@ -129,5 +131,37 @@ export class SettingsPage {
   illuminatiEasterEgg() {
     this.showIlluminatiEaster = true;
     setTimeout(() => this.showIlluminatiEaster = false, 5250);
+  }
+
+  explainUnavailable() {
+    if (!this.enableAdvanced) {
+      this.translate.get(["SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE", "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK", "COMMON.OK"]).subscribe(translations => {
+        let alert = this.alertCtrl.create({
+          title: translations["SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE"],
+          message: translations["SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK"],
+          buttons: [
+            {
+              text: translations["COMMON.OK"]
+            }
+          ]
+        });
+
+        alert.present();
+      });
+    }else if (!this.advancedAvailable) {
+      this.translate.get(["SETTINGS.ADVANCED_MODE.POPUP.UNSUPPORTED_DEVICE_TITLE", "SETTINGS.ADVANCED_MODE.POPUP.UNSUPPORTED_DEVICE", "COMMON.OK"]).subscribe(translations => {
+        let alert = this.alertCtrl.create({
+          title: translations["SETTINGS.ADVANCED_MODE.POPUP.UNSUPPORTED_DEVICE_TITLE"],
+          message: translations["SETTINGS.ADVANCED_MODE.POPUP.UNSUPPORTED_DEVICE"],
+          buttons: [
+            {
+              text: translations["COMMON.OK"]
+            }
+          ]
+        });
+
+        alert.present();
+      });
+    }
   }
 }

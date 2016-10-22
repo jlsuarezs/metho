@@ -604,6 +604,8 @@
                 "ALREADY_TEXT": "El modo avanzado es ya activado",
                 "ERR_NETWORK_TITLE": "Desconectado",
                 "ERR_NETWORK": "No puede comprar o restorar el modo avanzado mientras de ser desconectado.",
+                "UNSUPPORTED_DEVICE_TITLE": "Apparto no soportado",
+                "UNSUPPORTED_DEVICE": "iPhone 4S, iPod Touch 5, iPad 2 et iPad mini 1 no son soportados.",
                 "RESTORE": "Restorar",
                 "RESTORE_NO_FOUND": "Ningun compra fue encontrado."
             }
