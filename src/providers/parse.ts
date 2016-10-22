@@ -329,7 +329,7 @@ export class Parse {
             }
 
             if (sourceToParse.author1firstname) {
-                sourceToParse.parsedSource += sourceToParse.author1firstname.toUpperCase() + ". ";
+                sourceToParse.parsedSource += sourceToParse.author1firstname + ". ";
             } else {
                 sourceToParse.parsedSource += "?. ";
                 sourceToParse.errors.push(this.addError("AUTHOR_ARTICLE_FIRSTNAME", "author1firstname"));
