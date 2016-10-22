@@ -3,7 +3,6 @@ import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 
 import { ViewController, NavParams, NavController } from "ionic-angular";
 import { Keyboard } from "ionic-native";
-import { TranslateService } from "ng2-translate/ng2-translate";
 
 import { AppStorage } from "../../providers/app-storage";
 import { Language } from "../../providers/language";
@@ -37,7 +36,6 @@ export class SourceModalInterviewPage {
   constructor(
     public viewCtrl: ViewController,
     public params: NavParams,
-    public translate: TranslateService,
     public actionSheetCtrl: TranslatedActionSheetController,
     public alertCtrl: TranslatedAlertController,
     public storage: AppStorage,
@@ -81,10 +79,6 @@ export class SourceModalInterviewPage {
       consultationDate: [this.noData ? moment().utcOffset(0).subtract(-moment().utcOffset(), "minutes").toISOString() : this.previous.consultationDate],
     });
     this.generateLabels();
-    // Use async once issue is resolved
-    this.civilityOpts = {
-      title: this.translate.instant("PROJECT.PARSE.CIVILITY_TITLE.TITLE")
-    };
   }
 
   generateLabels() {
