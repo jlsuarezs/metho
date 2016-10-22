@@ -782,12 +782,12 @@ export class Parse {
 
   public addError(errorId: string, variable: string): SourceError {
     return {
-      errorTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".DESC"),
-      promptTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".TITLE"),
-      promptText: this.translate.instant("PROJECT.PARSE." + errorId + ".TEXT"),
+      errorTitle: "PROJECT.PARSE." + errorId + ".DESC",
+      promptTitle: "PROJECT.PARSE." + errorId + ".TITLE",
+      promptText: "PROJECT.PARSE." + errorId + ".TEXT",
       inputs: [
         {
-          example: this.translate.instant("PROJECT.PARSE." + errorId + ".EXAMPLE"),
+          example: "PROJECT.PARSE." + errorId + ".EXAMPLE",
           var: variable
         }
       ]
@@ -796,12 +796,12 @@ export class Parse {
 
   public addMultiInputError(inputs: {errorId:string, variable: string}[], errorId: string): SourceError {
     return {
-      errorTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".DESC"),
-      promptTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".TITLE"),
-      promptText: this.translate.instant("PROJECT.PARSE." + errorId + ".TEXT"),
+      errorTitle: "PROJECT.PARSE." + errorId + ".DESC",
+      promptTitle: "PROJECT.PARSE." + errorId + ".TITLE",
+      promptText: "PROJECT.PARSE." + errorId + ".TEXT",
       inputs: inputs.map(value => {
         return {
-          example: this.translate.instant("PROJECT.PARSE." + value.errorId + ".EXAMPLE"),
+          example: "PROJECT.PARSE." + value.errorId + ".EXAMPLE",
           var: value.variable
         }
       })
@@ -809,14 +809,10 @@ export class Parse {
   }
 
   public addComplexError(errorId: string, variable: string, complex: any): SourceError {
-    complex.options = complex.options.map((option) => {
-      option.text = this.translate.instant(option.text);
-      return option;
-    });
     return {
-      errorTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".DESC"),
-      promptTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".TITLE"),
-      promptText: this.translate.instant("PROJECT.PARSE." + errorId + ".TEXT"),
+      errorTitle: "PROJECT.PARSE." + errorId + ".DESC",
+      promptTitle: "PROJECT.PARSE." + errorId + ".TITLE",
+      promptText: "PROJECT.PARSE." + errorId + ".TEXT",
       var: variable,
       complex: true,
       type: complex.type,

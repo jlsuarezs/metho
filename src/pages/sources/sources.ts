@@ -1,6 +1,6 @@
 import { ViewChild, Component } from "@angular/core";
 
-import { NavController, NavParams, ActionSheetController, ModalController, AlertController, List, Content } from "ionic-angular";
+import { NavController, NavParams, ActionSheetController, ModalController, List, Content } from "ionic-angular";
 import { SocialSharing } from "ionic-native";
 import { TranslateService } from "ng2-translate/ng2-translate";
 
@@ -16,6 +16,7 @@ import { PendingsPage } from "../pendings/pendings";
 
 import { AppStorage } from "../../providers/app-storage";
 import { Settings } from "../../providers/settings";
+import { TranslatedAlertController } from "../../providers/translated-alert-controller";
 
 
 @Component({
@@ -37,7 +38,7 @@ export class SourcesPage {
     public params: NavParams,
     public translate: TranslateService,
     public actionSheetCtrl: ActionSheetController,
-    public alertCtrl: AlertController,
+    public alertCtrl: TranslatedAlertController,
     public modalCtrl: ModalController,
     public storage: AppStorage,
     public settings: Settings,
@@ -207,33 +208,24 @@ export class SourcesPage {
   }
 
   deleteSource(source: Source) {
-    this.translate.get([
-      "PROJECT.DETAIL.POPUP.DELETE_TITLE",
-      "PROJECT.DETAIL.POPUP.DELETE_TEXT",
-      "COMMON.DELETE",
-      "COMMON.CANCEL"
-    ]).subscribe(translations => {
-      let alert = this.alertCtrl.create({
-        title: translations["PROJECT.DETAIL.POPUP.DELETE_TITLE"],
-        message: translations["PROJECT.DETAIL.POPUP.DELETE_TEXT"],
-        buttons: [
-          {
-            text: translations["COMMON.CANCEL"],
-            handler: () => {
-              this.list.closeSlidingItems();
-            }
-          },
-          {
-            text: translations["COMMON.DELETE"],
-            handler: () => {
-              this.storage.deleteSource(source._id);
-              this.sources.splice(this.sources.indexOf(source), 1);
-            }
+    this.alertCtrl.present({
+      title: "PROJECT.DETAIL.POPUP.DELETE_TITLE",
+      message: "PROJECT.DETAIL.POPUP.DELETE_TEXT",
+      buttons: [
+        {
+          text: "COMMON.CANCEL",
+          handler: () => {
+            this.list.closeSlidingItems();
           }
-        ]
-      });
-
-      alert.present();
+        },
+        {
+          text: "COMMON.DELETE",
+          handler: () => {
+            this.storage.deleteSource(source._id);
+            this.sources.splice(this.sources.indexOf(source), 1);
+          }
+        }
+      ]
     });
   }
 
@@ -250,39 +242,30 @@ export class SourcesPage {
       });
 
       if (errNum > 0 && !this.settings.get("ignoreErrors")) {
-        this.translate.get([
-          "PROJECT.DETAIL.POPUP.ERRORS_SOURCES",
-          "PROJECT.DETAIL.POPUP.SHARE_TEXT",
-          "PROJECT.DETAIL.POPUP.SHARE",
-          "COMMON.CANCEL"
-        ], { errNum:errNum }).subscribe((translations) => {
-          let alert = this.alertCtrl.create({
-            title: translations["PROJECT.DETAIL.POPUP.SHARE_TEXT"],
-            message: translations["PROJECT.DETAIL.POPUP.ERRORS_SOURCES"],
-            buttons: [
-              {
-                text: translations["COMMON.CANCEL"]
-              },
-              {
-                text: translations["PROJECT.DETAIL.POPUP.SHARE"],
-                handler: () => {
-                  SocialSharing.shareViaEmail(
-                    textToShare,
-                    this.project.name,
-                    [],
-                    [],
-                    [],
-                    []
-                  ).then(() => {
-                    this.promptForAdvanced();
-                  }).catch(() => {});
-                }
+        this.alertCtrl.present({
+          title: "PROJECT.DETAIL.POPUP.SHARE_TEXT",
+          message: "PROJECT.DETAIL.POPUP.ERRORS_SOURCES",
+          buttons: [
+            {
+              text: "COMMON.CANCEL"
+            },
+            {
+              text: "PROJECT.DETAIL.POPUP.SHARE",
+              handler: () => {
+                SocialSharing.shareViaEmail(
+                  textToShare,
+                  this.project.name,
+                  [],
+                  [],
+                  [],
+                  []
+                ).then(() => {
+                  this.promptForAdvanced();
+                }).catch(() => {});
               }
-            ]
-          });
-
-          alert.present();
-        });
+            }
+          ]
+        }, undefined, { errNum: errNum });
       } else {
         SocialSharing.shareViaEmail(
           textToShare,
@@ -300,32 +283,25 @@ export class SourcesPage {
 
   promptForAdvanced() {
     if (!this.settings.get("advanced")) {
-      this.translate.get([
-        "PROJECT.DETAIL.POPUP.ADVANCED_MODE",
-        "PROJECT.DETAIL.POPUP.ADVANCED_MODE_MESSAGE",
-        "PROJECT.DETAIL.POPUP.DETAILS",
-        "PROJECT.DETAIL.POPUP.NO_THANKS"
-      ]).subscribe((translations) => {
-        let alert = this.alertCtrl.create({
-          title: translations["PROJECT.DETAIL.POPUP.ADVANCED_MODE"],
-          message: translations["PROJECT.DETAIL.POPUP.ADVANCED_MODE_MESSAGE"],
-          buttons: [
-            {
-              text: translations["PROJECT.DETAIL.POPUP.NO_THANKS"]
-            },
-            {
-              text: translations["PROJECT.DETAIL.POPUP.DETAILS"],
-              handler: () => {
-                alert.dismiss().then(() => {
+      let alert = this.alertCtrl.present({
+        title: "PROJECT.DETAIL.POPUP.ADVANCED_MODE",
+        message: "PROJECT.DETAIL.POPUP.ADVANCED_MODE_MESSAGE",
+        buttons: [
+          {
+            text: "PROJECT.DETAIL.POPUP.NO_THANKS"
+          },
+          {
+            text: "PROJECT.DETAIL.POPUP.DETAILS",
+            handler: () => {
+              alert.then(obj => {
+                obj.dismiss().then(() => {
                   this.nav.push(AdvancedModePage);
                 });
-                return false;
-              }
+              });
+              return false;
             }
-          ]
-        });
-
-        alert.present();
+          }
+        ]
       });
     }
   }

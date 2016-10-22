@@ -1,13 +1,13 @@
 import { Component } from "@angular/core";
 
-import { NavController, NavParams, ModalController, AlertController, LoadingController } from "ionic-angular";
-import { TranslateService } from "ng2-translate/ng2-translate";
+import { NavController, NavParams, ModalController, LoadingController } from "ionic-angular";
 
 import { SourceModalBookPage } from "../source-modal-book/source-modal-book";
 
 import { AppStorage } from "../../providers/app-storage";
 import { Fetch } from "../../providers/fetch";
 import { Language } from "../../providers/language";
+import { TranslatedAlertController } from "../../providers/translated-alert-controller";
 
 
 @Component({
@@ -21,8 +21,7 @@ export class PendingsPage {
   constructor(
     public nav: NavController,
     public params: NavParams,
-    public translate: TranslateService,
-    public alertCtrl: AlertController,
+    public alertCtrl: TranslatedAlertController,
     public loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
     public storage: AppStorage,
@@ -125,76 +124,53 @@ export class PendingsPage {
   }
 
   alert404(index: number) {
-    this.translate.get([
-      "PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TITLE",
-      "PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TEXT",
-      "PROJECT.PENDING.POPUP.SEARCH",
-      "PROJECT.PENDING.POPUP.LATER"
-    ]).subscribe(translations => {
-      let alert = this.alertCtrl.create({
-        title: translations["PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TITLE"],
-        message: translations["PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TEXT"],
-        buttons: [
-          {
-            text: translations["PROJECT.PENDING.POPUP.SEARCH"],
-            handler: () => {
-              this.openModalWithBrowser(this.pendings[index], alert.dismiss());
-              return false;
-            }
-          },
-          {
-            text: translations["PROJECT.PENDING.POPUP.LATER"]
+    let alert = this.alertCtrl.present({
+      title: "PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TITLE",
+      message: "PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TEXT",
+      buttons: [
+        {
+          text: "PROJECT.PENDING.POPUP.SEARCH",
+          handler: () => {
+            alert.then(obj => {
+              this.openModalWithBrowser(this.pendings[index], obj.dismiss());
+            });
+            return false;
           }
-        ]
-      });
-
-      alert.present();
+        },
+        {
+          text: "PROJECT.PENDING.POPUP.LATER"
+        }
+      ]
     });
   }
 
   alert408(pending: Pending) {
-    this.translate.get([
-      "PROJECT.PENDING.POPUP.TIMEOUT_TITLE",
-      "PROJECT.PENDING.POPUP.TIMEOUT_TEXT",
-      "COMMON.CANCEL",
-      "PROJECT.PENDING.POPUP.RETRY"
-    ]).subscribe((translations) => {
-      let alert = this.alertCtrl.create({
-        title: translations["PROJECT.PENDING.POPUP.TIMEOUT_TITLE"],
-        message: translations["PROJECT.PENDING.POPUP.TIMEOUT_TEXT"],
-        buttons: [
-          {
-            text: translations["COMMON.CANCEL"]
-          },
-          {
-            text: translations["PROJECT.PENDING.POPUP.RETRY"],
-            handler: () => {
-              this.solvePending(pending);
-            }
+    this.alertCtrl.present({
+      title: "PROJECT.PENDING.POPUP.TIMEOUT_TITLE",
+      message: "PROJECT.PENDING.POPUP.TIMEOUT_TEXT",
+      buttons: [
+        {
+          text: "COMMON.CANCEL"
+        },
+        {
+          text: "PROJECT.PENDING.POPUP.RETRY",
+          handler: () => {
+            this.solvePending(pending);
           }
-        ]
-      });
-      alert.present();
+        }
+      ]
     });
   }
 
   alert500() {
-    this.translate.get([
-      "PROJECT.DETAIL.POPUP.ERROR",
-      "PROJECT.DETAIL.POPUP.ERROR_500",
-      "COMMON.OK"
-    ]).subscribe(translations => {
-      let alert = this.alertCtrl.create({
-        title: translations["PROJECT.DETAIL.POPUP.ERROR"],
-        message: translations["PROJECT.DETAIL.POPUP.ERROR_500"],
-        buttons: [
-          {
-            text: translations["COMMON.OK"]
-          }
-        ]
-      });
-
-      alert.present();
+    this.alertCtrl.present({
+      title: "PROJECT.DETAIL.POPUP.ERROR",
+      message: "PROJECT.DETAIL.POPUP.ERROR_500",
+      buttons: [
+        {
+          text: "COMMON.OK"
+        }
+      ]
     });
   }
 }

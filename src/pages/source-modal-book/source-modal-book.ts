@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 
-import { ViewController, NavParams, AlertController, ActionSheetController } from "ionic-angular";
+import { ViewController, NavParams, ActionSheetController } from "ionic-angular";
 import { SafariViewController, Keyboard } from "ionic-native";
 import { TranslateService } from "ng2-translate/ng2-translate";
 
@@ -11,6 +11,7 @@ import { Language } from "../../providers/language";
 import { Parse } from "../../providers/parse";
 import { Scan } from "../../providers/scan";
 import { Settings } from "../../providers/settings";
+import { TranslatedAlertController } from "../../providers/translated-alert-controller";
 
 
 @Component({
@@ -50,7 +51,7 @@ export class SourceModalBookPage {
     public params: NavParams,
     public translate: TranslateService,
     public actionSheetCtrl: ActionSheetController,
-    public alertCtrl: AlertController,
+    public alertCtrl: TranslatedAlertController,
     public storage: AppStorage,
     public fetch: Fetch,
     public language: Language,
@@ -241,58 +242,34 @@ export class SourceModalBookPage {
 
   openExplaining() {
     if (this.instantStatus.none) {
-      this.translate.get([
-        "PROJECT.DETAIL.POPUP.NO_SUGGESTIONS",
-        "PROJECT.DETAIL.POPUP.NO_SUGGESTIONS_DESC",
-        "COMMON.OK"
-      ]).subscribe((translations) => {
-        let alert = this.alertCtrl.create({
-          title: translations["PROJECT.DETAIL.POPUP.NO_SUGGESTIONS"],
-          message: translations["PROJECT.DETAIL.POPUP.NO_SUGGESTIONS_DESC"],
-          buttons: [
-            {
-              text: translations["COMMON.OK"]
-            }
-          ]
-        });
-
-        alert.present();
+      this.alertCtrl.present({
+        title: "PROJECT.DETAIL.POPUP.NO_SUGGESTIONS",
+        message: "PROJECT.DETAIL.POPUP.NO_SUGGESTIONS_DESC",
+        buttons: [
+          {
+            text: "COMMON.OK"
+          }
+        ]
       });
     }else if (this.instantStatus.timeout) {
-      this.translate.get([
-        "PROJECT.DETAIL.POPUP.TIMEOUT_TITLE",
-        "PROJECT.DETAIL.POPUP.TIMEOUT_SEARCH",
-        "COMMON.OK"
-      ]).subscribe((translations) => {
-        let alert = this.alertCtrl.create({
-          title: translations["PROJECT.DETAIL.POPUP.TIMEOUT_TITLE"],
-          message: translations["PROJECT.DETAIL.POPUP.TIMEOUT_SEARCH"],
-          buttons: [
-            {
-              text: translations["COMMON.OK"]
-            }
-          ]
-        });
-
-        alert.present();
+      this.alertCtrl.present({
+        title: "PROJECT.DETAIL.POPUP.TIMEOUT_TITLE",
+        message: "PROJECT.DETAIL.POPUP.TIMEOUT_SEARCH",
+        buttons: [
+          {
+            text: "COMMON.OK"
+          }
+        ]
       });
     }else if (this.instantStatus.err500) {
-      this.translate.get([
-        "PROJECT.DETAIL.POPUP.ERROR",
-        "PROJECT.DETAIL.POPUP.ERROR_500",
-        "COMMON.OK"
-      ]).subscribe((translations) => {
-        let alert = this.alertCtrl.create({
-          title: translations["PROJECT.DETAIL.POPUP.ERROR"],
-          message: translations["PROJECT.DETAIL.POPUP.ERROR_500"],
-          buttons: [
-            {
-              text: translations["COMMON.OK"]
-            }
-          ]
-        });
-
-        alert.present();
+      this.alertCtrl.present({
+        title: "PROJECT.DETAIL.POPUP.ERROR",
+        message: "PROJECT.DETAIL.POPUP.ERROR_500",
+        buttons: [
+          {
+            text: "COMMON.OK"
+          }
+        ]
       });
     }
   }
@@ -303,31 +280,22 @@ export class SourceModalBookPage {
       this.instantStatus.shown = false;
       this.insertingFromScan = true;
     }else {
-      this.translate.get([
-        "PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE",
-        "PROJECT.DETAIL.POPUP.AUTO_FILL_DESC",
-        "PROJECT.DETAIL.POPUP.OVERWRITE",
-        "COMMON.CANCEL"
-      ]).subscribe((translations) => {
-        let alert = this.alertCtrl.create({
-          title: translations["PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE"],
-          message: translations["PROJECT.DETAIL.POPUP.AUTO_FILL_DESC"],
-          buttons: [
-            {
-              text: translations["COMMON.CANCEL"]
-            },
-            {
-              text: translations["PROJECT.DETAIL.POPUP.OVERWRITE"],
-              handler: () => {
-                this.updateValues(suggestion);
-                this.instantStatus.shown = false;
-                this.insertingFromScan = true;
-              }
+      this.alertCtrl.present({
+        title: "PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE",
+        message: "PROJECT.DETAIL.POPUP.AUTO_FILL_DESC",
+        buttons: [
+          {
+            text: "COMMON.CANCEL"
+          },
+          {
+            text: "PROJECT.DETAIL.POPUP.OVERWRITE",
+            handler: () => {
+              this.updateValues(suggestion);
+              this.instantStatus.shown = false;
+              this.insertingFromScan = true;
             }
-          ]
-        });
-
-        alert.present();
+          }
+        ]
       });
     }
   }
@@ -341,29 +309,21 @@ export class SourceModalBookPage {
           this.insertingFromScan = true;
         }else {
           response.transition.then(() => {
-            this.translate.get([
-              "PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE",
-              "PROJECT.DETAIL.POPUP.AUTO_FILL_DESC",
-              "PROJECT.DETAIL.POPUP.OVERWRITE",
-              "COMMON.CANCEL"
-            ]).subscribe((translations) => {
-              let alert = this.alertCtrl.create({
-                title: translations["PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE"],
-                message: translations["PROJECT.DETAIL.POPUP.AUTO_FILL_DESC"],
-                buttons: [
-                  {
-                    text: translations["COMMON.CANCEL"]
-                  },
-                  {
-                    text: translations["PROJECT.DETAIL.POPUP.OVERWRITE"],
-                    handler: () => {
-                      this.updateValues(response.data);
-                      this.insertingFromScan = true;
-                    }
+            this.alertCtrl.present({
+              title: "PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE",
+              message: "PROJECT.DETAIL.POPUP.AUTO_FILL_DESC",
+              buttons: [
+                {
+                  text: "COMMON.CANCEL"
+                },
+                {
+                  text: "PROJECT.DETAIL.POPUP.OVERWRITE",
+                  handler: () => {
+                    this.updateValues(response.data);
+                    this.insertingFromScan = true;
                   }
-                ]
-              });
-              alert.present();
+                }
+              ]
             });
           });
         }

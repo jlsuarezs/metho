@@ -1,11 +1,10 @@
 import { Injectable, EventEmitter } from "@angular/core";
 
-import { AlertController } from "ionic-angular";
 import { InAppPurchase, Device } from "ionic-native";
-import { TranslateService } from "ng2-translate/ng2-translate";
 
 import { Report } from "./report";
 import { Settings } from "./settings";
+import { TranslatedAlertController } from "./translated-alert-controller";
 
 interface CordovaWindow extends Window {
   cordova: any;
@@ -36,8 +35,7 @@ export class AdvancedMode {
   ];
 
   constructor(
-    public translate: TranslateService,
-    public alertCtrl: AlertController,
+    public alertCtrl: TranslatedAlertController,
     public report: Report,
     public settings: Settings,
   ) {
@@ -78,25 +76,17 @@ export class AdvancedMode {
             reject();
           });
         }else {
-          this.translate.get([
-            "COMMON.OK",
-            "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE",
-            "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK"
-          ]).subscribe(translations => {
-            let alert = this.alertCtrl.create({
-              title: translations["SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE"],
-              message: translations["SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK"],
-              buttons: [
-                {
-                  text: translations["COMMON.OK"],
-                  handler: () => {
-                    reject();
-                  }
+          this.alertCtrl.present({
+            title: "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE",
+            message: "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK",
+            buttons: [
+              {
+                text: "COMMON.OK",
+                handler: () => {
+                  reject();
                 }
-              ]
-            });
-
-            alert.present();
+              }
+            ]
           });
         }
       });
@@ -115,22 +105,14 @@ export class AdvancedMode {
               this.settings.set("advanced", true);
               resolve();
             }else {
-              this.translate.get([
-                "SETTINGS.ADVANCED_MODE.POPUP.RESTORE",
-                "SETTINGS.ADVANCED_MODE.POPUP.RESTORE_NO_FOUND",
-                "COMMON.OK"
-              ]).subscribe((translations) => {
-                let alert = this.alertCtrl.create({
-                  title: translations["SETTINGS.ADVANCED_MODE.POPUP.RESTORE"],
-                  message: translations["SETTINGS.ADVANCED_MODE.POPUP.RESTORE_NO_FOUND"],
-                  buttons: [
-                    {
-                      text: translations["COMMON.OK"]
-                    }
-                  ]
-                });
-
-                alert.present();
+              this.alertCtrl.present({
+                title: "SETTINGS.ADVANCED_MODE.POPUP.RESTORE",
+                message: "SETTINGS.ADVANCED_MODE.POPUP.RESTORE_NO_FOUND",
+                buttons: [
+                  {
+                    text: "COMMON.OK"
+                  }
+                ]
               });
             }
           }).catch(err => {
@@ -138,25 +120,17 @@ export class AdvancedMode {
             reject();
           });
         }else {
-          this.translate.get([
-            "COMMON.OK",
-            "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE",
-            "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK"
-          ]).subscribe(translations => {
-            let alert = this.alertCtrl.create({
-              title: translations["SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE"],
-              message: translations["SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK"],
-              buttons: [
-                {
-                  text: translations["COMMON.OK"],
-                  handler: () => {
-                    reject();
-                  }
+          this.alertCtrl.present({
+            title: "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE",
+            message: "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK",
+            buttons: [
+              {
+                text: "COMMON.OK",
+                handler: () => {
+                  reject();
                 }
-              ]
-            });
-
-            alert.present();
+              }
+            ]
           });
         }
       });

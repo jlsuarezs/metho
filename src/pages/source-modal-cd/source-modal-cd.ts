@@ -1,13 +1,14 @@
 import { Component } from "@angular/core";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 
-import { ViewController, NavParams, AlertController, ActionSheetController } from "ionic-angular";
+import { ViewController, NavParams, ActionSheetController } from "ionic-angular";
 import { Keyboard } from "ionic-native";
 import { TranslateService } from "ng2-translate/ng2-translate";
 
 import { AppStorage } from "../../providers/app-storage";
 import { Parse } from "../../providers/parse";
 import { Settings } from "../../providers/settings";
+import { TranslatedAlertController } from "../../providers/translated-alert-controller";
 
 
 @Component({
@@ -29,7 +30,7 @@ export class SourceModalCdPage {
     public params: NavParams,
     public translate: TranslateService,
     public actionSheetCtrl: ActionSheetController,
-    public alertCtrl: AlertController,
+    public alertCtrl: TranslatedAlertController,
     public storage: AppStorage,
     public parse: Parse,
     public settings: Settings,
@@ -69,24 +70,16 @@ export class SourceModalCdPage {
 
   ionViewDidEnter() {
     if (!this.settings.get("cdAlertShown")) {
-      this.translate.get([
-        "COMMON.OK",
-        "PROJECT.DETAIL.POPUP.USE_CD_FOR_INFORMATION",
-        "PROJECT.DETAIL.POPUP.CAUTION"
-      ]).subscribe(translations => {
-        let alert = this.alertCtrl.create({
-          title: translations["PROJECT.DETAIL.POPUP.CAUTION"],
-          message: translations["PROJECT.DETAIL.POPUP.USE_CD_FOR_INFORMATION"],
-          buttons: [
-            {
-              text: translations["COMMON.OK"]
-            }
-          ]
-        });
-
-        alert.present();
-        this.settings.set("cdAlertShown", true);
+      let alert = this.alertCtrl.present({
+        title: "PROJECT.DETAIL.POPUP.CAUTION",
+        message: "PROJECT.DETAIL.POPUP.USE_CD_FOR_INFORMATION",
+        buttons: [
+          {
+            text: "COMMON.OK"
+          }
+        ]
       });
+      this.settings.set("cdAlertShown", true);
     }
   }
 

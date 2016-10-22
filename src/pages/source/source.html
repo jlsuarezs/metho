@@ -17,11 +17,11 @@
   <ion-list>
     <button ion-item *ngFor="let error of source.errors" (click)="solve(error)" icon-left>
       <ion-icon name="alert" item-left class="red"></ion-icon>
-      <h2>{{error.errorTitle}}</h2>
+      <h2>{{error.errorTitle | translate}}</h2>
     </button>
     <button ion-item *ngFor="let warning of source.warnings" (click)="solve(warning)" icon-left>
       <ion-icon name="warning" item-left class="yellow"></ion-icon>
-      <h2>{{warning.errorTitle}}</h2>
+      <h2>{{warning.errorTitle | translate}}</h2>
     </button>
   </ion-list>
 

@@ -39,6 +39,7 @@ import { References } from "../providers/references";
 import { Report } from "../providers/report";
 import { Scan } from "../providers/scan";
 import { Settings } from "../providers/settings";
+import { TranslatedAlertController } from "../providers/translated-alert-controller";
 
 export function translateDeps (http: Http) {
   return new TranslateStaticLoader(http, "assets/i18n", ".json");
@@ -114,7 +115,8 @@ export function translateDeps (http: Http) {
     AdvancedMode,
     Language,
     Scan,
-    Storage
+    Storage,
+    TranslatedAlertController
   ]
 })
 export class AppModule {}

@@ -1,7 +1,6 @@
 import { ViewChild, Component } from "@angular/core";
 
-import { NavController, AlertController, List } from "ionic-angular";
-import { TranslateService } from "ng2-translate/ng2-translate";
+import { NavController, List } from "ionic-angular";
 
 import { AdvancedModePage } from "../advanced-mode/advanced-mode";
 import { AttributionsPage } from "../attributions/attributions";
@@ -10,6 +9,7 @@ import { FeedbackPage } from "../feedback/feedback";
 import { AdvancedMode } from "../../providers/advanced-mode";
 import { Language } from "../../providers/language";
 import { Settings } from "../../providers/settings";
+import { TranslatedAlertController } from "../../providers/translated-alert-controller";
 
 import deepcopy from "deepcopy";
 
@@ -30,8 +30,7 @@ export class SettingsPage {
 
   constructor(
     public nav: NavController,
-    public translate: TranslateService,
-    public alertCtrl: AlertController,
+    public alertCtrl: TranslatedAlertController,
     public advanced: AdvancedMode,
     public language: Language,
     public settingService: Settings,
@@ -78,13 +77,8 @@ export class SettingsPage {
   }
 
   editName() {
-    this.translate.get([
-      "SETTINGS.EDIT_NAME",
-      "COMMON.CANCEL",
-      "COMMON.EDIT"
-    ]).subscribe(translations => {
-      let alert = this.alertCtrl.create({
-        title: translations["SETTINGS.EDIT_NAME"],
+      this.alertCtrl.present({
+        title: "SETTINGS.EDIT_NAME",
         inputs: [
           {
             type: "text",
@@ -99,13 +93,13 @@ export class SettingsPage {
         ],
         buttons: [
           {
-            text: translations["COMMON.CANCEL"],
+            text: "COMMON.CANCEL",
             handler: () => {
               this.list.closeSlidingItems();
             }
           },
           {
-            text: translations["COMMON.EDIT"],
+            text: "COMMON.EDIT",
             handler: results => {
               this.settingService.set("firstname", results.firstname);
               this.settingService.set("lastname", results.lastname);
@@ -115,9 +109,6 @@ export class SettingsPage {
           }
         ]
       });
-
-      alert.present();
-    });
   }
 
   forgetName() {
@@ -139,40 +130,24 @@ export class SettingsPage {
 
   explainUnavailable() {
     if (!this.enableAdvanced) {
-      this.translate.get([
-        "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE",
-        "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK",
-        "COMMON.OK"
-      ]).subscribe(translations => {
-        let alert = this.alertCtrl.create({
-          title: translations["SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE"],
-          message: translations["SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK"],
-          buttons: [
-            {
-              text: translations["COMMON.OK"]
-            }
-          ]
-        });
-
-        alert.present();
+      this.alertCtrl.present({
+        title: "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE",
+        message: "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK",
+        buttons: [
+          {
+            text: "COMMON.OK"
+          }
+        ]
       });
     }else if (!this.advancedAvailable) {
-      this.translate.get([
-        "SETTINGS.ADVANCED_MODE.POPUP.UNSUPPORTED_DEVICE_TITLE",
-        "SETTINGS.ADVANCED_MODE.POPUP.UNSUPPORTED_DEVICE",
-        "COMMON.OK"
-      ]).subscribe(translations => {
-        let alert = this.alertCtrl.create({
-          title: translations["SETTINGS.ADVANCED_MODE.POPUP.UNSUPPORTED_DEVICE_TITLE"],
-          message: translations["SETTINGS.ADVANCED_MODE.POPUP.UNSUPPORTED_DEVICE"],
-          buttons: [
-            {
-              text: translations["COMMON.OK"]
-            }
-          ]
-        });
-
-        alert.present();
+      this.alertCtrl.present({
+        title: "SETTINGS.ADVANCED_MODE.POPUP.UNSUPPORTED_DEVICE_TITLE",
+        message: "SETTINGS.ADVANCED_MODE.POPUP.UNSUPPORTED_DEVICE",
+        buttons: [
+          {
+            text: "COMMON.OK"
+          }
+        ]
       });
     }
   }

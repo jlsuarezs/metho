@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 
-import { ViewController, NavParams, NavController, AlertController, ActionSheetController } from "ionic-angular";
+import { ViewController, NavParams, NavController, ActionSheetController } from "ionic-angular";
 import { Keyboard } from "ionic-native";
 import { TranslateService } from "ng2-translate/ng2-translate";
 
@@ -9,6 +9,7 @@ import { AppStorage } from "../../providers/app-storage";
 import { Language } from "../../providers/language";
 import { Parse } from "../../providers/parse";
 import { Settings } from "../../providers/settings";
+import { TranslatedAlertController } from "../../providers/translated-alert-controller";
 
 
 @Component({
@@ -37,7 +38,7 @@ export class SourceModalInterviewPage {
     public params: NavParams,
     public translate: TranslateService,
     public actionSheetCtrl: ActionSheetController,
-    public alertCtrl: AlertController,
+    public alertCtrl: TranslatedAlertController,
     public storage: AppStorage,
     public language: Language,
     public parse: Parse,
@@ -146,27 +147,22 @@ export class SourceModalInterviewPage {
     }
 
     if (values.author1firstname && values.author1lastname && !this.settings.get("firstname") && !this.settings.get("lastname")) {
-      this.translate.get([
-        "PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWER_NAME",
-        "PROJECT.DETAIL.POPUP.SAVE_INTERVIEWER_NAME",
-        "COMMON.YES",
-        "COMMON.NO"
-      ]).subscribe(translations => {
-        let alert = this.alertCtrl.create({
-          title: translations["PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWER_NAME"],
-          message: translations["PROJECT.DETAIL.POPUP.SAVE_INTERVIEWER_NAME"],
-          buttons: [
-            {
-              text: translations["COMMON.NO"],
-              handler: () => {
-                Keyboard.close();
-                this.viewCtrl.dismiss();
-              }
-            },
-            {
-              text: translations["COMMON.YES"],
-              handler: () => {
-                let transition = alert.dismiss();
+      let alert = this.alertCtrl.present({
+        title: "PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWER_NAME",
+        message: "PROJECT.DETAIL.POPUP.SAVE_INTERVIEWER_NAME",
+        buttons: [
+          {
+            text: "COMMON.NO",
+            handler: () => {
+              Keyboard.close();
+              this.viewCtrl.dismiss();
+            }
+          },
+          {
+            text: "COMMON.YES",
+            handler: () => {
+              alert.then(obj => {
+                let transition = obj.dismiss();
                 this.settings.set("firstname", values.author1firstname);
                 this.settings.set("lastname", values.author1lastname);
 
@@ -174,12 +170,11 @@ export class SourceModalInterviewPage {
                   Keyboard.close();
                   this.viewCtrl.dismiss();
                 });
-                return false;
-              }
+              });
+              return false;
             }
-          ]
-        });
-        alert.present();
+          }
+        ]
       });
     }else {
       Keyboard.close();

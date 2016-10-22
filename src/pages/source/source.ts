@@ -1,8 +1,7 @@
 import { Component } from "@angular/core";
 
-import { NavController, NavParams, ModalController, AlertController } from "ionic-angular";
+import { NavController, NavParams, ModalController } from "ionic-angular";
 import { Keyboard } from "ionic-native";
-import { TranslateService } from "ng2-translate/ng2-translate";
 
 import { SourceModalBookPage } from "../source-modal-book/source-modal-book";
 import { SourceModalArticlePage } from "../source-modal-article/source-modal-article";
@@ -13,6 +12,7 @@ import { SourceModalInterviewPage } from "../source-modal-interview/source-modal
 
 import { AppStorage } from "../../providers/app-storage";
 import { Parse } from "../../providers/parse";
+import { TranslatedAlertController } from "../../providers/translated-alert-controller";
 
 
 @Component({
@@ -31,8 +31,7 @@ export class SourcePage {
   constructor(
     public nav: NavController,
     public params: NavParams,
-    public translate: TranslateService,
-    public alertCtrl: AlertController,
+    public alertCtrl: TranslatedAlertController,
     public modalCtrl: ModalController,
     public storage: AppStorage,
     public parse: Parse,
@@ -51,62 +50,57 @@ export class SourcePage {
   }
 
   solve(error: SourceError) {
-    this.translate.get([
-      "COMMON.OK",
-      "COMMON.CANCEL"
-    ]).subscribe(translations => {
-      let alert = this.alertCtrl.create({
-        title: error.promptTitle,
-        message: error.promptText,
-        buttons: [
-          {
-            text: translations["COMMON.CANCEL"],
-            handler: () => {
-              Keyboard.close();
-            }
-          },
-          {
-            text: translations["COMMON.OK"],
-            handler: data => {
-              Keyboard.close();
-              if (error.complex) {
-                if (error.type == "select") {
-                  this.source[error.var] = data;
-                }
-              }else {
-                error.inputs.forEach((value) => {
-                  this.source[value.var] = data[value.var];
-                });
-              }
-              this.source = this.parse.parse(this.source);
-              this.storage.setSourceFromId(this.id, this.source);
-            }
+    let alertOpts = {
+      title: error.promptTitle,
+      message: error.promptText,
+      buttons: [
+        {
+          text: "COMMON.CANCEL",
+          handler: () => {
+            Keyboard.close();
           }
-        ]
-      });
-
-      if (error.complex) {
-        if (error.type == "select") {
-          error.options.forEach(option => {
-            alert.addInput({
-              type: "radio",
-              label: option.text,
-              value: option.value,
-              checked: false
-            });
-          });
+        },
+        {
+          text: "COMMON.OK",
+          handler: data => {
+            Keyboard.close();
+            if (error.complex) {
+              if (error.type == "select") {
+                this.source[error.var] = data;
+              }
+            }else {
+              error.inputs.forEach((value) => {
+                this.source[value.var] = data[value.var];
+              });
+            }
+            this.source = this.parse.parse(this.source);
+            this.storage.setSourceFromId(this.id, this.source);
+          }
         }
-      }else {
-        error.inputs.forEach((value) => {
-          alert.addInput({
-            name: value.var,
-            placeholder: value.example
+      ],
+      inputs: []
+    };
+    if (error.complex) {
+      if (error.type == "select") {
+        error.options.forEach(option => {
+          alertOpts.inputs.push({
+            type: "radio",
+            label: option.text,
+            value: option.value,
+            checked: false
           });
         });
       }
+    }else {
+      error.inputs.forEach((value) => {
+        alertOpts.inputs.push({
+          name: value.var,
+          placeholder: value.example
+        });
+      });
+    }
 
-      alert.present();
-    });
+    this.alertCtrl.present(alertOpts);
   }
 
   edit() {
