@@ -39,6 +39,7 @@ import { References } from "../providers/references";
 import { Report } from "../providers/report";
 import { Scan } from "../providers/scan";
 import { Settings } from "../providers/settings";
+import { TranslatedActionSheetController } from "../providers/translated-action-sheet-controller";
 import { TranslatedAlertController } from "../providers/translated-alert-controller";
 
 export function translateDeps (http: Http) {
@@ -116,6 +117,7 @@ export function translateDeps (http: Http) {
     Language,
     Scan,
     Storage,
+    TranslatedActionSheetController,
     TranslatedAlertController
   ]
 })

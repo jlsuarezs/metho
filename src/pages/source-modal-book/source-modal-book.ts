@@ -1,9 +1,8 @@
 import { Component } from "@angular/core";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 
-import { ViewController, NavParams, ActionSheetController } from "ionic-angular";
+import { ViewController, NavParams } from "ionic-angular";
 import { SafariViewController, Keyboard } from "ionic-native";
-import { TranslateService } from "ng2-translate/ng2-translate";
 
 import { AppStorage } from "../../providers/app-storage";
 import { Fetch } from "../../providers/fetch";
@@ -11,6 +10,7 @@ import { Language } from "../../providers/language";
 import { Parse } from "../../providers/parse";
 import { Scan } from "../../providers/scan";
 import { Settings } from "../../providers/settings";
+import { TranslatedActionSheetController } from "../../providers/translated-action-sheet-controller";
 import { TranslatedAlertController } from "../../providers/translated-alert-controller";
 
 
@@ -49,8 +49,7 @@ export class SourceModalBookPage {
   constructor(
     public viewCtrl: ViewController,
     public params: NavParams,
-    public translate: TranslateService,
-    public actionSheetCtrl: ActionSheetController,
+    public actionSheetCtrl: TranslatedActionSheetController,
     public alertCtrl: TranslatedAlertController,
     public storage: AppStorage,
     public fetch: Fetch,
@@ -131,30 +130,25 @@ export class SourceModalBookPage {
 
   dismiss() {
     if (!this.isEmpty(true) && this.isNew && !this.pendingId) {
-      this.translate.get([
-        "COMMON.CANCEL",
-        "PROJECT.DETAIL.MODAL.DELETE_DRAFT"
-      ]).subscribe(translations => {
-        let actionsheet = this.actionSheetCtrl.create({
-          buttons: [
-            {
-              text: translations["PROJECT.DETAIL.MODAL.DELETE_DRAFT"],
-              role: "destructive",
-              handler: () => {
-                actionsheet.dismiss().then(() => {
+      let actionsheet = this.actionSheetCtrl.present({
+        buttons: [
+          {
+            text: "PROJECT.DETAIL.MODAL.DELETE_DRAFT",
+            role: "destructive",
+            handler: () => {
+              actionsheet.then(obj => {
+                obj.dismiss().then(() => {
                   this.viewCtrl.dismiss();
                 });
-                return false;
-              }
-            },
-            {
-              text: translations["COMMON.CANCEL"],
-              role: "cancel"
+              });
+              return false;
             }
-          ]
-        });
-
-        actionsheet.present();
+          },
+          {
+            text: "COMMON.CANCEL",
+            role: "cancel"
+          }
+        ]
       });
     }else {
       this.viewCtrl.dismiss();

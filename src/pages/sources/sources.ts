@@ -1,6 +1,6 @@
 import { ViewChild, Component } from "@angular/core";
 
-import { NavController, NavParams, ActionSheetController, ModalController, List, Content } from "ionic-angular";
+import { NavController, NavParams, ModalController, List, Content } from "ionic-angular";
 import { SocialSharing } from "ionic-native";
 import { TranslateService } from "ng2-translate/ng2-translate";
 
@@ -16,6 +16,7 @@ import { PendingsPage } from "../pendings/pendings";
 
 import { AppStorage } from "../../providers/app-storage";
 import { Settings } from "../../providers/settings";
+import { TranslatedActionSheetController } from "../../providers/translated-action-sheet-controller";
 import { TranslatedAlertController } from "../../providers/translated-alert-controller";
 
 
@@ -37,7 +38,7 @@ export class SourcesPage {
     public nav: NavController,
     public params: NavParams,
     public translate: TranslateService,
-    public actionSheetCtrl: ActionSheetController,
+    public actionSheetCtrl: TranslatedActionSheetController,
     public alertCtrl: TranslatedAlertController,
     public modalCtrl: ModalController,
     public storage: AppStorage,
@@ -90,75 +91,74 @@ export class SourcesPage {
   }
 
   createSource() {
-    this.translate.get([
-      "PROJECT.TYPES.BOOK",
-      "PROJECT.TYPES.ARTICLE",
-      "PROJECT.TYPES.INTERNET",
-      "PROJECT.TYPES.CD",
-      "PROJECT.TYPES.MOVIE",
-      "PROJECT.TYPES.INTERVIEW",
-      "PROJECT.DETAIL.CHOOSE_TYPE",
-      "COMMON.CANCEL"
-    ]).subscribe(translations => {
-      let action = this.actionSheetCtrl.create({
-        title: translations["PROJECT.DETAIL.CHOOSE_TYPE"],
-        buttons: [
-          {
-            text: translations["PROJECT.TYPES.BOOK"],
-            icon: "book",
-            handler: () => {
-              this.openModal("book", action.dismiss());
-              return false;
-            }
-          },
-          {
-            text: translations["PROJECT.TYPES.ARTICLE"],
-            icon: "paper",
-            handler: () => {
-              this.openModal("article", action.dismiss());
-              return false;
-            }
-          },
-          {
-            text: translations["PROJECT.TYPES.INTERNET"],
-            icon: "at",
-            handler: () => {
-              this.openModal("internet", action.dismiss());
-              return false;
-            }
-          },
-          {
-            text: translations["PROJECT.TYPES.CD"],
-            icon: "disc",
-            handler: () => {
-              this.openModal("cd", action.dismiss());
-              return false;
-            }
-          },
-          {
-            text: translations["PROJECT.TYPES.MOVIE"],
-            icon: "film",
-            handler: () => {
-              this.openModal("movie", action.dismiss());
-              return false;
-            }
-          },
-          {
-            text: translations["PROJECT.TYPES.INTERVIEW"],
-            icon: "quote",
-            handler: () => {
-              this.openModal("interview", action.dismiss());
-              return false;
-            }
-          },
-          {
-            role: "cancel",
-            text: translations["COMMON.CANCEL"]
+    let actionsheet = this.actionSheetCtrl.present({
+      title: "PROJECT.DETAIL.CHOOSE_TYPE",
+      buttons: [
+        {
+          text: "PROJECT.TYPES.BOOK",
+          icon: "book",
+          handler: () => {
+            actionsheet.then(obj => {
+              this.openModal("book", obj.dismiss());
+            });
+            return false;
           }
-        ]
-      });
-
-      action.present();
+        },
+        {
+          text: "PROJECT.TYPES.ARTICLE",
+          icon: "paper",
+          handler: () => {
+            actionsheet.then(obj => {
+              this.openModal("article", obj.dismiss());
+            });
+            return false;
+          }
+        },
+        {
+          text: "PROJECT.TYPES.INTERNET",
+          icon: "at",
+          handler: () => {
+            actionsheet.then(obj => {
+              this.openModal("internet", obj.dismiss());
+            });
+            return false;
+          }
+        },
+        {
+          text: "PROJECT.TYPES.CD",
+          icon: "disc",
+          handler: () => {
+            actionsheet.then(obj => {
+              this.openModal("cd", obj.dismiss());
+            });
+            return false;
+          }
+        },
+        {
+          text: "PROJECT.TYPES.MOVIE",
+          icon: "film",
+          handler: () => {
+            actionsheet.then(obj => {
+              this.openModal("movie", obj.dismiss());
+            });
+            return false;
+          }
+        },
+        {
+          text: "PROJECT.TYPES.INTERVIEW",
+          icon: "quote",
+          handler: () => {
+            actionsheet.then(obj => {
+              this.openModal("interview", obj.dismiss());
+            });
+            return false;
+          }
+        },
+        {
+          role: "cancel",
+          text: "COMMON.CANCEL"
+        }
+      ]
     });
   }
 

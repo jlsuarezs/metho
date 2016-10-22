@@ -1,13 +1,13 @@
 import { Component } from "@angular/core";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 
-import { ViewController, NavParams, ActionSheetController } from "ionic-angular";
+import { ViewController, NavParams } from "ionic-angular";
 import { Keyboard } from "ionic-native";
-import { TranslateService } from "ng2-translate/ng2-translate";
 
 import { AppStorage } from "../../providers/app-storage";
 import { Language } from "../../providers/language";
 import { Parse } from "../../providers/parse";
+import { TranslatedActionSheetController } from "../../providers/translated-action-sheet-controller";
 
 
 @Component({
@@ -27,8 +27,7 @@ export class SourceModalArticlePage {
   constructor(
     public viewCtrl: ViewController,
     public params: NavParams,
-    public translate: TranslateService,
-    public actionSheetCtrl: ActionSheetController,
+    public actionSheetCtrl: TranslatedActionSheetController,
     public storage: AppStorage,
     public parse: Parse,
     public fb: FormBuilder,
@@ -65,30 +64,25 @@ export class SourceModalArticlePage {
 
   dismiss() {
     if (!this.isEmpty() && this.isNew) {
-      this.translate.get([
-        "COMMON.CANCEL",
-        "PROJECT.DETAIL.MODAL.DELETE_DRAFT"
-      ]).subscribe(translations => {
-        let actionsheet = this.actionSheetCtrl.create({
-          buttons: [
-            {
-              text: translations["PROJECT.DETAIL.MODAL.DELETE_DRAFT"],
-              role: "destructive",
-              handler: () => {
-                actionsheet.dismiss().then(() => {
+      let actionsheet = this.actionSheetCtrl.present({
+        buttons: [
+          {
+            text: "PROJECT.DETAIL.MODAL.DELETE_DRAFT",
+            role: "destructive",
+            handler: () => {
+              actionsheet.then(obj => {
+                obj.dismiss().then(() => {
                   this.viewCtrl.dismiss();
                 });
-                return false;
-              }
-            },
-            {
-              text: translations["COMMON.CANCEL"],
-              role: "cancel"
+              });
+              return false;
             }
-          ]
-        });
-
-        actionsheet.present();
+          },
+          {
+            text: "COMMON.CANCEL",
+            role: "cancel"
+          }
+        ]
       });
     }else {
       this.viewCtrl.dismiss();
