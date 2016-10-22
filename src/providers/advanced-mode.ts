@@ -78,7 +78,11 @@ export class AdvancedMode {
             reject();
           });
         }else {
-          this.translate.get(["COMMON.OK", "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE", "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK"]).subscribe(translations => {
+          this.translate.get([
+            "COMMON.OK",
+            "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE",
+            "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK"
+          ]).subscribe(translations => {
             let alert = this.alertCtrl.create({
               title: translations["SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE"],
               message: translations["SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK"],
@@ -111,7 +115,11 @@ export class AdvancedMode {
               this.settings.set("advanced", true);
               resolve();
             }else {
-              this.translate.get(["SETTINGS.ADVANCED_MODE.POPUP.RESTORE", "SETTINGS.ADVANCED_MODE.POPUP.RESTORE_NO_FOUND", "COMMON.OK"]).subscribe((translations) => {
+              this.translate.get([
+                "SETTINGS.ADVANCED_MODE.POPUP.RESTORE",
+                "SETTINGS.ADVANCED_MODE.POPUP.RESTORE_NO_FOUND",
+                "COMMON.OK"
+              ]).subscribe((translations) => {
                 let alert = this.alertCtrl.create({
                   title: translations["SETTINGS.ADVANCED_MODE.POPUP.RESTORE"],
                   message: translations["SETTINGS.ADVANCED_MODE.POPUP.RESTORE_NO_FOUND"],
@@ -130,7 +138,11 @@ export class AdvancedMode {
             reject();
           });
         }else {
-          this.translate.get(["COMMON.OK", "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE", "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK"]).subscribe(translations => {
+          this.translate.get([
+            "COMMON.OK",
+            "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE",
+            "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK"
+          ]).subscribe(translations => {
             let alert = this.alertCtrl.create({
               title: translations["SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE"],
               message: translations["SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK"],

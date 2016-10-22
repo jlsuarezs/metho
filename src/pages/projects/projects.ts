@@ -68,7 +68,12 @@ export class ProjectsPage {
   }
 
   deleteProject(project: Project) {
-    this.translate.get(["PROJECT.TAB.POPUP.DELETE_PROJECT_TITLE", "PROJECT.TAB.POPUP.DELETE_PROJECT", "COMMON.CANCEL", "COMMON.DELETE"]).subscribe(translations => {
+    this.translate.get([
+      "PROJECT.TAB.POPUP.DELETE_PROJECT_TITLE",
+      "PROJECT.TAB.POPUP.DELETE_PROJECT",
+      "COMMON.CANCEL",
+      "COMMON.DELETE"
+    ]).subscribe(translations => {
       let confirm = this.alertCtrl.create({
         title: translations["PROJECT.TAB.POPUP.DELETE_PROJECT_TITLE"],
         message: translations["PROJECT.TAB.POPUP.DELETE_PROJECT"],

@@ -130,7 +130,10 @@ export class SourceModalBookPage {
 
   dismiss() {
     if (!this.isEmpty(true) && this.isNew && !this.pendingId) {
-      this.translate.get(["COMMON.CANCEL", "PROJECT.DETAIL.MODAL.DELETE_DRAFT"]).subscribe(translations => {
+      this.translate.get([
+        "COMMON.CANCEL",
+        "PROJECT.DETAIL.MODAL.DELETE_DRAFT"
+      ]).subscribe(translations => {
         let actionsheet = this.actionSheetCtrl.create({
           buttons: [
             {
@@ -238,7 +241,11 @@ export class SourceModalBookPage {
 
   openExplaining() {
     if (this.instantStatus.none) {
-      this.translate.get(["PROJECT.DETAIL.POPUP.NO_SUGGESTIONS", "PROJECT.DETAIL.POPUP.NO_SUGGESTIONS_DESC", "COMMON.OK"]).subscribe((translations) => {
+      this.translate.get([
+        "PROJECT.DETAIL.POPUP.NO_SUGGESTIONS",
+        "PROJECT.DETAIL.POPUP.NO_SUGGESTIONS_DESC",
+        "COMMON.OK"
+      ]).subscribe((translations) => {
         let alert = this.alertCtrl.create({
           title: translations["PROJECT.DETAIL.POPUP.NO_SUGGESTIONS"],
           message: translations["PROJECT.DETAIL.POPUP.NO_SUGGESTIONS_DESC"],
@@ -252,7 +259,11 @@ export class SourceModalBookPage {
         alert.present();
       });
     }else if (this.instantStatus.timeout) {
-      this.translate.get(["PROJECT.DETAIL.POPUP.TIMEOUT_TITLE", "PROJECT.DETAIL.POPUP.TIMEOUT_SEARCH", "COMMON.OK"]).subscribe((translations) => {
+      this.translate.get([
+        "PROJECT.DETAIL.POPUP.TIMEOUT_TITLE",
+        "PROJECT.DETAIL.POPUP.TIMEOUT_SEARCH",
+        "COMMON.OK"
+      ]).subscribe((translations) => {
         let alert = this.alertCtrl.create({
           title: translations["PROJECT.DETAIL.POPUP.TIMEOUT_TITLE"],
           message: translations["PROJECT.DETAIL.POPUP.TIMEOUT_SEARCH"],
@@ -266,7 +277,11 @@ export class SourceModalBookPage {
         alert.present();
       });
     }else if (this.instantStatus.err500) {
-      this.translate.get(["PROJECT.DETAIL.POPUP.ERROR", "PROJECT.DETAIL.POPUP.ERROR_500", "COMMON.OK"]).subscribe((translations) => {
+      this.translate.get([
+        "PROJECT.DETAIL.POPUP.ERROR",
+        "PROJECT.DETAIL.POPUP.ERROR_500",
+        "COMMON.OK"
+      ]).subscribe((translations) => {
         let alert = this.alertCtrl.create({
           title: translations["PROJECT.DETAIL.POPUP.ERROR"],
           message: translations["PROJECT.DETAIL.POPUP.ERROR_500"],
@@ -288,7 +303,12 @@ export class SourceModalBookPage {
       this.instantStatus.shown = false;
       this.insertingFromScan = true;
     }else {
-      this.translate.get(["PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE", "PROJECT.DETAIL.POPUP.AUTO_FILL_DESC", "PROJECT.DETAIL.POPUP.OVERWRITE", "COMMON.CANCEL"]).subscribe((translations) => {
+      this.translate.get([
+        "PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE",
+        "PROJECT.DETAIL.POPUP.AUTO_FILL_DESC",
+        "PROJECT.DETAIL.POPUP.OVERWRITE",
+        "COMMON.CANCEL"
+      ]).subscribe((translations) => {
         let alert = this.alertCtrl.create({
           title: translations["PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE"],
           message: translations["PROJECT.DETAIL.POPUP.AUTO_FILL_DESC"],
@@ -321,7 +341,12 @@ export class SourceModalBookPage {
           this.insertingFromScan = true;
         }else {
           response.transition.then(() => {
-            this.translate.get(["PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE", "PROJECT.DETAIL.POPUP.AUTO_FILL_DESC", "PROJECT.DETAIL.POPUP.OVERWRITE", "COMMON.CANCEL"]).subscribe((translations) => {
+            this.translate.get([
+              "PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE",
+              "PROJECT.DETAIL.POPUP.AUTO_FILL_DESC",
+              "PROJECT.DETAIL.POPUP.OVERWRITE",
+              "COMMON.CANCEL"
+            ]).subscribe((translations) => {
               let alert = this.alertCtrl.create({
                 title: translations["PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE"],
                 message: translations["PROJECT.DETAIL.POPUP.AUTO_FILL_DESC"],

@@ -51,7 +51,10 @@ export class SourcePage {
   }
 
   solve(error: SourceError) {
-    this.translate.get(["COMMON.OK", "COMMON.CANCEL"]).subscribe(translations => {
+    this.translate.get([
+      "COMMON.OK",
+      "COMMON.CANCEL"
+    ]).subscribe(translations => {
       let alert = this.alertCtrl.create({
         title: error.promptTitle,
         message: error.promptText,

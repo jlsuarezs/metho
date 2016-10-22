@@ -27,7 +27,15 @@ export class Report {
         stacktrace = "";
       }
     }
-    this.translate.get(["COMMON.YES", "COMMON.NO", "REPORT.UNKNOWN", "REPORT.REPORT_?", "REPORT.DESC","REPORT.DO_NOT_EDIT", "REPORT.ERROR"]).subscribe(translations => {
+    this.translate.get([
+      "COMMON.YES",
+      "COMMON.NO",
+      "REPORT.UNKNOWN",
+      "REPORT.REPORT_?",
+      "REPORT.DESC",
+      "REPORT.DO_NOT_EDIT",
+      "REPORT.ERROR"
+    ]).subscribe(translations => {
       this.diagnostics().then(diags => {
         let alert = this.alertCtrl.create({
           title: translations["REPORT.UNKNOWN"],
@@ -69,7 +77,12 @@ export class Report {
 
   askForRefresh(transition:Promise<any> = Promise.resolve()) {
     transition.then(() => {
-      this.translate.get(["COMMON.YES", "COMMON.NO", "REPORT.ERROR", "REPORT.RELOAD?"]).subscribe(translations => {
+      this.translate.get([
+        "COMMON.YES",
+        "COMMON.NO",
+        "REPORT.ERROR",
+        "REPORT.RELOAD?"
+      ]).subscribe(translations => {
         let alert = this.alertCtrl.create({
           title: translations["REPORT.ERROR"],
           message: translations["REPORT.RELOAD?"],

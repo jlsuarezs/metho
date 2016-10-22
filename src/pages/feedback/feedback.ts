@@ -21,7 +21,10 @@ export class FeedbackPage {
   open(type: string) {
     switch (type) {
       case "projects":
-        this.translate.get(["SETTINGS.FEEDBACK.EMAIL.PROJECT", "SETTINGS.FEEDBACK.EMAIL.PROJECT_TITLE"]).subscribe(translations => {
+        this.translate.get([
+          "SETTINGS.FEEDBACK.EMAIL.PROJECT",
+          "SETTINGS.FEEDBACK.EMAIL.PROJECT_TITLE"
+        ]).subscribe(translations => {
           this.report.diagnostics().then(diags => {
             SocialSharing.shareViaEmail(
               `${translations["SETTINGS.FEEDBACK.EMAIL.PROJECT"]}
@@ -38,7 +41,10 @@ export class FeedbackPage {
         });
         break;
       case "reference":
-        this.translate.get(["SETTINGS.FEEDBACK.EMAIL.REFERENCE", "SETTINGS.FEEDBACK.EMAIL.REFERENCE_TITLE"]).subscribe(translations => {
+        this.translate.get([
+          "SETTINGS.FEEDBACK.EMAIL.REFERENCE",
+          "SETTINGS.FEEDBACK.EMAIL.REFERENCE_TITLE"
+        ]).subscribe(translations => {
           this.report.diagnostics().then(diags => {
             SocialSharing.shareViaEmail(
               `${translations["SETTINGS.FEEDBACK.EMAIL.REFERENCE"]}
@@ -55,7 +61,10 @@ export class FeedbackPage {
         });
         break;
       case "settings":
-        this.translate.get(["SETTINGS.FEEDBACK.EMAIL.SETTINGS", "SETTINGS.FEEDBACK.EMAIL.SETTINGS_TITLE"]).subscribe(translations => {
+        this.translate.get([
+          "SETTINGS.FEEDBACK.EMAIL.SETTINGS",
+          "SETTINGS.FEEDBACK.EMAIL.SETTINGS_TITLE"
+        ]).subscribe(translations => {
           this.report.diagnostics().then(diags => {
             SocialSharing.shareViaEmail(
               `${translations["SETTINGS.FEEDBACK.EMAIL.SETTINGS"]}
@@ -72,7 +81,10 @@ export class FeedbackPage {
         });
         break;
       case "comment":
-        this.translate.get(["SETTINGS.FEEDBACK.EMAIL.COMMENT", "SETTINGS.FEEDBACK.EMAIL.COMMENT_TITLE"]).subscribe(translations => {
+        this.translate.get([
+          "SETTINGS.FEEDBACK.EMAIL.COMMENT",
+          "SETTINGS.FEEDBACK.EMAIL.COMMENT_TITLE"
+        ]).subscribe(translations => {
           SocialSharing.shareViaEmail(
             translations["SETTINGS.FEEDBACK.EMAIL.COMMENT"],
             translations["SETTINGS.FEEDBACK.EMAIL.COMMENT_TITLE"],
@@ -84,7 +96,10 @@ export class FeedbackPage {
         });
         break;
       case "feature":
-        this.translate.get(["SETTINGS.FEEDBACK.EMAIL.FEATURE", "SETTINGS.FEEDBACK.EMAIL.FEATURE_TITLE"]).subscribe(translations => {
+        this.translate.get([
+          "SETTINGS.FEEDBACK.EMAIL.FEATURE",
+          "SETTINGS.FEEDBACK.EMAIL.FEATURE_TITLE"
+        ]).subscribe(translations => {
           SocialSharing.shareViaEmail(
             translations["SETTINGS.FEEDBACK.EMAIL.FEATURE"],
             translations["SETTINGS.FEEDBACK.EMAIL.FEATURE_TITLE"],

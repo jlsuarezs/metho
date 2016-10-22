@@ -89,7 +89,16 @@ export class SourcesPage {
   }
 
   createSource() {
-    this.translate.get(["PROJECT.TYPES.BOOK", "PROJECT.TYPES.ARTICLE", "PROJECT.TYPES.INTERNET", "PROJECT.TYPES.CD", "PROJECT.TYPES.MOVIE", "PROJECT.TYPES.INTERVIEW", "PROJECT.DETAIL.CHOOSE_TYPE", "COMMON.CANCEL"]).subscribe(translations => {
+    this.translate.get([
+      "PROJECT.TYPES.BOOK",
+      "PROJECT.TYPES.ARTICLE",
+      "PROJECT.TYPES.INTERNET",
+      "PROJECT.TYPES.CD",
+      "PROJECT.TYPES.MOVIE",
+      "PROJECT.TYPES.INTERVIEW",
+      "PROJECT.DETAIL.CHOOSE_TYPE",
+      "COMMON.CANCEL"
+    ]).subscribe(translations => {
       let action = this.actionSheetCtrl.create({
         title: translations["PROJECT.DETAIL.CHOOSE_TYPE"],
         buttons: [
@@ -198,7 +207,12 @@ export class SourcesPage {
   }
 
   deleteSource(source: Source) {
-    this.translate.get(["PROJECT.DETAIL.POPUP.DELETE_TITLE", "PROJECT.DETAIL.POPUP.DELETE_TEXT", "COMMON.DELETE", "COMMON.CANCEL"]).subscribe(translations => {
+    this.translate.get([
+      "PROJECT.DETAIL.POPUP.DELETE_TITLE",
+      "PROJECT.DETAIL.POPUP.DELETE_TEXT",
+      "COMMON.DELETE",
+      "COMMON.CANCEL"
+    ]).subscribe(translations => {
       let alert = this.alertCtrl.create({
         title: translations["PROJECT.DETAIL.POPUP.DELETE_TITLE"],
         message: translations["PROJECT.DETAIL.POPUP.DELETE_TEXT"],
@@ -236,7 +250,12 @@ export class SourcesPage {
       });
 
       if (errNum > 0 && !this.settings.get("ignoreErrors")) {
-        this.translate.get(["PROJECT.DETAIL.POPUP.ERRORS_SOURCES", "PROJECT.DETAIL.POPUP.SHARE_TEXT", "PROJECT.DETAIL.POPUP.SHARE", "COMMON.CANCEL"], { errNum:errNum }).subscribe((translations) => {
+        this.translate.get([
+          "PROJECT.DETAIL.POPUP.ERRORS_SOURCES",
+          "PROJECT.DETAIL.POPUP.SHARE_TEXT",
+          "PROJECT.DETAIL.POPUP.SHARE",
+          "COMMON.CANCEL"
+        ], { errNum:errNum }).subscribe((translations) => {
           let alert = this.alertCtrl.create({
             title: translations["PROJECT.DETAIL.POPUP.SHARE_TEXT"],
             message: translations["PROJECT.DETAIL.POPUP.ERRORS_SOURCES"],
@@ -281,7 +300,12 @@ export class SourcesPage {
 
   promptForAdvanced() {
     if (!this.settings.get("advanced")) {
-      this.translate.get(["PROJECT.DETAIL.POPUP.ADVANCED_MODE", "PROJECT.DETAIL.POPUP.ADVANCED_MODE_MESSAGE", "PROJECT.DETAIL.POPUP.DETAILS", "PROJECT.DETAIL.POPUP.NO_THANKS"]).subscribe((translations) => {
+      this.translate.get([
+        "PROJECT.DETAIL.POPUP.ADVANCED_MODE",
+        "PROJECT.DETAIL.POPUP.ADVANCED_MODE_MESSAGE",
+        "PROJECT.DETAIL.POPUP.DETAILS",
+        "PROJECT.DETAIL.POPUP.NO_THANKS"
+      ]).subscribe((translations) => {
         let alert = this.alertCtrl.create({
           title: translations["PROJECT.DETAIL.POPUP.ADVANCED_MODE"],
           message: translations["PROJECT.DETAIL.POPUP.ADVANCED_MODE_MESSAGE"],

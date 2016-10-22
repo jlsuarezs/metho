@@ -125,7 +125,12 @@ export class PendingsPage {
   }
 
   alert404(index: number) {
-    this.translate.get(["PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TITLE", "PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TEXT", "PROJECT.PENDING.POPUP.SEARCH", "PROJECT.PENDING.POPUP.LATER"]).subscribe(translations => {
+    this.translate.get([
+      "PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TITLE",
+      "PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TEXT",
+      "PROJECT.PENDING.POPUP.SEARCH",
+      "PROJECT.PENDING.POPUP.LATER"
+    ]).subscribe(translations => {
       let alert = this.alertCtrl.create({
         title: translations["PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TITLE"],
         message: translations["PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TEXT"],
@@ -148,7 +153,12 @@ export class PendingsPage {
   }
 
   alert408(pending: Pending) {
-    this.translate.get(["PROJECT.PENDING.POPUP.TIMEOUT_TITLE", "PROJECT.PENDING.POPUP.TIMEOUT_TEXT", "COMMON.CANCEL", "PROJECT.PENDING.POPUP.RETRY"]).subscribe((translations) => {
+    this.translate.get([
+      "PROJECT.PENDING.POPUP.TIMEOUT_TITLE",
+      "PROJECT.PENDING.POPUP.TIMEOUT_TEXT",
+      "COMMON.CANCEL",
+      "PROJECT.PENDING.POPUP.RETRY"
+    ]).subscribe((translations) => {
       let alert = this.alertCtrl.create({
         title: translations["PROJECT.PENDING.POPUP.TIMEOUT_TITLE"],
         message: translations["PROJECT.PENDING.POPUP.TIMEOUT_TEXT"],
@@ -169,7 +179,11 @@ export class PendingsPage {
   }
 
   alert500() {
-    this.translate.get(["PROJECT.DETAIL.POPUP.ERROR", "PROJECT.DETAIL.POPUP.ERROR_500", "COMMON.OK"]).subscribe(translations => {
+    this.translate.get([
+      "PROJECT.DETAIL.POPUP.ERROR",
+      "PROJECT.DETAIL.POPUP.ERROR_500",
+      "COMMON.OK"
+    ]).subscribe(translations => {
       let alert = this.alertCtrl.create({
         title: translations["PROJECT.DETAIL.POPUP.ERROR"],
         message: translations["PROJECT.DETAIL.POPUP.ERROR_500"],

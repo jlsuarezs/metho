@@ -82,7 +82,10 @@ export class SourceModalMoviePage {
 
   dismiss() {
     if (!this.isEmpty() && this.isNew) {
-      this.translate.get(["COMMON.CANCEL", "PROJECT.DETAIL.MODAL.DELETE_DRAFT"]).subscribe(translations => {
+      this.translate.get([
+        "COMMON.CANCEL",
+        "PROJECT.DETAIL.MODAL.DELETE_DRAFT"
+      ]).subscribe(translations => {
         let actionsheet = this.actionSheetCtrl.create({
           buttons: [
             {

@@ -69,7 +69,11 @@ export class SourceModalCdPage {
 
   ionViewDidEnter() {
     if (!this.settings.get("cdAlertShown")) {
-      this.translate.get(["COMMON.OK", "PROJECT.DETAIL.POPUP.USE_CD_FOR_INFORMATION", "PROJECT.DETAIL.POPUP.CAUTION"]).subscribe(translations => {
+      this.translate.get([
+        "COMMON.OK",
+        "PROJECT.DETAIL.POPUP.USE_CD_FOR_INFORMATION",
+        "PROJECT.DETAIL.POPUP.CAUTION"
+      ]).subscribe(translations => {
         let alert = this.alertCtrl.create({
           title: translations["PROJECT.DETAIL.POPUP.CAUTION"],
           message: translations["PROJECT.DETAIL.POPUP.USE_CD_FOR_INFORMATION"],
@@ -88,7 +92,10 @@ export class SourceModalCdPage {
 
   dismiss() {
     if (!this.isEmpty() && this.isNew) {
-      this.translate.get(["COMMON.CANCEL", "PROJECT.DETAIL.MODAL.DELETE_DRAFT"]).subscribe(translations => {
+      this.translate.get([
+        "COMMON.CANCEL",
+        "PROJECT.DETAIL.MODAL.DELETE_DRAFT"
+      ]).subscribe(translations => {
         let actionsheet = this.actionSheetCtrl.create({
           buttons: [
             {

@@ -78,7 +78,11 @@ export class SettingsPage {
   }
 
   editName() {
-    this.translate.get(["SETTINGS.EDIT_NAME", "COMMON.CANCEL", "COMMON.EDIT"]).subscribe(translations => {
+    this.translate.get([
+      "SETTINGS.EDIT_NAME",
+      "COMMON.CANCEL",
+      "COMMON.EDIT"
+    ]).subscribe(translations => {
       let alert = this.alertCtrl.create({
         title: translations["SETTINGS.EDIT_NAME"],
         inputs: [
@@ -135,7 +139,11 @@ export class SettingsPage {
 
   explainUnavailable() {
     if (!this.enableAdvanced) {
-      this.translate.get(["SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE", "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK", "COMMON.OK"]).subscribe(translations => {
+      this.translate.get([
+        "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE",
+        "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK",
+        "COMMON.OK"
+      ]).subscribe(translations => {
         let alert = this.alertCtrl.create({
           title: translations["SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE"],
           message: translations["SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK"],
@@ -149,7 +157,11 @@ export class SettingsPage {
         alert.present();
       });
     }else if (!this.advancedAvailable) {
-      this.translate.get(["SETTINGS.ADVANCED_MODE.POPUP.UNSUPPORTED_DEVICE_TITLE", "SETTINGS.ADVANCED_MODE.POPUP.UNSUPPORTED_DEVICE", "COMMON.OK"]).subscribe(translations => {
+      this.translate.get([
+        "SETTINGS.ADVANCED_MODE.POPUP.UNSUPPORTED_DEVICE_TITLE",
+        "SETTINGS.ADVANCED_MODE.POPUP.UNSUPPORTED_DEVICE",
+        "COMMON.OK"
+      ]).subscribe(translations => {
         let alert = this.alertCtrl.create({
           title: translations["SETTINGS.ADVANCED_MODE.POPUP.UNSUPPORTED_DEVICE_TITLE"],
           message: translations["SETTINGS.ADVANCED_MODE.POPUP.UNSUPPORTED_DEVICE"],
