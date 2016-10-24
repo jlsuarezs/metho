@@ -173,8 +173,12 @@ export class SourceModalInterviewPage {
   }
 
   isEmpty() {
-    if (!this.form.value.author1firstname && !this.form.value.author1lastname && !this.form.value.interviewed1firstname && !this.form.value.interviewed1lastname && !this.form.value.interviewedTitle && !this.form.value.publicationLocation && !this.form.value.civility && !this.form.value.publicationLocation) {
-      return true;
+    if (!this.form.value.interviewed1firstname && !this.form.value.interviewed1lastname && !this.form.value.interviewedTitle && !this.form.value.publicationLocation && !this.form.value.civility && !this.form.value.publicationLocation) {
+      if (!this.form.value.author1firstname || !this.form.value.author1firstname || this.settings.get("firstname") || this.settings.get("lastname")) {
+        return true;
+      }else {
+        return false;
+      }
     }else {
       return false;
     }
