@@ -75,7 +75,6 @@ export class AppStorage {
         this.sourcesByProject.set(value.doc.project_id, this.sourcesByProject.get(value.doc.project_id).set(value.doc._id, value.doc));
       });
       this.lockSources()();
-      this.parseSources();
     }).catch(err => {
       this.lockSources()();
       this.report.report(err);
