@@ -24,34 +24,30 @@ export class Language {
 
   init() {
     this.translate.setDefaultLang("en");
-    this.settings.getAsync("overideLang").then(overideLang => {
-      if (overideLang == "") {
-        Globalization.getPreferredLanguage().then(lang => {
-          let code = lang.value.split("-")[0];
+    this.determineLang().then(lang => {
+      this.translate.use(lang);
+      this.translate.get("BACK_BUTTON").subscribe(back => {
+        this.config.set("ios", "backButtonText", back);
+      });
 
-          this.translate.use(code);
-          this.translate.get("BACK_BUTTON").subscribe(back => {
-            this.config.set("ios", "backButtonText", back);
-          });
+      moment.locale(lang);
+      this.currentLang = lang;
+    });
+  }
 
-          moment.locale(code);
-          this.currentLang = code;
-        }).catch(err => {
-          this.translate.use("fr");
-          this.translate.get("BACK_BUTTON").subscribe(back => {
-            this.config.set("ios", "backButtonText", back);
+  determineLang(): Promise<string> {
+    return new Promise(resolve => {
+      this.settings.getAsync("overideLang").then(overideLang => {
+        if (overideLang == "") {
+          Globalization.getPreferredLanguage().then(lang => {
+            resolve(lang.value.split("-")[0]);
+          }).catch(err => {
+            resolve("fr");
           });
-          moment.locale("fr");
-          this.currentLang = "fr";
-        });
-      }else {
-        this.translate.use(overideLang);
-        this.translate.get("BACK_BUTTON").subscribe(back => {
-          this.config.set("ios", "backButtonText", back);
-        });
-        moment.locale(overideLang);
-        this.currentLang = overideLang;
-      }
+        }else {
+          resolve(overideLang);
+        }
+      });
     });
   }
 
