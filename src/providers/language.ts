@@ -4,7 +4,6 @@ import { Config } from "ionic-angular";
 import { Globalization } from "ionic-native";
 import { TranslateService } from "ng2-translate/ng2-translate";
 
-import { AppStorage } from "./app-storage";
 import { Settings } from "./settings";
 
 import moment from "moment";
@@ -20,7 +19,6 @@ export class Language {
   constructor(
     public config: Config,
     public translate: TranslateService,
-    public storage: AppStorage,
     public settings: Settings,
   ) {}
 
@@ -36,13 +34,6 @@ export class Language {
             this.config.set("ios", "backButtonText", back);
           });
 
-          let subscription = this.translate.onLangChange.subscribe(() => {
-            subscription.unsubscribe();
-            if (code != this.settings.get("lastLang")) {
-              this.storage.parseSources();
-            }
-            this.settings.set("lastLang", code);
-          });
           moment.locale(code);
           this.currentLang = code;
         }).catch(err => {
@@ -71,10 +62,6 @@ export class Language {
   change(lang: string) {
     this.settings.set("overideLang", lang);
     this.init();
-    let subscription = this.translate.onLangChange.subscribe(() => {
-      subscription.unsubscribe();
-      this.storage.parseSources();
-    });
   }
 
   current(): string {

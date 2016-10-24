@@ -3,7 +3,7 @@
     <ion-title>
       <div class="page-title" *ngIf="source.title">{{source.title}}</div>
       <div class="page-title" *ngIf="!source.title" [innerHtml]="source.parsedSource"></div>
-      <div class="page-sub-title">{{source.parsedType}}</div>
+      <div class="page-sub-title">{{ source.parsedType | translate }}</div>
     </ion-title>
     <ion-buttons end>
       <button ion-button (click)="edit()">{{"COMMON.EDIT" | translate}}</button>

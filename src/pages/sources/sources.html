@@ -22,7 +22,7 @@
     <ion-item-sliding *ngFor="let source of filteredSources">
       <button ion-item (click)="openSourcePage(source)">
         <h2 [innerHtml]="source.title ? source.title : source.parsedSource"></h2>
-        <p>{{ source.parsedType }}</p>
+        <p>{{ source.parsedType | translate }}</p>
         <div *ngIf="source.warnings.length" item-right>
           <span>{{ source.warnings.length }}</span>
           <ion-icon name="warning" class="yellow"></ion-icon>

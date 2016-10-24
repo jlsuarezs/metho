@@ -823,17 +823,17 @@ export class Parse {
   parseType(type: string): string {
     switch (type) {
       case "book":
-        return this.translate.instant("PROJECT.TYPES.BOOK");
+        return "PROJECT.TYPES.BOOK";
       case "internet":
-        return this.translate.instant("PROJECT.TYPES.INTERNET");
+        return "PROJECT.TYPES.INTERNET";
       case "article":
-        return this.translate.instant("PROJECT.TYPES.ARTICLE");
+        return "PROJECT.TYPES.ARTICLE";
       case "cd":
-        return this.translate.instant("PROJECT.TYPES.CD_PARSE");
+        return "PROJECT.TYPES.CD_PARSE";
       case "movie":
-        return this.translate.instant("PROJECT.TYPES.MOVIE");
+        return "PROJECT.TYPES.MOVIE";
       case "interview":
-        return this.translate.instant("PROJECT.TYPES.INTERVIEW");
+        return "PROJECT.TYPES.INTERVIEW";
     }
   }
 

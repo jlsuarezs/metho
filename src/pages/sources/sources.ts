@@ -31,6 +31,7 @@ export class SourcesPage {
   public pendingNumber: number = 0;
   public searchQuery: string = "";
   public filteredSources: Source[] = [];
+  public typeTable: any = {};
   @ViewChild(List) list: List;
   @ViewChild(Content) content: Content;
 
@@ -46,9 +47,14 @@ export class SourcesPage {
   ) {
     this.projectId = params.get("id");
     this.loadProjectInfo();
+
+    this.translate.onLangChange.subscribe(() => {
+      this.generateTypeTable();
+    });
   }
 
   ionViewWillEnter() {
+    this.generateTypeTable();
     this.loadSources();
     this.loadPendingNumber();
   }
@@ -72,7 +78,26 @@ export class SourcesPage {
           return a.parsedSource.localeCompare(b.title);
         }
       });
-      this.updateSearch();
+    });
+  }
+
+  generateTypeTable() {
+    this.translate.get([
+      "PROJECT.TYPES.BOOK",
+      "PROJECT.TYPES.ARTICLE",
+      "PROJECT.TYPES.INTERNET",
+      "PROJECT.TYPES.CD_PARSE",
+      "PROJECT.TYPES.MOVIE",
+      "PROJECT.TYPES.INTERVIEW"
+    ]).subscribe(translations => {
+      this.typeTable = {
+        "PROJECT.TYPES.BOOK": translations["PROJECT.TYPES.BOOK"],
+        "PROJECT.TYPES.ARTICLE": translations["PROJECT.TYPES.ARTICLE"],
+        "PROJECT.TYPES.INTERNET": translations["PROJECT.TYPES.INTERNET"],
+        "PROJECT.TYPES.CD_PARSE": translations["PROJECT.TYPES.CD_PARSE"],
+        "PROJECT.TYPES.MOVIE": translations["PROJECT.TYPES.MOVIE"],
+        "PROJECT.TYPES.INTERVIEW": translations["PROJECT.TYPES.INTERVIEW"]
+      }
     });
   }
 
@@ -320,14 +345,14 @@ export class SourcesPage {
     this.filteredSources = this.filteredSources.filter((v) => {
       if (qa.length > 1) {
         for (var i = 0; i < qa.length; i++) {
-          if (v.parsedSource.toLowerCase().indexOf(qa[i].toLowerCase()) > -1 || v.parsedType.toLowerCase().indexOf(qa[i].toLowerCase()) > -1) {
+          if (v.parsedSource.toLowerCase().indexOf(qa[i].toLowerCase()) > -1 || this.typeTable[v.parsedType].toLowerCase().indexOf(qa[i].toLowerCase()) > -1) {
           }else {
             return false;
           }
         }
         return true;
       }else {
-        if (v.parsedSource.toLowerCase().indexOf(qa[0].toLowerCase()) > -1 || v.parsedType.toLowerCase().indexOf(qa[0].toLowerCase()) > -1) {
+        if (v.parsedSource.toLowerCase().indexOf(qa[0].toLowerCase()) > -1 || this.typeTable[v.parsedType].toLowerCase().indexOf(qa[0].toLowerCase()) > -1) {
           return true;
         }
       }
