@@ -40,9 +40,11 @@ export class SettingsPage {
     this.feedbackPage = FeedbackPage;
     if (this.advanced.hasLoaded) {
       this.enableAdvanced = true;
+      this.settings.advanced = this.settingService.get("advanced");
     }else {
       this.advanced.loadEvents.subscribe(() => {
         this.enableAdvanced = true;
+        this.settings.advanced = this.settingService.get("advanced");
       });
     }
     this.advancedAvailable = this.advanced.isAvailable();
@@ -50,6 +52,9 @@ export class SettingsPage {
 
   loadSettings() {
     this.settings = deepcopy(this.settingService.getAll());
+    if (!this.enableAdvanced) {
+      this.settings.advanced = false;
+    }
   }
 
   ionViewWillEnter() {
